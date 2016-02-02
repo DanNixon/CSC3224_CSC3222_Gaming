@@ -42,7 +42,8 @@ void SceneObject::Update(float msec)
   else
     worldTransform = modelMatrix;
 
-  for (vector<SceneObject *>::const_iterator i = children.begin(); i != children.end(); ++i)
+  for (vector<SceneObject *>::const_iterator i = children.begin();
+       i != children.end(); ++i)
     (*i)->Update(msec);
 }
 
@@ -55,14 +56,18 @@ void SceneObject::render()
     GLuint program = shader->GetShaderProgram();
 
     glUseProgram(program);
-    glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix"), 1, false, (float*)&modelMatrix);
-    glUniformMatrix4fv(glGetUniformLocation(program, "viewMatrix"), 1, false, (float*)&(scene->viewMatrix()));
-    glUniformMatrix4fv(glGetUniformLocation(program, "projMatrix"), 1, false, (float*)&(scene->projectionMatrix()));
+    glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix"), 1, false,
+                       (float *)&modelMatrix);
+    glUniformMatrix4fv(glGetUniformLocation(program, "viewMatrix"), 1, false,
+                       (float *)&(scene->viewMatrix()));
+    glUniformMatrix4fv(glGetUniformLocation(program, "projMatrix"), 1, false,
+                       (float *)&(scene->projectionMatrix()));
 
     Matrix3 rotation = Matrix3(scene->viewMatrix());
     Vector3 invCamPos = scene->viewMatrix().GetPositionVector();
     Vector3 camPos = rotation * -invCamPos;
-    glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1, (float *)&camPos);
+    glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1,
+                 (float *)&camPos);
 
     glUniform1i(glGetUniformLocation(program, "objectTextures[0]"), 0);
     glUniform1i(glGetUniformLocation(program, "objectTextures[1]"), 1);
@@ -75,7 +80,8 @@ void SceneObject::render()
     mesh->Draw();
   }
 
-  for (vector<SceneObject *>::const_iterator i = GetChildren().begin(); i != GetChildren().end(); ++i)
+  for (vector<SceneObject *>::const_iterator i = GetChildren().begin();
+       i != GetChildren().end(); ++i)
   {
     (*i)->render();
   }

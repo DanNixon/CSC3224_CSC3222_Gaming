@@ -18,15 +18,15 @@ void update();
 void render(const SceneObject &o);
 void close();
 
-SDL_Window* gWindow = NULL;
+SDL_Window *gWindow = NULL;
 SDL_GLContext gContext;
 
 bool init()
 {
-  //Initialization flag
+  // Initialization flag
   bool success = true;
 
-  //Initialize SDL
+  // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0)
   {
     printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
@@ -34,16 +34,16 @@ bool init()
   }
   else
   {
-    //Use OpenGL 3.1 core
+    // Use OpenGL 3.1 core
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+                        SDL_GL_CONTEXT_PROFILE_CORE);
 
-    //Create window
-    gWindow = SDL_CreateWindow("Test",
-                               SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                               SCREEN_WIDTH, SCREEN_HEIGHT,
-                               SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    // Create window
+    gWindow = SDL_CreateWindow(
+        "Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+        SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     if (gWindow == NULL)
     {
       printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -51,21 +51,23 @@ bool init()
     }
     else
     {
-      //Create context
+      // Create context
       gContext = SDL_GL_CreateContext(gWindow);
       if (gContext == NULL)
       {
-        printf("OpenGL context could not be created! SDL Error: %s\n", SDL_GetError());
+        printf("OpenGL context could not be created! SDL Error: %s\n",
+               SDL_GetError());
         success = false;
       }
       else
       {
-        //Initialize GLEW
+        // Initialize GLEW
         glewExperimental = GL_TRUE;
         GLenum glewError = glewInit();
         if (glewError != GLEW_OK)
         {
-          printf("Error initializing GLEW! %s\n", glewGetErrorString(glewError));
+          printf("Error initializing GLEW! %s\n",
+                 glewGetErrorString(glewError));
         }
       }
     }
@@ -85,7 +87,7 @@ void close()
   SDL_Quit();
 }
 
-int main(int argc, char* args[])
+int main(int argc, char *args[])
 {
   if (!init())
     printf("Failed to initialize!\n");
@@ -98,9 +100,9 @@ int main(int argc, char* args[])
     Mesh *cubeMesh = Mesh::LoadMeshFile("cube.asciimesh");
     Shader *shader = new Shader("basic_vertex.glsl", "basic_fragment.glsl");
     SceneObject cube(cubeMesh, shader);
-    cube.SetModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0))
-                        * Matrix4::Rotation(45, Vector3(0, 1, 0))
-                        * Matrix4::Rotation(45, Vector3(1, 0, 0)));
+    cube.SetModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
+                        Matrix4::Rotation(45, Vector3(0, 1, 0)) *
+                        Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
     Scene s(&cube,
             Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)),
@@ -112,7 +114,7 @@ int main(int argc, char* args[])
 
     while (!quit)
     {
-      //Handle events on queue
+      // Handle events on queue
       while (SDL_PollEvent(&e) != 0)
       {
         if (e.type == SDL_QUIT)

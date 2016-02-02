@@ -7,7 +7,8 @@ class SceneObject;
 class Scene
 {
 public:
-  Scene(SceneObject * root, Matrix4 view = Matrix4(), Matrix4 projection = Matrix4());
+  Scene(SceneObject *root, Matrix4 view = Matrix4(),
+        Matrix4 projection = Matrix4());
   virtual ~Scene();
 
   void setViewMatrix(Matrix4 view);
@@ -20,8 +21,7 @@ public:
   void render();
 
 private:
-  SceneObject * m_root;
+  SceneObject *m_root;
   Matrix4 m_viewMatrix;
   Matrix4 m_projectionMatrix;
 };
-

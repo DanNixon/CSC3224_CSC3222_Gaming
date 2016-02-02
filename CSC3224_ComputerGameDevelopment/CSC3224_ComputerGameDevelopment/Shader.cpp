@@ -16,23 +16,23 @@ If you really want, you can disable this by commenting out the define below.
 #define BACKUP_SHADER
 
 #ifdef BACKUP_SHADER
-const string defaultVertex =
-    "#version 150 core\n"
-    "uniform mat4 modelMatrix;"
-    "uniform mat4 viewMatrix; "
-    "uniform mat4 projMatrix; "
-    "in  vec3 position;"
-    "in  vec2 texCoord;"
-    "in  vec4 colour;  "
-    "out Vertex{		"
-    "	vec2 texCoord;	"
-    "	vec4 colour;	"
-    "} OUT;				"
-    "void main(void)	{"
-    "	gl_Position = (projMatrix * viewMatrix * modelMatrix) * vec4(position, 1.0);"
-    "	OUT.texCoord = texCoord;"
-    "	OUT.colour	 = colour;"
-    "}";
+const string defaultVertex = "#version 150 core\n"
+                             "uniform mat4 modelMatrix;"
+                             "uniform mat4 viewMatrix; "
+                             "uniform mat4 projMatrix; "
+                             "in  vec3 position;"
+                             "in  vec2 texCoord;"
+                             "in  vec4 colour;  "
+                             "out Vertex{		"
+                             "	vec2 texCoord;	"
+                             "	vec4 colour;	"
+                             "} OUT;				"
+                             "void main(void)	{"
+                             "	gl_Position = (projMatrix * viewMatrix * "
+                             "modelMatrix) * vec4(position, 1.0);"
+                             "	OUT.texCoord = texCoord;"
+                             "	OUT.colour	 = colour;"
+                             "}";
 
 const string defaultFragment = "#version 150 core\n"
                                "in Vertex{"
@@ -63,7 +63,8 @@ will be a value suitable for using as an array size to keep all of the previous
 entries. I use this to create a compile-time array large enough to store all of
 the possible shader objects we might need, using an easy-to-read variable name.
 */
-Shader::Shader(string vFile, string fFile, string gFile, string tcsFile, string tesFile)
+Shader::Shader(string vFile, string fFile, string gFile, string tcsFile,
+               string tesFile)
 {
   linkSuccess = true;
   loadSuccess = true;
@@ -156,7 +157,8 @@ bool Shader::LoadShaderFile(string from, string &into)
   into[into.size() - 1] = '\n';
 
   file.close();
-  cout << "Loaded shader text!" << endl << endl;
+  cout << "Loaded shader text!" << endl
+       << endl;
   return true;
 }
 
@@ -205,22 +207,26 @@ GLuint Shader::GenerateShader(string from, GLenum type)
     loadSuccess = false;
     return false;
   }
-  cout << "Compiling success!" << endl << endl;
+  cout << "Compiling success!" << endl
+       << endl;
   return shader;
 }
 
 /*
 In order to create a finished working shader program, you must 'link' all of
 your shader objects together - this makes sure the outputs of one stage connect
-to the inputs of the next stage. In case this linking stage fails, it is possible
-to get an 'info log' from your OpenGL driver, which should (hopefully) inform you
+to the inputs of the next stage. In case this linking stage fails, it is
+possible
+to get an 'info log' from your OpenGL driver, which should (hopefully) inform
+you
 of why.
 */
 bool Shader::LinkProgram()
 {
   if (!loadSuccess)
   {
-    cout << "Can't link program, one or more shader objects have failed!" << endl;
+    cout << "Can't link program, one or more shader objects have failed!"
+         << endl;
     return false;
   }
   glLinkProgram(program);
@@ -248,16 +254,23 @@ Your shader needs to know how to interpret these generic attributes, and it
 can do this in one of two ways - either 'layout qualifiers' in the vertex
 shader itself, or by using the glBindAttribLocation function. For basic vertex
 data that is used across lots of shaders, I prefer the latter method, as it acts
-as a generic interface that any shader will work with as long as it uses the same
+as a generic interface that any shader will work with as long as it uses the
+same
 variable names, without having to really care about how the data is sent to it.
 
-The glBindAttribLocation takes 3 parameters, a shader program, a generic attribute
-index, and a string variable name, which will be an 'in' value in the vertex shader.
+The glBindAttribLocation takes 3 parameters, a shader program, a generic
+attribute
+index, and a string variable name, which will be an 'in' value in the vertex
+shader.
 
-As you can see, I've matched up these generic attribute indices to the mesh class vertex
-buffers, so the connecting of vertex buffers to any shader loaded via my class happens
-'automagically'. It's perfectly safe to attempt to bind a non-existant input variable,
-so it's generally a good idea to just attempt to bind all of your commonly used vertex
+As you can see, I've matched up these generic attribute indices to the mesh
+class vertex
+buffers, so the connecting of vertex buffers to any shader loaded via my class
+happens
+'automagically'. It's perfectly safe to attempt to bind a non-existant input
+variable,
+so it's generally a good idea to just attempt to bind all of your commonly used
+vertex
 attributes
 
 */
@@ -308,5 +321,6 @@ void Shader::LoadDefaultShader()
   SetDefaultAttributes();
   linkSuccess = LinkProgram();
 
-  cout << "Your shader program has failed! Reverting to default shader..." << endl;
+  cout << "Your shader program has failed! Reverting to default shader..."
+       << endl;
 }

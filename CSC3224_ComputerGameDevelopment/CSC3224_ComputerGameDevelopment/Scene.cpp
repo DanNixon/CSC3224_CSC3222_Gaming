@@ -2,10 +2,10 @@
 
 #include "SceneObject.h"
 
-Scene::Scene(SceneObject * root, Matrix4 view, Matrix4 projection)
-  : m_root(root)
-  , m_projectionMatrix(view)
-  , m_viewMatrix(projection)
+Scene::Scene(SceneObject *root, Matrix4 view, Matrix4 projection)
+    : m_root(root)
+    , m_projectionMatrix(view)
+    , m_viewMatrix(projection)
 {
   root->scene = this;
 }

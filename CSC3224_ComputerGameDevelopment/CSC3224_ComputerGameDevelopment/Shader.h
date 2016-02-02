@@ -36,7 +36,8 @@ using namespace std;
 class Shader
 {
 public:
-  Shader(string vertex, string fragment, string geometry = "", string tcs = "", string tes = "");
+  Shader(string vertex, string fragment, string geometry = "", string tcs = "",
+         string tes = "");
   ~Shader(void);
 
   GLuint GetShaderProgram() const
