@@ -6,22 +6,20 @@
 #include <stdio.h>
 #include <string>
 
-#include "RenderObject.h"
+#include "Scene.h"
+#include "SceneObject.h"
 #include "Matrix3.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 bool init();
-void handleKeys(unsigned char key, int x, int y);
 void update();
-void render(const RenderObject &o);
+void render(const SceneObject &o);
 void close();
 
 SDL_Window* gWindow = NULL;
 SDL_GLContext gContext;
-Matrix4 viewMatrix = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
-Matrix4 projMatrix = Matrix4::Perspective(1, 100, 1.33f, 45.0f);
 
 bool init()
 {
@@ -76,48 +74,8 @@ bool init()
   return success;
 }
 
-void handleKeys(unsigned char key, int x, int y)
-{
-}
-
 void update()
 {
-}
-
-void render(const RenderObject &o)
-{
-  Matrix4 modelMatrix = o.GetWorldTransform();
-
-  if (o.GetShader() && o.GetMesh())
-  {
-    GLuint program = o.GetShader()->GetShaderProgram();
-
-    glUseProgram(program);
-    glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix"), 1, false, (float*)&modelMatrix);
-    glUniformMatrix4fv(glGetUniformLocation(program, "viewMatrix"), 1, false, (float*)&viewMatrix);
-    glUniformMatrix4fv(glGetUniformLocation(program, "projMatrix"), 1, false, (float*)&projMatrix);
-
-    Matrix3 rotation = Matrix3(viewMatrix);
-    Vector3 invCamPos = viewMatrix.GetPositionVector();
-    Vector3 camPos = rotation * -invCamPos;
-    glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1, (float *)&camPos);
-
-    glUniform1i(glGetUniformLocation(program, "objectTextures[0]"), 0);
-    glUniform1i(glGetUniformLocation(program, "objectTextures[1]"), 1);
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, o.GetTexture(0));
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, o.GetTexture(1));
-
-    o.Draw();
-  }
-
-  for (vector<RenderObject *>::const_iterator i = o.GetChildren().begin();
-  i != o.GetChildren().end(); ++i)
-  {
-    render(*(*i));
-  }
 }
 
 void close()
@@ -139,8 +97,14 @@ int main(int argc, char* args[])
 
     Mesh *cubeMesh = Mesh::LoadMeshFile("cube.asciimesh");
     Shader *shader = new Shader("basic_vertex.glsl", "basic_fragment.glsl");
-    RenderObject cube(cubeMesh, shader);
-    cube.SetModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) * Matrix4::Rotation(45, Vector3(0, 1, 0)) * Matrix4::Rotation(45, Vector3(1, 0, 0)));
+    SceneObject cube(cubeMesh, shader);
+    cube.SetModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0))
+                        * Matrix4::Rotation(45, Vector3(0, 1, 0))
+                        * Matrix4::Rotation(45, Vector3(1, 0, 0)));
+
+    Scene s(&cube,
+            Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)),
+            Matrix4::Perspective(1, 100, 1.33f, 45.0f));
 
     glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -155,8 +119,8 @@ int main(int argc, char* args[])
           quit = true;
       }
 
-      cube.Update(0);
-      render(cube);
+      s.update();
+      s.render();
 
       SDL_GL_SwapWindow(gWindow);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

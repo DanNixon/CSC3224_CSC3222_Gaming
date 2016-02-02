@@ -3,15 +3,16 @@
 #include "Matrix4.h"
 #include "Mesh.h"
 #include "Shader.h"
+#include "Scene.h"
 
-class RenderObject
+class SceneObject
 {
 public:
   static const int NUM_TEXTURES = 2;
 
-  RenderObject(void);
-  RenderObject(Mesh *m, Shader *s, GLuint t = 0);
-  ~RenderObject(void);
+  SceneObject(void);
+  SceneObject(Mesh *m, Shader *s, GLuint t = 0);
+  ~SceneObject(void);
 
   Mesh *GetMesh() const
   {
@@ -55,12 +56,11 @@ public:
 
   virtual void Update(float msec);
 
-  virtual void Draw() const;
-
-  void AddChild(RenderObject &child)
+  void AddChild(SceneObject &child)
   {
     children.push_back(&child);
     child.parent = this;
+    child.scene = scene;
   }
 
   Matrix4 GetWorldTransform() const
@@ -68,12 +68,16 @@ public:
     return worldTransform;
   }
 
-  const vector<RenderObject *> &GetChildren() const
+  const vector<SceneObject *> &GetChildren() const
   {
     return children;
   }
 
+  void render();
+
 protected:
+  friend class Scene;
+
   Mesh *mesh;
   Shader *shader;
 
@@ -82,6 +86,7 @@ protected:
   Matrix4 modelMatrix;
   Matrix4 worldTransform;
 
-  RenderObject *parent;
-  vector<RenderObject *> children;
+  SceneObject *parent;
+  Scene *scene;
+  vector<SceneObject *> children;
 };
