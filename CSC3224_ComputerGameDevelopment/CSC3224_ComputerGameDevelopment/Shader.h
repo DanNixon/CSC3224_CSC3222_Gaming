@@ -33,41 +33,33 @@ enum ShaderStage
 };
 
 using namespace std;
+
 class Shader
 {
 public:
   Shader(string vertex, string fragment, string geometry = "", string tcs = "",
          string tes = "");
-  ~Shader(void);
+  ~Shader();
 
-  GLuint GetShaderProgram() const
+  GLuint program() const
   {
-    return program;
+    return m_program;
   }
 
-  bool ShaderLinked() const
+  bool valid() const
   {
-    return linkSuccess;
+    return m_linkSuccess;
   }
 
-  bool LinkProgram();
+private:
+  bool loadFile(string filename, string &into);
+  GLuint compile(string filename, GLenum type);
+  bool link();
+  void setDefaultAttributes();
 
-  bool UsingDefaultShader() const
-  {
-    return usingBackupShader;
-  }
+  GLuint m_objects[SHADER_MAX];
+  GLuint m_program;
 
-protected:
-  bool LoadShaderFile(string from, string &into);
-  GLuint GenerateShader(string from, GLenum type);
-  void SetDefaultAttributes();
-
-  void LoadDefaultShader();
-
-  GLuint objects[SHADER_MAX];
-  GLuint program;
-
-  bool loadSuccess;
-  bool linkSuccess;
-  bool usingBackupShader;
+  bool m_loadSuccess;
+  bool m_linkSuccess;
 };

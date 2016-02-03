@@ -1,8 +1,5 @@
 #version 330 core
 
-uniform float animPosition;
-uniform sampler2D objectTexture;
-
 in Vertex
 {
   vec2 texCoord;

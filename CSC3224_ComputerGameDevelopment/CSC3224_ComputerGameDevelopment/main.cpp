@@ -100,7 +100,7 @@ int main(int argc, char *args[])
     Mesh *cubeMesh = Mesh::LoadMeshFile("cube.asciimesh");
     Shader *shader = new Shader("basic_vertex.glsl", "basic_fragment.glsl");
     SceneObject cube(cubeMesh, shader);
-    cube.SetModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
+    cube.setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
                         Matrix4::Rotation(45, Vector3(0, 1, 0)) *
                         Matrix4::Rotation(45, Vector3(1, 0, 0)));
 

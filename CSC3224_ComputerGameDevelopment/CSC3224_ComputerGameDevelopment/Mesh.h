@@ -5,10 +5,6 @@ Author:Rich Davison	<richard.davison4@newcastle.ac.uk>
 Description:Wrapper around OpenGL primitives, geometry and related
 OGL functions.
 
-There's a couple of extra functions in here that you didn't get in the tutorial
-series, to draw debug normals and tangents.
-
-
 -_-_-_-_-_-_-_,------,
 _-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
 -_-_-_-_-_-_-~|__( ^ .^) /
@@ -32,8 +28,10 @@ _-_-_-_-_-_-_-""  ""
 using std::ifstream;
 using std::string;
 
-// A handy enumerator, to determine which member of the bufferObject array
-// holds which data
+/**
+ * @enum MeshBuffer
+ * @brief Describes the type of data held in a buffer.
+ */
 enum MeshBuffer
 {
   VERTEX_BUFFER = 0,
@@ -48,38 +46,29 @@ enum MeshBuffer
 class Mesh
 {
 public:
-  friend class MD5Mesh;
-  Mesh(void);
-  virtual ~Mesh(void);
-
-  virtual void Draw();
-  void GenerateNormals();
-
-  // Generates a single triangle, with RGB colours
   static Mesh *GenerateTriangle();
   static Mesh *GenerateLine(const Vector3 &from, const Vector3 &to);
   static Mesh *LoadMeshFile(const string &filename);
 
+  Mesh();
+  virtual ~Mesh();
+
+  virtual void draw();
+
 protected:
-  void BufferData();
+  void generateNormals();
+  void bufferData();
 
-  GLuint type;
-  GLuint arrayObject;
-  GLuint bufferObject[MAX_BUFFER];
-  GLuint numVertices;
+  GLuint m_type; //!< Type of primitives used in mesh
+  GLuint m_arrayObject;
+  GLuint m_bufferObject[MAX_BUFFER];
+  GLuint m_numVertices; //!< Number of vertices for the mesh
+  GLuint m_numIndices;  //!< Number of indices for the mesh
 
-  GLuint numIndices; //!< Number of indices for this mesh
-
-  // Pointer to vertex position attribute data (badly named...?)
-  Vector3 *vertices;
-  // Pointer to vertex colour attribute data
-  Vector4 *colours;
-  // Pointer to vertex texture coordinate attribute data
-  Vector2 *textureCoords;
-  // Pointer to vertex normals attribute data
-  Vector3 *normals;
-  // Pointer to vertex tangents attribute data
-  Vector3 *tangents;
-  // Pointer to vertex indices attribute data
-  unsigned int *indices;
+  Vector3 *m_vertices;      //!< Pointer to vertex position data
+  Vector4 *m_colours;       //!< Pointer to vertex colour data
+  Vector2 *m_textureCoords; //!< Pointer to vertex texture coordinate data
+  Vector3 *m_normals;       //!< Pointer to vertex normals data
+  Vector3 *m_tangents;      //!< Pointer to vertex tangents data
+  unsigned int *m_indices;  //!< Pointer to vertex indices data
 };

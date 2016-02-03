@@ -8,85 +8,86 @@
 class SceneObject
 {
 public:
+  typedef vector<SceneObject *>::const_iterator SceneObjectIter;
+
   static const int NUM_TEXTURES = 2;
 
-  SceneObject(void);
+  SceneObject();
   SceneObject(Mesh *m, Shader *s, GLuint t = 0);
-  ~SceneObject(void);
+  ~SceneObject();
 
-  Mesh *GetMesh() const
+  void setMesh(Mesh *m)
   {
-    return mesh;
+    m_mesh = m;
   }
 
-  void SetMesh(Mesh *m)
+  Mesh *mesh() const
   {
-    mesh = m;
+    return m_mesh;
   }
 
-  Shader *GetShader() const
+  void setShader(Shader *s)
   {
-    return shader;
+    m_shader = s;
   }
 
-  void SetShader(Shader *s)
+  Shader *shader() const
   {
-    shader = s;
+    return m_shader;
   }
 
-  GLuint GetTexture(int i) const
+  void setTexture(int i, GLuint tex)
   {
-    return textures[i];
+    m_textures[i] = tex;
   }
 
-  void SetTexture(int i, GLuint tex)
+  GLuint texture(int i) const
   {
-    textures[i] = tex;
+    return m_textures[i];
   }
 
-  void SetModelMatrix(Matrix4 mat)
+  void setModelMatrix(Matrix4 mat)
   {
-    modelMatrix = mat;
+    m_modelMatrix = mat;
   }
 
-  Matrix4 GetModelMatrix() const
+  Matrix4 modelMatrix() const
   {
-    return modelMatrix;
+    return m_modelMatrix;
   }
 
-  virtual void Update(float msec);
-
-  void AddChild(SceneObject &child)
+  void addChild(SceneObject &child)
   {
-    children.push_back(&child);
-    child.parent = this;
-    child.scene = scene;
+    m_children.push_back(&child);
+    child.m_parent = this;
+    child.m_scene = m_scene;
   }
 
-  Matrix4 GetWorldTransform() const
+  Matrix4 worldTransform() const
   {
-    return worldTransform;
+    return m_worldTransform;
   }
 
-  const vector<SceneObject *> &GetChildren() const
+  const vector<SceneObject *> &children() const
   {
-    return children;
+    return m_children;
   }
 
+  virtual void update(float msec);
   void render();
 
-protected:
+private:
   friend class Scene;
 
-  Mesh *mesh;
-  Shader *shader;
+  Mesh *m_mesh;
+  Shader *m_shader;
 
-  GLuint textures[NUM_TEXTURES];
+  GLuint m_textures[NUM_TEXTURES];
 
-  Matrix4 modelMatrix;
-  Matrix4 worldTransform;
+  Matrix4 m_modelMatrix;
+  Matrix4 m_worldTransform;
 
-  SceneObject *parent;
-  Scene *scene;
-  vector<SceneObject *> children;
+  SceneObject *m_parent;
+  Scene *m_scene;
+  vector<SceneObject *> m_children;
 };
