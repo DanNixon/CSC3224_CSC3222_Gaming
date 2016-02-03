@@ -1,59 +1,122 @@
 #pragma once
-/*
-Class:Vector2
-Implements:
-Author:Rich Davison
-Description:VERY simple Vector2 class. Students are encouraged to modify this as
-necessary!
 
--_-_-_-_-_-_-_,------,
-_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
--_-_-_-_-_-_-~|__( ^ .^) /
-_-_-_-_-_-_-_-""  ""
-
-*/
 #include <iostream>
 
 class Vector2
 {
 public:
-  Vector2(void)
-  {
-    ToZero();
-  }
+
+	Vector2()
+		: m_x(0.0), m_y(0.0)
+	{
+
+	}
 
   Vector2(const float x, const float y)
-  {
-    this->x = x;
-    this->y = y;
-  }
-
-  ~Vector2(void)
+	  : m_x(x), m_y(y)
   {
   }
 
-  float x;
-  float y;
-
-  void ToZero()
+  ~Vector2()
   {
-    x = 0.0f;
-    y = 0.0f;
   }
 
-  inline friend std::ostream &operator<<(std::ostream &o, const Vector2 &v)
+  void toZero()
   {
-    o << "Vector2(" << v.x << "," << v.y << ")" << std::endl;
-    return o;
+	  m_x = 0;
+	  m_y = 0;
   }
 
-  inline Vector2 operator-(const Vector2 &a) const
+  float length2() const
   {
-    return Vector2(x - a.x, y - a.y);
+	  return m_x*m_x + m_y*m_y;
   }
 
-  inline Vector2 operator+(const Vector2 &a) const
+  float length() const
   {
-    return Vector2(x + a.x, y + a.y);
+	  return sqrt(length2());
   }
+
+  void invert()
+  {
+	  m_x = -m_x;
+	  m_y = -m_y;
+  }
+
+  Vector2 inverse() const
+  {
+	  Vector2 i(-m_x, -m_y);
+	  return i;
+  }
+
+  Vector2 operator+(const Vector2 &rhs) const
+  {
+	  return Vector2(m_x + rhs.m_x, m_y + rhs.m_y);
+  }
+
+  Vector2 &operator+=(const Vector2 &rhs)
+  {
+	  m_x += rhs.m_x;
+	  m_y += rhs.m_y;
+
+	  return *this;
+  }
+
+  Vector2 operator-(const Vector2 &rhs) const
+  {
+	  return Vector2(m_x - rhs.m_x, m_y - rhs.m_y);
+  }
+
+  Vector2 &operator-=(const Vector2 &rhs)
+  {
+	  m_x -= rhs.m_x;
+	  m_y -= rhs.m_y;
+
+	  return *this;
+  }
+
+  Vector2 operator-() const
+  {
+	  return Vector2(-m_x, -m_y);
+  }
+
+  bool operator==(const Vector2 &other) const
+  {
+	  return (m_x == other.m_x) && (m_y == other.m_y);
+  }
+
+  bool operator!=(const Vector2 &other) const
+  {
+	  return !(this->operator==(other));
+  }
+
+  float operator[](const int i) const
+  {
+	  switch (i)
+	  {
+	  case 0:
+		  return m_x;
+	  case 1:
+		  return m_y;
+	  default:
+		  return 0.0;
+	  }
+  }
+
+  float &operator[](const int i)
+  {
+	  switch (i)
+	  {
+	  case 0:
+		  return m_x;
+	  case 1:
+		  return m_y;
+	  default:
+		  throw new std::runtime_error("Index out of range when selecting a reference to retrun");
+	  }
+  }
+
+private:
+	float m_x;
+	float m_y;
 };

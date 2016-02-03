@@ -42,10 +42,10 @@ public:
     {
       int start = 4 * row;
 
-      values[start += 4] = val.x;
-      values[start += 4] = val.y;
-      values[start += 4] = val.z;
-      values[start += 4] = val.w;
+      values[start += 4] = val.m_x;
+      values[start += 4] = val.m_y;
+      values[start += 4] = val.m_z;
+      values[start += 4] = val.m_w;
     }
   }
 
@@ -64,10 +64,10 @@ public:
     {
       int start = 4 * row;
 
-      out.x = values[start += 4];
-      out.y = values[start += 4];
-      out.z = values[start += 4];
-      out.w = values[start += 4];
+      out.m_x = values[start += 4];
+      out.m_y = values[start += 4];
+      out.m_z = values[start += 4];
+      out.m_w = values[start += 4];
     }
     return out;
   }
@@ -166,15 +166,13 @@ public:
   inline Vector4 operator*(const Vector4 &v) const
   {
     return Vector4(
-        v.x * values[0] + v.y * values[4] + v.z * values[8] + v.w * values[12],
-        v.x * values[1] + v.y * values[5] + v.z * values[9] + v.w * values[13],
-        v.x * values[2] + v.y * values[6] + v.z * values[10] + v.w * values[14],
-        v.x * values[3] + v.y * values[7] + v.z * values[11] +
-            v.w * values[15]);
+		v.m_x * values[0] + v.m_y * values[4] + v.m_z * values[8] + v.m_w * values[12],
+		v.m_x * values[1] + v.m_y * values[5] + v.m_z * values[9] + v.m_w * values[13],
+		v.m_x * values[2] + v.m_y * values[6] + v.m_z * values[10] + v.m_w * values[14],
+		v.m_x * values[3] + v.m_y * values[7] + v.m_z * values[11] +
+		v.m_w * values[15]);
   };
 
-  // Handy string output for the matrix. Can get a bit messy, but better than
-  // nothing!
   inline friend std::ostream &operator<<(std::ostream &o, const Matrix4 &m)
   {
     o << "Mat4(";

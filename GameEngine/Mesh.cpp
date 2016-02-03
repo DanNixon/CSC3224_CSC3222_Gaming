@@ -221,8 +221,8 @@ Mesh *Mesh::LoadMeshFile(const string &filename)
   {
     for (unsigned int i = 0; i < m->m_numVertices; ++i)
     {
-      f >> m->m_textureCoords[i].x;
-      f >> m->m_textureCoords[i].y;
+		f >> m->m_textureCoords[i][0];
+		f >> m->m_textureCoords[i][1];
     }
   }
 
