@@ -60,21 +60,15 @@ public:
   static Mesh *GenerateLine(const Vector3 &from, const Vector3 &to);
   static Mesh *LoadMeshFile(const string &filename);
 
-  GLuint type; // Primitive type for this mesh (GL_TRIANGLES...etc)
-
 protected:
-  // Buffers all VBO data into graphics memory. Required before drawing!
   void BufferData();
 
-  // VAO for this mesh
+  GLuint type;
   GLuint arrayObject;
-  // VBOs for this mesh
   GLuint bufferObject[MAX_BUFFER];
-  // Number of vertices for this mesh
   GLuint numVertices;
 
-  // Number of indices for this mesh
-  GLuint numIndices;
+  GLuint numIndices; //!< Number of indices for this mesh
 
   // Pointer to vertex position attribute data (badly named...?)
   Vector3 *vertices;
