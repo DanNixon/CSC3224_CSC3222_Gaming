@@ -25,74 +25,75 @@ class Vector3;
 class Matrix4
 {
 public:
-  Matrix4(void);
+  Matrix4();
   Matrix4(float elements[16]);
-  ~Matrix4(void);
-
-  float values[16];
+  ~Matrix4();
 
   // Set all matrix values to zero
-  void ToZero();
-  // Sets matrix to identity matrix (1.0 down the diagonal)
-  void ToIdentity();
+  void toZero();
 
-  void SetRow(unsigned int row, const Vector4 &val)
+  // Sets matrix to identity matrix (1.0 down the diagonal)
+  void toIdentity();
+
+  void setRow(unsigned int row, const Vector4 &val)
   {
     if (row <= 3)
     {
       int start = 4 * row;
 
-      values[start += 4] = val.m_x;
-      values[start += 4] = val.m_y;
-      values[start += 4] = val.m_z;
-      values[start += 4] = val.m_w;
+      m_values[start += 4] = val.m_x;
+      m_values[start += 4] = val.m_y;
+      m_values[start += 4] = val.m_z;
+      m_values[start += 4] = val.m_w;
     }
   }
 
-  void SetColumn(unsigned int column, const Vector4 &val)
+  void setColumn(unsigned int column, const Vector4 &val)
   {
     if (column <= 3)
     {
-      memcpy(&values[4 * column], &val, sizeof(Vector4));
+      memcpy(&m_values[4 * column], &val, sizeof(Vector4));
     }
   }
 
-  Vector4 GetRow(unsigned int row)
+  Vector4 row(unsigned int row)
   {
     Vector4 out(0, 0, 0, 1);
     if (row <= 3)
     {
       int start = 4 * row;
 
-      out.m_x = values[start += 4];
-      out.m_y = values[start += 4];
-      out.m_z = values[start += 4];
-      out.m_w = values[start += 4];
+      out.m_x = m_values[start += 4];
+      out.m_y = m_values[start += 4];
+      out.m_z = m_values[start += 4];
+      out.m_w = m_values[start += 4];
     }
     return out;
   }
 
-  Vector4 GetColumn(unsigned int column)
+  Vector4 column(unsigned int column)
   {
     Vector4 out(0, 0, 0, 1);
 
     if (column <= 3)
     {
-      memcpy(&out, &values[4 * column], sizeof(Vector4));
+      memcpy(&out, &m_values[4 * column], sizeof(Vector4));
     }
 
     return out;
   }
 
   // Gets the OpenGL position vector (floats 12,13, and 14)
-  Vector3 GetPositionVector() const;
+  Vector3 positionVector() const;
+
   // Sets the OpenGL position vector (floats 12,13, and 14)
-  void SetPositionVector(const Vector3 in);
+  void setPositionVector(const Vector3 in);
 
   // Gets the scale vector (floats 1,5, and 10)
-  Vector3 GetScalingVector() const;
+  Vector3 scalingVector() const;
+
   // Sets the scale vector (floats 1,5, and 10)
-  void SetScalingVector(const Vector3 &in);
+  void setScalingVector(const Vector3 &in);
 
   // Creates a rotation matrix that rotates by 'degrees' around the 'axis'
   // Analogous to glRotatef
@@ -133,11 +134,11 @@ public:
     {
       for (unsigned int c = 0; c < 4; ++c)
       {
-        out.values[c + (r * 4)] = 0.0f;
+        out.m_values[c + (r * 4)] = 0.0f;
         for (unsigned int i = 0; i < 4; ++i)
         {
-          out.values[c + (r * 4)] +=
-              this->values[c + (i * 4)] * a.values[(r * 4) + i];
+          out.m_values[c + (r * 4)] +=
+            m_values[c + (i * 4)] * a.m_values[(r * 4) + i];
         }
       }
     }
@@ -150,11 +151,11 @@ public:
 
     float temp;
 
-    vec.m_x = v.m_x * values[0] + v.m_y * values[4] + v.m_z * values[8] + values[12];
-    vec.m_y = v.m_x * values[1] + v.m_y * values[5] + v.m_z * values[9] + values[13];
-    vec.m_z = v.m_x * values[2] + v.m_y * values[6] + v.m_z * values[10] + values[14];
+    vec.m_x = v.m_x * m_values[0] + v.m_y * m_values[4] + v.m_z * m_values[8] + m_values[12];
+    vec.m_y = v.m_x * m_values[1] + v.m_y * m_values[5] + v.m_z * m_values[9] + m_values[13];
+    vec.m_z = v.m_x * m_values[2] + v.m_y * m_values[6] + v.m_z * m_values[10] + m_values[14];
 
-    temp = v.m_x * values[3] + v.m_y * values[7] + v.m_z * values[11] + values[15];
+    temp = v.m_x * m_values[3] + v.m_y * m_values[7] + v.m_z * m_values[11] + m_values[15];
 
     vec.m_x = vec.m_x / temp;
     vec.m_y = vec.m_y / temp;
@@ -166,24 +167,25 @@ public:
   inline Vector4 operator*(const Vector4 &v) const
   {
     return Vector4(
-		v.m_x * values[0] + v.m_y * values[4] + v.m_z * values[8] + v.m_w * values[12],
-		v.m_x * values[1] + v.m_y * values[5] + v.m_z * values[9] + v.m_w * values[13],
-		v.m_x * values[2] + v.m_y * values[6] + v.m_z * values[10] + v.m_w * values[14],
-		v.m_x * values[3] + v.m_y * values[7] + v.m_z * values[11] +
-		v.m_w * values[15]);
+      v.m_x * m_values[0] + v.m_y * m_values[4] + v.m_z * m_values[8] + v.m_w * m_values[12],
+      v.m_x * m_values[1] + v.m_y * m_values[5] + v.m_z * m_values[9] + v.m_w * m_values[13],
+      v.m_x * m_values[2] + v.m_y * m_values[6] + v.m_z * m_values[10] + v.m_w * m_values[14],
+      v.m_x * m_values[3] + v.m_y * m_values[7] + v.m_z * m_values[11] +
+      v.m_w * m_values[15]);
   };
 
   inline friend std::ostream &operator<<(std::ostream &o, const Matrix4 &m)
   {
     o << "Mat4(";
-    o << "\t" << m.values[0] << "," << m.values[4] << "," << m.values[8] << ","
-      << m.values[12] << std::endl;
-    o << "\t\t" << m.values[1] << "," << m.values[5] << "," << m.values[9]
-      << "," << m.values[13] << std::endl;
-    o << "\t\t" << m.values[2] << "," << m.values[6] << "," << m.values[10]
-      << "," << m.values[14] << std::endl;
-    o << "\t\t" << m.values[3] << "," << m.values[7] << "," << m.values[11]
-      << "," << m.values[15] << " )" << std::endl;
+    o << "\t" << m.m_values[0] << "," << m.m_values[4] << "," << m.m_values[8] << "," << m.m_values[12] << std::endl;
+    o << "\t\t" << m.m_values[1] << "," << m.m_values[5] << "," << m.m_values[9] << "," << m.m_values[13] << std::endl;
+    o << "\t\t" << m.m_values[2] << "," << m.m_values[6] << "," << m.m_values[10] << "," << m.m_values[14] << std::endl;
+    o << "\t\t" << m.m_values[3] << "," << m.m_values[7] << "," << m.m_values[11] << "," << m.m_values[15] << " )" << std::endl;
     return o;
   }
+
+private:
+  friend class Matrix3;
+
+  float m_values[16];
 };

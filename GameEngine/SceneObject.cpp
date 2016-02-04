@@ -59,7 +59,7 @@ void SceneObject::render()
                        (float *)&(m_scene->projectionMatrix()));
 
     Matrix3 rotation = Matrix3(m_scene->viewMatrix());
-    Vector3 invCamPos = m_scene->viewMatrix().GetPositionVector();
+    Vector3 invCamPos = m_scene->viewMatrix().positionVector();
     Vector3 camPos = rotation * -invCamPos;
     glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1,
                  (float *)&camPos);
