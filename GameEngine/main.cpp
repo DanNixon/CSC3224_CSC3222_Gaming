@@ -14,8 +14,6 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 bool init();
-void update();
-void render(const SceneObject &o);
 void close();
 
 SDL_Window *gWindow = NULL;
@@ -23,7 +21,6 @@ SDL_GLContext gContext;
 
 bool init()
 {
-  // Initialization flag
   bool success = true;
 
   // Initialize SDL
@@ -76,10 +73,6 @@ bool init()
   return success;
 }
 
-void update()
-{
-}
-
 void close()
 {
   SDL_DestroyWindow(gWindow);
@@ -97,12 +90,12 @@ int main(int argc, char *args[])
     SDL_Event e;
     SDL_StartTextInput();
 
-    Mesh *cubeMesh = Mesh::GenerateRing2D(0.5, 0.45); //LoadMeshFile("cube.asciimesh");
+    Mesh *cubeMesh = Mesh::LoadMeshFile("cube.asciimesh");
     Shader *shader = new Shader("basic_vertex.glsl", "basic_fragment.glsl");
     SceneObject cube(cubeMesh, shader);
-    cube.setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)));// *
-    //                    Matrix4::Rotation(45, Vector3(0, 1, 0)) *
-    //                    Matrix4::Rotation(45, Vector3(1, 0, 0)));
+    cube.setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
+                        Matrix4::Rotation(45, Vector3(0, 1, 0)) *
+                        Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
     Scene s(&cube,
             Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)),
