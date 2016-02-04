@@ -5,6 +5,8 @@
 SceneObject::SceneObject()
     : m_mesh(NULL)
     , m_shader(NULL)
+    , m_modelMatrix(Matrix4())
+    , m_worldTransform(Matrix4())
     , m_parent(NULL)
 {
   for (int i = 0; i < NUM_TEXTURES; i++)

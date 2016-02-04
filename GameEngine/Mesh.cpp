@@ -1,5 +1,7 @@
 #include "Mesh.h"
 
+#include "common.h"
+
 Mesh::Mesh()
     : m_numIndices(0)
     , m_type(GL_TRIANGLES)
@@ -168,6 +170,47 @@ Mesh *Mesh::GenerateLine(const Vector3 &from, const Vector3 &to)
 
   m->bufferData();
 
+  return m;
+}
+
+/**
+* @brief Generates a 2D ring.
+* @param radiusOuter Outer radius
+* @param radiusInner Inner radius
+* @param resolution Number of "slices" in angle
+* @return New mesh
+*/
+Mesh *Mesh::GenerateRing2D(float radiusOuter, float radiusInner, int resolution)
+{
+  Mesh *m = new Mesh();
+  m->m_type = GL_TRIANGLE_STRIP;
+
+  m->m_numVertices = (resolution + 2) * 2;
+  m->m_vertices = new Vector3[m->m_numVertices];
+  m->m_colours = new Vector4[m->m_numVertices];
+  m->m_textureCoords = new Vector2[m->m_numVertices];
+
+  const float deltaA = ((PI * 2) / resolution);
+  const Vector4 c(1, 1, 1, 127);
+
+  int n = 0;
+  for (int i = 0; i < resolution + 2; i++)
+  {
+    const float a = i * deltaA;
+
+    m->m_vertices[n] = Vector3(cos(a) * radiusOuter, sin(a) * radiusOuter, 0.0f);
+    m->m_colours[n] = c;
+    m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
+    n++;
+
+    m->m_vertices[n] = Vector3(cos(a) * radiusInner, sin(a) * radiusInner, 0.0f);
+    m->m_colours[n] = c;
+    m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
+    n++;
+  }
+
+  //m->generateNormals();
+  m->bufferData();
   return m;
 }
 
