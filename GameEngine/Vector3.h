@@ -1,150 +1,185 @@
 #pragma once
-/*
-Class:Vector3
-Implements:
-Author:Rich Davison
-Description:VERY simple Vector3 class. Students are encouraged to modify this as
-necessary!
 
--_-_-_-_-_-_-_,------,
-_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
--_-_-_-_-_-_-~|__( ^ .^) /
-_-_-_-_-_-_-_-""  ""
-
-*/
 #include <cmath>
 #include <iostream>
 
 class Vector3
 {
 public:
-  Vector3(void)
+  static float dot(const Vector3 &a, const Vector3 &b)
   {
-    ToZero();
+    return (a.m_x * b.m_x) + (a.m_y * b.m_y) + (a.m_z * b.m_z);
+  }
+
+  static Vector3 cross(const Vector3 &a, const Vector3 &b)
+  {
+    return Vector3((a.m_y * b.m_z) - (a.m_z * b.m_y),
+                   (a.m_z * b.m_x) - (a.m_x * b.m_z),
+                   (a.m_x * b.m_y) - (a.m_y * b.m_x));
+  }
+
+  Vector3()
+      : m_x(0.0)
+      , m_y(0.0)
+      , m_z(0.0)
+  {
   }
 
   Vector3(const float x, const float y, const float z)
-  {
-    this->x = x;
-    this->y = y;
-    this->z = z;
-  }
-
-  ~Vector3(void)
+      : m_x(x)
+      , m_y(y)
+      , m_z(z)
   {
   }
 
-  float x;
-  float y;
-  float z;
-
-  void Normalise()
+  ~Vector3()
   {
-    float length = Length();
+  }
 
-    if (length != 0.0f)
+  inline void toZero()
+  {
+    m_x = 0;
+    m_y = 0;
+    m_z = 0;
+  }
+
+  inline float length2() const
+  {
+    return m_x * m_x + m_y * m_y + m_z * m_z;
+  }
+
+  inline float length() const
+  {
+    return sqrt(length2());
+  }
+
+  inline void normalise()
+  {
+    float len = length();
+
+    if (len != 0.0)
     {
-      length = 1.0f / length;
-      x = x * length;
-      y = y * length;
-      z = z * length;
+      m_x /= len;
+      m_y /= len;
+      m_z /= len;
     }
   }
 
-  void ToZero()
+  inline void invert()
   {
-    x = y = z = 0.0f;
+    m_x = -m_x;
+    m_y = -m_y;
+    m_z = -m_z;
   }
 
-  float Length() const
+  inline Vector3 inverse() const
   {
-    return sqrt((x * x) + (y * y) + (z * z));
+    return Vector3(-m_x, -m_y, -m_z);
   }
 
-  void Invert()
+  inline Vector3 operator+(const Vector3 &rhs) const
   {
-    x = -x;
-    y = -y;
-    z = -z;
+    return Vector3(m_x + rhs.m_x, m_y + rhs.m_y, m_z + rhs.m_z);
   }
 
-  Vector3 Inverse() const
+  inline Vector3 &operator+=(const Vector3 &rhs)
   {
-    return Vector3(-x, -y, -z);
+    m_x += rhs.m_x;
+    m_y += rhs.m_y;
+    m_z += rhs.m_z;
+
+    return *this;
   }
 
-  static float Dot(const Vector3 &a, const Vector3 &b)
+  inline Vector3 operator-(const Vector3 &rhs) const
   {
-    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
+    return Vector3(m_x - rhs.m_x, m_y - rhs.m_y, m_z - rhs.m_z);
   }
 
-  static Vector3 Cross(const Vector3 &a, const Vector3 &b)
+  inline Vector3 &operator-=(const Vector3 &rhs)
   {
-    return Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z),
-                   (a.x * b.y) - (a.y * b.x));
-  }
+    m_x -= rhs.m_x;
+    m_y -= rhs.m_y;
+    m_z -= rhs.m_z;
 
-  inline friend std::ostream &operator<<(std::ostream &o, const Vector3 &v)
-  {
-    o << "Vector3(" << v.x << "," << v.y << "," << v.z << ")" << std::endl;
-    return o;
-  }
-
-  inline Vector3 operator+(const Vector3 &a) const
-  {
-    return Vector3(x + a.x, y + a.y, z + a.z);
-  }
-
-  inline Vector3 operator-(const Vector3 &a) const
-  {
-    return Vector3(x - a.x, y - a.y, z - a.z);
+    return *this;
   }
 
   inline Vector3 operator-() const
   {
-    return Vector3(-x, -y, -z);
+    return Vector3(-m_x, -m_y, -m_z);
   }
 
-  inline void operator+=(const Vector3 &a)
+  inline Vector3 operator*(const Vector3 &rhs) const
   {
-    x += a.x;
-    y += a.y;
-    z += a.z;
+    return Vector3(m_x * rhs.m_x, m_y * rhs.m_y, m_z * rhs.m_z);
   }
 
-  inline void operator-=(const Vector3 &a)
+  inline Vector3 operator*(float a) const
   {
-    x -= a.x;
-    y -= a.y;
-    z -= a.z;
+    return Vector3(m_x * a, m_y * a, m_z * a);
   }
 
-  inline Vector3 operator*(const float a) const
+  inline Vector3 operator/(const Vector3 &rhs) const
   {
-    return Vector3(x * a, y * a, z * a);
+    return Vector3(m_x / rhs.m_x, m_y / rhs.m_y, m_z / rhs.m_z);
   }
 
-  inline Vector3 operator*(const Vector3 &a) const
+  inline Vector3 operator/(float a) const
   {
-    return Vector3(x * a.x, y * a.y, z * a.z);
+    return Vector3(m_x / a, m_y / a, m_z / a);
   }
 
-  inline Vector3 operator/(const Vector3 &a) const
+  inline bool operator==(const Vector3 &other) const
   {
-    return Vector3(x / a.x, y / a.y, z / a.z);
-  };
+    return (m_x == other.m_x) && (m_y == other.m_y) && (m_z == other.m_z)
+  }
 
-  inline Vector3 operator/(const float v) const
+  inline bool operator!=(const Vector3 &other) const
   {
-    return Vector3(x / v, y / v, z / v);
-  };
+    return !(this->operator==(other));
+  }
 
-  inline bool operator==(const Vector3 &A) const
+  inline float operator[](const int i) const
   {
-    return (A.x == x && A.y == y && A.z == z) ? true : false;
-  };
-  inline bool operator!=(const Vector3 &A) const
+    switch (i)
+    {
+    case 0:
+      return m_x;
+    case 1:
+      return m_y;
+    case 2:
+      return m_z;
+    default:
+      return 0.0;
+    }
+  }
+
+  inline float &operator[](const int i)
   {
-    return (A.x == x && A.y == y && A.z == z) ? false : true;
-  };
+    switch (i)
+    {
+    case 0:
+      return m_x;
+    case 1:
+      return m_y;
+    case 2:
+      return m_z;
+    default:
+      throw new std::runtime_error(
+          "Index out of range when selecting a reference to retrun");
+    }
+  }
+
+  inline friend std::ostream &operator<<(std::ostream &o, const Vector3 &v)
+  {
+    o << "Vector3(" << v.m_x << "," << v.m_y << "," << v.m_z << ")"
+      << std::endl;
+    return o;
+  }
+
+private:
+  float m_x;
+  float m_y;
+  float m_z;
 };

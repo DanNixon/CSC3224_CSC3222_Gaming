@@ -5,15 +5,15 @@
 class Vector2
 {
 public:
-
-	Vector2()
-		: m_x(0.0), m_y(0.0)
-	{
-
-	}
+  Vector2()
+      : m_x(0.0)
+      , m_y(0.0)
+  {
+  }
 
   Vector2(const float x, const float y)
-	  : m_x(x), m_y(y)
+      : m_x(x)
+      , m_y(y)
   {
   }
 
@@ -21,102 +21,140 @@ public:
   {
   }
 
-  void toZero()
+  inline void toZero()
   {
-	  m_x = 0;
-	  m_y = 0;
+    m_x = 0;
+    m_y = 0;
   }
 
-  float length2() const
+  inline float length2() const
   {
-	  return m_x*m_x + m_y*m_y;
+    return m_x * m_x + m_y * m_y;
   }
 
-  float length() const
+  inline float length() const
   {
-	  return sqrt(length2());
+    return sqrt(length2());
   }
 
-  void invert()
+  inline void normalise()
   {
-	  m_x = -m_x;
-	  m_y = -m_y;
+    float len = length();
+
+    if (len != 0.0)
+    {
+      m_x /= len;
+      m_y /= len;
+    }
   }
 
-  Vector2 inverse() const
+  inline void invert()
   {
-	  Vector2 i(-m_x, -m_y);
-	  return i;
+    m_x = -m_x;
+    m_y = -m_y;
   }
 
-  Vector2 operator+(const Vector2 &rhs) const
+  inline Vector2 inverse() const
   {
-	  return Vector2(m_x + rhs.m_x, m_y + rhs.m_y);
+    Vector2 i(-m_x, -m_y);
+    return i;
   }
 
-  Vector2 &operator+=(const Vector2 &rhs)
+  inline Vector2 operator+(const Vector2 &rhs) const
   {
-	  m_x += rhs.m_x;
-	  m_y += rhs.m_y;
-
-	  return *this;
+    return Vector2(m_x + rhs.m_x, m_y + rhs.m_y);
   }
 
-  Vector2 operator-(const Vector2 &rhs) const
+  inline Vector2 &operator+=(const Vector2 &rhs)
   {
-	  return Vector2(m_x - rhs.m_x, m_y - rhs.m_y);
+    m_x += rhs.m_x;
+    m_y += rhs.m_y;
+
+    return *this;
   }
 
-  Vector2 &operator-=(const Vector2 &rhs)
+  inline Vector2 operator-(const Vector2 &rhs) const
   {
-	  m_x -= rhs.m_x;
-	  m_y -= rhs.m_y;
-
-	  return *this;
+    return Vector2(m_x - rhs.m_x, m_y - rhs.m_y);
   }
 
-  Vector2 operator-() const
+  inline Vector2 &operator-=(const Vector2 &rhs)
   {
-	  return Vector2(-m_x, -m_y);
+    m_x -= rhs.m_x;
+    m_y -= rhs.m_y;
+
+    return *this;
   }
 
-  bool operator==(const Vector2 &other) const
+  inline Vector2 operator-() const
   {
-	  return (m_x == other.m_x) && (m_y == other.m_y);
+    return Vector2(-m_x, -m_y);
   }
 
-  bool operator!=(const Vector2 &other) const
+  inline Vector2 operator*(const Vector2 &rhs) const
   {
-	  return !(this->operator==(other));
+    return Vector2(m_x * rhs.m_x, m_y * rhs.m_y);
   }
 
-  float operator[](const int i) const
+  inline Vector2 operator*(float a) const
   {
-	  switch (i)
-	  {
-	  case 0:
-		  return m_x;
-	  case 1:
-		  return m_y;
-	  default:
-		  return 0.0;
-	  }
+    return Vector2(m_x * a, m_y * a);
   }
 
-  float &operator[](const int i)
+  inline Vector2 operator/(const Vector2 &rhs) const
   {
-	  switch (i)
-	  {
-	  case 0:
-		  return m_x;
-	  case 1:
-		  return m_y;
-	  default:
-		  throw new std::runtime_error("Index out of range when selecting a reference to retrun");
-	  }
+    return Vector2(m_x / rhs.m_x, m_y / rhs.m_y);
+  }
+
+  inline Vector2 operator/(float a) const
+  {
+    return Vector2(m_x / a, m_y / a);
+  }
+
+  inline bool operator==(const Vector2 &other) const
+  {
+    return (m_x == other.m_x) && (m_y == other.m_y);
+  }
+
+  inline bool operator!=(const Vector2 &other) const
+  {
+    return !(this->operator==(other));
+  }
+
+  inline float operator[](const int i) const
+  {
+    switch (i)
+    {
+    case 0:
+      return m_x;
+    case 1:
+      return m_y;
+    default:
+      return 0.0;
+    }
+  }
+
+  inline float &operator[](const int i)
+  {
+    switch (i)
+    {
+    case 0:
+      return m_x;
+    case 1:
+      return m_y;
+    default:
+      throw new std::runtime_error(
+          "Index out of range when selecting a reference to retrun");
+    }
+  }
+
+  inline friend std::ostream &operator<<(std::ostream &o, const Vector2 &v)
+  {
+    o << "Vector2(" << v.m_x << "," << v.m_y << ")" << std::endl;
+    return o;
   }
 
 private:
-	float m_x;
-	float m_y;
+  float m_x;
+  float m_y;
 };
