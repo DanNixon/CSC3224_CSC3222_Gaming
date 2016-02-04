@@ -150,15 +150,15 @@ public:
 
     float temp;
 
-    vec.x = v.x * values[0] + v.y * values[4] + v.z * values[8] + values[12];
-    vec.y = v.x * values[1] + v.y * values[5] + v.z * values[9] + values[13];
-    vec.z = v.x * values[2] + v.y * values[6] + v.z * values[10] + values[14];
+    vec.m_x = v.m_x * values[0] + v.m_y * values[4] + v.m_z * values[8] + values[12];
+    vec.m_y = v.m_x * values[1] + v.m_y * values[5] + v.m_z * values[9] + values[13];
+    vec.m_z = v.m_x * values[2] + v.m_y * values[6] + v.m_z * values[10] + values[14];
 
-    temp = v.x * values[3] + v.y * values[7] + v.z * values[11] + values[15];
+    temp = v.m_x * values[3] + v.m_y * values[7] + v.m_z * values[11] + values[15];
 
-    vec.x = vec.x / temp;
-    vec.y = vec.y / temp;
-    vec.z = vec.z / temp;
+    vec.m_x = vec.m_x / temp;
+    vec.m_y = vec.m_y / temp;
+    vec.m_z = vec.m_z / temp;
 
     return vec;
   };

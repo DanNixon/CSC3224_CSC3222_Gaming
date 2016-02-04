@@ -39,9 +39,9 @@ Vector3 Matrix4::GetPositionVector() const
 
 void Matrix4::SetPositionVector(const Vector3 in)
 {
-  values[12] = in.x;
-  values[13] = in.y;
-  values[14] = in.z;
+  values[12] = in.m_x;
+  values[13] = in.m_y;
+  values[14] = in.m_z;
 }
 
 Vector3 Matrix4::GetScalingVector() const
@@ -51,9 +51,9 @@ Vector3 Matrix4::GetScalingVector() const
 
 void Matrix4::SetScalingVector(const Vector3 &in)
 {
-  values[0] = in.x;
-  values[5] = in.y;
-  values[10] = in.z;
+  values[0] = in.m_x;
+  values[5] = in.m_y;
+  values[10] = in.m_z;
 }
 
 Matrix4 Matrix4::Perspective(float znear, float zfar, float aspect, float fov)
@@ -95,27 +95,27 @@ Matrix4 Matrix4::BuildViewMatrix(const Vector3 &from, const Vector3 &lookingAt,
                                  const Vector3 up /*= Vector3(1,0,0)*/)
 {
   Matrix4 r;
-  r.SetPositionVector(Vector3(-from.x, -from.y, -from.z));
+  r.SetPositionVector(Vector3(-from.m_x, -from.m_y, -from.m_z));
 
   Matrix4 m;
 
   Vector3 f = (lookingAt - from);
-  f.Normalise();
+  f.normalise();
 
-  Vector3 s = Vector3::Cross(f, up);
-  Vector3 u = Vector3::Cross(s, f);
+  Vector3 s = Vector3::cross(f, up);
+  Vector3 u = Vector3::cross(s, f);
 
-  m.values[0] = s.x;
-  m.values[4] = s.y;
-  m.values[8] = s.z;
+  m.values[0] = s.m_x;
+  m.values[4] = s.m_y;
+  m.values[8] = s.m_z;
 
-  m.values[1] = u.x;
-  m.values[5] = u.y;
-  m.values[9] = u.z;
+  m.values[1] = u.m_x;
+  m.values[5] = u.m_y;
+  m.values[9] = u.m_z;
 
-  m.values[2] = -f.x;
-  m.values[6] = -f.y;
-  m.values[10] = -f.z;
+  m.values[2] = -f.m_x;
+  m.values[6] = -f.m_y;
+  m.values[10] = -f.m_z;
 
   return m * r;
 }
@@ -126,22 +126,22 @@ Matrix4 Matrix4::Rotation(float degrees, const Vector3 &inaxis)
 
   Vector3 axis = inaxis;
 
-  axis.Normalise();
+  axis.normalise();
 
   float c = cos((float)DegToRad(degrees));
   float s = sin((float)DegToRad(degrees));
 
-  m.values[0] = (axis.x * axis.x) * (1.0f - c) + c;
-  m.values[1] = (axis.y * axis.x) * (1.0f - c) + (axis.z * s);
-  m.values[2] = (axis.z * axis.x) * (1.0f - c) - (axis.y * s);
+  m.values[0] = (axis.m_x * axis.m_x) * (1.0f - c) + c;
+  m.values[1] = (axis.m_y * axis.m_x) * (1.0f - c) + (axis.m_z * s);
+  m.values[2] = (axis.m_z * axis.m_x) * (1.0f - c) - (axis.m_y * s);
 
-  m.values[4] = (axis.x * axis.y) * (1.0f - c) - (axis.z * s);
-  m.values[5] = (axis.y * axis.y) * (1.0f - c) + c;
-  m.values[6] = (axis.z * axis.y) * (1.0f - c) + (axis.x * s);
+  m.values[4] = (axis.m_x * axis.m_y) * (1.0f - c) - (axis.m_z * s);
+  m.values[5] = (axis.m_y * axis.m_y) * (1.0f - c) + c;
+  m.values[6] = (axis.m_z * axis.m_y) * (1.0f - c) + (axis.m_x * s);
 
-  m.values[8] = (axis.x * axis.z) * (1.0f - c) + (axis.y * s);
-  m.values[9] = (axis.y * axis.z) * (1.0f - c) - (axis.x * s);
-  m.values[10] = (axis.z * axis.z) * (1.0f - c) + c;
+  m.values[8] = (axis.m_x * axis.m_z) * (1.0f - c) + (axis.m_y * s);
+  m.values[9] = (axis.m_y * axis.m_z) * (1.0f - c) - (axis.m_x * s);
+  m.values[10] = (axis.m_z * axis.m_z) * (1.0f - c) + c;
 
   return m;
 }
@@ -150,9 +150,9 @@ Matrix4 Matrix4::Scale(const Vector3 &scale)
 {
   Matrix4 m;
 
-  m.values[0] = scale.x;
-  m.values[5] = scale.y;
-  m.values[10] = scale.z;
+  m.values[0] = scale.m_x;
+  m.values[5] = scale.m_y;
+  m.values[10] = scale.m_z;
 
   return m;
 }
@@ -161,9 +161,9 @@ Matrix4 Matrix4::Translation(const Vector3 &translation)
 {
   Matrix4 m;
 
-  m.values[12] = translation.x;
-  m.values[13] = translation.y;
-  m.values[14] = translation.z;
+  m.values[12] = translation.m_x;
+  m.values[13] = translation.m_y;
+  m.values[14] = translation.m_z;
 
   return m;
 }

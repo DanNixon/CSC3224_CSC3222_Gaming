@@ -21,9 +21,9 @@ public:
     {
       int start = 3 * row;
 
-      values[start += 3] = val.x;
-      values[start += 3] = val.y;
-      values[start += 3] = val.z;
+      values[start += 3] = val.m_x;
+      values[start += 3] = val.m_y;
+      values[start += 3] = val.m_z;
     }
   }
 
@@ -42,9 +42,9 @@ public:
     {
       int start = 3 * row;
 
-      out.x = values[start += 3];
-      out.y = values[start += 3];
-      out.z = values[start += 3];
+      out.m_x = values[start += 3];
+      out.m_y = values[start += 3];
+      out.m_z = values[start += 3];
     }
     return out;
   }
@@ -68,18 +68,18 @@ public:
 
   void SetDiagonal(const Vector3 &in)
   {
-    values[0] = in.x;
-    values[4] = in.y;
-    values[8] = in.z;
+    values[0] = in.m_x;
+    values[4] = in.m_y;
+    values[8] = in.m_z;
   }
 
   inline Vector3 operator*(const Vector3 &v) const
   {
     Vector3 vec;
 
-    vec.x = v.x * values[0] + v.y * values[3] + v.z * values[6];
-    vec.y = v.x * values[1] + v.y * values[4] + v.z * values[7];
-    vec.z = v.x * values[2] + v.y * values[5] + v.z * values[8];
+    vec.m_x = v.m_x * values[0] + v.m_y * values[3] + v.m_z * values[6];
+    vec.m_y = v.m_x * values[1] + v.m_y * values[4] + v.m_z * values[7];
+    vec.m_z = v.m_x * values[2] + v.m_y * values[5] + v.m_z * values[8];
 
     return vec;
   };

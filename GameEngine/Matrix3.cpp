@@ -45,22 +45,22 @@ Matrix3 Matrix3::Rotation(float degrees, const Vector3 &inaxis)
 
   Vector3 axis = inaxis;
 
-  axis.Normalise();
+  axis.normalise();
 
   float c = cos((float)DegToRad(degrees));
   float s = sin((float)DegToRad(degrees));
 
-  m.values[0] = (axis.x * axis.x) * (1.0f - c) + c;
-  m.values[1] = (axis.y * axis.x) * (1.0f - c) + (axis.z * s);
-  m.values[2] = (axis.z * axis.x) * (1.0f - c) - (axis.y * s);
+  m.values[0] = (axis.m_x * axis.m_x) * (1.0f - c) + c;
+  m.values[1] = (axis.m_y * axis.m_x) * (1.0f - c) + (axis.m_z * s);
+  m.values[2] = (axis.m_z * axis.m_x) * (1.0f - c) - (axis.m_y * s);
 
-  m.values[3] = (axis.x * axis.y) * (1.0f - c) - (axis.z * s);
-  m.values[4] = (axis.y * axis.y) * (1.0f - c) + c;
-  m.values[5] = (axis.z * axis.y) * (1.0f - c) + (axis.x * s);
+  m.values[3] = (axis.m_x * axis.m_y) * (1.0f - c) - (axis.m_z * s);
+  m.values[4] = (axis.m_y * axis.m_y) * (1.0f - c) + c;
+  m.values[5] = (axis.m_z * axis.m_y) * (1.0f - c) + (axis.m_x * s);
 
-  m.values[6] = (axis.x * axis.z) * (1.0f - c) + (axis.y * s);
-  m.values[7] = (axis.y * axis.z) * (1.0f - c) - (axis.x * s);
-  m.values[8] = (axis.z * axis.z) * (1.0f - c) + c;
+  m.values[6] = (axis.m_x * axis.m_z) * (1.0f - c) + (axis.m_y * s);
+  m.values[7] = (axis.m_y * axis.m_z) * (1.0f - c) - (axis.m_x * s);
+  m.values[8] = (axis.m_z * axis.m_z) * (1.0f - c) + c;
 
   return m;
 }
@@ -69,9 +69,9 @@ Matrix3 Matrix3::Scale(const Vector3 &scale)
 {
   Matrix3 m;
 
-  m.values[0] = scale.x;
-  m.values[4] = scale.y;
-  m.values[8] = scale.z;
+  m.values[0] = scale.m_x;
+  m.values[4] = scale.m_y;
+  m.values[8] = scale.m_z;
 
   return m;
 }

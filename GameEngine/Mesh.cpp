@@ -52,8 +52,8 @@ void Mesh::generateNormals()
     Vector3 &b = m_vertices[i + 1];
     Vector3 &c = m_vertices[i + 2];
 
-    Vector3 normal = Vector3::Cross(b - a, c - a);
-    normal.Normalise();
+    Vector3 normal = Vector3::cross(b - a, c - a);
+    normal.normalise();
 
     m_normals[i] = normal;
     m_normals[i + 1] = normal;
@@ -198,9 +198,9 @@ Mesh *Mesh::LoadMeshFile(const string &filename)
 
   for (unsigned int i = 0; i < m->m_numVertices; ++i)
   {
-    f >> m->m_vertices[i].x;
-    f >> m->m_vertices[i].y;
-    f >> m->m_vertices[i].z;
+    f >> m->m_vertices[i][0];
+    f >> m->m_vertices[i][1];
+    f >> m->m_vertices[i][2];
   }
 
   if (hasColour)

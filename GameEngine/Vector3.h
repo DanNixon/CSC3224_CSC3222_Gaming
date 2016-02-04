@@ -132,7 +132,7 @@ public:
 
   inline bool operator==(const Vector3 &other) const
   {
-    return (m_x == other.m_x) && (m_y == other.m_y) && (m_z == other.m_z)
+    return (m_x == other.m_x) && (m_y == other.m_y) && (m_z == other.m_z);
   }
 
   inline bool operator!=(const Vector3 &other) const
@@ -179,6 +179,9 @@ public:
   }
 
 private:
+  friend class Matrix3;
+  friend class Matrix4;
+
   float m_x;
   float m_y;
   float m_z;
