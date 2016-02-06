@@ -36,6 +36,21 @@ public:
   {
   }
 
+  float x() const
+  {
+    return m_x;
+  }
+
+  float y() const
+  {
+    return m_y;
+  }
+
+  float z() const
+  {
+    return m_z;
+  }
+
   inline void toZero()
   {
     m_x = 0;
@@ -173,8 +188,7 @@ public:
 
   inline friend std::ostream &operator<<(std::ostream &o, const Vector3 &v)
   {
-    o << "Vector3(" << v.m_x << "," << v.m_y << "," << v.m_z << ")"
-      << std::endl;
+    o << "Vector3(" << v.m_x << "," << v.m_y << "," << v.m_z << ")";
     return o;
   }
 
