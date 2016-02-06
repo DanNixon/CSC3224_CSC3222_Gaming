@@ -1,6 +1,16 @@
+/** @file */
+
 #include "Shader.h"
 #include "Mesh.h"
 
+/**
+ * @brief Creates a new shader collection.
+ * @param vFile Filename for the vertex shader
+ * @param fFile Filename for the fragment shader
+ * @param gFile Filename for the geometry shader (optional)
+ * @param tcsFile Filename for the tessellation control shader (optional)
+ * @param tesFile Filename for the tessellation evaluation shader (optional)
+ */
 Shader::Shader(string vFile, string fFile, string gFile, string tcsFile,
                string tesFile)
     : m_linkSuccess(true)
@@ -35,6 +45,9 @@ Shader::Shader(string vFile, string fFile, string gFile, string tcsFile,
   m_linkSuccess = link();
 }
 
+/**
+ * @brief Deletes the programs associated with the loaded shaders.
+ */
 Shader::~Shader(void)
 {
   if (m_program)
@@ -51,6 +64,12 @@ Shader::~Shader(void)
   }
 }
 
+/**
+ * @brief Loads the contents of a file into a string.
+ * @param filename Name of file to load
+ * @param into [out] String to store contents in
+ * @return True on success, false if file is not found
+ */
 bool Shader::loadFile(string filename, string &into)
 {
   ifstream file;
@@ -73,6 +92,12 @@ bool Shader::loadFile(string filename, string &into)
   return true;
 }
 
+/**
+ * @brief Compiles a shader.
+ * @param filename Filename of GLSL source file
+ * @param type Shader type
+ * @return Shader ID
+ */
 GLuint Shader::compile(string filename, GLenum type)
 {
   string load;
@@ -105,6 +130,10 @@ GLuint Shader::compile(string filename, GLenum type)
   return shader;
 }
 
+/**
+ * @brief Links the loaded shaders.
+ * @return True on success
+ */
 bool Shader::link()
 {
   if (!m_loadSuccess)

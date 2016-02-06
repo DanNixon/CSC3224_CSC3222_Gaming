@@ -1,3 +1,5 @@
+/** @file */
+
 #include "SceneObject.h"
 
 #include "Matrix3.h"

@@ -1,3 +1,5 @@
+/** @file */
+
 #pragma once
 
 #include <iostream>
@@ -5,12 +7,20 @@
 class Vector2
 {
 public:
+  /**
+   * @brief Creates a new vector with default values of [0, 0].
+   */
   Vector2()
       : m_x(0.0)
       , m_y(0.0)
   {
   }
 
+  /**
+   * @brief Creates a new vector with specified values.
+   * @param x X coordinate value
+   * @param y Y coordinate value
+   */
   Vector2(const float x, const float y)
       : m_x(x)
       , m_y(y)
@@ -21,27 +31,46 @@ public:
   {
   }
 
+  /**
+   * @brief Gets the X coordinate value.
+   * @return X coordinate value
+   */
   float x() const
   {
     return m_x;
   }
 
+  /**
+   * @brief Gets the Y coordinate value.
+   * @return Y coordinate value
+   */
   float y() const
   {
     return m_y;
   }
 
+  /**
+   * @brief Sets each coordinate of the vextor to zero.
+   */
   inline void toZero()
   {
     m_x = 0;
     m_y = 0;
   }
 
+  /**
+   * @brief Gets the squared length of the vector.
+   * @return Length squared
+   */
   inline float length2() const
   {
     return m_x * m_x + m_y * m_y;
   }
 
+  /**
+   * @brief Gets the length of the vector.
+   * @return Length
+   */
   inline float length() const
   {
     return sqrt(length2());

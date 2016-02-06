@@ -1,3 +1,5 @@
+/** @file */
+
 #include "Scene.h"
 
 #include "SceneObject.h"
