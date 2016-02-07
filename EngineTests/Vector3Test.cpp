@@ -218,5 +218,23 @@ public:
     stream << v;
     Assert::AreEqual(std::string("Vector3[5.1,3.2,2.3]"), stream.str());
   }
+
+  TEST_METHOD(test_dot)
+  {
+    Vector3 v1(5.0f, 3.0f, 2.0f);
+    Vector3 v2(2.0f, -2.0f, 8.0f);
+    float dotProd = Vector3::dot(v1, v2);
+    Assert::AreEqual(20.0f, dotProd, 0.0001f);
+  }
+
+  TEST_METHOD(test_cross)
+  {
+    Vector3 v1(5.0f, 3.0f, 2.0f);
+    Vector3 v2(2.0f, -2.0f, 8.0f);
+    Vector3 crossProd = Vector3::cross(v1, v2);
+    Assert::AreEqual(28.0f, crossProd.x(), 0.0001f);
+    Assert::AreEqual(-36.0f, crossProd.y(), 0.0001f);
+    Assert::AreEqual(-16.0f, crossProd.z(), 0.0001f);
+  }
 };
 }
