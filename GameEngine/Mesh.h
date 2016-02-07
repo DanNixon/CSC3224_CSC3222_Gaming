@@ -44,7 +44,8 @@ public:
   static Mesh *GenerateTriangle();
   static Mesh *GenerateLine(const Vector3 &from, const Vector3 &to);
   static Mesh *GenerateRing2D(float radiusOuter, float radiusInner, int resolution = 64);
-  static Mesh *LoadMeshFile(const string &filename);
+  static Mesh *LoadASCIIMeshFile(const string &filename);
+  static Mesh *LoadModelFile(const string &filename);
 
   Mesh();
   virtual ~Mesh();

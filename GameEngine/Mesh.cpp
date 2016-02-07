@@ -4,6 +4,9 @@
 
 #include "common.h"
 
+/**
+ * @brief Creates a new empty mesh.
+ */
 Mesh::Mesh()
     : m_numIndices(0)
     , m_type(GL_TRIANGLES)
@@ -216,18 +219,20 @@ Mesh *Mesh::GenerateRing2D(float radiusOuter, float radiusInner, int resolution)
   {
     const float a = i * deltaA;
 
-    m->m_vertices[n] = Vector3(cos(a) * radiusOuter, sin(a) * radiusOuter, 0.0f);
+    m->m_vertices[n] =
+        Vector3(cos(a) * radiusOuter, sin(a) * radiusOuter, 0.0f);
     m->m_colours[n] = c;
     m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
     n++;
 
-    m->m_vertices[n] = Vector3(cos(a) * radiusInner, sin(a) * radiusInner, 0.0f);
+    m->m_vertices[n] =
+        Vector3(cos(a) * radiusInner, sin(a) * radiusInner, 0.0f);
     m->m_colours[n] = c;
     m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
     n++;
   }
 
-  //m->generateNormals();
+  // m->generateNormals();
   m->bufferData();
   return m;
 }
@@ -237,7 +242,7 @@ Mesh *Mesh::GenerateRing2D(float radiusOuter, float radiusInner, int resolution)
  * @param filename Filename to load
  * @return Mesh containing loaded mesh
  */
-Mesh *Mesh::LoadMeshFile(const string &filename)
+Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
 {
   ifstream f(filename);
 
@@ -287,10 +292,26 @@ Mesh *Mesh::LoadMeshFile(const string &filename)
   {
     for (unsigned int i = 0; i < m->m_numVertices; ++i)
     {
-		f >> m->m_textureCoords[i][0];
-		f >> m->m_textureCoords[i][1];
+      f >> m->m_textureCoords[i][0];
+      f >> m->m_textureCoords[i][1];
     }
   }
+
+  m->generateNormals();
+  m->bufferData();
+  return m;
+}
+
+/**
+ * @brief Loads a mesh from a supported model file.
+ * @param filename Filename to load
+ * @return Mesh containing loaded model
+ */
+Mesh *Mesh::LoadModelFile(const string &filename)
+{
+  Mesh *m = new Mesh();
+
+  // TODO: load model (possibly using http://www.assimp.org/)
 
   m->generateNormals();
   m->bufferData();
