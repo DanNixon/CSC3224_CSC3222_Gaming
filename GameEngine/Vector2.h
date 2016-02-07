@@ -4,6 +4,10 @@
 
 #include <iostream>
 
+/**
+ * @class Vector2
+ * @brief Represents a two dimensional vector.
+ */
 class Vector2
 {
 public:
@@ -76,6 +80,11 @@ public:
     return sqrt(length2());
   }
 
+  /**
+   * @brief Normalises a vector to a length of 1.0.
+   *
+   * Divides each component of the vector by its length.
+   */
   inline void normalise()
   {
     float len = length();
@@ -87,23 +96,39 @@ public:
     }
   }
 
+  /**
+   * @brief Negates each coordinate value of the vector.
+   */
   inline void invert()
   {
     m_x = -m_x;
     m_y = -m_y;
   }
 
-  inline Vector2 inverse() const
+  /**
+   * @brief Returns a negated copy of this vector.
+   * @return Inverse vector
+   */
+  inline Vector2 operator-() const
   {
-    Vector2 i(-m_x, -m_y);
-    return i;
+    return Vector2(-m_x, -m_y);
   }
 
+  /**
+   * @brief Adds another vector to this vector.
+   * @param rhs Vector to add
+   * @return Result
+   */
   inline Vector2 operator+(const Vector2 &rhs) const
   {
     return Vector2(m_x + rhs.m_x, m_y + rhs.m_y);
   }
 
+  /**
+   * @brief Adds another vector to this vector.
+   * @param rhs Vector to add
+   * @return This vector
+   */
   inline Vector2 &operator+=(const Vector2 &rhs)
   {
     m_x += rhs.m_x;
@@ -112,11 +137,21 @@ public:
     return *this;
   }
 
+  /**
+   * @brief Subtracts another vector to this vector.
+   * @param rhs Vector to subtract
+   * @return Result
+   */
   inline Vector2 operator-(const Vector2 &rhs) const
   {
     return Vector2(m_x - rhs.m_x, m_y - rhs.m_y);
   }
 
+  /**
+   * @brief Subtracts another vector to this vector.
+   * @param rhs Vector to subtract
+   * @return This vector
+   */
   inline Vector2 &operator-=(const Vector2 &rhs)
   {
     m_x -= rhs.m_x;
@@ -125,41 +160,71 @@ public:
     return *this;
   }
 
-  inline Vector2 operator-() const
-  {
-    return Vector2(-m_x, -m_y);
-  }
-
+  /**
+   * @brief Multiplies components of this vector with another.
+   * @param rhs Vector to multiply by
+   * @return Result
+   */
   inline Vector2 operator*(const Vector2 &rhs) const
   {
     return Vector2(m_x * rhs.m_x, m_y * rhs.m_y);
   }
 
+  /**
+   * @brief Multiplies components of this vector by a scalar.
+   * @param a Scalar to multiply by
+   * @return Result
+   */
   inline Vector2 operator*(float a) const
   {
     return Vector2(m_x * a, m_y * a);
   }
 
+  /**
+   * @brief Divides components of this vector by another.
+   * @param rhs Vector to divide by
+   * @return Result
+   */
   inline Vector2 operator/(const Vector2 &rhs) const
   {
     return Vector2(m_x / rhs.m_x, m_y / rhs.m_y);
   }
 
+  /**
+   * @brief Divides components of this vector by a scalar.
+   * @param a Scalar to divide by
+   * @return Result
+   */
   inline Vector2 operator/(float a) const
   {
     return Vector2(m_x / a, m_y / a);
   }
 
+  /**
+   * @brief Tests for equality between this vector and another.
+   * @param other Other vector to test
+   * @return True if all components are equal
+   */
   inline bool operator==(const Vector2 &other) const
   {
     return (m_x == other.m_x) && (m_y == other.m_y);
   }
 
+  /**
+   * @brief Tests for inequality between this vector and another.
+   * @param other Other vector to test
+   * @return True if at least one component differs
+   */
   inline bool operator!=(const Vector2 &other) const
   {
     return !(this->operator==(other));
   }
 
+  /**
+   * @brief Returns the value of a component of the vector.
+   * @param i Index of component to return
+   * @return Value of component
+   */
   inline float operator[](const int i) const
   {
     switch (i)
@@ -173,6 +238,11 @@ public:
     }
   }
 
+  /**
+   * @brief Returns a reference to a component of the vector.
+   * @param i Index of component to return
+   * @return Reference to component
+   */
   inline float &operator[](const int i)
   {
     switch (i)
@@ -187,6 +257,12 @@ public:
     }
   }
 
+  /**
+   * @brief Outputs a Vector2 to a stream.
+   * @param o Stream to output to
+   * @param v Vector to output
+   * @return Reference to stream
+   */
   inline friend std::ostream &operator<<(std::ostream &o, const Vector2 &v)
   {
     o << "Vector2[" << v.m_x << "," << v.m_y << "]";
@@ -194,6 +270,6 @@ public:
   }
 
 private:
-  float m_x;
-  float m_y;
+  float m_x; //!< X coordinate
+  float m_y; //!< Y coordinate
 };

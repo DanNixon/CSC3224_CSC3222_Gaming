@@ -5,6 +5,10 @@
 #include <cmath>
 #include <iostream>
 
+/**
+ * @class Vector3
+ * @brief Represents a three dimensional vector.
+ */
 class Vector3
 {
 public:
@@ -20,6 +24,9 @@ public:
                    (a.m_x * b.m_y) - (a.m_y * b.m_x));
   }
 
+  /**
+   * @brief Creates a new vector with default values of [0, 0, 0].
+   */
   Vector3()
       : m_x(0.0)
       , m_y(0.0)
@@ -27,6 +34,12 @@ public:
   {
   }
 
+  /**
+   * @brief Creates a new vector with specified values.
+   * @param x X coordinate value
+   * @param y Y coordinate value
+   * @param z Z coordinate value
+   */
   Vector3(const float x, const float y, const float z)
       : m_x(x)
       , m_y(y)
@@ -38,21 +51,36 @@ public:
   {
   }
 
+  /**
+   * @brief Gets the X coordinate value.
+   * @return X coordinate value
+   */
   float x() const
   {
     return m_x;
   }
 
+  /**
+   * @brief Gets the Y coordinate value.
+   * @return Y coordinate value
+   */
   float y() const
   {
     return m_y;
   }
 
+  /**
+   * @brief Gets the Z coordinate value.
+   * @return Z coordinate value
+   */
   float z() const
   {
     return m_z;
   }
 
+  /**
+   * @brief Sets each coordinate of the vextor to zero.
+   */
   inline void toZero()
   {
     m_x = 0;
@@ -60,16 +88,29 @@ public:
     m_z = 0;
   }
 
+  /**
+   * @brief Gets the squared length of the vector.
+   * @return Length squared
+   */
   inline float length2() const
   {
     return m_x * m_x + m_y * m_y + m_z * m_z;
   }
 
+  /**
+   * @brief Gets the length of the vector.
+   * @return Length
+   */
   inline float length() const
   {
     return sqrt(length2());
   }
 
+  /**
+   * @brief Normalises a vector to a length of 1.0.
+   *
+   * Divides each component of the vector by its length.
+   */
   inline void normalise()
   {
     float len = length();
@@ -82,6 +123,9 @@ public:
     }
   }
 
+  /**
+   * @brief Negates each coordinate value of the vector.
+   */
   inline void invert()
   {
     m_x = -m_x;
@@ -89,16 +133,30 @@ public:
     m_z = -m_z;
   }
 
-  inline Vector3 inverse() const
+  /**
+   * @brief Returns a negated copy of this vector.
+   * @return Inverse vector
+   */
+  inline Vector3 operator-() const
   {
     return Vector3(-m_x, -m_y, -m_z);
   }
 
+  /**
+   * @brief Adds another vector to this vector.
+   * @param rhs Vector to add
+   * @return Result
+   */
   inline Vector3 operator+(const Vector3 &rhs) const
   {
     return Vector3(m_x + rhs.m_x, m_y + rhs.m_y, m_z + rhs.m_z);
   }
 
+  /**
+   * @brief Adds another vector to this vector.
+   * @param rhs Vector to add
+   * @return This vector
+   */
   inline Vector3 &operator+=(const Vector3 &rhs)
   {
     m_x += rhs.m_x;
@@ -108,11 +166,21 @@ public:
     return *this;
   }
 
+  /**
+   * @brief Subtracts another vector to this vector.
+   * @param rhs Vector to subtract
+   * @return Result
+   */
   inline Vector3 operator-(const Vector3 &rhs) const
   {
     return Vector3(m_x - rhs.m_x, m_y - rhs.m_y, m_z - rhs.m_z);
   }
 
+  /**
+   * @brief Subtracts another vector to this vector.
+   * @param rhs Vector to subtract
+   * @return This vector
+   */
   inline Vector3 &operator-=(const Vector3 &rhs)
   {
     m_x -= rhs.m_x;
@@ -122,41 +190,71 @@ public:
     return *this;
   }
 
-  inline Vector3 operator-() const
-  {
-    return Vector3(-m_x, -m_y, -m_z);
-  }
-
+  /**
+   * @brief Multiplies components of this vector with another.
+   * @param rhs Vector to multiply by
+   * @return Result
+   */
   inline Vector3 operator*(const Vector3 &rhs) const
   {
     return Vector3(m_x * rhs.m_x, m_y * rhs.m_y, m_z * rhs.m_z);
   }
 
+  /**
+   * @brief Multiplies components of this vector by a scalar.
+   * @param a Scalar to multiply by
+   * @return Result
+   */
   inline Vector3 operator*(float a) const
   {
     return Vector3(m_x * a, m_y * a, m_z * a);
   }
 
+  /**
+   * @brief Divides components of this vector by another.
+   * @param rhs Vector to divide by
+   * @return Result
+   */
   inline Vector3 operator/(const Vector3 &rhs) const
   {
     return Vector3(m_x / rhs.m_x, m_y / rhs.m_y, m_z / rhs.m_z);
   }
 
+  /**
+   * @brief Divides components of this vector by a scalar.
+   * @param a Scalar to divide by
+   * @return Result
+   */
   inline Vector3 operator/(float a) const
   {
     return Vector3(m_x / a, m_y / a, m_z / a);
   }
 
+  /**
+   * @brief Tests for equality between this vector and another.
+   * @param other Other vector to test
+   * @return True if all components are equal
+   */
   inline bool operator==(const Vector3 &other) const
   {
     return (m_x == other.m_x) && (m_y == other.m_y) && (m_z == other.m_z);
   }
 
+  /**
+   * @brief Tests for inequality between this vector and another.
+   * @param other Other vector to test
+   * @return True if at least one component differs
+   */
   inline bool operator!=(const Vector3 &other) const
   {
     return !(this->operator==(other));
   }
 
+  /**
+   * @brief Returns the value of a component of the vector.
+   * @param i Index of component to return
+   * @return Value of component
+   */
   inline float operator[](const int i) const
   {
     switch (i)
@@ -172,6 +270,11 @@ public:
     }
   }
 
+  /**
+   * @brief Returns a reference to a component of the vector.
+   * @param i Index of component to return
+   * @return Reference to component
+   */
   inline float &operator[](const int i)
   {
     switch (i)
@@ -188,6 +291,12 @@ public:
     }
   }
 
+  /**
+   * @brief Outputs a Vector3 to a stream.
+   * @param o Stream to output to
+   * @param v Vector to output
+   * @return Reference to stream
+   */
   inline friend std::ostream &operator<<(std::ostream &o, const Vector3 &v)
   {
     o << "Vector3[" << v.m_x << "," << v.m_y << "," << v.m_z << "]";
@@ -198,7 +307,7 @@ private:
   friend class Matrix3;
   friend class Matrix4;
 
-  float m_x;
-  float m_y;
-  float m_z;
+  float m_x; //!< X coordinate
+  float m_y; //!< Y coordinate
+  float m_z; //!< Z coordinate
 };

@@ -33,6 +33,9 @@ Mesh::~Mesh(void)
   delete[] m_indices;
 }
 
+/**
+ * @brief Draws mesh.
+ */
 void Mesh::draw()
 {
   glBindVertexArray(m_arrayObject);
@@ -45,6 +48,9 @@ void Mesh::draw()
   glBindVertexArray(0);
 }
 
+/**
+ * @brief Generates normals for each vertex.
+ */
 void Mesh::generateNormals()
 {
   if (!m_normals)
@@ -68,7 +74,7 @@ void Mesh::generateNormals()
 /**
  * @brief Buffers all VBO data into graphics memory.
  *
- * Required before drawing!
+ * Required before drawing.
  */
 void Mesh::bufferData()
 {
@@ -126,6 +132,10 @@ void Mesh::bufferData()
   glBindVertexArray(0);
 }
 
+/**
+ * @brief Creates a coloured triangle for demonstration.
+ * @return Mesh containing triangle
+ */
 Mesh *Mesh::GenerateTriangle()
 {
   Mesh *m = new Mesh();
@@ -152,6 +162,12 @@ Mesh *Mesh::GenerateTriangle()
   return m;
 }
 
+/**
+ * @brief Generates a line between two points.
+ * @param from Start point
+ * @param to End point
+ * @return Mesh containing line
+ */
 Mesh *Mesh::GenerateLine(const Vector3 &from, const Vector3 &to)
 {
   Mesh *m = new Mesh();
@@ -180,7 +196,7 @@ Mesh *Mesh::GenerateLine(const Vector3 &from, const Vector3 &to)
 * @param radiusOuter Outer radius
 * @param radiusInner Inner radius
 * @param resolution Number of "slices" in angle
-* @return New mesh
+* @return Mesh containing 2D ring
 */
 Mesh *Mesh::GenerateRing2D(float radiusOuter, float radiusInner, int resolution)
 {
@@ -216,6 +232,11 @@ Mesh *Mesh::GenerateRing2D(float radiusOuter, float radiusInner, int resolution)
   return m;
 }
 
+/**
+ * @brief Loads a mesh from an ASCII file.
+ * @param filename Filename to load
+ * @return Mesh containing loaded mesh
+ */
 Mesh *Mesh::LoadMeshFile(const string &filename)
 {
   ifstream f(filename);

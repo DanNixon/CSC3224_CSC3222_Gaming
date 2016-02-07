@@ -1,16 +1,9 @@
-/** @file */
-
-/******************************************************************************
-Author:Rich Davison
-Description: Some random variables and functions, for lack of a better place
-to put them.
-
--_-_-_-_-_-_-_,------,
-_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
--_-_-_-_-_-_-~|__( ^ .^) /
-_-_-_-_-_-_-_-""  ""
-
-*/ /////////////////////////////////////////////////////////////////////////////
+/**
+ * @file
+ * @brief Some random variables and functions, for lack of a better place to
+ *        put them.
+ * @author Rich Davison
+ */
 
 #pragma once
 

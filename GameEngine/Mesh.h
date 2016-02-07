@@ -1,19 +1,5 @@
 /** @file */
 
-/******************************************************************************
-Class:Mesh
-Implements:
-Author:Rich Davison	<richard.davison4@newcastle.ac.uk>
-Description:Wrapper around OpenGL primitives, geometry and related
-OGL functions.
-
--_-_-_-_-_-_-_,------,
-_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
--_-_-_-_-_-_-~|__( ^ .^) /
-_-_-_-_-_-_-_-""  ""
-
-*/ /////////////////////////////////////////////////////////////////////////////
-
 #pragma once
 
 #include <vector>
@@ -45,6 +31,13 @@ enum MeshBuffer
   MAX_BUFFER
 };
 
+/**
+ * @class Mesh
+ * @brief Wrapper around OpenGL primitives, geometry and related OGL functions.
+ * @author Rich Davison, Dan Nixon
+ *
+ * Modified from the original nclgl library.
+ */
 class Mesh
 {
 public:

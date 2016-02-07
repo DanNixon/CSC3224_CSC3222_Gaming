@@ -6,6 +6,10 @@
 
 class SceneObject;
 
+/**
+ * @class Scene
+ * @brief Represents a 3D scene.
+ */
 class Scene
 {
 public:
@@ -23,7 +27,7 @@ public:
   void render();
 
 private:
-  SceneObject *m_root;
-  Matrix4 m_viewMatrix;
-  Matrix4 m_projectionMatrix;
+  SceneObject *m_root;        //!< Root node in the scene tree
+  Matrix4 m_viewMatrix;       //!< View matrix
+  Matrix4 m_projectionMatrix; //!< Projection matrix
 };

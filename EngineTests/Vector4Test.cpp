@@ -75,10 +75,10 @@ public:
     Assert::AreEqual(-8.0f, v.w());
   }
 
-  TEST_METHOD(test_inverse)
+  TEST_METHOD(test_operatorMinusInverse)
   {
-    Vector4 v(5.0f, 3.0f, 2.0f, 8.0f);
-    Vector4 v2 = v.inverse();
+    Vector4 v1(5.0f, 3.0f, 2.0f, 8.0f);
+    Vector4 v2 = -v1;
     Assert::AreEqual(-5.0f, v2.x());
     Assert::AreEqual(-3.0f, v2.y());
     Assert::AreEqual(-2.0f, v2.z());
@@ -127,16 +127,6 @@ public:
     Assert::AreEqual(2.0f, v1.y());
     Assert::AreEqual(1.5f, v1.z());
     Assert::AreEqual(4.0f, v1.w());
-  }
-
-  TEST_METHOD(test_operatorMinusInverse)
-  {
-    Vector4 v1(5.0f, 3.0f, 2.0f, 8.0f);
-    Vector4 v2 = -v1;
-    Assert::AreEqual(-5.0f, v2.x());
-    Assert::AreEqual(-3.0f, v2.y());
-    Assert::AreEqual(-2.0f, v2.z());
-    Assert::AreEqual(-8.0f, v2.w());
   }
 
   TEST_METHOD(test_operatorMultVec)

@@ -1,21 +1,5 @@
 /** @file */
 
-/******************************************************************************
-Class:Shader
-Implements:
-Author:Rich Davison	<richard.davison4@newcastle.ac.uk>
-Description:VERY simple class to encapsulate GLSL shader loading, linking,
-and binding. Useful additions to this class would be overloaded functions to
-replace the glUniformxx functions in external code, and possibly a map to store
-uniform names and their resulting bindings.
-
--_-_-_-_-_-_-_,------,
-_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
--_-_-_-_-_-_-~|__( ^ .^) /
-_-_-_-_-_-_-_-""  ""
-
-*/ /////////////////////////////////////////////////////////////////////////////
-
 #pragma once
 
 #include <string>
@@ -24,6 +8,10 @@ _-_-_-_-_-_-_-""  ""
 
 #include "GL/glew.h"
 
+/**
+ * @enum ShaderStage
+ * @brief Represents a specific shader in the pipeline.
+ */
 enum ShaderStage
 {
   SHADER_VERTEX = 0,
@@ -36,6 +24,13 @@ enum ShaderStage
 
 using namespace std;
 
+/**
+ * @class Shader
+ * @brief Encapsulation for OpenGL shaders.
+ * @author Rich Davison, Dan Nixon
+ *
+ * Modified from the original nclgl library.
+ */
 class Shader
 {
 public:
@@ -43,11 +38,19 @@ public:
          string tes = "");
   ~Shader();
 
+  /**
+   * @brief Returns the shader program.
+   * @return Shader program
+   */
   GLuint program() const
   {
     return m_program;
   }
 
+  /**
+   * @brief Checks if all shaders have been loaded and linked successfully.
+   * @return True if shaders are valid
+   */
   bool valid() const
   {
     return m_linkSuccess;
