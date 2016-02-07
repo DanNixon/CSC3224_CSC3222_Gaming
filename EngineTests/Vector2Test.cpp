@@ -55,6 +55,7 @@ public:
     v.normalise();
     Assert::AreEqual(0.857f, v.x(), 0.001f);
     Assert::AreEqual(0.515f, v.y(), 0.001f);
+    Assert::AreEqual(1.0f, v.length(), 0.001f);
   }
 
   TEST_METHOD(test_invert)
