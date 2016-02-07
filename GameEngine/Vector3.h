@@ -37,6 +37,28 @@ public:
   }
 
   /**
+  * @brief Calculates the distance between two vectors.
+  * @param a First vector
+  * @param b Second vector
+  * @return Distance
+  */
+  static float distance(const Vector3 &a, const Vector3 &b)
+  {
+    return (b - a).length();
+  }
+
+  /**
+  * @brief Calculates the squared distance between two vectors.
+  * @param a First vector
+  * @param b Second vector
+  * @return Distance
+  */
+  static float distance2(const Vector3 &a, const Vector3 &b)
+  {
+    return (b - a).length2();
+  }
+
+  /**
    * @brief Creates a new vector with default values of [0, 0, 0].
    */
   Vector3()

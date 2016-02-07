@@ -236,5 +236,21 @@ public:
     Assert::AreEqual(-36.0f, crossProd.y(), 0.0001f);
     Assert::AreEqual(-16.0f, crossProd.z(), 0.0001f);
   }
+
+  TEST_METHOD(test_distance)
+  {
+    Vector3 v1(5.0f, 3.0f, 2.0f);
+    Vector3 v2(6.0f, 4.0f, 9.0f);
+    float dist = Vector3::distance(v1, v2);
+    Assert::AreEqual(7.1414f, dist, 0.001f);
+  }
+
+  TEST_METHOD(test_distance2)
+  {
+    Vector3 v1(5.0f, 3.0f, 2.0f);
+    Vector3 v2(6.0f, 4.0f, 9.0f);
+    float dist2 = Vector3::distance2(v1, v2);
+    Assert::AreEqual(51.0f, dist2, 0.001f);
+  }
 };
 }

@@ -236,5 +236,21 @@ public:
     stream << v;
     Assert::AreEqual(std::string("Vector4[5.1,3.2,2.3,8.4]"), stream.str());
   }
+
+  TEST_METHOD(test_distance)
+  {
+    Vector4 v1(5.0f, 3.0f, 2.0f, 8.0f);
+    Vector4 v2(6.0f, 4.0f, 9.0f, 4.0f);
+    float dist = Vector4::distance(v1, v2);
+    Assert::AreEqual(8.1853f, dist, 0.001f);
+  }
+
+  TEST_METHOD(test_distance2)
+  {
+    Vector4 v1(5.0f, 3.0f, 2.0f, 8.0f);
+    Vector4 v2(6.0f, 4.0f, 9.0f, 4.0f);
+    float dist2 = Vector4::distance2(v1, v2);
+    Assert::AreEqual(67.0f, dist2, 0.001f);
+  }
 };
 }
