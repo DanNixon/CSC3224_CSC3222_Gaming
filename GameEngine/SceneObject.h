@@ -7,9 +7,19 @@
 #include "Shader.h"
 #include "Scene.h"
 
+// TODO: Separate render stuff into a subclass of SceneObject
+
+/**
+ * @class SceneObject
+ * @brief Represents an item in a Scene.
+ */
 class SceneObject
 {
 public:
+  /**
+   * @typedef SceneObjectIter
+   * @brief Const iterator for items of a vector of SceneObject.
+   */
   typedef vector<SceneObject *>::const_iterator SceneObjectIter;
 
   static const int NUM_TEXTURES = 2;
@@ -17,6 +27,35 @@ public:
   SceneObject();
   SceneObject(Mesh *m, Shader *s, GLuint t = 0);
   ~SceneObject();
+
+  /**
+   * @brief Adds a SceneObject as a child of this object.
+   * @param child Child SceneObject
+   */
+  void addChild(SceneObject &child)
+  {
+    m_children.push_back(&child);
+    child.m_parent = this;
+    child.m_scene = m_scene;
+  }
+
+  /**
+   * @brief Gets the list of children SceneObject of this object.
+   * @return List of children
+   */
+  const vector<SceneObject *> &children() const
+  {
+    return m_children;
+  }
+
+  /**
+   * @brief Tests if this object is visually renderable.
+   * @return True if this object can be rendered.
+   */
+  bool isRenderable() const
+  {
+    return m_mesh && m_shader;
+  }
 
   void setMesh(Mesh *m)
   {
@@ -58,21 +97,9 @@ public:
     return m_modelMatrix;
   }
 
-  void addChild(SceneObject &child)
-  {
-    m_children.push_back(&child);
-    child.m_parent = this;
-    child.m_scene = m_scene;
-  }
-
   Matrix4 worldTransform() const
   {
     return m_worldTransform;
-  }
-
-  const vector<SceneObject *> &children() const
-  {
-    return m_children;
   }
 
   virtual void update(float msec);
@@ -81,15 +108,15 @@ public:
 private:
   friend class Scene;
 
-  Mesh *m_mesh;
-  Shader *m_shader;
+  Mesh *m_mesh;     //!< Mesh represented by this object
+  Shader *m_shader; //!< Shader used to render m_mesh
 
-  GLuint m_textures[NUM_TEXTURES];
+  GLuint m_textures[NUM_TEXTURES]; //!< Textures used on m_mesh
 
-  Matrix4 m_modelMatrix;
-  Matrix4 m_worldTransform;
+  Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
+  Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
 
-  SceneObject *m_parent;
-  Scene *m_scene;
-  vector<SceneObject *> m_children;
+  SceneObject *m_parent;            //!< Parent SceneObject
+  Scene *m_scene;                   //!< Scene this object belongs to
+  vector<SceneObject *> m_children; //!< Children
 };

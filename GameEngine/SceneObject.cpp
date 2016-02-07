@@ -48,7 +48,7 @@ void SceneObject::update(float msec)
 
 void SceneObject::render()
 {
-  if (m_shader && m_mesh)
+  if (m_mesh && m_shader)
   {
     GLuint program = m_shader->program();
 

@@ -51,4 +51,8 @@ static inline double DegToRad(const double deg)
  */
 #define min(a, b) (((a) < (b)) ? (a) : (b))
 
+/**
+ * @typedef uint
+ * @brief Unsigned integer
+ */
 typedef unsigned int uint;

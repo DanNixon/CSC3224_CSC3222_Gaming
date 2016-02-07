@@ -2,11 +2,18 @@
 
 #include "Matrix3.h"
 
-Matrix3::Matrix3(void)
+/**
+ * @brief Creates a matrix with default values (identity).
+ */
+Matrix3::Matrix3()
 {
   toIdentity();
 }
 
+/**
+ * @brief Creates a new matrix with given values.
+ * @param elements Component values
+ */
 Matrix3::Matrix3(float elements[16])
 {
   m_values[0] = elements[0];
@@ -22,6 +29,10 @@ Matrix3::Matrix3(float elements[16])
   m_values[8] = elements[10];
 }
 
+/**
+ * @brief Creates a new 3x3 matrix from a 4x4 matrix.
+ * @param m4 4x4 matrix to copy values from
+ */
 Matrix3::Matrix3(const Matrix4 &m4)
 {
   m_values[0] = m4.m_values[0];
@@ -37,10 +48,39 @@ Matrix3::Matrix3(const Matrix4 &m4)
   m_values[8] = m4.m_values[10];
 }
 
-Matrix3::~Matrix3(void)
+Matrix3::~Matrix3()
 {
 }
 
+/**
+ * @brief Sets each component of the matrix to zero.
+ */
+void Matrix3::toZero()
+{
+  for (int i = 0; i < 9; ++i)
+    m_values[i] = 0.0f;
+}
+
+/**
+ * @brief Sets the matrix to an identity matrix.
+ */
+void Matrix3::toIdentity()
+{
+  toZero();
+
+  m_values[0] = 1.0f;
+  m_values[4] = 1.0f;
+  m_values[8] = 1.0f;
+}
+
+/**
+ * @brief Creates a rotation matrix that rotates by 'degrees' around the 'axis'.
+ * @param degrees Degrees of rotation
+ * @param inaxis Axis to rotate around
+ * @return Rotation matrix
+ *
+ * Analogous to glRotatef().
+ */
 Matrix3 Matrix3::Rotation(float degrees, const Vector3 &inaxis)
 {
   Matrix3 m;
@@ -67,6 +107,13 @@ Matrix3 Matrix3::Rotation(float degrees, const Vector3 &inaxis)
   return m;
 }
 
+/**
+ * @brief Creates a scaling matrix (puts the 'scale' vector down the diagonal).
+ * @param scale Scale factors in each axis
+ * @return Scaling matrix
+ *
+ * Analogous to glScalef().
+ */
 Matrix3 Matrix3::Scale(const Vector3 &scale)
 {
   Matrix3 m;
@@ -76,19 +123,4 @@ Matrix3 Matrix3::Scale(const Vector3 &scale)
   m.m_values[8] = scale.m_z;
 
   return m;
-}
-
-void Matrix3::toZero()
-{
-  for (int i = 0; i < 9; ++i)
-    m_values[i] = 0.0f;
-}
-
-void Matrix3::toIdentity()
-{
-  toZero();
-
-  m_values[0] = 1.0f;
-  m_values[4] = 1.0f;
-  m_values[8] = 1.0f;
 }

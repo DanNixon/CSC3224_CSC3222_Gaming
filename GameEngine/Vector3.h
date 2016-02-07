@@ -7,16 +7,28 @@
 
 /**
  * @class Vector3
- * @brief Represents a three dimensional vector.
+ * @brief Three dimensional vector.
  */
 class Vector3
 {
 public:
+  /**
+   * @brief Calculates the dot product of two Vector3.
+   * @param a LHS vector
+   * @param b RHS vector
+   * @return Dot product
+   */
   static float dot(const Vector3 &a, const Vector3 &b)
   {
     return (a.m_x * b.m_x) + (a.m_y * b.m_y) + (a.m_z * b.m_z);
   }
 
+  /**
+   * @brief Calculates the cross product of two Vector3.
+   * @param a LHS vector
+   * @param b RHS vector
+   * @return Cross product
+   */
   static Vector3 cross(const Vector3 &a, const Vector3 &b)
   {
     return Vector3((a.m_y * b.m_z) - (a.m_z * b.m_y),
@@ -79,7 +91,7 @@ public:
   }
 
   /**
-   * @brief Sets each coordinate of the vextor to zero.
+   * @brief Sets each coordinate of the vector to zero.
    */
   inline void toZero()
   {

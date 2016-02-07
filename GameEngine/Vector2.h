@@ -6,7 +6,7 @@
 
 /**
  * @class Vector2
- * @brief Represents a two dimensional vector.
+ * @brief Two dimensional vector.
  */
 class Vector2
 {
@@ -54,7 +54,7 @@ public:
   }
 
   /**
-   * @brief Sets each coordinate of the vextor to zero.
+   * @brief Sets each coordinate of the vector to zero.
    */
   inline void toZero()
   {

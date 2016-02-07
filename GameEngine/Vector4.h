@@ -6,7 +6,7 @@
 
 /**
  * @class Vector4
- * @brief Represents a four dimensional vector.
+ * @brief Four dimensional vector.
  */
 class Vector4
 {
@@ -78,7 +78,7 @@ public:
   }
 
   /**
-   * @brief Sets each coordinate of the vextor to zero.
+   * @brief Sets each coordinate of the vector to zero.
    */
   inline void toZero()
   {
