@@ -92,7 +92,7 @@ int main(int argc, char *args[])
     SDL_Event e;
     SDL_StartTextInput();
 
-    Mesh *cubeMesh = Mesh::LoadMeshFile("cube.asciimesh");
+    Mesh *cubeMesh = Mesh::LoadASCIIMeshFile("cube.asciimesh");
     Shader *shader = new Shader("basic_vertex.glsl", "basic_fragment.glsl");
     SceneObject cube(cubeMesh, shader);
     cube.setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *

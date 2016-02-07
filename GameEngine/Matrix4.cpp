@@ -58,7 +58,7 @@ Vector3 Matrix4::positionVector() const
  * @brief Sets the position component of the matrix.
  * @param position Position vector
  */
-void Matrix4::setPositionVector(const Vector3 position)
+void Matrix4::setPositionVector(const Vector3 &position)
 {
   m_values[12] = position.m_x;
   m_values[13] = position.m_y;
