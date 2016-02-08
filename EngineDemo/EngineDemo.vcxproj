@@ -148,6 +148,11 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platf
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"</Command>
+      <Message>Copy DLLs to build directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -164,6 +169,11 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platf
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"</Command>
+      <Message>Copy DLLs to build directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

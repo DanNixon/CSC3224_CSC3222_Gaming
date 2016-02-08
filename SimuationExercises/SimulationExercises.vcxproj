@@ -68,19 +68,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\</LibraryPath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\</LibraryPath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\</LibraryPath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\</LibraryPath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -94,7 +94,8 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32d.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"</Command>
       <Message>Copy DLLs to build directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -110,7 +111,8 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32d.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"</Command>
       <Message>Copy DLLs to build directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -129,6 +131,11 @@
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Message>Copy DLLs to build directory</Message>
+      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -145,13 +152,21 @@
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Message>Copy DLLs to build directory</Message>
+      <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
