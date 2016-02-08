@@ -11,6 +11,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineDemo", "EngineDemo\En
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTests", "EngineTests\EngineTests.vcxproj", "{F0E9BBF3-AE29-4CE3-B2E3-A509D832D9B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C90355C9-FF3E-47DA-A084-A8508D26DB77} = {C90355C9-FF3E-47DA-A084-A8508D26DB77}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimulationExercises", "SimuationExercises\SimulationExercises.vcxproj", "{EA5EC09A-A51D-4BD2-844A-D1941D4C0F72}"
 	ProjectSection(ProjectDependencies) = postProject
