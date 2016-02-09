@@ -337,6 +337,31 @@ public:
     return o;
   }
 
+  /**
+   * @brief Populates a Vector3 from a stream.
+   * @param stream Stream to populate from
+   * @param v Vector to populate
+   * @return Reference to stream
+   */
+  inline friend std::istream &operator>>(std::istream &stream, Vector3 &v)
+  {
+    const int n = 100;
+
+    float x, y, z;
+
+    stream.ignore(n, '[');
+    stream >> x;
+    stream.ignore(n, ',');
+    stream >> y;
+    stream.ignore(n, ',');
+    stream >> z;
+    stream.ignore(n, ']');
+
+    v = Vector3(x, y, z);
+
+    return stream;
+  }
+
 private:
   friend class Matrix3;
   friend class Matrix4;

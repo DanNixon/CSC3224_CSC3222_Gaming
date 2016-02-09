@@ -291,6 +291,29 @@ public:
     return o;
   }
 
+  /**
+   * @brief Populates a Vector2 from a stream.
+   * @param stream Stream to populate from
+   * @param v Vector to populate
+   * @return Reference to stream
+   */
+  inline friend std::istream &operator>>(std::istream &stream, Vector2 &v)
+  {
+	  const int n = 100;
+
+	  float x, y;
+
+	  stream.ignore(n, '[');
+	  stream >> x;
+	  stream.ignore(n, ',');
+	  stream >> y;
+	  stream.ignore(n, ']');
+
+	  v = Vector2(x, y);
+
+	  return stream;
+  }
+
 private:
   float m_x; //!< X coordinate
   float m_y; //!< Y coordinate

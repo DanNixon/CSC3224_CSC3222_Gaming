@@ -237,6 +237,20 @@ public:
     Assert::AreEqual(std::string("Vector4[5.1,3.2,2.3,8.4]"), stream.str());
   }
 
+  TEST_METHOD(test_operatorStreamInput)
+  {
+    std::stringstream stream;
+    stream << "Vector4[5.1,3.2,2.3,8.4]";
+
+    Vector4 v;
+    stream >> v;
+
+    Assert::AreEqual(5.1f, v.x());
+    Assert::AreEqual(3.2f, v.y());
+    Assert::AreEqual(2.3f, v.z());
+    Assert::AreEqual(8.4f, v.w());
+  }
+
   TEST_METHOD(test_distance)
   {
     Vector4 v1(5.0f, 3.0f, 2.0f, 8.0f);
