@@ -14,7 +14,7 @@ namespace EngineTests
 	{
 	public:
 		
-    TEST_METHOD(Default)
+    TEST_METHOD(test_Default)
     {
       Quaternion q;
       Assert::AreEqual(q.getReal(), 1.0f);
@@ -23,7 +23,7 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), 0.0f);
     }
 
-    TEST_METHOD(ConstructReal)
+    TEST_METHOD(test_ConstructReal)
     {
       Quaternion q(5.0f);
       Assert::AreEqual(q.getReal(), 5.0f);
@@ -32,7 +32,7 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), 0.0f);
     }
 
-    TEST_METHOD(ConstructImaginary)
+    TEST_METHOD(test_ConstructImaginary)
     {
       Quaternion q(5.0f, 2.0f, 4.5f, 8.9f);
       Assert::AreEqual(q.getReal(), 5.0f);
@@ -41,7 +41,7 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), 8.9f);
     }
 
-    TEST_METHOD(ConstructRotation)
+    TEST_METHOD(test_ConstructRotation)
     {
       Vector3 axis(1.0f, 1.0f, 1.0f);
       Quaternion q(90.0f, axis);
@@ -53,7 +53,7 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), s, TH);
     }
 
-    TEST_METHOD(Assignment)
+    TEST_METHOD(test_Assignment)
     {
       Quaternion q1(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion q2(16.0f, 2.5f, 8.3f, 6.7f);
@@ -64,7 +64,7 @@ namespace EngineTests
       Assert::AreEqual(q2.getK(), 8.9f);
     }
 
-    TEST_METHOD(Equality)
+    TEST_METHOD(test_Equality)
     {
       Quaternion q1(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion q2(16.0f, 2.5f, 8.3f, 6.7f);
@@ -74,7 +74,7 @@ namespace EngineTests
       Assert::IsTrue(!(q1 == q2));
     }
 
-    TEST_METHOD(Inequality)
+    TEST_METHOD(test_Inequality)
     {
       Quaternion q1(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion q2(16.0f, 2.5f, 8.3f, 6.7f);
@@ -84,7 +84,7 @@ namespace EngineTests
       Assert::IsTrue(q1 != q2);
     }
 
-    TEST_METHOD(SetReal)
+    TEST_METHOD(test_SetReal)
     {
       Quaternion q;
       q.setReal(10.0f);
@@ -94,7 +94,7 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), 0.0f, TH);
     }
 
-    TEST_METHOD(SetI)
+    TEST_METHOD(test_SetI)
     {
       Quaternion q;
       q.setI(1.0f);
@@ -104,7 +104,7 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), 0.0f, TH);
     }
 
-    TEST_METHOD(SetJ)
+    TEST_METHOD(test_SetJ)
     {
       Quaternion q;
       q.setJ(1.0f);
@@ -114,7 +114,7 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), 0.0f, TH);
     }
 
-    TEST_METHOD(SetK)
+    TEST_METHOD(test_SetK)
     {
       Quaternion q;
       q.setK(1.0f);
@@ -124,13 +124,13 @@ namespace EngineTests
       Assert::AreEqual(q.getK(), 1.0f, TH);
     }
 
-    TEST_METHOD(Magnitude)
+    TEST_METHOD(test_Magnitude)
     {
       Quaternion q(5.0f, 2.0f, 4.5f, 8.9f);
       Assert::AreEqual(q.magnitude(), 11.3340f, TH);
     }
 
-    TEST_METHOD(Addition)
+    TEST_METHOD(test_Addition)
     {
       Quaternion q1(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion q2(16.0f, 2.5f, 8.3f, 6.7f);
@@ -141,7 +141,7 @@ namespace EngineTests
       Assert::AreEqual(q3.getK(), 15.6f, TH);
     }
 
-    TEST_METHOD(Subtraction)
+    TEST_METHOD(test_Subtraction)
     {
       Quaternion q1(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion q2(16.0f, 2.5f, 8.3f, 6.7f);
@@ -152,7 +152,7 @@ namespace EngineTests
       Assert::AreEqual(q3.getK(), 2.2f, TH);
     }
 
-    TEST_METHOD(Multiplicaion)
+    TEST_METHOD(test_Multiplicaion)
     {
       Quaternion q1(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion q2(16.0f, 2.5f, 8.3f, 6.7f);
@@ -163,7 +163,7 @@ namespace EngineTests
       Assert::AreEqual(q3.getK(), 181.25f, TH);
     }
 
-    TEST_METHOD(Conjugate)
+    TEST_METHOD(test_Conjugate)
     {
       Quaternion q(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion conj = q.conjugate();
@@ -173,7 +173,7 @@ namespace EngineTests
       Assert::AreEqual(conj.getK(), -8.9f, TH);
     }
 
-    TEST_METHOD(IndexOperator)
+    TEST_METHOD(test_IndexOperator)
     {
       Quaternion q(5.0f, 2.0f, 4.5f, 8.9f);
       Assert::AreEqual(q[0], 5.0f, TH);
@@ -182,7 +182,7 @@ namespace EngineTests
       Assert::AreEqual(q[3], 8.9f, TH);
     }
 
-    TEST_METHOD(IndexOperatorSet)
+    TEST_METHOD(test_IndexOperatorSet)
     {
       Quaternion q;
       q[0] = 5.0f;
@@ -195,7 +195,7 @@ namespace EngineTests
       Assert::AreEqual(q[3], 8.9f, TH);
     }
 
-    TEST_METHOD(Inverse)
+    TEST_METHOD(test_Inverse)
     {
       Quaternion q(5.0f, 2.0f, 4.5f, 8.9f);
       Quaternion inv = q.inverse();
@@ -208,7 +208,7 @@ namespace EngineTests
       Assert::AreEqual(r.getK(), 0.0f, TH);
     }
 
-    TEST_METHOD(Rotation90DegY)
+    TEST_METHOD(test_Rotation90DegY)
     {
       Quaternion q(90.0f, Vector3(0.0f, 1.0f, 0.0f));
       Vector3 v(1.0f, 0.0f, 0.0f);
@@ -218,7 +218,7 @@ namespace EngineTests
       Assert::AreEqual(v.z(), -1.0f, TH);
     }
 
-    TEST_METHOD(Rotation45DegZ)
+    TEST_METHOD(test_Rotation45DegZ)
     {
       Quaternion q(45.0f, Vector3(0.0f, 0.0f, 1.0f));
       Vector3 v(1.0f, 0.0f, 0.0f);
@@ -229,7 +229,7 @@ namespace EngineTests
       Assert::AreEqual(v.z(), 0.0f, TH);
     }
 
-    TEST_METHOD(StreamOutput)
+    TEST_METHOD(test_StreamOutput)
     {
       Quaternion q(5.0f, 2.0f, 4.5f, 8.9f);
       std::stringstream stream;
@@ -237,7 +237,7 @@ namespace EngineTests
       Assert::AreEqual(stream.str(), std::string("[5,2,4.5,8.9]"));
     }
 
-    TEST_METHOD(StreamInput)
+    TEST_METHOD(test_StreamInput)
     {
       /* Create stream with valid string */
       std::stringstream stream;
