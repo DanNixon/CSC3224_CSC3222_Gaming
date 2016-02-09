@@ -3,9 +3,6 @@
 #include "stdafx.h"
 #include <CppUnitTest.h>
 
-#include <stdexcept>
-#include <functional>
-
 #include <Matrix3.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
