@@ -3,6 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "Vector3.h"
+#include "common.h"
 
 /**
  * Construct a quaternion with a default value of 1.
@@ -53,9 +54,8 @@ Quaternion::Quaternion(const float w, const float i, const float j,
  */
 Quaternion::Quaternion(const float angle, const Vector3 &axis)
 {
-  const float DEG_2_RAD = 3.1415 / 180.0;
-  m_w = cos(0.5f * angle * DEG_2_RAD);
-  const float s = sin(0.5 * angle * DEG_2_RAD);
+  m_w = (float) cos(0.5f * DegToRad(angle));
+  const float s = (float) sin(0.5f * DegToRad(angle));
   Vector3 temp(axis);
   temp.normalise();
   m_i = s * temp.x();
