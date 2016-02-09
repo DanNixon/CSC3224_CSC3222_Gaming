@@ -15,6 +15,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Maths</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Maths</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
