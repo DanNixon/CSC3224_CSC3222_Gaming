@@ -333,7 +333,7 @@ public:
    */
   inline friend std::ostream &operator<<(std::ostream &o, const Vector3 &v)
   {
-    o << "Vector3[" << v.m_x << "," << v.m_y << "," << v.m_z << "]";
+    o << "[" << v.m_x << "," << v.m_y << "," << v.m_z << "]";
     return o;
   }
 

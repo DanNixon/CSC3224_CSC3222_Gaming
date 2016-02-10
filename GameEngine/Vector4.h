@@ -330,8 +330,7 @@ public:
    */
   inline friend std::ostream &operator<<(std::ostream &o, const Vector4 &v)
   {
-    o << "Vector4[" << v.m_x << "," << v.m_y << "," << v.m_z << "," << v.m_w
-      << "]";
+    o << "[" << v.m_x << "," << v.m_y << "," << v.m_z << "," << v.m_w << "]";
     return o;
   }
 

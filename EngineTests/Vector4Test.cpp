@@ -231,13 +231,13 @@ public:
     Vector4 v(5.1f, 3.2f, 2.3f, 8.4f);
     std::stringstream stream;
     stream << v;
-    Assert::AreEqual(std::string("Vector4[5.1,3.2,2.3,8.4]"), stream.str());
+    Assert::AreEqual(std::string("[5.1,3.2,2.3,8.4]"), stream.str());
   }
 
   TEST_METHOD(test_operatorStreamInput)
   {
     std::stringstream stream;
-    stream << "Vector4[5.1,3.2,2.3,8.4]";
+    stream << "[5.1,3.2,2.3,8.4]";
 
     Vector4 v;
     stream >> v;

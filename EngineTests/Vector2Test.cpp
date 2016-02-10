@@ -195,13 +195,13 @@ public:
     Vector2 v(5.1f, 3.2f);
     std::stringstream stream;
     stream << v;
-    Assert::AreEqual(std::string("Vector2[5.1,3.2]"), stream.str());
+    Assert::AreEqual(std::string("[5.1,3.2]"), stream.str());
   }
 
   TEST_METHOD(test_operatorStreamInput)
   {
     std::stringstream stream;
-    stream << "Vector2[5.1,3.2]";
+    stream << "[5.1,3.2]";
 
     Vector2 v;
     stream >> v;
