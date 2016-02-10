@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Entity.h"
+#include "SUVAT.h"
 
 void w1_entity()
 {
@@ -35,8 +36,44 @@ void w1_entity()
   }
 }
 
+void w2_calc()
+{
+  std::cout << "Calculate [v,s]: ";
+  char option;
+  std::cin >> option;
+
+  Vector3 u, a;
+  float t;
+  
+  std::cout << "u: ";
+  std::cin >> u;
+
+  std::cout << "a: ";
+  std::cin >> a;
+
+  std::cout << "t: ";
+  std::cin >> t;
+
+  Vector3 res;
+
+  switch (option)
+  {
+  case 'v':
+    res = SUVAT::getVfromUAT(u, a, t);
+    std::cout << "s=";
+    break;
+  case 's':
+    res = SUVAT::getSfromUAT(u, a, t);
+    std::cout << "s=";
+    break;
+  }
+
+  std::cout << res << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
-  w1_entity();
+  //w1_entity();
+  w2_calc();
   return 0;
 }
