@@ -11,8 +11,10 @@
 #include <string>
 
 #include "Scene.h"
-#include "SceneObject.h"
+#include "RenderableObject.h"
 #include "Matrix3.h"
+#include "Mesh.h"
+#include "Shader.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -94,12 +96,16 @@ int main(int argc, char *args[])
     SDL_Event e;
     SDL_StartTextInput();
 
-    Mesh *cubeMesh = Mesh::LoadASCIIMeshFile("cube.asciimesh");
-    Shader *shader = new Shader("basic_vertex.glsl", "basic_fragment.glsl");
-    SceneObject cube(cubeMesh, shader);
+    RenderableObject cube(Mesh::LoadASCIIMeshFile("cube.asciimesh"), new Shader("basic_vertex.glsl", "basic_fragment.glsl"));
     cube.setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
                         Matrix4::Rotation(45, Vector3(0, 1, 0)) *
                         Matrix4::Rotation(45, Vector3(1, 0, 0)));
+
+    RenderableObject cube2(Mesh::LoadASCIIMeshFile("cube.asciimesh"), new Shader("basic_vertex.glsl", "basic_fragment.glsl"));
+    cube2.setModelMatrix(Matrix4::Translation(Vector3(1.0, 0.0, 0.0)) *
+      Matrix4::Rotation(30, Vector3(1, 0, 0)));
+
+    cube.addChild(cube2);
 
     Scene s(&cube,
             Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)),

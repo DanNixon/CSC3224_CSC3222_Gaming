@@ -15,7 +15,7 @@ Scene::Scene(SceneObject *root, Matrix4 view, Matrix4 projection)
     , m_projectionMatrix(view)
     , m_viewMatrix(projection)
 {
-  root->m_scene = this;
+  root->addToScene(this);
 }
 
 Scene::~Scene()

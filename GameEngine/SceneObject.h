@@ -2,12 +2,10 @@
 
 #pragma once
 
-#include "Matrix4.h"
-#include "Mesh.h"
-#include "Shader.h"
-#include "Scene.h"
+#include <vector>
 
-// TODO: Separate render stuff into a subclass of SceneObject
+#include "Matrix4.h"
+#include "Scene.h"
 
 /**
  * @class SceneObject
@@ -20,12 +18,9 @@ public:
    * @typedef SceneObjectIter
    * @brief Const iterator for items of a vector of SceneObject.
    */
-  typedef vector<SceneObject *>::const_iterator SceneObjectIter;
-
-  static const int NUM_TEXTURES = 2;
+  typedef std::vector<SceneObject *>::const_iterator SceneObjectIter;
 
   SceneObject();
-  SceneObject(Mesh *m, Shader *s, GLuint t = 0);
   ~SceneObject();
 
   /**
@@ -43,48 +38,9 @@ public:
    * @brief Gets the list of children SceneObject of this object.
    * @return List of children
    */
-  const vector<SceneObject *> &children() const
+  const std::vector<SceneObject *> &children() const
   {
     return m_children;
-  }
-
-  /**
-   * @brief Tests if this object is visually renderable.
-   * @return True if this object can be rendered.
-   */
-  bool isRenderable() const
-  {
-    return m_mesh && m_shader;
-  }
-
-  void setMesh(Mesh *m)
-  {
-    m_mesh = m;
-  }
-
-  Mesh *mesh() const
-  {
-    return m_mesh;
-  }
-
-  void setShader(Shader *s)
-  {
-    m_shader = s;
-  }
-
-  Shader *shader() const
-  {
-    return m_shader;
-  }
-
-  void setTexture(int i, GLuint tex)
-  {
-    m_textures[i] = tex;
-  }
-
-  GLuint texture(int i) const
-  {
-    return m_textures[i];
   }
 
   void setModelMatrix(Matrix4 mat)
@@ -103,20 +59,17 @@ public:
   }
 
   virtual void update(float msec);
-  void render();
+  virtual void render();
 
-private:
+protected:
   friend class Scene;
 
-  Mesh *m_mesh;     //!< Mesh represented by this object
-  Shader *m_shader; //!< Shader used to render m_mesh
-
-  GLuint m_textures[NUM_TEXTURES]; //!< Textures used on m_mesh
+  void addToScene(Scene * scene);
 
   Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
   Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
 
   SceneObject *m_parent;            //!< Parent SceneObject
   Scene *m_scene;                   //!< Scene this object belongs to
-  vector<SceneObject *> m_children; //!< Children
+  std::vector<SceneObject *> m_children; //!< Children
 };

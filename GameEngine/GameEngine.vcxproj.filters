@@ -21,6 +21,9 @@
     <ClCompile Include="Random.cpp">
       <Filter>Maths</Filter>
     </ClCompile>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
