@@ -1,7 +1,10 @@
 To Do
 =====
 
-- [ ] Engine structure outline
+- [x] Engine structure outline
+- [ ] Move setup code into engine
 - [ ] Managed memory
 - [ ] Asset import
-- [ ] Move setup code into engine
+- [ ] Keyboard input
+- [ ] Mouse input
+- [ ] Joystick input
