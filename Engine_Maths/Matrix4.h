@@ -3,7 +3,8 @@
 #pragma once
 
 #include <iostream>
-#include "common.h"
+
+#include "math_common.h"
 #include "Vector3.h"
 #include "Vector4.h"
 

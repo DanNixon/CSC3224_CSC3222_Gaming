@@ -2,7 +2,7 @@
 
 #include "Mesh.h"
 
-#include "common.h"
+#include "math_common.h"
 
 /**
  * @brief Creates a new empty mesh.

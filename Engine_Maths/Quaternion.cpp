@@ -2,8 +2,9 @@
 
 #include <cmath>
 #include <stdexcept>
+
+#include "math_common.h"
 #include "Vector3.h"
-#include "common.h"
 
 /**
  * Construct a quaternion with a default value of 1.

@@ -67,19 +67,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Physics;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Physics;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Physics;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)GameEngine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Physics;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)$(Platform)\$(Configuration)\;;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -87,11 +87,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32d.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;SDL2.lib;SDL2main.lib;opengl32.lib;glew32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
@@ -104,11 +105,12 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platf
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32d.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;SDL2.lib;SDL2main.lib;opengl32.lib;glew32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
@@ -123,13 +125,14 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platf
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Message>Copy DLLs to build directory</Message>
@@ -144,13 +147,14 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platf
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Message>Copy DLLs to build directory</Message>
