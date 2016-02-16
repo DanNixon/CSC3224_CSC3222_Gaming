@@ -20,11 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Integration.cpp" />
     <ClCompile Include="SUVAT.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Integration.h" />
     <ClInclude Include="SUVAT.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CED8A1EC-2C1C-4A0F-AAFD-253C4E6933B5}</ProjectGuid>

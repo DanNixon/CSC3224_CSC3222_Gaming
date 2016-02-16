@@ -3,9 +3,13 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="SUVAT.cpp" />
+    <ClCompile Include="Integration.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="SUVAT.h" />
+    <ClInclude Include="Integration.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
 </Project>
