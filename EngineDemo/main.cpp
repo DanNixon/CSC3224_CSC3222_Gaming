@@ -14,7 +14,8 @@
 #include "RenderableObject.h"
 #include "Matrix3.h"
 #include "Mesh.h"
-#include "Shader.h"
+#include "ShaderProgram.h"
+#include "Shaders.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -96,12 +97,17 @@ int main(int argc, char *args[])
     SDL_Event e;
     SDL_StartTextInput();
 
-    RenderableObject cube(Mesh::LoadASCIIMeshFile("cube.asciimesh"), new Shader("basic_vertex.glsl", "basic_fragment.glsl"));
+    ShaderProgram * sp = new ShaderProgram();
+    sp->addShader(new VertexShader("basic_vertex.glsl"));
+    sp->addShader(new FragmentShader("basic_fragment.glsl"));
+    sp->link();
+
+    RenderableObject cube(Mesh::LoadASCIIMeshFile("cube.asciimesh"), sp);
     cube.setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
                         Matrix4::Rotation(45, Vector3(0, 1, 0)) *
                         Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
-    RenderableObject cube2(Mesh::LoadModelFile("sphere.stl"), new Shader("basic_vertex.glsl", "basic_fragment.glsl"));
+    RenderableObject cube2(Mesh::LoadModelFile("sphere.stl"), sp);
     cube2.setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
                          Matrix4::Rotation(30, Vector3(1, 0, 0)));
 

@@ -35,7 +35,7 @@ public:
     Vector3 out(0, 0, 0);
     if (row < 3)
     {
-      int start = 3 * row;
+      size_t start = 3 * row;
 
       out.m_x = m_values[start += 3];
       out.m_y = m_values[start += 3];
@@ -53,7 +53,7 @@ public:
   {
     if (row < 3)
     {
-      int start = 3 * row;
+      size_t start = 3 * row;
 
       m_values[start += 3] = val.m_x;
       m_values[start += 3] = val.m_y;

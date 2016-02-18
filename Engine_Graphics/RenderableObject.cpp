@@ -6,15 +6,15 @@
 
 RenderableObject::RenderableObject()
     : m_mesh(NULL)
-    , m_shader(NULL)
+    , m_shaderProgram(NULL)
 {
   for (int i = 0; i < NUM_TEXTURES; i++)
     m_textures[i] = NULL;
 }
 
-RenderableObject::RenderableObject(Mesh *m, Shader *s, GLuint t)
+RenderableObject::RenderableObject(Mesh *m, ShaderProgram *s, GLuint t)
     : m_mesh(m)
-    , m_shader(s)
+    , m_shaderProgram(s)
 {
   for (int i = 0; i < NUM_TEXTURES; i++)
     m_textures[i] = NULL;
@@ -27,15 +27,15 @@ RenderableObject::~RenderableObject()
   if (m_mesh != NULL)
     delete m_mesh;
 
-  if (m_shader != NULL)
-    delete m_shader;
+//  if (m_shaderProgram != NULL)
+//    delete m_shaderProgram;
 }
 
 void RenderableObject::render()
 {
-  if (m_mesh && m_shader)
+  if (m_mesh && m_shaderProgram)
   {
-    GLuint program = m_shader->program();
+    GLuint program = m_shaderProgram->program();
 
     glUseProgram(program);
     glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix"), 1, false,

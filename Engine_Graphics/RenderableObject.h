@@ -4,7 +4,7 @@
 
 #include "SceneObject.h"
 #include "Mesh.h"
-#include "Shader.h"
+#include "ShaderProgram.h"
 
 /**
  * @class RenderableObject
@@ -16,7 +16,7 @@ public:
   static const int NUM_TEXTURES = 2;
 
   RenderableObject();
-  RenderableObject(Mesh *m, Shader *s, GLuint t = 0);
+  RenderableObject(Mesh *m, ShaderProgram *s, GLuint t = 0);
   ~RenderableObject();
 
   void setMesh(Mesh *m)
@@ -29,14 +29,14 @@ public:
     return m_mesh;
   }
 
-  void setShader(Shader *s)
+  void setShader(ShaderProgram *s)
   {
-    m_shader = s;
+    m_shaderProgram = s;
   }
 
-  Shader *shader() const
+  ShaderProgram *shader() const
   {
-    return m_shader;
+    return m_shaderProgram;
   }
 
   void setTexture(int i, GLuint tex)
@@ -54,6 +54,6 @@ public:
 
 private:
   Mesh *m_mesh;     //!< Mesh represented by this object
-  Shader *m_shader; //!< Shader used to render m_mesh
+  ShaderProgram *m_shaderProgram; //!< Shader used to render m_mesh
   GLuint m_textures[NUM_TEXTURES]; //!< Textures used on m_mesh
 };
