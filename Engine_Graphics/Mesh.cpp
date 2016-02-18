@@ -332,7 +332,7 @@ Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
 }
 
 /**
- * @brief Loads a mesh from a supported model file.
+ * @brief Loads a mesh from a model file (supported by Assimp).
  * @param filename Filename to load
  * @return Mesh containing loaded model
  */
@@ -370,6 +370,7 @@ Mesh *Mesh::LoadModelFile(const string &filename)
     }
   }
 
+  // Normalise vertex coordinates to 1
   std::pair<Vector3, Vector3> bBox = GetBoundingBox(m);
   Vector3 norm = bBox.second;
   if (bBox.first.length2() > bBox.second.length2())
@@ -378,7 +379,7 @@ Mesh *Mesh::LoadModelFile(const string &filename)
   for (size_t i = 0; i < m->m_numVertices; i++)
     m->m_vertices[i] = m->m_vertices[i] / norm;
 
-  //m->generateNormals();
+  m->generateNormals();
   m->bufferData();
   return m;
 }
