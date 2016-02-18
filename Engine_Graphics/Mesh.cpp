@@ -4,6 +4,11 @@
 
 #include "math_common.h"
 
+#include <assimp/cimport.h>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <assimp/Importer.hpp>
+
 /**
  * @brief Creates a new empty mesh.
  */
@@ -309,6 +314,9 @@ Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
  */
 Mesh *Mesh::LoadModelFile(const string &filename)
 {
+  Assimp::Importer i;
+  const struct aiScene* scene = i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+
   Mesh *m = new Mesh();
 
   // TODO: load model (possibly using http://www.assimp.org/)
