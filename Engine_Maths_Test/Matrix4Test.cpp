@@ -9,8 +9,12 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace EngineTests
 {
-TEST_CLASS(Matrix4Test){public : TEST_METHOD(test_InitEmpty){Matrix4 m;
-}
-}
-;
+TEST_CLASS(Matrix4Test)
+{
+public:
+  TEST_METHOD(test_InitEmpty)
+  {
+    Matrix4 m;
+  }
+};
 }
