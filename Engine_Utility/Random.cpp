@@ -1,3 +1,5 @@
+/** @file */
+
 #include "Random.h"
 
 #include <cstdlib>

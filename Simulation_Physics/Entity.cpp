@@ -1,3 +1,5 @@
+/** @file */
+
 #include "Entity.h"
 
 #include <Random.h>

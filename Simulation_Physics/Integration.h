@@ -1,3 +1,5 @@
+/** @file */
+
 #pragma once
 
 class Vector3;

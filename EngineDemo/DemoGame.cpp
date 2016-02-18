@@ -1,3 +1,5 @@
+/** @file */
+
 #include "DemoGame.h"
 
 #include <Shaders.h>

@@ -1,3 +1,5 @@
+/** @file */
+
 #include "Game.h"
 
 #include <iostream>

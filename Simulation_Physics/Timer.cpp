@@ -1,3 +1,5 @@
+/** @file */
+
 #include "Timer.h"
 
 void Timer::Init()

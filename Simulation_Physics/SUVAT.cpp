@@ -1,3 +1,5 @@
+/** @file */
+
 #include "SUVAT.h"
 
 #include <Vector3.h>

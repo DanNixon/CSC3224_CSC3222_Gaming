@@ -1,3 +1,5 @@
+/** @file */
+
 #include "Quaternion.h"
 
 #include <cmath>
