@@ -1,9 +1,17 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
 #include "Shader.h"
 
+/**
+ * @class VertexShader
+ * @brief Encapsulation for a vertex shader.
+ * @author Dan Nixon
+ */
 class VertexShader : public Shader
 {
 public:
@@ -12,6 +20,11 @@ public:
   {
   }
 };
+/**
+ * @class FragmentShader
+ * @brief Encapsulation for a fragment shader.
+ * @author Dan Nixon
+ */
 
 class FragmentShader : public Shader
 {
@@ -22,6 +35,11 @@ public:
   }
 };
 
+/**
+ * @class GeometryShader
+ * @brief Encapsulation for a geometry shader.
+ * @author Dan Nixon
+ */
 class GeometryShader : public Shader
 {
 public:
@@ -31,6 +49,11 @@ public:
   }
 };
 
+/**
+ * @class TesselationControlShader
+ * @brief Encapsulation for a tesselation control shader.
+ * @author Dan Nixon
+ */
 class TesselationControlShader : public Shader
 {
 public:
@@ -40,6 +63,11 @@ public:
   }
 };
 
+/**
+ * @class TesselationEvaluationShader
+ * @brief Encapsulation for a tesselation evaluation shader.
+ * @author Dan Nixon
+ */
 class TesselationEvaluationShader : public Shader
 {
 public:
