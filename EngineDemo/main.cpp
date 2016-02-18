@@ -2,13 +2,9 @@
 
 #include "stdafx.h"
 
-#include <SDL.h>
-#include <gl\glew.h>
-#include <SDL_opengl.h>
-#include <gl\glu.h>
-
-#include <stdio.h>
 #include <string>
+
+#include <Game.h>
 
 #include "Scene.h"
 #include "RenderableObject.h"
@@ -17,129 +13,61 @@
 #include "ShaderProgram.h"
 #include "Shaders.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-bool init();
-void close();
-
-SDL_Window *gWindow = NULL;
-SDL_GLContext gContext;
-
-bool init()
+class DemoGame : public Game
 {
-  bool success = true;
+public:
+  DemoGame() : Game("Test 2", std::make_pair(640, 480)) {}
 
-  // Initialize SDL
-  if (SDL_Init(SDL_INIT_VIDEO) < 0)
+  void setup()
   {
-    printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
-    success = false;
-  }
-  else
-  {
-    // Use OpenGL 3.1 core
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-                        SDL_GL_CONTEXT_PROFILE_CORE);
+    m_sp = new ShaderProgram();
+    m_sp->addShader(new VertexShader("basic_vertex.glsl"));
+    m_sp->addShader(new FragmentShader("basic_fragment.glsl"));
+    m_sp->link();
 
-    // Create window
-    gWindow = SDL_CreateWindow(
-        "Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-        SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-    if (gWindow == NULL)
-    {
-      printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
-      success = false;
-    }
-    else
-    {
-      // Create context
-      gContext = SDL_GL_CreateContext(gWindow);
-      if (gContext == NULL)
-      {
-        printf("OpenGL context could not be created! SDL Error: %s\n",
-               SDL_GetError());
-        success = false;
-      }
-      else
-      {
-        // Initialize GLEW
-        glewExperimental = GL_TRUE;
-        GLenum glewError = glewInit();
-        if (glewError != GLEW_OK)
-        {
-          printf("Error initializing GLEW! %s\n",
-                 glewGetErrorString(glewError));
-        }
-      }
-    }
-  }
+    m_cube = new RenderableObject(Mesh::LoadASCIIMeshFile("cube.asciimesh"), m_sp);
+    m_cube->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
+                           Matrix4::Rotation(45, Vector3(0, 1, 0)) *
+                           Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
-  return success;
-}
+    m_child = new RenderableObject(Mesh::LoadModelFile("sphere.stl", 0), m_sp);
+    m_child->setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
+                            Matrix4::Rotation(30, Vector3(1, 0, 0)));
 
-void close()
-{
-  SDL_DestroyWindow(gWindow);
-  gWindow = NULL;
-  SDL_Quit();
-}
+    m_cube->addChild(*m_child);
 
-int main(int argc, char *args[])
-{
-  if (!init())
-    printf("Failed to initialize!\n");
-  else
-  {
-    bool quit = false;
-    SDL_Event e;
-    SDL_StartTextInput();
-
-    ShaderProgram * sp = new ShaderProgram();
-    sp->addShader(new VertexShader("basic_vertex.glsl"));
-    sp->addShader(new FragmentShader("basic_fragment.glsl"));
-    sp->link();
-
-    RenderableObject cube(Mesh::LoadASCIIMeshFile("cube.asciimesh"), sp);
-    cube.setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
-                        Matrix4::Rotation(45, Vector3(0, 1, 0)) *
-                        Matrix4::Rotation(45, Vector3(1, 0, 0)));
-
-    RenderableObject cube2(Mesh::LoadModelFile("sphere.stl", 0), sp);
-    cube2.setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
-                         Matrix4::Rotation(30, Vector3(1, 0, 0)));
-
-    cube.addChild(cube2);
-
-    Scene s(&cube,
-            Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)),
-            Matrix4::Perspective(1, 100, 1.33f, 45.0f));
+    m_s = new Scene(m_cube,
+                    Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)),
+                    Matrix4::Perspective(1, 100, 1.33f, 45.0f));
 
     glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
-
-    while (!quit)
-    {
-      // Handle events on queue
-      while (SDL_PollEvent(&e) != 0)
-      {
-        if (e.type == SDL_QUIT)
-          quit = true;
-      }
-
-      s.update();
-      s.render();
-
-      SDL_GL_SwapWindow(gWindow);
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
-
-    SDL_StopTextInput();
   }
 
-  close();
+  void loop(unsigned long dtUs)
+  {
+    m_s->update();
+    m_s->render();
+  }
+
+  void tearDown()
+  {
+  }
+
+private:
+  ShaderProgram * m_sp;
+  RenderableObject * m_cube;
+  RenderableObject * m_child;
+  Scene * m_s;
+};
+
+int main(int argc, char *args[])
+{
+  DemoGame g;
+
+  g.init();
+  g.run();
+
   return 0;
 }
