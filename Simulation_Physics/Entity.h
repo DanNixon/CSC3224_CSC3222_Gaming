@@ -45,4 +45,3 @@ private:
   float m_aggroRange2;
   int m_entitiesInRange;
 };
-

@@ -27,8 +27,8 @@ RenderableObject::~RenderableObject()
   if (m_mesh != NULL)
     delete m_mesh;
 
-//  if (m_shaderProgram != NULL)
-//    delete m_shaderProgram;
+  //  if (m_shaderProgram != NULL)
+  //    delete m_shaderProgram;
 }
 
 void RenderableObject::render()

@@ -8,7 +8,7 @@ public:
   static void Init();
   static float SystemTime(LARGE_INTEGER start);
 
-private:  
+private:
   static LARGE_INTEGER s_freq;
 
 public:
@@ -27,4 +27,3 @@ private:
   LARGE_INTEGER m_start;
   float m_lastFrameTime;
 };
-

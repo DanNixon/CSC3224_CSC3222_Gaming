@@ -64,12 +64,12 @@ public:
 protected:
   friend class Scene;
 
-  void addToScene(Scene * scene);
+  void addToScene(Scene *scene);
 
   Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
   Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
 
-  SceneObject *m_parent;            //!< Parent SceneObject
-  Scene *m_scene;                   //!< Scene this object belongs to
+  SceneObject *m_parent;                 //!< Parent SceneObject
+  Scene *m_scene;                        //!< Scene this object belongs to
   std::vector<SceneObject *> m_children; //!< Children
 };

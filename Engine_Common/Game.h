@@ -21,7 +21,7 @@ public:
 private:
   void close();
 
-  SDL_Window * m_window;
+  SDL_Window *m_window;
   SDL_GLContext m_context;
 
 protected:

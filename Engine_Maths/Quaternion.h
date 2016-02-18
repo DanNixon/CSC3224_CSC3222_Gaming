@@ -39,7 +39,7 @@ public:
   Quaternion operator*(const Quaternion &rhs) const;
 
   float operator[](const int index) const;
-  float& operator[](const int index);
+  float &operator[](const int index);
 
   Quaternion conjugate() const;
   Quaternion inverse() const;

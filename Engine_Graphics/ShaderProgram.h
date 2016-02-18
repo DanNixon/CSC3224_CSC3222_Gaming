@@ -12,7 +12,7 @@ public:
   ShaderProgram();
   ~ShaderProgram();
 
-  bool addShader(Shader * s);
+  bool addShader(Shader *s);
 
   bool link();
 
@@ -28,7 +28,6 @@ public:
 
 private:
   GLuint m_program;
-  Shader * m_shaders[NUM_SHADERS];
+  Shader *m_shaders[NUM_SHADERS];
   bool m_valid;
 };
-

@@ -17,9 +17,8 @@ public:
   void tearDown();
 
 private:
-  ShaderProgram * m_sp;
-  RenderableObject * m_cube;
-  RenderableObject * m_child;
-  Scene * m_s;
+  ShaderProgram *m_sp;
+  RenderableObject *m_cube;
+  RenderableObject *m_child;
+  Scene *m_s;
 };
-

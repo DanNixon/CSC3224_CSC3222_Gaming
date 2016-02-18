@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   {
     Entity *a = entities[i];
     const float aAgroRange = a->aggroRange2();
-    int & aNumInRange = a->entitiesInRangeRef();
+    int &aNumInRange = a->entitiesInRangeRef();
 
     for (size_t j = 0; j < numEntities; j++)
     {

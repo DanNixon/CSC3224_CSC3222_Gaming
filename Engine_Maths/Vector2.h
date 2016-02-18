@@ -299,19 +299,19 @@ public:
    */
   inline friend std::istream &operator>>(std::istream &stream, Vector2 &v)
   {
-	  const int n = 100;
+    const int n = 100;
 
-	  float x, y;
+    float x, y;
 
-	  stream.ignore(n, '[');
-	  stream >> x;
-	  stream.ignore(n, ',');
-	  stream >> y;
-	  stream.ignore(n, ']');
+    stream.ignore(n, '[');
+    stream >> x;
+    stream.ignore(n, ',');
+    stream >> y;
+    stream.ignore(n, ']');
 
-	  v = Vector2(x, y);
+    v = Vector2(x, y);
 
-	  return stream;
+    return stream;
   }
 
 private:

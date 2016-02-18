@@ -49,11 +49,11 @@ public:
     return m_textures[i];
   }
 
-  //virtual void update(float msec);
+  // virtual void update(float msec);
   virtual void render();
 
 private:
-  Mesh *m_mesh;     //!< Mesh represented by this object
-  ShaderProgram *m_shaderProgram; //!< Shader used to render m_mesh
+  Mesh *m_mesh;                    //!< Mesh represented by this object
+  ShaderProgram *m_shaderProgram;  //!< Shader used to render m_mesh
   GLuint m_textures[NUM_TEXTURES]; //!< Textures used on m_mesh
 };

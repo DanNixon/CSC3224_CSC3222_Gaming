@@ -7,9 +7,9 @@
 #include <gl\glu.h>
 
 Game::Game(std::string windowTitle, std::pair<int, int> resolution)
-: m_windowTitle(windowTitle)
-, m_windowWidth(resolution.first)
-, m_windowHeight(resolution.second)
+    : m_windowTitle(windowTitle)
+    , m_windowWidth(resolution.first)
+    , m_windowHeight(resolution.second)
 {
 }
 
@@ -24,7 +24,8 @@ bool Game::init()
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0)
   {
-    std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError() << std::endl;
+    std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
+              << std::endl;
     success = false;
   }
   else
@@ -32,15 +33,17 @@ bool Game::init()
     // Use OpenGL 3.1 core
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+                        SDL_GL_CONTEXT_PROFILE_CORE);
 
     // Create window
     m_window = SDL_CreateWindow(
-      "Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_windowWidth,
-      m_windowHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+        "Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_windowWidth,
+        m_windowHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     if (m_window == NULL)
     {
-      std::cerr << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;
+      std::cerr << "Window could not be created! SDL Error: " << SDL_GetError()
+                << std::endl;
       success = false;
     }
     else
@@ -49,8 +52,8 @@ bool Game::init()
       m_context = SDL_GL_CreateContext(m_window);
       if (m_context == NULL)
       {
-        std::cerr << "OpenGL context could not be created! SDL Error: " <<
-          SDL_GetError() << std::endl;
+        std::cerr << "OpenGL context could not be created! SDL Error: "
+                  << SDL_GetError() << std::endl;
         success = false;
       }
       else
@@ -60,8 +63,8 @@ bool Game::init()
         GLenum glewError = glewInit();
         if (glewError != GLEW_OK)
         {
-          std::cerr << "Error initializing GLEW: " <<
-            glewGetErrorString(glewError) << std::endl;
+          std::cerr << "Error initializing GLEW: "
+                    << glewGetErrorString(glewError) << std::endl;
         }
       }
     }
@@ -113,5 +116,5 @@ void Game::run()
 
 float Game::windowAspect() const
 {
-  return ((float) m_windowHeight / (float) m_windowWidth);
+  return ((float)m_windowHeight / (float)m_windowWidth);
 }

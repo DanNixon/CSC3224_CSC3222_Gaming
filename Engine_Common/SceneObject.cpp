@@ -30,7 +30,7 @@ void SceneObject::render()
     (*i)->render();
 }
 
-void SceneObject::addToScene(Scene * scene)
+void SceneObject::addToScene(Scene *scene)
 {
   m_scene = scene;
 

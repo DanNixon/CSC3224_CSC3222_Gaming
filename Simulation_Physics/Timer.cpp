@@ -6,7 +6,7 @@ void Timer::Init()
 }
 
 Timer::Timer()
-  : m_running(false)
+    : m_running(false)
 {
 }
 

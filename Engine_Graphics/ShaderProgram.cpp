@@ -4,7 +4,7 @@
 #include "Mesh.h"
 
 ShaderProgram::ShaderProgram()
-: m_valid(false)
+    : m_valid(false)
 {
   for (size_t i = 0; i < NUM_SHADERS; i++)
     m_shaders[i] = NULL;
@@ -20,7 +20,7 @@ ShaderProgram::~ShaderProgram()
   glDeleteProgram(m_program);
 }
 
-bool ShaderProgram::addShader(Shader * s)
+bool ShaderProgram::addShader(Shader *s)
 {
   for (size_t i = 0; i < NUM_SHADERS; i++)
   {

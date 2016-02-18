@@ -9,7 +9,7 @@
 #include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
 
-std::pair<Vector3, Vector3> Mesh::GetBoundingBox(Mesh * m)
+std::pair<Vector3, Vector3> Mesh::GetBoundingBox(Mesh *m)
 {
   const float maxFloat = std::numeric_limits<float>::max();
   const float minFloat = std::numeric_limits<float>::min();
@@ -339,17 +339,18 @@ Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
 Mesh *Mesh::LoadModelFile(const string &filename, size_t meshIdx)
 {
   Assimp::Importer i;
-  const struct aiScene * scene = i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+  const struct aiScene *scene =
+      i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
   if (meshIdx > scene->mNumMeshes)
     return NULL;
 
   Mesh *m = new Mesh();
   m->m_type = GL_TRIANGLES;
-  //m->m_type = GL_LINES;
+  // m->m_type = GL_LINES;
 
-  aiMesh * mesh = scene->mMeshes[meshIdx];
-  aiVector3D * vertices = mesh->mVertices;
+  aiMesh *mesh = scene->mMeshes[meshIdx];
+  aiVector3D *vertices = mesh->mVertices;
 
   m->m_numVertices = mesh->mNumVertices * 3;
   m->m_vertices = new Vector3[m->m_numVertices];

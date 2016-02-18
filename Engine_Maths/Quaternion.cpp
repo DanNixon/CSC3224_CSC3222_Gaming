@@ -55,8 +55,8 @@ Quaternion::Quaternion(const float w, const float i, const float j,
  */
 Quaternion::Quaternion(const float angle, const Vector3 &axis)
 {
-  m_w = (float) cos(0.5f * DegToRad(angle));
-  const float s = (float) sin(0.5f * DegToRad(angle));
+  m_w = (float)cos(0.5f * DegToRad(angle));
+  const float s = (float)sin(0.5f * DegToRad(angle));
   Vector3 temp(axis);
   temp.normalise();
   m_i = s * temp.x();
@@ -257,18 +257,18 @@ Quaternion Quaternion::operator*(const Quaternion &rhs) const
  */
 float Quaternion::operator[](const int index) const
 {
-  switch(index)
+  switch (index)
   {
-    case 0:
-      return m_w;
-    case 1:
-      return m_i;
-    case 2:
-      return m_j;
-    case 3:
-      return m_k;
-    default:
-      return 0.0f;
+  case 0:
+    return m_w;
+  case 1:
+    return m_i;
+  case 2:
+    return m_j;
+  case 3:
+    return m_k;
+  default:
+    return 0.0f;
   }
 }
 
@@ -282,18 +282,18 @@ float Quaternion::operator[](const int index) const
  */
 float &Quaternion::operator[](const int index)
 {
-  switch(index)
+  switch (index)
   {
-    case 0:
-      return m_w;
-    case 1:
-      return m_i;
-    case 2:
-      return m_j;
-    case 3:
-      return m_k;
-    default:
-      throw std::runtime_error("Quaternion index out of range");
+  case 0:
+    return m_w;
+  case 1:
+    return m_i;
+  case 2:
+    return m_j;
+  case 3:
+    return m_k;
+  default:
+    throw std::runtime_error("Quaternion index out of range");
   }
 }
 

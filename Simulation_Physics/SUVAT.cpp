@@ -105,7 +105,8 @@ Vector3 SUVAT::getSfromUVT(const Vector3 &u, const Vector3 &v, float &t)
 * @param s Displacement
 * @return Final velocity squared
 */
-Vector3 SUVAT::getV2fromUAS(const Vector3 &u, const Vector3 &a, const Vector3 &s)
+Vector3 SUVAT::getV2fromUAS(const Vector3 &u, const Vector3 &a,
+                            const Vector3 &s)
 {
   return (u * u) + (a * s * 2.0f);
 }
