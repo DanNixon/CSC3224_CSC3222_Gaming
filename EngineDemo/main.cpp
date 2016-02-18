@@ -102,8 +102,8 @@ int main(int argc, char *args[])
                         Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
     RenderableObject cube2(Mesh::LoadModelFile("sphere.stl"), new Shader("basic_vertex.glsl", "basic_fragment.glsl"));
-    cube2.setModelMatrix(Matrix4::Translation(Vector3(1.0, 0.0, 0.0)) *
-      Matrix4::Rotation(30, Vector3(1, 0, 0)));
+    cube2.setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
+                         Matrix4::Rotation(30, Vector3(1, 0, 0)));
 
     cube.addChild(cube2);
 

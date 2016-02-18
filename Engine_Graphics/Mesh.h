@@ -48,6 +48,8 @@ public:
   static Mesh *LoadASCIIMeshFile(const string &filename);
   static Mesh *LoadModelFile(const string &filename);
 
+  static std::pair<Vector3, Vector3> GetBoundingBox(Mesh * m);
+
   Mesh();
   virtual ~Mesh();
 
@@ -69,5 +71,5 @@ protected:
   Vector2 *m_textureCoords; //!< Pointer to vertex texture coordinate data
   Vector3 *m_normals;       //!< Pointer to vertex normals data
   Vector3 *m_tangents;      //!< Pointer to vertex tangents data
-  unsigned int *m_indices;  //!< Pointer to vertex indices data
+  size_t *m_indices;  //!< Pointer to vertex indices data
 };

@@ -9,6 +9,30 @@
 #include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
 
+std::pair<Vector3, Vector3> Mesh::GetBoundingBox(Mesh * m)
+{
+  const float maxFloat = std::numeric_limits<float>::max();
+  const float minFloat = std::numeric_limits<float>::min();
+
+  Vector3 min(maxFloat, maxFloat, maxFloat);
+  Vector3 max(minFloat, minFloat, minFloat);
+
+  for (size_t i = 0; i < m->m_numVertices; i++)
+  {
+    const Vector3 &v = m->m_vertices[i];
+
+    for (int j = 0; j < 3; j++)
+    {
+      if (v[j] < min[j])
+        min[j] = v[j];
+      else if (v[j] > max[j])
+        max[j] = v[j];
+    }
+  }
+
+  return std::make_pair(min, max);
+}
+
 /**
  * @brief Creates a new empty mesh.
  */
@@ -314,14 +338,47 @@ Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
  */
 Mesh *Mesh::LoadModelFile(const string &filename)
 {
-  Assimp::Importer i;
-  const struct aiScene* scene = i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
-
   Mesh *m = new Mesh();
 
-  // TODO: load model (possibly using http://www.assimp.org/)
+  Assimp::Importer i;
+  const struct aiScene * scene = i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-  m->generateNormals();
+  size_t numVertices = 0;
+  for (size_t i = 0; i < scene->mNumMeshes; i++)
+    numVertices += (size_t) scene->mMeshes[i]->mNumVertices;
+  m->m_numVertices = numVertices * 3;
+
+  m->m_vertices = new Vector3[m->m_numVertices];
+
+  size_t idx = 0;
+  for (size_t i = 0; i < scene->mNumMeshes; i++)
+  {
+    aiMesh * mesh = scene->mMeshes[i];
+    aiVector3D * vertices = mesh->mVertices;
+
+    for (size_t j = 0; j < mesh->mNumFaces; j++)
+    {
+      const aiFace &face = mesh->mFaces[j];
+
+      const aiVector3D &v0 = vertices[face.mIndices[0]];
+      const aiVector3D &v1 = vertices[face.mIndices[1]];
+      const aiVector3D &v2 = vertices[face.mIndices[2]];
+
+      m->m_vertices[idx++] = Vector3(v0[0], v0[1], v0[2]);
+      m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
+      m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
+    }
+  }
+
+  std::pair<Vector3, Vector3> bBox = GetBoundingBox(m);
+  Vector3 norm = bBox.second;
+  if (bBox.first.length2() > bBox.second.length2())
+    norm = bBox.first;
+
+  for (size_t i = 0; i < m->m_numVertices; i++)
+    m->m_vertices[i] = m->m_vertices[i] / norm;
+
+  //m->generateNormals();
   m->bufferData();
   return m;
 }

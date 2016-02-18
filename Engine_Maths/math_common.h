@@ -40,16 +40,16 @@ static inline double DegToRad(const double deg)
 };
 
 /**
- * @def max
+ * @def max_n
  * @brief Returns the maximum of two numbers.
  */
-#define max(a, b) (((a) > (b)) ? (a) : (b))
+#define max_n(a, b) (((a) > (b)) ? (a) : (b))
 
 /**
- * @def min
+ * @def min_n
  * @brief Returns the minimum of two numbers.
  */
-#define min(a, b) (((a) < (b)) ? (a) : (b))
+#define min_n(a, b) (((a) < (b)) ? (a) : (b))
 
 /**
  * @typedef uint
