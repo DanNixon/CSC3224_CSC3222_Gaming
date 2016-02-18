@@ -46,7 +46,7 @@ public:
   static Mesh *GenerateRing2D(float radiusOuter, float radiusInner,
                               int resolution = 64);
   static Mesh *LoadASCIIMeshFile(const string &filename);
-  static Mesh *LoadModelFile(const string &filename);
+  static Mesh *LoadModelFile(const string &filename, size_t meshIdx);
 
   static std::pair<Vector3, Vector3> GetBoundingBox(Mesh * m);
 

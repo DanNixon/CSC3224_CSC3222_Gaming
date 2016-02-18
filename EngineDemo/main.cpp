@@ -107,7 +107,7 @@ int main(int argc, char *args[])
                         Matrix4::Rotation(45, Vector3(0, 1, 0)) *
                         Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
-    RenderableObject cube2(Mesh::LoadModelFile("sphere.stl"), sp);
+    RenderableObject cube2(Mesh::LoadModelFile("sphere.stl", 0), sp);
     cube2.setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
                          Matrix4::Rotation(30, Vector3(1, 0, 0)));
 

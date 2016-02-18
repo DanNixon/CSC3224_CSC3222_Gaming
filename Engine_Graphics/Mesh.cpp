@@ -336,38 +336,37 @@ Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
  * @param filename Filename to load
  * @return Mesh containing loaded model
  */
-Mesh *Mesh::LoadModelFile(const string &filename)
+Mesh *Mesh::LoadModelFile(const string &filename, size_t meshIdx)
 {
-  Mesh *m = new Mesh();
-
   Assimp::Importer i;
   const struct aiScene * scene = i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-  size_t numVertices = 0;
-  for (size_t i = 0; i < scene->mNumMeshes; i++)
-    numVertices += (size_t) scene->mMeshes[i]->mNumVertices;
-  m->m_numVertices = numVertices * 3;
+  if (meshIdx > scene->mNumMeshes)
+    return NULL;
 
+  Mesh *m = new Mesh();
+  m->m_type = GL_TRIANGLES;
+  //m->m_type = GL_LINES;
+
+  aiMesh * mesh = scene->mMeshes[meshIdx];
+  aiVector3D * vertices = mesh->mVertices;
+
+  m->m_numVertices = mesh->mNumVertices * 3;
   m->m_vertices = new Vector3[m->m_numVertices];
 
+  // Load vertices
   size_t idx = 0;
-  for (size_t i = 0; i < scene->mNumMeshes; i++)
+  for (size_t i = 0; i < mesh->mNumFaces; i++)
   {
-    aiMesh * mesh = scene->mMeshes[i];
-    aiVector3D * vertices = mesh->mVertices;
+    const aiFace &face = mesh->mFaces[i];
 
-    for (size_t j = 0; j < mesh->mNumFaces; j++)
-    {
-      const aiFace &face = mesh->mFaces[j];
+    const aiVector3D &v0 = vertices[face.mIndices[0]];
+    const aiVector3D &v1 = vertices[face.mIndices[1]];
+    const aiVector3D &v2 = vertices[face.mIndices[2]];
 
-      const aiVector3D &v0 = vertices[face.mIndices[0]];
-      const aiVector3D &v1 = vertices[face.mIndices[1]];
-      const aiVector3D &v2 = vertices[face.mIndices[2]];
-
-      m->m_vertices[idx++] = Vector3(v0[0], v0[1], v0[2]);
-      m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
-      m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
-    }
+    m->m_vertices[idx++] = Vector3(v0[0], v0[1], v0[2]);
+    m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
+    m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
   }
 
   // Normalise vertex coordinates to 1
@@ -381,5 +380,6 @@ Mesh *Mesh::LoadModelFile(const string &filename)
 
   m->generateNormals();
   m->bufferData();
+
   return m;
 }
