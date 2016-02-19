@@ -3,8 +3,6 @@
  * @author Dan Nixon
  */
 
-#include "stdafx.h"
-
 #include <string>
 
 #include "DemoGame.h"

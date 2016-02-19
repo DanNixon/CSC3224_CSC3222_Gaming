@@ -3,7 +3,6 @@
  * @author Dan Nixon
  */
 
-#include "stdafx.h"
 #include <CppUnitTest.h>
 
 #include <Vector3.h>

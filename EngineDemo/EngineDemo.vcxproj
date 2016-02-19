@@ -21,12 +21,9 @@
   <ItemGroup>
     <ClCompile Include="DemoGame.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoGame.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4F6104E8-AC92-4DED-AB32-7BD100B04761}</ProjectGuid>

@@ -7,10 +7,5 @@
     <ClCompile Include="Vector2Test.cpp" />
     <ClCompile Include="Vector3Test.cpp" />
     <ClCompile Include="Vector4Test.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
 </Project>

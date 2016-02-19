@@ -3,8 +3,6 @@
  * @author Dan Nixon
  */
 
-#include "stdafx.h"
-
 #include <iostream>
 
 #include <Entity.h>
