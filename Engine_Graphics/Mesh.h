@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Rich Davison, Dan Nixon
+ */
 
 #pragma once
 
@@ -36,7 +39,7 @@ enum MeshBuffer
  * @brief Wrapper around OpenGL primitives, geometry and related OGL functions.
  * @author Rich Davison, Dan Nixon
  *
- * Modified from the original nclgl library.
+ * Modified from the nclgl library.
  */
 class Mesh
 {

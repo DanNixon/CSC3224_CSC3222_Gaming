@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Rich Davison, Dan Nixon
+ */
 
 #pragma once
 
@@ -15,7 +18,7 @@ class Vector3;
  * @brief 4x4 dimensional matrix.
  * @author Rich Davison, Dan Nixon
  *
- * Modified from the original nclgl library.
+ * Modified from the nclgl library.
  */
 class Matrix4
 {

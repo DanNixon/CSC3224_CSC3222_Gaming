@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
@@ -46,8 +49,8 @@ private:
   bool loadFile(std::string filename, std::string &into);
   bool compile(std::string filename);
 
-  GLuint m_stage;
-  GLuint m_shaderObject;
+  GLuint m_stage;        //!< Shader stage
+  GLuint m_shaderObject; //!< GL shader object
 
-  bool m_valid;
+  bool m_valid; //!< Flag indicating validity of shader
 };

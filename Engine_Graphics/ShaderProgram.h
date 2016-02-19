@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
@@ -49,7 +52,7 @@ public:
   }
 
 private:
-  GLuint m_program;
-  Shader *m_shaders[NUM_SHADERS];
-  bool m_valid;
+  GLuint m_program;               //!< GL shader program
+  Shader *m_shaders[NUM_SHADERS]; //!< Array of Shaders in program
+  bool m_valid;                   //!< Flag indicating validity of program
 };

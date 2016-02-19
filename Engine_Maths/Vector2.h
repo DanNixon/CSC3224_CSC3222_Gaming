@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
@@ -7,6 +10,7 @@
 /**
  * @class Vector2
  * @brief Two dimensional vector.
+ * @author Dan Nixon
  */
 class Vector2
 {

@@ -20,12 +20,12 @@ public:
   {
   }
 };
+
 /**
  * @class FragmentShader
  * @brief Encapsulation for a fragment shader.
  * @author Dan Nixon
  */
-
 class FragmentShader : public Shader
 {
 public:

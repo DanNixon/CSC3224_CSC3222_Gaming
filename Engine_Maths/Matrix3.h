@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Rich Davison, Dan Nixon
+ */
 
 #pragma once
 
@@ -9,7 +12,7 @@
  * @brief 3x3 dimensional matrix.
  * @author Rich Davison, Dan Nixon
  *
- * Modified from the original nclgl library.
+ * Modified from the nclgl library.
  */
 class Matrix3
 {
