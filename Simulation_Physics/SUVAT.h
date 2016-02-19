@@ -1,9 +1,17 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
 class Vector3;
 
+/**
+ * @class SUVAT
+ * @brief Helper class for performing SUVAT euqations.
+ * @author Dan Nixon
+ */
 class SUVAT
 {
 public:

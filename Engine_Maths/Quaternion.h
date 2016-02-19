@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
@@ -6,6 +9,11 @@
 
 class Vector3;
 
+/**
+ * @class Quaternion
+ * @brief Represents a quaternion.
+ * @author Dan Nixon
+ */
 class Quaternion
 {
 public:
@@ -13,7 +21,6 @@ public:
   Quaternion(const float w);
   Quaternion(const float w, const float i, const float j, const float k);
   Quaternion(const float angle, const Vector3 &axis);
-  Quaternion(const Vector3 &v0, const Vector3 &v1);
   Quaternion(const Quaternion &other);
   ~Quaternion();
 
@@ -51,10 +58,10 @@ public:
   friend std::ostream &operator<<(std::ostream &stream, const Quaternion &q);
 
 private:
-  float m_w;
-  float m_i;
-  float m_j;
-  float m_k;
+  float m_w; //!< Real component
+  float m_i; //!< Imaginary I component
+  float m_j; //!< Imaginary J component
+  float m_k; //!< Imaginary K component
 };
 
 std::istream &operator>>(std::istream &stream, Quaternion &q);

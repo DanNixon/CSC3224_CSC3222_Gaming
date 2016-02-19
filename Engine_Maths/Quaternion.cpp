@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #include "Quaternion.h"
 
@@ -9,7 +12,7 @@
 #include "Vector3.h"
 
 /**
- * Construct a quaternion with a default value of 1.
+ * @brief Construct a quaternion with a default value of 1.
  */
 Quaternion::Quaternion()
     : m_w(1.0)
@@ -20,8 +23,7 @@ Quaternion::Quaternion()
 }
 
 /**
- * Construct a real valued quaternion.
- *
+ * @brief Construct a real valued quaternion.
  * @param w Real value
  */
 Quaternion::Quaternion(const float w)
@@ -33,8 +35,7 @@ Quaternion::Quaternion(const float w)
 }
 
 /**
- * Construct an imaginary valued quaternion.
- *
+ * @brief Construct an imaginary valued quaternion.
  * @param w Real value
  * @param i Coefficient of i
  * @param j Coefficient of j
@@ -50,8 +51,7 @@ Quaternion::Quaternion(const float w, const float i, const float j,
 }
 
 /**
- * Construct a quaternion to represent a rotation in a given axis.
- *
+ * @brief Construct a quaternion to represent a rotation in a given axis.
  * @param angle Angle in degrees.
  * @param axis Vector defining axit to rotate in
  */
@@ -67,9 +67,8 @@ Quaternion::Quaternion(const float angle, const Vector3 &axis)
 }
 
 /**
- * Construct a quaternion using the values of another.
- *
- * @param rhs Quaternion from which to take values
+ * @brief Construct a quaternion using the values of another.
+ * @param other Quaternion from which to take values
  */
 Quaternion::Quaternion(const Quaternion &other)
     : m_w(other.m_w)
@@ -80,15 +79,14 @@ Quaternion::Quaternion(const Quaternion &other)
 }
 
 /**
- * Destructor
+ * @brief Destructor
  */
 Quaternion::~Quaternion()
 {
 }
 
 /**
- * Assign this quaternion the values of another.
- *
+ * @brief Assign this quaternion the values of another.
  * @param rhs Quaternion from which to take values
  */
 void Quaternion::operator=(const Quaternion &rhs)
@@ -100,8 +98,7 @@ void Quaternion::operator=(const Quaternion &rhs)
 }
 
 /**
- * Check for equality between this quaternion and another.
- *
+ * @brief Check for equality between this quaternion and another.
  * @param rhs Other quaternion to compare to
  * @return True of values are equal
  */
@@ -111,8 +108,7 @@ bool Quaternion::operator==(const Quaternion &rhs) const
 }
 
 /**
- * Check for inequality between this quaternion and another.
- *
+ * @brief Check for inequality between this quaternion and another.
  * @param rhs Other quaternion to compare to
  * @return True if values are not equal
  */
@@ -122,8 +118,7 @@ bool Quaternion::operator!=(const Quaternion &rhs) const
 }
 
 /**
- * Sets the real part of the quaternion.
- *
+ * @brief Sets the real part of the quaternion.
  * @param w Real part
  */
 void Quaternion::setReal(float w)
@@ -132,9 +127,8 @@ void Quaternion::setReal(float w)
 }
 
 /**
- * Return the real part of the quaternion.
- *
- * @param Real part
+ * @brief Return the real part of the quaternion.
+ * @return Real part
  */
 float Quaternion::getReal() const
 {
@@ -142,8 +136,7 @@ float Quaternion::getReal() const
 }
 
 /**
- * Sets the i imaginary part of the quaternion.
- *
+ * @brief Sets the i imaginary part of the quaternion.
  * @param i Imaginary part
  */
 void Quaternion::setI(float i)
@@ -152,8 +145,7 @@ void Quaternion::setI(float i)
 }
 
 /**
- * Return the i imaginary part of the quaternion.
- *
+ * @brief Return the i imaginary part of the quaternion.
  * @return Coefficient of i
  */
 float Quaternion::getI() const
@@ -162,8 +154,7 @@ float Quaternion::getI() const
 }
 
 /**
- * Sets the j imaginary part of the quaternion.
- *
+ * @brief Sets the j imaginary part of the quaternion.
  * @param j Imaginary part
  */
 void Quaternion::setJ(float j)
@@ -172,8 +163,7 @@ void Quaternion::setJ(float j)
 }
 
 /**
- * Return the j imaginary part of the quaternion.
- *
+ * @brief Return the j imaginary part of the quaternion.
  * @return Coefficient of j
  */
 float Quaternion::getJ() const
@@ -182,8 +172,7 @@ float Quaternion::getJ() const
 }
 
 /**
- * Sets the k imaginary part of the quaternion.
- *
+ * @brief Sets the k imaginary part of the quaternion.
  * @param k Imaginary part
  */
 void Quaternion::setK(float k)
@@ -192,8 +181,7 @@ void Quaternion::setK(float k)
 }
 
 /**
- * Return the k imaginary part of the quaternion.
- *
+ * @brief Return the k imaginary part of the quaternion.
  * @return Coefficient of k
  */
 float Quaternion::getK() const
@@ -202,8 +190,7 @@ float Quaternion::getK() const
 }
 
 /**
- * Calculate the magnitude (length) of the quaternion.
- *
+ * @brief Calculate the magnitude (length) of the quaternion.
  * @return Magnitude
  */
 float Quaternion::magnitude() const
@@ -212,8 +199,7 @@ float Quaternion::magnitude() const
 }
 
 /**
- * Calculate the sum of two quaternions.
- *
+ * @brief Calculate the sum of two quaternions.
  * @param rhs Quaternion to add to the LHS
  * @return Sum of quaternions
  */
@@ -223,8 +209,7 @@ Quaternion Quaternion::operator+(const Quaternion &rhs) const
 }
 
 /**
- * Subtract two quaternions.
- *
+ * @brief Subtract two quaternions.
  * @param rhs Quaternion to subtract from the LHS
  * @return Subtraction of quaternions
  */
@@ -234,8 +219,7 @@ Quaternion Quaternion::operator-(const Quaternion &rhs) const
 }
 
 /**
- * Calculate the product of two quaternions.
- *
+ * @brief Calculate the product of two quaternions.
  * @param rhs Quaternion to multiply by
  * @return Product of quaternions
  */
@@ -250,12 +234,11 @@ Quaternion Quaternion::operator*(const Quaternion &rhs) const
 }
 
 /**
- * Return elements of the quaternion by index operator.
+ * @brief Return elements of the quaternion by index operator.
+ * @param index Index accessed
+ * @return Quaternion component
  *
  * For reading only.
- *
- * @param index Index accessed
- * @param Quaternion component
  */
 float Quaternion::operator[](const int index) const
 {
@@ -275,12 +258,11 @@ float Quaternion::operator[](const int index) const
 }
 
 /**
- * Return elements of the quaternion by index operator.
+ * @brief Return elements of the quaternion by index operator.
+ * @param index Index accessed
+ * @return Quaternion component
  *
  * For reading and writing.
- *
- * @param index Index accessed
- * @param Quaternion component
  */
 float &Quaternion::operator[](const int index)
 {
@@ -300,8 +282,7 @@ float &Quaternion::operator[](const int index)
 }
 
 /**
- * Returns the complex conjugate of this quaternion.
- *
+ * @brief Returns the complex conjugate of this quaternion.
  * @return Complex conjugate
  */
 Quaternion Quaternion::conjugate() const
@@ -310,8 +291,7 @@ Quaternion Quaternion::conjugate() const
 }
 
 /**
- * Compute the inverse of this quaternion.
- *
+ * @brief Compute the inverse of this quaternion.
  * @return Inverse quaternion
  */
 Quaternion Quaternion::inverse() const
@@ -330,8 +310,7 @@ Quaternion Quaternion::inverse() const
 }
 
 /**
- * Rotates a given vector using this quaternion.
- *
+ * @brief Rotates a given vector using this quaternion.
  * @param vector Vector to rotate
  * @return Rotated vector
  */
@@ -345,9 +324,8 @@ Vector3 Quaternion::rotateVector(const Vector3 &vector) const
 }
 
 /**
- * Outputs the component values of a quaternion to a strem in the format
- * "[w,i,j,k]".
- *
+ * @brief Outputs the component values of a quaternion to a strem in the format
+ *        "[w,i,j,k]".
  * @param stream The stream to output to
  * @param q The quaternion to output
  */
@@ -358,8 +336,8 @@ std::ostream &operator<<(std::ostream &stream, const Quaternion &q)
 }
 
 /**
- * Reads component values of a quaternion from a stream in format "[w,i,j,k]".
- *
+ * @brief Reads component values of a quaternion from a stream in format
+ *        "[w,i,j,k]".
  * @param stream Stream to read from
  * @param q Quaternion to store values in
  */

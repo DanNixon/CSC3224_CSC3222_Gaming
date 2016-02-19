@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
@@ -43,16 +46,28 @@ public:
     return m_children;
   }
 
+  /**
+   * @brief Sets the position of this object relative to its parent.
+   * @param mat Model matrix
+   */
   void setModelMatrix(Matrix4 mat)
   {
     m_modelMatrix = mat;
   }
 
+  /**
+   * @brief Gets the model matrix (relative to parent)
+   * @return Model matrix
+   */
   Matrix4 modelMatrix() const
   {
     return m_modelMatrix;
   }
 
+  /**
+   * @brief Gets the position in world space (absolute position)
+   * @return World position
+   */
   Matrix4 worldTransform() const
   {
     return m_worldTransform;

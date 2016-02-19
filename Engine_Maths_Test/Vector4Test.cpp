@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #include "stdafx.h"
 #include <CppUnitTest.h>
@@ -9,6 +12,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace EngineTests
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(Vector4Test)
 {
 public:
@@ -264,4 +268,5 @@ public:
     Assert::AreEqual(67.0f, dist2, 0.001f);
   }
 };
+#endif /* DOXYGEN_SKIP */
 }

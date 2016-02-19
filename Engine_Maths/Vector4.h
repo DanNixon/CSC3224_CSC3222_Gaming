@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
@@ -7,6 +10,7 @@
 /**
  * @class Vector4
  * @brief Four dimensional vector.
+ * @author Dan Nixon
  */
 class Vector4
 {

@@ -1,10 +1,16 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #include "ShaderProgram.h"
 
 #include "Shader.h"
 #include "Mesh.h"
 
+/**
+ * @brief Creates a new, empty shader program.
+ */
 ShaderProgram::ShaderProgram()
     : m_valid(false)
 {
@@ -14,6 +20,10 @@ ShaderProgram::ShaderProgram()
   m_program = glCreateProgram();
 }
 
+/**
+ * @brief Destroys the shader program, deteching all shaders and deleting the
+ *        program.
+ */
 ShaderProgram::~ShaderProgram()
 {
   for (size_t i = 0; i < NUM_SHADERS; i++)
@@ -22,6 +32,11 @@ ShaderProgram::~ShaderProgram()
   glDeleteProgram(m_program);
 }
 
+/**
+ * @brief Adds a Shader to the program.
+ * @param s Shader to add
+ * @return True if the shader was added
+ */
 bool ShaderProgram::addShader(Shader *s)
 {
   for (size_t i = 0; i < NUM_SHADERS; i++)
@@ -36,6 +51,10 @@ bool ShaderProgram::addShader(Shader *s)
   return false;
 }
 
+/**
+ * @brief Links the shader program.
+ * @return True if the program was successfully linked
+ */
 bool ShaderProgram::link()
 {
   if (m_valid)

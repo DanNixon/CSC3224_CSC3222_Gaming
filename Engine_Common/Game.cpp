@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #include "Game.h"
 
@@ -8,6 +11,11 @@
 #include <SDL_opengl.h>
 #include <gl\glu.h>
 
+/**
+ * @brief Creates a new game instance.
+ * @param windowTitle Window title string
+ * @param resolution Window resolution
+ */
 Game::Game(std::string windowTitle, std::pair<int, int> resolution)
     : m_windowTitle(windowTitle)
     , m_windowWidth(resolution.first)
@@ -19,11 +27,15 @@ Game::~Game()
 {
 }
 
+/**
+ * @brief Initializes the game engine.
+ * @return True if engine is succesfully initialised
+ */
 bool Game::init()
 {
   bool success = true;
 
-  // Initialize SDL
+  /* Initialize SDL */
   if (SDL_Init(SDL_INIT_VIDEO) < 0)
   {
     std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
@@ -32,16 +44,17 @@ bool Game::init()
   }
   else
   {
-    // Use OpenGL 3.1 core
+    /* Use OpenGL 3.1 core */
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                         SDL_GL_CONTEXT_PROFILE_CORE);
 
-    // Create window
+    /* Create window */
     m_window = SDL_CreateWindow(
         "Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_windowWidth,
         m_windowHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+
     if (m_window == NULL)
     {
       std::cerr << "Window could not be created! SDL Error: " << SDL_GetError()
@@ -50,7 +63,7 @@ bool Game::init()
     }
     else
     {
-      // Create context
+      /* Create context */
       m_context = SDL_GL_CreateContext(m_window);
       if (m_context == NULL)
       {
@@ -60,7 +73,7 @@ bool Game::init()
       }
       else
       {
-        // Initialize GLEW
+        /* Initialize GLEW */
         glewExperimental = GL_TRUE;
         GLenum glewError = glewInit();
         if (glewError != GLEW_OK)
@@ -77,14 +90,9 @@ bool Game::init()
   return success;
 }
 
-void Game::close()
-{
-  SDL_StopTextInput();
-  SDL_DestroyWindow(m_window);
-  m_window = NULL;
-  SDL_Quit();
-}
-
+/**
+ * @brief Run the game and process the main game loop.
+ */
 void Game::run()
 {
   this->setup();
@@ -116,6 +124,21 @@ void Game::run()
   this->tearDown();
 }
 
+/**
+ * @brief Shuts down the game engine.
+ */
+void Game::close()
+{
+  SDL_StopTextInput();
+  SDL_DestroyWindow(m_window);
+  m_window = NULL;
+  SDL_Quit();
+}
+
+/**
+ * @brief Gets the window aspect ratio.
+ * @return Aspect ratio
+ */
 float Game::windowAspect() const
 {
   return ((float)m_windowHeight / (float)m_windowWidth);

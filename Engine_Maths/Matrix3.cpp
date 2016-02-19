@@ -1,4 +1,7 @@
-/** @file */
+/**
+ * @file
+ * @author Rich Davison, Dan Nixon
+ */
 
 #include "Matrix3.h"
 

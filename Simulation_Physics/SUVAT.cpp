@@ -1,11 +1,14 @@
-/** @file */
+/**
+ * @file
+ * @author Dan Nixon
+ */
 
 #include "SUVAT.h"
 
 #include <Vector3.h>
 
 /**
- * @brief
+ * @brief Calculate final velocity.
  * @param u Initial velocity
  * @param a Acceleration
  * @param t Time
@@ -17,7 +20,7 @@ float SUVAT::getVfromUAT(float u, float a, float t)
 }
 
 /**
- * @brief
+ * @brief Calculate displacement.
  * @param u Initial velocity
  * @param a Acceleration
  * @param t Time
@@ -29,7 +32,7 @@ float SUVAT::getSfromUAT(float u, float a, float t)
 }
 
 /**
- * @brief
+ * @brief Calculate displacement.
  * @param u Initial velocity
  * @param v Final velocity
  * @param t Time
@@ -41,7 +44,7 @@ float SUVAT::getSfromUVT(float u, float v, float t)
 }
 
 /**
- * @brief
+ * @brief Calculate final velocity squared.
  * @param u Initial velocity
  * @param a Acceleration
  * @param s Displacement
@@ -53,7 +56,7 @@ float SUVAT::getV2fromUAS(float u, float a, float s)
 }
 
 /**
- * @brief
+ * @brief Calculate displacement.
  * @param v Final velocity
  * @param t Time
  * @param a Acceleration
@@ -65,48 +68,48 @@ float SUVAT::getSfromVTA(float v, float t, float a)
 }
 
 /**
-* @brief
-* @param u Initial velocity
-* @param a Acceleration
-* @param t Time
-* @return Final velocity
-*/
+ * @brief Calculate final velocity.
+ * @param u Initial velocity
+ * @param a Acceleration
+ * @param t Time
+ * @return Final velocity
+ */
 Vector3 SUVAT::getVfromUAT(const Vector3 &u, const Vector3 &a, float &t)
 {
   return u + (a * t);
 }
 
 /**
-* @brief
-* @param u Initial velocity
-* @param a Acceleration
-* @param t Time
-* @return Displacement
-*/
+ * @brief Calculate displacement.
+ * @param u Initial velocity
+ * @param a Acceleration
+ * @param t Time
+ * @return Displacement
+ */
 Vector3 SUVAT::getSfromUAT(const Vector3 &u, const Vector3 &a, float &t)
 {
   return (u * t) + ((a * t * t) * 0.5f);
 }
 
 /**
-* @brief
-* @param u Initial velocity
-* @param v Final velocity
-* @param t Time
-* @return Displacement
-*/
+ * @brief Calculate displacement.
+ * @param u Initial velocity
+ * @param v Final velocity
+ * @param t Time
+ * @return Displacement
+ */
 Vector3 SUVAT::getSfromUVT(const Vector3 &u, const Vector3 &v, float &t)
 {
   return (u + v) * t * 0.5f;
 }
 
 /**
-* @brief
-* @param u Initial velocity
-* @param a Acceleration
-* @param s Displacement
-* @return Final velocity squared
-*/
+ * @brief Calculate final velocity squared.
+ * @param u Initial velocity
+ * @param a Acceleration
+ * @param s Displacement
+ * @return Final velocity squared
+ */
 Vector3 SUVAT::getV2fromUAS(const Vector3 &u, const Vector3 &a,
                             const Vector3 &s)
 {
@@ -114,12 +117,12 @@ Vector3 SUVAT::getV2fromUAS(const Vector3 &u, const Vector3 &a,
 }
 
 /**
-* @brief
-* @param v Final velocity
-* @param t Time
-* @param a Acceleration
-* @return Displacement
-*/
+ * @brief Calculate displacement.
+ * @param v Final velocity
+ * @param t Time
+ * @param a Acceleration
+ * @return Displacement
+ */
 Vector3 SUVAT::getSfromVTA(const Vector3 &v, const Vector3 &t, const Vector3 &a)
 {
   return (v * t) - ((a * t * t) * 0.5f);
