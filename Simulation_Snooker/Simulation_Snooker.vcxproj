@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3F9742EB-8600-4A1A-822E-DBED6BEB1AAD}</ProjectGuid>
-    <RootNamespace>Simulation_Pool</RootNamespace>
-    <ProjectName>Simulation_Pool</ProjectName>
+    <RootNamespace>Simulation_Snooker</RootNamespace>
+    <ProjectName>Simulation_Snooker</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -164,6 +164,10 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platf
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SnookerSimulation.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SnookerSimulation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+#include "SnookerSimulation.h"
 #include <Entity.h>
 
 int main(int argc, char *argv[])
