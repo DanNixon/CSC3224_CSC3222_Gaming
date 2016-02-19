@@ -7,6 +7,11 @@
 
 class Vector3;
 
+/**
+ * @class SUVAT
+ * @brief Helper class for performing SUVAT euqations.
+ * @author Dan Nixon
+ */
 class SUVAT
 {
 public:

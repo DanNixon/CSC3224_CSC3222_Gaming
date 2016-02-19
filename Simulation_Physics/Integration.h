@@ -7,6 +7,11 @@
 
 class Vector3;
 
+/**
+ * @class Integration
+ * @brief Helper class for performing numerical integration.
+ * @author Dan Nixon
+ */
 class Integration
 {
 public:

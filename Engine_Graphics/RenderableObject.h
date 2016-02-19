@@ -16,6 +16,10 @@
 class RenderableObject : public SceneObject
 {
 public:
+  /**
+   * @var NUM_TEXTURES
+   * @brief Maximum number of tectures for a single RenderableObject.
+   */
   static const int NUM_TEXTURES = 2;
 
   RenderableObject();

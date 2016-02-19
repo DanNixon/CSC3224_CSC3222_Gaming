@@ -12,6 +12,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace EngineTests
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(Vector2Test)
 {
 public:
@@ -229,4 +230,5 @@ public:
     Assert::AreEqual(2.0f, dist2, 0.001f);
   }
 };
+#endif /* DOXYGEN_SKIP */
 }

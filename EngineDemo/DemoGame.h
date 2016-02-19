@@ -11,6 +11,11 @@
 #include <RenderableObject.h>
 #include <ShaderProgram.h>
 
+/**
+ * @class DemoGame
+ * @brief Game demonstrating features of the game engine.
+ * @author Dan Nixon
+ */
 class DemoGame : public Game
 {
 public:

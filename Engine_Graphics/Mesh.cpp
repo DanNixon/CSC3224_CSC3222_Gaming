@@ -351,6 +351,7 @@ Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
 /**
  * @brief Loads a mesh from a model file (supported by Assimp).
  * @param filename Filename to load
+ * @param meshIdx Index of mesh (within scene) to load
  * @return Mesh containing loaded model
  */
 Mesh *Mesh::LoadModelFile(const string &filename, size_t meshIdx)

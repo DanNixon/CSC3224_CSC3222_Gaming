@@ -22,6 +22,10 @@ public:
   Shader(std::string filename, GLuint stage);
   virtual ~Shader();
 
+  /**
+   * @brief Returns the type of shader (shader stage).
+   * @return Shader stage
+   */
   GLuint stage() const
   {
     return m_stage;

@@ -7,7 +7,9 @@
 #include "Mesh.h"
 
 /**
- * @brief Creates a new shader collection.
+ * @brief Creates a new shader.
+ * @param filename GLSL source file
+ * @param stage Shader stage
  */
 Shader::Shader(std::string filename, GLuint stage)
     : m_valid(false)
@@ -51,6 +53,8 @@ bool Shader::loadFile(std::string filename, std::string &into)
 
 /**
  * @brief Compiles a shader.
+ * @param filename GLSL source file
+ * @return True for successful compilation
  */
 bool Shader::compile(std::string filename)
 {

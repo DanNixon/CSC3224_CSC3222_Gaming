@@ -7,14 +7,18 @@
 
 #include <Windows.h>
 
+/**
+ * @class Timer
+ * @brief Provides timing of a game loop.
+ * @author Dan Nixon
+ */
 class Timer
 {
 public:
   static void Init();
-  static float SystemTime(LARGE_INTEGER start);
 
 private:
-  static LARGE_INTEGER s_freq;
+  static LARGE_INTEGER s_freq; //!< Performance counter frequency
 
 public:
   Timer();
@@ -28,7 +32,7 @@ public:
   float frameTime();
 
 private:
-  bool m_running;
-  LARGE_INTEGER m_start;
-  float m_lastFrameTime;
+  bool m_running;        //!< Flag to indicate if the timer is running
+  LARGE_INTEGER m_start; //!< Time at which timer was started
+  float m_lastFrameTime; //!< Time of last recorded update frame
 };

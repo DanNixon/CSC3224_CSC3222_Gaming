@@ -12,6 +12,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace EngineTests
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(Matrix4Test)
 {
 public:
@@ -20,4 +21,5 @@ public:
     Matrix4 m;
   }
 };
+#endif /* DOXYGEN_SKIP */
 }

@@ -15,6 +15,10 @@
 class VertexShader : public Shader
 {
 public:
+  /**
+   * @brief Creates a new vertex shader.
+   * @param filename GLSL source file
+   */
   VertexShader(std::string filename)
       : Shader(filename, GL_VERTEX_SHADER)
   {
@@ -29,6 +33,10 @@ public:
 class FragmentShader : public Shader
 {
 public:
+  /**
+   * @brief Creates a new fragement shader.
+   * @param filename GLSL source file
+   */
   FragmentShader(std::string filename)
       : Shader(filename, GL_FRAGMENT_SHADER)
   {
@@ -43,6 +51,10 @@ public:
 class GeometryShader : public Shader
 {
 public:
+  /**
+   * @brief Creates a new geometry shader.
+   * @param filename GLSL source file
+   */
   GeometryShader(std::string filename)
       : Shader(filename, GL_GEOMETRY_SHADER)
   {
@@ -57,6 +69,10 @@ public:
 class TesselationControlShader : public Shader
 {
 public:
+  /**
+   * @brief Creates a new tesselation control shader.
+   * @param filename GLSL source file
+   */
   TesselationControlShader(std::string filename)
       : Shader(filename, GL_TESS_CONTROL_SHADER)
   {
@@ -71,6 +87,10 @@ public:
 class TesselationEvaluationShader : public Shader
 {
 public:
+  /**
+   * @brief Creates a new tesselation evaluation shader.
+   * @param filename GLSL source file
+   */
   TesselationEvaluationShader(std::string filename)
       : Shader(filename, GL_TESS_EVALUATION_SHADER)
   {

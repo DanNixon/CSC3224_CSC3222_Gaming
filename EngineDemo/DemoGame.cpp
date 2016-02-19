@@ -7,6 +7,9 @@
 
 #include <Shaders.h>
 
+/**
+ * @brief Creates a new demonstration game instance.
+ */
 DemoGame::DemoGame()
     : Game("Engine Demo", std::make_pair(640, 480))
 {
@@ -16,6 +19,9 @@ DemoGame::~DemoGame()
 {
 }
 
+/**
+ * @copydoc Game::setup
+ */
 void DemoGame::setup()
 {
   m_sp = new ShaderProgram();
@@ -44,12 +50,18 @@ void DemoGame::setup()
   glEnable(GL_BLEND);
 }
 
+/**
+ * @copydoc Game::loop
+ */
 void DemoGame::loop(unsigned long dtUs)
 {
   m_s->update();
   m_s->render();
 }
 
+/**
+ * @copydoc Game::tearDown
+ */
 void DemoGame::tearDown()
 {
 }
