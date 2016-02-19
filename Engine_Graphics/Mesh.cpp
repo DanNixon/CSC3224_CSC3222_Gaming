@@ -372,6 +372,7 @@ Mesh *Mesh::LoadModelFile(const string &filename, size_t meshIdx)
 
   m->m_numVertices = mesh->mNumVertices * 3;
   m->m_vertices = new Vector3[m->m_numVertices];
+  m->m_colours = new Vector4[m->m_numVertices];
 
   // Load vertices
   size_t idx = 0;
@@ -383,8 +384,13 @@ Mesh *Mesh::LoadModelFile(const string &filename, size_t meshIdx)
     const aiVector3D &v1 = vertices[face.mIndices[1]];
     const aiVector3D &v2 = vertices[face.mIndices[2]];
 
+    m->m_colours[idx] = Vector4(1, 1, 1, 1);
     m->m_vertices[idx++] = Vector3(v0[0], v0[1], v0[2]);
+
+    m->m_colours[idx] = Vector4(1, 1, 1, 1);
     m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
+
+    m->m_colours[idx] = Vector4(1, 1, 1, 1);
     m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
   }
 

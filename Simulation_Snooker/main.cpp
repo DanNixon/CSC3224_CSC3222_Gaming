@@ -36,5 +36,9 @@ int main(int argc, char *argv[])
     std::cout << *a << "\t In Range: " << a->entitiesInRange() << std::endl;
   }
 
+  SnookerSimulation s;
+  s.init();
+  s.run();
+
   return 0;
 }

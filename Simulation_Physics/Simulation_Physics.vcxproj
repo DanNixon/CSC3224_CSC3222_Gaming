@@ -82,24 +82,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Utility;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

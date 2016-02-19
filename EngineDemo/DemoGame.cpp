@@ -20,9 +20,9 @@ DemoGame::~DemoGame()
 }
 
 /**
- * @copydoc Game::setup
+ * @copydoc Game::gameStartup
  */
-void DemoGame::setup()
+void DemoGame::gameStartup()
 {
   m_sp = new ShaderProgram();
   m_sp->addShader(new VertexShader("basic_vertex.glsl"));
@@ -51,17 +51,17 @@ void DemoGame::setup()
 }
 
 /**
- * @copydoc Game::loop
+ * @copydoc Game::gameLoop
  */
-void DemoGame::loop(unsigned long dtUs)
+void DemoGame::gameLoop(unsigned long dtUs)
 {
   m_s->update();
   m_s->render();
 }
 
 /**
- * @copydoc Game::tearDown
+ * @copydoc Game::gameShutdown
  */
-void DemoGame::tearDown()
+void DemoGame::gameShutdown()
 {
 }

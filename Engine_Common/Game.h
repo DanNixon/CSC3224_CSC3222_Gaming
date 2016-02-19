@@ -25,21 +25,22 @@ public:
 
   float windowAspect() const;
 
+protected:
   /**
    * @brief Performs any setup specific to the game.
    */
-  virtual void setup() = 0;
+  virtual void gameStartup() = 0;
 
   /**
    * @brief The main game loop.
-   * @param dtUs TIme since last loop in microseconds
+   * @param dtUs Time since last loop in microseconds
    */
-  virtual void loop(unsigned long dtUs) = 0;
+  virtual void gameLoop(unsigned long dtUs) = 0;
 
   /**
    * @brief Performs any shutdown logic specific to the game.
    */
-  virtual void tearDown() = 0;
+  virtual void gameShutdown() = 0;
 
 private:
   void close();

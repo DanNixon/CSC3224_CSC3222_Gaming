@@ -95,7 +95,7 @@ bool Game::init()
  */
 void Game::run()
 {
-  this->setup();
+  this->gameStartup();
 
   SDL_Event e;
   bool exit = false;
@@ -115,13 +115,13 @@ void Game::run()
       }
     }
 
-    this->loop(0);
+    this->gameLoop(0);
 
     SDL_GL_SwapWindow(m_window);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   }
 
-  this->tearDown();
+  this->gameShutdown();
 }
 
 /**

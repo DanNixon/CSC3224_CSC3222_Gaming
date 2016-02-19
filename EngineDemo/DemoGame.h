@@ -22,9 +22,10 @@ public:
   DemoGame();
   virtual ~DemoGame();
 
-  void setup();
-  void loop(unsigned long dtUs);
-  void tearDown();
+protected:
+  void gameStartup();
+  void gameLoop(unsigned long dtUs);
+  void gameShutdown();
 
 private:
   ShaderProgram *m_sp;
