@@ -56,7 +56,7 @@ public:
   virtual void draw();
 
 protected:
-  void generateNormals();
+  bool generateNormals();
   void bufferData();
 
   GLuint m_type;                     //!< Type of primitives used in mesh

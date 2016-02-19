@@ -4,6 +4,9 @@
 
 #include "Matrix3.h"
 
+/**
+ * @brief Creates a new, empty renderable object.
+ */
 RenderableObject::RenderableObject()
     : m_mesh(NULL)
     , m_shaderProgram(NULL)
@@ -12,6 +15,12 @@ RenderableObject::RenderableObject()
     m_textures[i] = NULL;
 }
 
+/**
+ * @brief Creates a new renderable object with a given mesh, shader and texture.
+ * @param m Mesh
+ * @param s Shader
+ * @param t Fist (default) texture
+ */
 RenderableObject::RenderableObject(Mesh *m, ShaderProgram *s, GLuint t)
     : m_mesh(m)
     , m_shaderProgram(s)
@@ -31,6 +40,9 @@ RenderableObject::~RenderableObject()
   //    delete m_shaderProgram;
 }
 
+/**
+ * @copydoc SceneObject::render
+ */
 void RenderableObject::render()
 {
   if (m_mesh && m_shaderProgram)

@@ -9,6 +9,11 @@
 #include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
 
+/**
+ * @brief Gets the upper and lower bounds of the vertices of a mesh.
+ * @param m Mesh to get bounds for
+ * @return Pair containing upper and lower bounding vertices
+ */
 std::pair<Vector3, Vector3> Mesh::GetBoundingBox(Mesh *m)
 {
   const float maxFloat = std::numeric_limits<float>::max();
@@ -82,9 +87,15 @@ void Mesh::draw()
 
 /**
  * @brief Generates normals for each vertex.
+ * @return True if normals were generated
+ *
+ * Requires that faces are triangles.
  */
-void Mesh::generateNormals()
+bool Mesh::generateNormals()
 {
+  if (m_type != GL_TRIANGLES)
+    return false;
+
   if (!m_normals)
     m_normals = new Vector3[m_numVertices];
 
@@ -101,6 +112,8 @@ void Mesh::generateNormals()
     m_normals[i + 1] = normal;
     m_normals[i + 2] = normal;
   }
+
+  return true;
 }
 
 /**
@@ -119,7 +132,7 @@ void Mesh::bufferData()
   glVertexAttribPointer(VERTEX_BUFFER, 3, GL_FLOAT, GL_FALSE, 0, 0);
   glEnableVertexAttribArray(VERTEX_BUFFER);
 
-  // Buffer texture data
+  /* Buffer texture data */
   if (m_textureCoords)
   {
     glGenBuffers(1, &m_bufferObject[TEXTURE_BUFFER]);
@@ -130,7 +143,7 @@ void Mesh::bufferData()
     glEnableVertexAttribArray(TEXTURE_BUFFER);
   }
 
-  // buffer colour data
+  /* Buffer colour data */
   if (m_colours)
   {
     glGenBuffers(1, &m_bufferObject[COLOUR_BUFFER]);
@@ -141,7 +154,7 @@ void Mesh::bufferData()
     glEnableVertexAttribArray(COLOUR_BUFFER);
   }
 
-  // buffer index data
+  /* Buffer index data */
   if (m_indices)
   {
     glGenBuffers(1, &m_bufferObject[INDEX_BUFFER]);
@@ -150,6 +163,7 @@ void Mesh::bufferData()
                  m_indices, GL_STATIC_DRAW);
   }
 
+  /* Buffer normals data */
   if (m_normals)
   {
     glGenBuffers(1, &m_bufferObject[NORMAL_BUFFER]);
