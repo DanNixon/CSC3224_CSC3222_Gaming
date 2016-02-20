@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IKeyValueStore.h" />
+    <ClInclude Include="KVNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="IKeyValueStore.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{350302AA-1DBE-4425-8B10-47C8D0423EEC}</ProjectGuid>
     <RootNamespace>Engine_IO</RootNamespace>
