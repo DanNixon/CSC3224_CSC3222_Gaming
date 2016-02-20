@@ -1,8 +1,20 @@
+/**
+ * @file
+ * @author Dan Nixon
+ */
+
 #pragma once
 
 #include <string>
 #include <map>
 
+/**
+ * @class KVNode
+ * @brief Represents a node in a key-value data store.
+ * @author Dan Nixon
+ *
+ * Contains a set of key-value pairs and set of children.
+ */
 class KVNode
 {
 public:

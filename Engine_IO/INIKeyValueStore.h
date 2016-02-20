@@ -1,7 +1,17 @@
+/**
+ * @file
+ * @author Dan Nixon
+ */
+
 #pragma once
 
 #include "IKeyValueStore.h"
 
+/**
+ * @class INIKeyValueStore
+ * @brief Key value store that loads and saves to INI files.
+ * @author Dan Nixon
+ */
 class INIKeyValueStore : public IKeyValueStore
 {
 public:

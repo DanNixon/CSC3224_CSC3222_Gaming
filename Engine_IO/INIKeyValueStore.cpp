@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @author Dan Nixon
+ */
+
 #include "INIKeyValueStore.h"
 
 #include "KVNode.h"
@@ -10,6 +15,9 @@ INIKeyValueStore::~INIKeyValueStore()
 {
 }
 
+/**
+ * @copydoc IKeyValueStore::load
+ */
 bool INIKeyValueStore::load(std::istream &stream)
 {
   parseNode(stream, m_root, true);
@@ -24,6 +32,9 @@ bool INIKeyValueStore::load(std::istream &stream)
   return true;
 }
 
+/**
+ * @copydoc IKeyValueStore::save
+ */
 bool INIKeyValueStore::save(std::ostream &stream)
 {
   outputNode(stream, m_root);

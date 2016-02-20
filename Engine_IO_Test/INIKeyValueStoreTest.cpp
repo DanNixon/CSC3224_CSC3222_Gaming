@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @author Dan Nixon
+ */
+
 #include "CppUnitTest.h"
 
 #include <INIKeyValueStore.h>
@@ -6,7 +11,8 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Engine_IO_Test
-{		
+{
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(INIKeyValueStoreTest)
 {
 public:
@@ -72,7 +78,7 @@ public:
     child2.set("detail", "good");
     child2.set("speed", "good enough");
     root.addChild(child2);
-    
+
     // Output
     std::stringstream stream;
     Assert::IsTrue(store.save(stream));
@@ -91,6 +97,6 @@ public:
     // Test
     Assert::AreEqual(expected, stream.str());
   }
-
 };
+#endif /* DOXYGEN_SKIP */
 }
