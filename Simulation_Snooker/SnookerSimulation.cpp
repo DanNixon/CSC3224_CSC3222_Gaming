@@ -1,7 +1,7 @@
 #include "SnookerSimulation.h"
 
 SnookerSimulation::SnookerSimulation()
-  : Game("Snooker", std::make_pair(640, 480))
+    : Game("Snooker", std::make_pair(640, 480))
 {
 }
 

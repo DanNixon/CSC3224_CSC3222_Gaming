@@ -17,7 +17,7 @@ public:
   {
   }
 
-  KVNode & root()
+  KVNode &root()
   {
     return m_root;
   }

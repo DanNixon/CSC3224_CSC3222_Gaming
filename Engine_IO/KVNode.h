@@ -7,7 +7,7 @@ class KVNode
 {
 public:
   KVNode(const std::string &name = "")
-    : m_name(name)
+      : m_name(name)
   {
   }
 
@@ -75,7 +75,7 @@ public:
 private:
   friend class INIKeyValueStore;
 
-  std::string m_name; //!< Name of this node
+  std::string m_name;                        //!< Name of this node
   std::map<std::string, std::string> m_keys; //!< Map of keys under this node
-  std::map<std::string, KVNode> m_children; //!< Map of child nodes
+  std::map<std::string, KVNode> m_children;  //!< Map of child nodes
 };

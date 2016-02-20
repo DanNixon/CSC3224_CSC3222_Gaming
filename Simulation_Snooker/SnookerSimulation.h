@@ -13,4 +13,3 @@ protected:
   void gameLoop(unsigned long dtUs);
   void gameShutdown();
 };
-
