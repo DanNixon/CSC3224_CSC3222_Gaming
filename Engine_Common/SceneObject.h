@@ -10,6 +10,11 @@
 #include "Matrix4.h"
 #include "Scene.h"
 
+namespace Engine
+{
+namespace Common
+{
+
 /**
  * @class SceneObject
  * @brief Represents an item in a Scene.
@@ -88,3 +93,5 @@ protected:
   Scene *m_scene;                        //!< Scene this object belongs to
   std::vector<SceneObject *> m_children; //!< Children
 };
+}
+}

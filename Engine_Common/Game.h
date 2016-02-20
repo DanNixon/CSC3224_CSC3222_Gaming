@@ -8,6 +8,11 @@
 #include <string>
 #include <SDL.h>
 
+namespace Engine
+{
+namespace Common
+{
+
 /**
  * @class Game
  * @author Dan Nxion
@@ -53,3 +58,5 @@ protected:
   int m_windowWidth;         //!< Window width
   int m_windowHeight;        //!< Window height
 };
+}
+}

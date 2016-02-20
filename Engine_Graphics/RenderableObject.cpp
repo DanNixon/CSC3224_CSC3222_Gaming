@@ -7,6 +7,11 @@
 
 #include "Matrix3.h"
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @brief Creates a new, empty renderable object.
  */
@@ -78,4 +83,6 @@ void RenderableObject::render()
   }
 
   SceneObject::render();
+}
+}
 }

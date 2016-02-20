@@ -11,6 +11,11 @@
 #include "math_common.h"
 #include "Vector3.h"
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @brief Construct a quaternion with a default value of 1.
  */
@@ -348,4 +353,6 @@ std::istream &operator>>(std::istream &stream, Quaternion &q)
   stream >> delim >> w >> delim >> i >> delim >> j >> delim >> k >> delim;
   q = Quaternion(w, i, j, k);
   return stream;
+}
+}
 }

@@ -10,7 +10,11 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace Engine_IO_Test
+namespace Engine
+{
+namespace IO
+{
+namespace Test
 {
 #ifndef DOXYGEN_SKIP
 TEST_CLASS(INIKeyValueStoreTest)
@@ -99,4 +103,6 @@ public:
   }
 };
 #endif /* DOXYGEN_SKIP */
+}
+}
 }

@@ -5,6 +5,11 @@
 
 #include "Timer.h"
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @brief Initialises the timer, must be called before an instance of Timer is
  *        created.
@@ -77,4 +82,6 @@ float Timer::frameTime()
   float dt = t - m_lastFrameTime;
   m_lastFrameTime = absoluteTime();
   return dt;
+}
+}
 }

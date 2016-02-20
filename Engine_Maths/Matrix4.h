@@ -13,6 +13,11 @@
 
 class Vector3;
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @class Matrix4
  * @brief 4x4 dimensional matrix.
@@ -213,3 +218,5 @@ private:
 
   float m_values[16]; //!< Matrix values
 };
+}
+}

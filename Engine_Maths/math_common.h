@@ -7,6 +7,11 @@
 
 #pragma once
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @var PI
  * @brief Is Pi.
@@ -44,3 +49,5 @@ static inline double DegToRad(const double deg)
  * @brief Unsigned integer
  */
 typedef unsigned int uint;
+}
+}

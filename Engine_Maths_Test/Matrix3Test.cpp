@@ -9,7 +9,11 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace EngineTests
+namespace Engine
+{
+namespace Maths
+{
+namespace Test
 {
 #ifndef DOXYGEN_SKIP
 TEST_CLASS(Matrix3Test)
@@ -21,4 +25,6 @@ public:
   }
 };
 #endif /* DOXYGEN_SKIP */
+}
+}
 }

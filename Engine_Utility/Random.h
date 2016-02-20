@@ -5,6 +5,11 @@
 
 #pragma once
 
+namespace Engine
+{
+namespace Utility
+{
+
 /**
  * @class Random
  * @brief Utility class for generating random numbers.
@@ -15,3 +20,5 @@ class Random
 public:
   static float random(float lower, float upper);
 };
+}
+}

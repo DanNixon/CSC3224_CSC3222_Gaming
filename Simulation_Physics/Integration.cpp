@@ -7,6 +7,11 @@
 
 #include <Vector3.h>
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @brief Performs Euler integration.
  * @param out [out] Integral
@@ -26,4 +31,6 @@ void Integration::Euler(Vector3 &out, const Vector3 &x, const Vector3 &y,
                         float dT)
 {
   out = x + (y * dT);
+}
+}
 }

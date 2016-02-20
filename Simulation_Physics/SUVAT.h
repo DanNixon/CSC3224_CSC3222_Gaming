@@ -7,6 +7,11 @@
 
 class Vector3;
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @class SUVAT
  * @brief Helper class for performing SUVAT euqations.
@@ -29,3 +34,5 @@ public:
   static Vector3 getSfromVTA(const Vector3 &v, const Vector3 &t,
                              const Vector3 &a);
 };
+}
+}

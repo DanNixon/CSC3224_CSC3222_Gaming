@@ -7,6 +7,11 @@
 
 #include <iostream>
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @class Vector4
  * @brief Four dimensional vector.
@@ -373,3 +378,5 @@ private:
   float m_z; //!< Z coordinate
   float m_w; //!< W coordinate
 };
+}
+}

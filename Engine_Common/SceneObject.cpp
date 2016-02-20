@@ -5,6 +5,11 @@
 
 #include "SceneObject.h"
 
+namespace Engine
+{
+namespace Common
+{
+
 /**
  * @brief Creates a new, empty scene object.
  */
@@ -53,4 +58,6 @@ void SceneObject::addToScene(Scene *scene)
 
   for (SceneObjectIter i = m_children.begin(); i != m_children.end(); ++i)
     (*i)->addToScene(scene);
+}
+}
 }

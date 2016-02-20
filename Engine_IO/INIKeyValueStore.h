@@ -7,6 +7,11 @@
 
 #include "IKeyValueStore.h"
 
+namespace Engine
+{
+namespace IO
+{
+
 /**
  * @class INIKeyValueStore
  * @brief Key value store that loads and saves to INI files.
@@ -25,3 +30,5 @@ private:
   void parseNode(std::istream &stream, KVNode &node, bool root = false);
   void outputNode(std::ostream &stream, const KVNode &node);
 };
+}
+}

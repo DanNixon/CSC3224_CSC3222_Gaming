@@ -8,6 +8,11 @@
 #include <cmath>
 #include <iostream>
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @class Vector3
  * @brief Three dimensional vector.
@@ -374,3 +379,5 @@ private:
   float m_y; //!< Y coordinate
   float m_z; //!< Z coordinate
 };
+}
+}

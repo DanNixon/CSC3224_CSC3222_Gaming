@@ -5,6 +5,11 @@
 
 #include "Matrix3.h"
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @brief Creates a matrix with default values (identity).
  */
@@ -126,4 +131,6 @@ Matrix3 Matrix3::Scale(const Vector3 &scale)
   m.m_values[8] = scale.m_z;
 
   return m;
+}
+}
 }

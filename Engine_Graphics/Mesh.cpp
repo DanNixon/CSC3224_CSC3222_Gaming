@@ -12,6 +12,11 @@
 #include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @brief Gets the upper and lower bounds of the vertices of a mesh.
  * @param m Mesh to get bounds for
@@ -407,4 +412,6 @@ Mesh *Mesh::LoadModelFile(const string &filename, size_t meshIdx)
   m->bufferData();
 
   return m;
+}
+}
 }

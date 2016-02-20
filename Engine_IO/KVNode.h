@@ -8,6 +8,11 @@
 #include <string>
 #include <map>
 
+namespace Engine
+{
+namespace IO
+{
+
 /**
  * @class KVNode
  * @brief Represents a node in a key-value data store.
@@ -161,3 +166,5 @@ private:
   std::map<std::string, std::string> m_keys; //!< Map of keys under this node
   std::map<std::string, KVNode> m_children;  //!< Map of child nodes
 };
+}
+}

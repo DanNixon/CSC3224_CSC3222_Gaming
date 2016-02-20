@@ -11,6 +11,11 @@
 
 #include "KVNode.h"
 
+namespace Engine
+{
+namespace IO
+{
+
 /**
  * @class IKeyValueStore
  * @brief Represents a tree of KVNode each containing a set of key-value pairs.
@@ -56,3 +61,5 @@ public:
 protected:
   KVNode m_root; //!< Root node
 };
+}
+}

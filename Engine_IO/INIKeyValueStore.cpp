@@ -7,6 +7,11 @@
 
 #include "KVNode.h"
 
+namespace Engine
+{
+namespace IO
+{
+
 INIKeyValueStore::INIKeyValueStore()
 {
 }
@@ -84,4 +89,6 @@ void INIKeyValueStore::outputNode(std::ostream &stream, const KVNode &node)
 
   for (auto it = node.m_keys.begin(); it != node.m_keys.end(); ++it)
     stream << it->first << "=" << it->second << std::endl;
+}
+}
 }

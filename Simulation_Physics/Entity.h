@@ -7,6 +7,11 @@
 
 #include "Vector3.h"
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @class Entity
  * @brief Represents an entity in a simulation.
@@ -81,3 +86,5 @@ private:
   float m_aggroRange2;   //!< Aggro range squared
   int m_entitiesInRange; //!< Number of entities within aggro range
 };
+}
+}

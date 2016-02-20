@@ -8,6 +8,11 @@
 #include "Shader.h"
 #include "Mesh.h"
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @brief Creates a new, empty shader program.
  */
@@ -93,4 +98,6 @@ bool ShaderProgram::link()
 
   m_valid = (status != GL_FALSE);
   return m_valid;
+}
+}
 }

@@ -7,6 +7,11 @@
 
 #include <iostream>
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @class Vector2
  * @brief Two dimensional vector.
@@ -322,3 +327,5 @@ private:
   float m_x; //!< X coordinate
   float m_y; //!< Y coordinate
 };
+}
+}

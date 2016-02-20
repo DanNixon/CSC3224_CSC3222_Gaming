@@ -7,6 +7,11 @@
 
 #include "SceneObject.h"
 
+namespace Engine
+{
+namespace Common
+{
+
 /**
  * @brief Creates a new scene.
  * @param root Root node in the scene
@@ -75,4 +80,6 @@ void Scene::update()
 void Scene::render()
 {
   m_root->render();
+}
+}
 }

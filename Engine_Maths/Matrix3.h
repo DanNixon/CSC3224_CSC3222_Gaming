@@ -7,6 +7,11 @@
 
 #include "Matrix4.h"
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @class Matrix3
  * @brief 3x3 dimensional matrix.
@@ -149,3 +154,5 @@ public:
 private:
   float m_values[9]; //!< Matrix values
 };
+}
+}

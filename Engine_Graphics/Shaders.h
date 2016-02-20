@@ -7,6 +7,11 @@
 
 #include "Shader.h"
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @class VertexShader
  * @brief Encapsulation for a vertex shader.
@@ -96,3 +101,5 @@ public:
   {
   }
 };
+}
+}

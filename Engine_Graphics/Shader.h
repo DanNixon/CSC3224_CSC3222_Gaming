@@ -11,6 +11,11 @@
 
 #include "GL/glew.h"
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @class Shader
  * @brief Encapsulation for a single OpenGL shader.
@@ -58,3 +63,5 @@ private:
 
   bool m_valid; //!< Flag indicating validity of shader
 };
+}
+}

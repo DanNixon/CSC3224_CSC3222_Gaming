@@ -5,6 +5,11 @@
 
 #include "Matrix4.h"
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @brief Creates a matrix with default values (identity).
  */
@@ -248,4 +253,6 @@ Matrix4 Matrix4::Translation(const Vector3 &translation)
   m.m_values[14] = translation.m_z;
 
   return m;
+}
+}
 }

@@ -7,6 +7,11 @@
 
 #include <Windows.h>
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @class Timer
  * @brief Provides timing of a game loop.
@@ -36,3 +41,5 @@ private:
   LARGE_INTEGER m_start; //!< Time at which timer was started
   float m_lastFrameTime; //!< Time of last recorded update frame
 };
+}
+}

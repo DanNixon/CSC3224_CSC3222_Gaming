@@ -11,6 +11,11 @@
 #include <SDL_opengl.h>
 #include <gl\glu.h>
 
+namespace Engine
+{
+namespace Common
+{
+
 /**
  * @brief Creates a new game instance.
  * @param windowTitle Window title string
@@ -142,4 +147,6 @@ void Game::close()
 float Game::windowAspect() const
 {
   return ((float)m_windowHeight / (float)m_windowWidth);
+}
+}
 }

@@ -9,6 +9,11 @@
 
 class SceneObject;
 
+namespace Engine
+{
+namespace Common
+{
+
 /**
  * @class Scene
  * @brief Represents a 3D scene.
@@ -34,3 +39,5 @@ private:
   Matrix4 m_viewMatrix;       //!< View matrix
   Matrix4 m_projectionMatrix; //!< Projection matrix
 };
+}
+}

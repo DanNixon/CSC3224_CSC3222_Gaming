@@ -9,6 +9,11 @@
 #include "Mesh.h"
 #include "ShaderProgram.h"
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @class RenderableObject
  * @brief Represents a renderable item in a Scene.
@@ -95,3 +100,5 @@ private:
   ShaderProgram *m_shaderProgram;  //!< Shader used to render m_mesh
   GLuint m_textures[NUM_TEXTURES]; //!< Textures used on m_mesh
 };
+}
+}

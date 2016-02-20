@@ -9,6 +9,11 @@
 
 class Shader;
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @class ShaderProgram
  * @brief Encapsulation for a GL shader program.
@@ -56,3 +61,5 @@ private:
   Shader *m_shaders[NUM_SHADERS]; //!< Array of Shaders in program
   bool m_valid;                   //!< Flag indicating validity of program
 };
+}
+}

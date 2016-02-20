@@ -7,6 +7,11 @@
 
 class Vector3;
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @class Integration
  * @brief Helper class for performing numerical integration.
@@ -17,3 +22,5 @@ class Integration
 public:
   static void Euler(Vector3 &out, const Vector3 &x, const Vector3 &y, float dT);
 };
+}
+}

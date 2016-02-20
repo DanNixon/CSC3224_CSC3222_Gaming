@@ -9,6 +9,11 @@
 
 class Vector3;
 
+namespace Engine
+{
+namespace Maths
+{
+
 /**
  * @class Quaternion
  * @brief Represents a quaternion.
@@ -65,3 +70,5 @@ private:
 };
 
 std::istream &operator>>(std::istream &stream, Quaternion &q);
+}
+}

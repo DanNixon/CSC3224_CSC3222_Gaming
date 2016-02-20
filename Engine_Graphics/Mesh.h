@@ -19,6 +19,11 @@
 using std::ifstream;
 using std::string;
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @enum MeshBuffer
  * @brief Describes the type of data held in a buffer.
@@ -76,3 +81,5 @@ protected:
   Vector3 *m_tangents;      //!< Pointer to vertex tangents data
   size_t *m_indices;        //!< Pointer to vertex indices data
 };
+}
+}

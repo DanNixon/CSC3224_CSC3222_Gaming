@@ -7,6 +7,11 @@
 
 #include <Vector3.h>
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @brief Calculate final velocity.
  * @param u Initial velocity
@@ -126,4 +131,6 @@ Vector3 SUVAT::getV2fromUAS(const Vector3 &u, const Vector3 &a,
 Vector3 SUVAT::getSfromVTA(const Vector3 &v, const Vector3 &t, const Vector3 &a)
 {
   return (v * t) - ((a * t * t) * 0.5f);
+}
+}
 }

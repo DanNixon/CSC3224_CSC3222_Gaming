@@ -6,6 +6,11 @@
 #include "Shader.h"
 #include "Mesh.h"
 
+namespace Engine
+{
+namespace Graphics
+{
+
 /**
  * @brief Creates a new shader.
  * @param filename GLSL source file
@@ -71,4 +76,6 @@ bool Shader::compile(std::string filename)
   GLint status;
   glGetShaderiv(m_shaderObject, GL_COMPILE_STATUS, &status);
   return (status != GL_FALSE);
+}
+}
 }

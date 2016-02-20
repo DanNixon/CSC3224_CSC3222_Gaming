@@ -7,6 +7,11 @@
 
 #include <Random.h>
 
+namespace Simulation
+{
+namespace Physics
+{
+
 /**
  * @brief Creates an Entity with a randomised 2D position and aggro range.
  * @param symmLimit Limit for random number generation
@@ -72,4 +77,6 @@ std::ostream &operator<<(std::ostream &o, const Entity &e)
   o << "Entity[position=" << e.m_position << ",aggroRange=" << e.aggroRange()
     << "]";
   return o;
+}
+}
 }
