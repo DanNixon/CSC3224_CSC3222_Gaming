@@ -5,16 +5,16 @@ To Do
 - [ ] Engine_Common
   - [x] Move setup code into engine
   - [ ] Managed memory
+  - [ ] Profiling
 - [ ] Engine_Graphics
   - [x] Asset import
   - [ ] Menu interface (programmatic/generic)
 - [ ] Engine_IO
-  - [ ] File IO
-    - [ ] INI
-    - [ ] JSON
-  - [ ] Controls
-    - [ ] Keyboard
-    - [ ] Mouse
-    - [ ] Joystick
+  - [ ] INI
+  - [ ] JSON
+- [ ] Engine_Input
+  - [ ] Keyboard
+  - [ ] Mouse
+  - [ ] Joystick
 - [ ] Engine_Physics
-- [ ] Audio
+- [ ] Engine_Audio
