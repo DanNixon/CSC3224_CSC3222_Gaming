@@ -7,6 +7,10 @@
 
 #include <Shaders.h>
 
+using namespace Engine::Common;
+using namespace Engine::Graphics;
+using namespace Engine::Maths;
+
 /**
  * @brief Creates a new demonstration game instance.
  */

@@ -7,6 +7,8 @@
 
 #include "SceneObject.h"
 
+using namespace Engine::Maths;
+
 namespace Engine
 {
 namespace Common

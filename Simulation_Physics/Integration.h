@@ -5,7 +5,7 @@
 
 #pragma once
 
-class Vector3;
+#include <Vector3.h>
 
 namespace Simulation
 {
@@ -20,7 +20,7 @@ namespace Physics
 class Integration
 {
 public:
-  static void Euler(Vector3 &out, const Vector3 &x, const Vector3 &y, float dT);
+  static void Euler(Engine::Maths::Vector3 &out, const Engine::Maths::Vector3 &x, const Engine::Maths::Vector3 &y, float dT);
 };
 }
 }

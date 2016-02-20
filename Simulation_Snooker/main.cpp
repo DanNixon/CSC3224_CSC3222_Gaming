@@ -8,6 +8,9 @@
 #include "SnookerSimulation.h"
 #include <Entity.h>
 
+using namespace Engine::Maths;
+using namespace Simulation::Physics;
+
 int main(int argc, char *argv[])
 {
   const size_t numEntities = 10;

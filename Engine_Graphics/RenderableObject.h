@@ -18,7 +18,7 @@ namespace Graphics
  * @class RenderableObject
  * @brief Represents a renderable item in a Scene.
  */
-class RenderableObject : public SceneObject
+class RenderableObject : public Engine::Common::SceneObject
 {
 public:
   /**

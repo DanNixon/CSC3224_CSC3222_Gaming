@@ -7,6 +7,8 @@
 
 #include "Matrix3.h"
 
+using namespace Engine::Maths;
+
 namespace Engine
 {
 namespace Graphics

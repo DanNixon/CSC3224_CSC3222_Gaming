@@ -5,7 +5,9 @@
 
 #pragma once
 
-#include "Vector3.h"
+#include <istream>
+
+#include <Vector3.h>
 
 namespace Simulation
 {
@@ -21,7 +23,7 @@ class Entity
 {
 public:
   Entity(float symmLimit);
-  Entity(const Vector3 &pos, float aggroRange);
+  Entity(const Engine::Maths::Vector3 &pos, float aggroRange);
   virtual ~Entity();
 
   /**
@@ -29,12 +31,12 @@ public:
    * @return Position
    * @see Entity::setPosition
    */
-  inline Vector3 position() const
+  inline Engine::Maths::Vector3 position() const
   {
     return m_position;
   }
 
-  void setPosition(const Vector3 &pos);
+  void setPosition(const Engine::Maths::Vector3 &pos);
 
   /**
    * @brief Gets the aggro range of this entity.
@@ -82,7 +84,7 @@ public:
   friend std::ostream &operator<<(std::ostream &o, const Entity &e);
 
 private:
-  Vector3 m_position;    //!< Position of Entity
+  Engine::Maths::Vector3 m_position;    //!< Position of Entity
   float m_aggroRange2;   //!< Aggro range squared
   int m_entitiesInRange; //!< Number of entities within aggro range
 };

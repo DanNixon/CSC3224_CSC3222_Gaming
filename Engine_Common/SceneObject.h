@@ -55,7 +55,7 @@ public:
    * @brief Sets the position of this object relative to its parent.
    * @param mat Model matrix
    */
-  void setModelMatrix(Matrix4 mat)
+  void setModelMatrix(Engine::Maths::Matrix4 mat)
   {
     m_modelMatrix = mat;
   }
@@ -64,7 +64,7 @@ public:
    * @brief Gets the model matrix (relative to parent)
    * @return Model matrix
    */
-  Matrix4 modelMatrix() const
+  Engine::Maths::Matrix4 modelMatrix() const
   {
     return m_modelMatrix;
   }
@@ -73,7 +73,7 @@ public:
    * @brief Gets the position in world space (absolute position)
    * @return World position
    */
-  Matrix4 worldTransform() const
+  Engine::Maths::Matrix4 worldTransform() const
   {
     return m_worldTransform;
   }
@@ -86,8 +86,8 @@ protected:
 
   void addToScene(Scene *scene);
 
-  Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
-  Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
+  Engine::Maths::Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
+  Engine::Maths::Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
 
   SceneObject *m_parent;                 //!< Parent SceneObject
   Scene *m_scene;                        //!< Scene this object belongs to

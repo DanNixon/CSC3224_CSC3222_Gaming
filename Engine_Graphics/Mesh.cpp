@@ -12,6 +12,8 @@
 #include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
 
+using namespace Engine::Maths;
+
 namespace Engine
 {
 namespace Graphics

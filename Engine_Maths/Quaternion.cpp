@@ -9,7 +9,6 @@
 #include <stdexcept>
 
 #include "math_common.h"
-#include "Vector3.h"
 
 namespace Engine
 {

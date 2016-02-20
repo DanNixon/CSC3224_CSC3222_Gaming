@@ -6,8 +6,7 @@
 #pragma once
 
 #include <iostream>
-
-class Vector3;
+#include "Vector3.h"
 
 namespace Engine
 {

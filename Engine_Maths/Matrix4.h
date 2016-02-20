@@ -11,8 +11,6 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
-class Vector3;
-
 namespace Engine
 {
 namespace Maths

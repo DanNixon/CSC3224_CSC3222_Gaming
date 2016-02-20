@@ -12,7 +12,7 @@
  * @brief Game application for the snooker simulation.
  * @author Dan Nixon
  */
-class SnookerSimulation : public Game
+class SnookerSimulation : public Engine::Common::Game
 {
 public:
   SnookerSimulation();

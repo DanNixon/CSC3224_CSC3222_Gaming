@@ -7,12 +7,12 @@
 
 #include "Matrix4.h"
 
-class SceneObject;
-
 namespace Engine
 {
 namespace Common
 {
+
+class SceneObject;
 
 /**
  * @class Scene
@@ -21,23 +21,23 @@ namespace Common
 class Scene
 {
 public:
-  Scene(SceneObject *root, Matrix4 view = Matrix4(),
-        Matrix4 projection = Matrix4());
+  Scene(SceneObject *root, Engine::Maths::Matrix4 view = Engine::Maths::Matrix4(),
+    Engine::Maths::Matrix4 projection = Engine::Maths::Matrix4());
   virtual ~Scene();
 
-  void setViewMatrix(Matrix4 view);
-  Matrix4 viewMatrix();
+  void setViewMatrix(Engine::Maths::Matrix4 view);
+  Engine::Maths::Matrix4 viewMatrix();
 
-  void setProjectionMatrix(Matrix4 projection);
-  Matrix4 projectionMatrix();
+  void setProjectionMatrix(Engine::Maths::Matrix4 projection);
+  Engine::Maths::Matrix4 projectionMatrix();
 
   void update();
   void render();
 
 private:
   SceneObject *m_root;        //!< Root node in the scene tree
-  Matrix4 m_viewMatrix;       //!< View matrix
-  Matrix4 m_projectionMatrix; //!< Projection matrix
+  Engine::Maths::Matrix4 m_viewMatrix;       //!< View matrix
+  Engine::Maths::Matrix4 m_projectionMatrix; //!< Projection matrix
 };
 }
 }

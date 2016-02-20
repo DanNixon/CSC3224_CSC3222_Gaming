@@ -16,7 +16,7 @@
  * @brief Game demonstrating features of the game engine.
  * @author Dan Nixon
  */
-class DemoGame : public Game
+class DemoGame : public Engine::Common::Game
 {
 public:
   DemoGame();
@@ -28,8 +28,8 @@ protected:
   void gameShutdown();
 
 private:
-  ShaderProgram *m_sp;
-  RenderableObject *m_cube;
-  RenderableObject *m_child;
-  Scene *m_s;
+  Engine::Graphics::ShaderProgram *m_sp;
+  Engine::Graphics::RenderableObject *m_cube;
+  Engine::Graphics::RenderableObject *m_child;
+  Engine::Common::Scene *m_s;
 };

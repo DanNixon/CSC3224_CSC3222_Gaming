@@ -8,6 +8,9 @@
 #include <Vector3.h>
 #include <SUVAT.h>
 
+using namespace Engine::Maths;
+using namespace Simulation::Physics;
+
 int main(int argc, char *argv[])
 {
   std::cout << "Calculate [v,s]: ";

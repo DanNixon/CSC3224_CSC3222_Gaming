@@ -7,12 +7,12 @@
 
 #include "GL/glew.h"
 
-class Shader;
-
 namespace Engine
 {
 namespace Graphics
 {
+
+class Shader;
 
 /**
  * @class ShaderProgram
