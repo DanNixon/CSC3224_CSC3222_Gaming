@@ -2,19 +2,19 @@ To Do
 =====
 
 - [x] Engine structure outline
-- [ ] Engine_Common
+- [ ] `Engine_Audio`
+- [ ] `Engine_Common`
   - [x] Move setup code into engine
   - [ ] Managed memory
   - [ ] Profiling
-- [ ] Engine_Graphics
+- [ ] `Engine_Graphics`
   - [x] Asset import
   - [ ] Menu interface (programmatic/generic)
-- [ ] Engine_IO
-  - [ ] INI
-  - [ ] JSON
-- [ ] Engine_Input
+- [ ] `Engine_Input`
   - [ ] Keyboard
   - [ ] Mouse
   - [ ] Joystick
-- [ ] Engine_Physics
-- [ ] Engine_Audio
+- [ ] `Engine_IO`
+  - [x] INI
+  - [ ] JSON
+- [ ] `Engine_Physics`
