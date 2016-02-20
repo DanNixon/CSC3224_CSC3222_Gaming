@@ -3,8 +3,9 @@
   <ItemGroup>
     <ClInclude Include="IKeyValueStore.h" />
     <ClInclude Include="KVNode.h" />
+    <ClInclude Include="INIKeyValueStore.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IKeyValueStore.cpp" />
+    <ClCompile Include="INIKeyValueStore.cpp" />
   </ItemGroup>
 </Project>

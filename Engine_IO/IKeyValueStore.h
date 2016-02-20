@@ -1,21 +1,31 @@
 #pragma once
 
 #include <string>
+#include <istream>
+#include <ostream>
 
-class KVNode;
+#include "KVNode.h"
 
 class IKeyValueStore
 {
 public:
-  IKeyValueStore();
-  virtual ~IKeyValueStore();
+  IKeyValueStore()
+  {
+  }
 
-  std::string getValue(const std::string &fullKey) const;
+  virtual ~IKeyValueStore()
+  {
+  }
 
-  virtual void load(const std::string &filename) = 0;
+  KVNode & root()
+  {
+    return m_root;
+  }
 
-  virtual void save(const std::string &filename) = 0;
+  virtual bool load(std::istream &stream) = 0;
 
-private:
-  KVNode * m_root; //!< Root node
+  virtual bool save(std::ostream &stream) = 0;
+
+protected:
+  KVNode m_root; //!< Root node
 };
