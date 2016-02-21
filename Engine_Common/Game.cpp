@@ -11,6 +11,8 @@
 #include <SDL_opengl.h>
 #include <gl\glu.h>
 
+#include "IEventHandler.h"
+
 namespace Engine
 {
 namespace Common
@@ -33,18 +35,17 @@ namespace Common
 
   /**
    * @brief Initializes the game engine.
-   * @return True if engine is succesfully initialised
+   * @return True if engine is successfully initialised
+   * @see Game::isInitialised
    */
   bool Game::init()
   {
-    bool success = true;
-
     /* Initialize SDL */
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
     {
       std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
                 << std::endl;
-      success = false;
+      m_initialised = false;
     }
     else
     {
@@ -63,7 +64,7 @@ namespace Common
       {
         std::cerr << "Window could not be created! SDL Error: "
                   << SDL_GetError() << std::endl;
-        success = false;
+        m_initialised = false;
       }
       else
       {
@@ -73,7 +74,7 @@ namespace Common
         {
           std::cerr << "OpenGL context could not be created! SDL Error: "
                     << SDL_GetError() << std::endl;
-          success = false;
+          m_initialised = false;
         }
         else
         {
@@ -89,9 +90,8 @@ namespace Common
       }
     }
 
-    SDL_StartTextInput();
-
-    return success;
+    m_initialised = true;
+    return m_initialised;
   }
 
   /**
@@ -99,24 +99,26 @@ namespace Common
    */
   void Game::run()
   {
+    if (!m_initialised)
+      return;
+
     this->gameStartup();
 
     SDL_Event e;
     bool exit = false;
     while (!exit)
     {
-      while (SDL_PollEvent(&e) != 0)
+      while (SDL_PollEvent(&e) == 1)
       {
-        switch (e.type)
+        if (e.type == SDL_QUIT)
         {
-        case SDL_QUIT:
           exit = true;
           break;
-        case SDL_KEYDOWN:
-          // TODO
-          std::cout << "key" << std::endl;
-          break;
         }
+
+        for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
+             it != m_eventHandlers.end(); ++it)
+          (*it)->handleEvent(e);
       }
 
       this->gameLoop(0);
@@ -133,10 +135,18 @@ namespace Common
    */
   void Game::close()
   {
-    SDL_StopTextInput();
     SDL_DestroyWindow(m_window);
     m_window = NULL;
     SDL_Quit();
+  }
+
+  /**
+   * @brief Adds an event handler to be updated in the game loop.
+   * @param handler Event hander to add
+   */
+  void Game::addEventHandler(IEventHandler *handler)
+  {
+    m_eventHandlers.push_back(handler);
   }
 
   /**

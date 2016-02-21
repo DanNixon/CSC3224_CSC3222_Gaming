@@ -10,6 +10,9 @@
 #include <Scene.h>
 #include <RenderableObject.h>
 #include <ShaderProgram.h>
+#include "DemoKeyboardHandler.h"
+#include "DemoMouseHandler.h"
+#include "DemoJoystickHandler.h"
 
 /**
  * @class DemoGame
@@ -32,4 +35,7 @@ private:
   Engine::Graphics::RenderableObject *m_cube;
   Engine::Graphics::RenderableObject *m_child;
   Engine::Common::Scene *m_s;
+  DemoKeyboardHandler m_keyboard;
+  DemoMouseHandler m_mouse;
+  DemoJoystickHandler m_joystick;
 };

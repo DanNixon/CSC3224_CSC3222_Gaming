@@ -6,7 +6,11 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
 #include <SDL.h>
+
+#include "IEventHandler.h"
 
 namespace Engine
 {
@@ -26,6 +30,37 @@ namespace Common
 
     bool init();
     void run();
+
+    /**
+     * @brief Checks to see if the framework is initialised after a call to
+     *        init().
+     * @return True for a successful initialisation
+     * @see Game::init
+     */
+    bool isInitialised() const
+    {
+      return m_initialised;
+    }
+
+    void addEventHandler(IEventHandler *handler);
+
+    /**
+     * @brief Gets the width of the window.
+     * @return Window width
+     */
+    int windowX() const
+    {
+      return m_windowWidth;
+    }
+
+    /**
+     * @brief Gets the height of the window.
+     * @return Window height
+     */
+    int windowY() const
+    {
+      return m_windowHeight;
+    }
 
     float windowAspect() const;
 
@@ -53,9 +88,11 @@ namespace Common
     SDL_GLContext m_context; //!< GL context
 
   protected:
+    bool m_initialised;        //!< If the framework is initialised
     std::string m_windowTitle; //!< Window title
     int m_windowWidth;         //!< Window width
     int m_windowHeight;        //!< Window height
+    IEventHandler::HandlerList m_eventHandlers; //!< List of event handlers
   };
 }
 }

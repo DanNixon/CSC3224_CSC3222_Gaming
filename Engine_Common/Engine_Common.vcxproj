@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneObject.h" />
   </ItemGroup>
