@@ -33,6 +33,16 @@ namespace Common
 
     void addEventHandler(IEventHandler *handler);
 
+    int windowX() const
+    {
+      return m_windowWidth;
+    }
+
+    int windowY() const
+    {
+      return m_windowHeight;
+    }
+
     float windowAspect() const;
 
   protected:

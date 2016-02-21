@@ -26,11 +26,11 @@ namespace Input
       switch (e.type)
       {
       case SDL_JOYAXISMOTION:
-        // TODO
+        handleMotion(e.jaxis);
         break;
       case SDL_JOYBUTTONDOWN:
       case SDL_JOYBUTTONUP:
-        // TODO
+        handleButton(e.jbutton);
         break;
       }
     }

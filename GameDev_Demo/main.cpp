@@ -6,10 +6,9 @@
 #include <string>
 
 #include "DemoGame.h"
-
-#include <DemoKeyboardHandler.h>
-
-using namespace Engine::Input;
+#include "DemoKeyboardHandler.h"
+#include "DemoMouseHandler.h"
+#include "DemoJoystickHandler.h"
 
 int main(int argc, char *args[])
 {
@@ -17,9 +16,14 @@ int main(int argc, char *args[])
 
   g.init();
 
-  // Demo input handlers
   DemoKeyboardHandler kbh;
   g.addEventHandler(&kbh);
+
+  DemoMouseHandler mh;
+  g.addEventHandler(&mh);
+
+  DemoJoystickHandler jsh;
+  g.addEventHandler(&jsh);
 
   g.run();
 

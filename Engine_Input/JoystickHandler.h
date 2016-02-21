@@ -7,6 +7,8 @@
 
 #include <IEventHandler.h>
 
+#include <SDL.h>
+
 namespace Engine
 {
 namespace Input
@@ -19,6 +21,9 @@ namespace Input
 
   protected:
     virtual void handleEvent(const SDL_Event &e);
+
+    virtual void handleButton(const SDL_JoyButtonEvent &e) = 0;
+    virtual void handleMotion(const SDL_JoyAxisEvent &e) = 0;
   };
 }
 }

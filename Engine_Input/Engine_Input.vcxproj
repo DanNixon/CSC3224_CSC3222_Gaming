@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DemoKeyboardHandler.h" />
     <ClInclude Include="JoystickHandler.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="MouseHandler.h" />

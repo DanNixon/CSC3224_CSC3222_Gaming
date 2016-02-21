@@ -24,6 +24,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoGame.h" />
+    <ClInclude Include="DemoJoystickHandler.h" />
+    <ClInclude Include="DemoKeyboardHandler.h" />
+    <ClInclude Include="DemoMouseHandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4F6104E8-AC92-4DED-AB32-7BD100B04761}</ProjectGuid>

@@ -24,7 +24,7 @@ namespace Input
   protected:
     virtual void handleEvent(const SDL_Event &e);
 
-    virtual void handleKey(uint8_t state, SDL_Keycode key, uint16_t moidifiers) = 0;
+    virtual void handleKey(const SDL_KeyboardEvent &e) = 0;
   };
 }
 }
