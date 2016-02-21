@@ -7,12 +7,15 @@
 
 #include <IEventHandler.h>
 
-#include <SDL.h>
-
 namespace Engine
 {
 namespace Input
 {
+  /**
+   * @class JoystickHandler
+   * @brief Abstract class for handling joystick input.
+   * @author Dan Nixon
+   */
   class JoystickHandler : public Engine::Common::IEventHandler
   {
   public:
@@ -30,11 +33,20 @@ namespace Input
   protected:
     virtual void handleEvent(const SDL_Event &e);
 
+    /**
+     * @brief Handles a button being pressed or released.
+     * @param e Event
+     */
     virtual void handleButton(const SDL_JoyButtonEvent &e) = 0;
+
+    /**
+     * @brief Handles an axis of the joystick being moved.
+     * @param e Event
+     */
     virtual void handleMotion(const SDL_JoyAxisEvent &e) = 0;
 
   private:
-    SDL_Joystick *m_joystick;
+    SDL_Joystick *m_joystick; //!< Currently open joystick
   };
 }
 }

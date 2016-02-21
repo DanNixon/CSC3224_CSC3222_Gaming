@@ -9,6 +9,11 @@
 
 #include <iostream>
 
+/**
+ * @class DemoMouseHandler
+ * @brief Demonstraton of a mouse event handler.
+ * @author Dan Nixon
+ */
 class DemoMouseHandler : public Engine::Input::MouseHandler
 {
 public:
@@ -20,12 +25,18 @@ public:
   {
   }
 
+  /**
+   * @copydoc MouseHandler::handleButton
+   */
   void handleButton(const SDL_MouseButtonEvent &e)
   {
     std::cout << "State: " << ((e.state == SDL_PRESSED) ? "pressed" : "released") << std::endl
               << "Button: " << e.button << std::endl;
   }
 
+  /**
+   * @copydoc MouseHandler::handleButton
+   */
   void handleMotion(const SDL_MouseMotionEvent &e)
   {
     auto relScrn = MouseHandler::GetNormalisedPos(e, 640, 480);

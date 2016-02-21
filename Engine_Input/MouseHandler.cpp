@@ -11,6 +11,17 @@ namespace Engine
 {
 namespace Input
 {
+  /**
+   * @brief Normalises a set of coordinates from a mouse motion event to the
+   *        screen width and height.
+   * @param e Event containing coordinates
+   * @param width Width of window
+   * @param height Height of window
+   * @return Normalised coordinates
+   *
+   * Normalisation is such that the centre of the screen is (0, 0) and each
+   * axis has range [-1, 1].
+   */
   std::pair<float, float> MouseHandler::GetNormalisedPos(const SDL_MouseMotionEvent &e, int width, int height)
   {
     float x = ((float) (2 * e.x) / (float) width) - 1.0f;
@@ -27,6 +38,9 @@ namespace Input
   {
   }
 
+  /**
+   * @copydoc IEventHandler::handleEvent
+   */
   void MouseHandler::handleEvent(const SDL_Event &e)
   {
     // Fire if enabled and is not a repeat

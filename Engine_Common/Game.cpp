@@ -35,7 +35,8 @@ namespace Common
 
   /**
    * @brief Initializes the game engine.
-   * @return True if engine is succesfully initialised
+   * @return True if engine is successfully initialised
+   * @see Game::isInitialised
    */
   bool Game::init()
   {
@@ -138,6 +139,10 @@ namespace Common
     SDL_Quit();
   }
 
+  /**
+   * @brief Adds an event handler to be updated in the game loop.
+   * @param handler Event hander to add
+   */
   void Game::addEventHandler(IEventHandler * handler)
   {
     m_eventHandlers.push_back(handler);

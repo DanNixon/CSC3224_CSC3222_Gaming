@@ -13,6 +13,11 @@ namespace Engine
 {
 namespace Input
 {
+  /**
+   * @brief Tests to see if a given key is pressed.
+   * @param key Key to test
+   * @return True if key is pressed
+   */
   bool KeyboardHandler::KeyPressed(SDL_Keycode key)
   {
     const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -28,6 +33,9 @@ namespace Input
   {
   }
 
+  /**
+   * @copydoc IEventHandler::handleEvent
+   */
   void KeyboardHandler::handleEvent(const SDL_Event &e)
   {
     // Fire if enabled, is a keyboard event and is not a repeat event
