@@ -14,84 +14,85 @@ namespace Engine
 {
 namespace Common
 {
-
-/**
- * @class SceneObject
- * @brief Represents an item in a Scene.
- */
-class SceneObject
-{
-public:
   /**
-   * @typedef SceneObjectIter
-   * @brief Const iterator for items of a vector of SceneObject.
+   * @class SceneObject
+   * @brief Represents an item in a Scene.
    */
-  typedef std::vector<SceneObject *>::const_iterator SceneObjectIter;
-
-  SceneObject();
-  ~SceneObject();
-
-  /**
-   * @brief Adds a SceneObject as a child of this object.
-   * @param child Child SceneObject
-   */
-  void addChild(SceneObject &child)
+  class SceneObject
   {
-    m_children.push_back(&child);
-    child.m_parent = this;
-    child.m_scene = m_scene;
-  }
+  public:
+    /**
+     * @typedef SceneObjectIter
+     * @brief Const iterator for items of a vector of SceneObject.
+     */
+    typedef std::vector<SceneObject *>::const_iterator SceneObjectIter;
 
-  /**
-   * @brief Gets the list of children SceneObject of this object.
-   * @return List of children
-   */
-  const std::vector<SceneObject *> &children() const
-  {
-    return m_children;
-  }
+    SceneObject();
+    ~SceneObject();
 
-  /**
-   * @brief Sets the position of this object relative to its parent.
-   * @param mat Model matrix
-   */
-  void setModelMatrix(Engine::Maths::Matrix4 mat)
-  {
-    m_modelMatrix = mat;
-  }
+    /**
+     * @brief Adds a SceneObject as a child of this object.
+     * @param child Child SceneObject
+     */
+    void addChild(SceneObject &child)
+    {
+      m_children.push_back(&child);
+      child.m_parent = this;
+      child.m_scene = m_scene;
+    }
 
-  /**
-   * @brief Gets the model matrix (relative to parent)
-   * @return Model matrix
-   */
-  Engine::Maths::Matrix4 modelMatrix() const
-  {
-    return m_modelMatrix;
-  }
+    /**
+     * @brief Gets the list of children SceneObject of this object.
+     * @return List of children
+     */
+    const std::vector<SceneObject *> &children() const
+    {
+      return m_children;
+    }
 
-  /**
-   * @brief Gets the position in world space (absolute position)
-   * @return World position
-   */
-  Engine::Maths::Matrix4 worldTransform() const
-  {
-    return m_worldTransform;
-  }
+    /**
+     * @brief Sets the position of this object relative to its parent.
+     * @param mat Model matrix
+     */
+    void setModelMatrix(Engine::Maths::Matrix4 mat)
+    {
+      m_modelMatrix = mat;
+    }
 
-  virtual void update(float msec);
-  virtual void render();
+    /**
+     * @brief Gets the model matrix (relative to parent)
+     * @return Model matrix
+     */
+    Engine::Maths::Matrix4 modelMatrix() const
+    {
+      return m_modelMatrix;
+    }
 
-protected:
-  friend class Scene;
+    /**
+     * @brief Gets the position in world space (absolute position)
+     * @return World position
+     */
+    Engine::Maths::Matrix4 worldTransform() const
+    {
+      return m_worldTransform;
+    }
 
-  void addToScene(Scene *scene);
+    virtual void update(float msec);
+    virtual void render();
 
-  Engine::Maths::Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
-  Engine::Maths::Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
+  protected:
+    friend class Scene;
 
-  SceneObject *m_parent;                 //!< Parent SceneObject
-  Scene *m_scene;                        //!< Scene this object belongs to
-  std::vector<SceneObject *> m_children; //!< Children
-};
+    void addToScene(Scene *scene);
+
+    Engine::Maths::Matrix4
+        m_modelMatrix; //!< Local model matrix (relative to parent)
+    Engine::Maths::Matrix4
+        m_worldTransform; //!< World matrix (relative to world origin)
+
+    SceneObject *m_parent;                 //!< Parent SceneObject
+    Scene *m_scene;                        //!< Scene this object belongs to
+    std::vector<SceneObject *> m_children; //!< Children
+  };
 }
 }
