@@ -25,7 +25,7 @@ namespace Input
   }
 
   KeyboardHandler::KeyboardHandler()
-    : IEventHandler()
+      : IEventHandler()
   {
   }
 
@@ -39,7 +39,8 @@ namespace Input
   void KeyboardHandler::handleEvent(const SDL_Event &e)
   {
     // Fire if enabled, is a keyboard event and is not a repeat event
-    if (m_enabled && (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP) && e.key.repeat == 0)
+    if (m_enabled && (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP) &&
+        e.key.repeat == 0)
       handleKey(e.key);
   }
 }

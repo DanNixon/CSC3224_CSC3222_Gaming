@@ -30,7 +30,9 @@ public:
    */
   void handleKey(const SDL_KeyboardEvent &e)
   {
-    std::cout << "State: " << ((e.state == SDL_PRESSED) ? "pressed" : "released") << std::endl
+    std::cout << "State: "
+              << ((e.state == SDL_PRESSED) ? "pressed" : "released")
+              << std::endl
               << "Key: " << e.keysym.sym << std::endl;
   }
 };

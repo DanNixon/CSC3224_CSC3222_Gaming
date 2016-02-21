@@ -19,8 +19,8 @@ namespace Input
   }
 
   JoystickHandler::JoystickHandler()
-    : IEventHandler()
-    , m_joystick(NULL)
+      : IEventHandler()
+      , m_joystick(NULL)
   {
   }
 

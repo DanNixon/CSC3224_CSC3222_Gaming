@@ -116,7 +116,8 @@ namespace Common
           break;
         }
 
-        for (IEventHandler::HandlerListIter it = m_eventHandlers.begin(); it != m_eventHandlers.end(); ++it)
+        for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
+             it != m_eventHandlers.end(); ++it)
           (*it)->handleEvent(e);
       }
 
@@ -143,7 +144,7 @@ namespace Common
    * @brief Adds an event handler to be updated in the game loop.
    * @param handler Event hander to add
    */
-  void Game::addEventHandler(IEventHandler * handler)
+  void Game::addEventHandler(IEventHandler *handler)
   {
     m_eventHandlers.push_back(handler);
   }

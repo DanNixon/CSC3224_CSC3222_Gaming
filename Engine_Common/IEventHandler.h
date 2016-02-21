@@ -26,7 +26,7 @@ namespace Common
      * @typedef HandlerList
      * @brief A list of event handlers.
      */
-    typedef std::vector<IEventHandler*> HandlerList;
+    typedef std::vector<IEventHandler *> HandlerList;
 
     /**
      * @typedef HandlerListIter
@@ -37,8 +37,8 @@ namespace Common
     /**
      * @brief Creates a new event handler that is enabled by default.
      */
-    IEventHandler() :
-      m_enabled(true)
+    IEventHandler()
+        : m_enabled(true)
     {
     }
 

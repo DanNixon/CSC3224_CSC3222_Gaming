@@ -30,8 +30,10 @@ public:
    */
   void handleButton(const SDL_JoyButtonEvent &e)
   {
-    std::cout << "Button: " << (int) e.button << std::endl
-      << "State: " << ((e.state == SDL_PRESSED) ? "pressed" : "released") << std::endl;
+    std::cout << "Button: " << (int)e.button << std::endl
+              << "State: "
+              << ((e.state == SDL_PRESSED) ? "pressed" : "released")
+              << std::endl;
   }
 
   /**
@@ -39,7 +41,7 @@ public:
    */
   void handleMotion(const SDL_JoyAxisEvent &e)
   {
-    std::cout << "Axis: " << (int) e.axis << std::endl
-      << "Value: " << e.value << std::endl;
+    std::cout << "Axis: " << (int)e.axis << std::endl
+              << "Value: " << e.value << std::endl;
   }
 };
