@@ -11,8 +11,8 @@ To Do
   - [x] Asset import
   - [ ] Menu interface (programmatic/generic)
 - [ ] `Engine_Input`
-  - [ ] Keyboard
-  - [ ] Mouse
+  - [x] Keyboard
+  - [x] Mouse
   - [ ] Joystick
 - [ ] `Engine_IO`
   - [x] INI
