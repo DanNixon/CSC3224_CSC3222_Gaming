@@ -11,6 +11,8 @@
 #include <SDL_opengl.h>
 #include <gl\glu.h>
 
+#include "IEventHandler.h"
+
 namespace Engine
 {
 namespace Common
@@ -89,8 +91,6 @@ namespace Common
       }
     }
 
-    SDL_StartTextInput();
-
     return success;
   }
 
@@ -107,16 +107,11 @@ namespace Common
     {
       while (SDL_PollEvent(&e) != 0)
       {
-        switch (e.type)
-        {
-        case SDL_QUIT:
+        if (e.type == SDL_QUIT)
           exit = true;
-          break;
-        case SDL_KEYDOWN:
-          // TODO
-          std::cout << "key" << std::endl;
-          break;
-        }
+
+        for (IEventHandler::HandlerListIter it = m_eventHandlers.begin(); it != m_eventHandlers.end(); ++it)
+          (*it)->handleEvent(e);
       }
 
       this->gameLoop(0);
@@ -133,10 +128,14 @@ namespace Common
    */
   void Game::close()
   {
-    SDL_StopTextInput();
     SDL_DestroyWindow(m_window);
     m_window = NULL;
     SDL_Quit();
+  }
+
+  void Game::addEventHandler(IEventHandler * handler)
+  {
+    m_eventHandlers.push_back(handler);
   }
 
   /**

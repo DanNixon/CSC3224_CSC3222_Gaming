@@ -6,7 +6,11 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
 #include <SDL.h>
+
+#include "IEventHandler.h"
 
 namespace Engine
 {
@@ -26,6 +30,8 @@ namespace Common
 
     bool init();
     void run();
+
+    void addEventHandler(IEventHandler *handler);
 
     float windowAspect() const;
 
@@ -56,6 +62,7 @@ namespace Common
     std::string m_windowTitle; //!< Window title
     int m_windowWidth;         //!< Window width
     int m_windowHeight;        //!< Window height
+    IEventHandler::HandlerList m_eventHandlers; //!< List of event handlers
   };
 }
 }
