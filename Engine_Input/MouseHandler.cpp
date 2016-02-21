@@ -5,7 +5,7 @@
 
 #include "MouseHandler.h"
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 namespace Engine
 {

@@ -8,7 +8,7 @@
 #include <iostream>
 
 #include <gl\glew.h>
-#include <SDL_opengl.h>
+#include <SDL\SDL_opengl.h>
 #include <gl\glu.h>
 
 #include "IEventHandler.h"

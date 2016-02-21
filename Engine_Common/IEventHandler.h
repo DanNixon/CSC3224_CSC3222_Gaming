@@ -8,7 +8,7 @@
 #include <vector>
 #include <initializer_list>
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 namespace Engine
 {

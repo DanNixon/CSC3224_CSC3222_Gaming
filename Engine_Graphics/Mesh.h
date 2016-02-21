@@ -10,7 +10,7 @@
 #include <fstream>
 
 #include <GL/glew.h>
-#include <SDL_opengl.h>
+#include <SDL/SDL_opengl.h>
 
 #include "Vector2.h"
 #include "Vector3.h"
