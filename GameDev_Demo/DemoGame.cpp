@@ -5,11 +5,15 @@
 
 #include "DemoGame.h"
 
+#include <SDL.h>
+
 #include <Shaders.h>
+#include <KeyboardHandler.h>
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
+using namespace Engine::Input;
 
 /**
  * @brief Creates a new demonstration game instance.
@@ -61,6 +65,9 @@ void DemoGame::gameLoop(unsigned long dtUs)
 {
   m_s->update();
   m_s->render();
+
+  if (KeyboardHandler::KeyPressed(SDLK_ESCAPE))
+    std::cout << "Esc pressed" << std::endl;
 }
 
 /**

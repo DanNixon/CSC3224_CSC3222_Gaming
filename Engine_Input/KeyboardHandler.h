@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SDL.h"
+
 #include <IEventHandler.h>
 
 namespace Engine
@@ -9,6 +11,8 @@ namespace Input
   class KeyboardHandler : public Engine::Common::IEventHandler
   {
   public:
+    static bool KeyPressed(SDL_Keycode key);
+
     KeyboardHandler();
     virtual ~KeyboardHandler();
 

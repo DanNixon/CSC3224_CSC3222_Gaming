@@ -105,10 +105,13 @@ namespace Common
     bool exit = false;
     while (!exit)
     {
-      while (SDL_PollEvent(&e) != 0)
+      while (SDL_PollEvent(&e) == 1)
       {
         if (e.type == SDL_QUIT)
+        {
           exit = true;
+          break;
+        }
 
         for (IEventHandler::HandlerListIter it = m_eventHandlers.begin(); it != m_eventHandlers.end(); ++it)
           (*it)->handleEvent(e);
