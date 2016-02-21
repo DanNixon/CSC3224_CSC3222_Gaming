@@ -56,6 +56,12 @@ void DemoGame::gameStartup()
   glEnable(GL_DEPTH_TEST);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
+
+  addEventHandler(&m_keyboard);
+  addEventHandler(&m_mouse);
+
+  m_joystick.open(0);
+  addEventHandler(&m_joystick);
 }
 
 /**
@@ -68,6 +74,9 @@ void DemoGame::gameLoop(unsigned long dtUs)
 
   if (KeyboardHandler::KeyPressed(SDLK_ESCAPE))
     std::cout << "Esc pressed" << std::endl;
+
+  if (m_joystick.button(0))
+    std::cout << "JS button 0 pressed" << std::endl;
 }
 
 /**
@@ -75,4 +84,5 @@ void DemoGame::gameLoop(unsigned long dtUs)
  */
 void DemoGame::gameShutdown()
 {
+  m_joystick.close();
 }

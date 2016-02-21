@@ -31,6 +31,11 @@ namespace Common
     bool init();
     void run();
 
+    bool isInitialised() const
+    {
+      return m_initialised;
+    }
+
     void addEventHandler(IEventHandler *handler);
 
     int windowX() const
@@ -69,6 +74,7 @@ namespace Common
     SDL_GLContext m_context; //!< GL context
 
   protected:
+    bool m_initialised;
     std::string m_windowTitle; //!< Window title
     int m_windowWidth;         //!< Window width
     int m_windowHeight;        //!< Window height

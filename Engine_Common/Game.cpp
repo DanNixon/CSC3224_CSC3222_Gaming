@@ -39,14 +39,12 @@ namespace Common
    */
   bool Game::init()
   {
-    bool success = true;
-
     /* Initialize SDL */
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
     {
       std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
                 << std::endl;
-      success = false;
+      m_initialised = false;
     }
     else
     {
@@ -65,7 +63,7 @@ namespace Common
       {
         std::cerr << "Window could not be created! SDL Error: "
                   << SDL_GetError() << std::endl;
-        success = false;
+        m_initialised = false;
       }
       else
       {
@@ -75,7 +73,7 @@ namespace Common
         {
           std::cerr << "OpenGL context could not be created! SDL Error: "
                     << SDL_GetError() << std::endl;
-          success = false;
+          m_initialised = false;
         }
         else
         {
@@ -91,7 +89,8 @@ namespace Common
       }
     }
 
-    return success;
+    m_initialised = true;
+    return m_initialised;
   }
 
   /**
@@ -99,6 +98,9 @@ namespace Common
    */
   void Game::run()
   {
+    if (!m_initialised)
+      return;
+
     this->gameStartup();
 
     SDL_Event e;

@@ -22,13 +22,13 @@ public:
 
   void handleButton(const SDL_JoyButtonEvent &e)
   {
-    std::cout << "Button: " << e.button << std::endl
-      << "State: " << e.state << std::endl;
+    std::cout << "Button: " << (int) e.button << std::endl
+      << "State: " << ((e.state == SDL_PRESSED) ? "pressed" : "released") << std::endl;
   }
 
   void handleMotion(const SDL_JoyAxisEvent &e)
   {
-    std::cout << "Axis: " << e.axis << std::endl
+    std::cout << "Axis: " << (int) e.axis << std::endl
       << "Value: " << e.value << std::endl;
   }
 };
