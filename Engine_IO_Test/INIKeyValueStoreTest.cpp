@@ -22,7 +22,7 @@ TEST_CLASS(INIKeyValueStoreTest)
 public:
   TEST_METHOD(test_LoadINIFromStream)
   {
-    // Sample INI file
+    // Sample INI string
     std::stringstream stream;
     stream << "aaa=yes" << std::endl
            << "" << std::endl

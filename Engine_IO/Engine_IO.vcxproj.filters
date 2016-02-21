@@ -4,8 +4,10 @@
     <ClInclude Include="IKeyValueStore.h" />
     <ClInclude Include="KVNode.h" />
     <ClInclude Include="INIKeyValueStore.h" />
+    <ClInclude Include="JSONKeyValueStore.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="INIKeyValueStore.cpp" />
+    <ClCompile Include="JSONKeyValueStore.cpp" />
   </ItemGroup>
 </Project>
