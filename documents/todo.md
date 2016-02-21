@@ -10,10 +10,10 @@ To Do
 - [ ] `Engine_Graphics`
   - [x] Asset import
   - [ ] Menu interface (programmatic/generic)
-- [ ] `Engine_Input`
+- [x] `Engine_Input`
   - [x] Keyboard
   - [x] Mouse
-  - [ ] Joystick
+  - [x] Joystick
 - [ ] `Engine_IO`
   - [x] INI
   - [ ] JSON
