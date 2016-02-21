@@ -20,10 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoKeyboardHandler.h" />
+    <ClInclude Include="JoystickHandler.h" />
     <ClInclude Include="KeyboardHandler.h" />
+    <ClInclude Include="MouseHandler.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="JoystickHandler.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
+    <ClCompile Include="MouseHandler.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9A0AC220-38BE-4509-A118-AED58284B9B5}</ProjectGuid>

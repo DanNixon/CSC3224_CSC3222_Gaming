@@ -1,3 +1,8 @@
+/**
+* @file
+* @author Dan Nixon
+*/
+
 #pragma once
 
 #include "KeyboardHandler.h"

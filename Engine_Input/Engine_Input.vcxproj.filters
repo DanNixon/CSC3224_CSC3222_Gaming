@@ -3,8 +3,12 @@
   <ItemGroup>
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="DemoKeyboardHandler.h" />
+    <ClInclude Include="MouseHandler.h" />
+    <ClInclude Include="JoystickHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KeyboardHandler.cpp" />
+    <ClCompile Include="MouseHandler.cpp" />
+    <ClCompile Include="JoystickHandler.cpp" />
   </ItemGroup>
 </Project>

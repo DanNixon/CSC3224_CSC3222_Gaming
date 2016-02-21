@@ -1,3 +1,8 @@
+/**
+* @file
+* @author Dan Nixon
+*/
+
 #include "KeyboardHandler.h"
 
 #include "SDL.h"
@@ -15,6 +20,7 @@ namespace Input
   }
 
   KeyboardHandler::KeyboardHandler()
+    : IEventHandler()
   {
   }
 
