@@ -11,6 +11,9 @@ namespace Simulation
 {
 namespace Physics
 {
+  /**
+   * @copydoc Entity::Entity(const Vector 2 &)
+   */
   PlanarEntity::PlanarEntity(const Vector2 &pos)
       : Entity(pos)
   {

@@ -7,6 +7,11 @@
 
 #include <PlanarEntity.h>
 
+/**
+ * @class Cushion
+ * @brief Represents a side cushion of the snooker table.
+ * @author Dan Nixon
+ */
 class Cushion : public Simulation::Physics::PlanarEntity
 {
 public:

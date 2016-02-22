@@ -31,7 +31,7 @@ namespace Physics
   }
 
   /**
-   * @brief Creates an Entity with a given position and aggro range.
+   * @brief Creates an Entity with a given position.
    * @param pos Position
    */
   Entity::Entity(const Vector2 &pos)

@@ -16,11 +16,15 @@ namespace Engine
 {
 namespace Common
 {
+  /**
+   * @struct GameLoopConfiguration
+   * @brief Holds configuration and state for loop timers.
+   */
   struct GameLoopConfiguration
   {
-    Uint32 lastFired;
-    Uint32 interval;
-    std::string loopName;
+    Uint32 lastFired;     //!< Last time the timer fired (in milliseconds)
+    Uint32 interval;      //!< Timer interval (in milliseconds)
+    std::string loopName; //!< Name of loop
   };
 
   /**
@@ -32,6 +36,10 @@ namespace Common
   class Game
   {
   public:
+    /**
+     * @var MAX_TIMED_LOOPS
+     * @brief Max number of timed loops that can be configured.
+     */
     static const int MAX_TIMED_LOOPS = 8;
 
     Game(std::string WindowTitle, std::pair<int, int> resolution);

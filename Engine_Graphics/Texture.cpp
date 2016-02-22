@@ -9,6 +9,12 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @brief Creates a new texture with a given name.
+   * @param name Texture name (defaults to "tex")
+   *
+   * Texture name is used as the uniform name for use in shaders.
+   */
   Texture::Texture(const std::string &name)
       : m_name(name)
   {
@@ -18,6 +24,11 @@ namespace Graphics
   {
   }
 
+  /**
+   * @brief Loads an image file into a GL texture.
+   * @param filename Image file to load
+   * @return GL texture, 0 if loading failed
+   */
   bool Texture::load(const std::string &filename)
   {
     m_texture = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO,
@@ -25,11 +36,20 @@ namespace Graphics
     return (m_texture != 0);
   }
 
+  /**
+   * @brief Checks to see if a valid image has been loaded into the texture.
+   * @return True if tecture holds a valid image
+   */
   bool Texture::valid() const
   {
     return (m_texture > 0);
   }
 
+  /**
+   * @brief Use the texture in rendering.
+   * @param shaderProgram Shader program used in rendering
+   * @param idx Index of this testure in rendering
+   */
   void Texture::use(GLuint shaderProgram, int idx) const
   {
     if (m_texture == 0)

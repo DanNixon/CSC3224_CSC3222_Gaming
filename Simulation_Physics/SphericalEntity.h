@@ -11,6 +11,11 @@ namespace Simulation
 {
 namespace Physics
 {
+  /**
+   * @class SphericalEntity
+   * @brief Represents an entity in a 2D circle.
+   * @author Dan Nixon
+   */
   class SphericalEntity : public Entity
   {
   public:

@@ -7,6 +7,11 @@
 
 #include <SphericalEntity.h>
 
+/**
+ * @class Ball
+ * @brief Represents a snooker ball.
+ * @author Dan Nixon
+ */
 class Ball : public Simulation::Physics::SphericalEntity
 {
 public:

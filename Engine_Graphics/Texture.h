@@ -1,7 +1,7 @@
 /**
-* @file
-* @author Dan Nixon
-*/
+ * @file
+ * @author Dan Nixon
+ */
 
 #pragma once
 
@@ -13,6 +13,11 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @class Texture
+   * @brief Encapsulates a GL texture and image loading.
+   * @author Dan Nixon
+   */
   class Texture
   {
   public:
@@ -23,14 +28,18 @@ namespace Graphics
     bool valid() const;
     void use(GLuint shaderProgram, int idx) const;
 
+    /**
+     * @brief Gets the GL texture for use in rendering.
+     * @return GL texture
+     */
     GLuint texture() const
     {
       return m_texture;
     }
 
   private:
-    std::string m_name;
-    GLuint m_texture;
+    std::string m_name; //!< Name of texture
+    GLuint m_texture;   //!< GL texture
   };
 }
 }

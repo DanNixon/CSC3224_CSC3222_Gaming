@@ -11,6 +11,11 @@ namespace Simulation
 {
 namespace Physics
 {
+  /**
+   * @class PlanarEntity
+   * @brief Represents an entity that exists along a 2D plane.
+   * @author Dan Nixon
+   */
   class PlanarEntity : public Entity
   {
   public:

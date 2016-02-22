@@ -15,7 +15,7 @@ namespace Physics
 {
   /**
    * @class Entity
-   * @brief Represents an entity in a simulation.
+   * @brief Represents an entity in a 2D simulation.
    * @author Dan Nixon
    */
   class Entity
