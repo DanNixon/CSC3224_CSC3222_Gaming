@@ -16,6 +16,13 @@ namespace Engine
 {
 namespace Common
 {
+  struct GameLoopConfiguration
+  {
+    Uint32 lastFired;
+    Uint32 interval;
+    std::string loopName;
+  };
+
   /**
    * @class Game
    * @author Dan Nxion
@@ -25,6 +32,8 @@ namespace Common
   class Game
   {
   public:
+    static const int MAX_TIMED_LOOPS = 8;
+
     Game(std::string WindowTitle, std::pair<int, int> resolution);
     virtual ~Game();
 
@@ -43,6 +52,10 @@ namespace Common
     }
 
     void addEventHandler(IEventHandler *handler);
+
+    /** @name Window functions
+    *  @{
+    */
 
     /**
      * @brief Gets the width of the window.
@@ -64,6 +77,19 @@ namespace Common
 
     float windowAspect() const;
 
+    void swapBuffers();
+
+    /** @} */
+
+    /** @name Timer/loop functions
+    *  @{
+    */
+
+    Uint8 addTimedLoop(Uint32 interval, const std::string &name);
+    void removeTimedLoop(Uint8 id);
+
+    /** @} */
+
   protected:
     /**
      * @brief Performs any setup specific to the game.
@@ -71,10 +97,11 @@ namespace Common
     virtual void gameStartup() = 0;
 
     /**
-     * @brief The main game loop.
-     * @param dtUs Time since last loop in microseconds
+     * @brief Callback for a given loop.
+     * @param id Loop ID
+     * @param deltaT Time in milliseconds since this loop last executed
      */
-    virtual void gameLoop(unsigned long dtUs) = 0;
+    virtual void gameLoop(Uint8 id, Uint32 deltaT) = 0;
 
     /**
      * @brief Performs any shutdown logic specific to the game.
@@ -93,6 +120,7 @@ namespace Common
     int m_windowWidth;         //!< Window width
     int m_windowHeight;        //!< Window height
     IEventHandler::HandlerList m_eventHandlers; //!< List of event handlers
+    GameLoopConfiguration *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
   };
 }
 }

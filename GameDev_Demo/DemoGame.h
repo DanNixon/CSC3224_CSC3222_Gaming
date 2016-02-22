@@ -27,14 +27,19 @@ public:
 
 protected:
   void gameStartup();
-  void gameLoop(unsigned long dtUs);
+  void gameLoop(Uint8 id, Uint32 deltaT);
   void gameShutdown();
 
 private:
+  Uint8 m_graphicsLoop;
+  Uint8 m_physicsLoop;
+
   Engine::Graphics::ShaderProgram *m_sp;
+  Engine::Common::Scene *m_s;
+
   Engine::Graphics::RenderableObject *m_cube;
   Engine::Graphics::RenderableObject *m_child;
-  Engine::Common::Scene *m_s;
+
   DemoKeyboardHandler m_keyboard;
   DemoMouseHandler m_mouse;
   DemoJoystickHandler m_joystick;

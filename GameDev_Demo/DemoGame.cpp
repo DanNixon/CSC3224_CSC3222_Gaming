@@ -62,21 +62,30 @@ void DemoGame::gameStartup()
 
   m_joystick.open(0);
   addEventHandler(&m_joystick);
+
+  m_graphicsLoop = addTimedLoop(16, "graphics");
+  m_physicsLoop = addTimedLoop(8, "physics");
 }
 
 /**
  * @copydoc Game::gameLoop
  */
-void DemoGame::gameLoop(unsigned long dtUs)
+void DemoGame::gameLoop(Uint8 id, Uint32 deltaT)
 {
-  m_s->update();
-  m_s->render();
+  if (id == m_graphicsLoop)
+  {
+    m_s->update();
+    m_s->render();
+    swapBuffers();
+  }
+  else if (id == m_physicsLoop)
+  {
+    if (KeyboardHandler::KeyPressed(SDLK_ESCAPE))
+      std::cout << "Esc pressed" << std::endl;
 
-  if (KeyboardHandler::KeyPressed(SDLK_ESCAPE))
-    std::cout << "Esc pressed" << std::endl;
-
-  if (m_joystick.button(0))
-    std::cout << "JS button 0 pressed" << std::endl;
+    if (m_joystick.button(0))
+      std::cout << "JS button 0 pressed" << std::endl;
+  }
 }
 
 /**

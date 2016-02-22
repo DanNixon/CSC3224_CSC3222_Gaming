@@ -24,10 +24,13 @@ public:
 
 protected:
   void gameStartup();
-  void gameLoop(unsigned long dtUs);
+  void gameLoop(Uint8 id, Uint32 deltaT);
   void gameShutdown();
 
 private:
+  Uint8 m_graphicsLoop;
+  Uint8 m_physicsLoop;
+
   Engine::Graphics::ShaderProgram *m_texShader;
   Engine::Graphics::ShaderProgram *m_colShader;
   Engine::Graphics::Texture *m_tableTex;

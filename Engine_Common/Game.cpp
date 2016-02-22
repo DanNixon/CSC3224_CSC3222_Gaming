@@ -27,6 +27,8 @@ namespace Common
       , m_windowWidth(resolution.first)
       , m_windowHeight(resolution.second)
   {
+    for (size_t i = 0; i < MAX_TIMED_LOOPS; i++)
+      m_loops[i] = NULL;
   }
 
   Game::~Game()
@@ -41,7 +43,7 @@ namespace Common
   bool Game::init()
   {
     /* Initialize SDL */
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) < 0)
     {
       std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
                 << std::endl;
@@ -121,23 +123,23 @@ namespace Common
           (*it)->handleEvent(e);
       }
 
-      this->gameLoop(0);
+      for (size_t i = 0; i < MAX_TIMED_LOOPS; i++)
+      {
+        if (m_loops[i] == NULL)
+          continue;
+        
+        Uint32 t = SDL_GetTicks();
+        Uint32 deltaT = t - m_loops[i]->lastFired;
 
-      SDL_GL_SwapWindow(m_window);
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        if (deltaT >= m_loops[i]->interval)
+        {
+          m_loops[i]->lastFired = t;
+          this->gameLoop(i, deltaT);
+        }
+      }
     }
 
     this->gameShutdown();
-  }
-
-  /**
-   * @brief Shuts down the game engine.
-   */
-  void Game::close()
-  {
-    SDL_DestroyWindow(m_window);
-    m_window = NULL;
-    SDL_Quit();
   }
 
   /**
@@ -156,6 +158,47 @@ namespace Common
   float Game::windowAspect() const
   {
     return ((float)m_windowHeight / (float)m_windowWidth);
+  }
+
+  void Game::swapBuffers()
+  {
+    SDL_GL_SwapWindow(m_window);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  }
+
+  /**
+  * @brief Shuts down the game engine.
+  */
+  void Game::close()
+  {
+    SDL_DestroyWindow(m_window);
+    m_window = NULL;
+    SDL_Quit();
+  }
+
+  Uint8 Game::addTimedLoop(Uint32 interval, const std::string &name)
+  {
+    Uint8 idx = 0;
+    while (m_loops[idx] != NULL && idx < MAX_TIMED_LOOPS)
+      idx++;
+
+    GameLoopConfiguration * config = new GameLoopConfiguration;
+
+    config->interval = interval;
+    config->loopName = name;
+    config->lastFired = 0;
+
+    m_loops[idx] = config;
+
+    return idx;
+  }
+
+  void Game::removeTimedLoop(Uint8 id)
+  {
+    if (m_loops[id] != NULL)
+      delete m_loops[id];
+
+    m_loops[id] = NULL;
   }
 }
 }

@@ -51,15 +51,26 @@ void SnookerSimulation::gameStartup()
   m_scene = new Scene( m_table, view, proj);
 
   glEnable(GL_DEPTH_TEST);
+
+  m_graphicsLoop = addTimedLoop(16, "graphics");
+  m_physicsLoop = addTimedLoop(8, "physics");
 }
 
 /**
  * @copydoc Game::gameLoop
  */
-void SnookerSimulation::gameLoop(unsigned long dtUs)
+void SnookerSimulation::gameLoop(Uint8 id, Uint32 deltaT)
 {
-  m_scene->update();
-  m_scene->render();
+  if (id == m_graphicsLoop)
+  {
+    m_scene->update();
+    m_scene->render();
+    swapBuffers();
+  }
+  else if (id == m_physicsLoop)
+  {
+    // TODO
+  }
 }
 
 /**
