@@ -331,9 +331,9 @@ namespace Graphics
   * @param dimensions Dimensions of rectangle
   * @return New mesh
   */
-  Mesh *Mesh::GenerateRect2D(const Engine::Maths::Vector2 & dimensions)
+  Mesh *Mesh::GenerateRect2D(const Engine::Maths::Vector2 &dimensions)
   {
-    Mesh * m = new Mesh();
+    Mesh *m = new Mesh();
 
     m->m_type = GL_TRIANGLE_STRIP;
     m->m_numVertices = 4;
