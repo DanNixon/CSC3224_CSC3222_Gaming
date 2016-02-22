@@ -8,6 +8,7 @@
 #include "SceneObject.h"
 #include "Mesh.h"
 #include "ShaderProgram.h"
+#include "Texture.h"
 
 namespace Engine
 {
@@ -20,14 +21,8 @@ namespace Graphics
   class RenderableObject : public Engine::Common::SceneObject
   {
   public:
-    /**
-     * @var NUM_TEXTURES
-     * @brief Maximum number of tectures for a single RenderableObject.
-     */
-    static const int NUM_TEXTURES = 2;
-
     RenderableObject();
-    RenderableObject(Mesh *m, ShaderProgram *s, GLuint t = 0);
+    RenderableObject(Mesh *m, ShaderProgram *s, Texture *t = NULL);
     ~RenderableObject();
 
     /**
@@ -71,25 +66,23 @@ namespace Graphics
     }
 
     /**
-     * @brief Sets a texture associated with this object.
-     * @param i Texture index
+     * @brief Sets the texture associated with this object.
      * @param tex Texture
      * @see RenderableObject::texture
      */
-    void setTexture(int i, GLuint tex)
+    void setTexture(Texture *tex)
     {
-      m_textures[i] = tex;
+      m_texture = tex;
     }
 
     /**
-     * @brief Gets a texture associated with this object.
-     * @param i Texture index
+     * @brief Gets the texture associated with this object.
      * @return Texture
      * @see RenderableObject::setTexture
      */
-    GLuint texture(int i) const
+    Texture * texture() const
     {
-      return m_textures[i];
+      return m_texture;
     }
 
     virtual void render();
@@ -97,7 +90,7 @@ namespace Graphics
   private:
     Mesh *m_mesh;                    //!< Mesh represented by this object
     ShaderProgram *m_shaderProgram;  //!< Shader used to render m_mesh
-    GLuint m_textures[NUM_TEXTURES]; //!< Textures used on m_mesh
+    Texture * m_texture;             //!< Texture used on m_mesh
   };
 }
 }

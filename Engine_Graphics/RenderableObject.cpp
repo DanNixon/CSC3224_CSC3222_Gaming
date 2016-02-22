@@ -19,9 +19,8 @@ namespace Graphics
   RenderableObject::RenderableObject()
       : m_mesh(NULL)
       , m_shaderProgram(NULL)
+      , m_texture(NULL)
   {
-    for (int i = 0; i < NUM_TEXTURES; i++)
-      m_textures[i] = NULL;
   }
 
   /**
@@ -29,16 +28,13 @@ namespace Graphics
    * texture.
    * @param m Mesh
    * @param s Shader
-   * @param t Fist (default) texture
+   * @param t Texture
    */
-  RenderableObject::RenderableObject(Mesh *m, ShaderProgram *s, GLuint t)
+  RenderableObject::RenderableObject(Mesh *m, ShaderProgram *s, Texture * t)
       : m_mesh(m)
       , m_shaderProgram(s)
+      , m_texture(t)
   {
-    for (int i = 0; i < NUM_TEXTURES; i++)
-      m_textures[i] = NULL;
-
-    m_textures[0] = t;
   }
 
   RenderableObject::~RenderableObject()
@@ -73,15 +69,12 @@ namespace Graphics
       glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1,
                    (float *)&camPos);
 
-      glUniform1i(glGetUniformLocation(program, "objectTextures[0]"), 0);
-      glUniform1i(glGetUniformLocation(program, "objectTextures[1]"), 1);
-
-      glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_2D, m_textures[0]);
-      glActiveTexture(GL_TEXTURE1);
-      glBindTexture(GL_TEXTURE_2D, m_textures[1]);
+      if (m_texture != NULL)
+        m_texture->use(program, 0);
 
       m_mesh->draw();
+
+      glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     SceneObject::render();
