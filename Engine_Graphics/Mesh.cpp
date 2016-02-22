@@ -326,6 +326,11 @@ namespace Graphics
     return m;
   }
 
+  /**
+  * @brief Generates a 2D rectangle.
+  * @param dimensions Dimensions of rectangle
+  * @return New mesh
+  */
   Mesh *Mesh::GenerateRect2D(const Engine::Maths::Vector2 & dimensions)
   {
     Mesh * m = new Mesh();
