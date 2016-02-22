@@ -9,7 +9,7 @@ To Do
   - [ ] Profiling
 - [ ] `Engine_Graphics`
   - [x] Asset import
-  - [ ] Texture encapsulation
+  - [x] Texture encapsulation
   - [ ] Menu interface (programmatic/generic)
 - [x] `Engine_Input`
   - [x] Keyboard
