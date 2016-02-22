@@ -5,11 +5,15 @@
     <ClCompile Include="SUVAT.cpp" />
     <ClCompile Include="Integration.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="SphericalEntity.cpp" />
+    <ClCompile Include="PlanarEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="SUVAT.h" />
     <ClInclude Include="Integration.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="SphericalEntity.h" />
+    <ClInclude Include="PlanarEntity.h" />
   </ItemGroup>
 </Project>
