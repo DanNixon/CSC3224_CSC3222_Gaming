@@ -247,6 +247,43 @@ namespace Graphics
   }
 
   /**
+   * @brief Generates a 2D filled circle/disc.
+   * @param radius Radius (default 1.0)
+   * @param resolution Number of "slices" in angle
+   * @return New mesh
+   */
+  Mesh *Mesh::GenerateDisc2D(float radius, int resolution)
+  {
+    Mesh *m = new Mesh();
+    m->m_type = GL_TRIANGLE_FAN;
+
+    m->m_numVertices = resolution + 2;
+    m->m_vertices = new Vector3[m->m_numVertices];
+    m->m_colours = new Vector4[m->m_numVertices];
+    m->m_textureCoords = new Vector2[m->m_numVertices];
+
+    const float deltaA = ((PI * 2) / resolution);
+
+    // "Origin" vertex
+    m->m_vertices[0] = Vector3(0.0f, 0.0f, 0.0f);
+    m->m_colours[0] = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+    m->m_textureCoords[0] = Vector2(0.5f, 0.5f);
+
+    for (int i = 1; i < resolution + 2; ++i)
+    {
+      const float a = i * deltaA;
+
+      m->m_vertices[i] = Vector3(cos(a) * radius, sin(a) * radius, 0.0f);
+      m->m_colours[i] = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+      Vector2 v = Vector2(abs(cos(a)), abs(sin(a)));
+      m->m_textureCoords[i] = v;
+    }
+
+    m->bufferData();
+    return m;
+  }
+
+  /**
   * @brief Generates a 2D ring.
   * @param radiusOuter Outer radius
   * @param radiusInner Inner radius
@@ -285,7 +322,31 @@ namespace Graphics
       n++;
     }
 
-    // m->generateNormals();
+    m->bufferData();
+    return m;
+  }
+
+  Mesh *Mesh::GenerateRect2D(const Engine::Maths::Vector2 & dimensions)
+  {
+    Mesh * m = new Mesh();
+
+    m->m_type = GL_TRIANGLE_STRIP;
+    m->m_numVertices = 4;
+
+    Vector2 halfDim = dimensions / 2;
+
+    m->m_vertices = new Vector3[m->m_numVertices];
+    m->m_vertices[0] = Vector3(-halfDim.x(), halfDim.y(), 0);
+    m->m_vertices[1] = Vector3(halfDim.x(), halfDim.y(), 0);
+    m->m_vertices[2] = Vector3(-halfDim.x(), -halfDim.y(), 0);
+    m->m_vertices[3] = Vector3(halfDim.x(), -halfDim.y(), 0);
+
+    m->m_textureCoords = new Vector2[m->m_numVertices];
+    m->m_textureCoords[0] = Vector2(0, 1);
+    m->m_textureCoords[1] = Vector2(1, 1);
+    m->m_textureCoords[2] = Vector2(0, 0);
+    m->m_textureCoords[3] = Vector2(0, 1);
+
     m->bufferData();
     return m;
   }
