@@ -28,7 +28,11 @@ protected:
   void gameShutdown();
 
 private:
-  Engine::Graphics::ShaderProgram *m_sp;
+  Engine::Graphics::ShaderProgram *m_texShader;
+  Engine::Graphics::ShaderProgram *m_colShader;
+  Engine::Graphics::Texture *m_tableTex;
+  Engine::Common::Scene *m_scene;
+
   Engine::Graphics::RenderableObject *m_table;
-  Engine::Common::Scene *m_s;
+  Engine::Graphics::RenderableObject *m_child;
 };
