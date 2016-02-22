@@ -8,7 +8,7 @@
 using namespace Engine::Maths;
 
 Cushion::Cushion(const Vector2 &pos)
-  : PlanarEntity(pos)
+    : PlanarEntity(pos)
 {
 }
 

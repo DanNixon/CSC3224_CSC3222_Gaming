@@ -127,7 +127,7 @@ namespace Common
       {
         if (m_loops[i] == NULL)
           continue;
-        
+
         Uint32 t = SDL_GetTicks();
         Uint32 deltaT = t - m_loops[i]->lastFired;
 
@@ -182,7 +182,7 @@ namespace Common
     while (m_loops[idx] != NULL && idx < MAX_TIMED_LOOPS)
       idx++;
 
-    GameLoopConfiguration * config = new GameLoopConfiguration;
+    GameLoopConfiguration *config = new GameLoopConfiguration;
 
     config->interval = interval;
     config->loopName = name;

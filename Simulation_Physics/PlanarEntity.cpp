@@ -9,15 +9,15 @@ using namespace Engine::Maths;
 
 namespace Simulation
 {
-  namespace Physics
-  {
-    PlanarEntity::PlanarEntity(const Vector2 &pos)
+namespace Physics
+{
+  PlanarEntity::PlanarEntity(const Vector2 &pos)
       : Entity(pos)
-    {
-    }
-
-    PlanarEntity::~PlanarEntity()
-    {
-    }
+  {
   }
+
+  PlanarEntity::~PlanarEntity()
+  {
+  }
+}
 }

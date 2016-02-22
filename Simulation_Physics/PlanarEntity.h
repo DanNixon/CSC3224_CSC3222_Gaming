@@ -9,13 +9,13 @@
 
 namespace Simulation
 {
-  namespace Physics
+namespace Physics
+{
+  class PlanarEntity : public Entity
   {
-    class PlanarEntity : public Entity
-    {
-    public:
-      PlanarEntity(const Engine::Maths::Vector2 &pos);
-      virtual ~PlanarEntity();
-    };
-  }
+  public:
+    PlanarEntity(const Engine::Maths::Vector2 &pos);
+    virtual ~PlanarEntity();
+  };
+}
 }

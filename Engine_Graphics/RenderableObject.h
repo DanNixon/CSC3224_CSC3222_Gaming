@@ -80,7 +80,7 @@ namespace Graphics
      * @return Texture
      * @see RenderableObject::setTexture
      */
-    Texture * texture() const
+    Texture *texture() const
     {
       return m_texture;
     }
@@ -88,9 +88,9 @@ namespace Graphics
     virtual void render();
 
   private:
-    Mesh *m_mesh;                    //!< Mesh represented by this object
-    ShaderProgram *m_shaderProgram;  //!< Shader used to render m_mesh
-    Texture * m_texture;             //!< Texture used on m_mesh
+    Mesh *m_mesh;                   //!< Mesh represented by this object
+    ShaderProgram *m_shaderProgram; //!< Shader used to render m_mesh
+    Texture *m_texture;             //!< Texture used on m_mesh
   };
 }
 }

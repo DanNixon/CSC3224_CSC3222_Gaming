@@ -9,13 +9,13 @@
 
 namespace Simulation
 {
-  namespace Physics
+namespace Physics
+{
+  class SphericalEntity : public Entity
   {
-    class SphericalEntity : public Entity
-    {
-    public:
-      SphericalEntity(const Engine::Maths::Vector2 &pos);
-      virtual ~SphericalEntity();
-    };
-  }
+  public:
+    SphericalEntity(const Engine::Maths::Vector2 &pos);
+    virtual ~SphericalEntity();
+  };
+}
 }

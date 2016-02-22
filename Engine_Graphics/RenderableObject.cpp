@@ -30,7 +30,7 @@ namespace Graphics
    * @param s Shader
    * @param t Texture
    */
-  RenderableObject::RenderableObject(Mesh *m, ShaderProgram *s, Texture * t)
+  RenderableObject::RenderableObject(Mesh *m, ShaderProgram *s, Texture *t)
       : m_mesh(m)
       , m_shaderProgram(s)
       , m_texture(t)

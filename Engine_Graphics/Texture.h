@@ -11,26 +11,26 @@
 
 namespace Engine
 {
-  namespace Graphics
+namespace Graphics
+{
+  class Texture
   {
-    class Texture
+  public:
+    Texture(const std::string &name = "tex");
+    virtual ~Texture();
+
+    bool load(const std::string &filename);
+    bool valid() const;
+    void use(GLuint shaderProgram, int idx) const;
+
+    GLuint texture() const
     {
-    public:
-      Texture(const std::string &name = "tex");
-      virtual ~Texture();
+      return m_texture;
+    }
 
-      bool load(const std::string &filename);
-      bool valid() const;
-      void use(GLuint shaderProgram, int idx) const;
-
-      GLuint texture() const
-      {
-        return m_texture;
-      }
-
-    private:
-      std::string m_name;
-      GLuint m_texture;
-    };
-  }
+  private:
+    std::string m_name;
+    GLuint m_texture;
+  };
+}
 }

@@ -8,7 +8,7 @@
 using namespace Engine::Maths;
 
 Ball::Ball(const Vector2 &pos)
-  : SphericalEntity(pos)
+    : SphericalEntity(pos)
 {
 }
 
