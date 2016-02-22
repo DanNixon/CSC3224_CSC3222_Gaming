@@ -6,7 +6,7 @@ To Do
 - [ ] `Engine_Common`
   - [x] Move setup code into engine
   - [ ] Managed memory
-  - [ ] Profiling
+  - [x] Loop timing
 - [ ] `Engine_Graphics`
   - [x] Asset import
   - [x] Texture encapsulation
@@ -18,4 +18,7 @@ To Do
 - [x] `Engine_IO`
   - [x] INI
 - [ ] `Engine_Physics`
+- [ ] `Engine_Utility`
+  - [ ] Profiling
+  - [ ] More random distributions
 - [ ] `Engine_Environment`
