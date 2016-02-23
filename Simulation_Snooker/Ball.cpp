@@ -17,7 +17,7 @@ using namespace Engine::Graphics;
  *               ball)
  */
 Ball::Ball(const Vector2 &pos, int points)
-    : SphericalEntity(pos, RADIUS)
+    : SphericalEntity(pos, RADIUS, false, 0.99f, 0.005f)
     , RenderableObject(Mesh::GenerateDisc2D(RADIUS), NULL)
     , m_points(points)
 {

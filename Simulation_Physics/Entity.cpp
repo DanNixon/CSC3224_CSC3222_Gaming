@@ -18,8 +18,10 @@ namespace Physics
    * @param pos Position
    * @param stationary If this Entity is fixed in position
    */
-  Entity::Entity(const Vector2 &pos, bool stationary)
+  Entity::Entity(const Vector2 &pos, bool stationary, float dragCoeff, float velocityFloor)
     : m_stationary(stationary)
+    , m_dragCoeff(dragCoeff)
+    , m_velocityFloor2(velocityFloor * velocityFloor)
     , m_position(pos)
   {
   }
@@ -68,6 +70,21 @@ namespace Physics
   void Entity::setAcceleration(const Vector2 &acc)
   {
     m_acceleration = acc;
+  }
+
+  bool Entity::clampVelocity()
+  {
+    bool clamp = (m_velocity.length2() < m_velocityFloor2);
+
+    if (clamp)
+      m_velocity.toZero();
+
+    return clamp;
+  }
+
+  void Entity::multiplyDragCoeff()
+  {
+    m_velocity = m_velocity * m_dragCoeff;
   }
 }
 }

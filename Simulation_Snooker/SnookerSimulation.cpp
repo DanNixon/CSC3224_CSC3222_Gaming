@@ -60,9 +60,6 @@ void SnookerSimulation::gameStartup()
   m_balls[20] = new Ball(Vector2(-600.0f, 0.0f), 6);   // Pink
   m_balls[21] = new Ball(Vector2(-900.0f, 0.0f), 7);   // Black
 
-  m_balls[0]->setVelocity(Vector2(-0.5f, 0.0f));
-  m_balls[0]->setAcceleration(Vector2(0.0001f, 0.0f));
-
   for (size_t i = 0; i < NUM_BALLS; i++)
   {
     if (m_balls[i] != NULL)
@@ -71,6 +68,10 @@ void SnookerSimulation::gameStartup()
       m_entities.push_back(m_balls[i]);
     }
   }
+
+  // Sample physics
+  m_balls[0]->setVelocity(Vector2(-0.5f, 0.0f));
+  //m_balls[0]->setAcceleration(Vector2(0.0001f, 0.0f));
 
   // Scene
   Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
