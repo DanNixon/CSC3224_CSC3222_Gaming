@@ -13,13 +13,15 @@ using namespace Engine::Graphics;
 
 /**
  * @copydoc SphericalEntity::SphericalEntity(const Vector2 &)
+ * @param points Number of points awarded for potting this ball (-1 for cue
+ *               ball)
  */
 Ball::Ball(const Vector2 &pos, int points)
     : SphericalEntity(pos, RADIUS)
     , RenderableObject(Mesh::GenerateDisc2D(RADIUS), NULL)
     , m_points(points)
 {
-  ShaderProgram * sp = new ShaderProgram();
+  ShaderProgram *sp = new ShaderProgram();
   sp->addShader(new VertexShader("vert.glsl"));
   sp->addShader(new FragmentShader("frag_col.glsl"));
   sp->link();
@@ -36,6 +38,13 @@ Ball::~Ball()
 {
 }
 
+/**
+ * @brief Gets the colour of this ball.
+ * @param alpha Alpha channel intensity (defaults to 1.0)
+ * @return Ball colour
+ *
+ * Colour is determined by the number of points (-1 being the cue ball).
+ */
 Vector4 Ball::colour(float alpha) const
 {
   switch (m_points)
@@ -61,6 +70,9 @@ Vector4 Ball::colour(float alpha) const
   }
 }
 
+/**
+ * @copydoc SphericalEntity::setPosition
+ */
 void Ball::setPosition(const Engine::Maths::Vector2 &pos)
 {
   SphericalEntity::setPosition(pos);

@@ -9,6 +9,11 @@
 #include <Vector2.h>
 #include "Cushion.h"
 
+/**
+ * @class Table
+ * @brief Represents a snooker table.
+ * @author Dan Nixon
+ */
 class Table : public Engine::Graphics::RenderableObject
 {
 public:
@@ -19,5 +24,5 @@ public:
   virtual ~Table();
 
 private:
-  Cushion * m_cushions[4];
+  Cushion *m_cushions[4]; //!< Side cushions
 };

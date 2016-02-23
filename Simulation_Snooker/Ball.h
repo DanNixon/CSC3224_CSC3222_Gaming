@@ -14,8 +14,8 @@
  * @brief Represents a snooker ball.
  * @author Dan Nixon
  */
-class Ball : public Simulation::Physics::SphericalEntity
-           , public Engine::Graphics::RenderableObject
+class Ball : public Simulation::Physics::SphericalEntity,
+             public Engine::Graphics::RenderableObject
 {
 public:
   static const int RADIUS = 21;
@@ -28,5 +28,5 @@ public:
   virtual void setPosition(const Engine::Maths::Vector2 &pos);
 
 private:
-  int m_points;
+  int m_points; //!< Number of points potting this ball gets
 };

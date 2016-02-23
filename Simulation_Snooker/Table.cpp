@@ -12,19 +12,31 @@
 using namespace Engine::Maths;
 using namespace Engine::Graphics;
 
+/**
+ * @var DIMENSIONS
+ * @brief Dimensions of the table in mm.
+ */
 const Vector2 Table::DIMENSIONS = Vector2(3569.0f, 1778.0f);
+
+/**
+ * @var HALF_DIMENSIONS
+ * @brief Half the dimensions of the table in mm.
+ */
 const Vector2 Table::HALF_DIMENSIONS = DIMENSIONS / 2;
 
+/**
+ * @brief Creates a new table.
+ */
 Table::Table()
-  : RenderableObject(Mesh::GenerateRect2D(DIMENSIONS), NULL)
+    : RenderableObject(Mesh::GenerateRect2D(DIMENSIONS), NULL)
 {
-  ShaderProgram * sp = new ShaderProgram();
+  ShaderProgram *sp = new ShaderProgram();
   sp->addShader(new VertexShader("vert.glsl"));
   sp->addShader(new FragmentShader("frag_tex.glsl"));
   sp->link();
   setShader(sp);
 
-  Texture * tex = new Texture("tabletopTex");
+  Texture *tex = new Texture("tabletopTex");
   tex->load("table.bmp");
   setTexture(tex);
 

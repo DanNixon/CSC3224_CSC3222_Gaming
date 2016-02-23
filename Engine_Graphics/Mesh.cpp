@@ -94,6 +94,10 @@ namespace Graphics
     glBindVertexArray(0);
   }
 
+  /**
+   * @brief Sets all vertix colours in the mesh to a solid colour.
+   * @param col Colour to set
+   */
   void Mesh::setStaticColour(const Vector4 &col)
   {
     if (m_colours != NULL)

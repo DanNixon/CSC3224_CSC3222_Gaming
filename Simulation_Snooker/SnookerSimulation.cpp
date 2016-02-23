@@ -30,13 +30,13 @@ void SnookerSimulation::gameStartup()
   m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
   // Balls
-  m_balls[0] = new Ball(Vector2(900.0f, 0.0f), -1); // Cue
-  m_balls[1] = new Ball(Vector2(600.0f, 200.0f), 2); // Yellow
+  m_balls[0] = new Ball(Vector2(900.0f, 0.0f), -1);   // Cue
+  m_balls[1] = new Ball(Vector2(600.0f, 200.0f), 2);  // Yellow
   m_balls[2] = new Ball(Vector2(600.0f, -200.0f), 3); // Green
-  m_balls[3] = new Ball(Vector2(600.0f, 0.0f), 4); // Brown
-  m_balls[4] = new Ball(Vector2(0.0f, 0.0f), 5); // Blue
-  m_balls[5] = new Ball(Vector2(-600.0f, 0.0f), 6); // Pink
-  m_balls[6] = new Ball(Vector2(-900.0f, 0.0f), 7); // Black
+  m_balls[3] = new Ball(Vector2(600.0f, 0.0f), 4);    // Brown
+  m_balls[4] = new Ball(Vector2(0.0f, 0.0f), 5);      // Blue
+  m_balls[5] = new Ball(Vector2(-600.0f, 0.0f), 6);   // Pink
+  m_balls[6] = new Ball(Vector2(-900.0f, 0.0f), 7);   // Black
 
   for (size_t i = 0; i < NUM_BALLS; i++)
   {
