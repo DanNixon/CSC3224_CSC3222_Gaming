@@ -13,6 +13,7 @@ using namespace Engine::Graphics;
 
 /**
  * @copydoc SphericalEntity::SphericalEntity(const Vector2 &)
+ * @param pos Position of the ball
  * @param points Number of points awarded for potting this ball (-1 for cue
  *               ball)
  */

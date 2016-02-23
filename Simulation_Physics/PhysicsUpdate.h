@@ -11,9 +11,19 @@ namespace Simulation
 {
   namespace Physics
   {
+    /**
+     * @class PhysicsUpdate
+     * @brief Contains utilities for performing physics updates.
+     * @author Dan Nixon
+     */
     class PhysicsUpdate
     {
     public:
+      /**
+       * @brief Performs all physics updates.
+       * @param entities List of entities to update
+       * @param dtMilliSec Time step in milliseconds
+       */
       static void Update(Entity::EntityPtrList entities, float dtMilliSec)
       {
         UpdatePositions(entities, dtMilliSec);

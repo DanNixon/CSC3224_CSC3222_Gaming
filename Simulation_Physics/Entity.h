@@ -22,7 +22,16 @@ namespace Physics
   class Entity
   {
   public:
+    /**
+     * @typedef EntityPtrList
+     * @brief List of pointers to Entity instances.
+     */
     typedef std::list<Entity *> EntityPtrList;
+
+    /**
+     * @typedef EntityPtrListIter
+     * @brief Iterator ofver a list of pointers to Entity instances.
+     */
     typedef EntityPtrList::iterator EntityPtrListIter;
 
     Entity(const Engine::Maths::Vector2 &pos, bool stationary = false, float dragCoeff = 1.0f, float velocityFloor = 0.0f);
@@ -75,6 +84,10 @@ namespace Physics
 
     void setAcceleration(const Engine::Maths::Vector2 &acc);
 
+    /**
+     * @brief Checks to see if this Entity interfaces with another.
+     * @return If this Entity has an interface
+     */
     bool interface() const
     {
       return m_interface;

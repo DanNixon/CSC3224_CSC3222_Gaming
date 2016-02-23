@@ -70,7 +70,7 @@ void DemoGame::gameStartup()
 /**
  * @copydoc Game::gameLoop
  */
-void DemoGame::gameLoop(Uint8 id, Uint32 deltaT)
+void DemoGame::gameLoop(Uint8 id, Uint32 dtMilliSec)
 {
   if (id == m_graphicsLoop)
   {

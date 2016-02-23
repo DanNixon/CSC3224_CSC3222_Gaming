@@ -15,6 +15,12 @@ namespace Simulation
 {
   namespace Physics
   {
+    /**
+     * @brief Updates the positions of entities according to their velocity and
+     *        acceleration.
+     * @param entities List of entities to update
+     * @param dtMilliSec Time step in milliseconds
+     */
     void PhysicsUpdate::UpdatePositions(Entity::EntityPtrList entities, float dtMilliSec)
     {
       for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end(); ++it)
@@ -35,6 +41,10 @@ namespace Simulation
       }
     }
 
+    /**
+     * @brief Detects interfaces between entities.
+     * @param entities List of entities to update
+     */
     void PhysicsUpdate::DetectInterfaces(Entity::EntityPtrList entities)
     {
       for (Entity::EntityPtrListIter oit = entities.begin(); oit != entities.end(); ++oit)
@@ -49,6 +59,10 @@ namespace Simulation
       }
     }
 
+    /**
+     * @brief Resolves detected interfaces.
+     * @param entities List of entities to update
+     */
     void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrList entities)
     {
       // TODO

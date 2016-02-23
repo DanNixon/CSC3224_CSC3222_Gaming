@@ -107,7 +107,7 @@ namespace Common
     /**
      * @brief Callback for a given loop.
      * @param id Loop ID
-     * @param deltaT Time in milliseconds since this loop last executed
+     * @param dtMilliSec Time in milliseconds since this loop last executed
      */
     virtual void gameLoop(Uint8 id, Uint32 dtMilliSec) = 0;
 
