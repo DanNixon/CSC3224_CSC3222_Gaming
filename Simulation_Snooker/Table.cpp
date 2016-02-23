@@ -13,13 +13,11 @@ using namespace Engine::Maths;
 using namespace Engine::Graphics;
 
 /**
- * @var DIMENSIONS
  * @brief Dimensions of the table in mm.
  */
 const Vector2 Table::DIMENSIONS = Vector2(3569.0f, 1778.0f);
 
 /**
- * @var HALF_DIMENSIONS
  * @brief Half the dimensions of the table in mm.
  */
 const Vector2 Table::HALF_DIMENSIONS = DIMENSIONS / 2;

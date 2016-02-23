@@ -21,6 +21,9 @@
 class SnookerSimulation : public Engine::Common::Game
 {
 public:
+  /**
+   * @brief Number of snooker balls.
+   */
   static const int NUM_BALLS = 22;
 
   SnookerSimulation();
