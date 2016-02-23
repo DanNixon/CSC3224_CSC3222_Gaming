@@ -28,7 +28,7 @@ public:
    * @param idx Cushion index
    * @return Cushion
    */
-  Cushion * cushion(size_t idx)
+  Cushion *cushion(size_t idx)
   {
     return m_cushions[idx];
   }

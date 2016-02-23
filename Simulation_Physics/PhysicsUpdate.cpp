@@ -13,59 +13,65 @@ using namespace Engine::Maths;
 
 namespace Simulation
 {
-  namespace Physics
+namespace Physics
+{
+  /**
+   * @brief Updates the positions of entities according to their velocity and
+   *        acceleration.
+   * @param entities List of entities to update
+   * @param dtMilliSec Time step in milliseconds
+   */
+  void PhysicsUpdate::UpdatePositions(Entity::EntityPtrList entities,
+                                      float dtMilliSec)
   {
-    /**
-     * @brief Updates the positions of entities according to their velocity and
-     *        acceleration.
-     * @param entities List of entities to update
-     * @param dtMilliSec Time step in milliseconds
-     */
-    void PhysicsUpdate::UpdatePositions(Entity::EntityPtrList entities, float dtMilliSec)
+    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end();
+         ++it)
     {
-      for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end(); ++it)
-      {
-        if ((*it)->m_stationary)
-          continue;
+      if ((*it)->m_stationary)
+        continue;
 
-        // Calculate new velocity
-        Integration::Euler<Vector2>((*it)->m_velocity, (*it)->m_velocity, (*it)->m_acceleration, dtMilliSec);
-        if (!(*it)->clampVelocity())
-          (*it)->multiplyDragCoeff();
+      // Calculate new velocity
+      Integration::Euler<Vector2>((*it)->m_velocity, (*it)->m_velocity,
+                                  (*it)->m_acceleration, dtMilliSec);
+      if (!(*it)->clampVelocity())
+        (*it)->multiplyDragCoeff();
 
-        // Calculate new position/displacement
-        Integration::Euler<Vector2>((*it)->m_position, (*it)->m_position, (*it)->m_velocity, dtMilliSec);
+      // Calculate new position/displacement
+      Integration::Euler<Vector2>((*it)->m_position, (*it)->m_position,
+                                  (*it)->m_velocity, dtMilliSec);
 
-        // Update position
-        (*it)->setPosition((*it)->m_position);
-      }
-    }
-
-    /**
-     * @brief Detects interfaces between entities.
-     * @param entities List of entities to update
-     */
-    void PhysicsUpdate::DetectInterfaces(Entity::EntityPtrList entities)
-    {
-      for (Entity::EntityPtrListIter oit = entities.begin(); oit != entities.end(); ++oit)
-      {
-        for (Entity::EntityPtrListIter iit = entities.begin(); iit != entities.end(); ++iit)
-        {
-          if (*oit == *iit)
-            continue;
-
-          // TODO
-        }
-      }
-    }
-
-    /**
-     * @brief Resolves detected interfaces.
-     * @param entities List of entities to update
-     */
-    void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrList entities)
-    {
-      // TODO
+      // Update position
+      (*it)->setPosition((*it)->m_position);
     }
   }
+
+  /**
+   * @brief Detects interfaces between entities.
+   * @param entities List of entities to update
+   */
+  void PhysicsUpdate::DetectInterfaces(Entity::EntityPtrList entities)
+  {
+    for (Entity::EntityPtrListIter oit = entities.begin();
+         oit != entities.end(); ++oit)
+    {
+      for (Entity::EntityPtrListIter iit = entities.begin();
+           iit != entities.end(); ++iit)
+      {
+        if (*oit == *iit)
+          continue;
+
+        // TODO
+      }
+    }
+  }
+
+  /**
+   * @brief Resolves detected interfaces.
+   * @param entities List of entities to update
+   */
+  void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrList entities)
+  {
+    // TODO
+  }
+}
 }

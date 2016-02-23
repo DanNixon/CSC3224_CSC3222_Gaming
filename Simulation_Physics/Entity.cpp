@@ -20,12 +20,13 @@ namespace Physics
    * @param dragCoeff Velocity coefficient for simple drag simulation
    * @param velocityFloor Minimum velocity magnitude
    */
-  Entity::Entity(const Vector2 &pos, bool stationary, float dragCoeff, float velocityFloor)
-    : m_stationary(stationary)
-    , m_dragCoeff(dragCoeff)
-    , m_velocityFloor2(velocityFloor * velocityFloor)
-    , m_position(pos)
-    , m_interface(false)
+  Entity::Entity(const Vector2 &pos, bool stationary, float dragCoeff,
+                 float velocityFloor)
+      : m_stationary(stationary)
+      , m_dragCoeff(dragCoeff)
+      , m_velocityFloor2(velocityFloor * velocityFloor)
+      , m_position(pos)
+      , m_interface(false)
   {
   }
 

@@ -34,7 +34,8 @@ namespace Physics
      */
     typedef EntityPtrList::iterator EntityPtrListIter;
 
-    Entity(const Engine::Maths::Vector2 &pos, bool stationary = false, float dragCoeff = 1.0f, float velocityFloor = 0.0f);
+    Entity(const Engine::Maths::Vector2 &pos, bool stationary = false,
+           float dragCoeff = 1.0f, float velocityFloor = 0.0f);
     virtual ~Entity();
 
     /**
@@ -99,12 +100,13 @@ namespace Physics
     bool clampVelocity();
     void multiplyDragCoeff();
 
-    const bool m_stationary; //!< Flag indicating this entity is stationary
-    const float m_dragCoeff; //!< Velocity coefficient due to simple drag
-    const float m_velocityFloor2; //<! Velcoity magnitude squared at which velocity is set to zero
+    const bool m_stationary;      //!< Flag indicating this entity is stationary
+    const float m_dragCoeff;      //!< Velocity coefficient due to simple drag
+    const float m_velocityFloor2; //<! Velcoity magnitude squared at which
+                                  //velocity is set to zero
 
-    Engine::Maths::Vector2 m_position; //!< Position of Entity
-    Engine::Maths::Vector2 m_velocity; //!< Velocity in current timestep
+    Engine::Maths::Vector2 m_position;     //!< Position of Entity
+    Engine::Maths::Vector2 m_velocity;     //!< Velocity in current timestep
     Engine::Maths::Vector2 m_acceleration; //!< Acceleration in current timestep
     bool m_interface; //!< Flag indicating interface detection
   };

@@ -37,22 +37,22 @@ void SnookerSimulation::gameStartup()
   m_entities.push_back(m_table->cushion(3));
 
   // Balls
-  m_balls[0] = new Ball(Vector2(900.0f, 0.0f), -1);   // Cue ball
-  //m_balls[1] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[2] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[3] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[4] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[5] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[6] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[7] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[8] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[9] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[10] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[11] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[12] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[13] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[14] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  //m_balls[15] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  m_balls[0] = new Ball(Vector2(900.0f, 0.0f), -1); // Cue ball
+  // m_balls[1] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[2] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[3] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[4] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[5] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[6] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[7] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[8] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[9] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[10] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[11] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[12] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[13] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[14] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  // m_balls[15] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
   m_balls[16] = new Ball(Vector2(600.0f, 200.0f), 2);  // Yellow
   m_balls[17] = new Ball(Vector2(600.0f, -200.0f), 3); // Green
   m_balls[18] = new Ball(Vector2(600.0f, 0.0f), 4);    // Brown
@@ -71,7 +71,7 @@ void SnookerSimulation::gameStartup()
 
   // Sample physics
   m_balls[0]->setVelocity(Vector2(-0.5f, 0.0f));
-  //m_balls[0]->setAcceleration(Vector2(0.0001f, 0.0f));
+  // m_balls[0]->setAcceleration(Vector2(0.0001f, 0.0f));
 
   // Scene
   Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
@@ -98,7 +98,7 @@ void SnookerSimulation::gameLoop(Uint8 id, Uint32 dtMilliSec)
   // Handle physics
   else if (id == m_physicsLoop)
   {
-    PhysicsUpdate::Update(m_entities, (float) dtMilliSec);
+    PhysicsUpdate::Update(m_entities, (float)dtMilliSec);
   }
 }
 
