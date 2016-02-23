@@ -23,6 +23,11 @@ public:
   Table();
   virtual ~Table();
 
+  Cushion * cushion(size_t idx)
+  {
+    return m_cushions[idx];
+  }
+
 private:
   Cushion *m_cushions[4]; //!< Side cushions
 };

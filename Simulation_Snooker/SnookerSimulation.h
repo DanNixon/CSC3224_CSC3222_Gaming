@@ -10,6 +10,8 @@
 #include <Scene.h>
 #include <ShaderProgram.h>
 
+#include <Entity.h>
+
 #include "Table.h"
 #include "Ball.h"
 
@@ -42,4 +44,6 @@ private:
 
   Table *m_table;
   Ball *m_balls[NUM_BALLS];
+
+  Simulation::Physics::Entity::EntityPtrList m_entities;
 };

@@ -6,6 +6,7 @@
 #pragma once
 
 #include <istream>
+#include <list>
 
 #include <Vector2.h>
 
@@ -21,9 +22,20 @@ namespace Physics
   class Entity
   {
   public:
-    Entity(float symmLimit);
-    Entity(const Engine::Maths::Vector2 &pos);
+    typedef std::list<Entity *> EntityPtrList;
+    typedef EntityPtrList::iterator EntityPtrListIter;
+
+    Entity(const Engine::Maths::Vector2 &pos, bool stationary = false);
     virtual ~Entity();
+
+    /**
+     * @brief CHecks if this Entity is fixed in position.
+     * @return True if stationary
+     */
+    bool stationary() const
+    {
+      return m_stationary;
+    }
 
     /**
      * @brief Gets the position of this entity.
@@ -64,9 +76,15 @@ namespace Physics
     void setAcceleration(const Engine::Maths::Vector2 &acc);
 
   private:
+    friend class PhysicsUpdate;
+
+    bool m_stationary; //!< Flag indicating this entity is stationary
     Engine::Maths::Vector2 m_position; //!< Position of Entity
     Engine::Maths::Vector2 m_velocity; //!< Velocity in current timestep
     Engine::Maths::Vector2 m_acceleration; //!< Acceleration in current timestep
+    float m_dragAcceleration; //!< Acceleration that is added at each iteration
+    float m_velocityFloor2; //<! Velcoity magnitude squared at which velocity is set to zero
+    bool m_interface; //!< Flag indicating interface detection
   };
 }
 }
