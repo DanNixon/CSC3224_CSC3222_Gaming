@@ -27,7 +27,7 @@ namespace Common
       , m_windowWidth(resolution.first)
       , m_windowHeight(resolution.second)
   {
-    for (size_t i = 0; i < MAX_TIMED_LOOPS; i++)
+    for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       m_loops[i] = NULL;
   }
 
@@ -123,7 +123,7 @@ namespace Common
           (*it)->handleEvent(e);
       }
 
-      for (size_t i = 0; i < MAX_TIMED_LOOPS; i++)
+      for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       {
         if (m_loops[i] == NULL)
           continue;

@@ -20,6 +20,17 @@ namespace Maths
   {
   public:
     /**
+     * @brief Calculates the dot product of two Vector2.
+     * @param a LHS vector
+     * @param b RHS vector
+     * @return Dot product
+     */
+    static float dot(const Vector2 &a, const Vector2 &b)
+    {
+      return (a.m_x * b.m_x) + (a.m_y * b.m_y);
+    }
+
+    /**
      * @brief Calculates the distance between two vectors.
      * @param a First vector
      * @param b Second vector

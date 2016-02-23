@@ -8,8 +8,10 @@
 #include <Game.h>
 
 #include <Scene.h>
-#include <RenderableObject.h>
 #include <ShaderProgram.h>
+
+#include "Table.h"
+#include "Ball.h"
 
 /**
  * @class SnookerSimulation
@@ -19,6 +21,8 @@
 class SnookerSimulation : public Engine::Common::Game
 {
 public:
+  static const int NUM_BALLS = 22;
+
   SnookerSimulation();
   ~SnookerSimulation();
 
@@ -31,11 +35,8 @@ private:
   Uint8 m_graphicsLoop;
   Uint8 m_physicsLoop;
 
-  Engine::Graphics::ShaderProgram *m_texShader;
-  Engine::Graphics::ShaderProgram *m_colShader;
-  Engine::Graphics::Texture *m_tableTex;
   Engine::Common::Scene *m_scene;
 
-  Engine::Graphics::RenderableObject *m_table;
-  Engine::Graphics::RenderableObject *m_child;
+  Table *m_table;
+  Ball *m_balls[NUM_BALLS];
 };

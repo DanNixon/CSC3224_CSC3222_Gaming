@@ -175,11 +175,13 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(O
     <ClCompile Include="Cushion.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SnookerSimulation.cpp" />
+    <ClCompile Include="Table.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Cushion.h" />
     <ClInclude Include="SnookerSimulation.h" />
+    <ClInclude Include="Table.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

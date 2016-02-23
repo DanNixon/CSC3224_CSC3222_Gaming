@@ -67,6 +67,8 @@ namespace Graphics
 
     virtual void draw();
 
+    void setStaticColour(const Engine::Maths::Vector4 &col);
+
   protected:
     bool generateNormals();
     void bufferData();

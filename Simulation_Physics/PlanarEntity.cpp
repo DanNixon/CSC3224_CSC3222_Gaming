@@ -12,7 +12,7 @@ namespace Simulation
 namespace Physics
 {
   /**
-   * @copydoc Entity::Entity(const Vector 2 &)
+   * @copydoc Entity::Entity(const Vector2 &)
    *
    * The plane will be in axes with non-zero position coordinates.
    */

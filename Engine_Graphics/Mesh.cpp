@@ -94,6 +94,17 @@ namespace Graphics
     glBindVertexArray(0);
   }
 
+  void Mesh::setStaticColour(const Vector4 &col)
+  {
+    if (m_colours != NULL)
+    {
+      for (size_t i = 0; i < m_numVertices; i++)
+        m_colours[i] = col;
+    }
+
+    bufferData();
+  }
+
   /**
    * @brief Generates normals for each vertex.
    * @return True if normals were generated

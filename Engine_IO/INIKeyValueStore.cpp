@@ -69,7 +69,7 @@ namespace IO
     {
       std::string line;
       std::getline(stream, line);
-      int eqPos = line.find("=");
+      size_t eqPos = line.find("=");
       if (eqPos != -1)
       {
         std::string key = line.substr(0, eqPos);

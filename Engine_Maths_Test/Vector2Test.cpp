@@ -217,6 +217,14 @@ public:
     Assert::AreEqual(3.2f, v.y());
   }
 
+  TEST_METHOD(test_dot)
+  {
+    Vector2 v1(5.0f, 3.0f);
+    Vector2 v2(2.0f, -2.0f);
+    float dotProd = Vector2::dot(v1, v2);
+    Assert::AreEqual(4.0f, dotProd, 0.0001f);
+  }
+
   TEST_METHOD(test_distance)
   {
     Vector2 v1(5.0f, 3.0f);

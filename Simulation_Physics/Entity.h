@@ -35,7 +35,7 @@ namespace Physics
       return m_position;
     }
 
-    void setPosition(const Engine::Maths::Vector2 &pos);
+    virtual void setPosition(const Engine::Maths::Vector2 &pos);
 
   private:
     Engine::Maths::Vector2 m_position; //!< Position of Entity
