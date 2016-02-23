@@ -18,11 +18,13 @@ namespace Simulation
       {
         UpdatePositions(entities, dtMilliSec);
         DetectInterfaces(entities);
+        ResolveInterfaces(entities);
       }
 
     private:
       static void UpdatePositions(Entity::EntityPtrList entities, float dtMilliSec);
       static void DetectInterfaces(Entity::EntityPtrList entities);
+      static void ResolveInterfaces(Entity::EntityPtrList entities);
     };
   }
 }

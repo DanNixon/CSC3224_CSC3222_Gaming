@@ -23,6 +23,7 @@ namespace Physics
     , m_dragCoeff(dragCoeff)
     , m_velocityFloor2(velocityFloor * velocityFloor)
     , m_position(pos)
+    , m_interface(false)
   {
   }
 

@@ -75,6 +75,11 @@ namespace Physics
 
     void setAcceleration(const Engine::Maths::Vector2 &acc);
 
+    bool interface() const
+    {
+      return m_interface;
+    }
+
   private:
     friend class PhysicsUpdate;
 

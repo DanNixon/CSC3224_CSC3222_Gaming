@@ -37,6 +37,20 @@ namespace Simulation
 
     void PhysicsUpdate::DetectInterfaces(Entity::EntityPtrList entities)
     {
+      for (Entity::EntityPtrListIter oit = entities.begin(); oit != entities.end(); ++oit)
+      {
+        for (Entity::EntityPtrListIter iit = entities.begin(); iit != entities.end(); ++iit)
+        {
+          if (*oit == *iit)
+            continue;
+
+          // TODO
+        }
+      }
+    }
+
+    void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrList entities)
+    {
       // TODO
     }
   }
