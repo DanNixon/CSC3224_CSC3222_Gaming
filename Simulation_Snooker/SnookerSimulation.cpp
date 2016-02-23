@@ -60,6 +60,9 @@ void SnookerSimulation::gameStartup()
   m_balls[20] = new Ball(Vector2(-600.0f, 0.0f), 6);   // Pink
   m_balls[21] = new Ball(Vector2(-900.0f, 0.0f), 7);   // Black
 
+  m_balls[0]->setVelocity(Vector2(-0.5f, 0.0f));
+  m_balls[0]->setAcceleration(Vector2(0.0001f, 0.0f));
+
   for (size_t i = 0; i < NUM_BALLS; i++)
   {
     if (m_balls[i] != NULL)
@@ -82,7 +85,7 @@ void SnookerSimulation::gameStartup()
 /**
  * @copydoc Game::gameLoop
  */
-void SnookerSimulation::gameLoop(Uint8 id, Uint32 deltaT)
+void SnookerSimulation::gameLoop(Uint8 id, Uint32 dtMilliSec)
 {
   // Handle graphics
   if (id == m_graphicsLoop)
@@ -94,7 +97,7 @@ void SnookerSimulation::gameLoop(Uint8 id, Uint32 deltaT)
   // Handle physics
   else if (id == m_physicsLoop)
   {
-    PhysicsUpdate::Update(m_entities);
+    PhysicsUpdate::Update(m_entities, (float) dtMilliSec);
   }
 }
 

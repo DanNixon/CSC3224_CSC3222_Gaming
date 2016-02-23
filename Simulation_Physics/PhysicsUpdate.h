@@ -14,14 +14,14 @@ namespace Simulation
     class PhysicsUpdate
     {
     public:
-      static void Update(Entity::EntityPtrList entities)
+      static void Update(Entity::EntityPtrList entities, float dtMilliSec)
       {
-        UpdatePositions(entities);
+        UpdatePositions(entities, dtMilliSec);
         DetectInterfaces(entities);
       }
 
     private:
-      static void UpdatePositions(Entity::EntityPtrList entities);
+      static void UpdatePositions(Entity::EntityPtrList entities, float dtMilliSec);
       static void DetectInterfaces(Entity::EntityPtrList entities);
     };
   }

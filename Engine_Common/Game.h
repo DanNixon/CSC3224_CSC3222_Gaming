@@ -109,7 +109,7 @@ namespace Common
      * @param id Loop ID
      * @param deltaT Time in milliseconds since this loop last executed
      */
-    virtual void gameLoop(Uint8 id, Uint32 deltaT) = 0;
+    virtual void gameLoop(Uint8 id, Uint32 dtMilliSec) = 0;
 
     /**
      * @brief Performs any shutdown logic specific to the game.

@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Integration.cpp" />
     <ClCompile Include="PhysicsUpdate.cpp" />
     <ClCompile Include="PlanarEntity.cpp" />
     <ClCompile Include="SphericalEntity.cpp" />
