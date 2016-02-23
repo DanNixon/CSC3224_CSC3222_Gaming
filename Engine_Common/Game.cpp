@@ -59,7 +59,7 @@ namespace Common
 
       /* Create window */
       m_window = SDL_CreateWindow(
-          "Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+          m_windowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
           m_windowWidth, m_windowHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
       if (m_window == NULL)
