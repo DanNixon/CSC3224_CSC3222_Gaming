@@ -8,6 +8,7 @@
 #include <Vector3.h>
 
 #include "Integration.h"
+#include "InterfaceDetection.h"
 
 using namespace Engine::Maths;
 
@@ -60,7 +61,13 @@ namespace Physics
         if (*oit == *iit)
           continue;
 
-        // TODO
+        // Check for interface
+        if (InterfaceDetection::Detect(**oit, **iit))
+        {
+          // Set interface flag
+          (*oit)->m_interface = true;
+          (*iit)->m_interface = true;
+        }
       }
     }
   }
@@ -71,7 +78,11 @@ namespace Physics
    */
   void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrList entities)
   {
-    // TODO
+    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end();
+      ++it)
+    {
+      // TODO
+    }
   }
 }
 }
