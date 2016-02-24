@@ -13,5 +13,6 @@
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />
     <ClInclude Include="math_common.h" />
+    <ClInclude Include="VectorOperations.h" />
   </ItemGroup>
 </Project>

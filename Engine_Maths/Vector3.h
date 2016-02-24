@@ -45,28 +45,6 @@ namespace Maths
     }
 
     /**
-    * @brief Calculates the distance between two vectors.
-    * @param a First vector
-    * @param b Second vector
-    * @return Distance
-    */
-    static float distance(const Vector3 &a, const Vector3 &b)
-    {
-      return (b - a).length();
-    }
-
-    /**
-    * @brief Calculates the squared distance between two vectors.
-    * @param a First vector
-    * @param b Second vector
-    * @return Distance
-    */
-    static float distance2(const Vector3 &a, const Vector3 &b)
-    {
-      return (b - a).length2();
-    }
-
-    /**
      * @brief Creates a new vector with default values of [0, 0, 0].
      */
     Vector3()
@@ -146,23 +124,6 @@ namespace Maths
     inline float length() const
     {
       return sqrt(length2());
-    }
-
-    /**
-     * @brief Normalises a vector to a length of 1.0.
-     *
-     * Divides each component of the vector by its length.
-     */
-    inline void normalise()
-    {
-      float len = length();
-
-      if (len != 0.0)
-      {
-        m_x /= len;
-        m_y /= len;
-        m_z /= len;
-      }
     }
 
     /**
