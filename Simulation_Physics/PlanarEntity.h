@@ -27,7 +27,7 @@ namespace Physics
       return m_direction;
     }
 
-    int axis() const;
+    Engine::Maths::Vector2 normal() const;
 
   private:
     int m_direction;

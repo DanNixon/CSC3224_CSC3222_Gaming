@@ -29,17 +29,11 @@ namespace Physics
   {
   }
 
-  int PlanarEntity::axis() const
+  Vector2 PlanarEntity::normal() const
   {
-    int retVal = -1;
-
-    for (int i = 0; i < 2; i++)
-    {
-      if (m_position[i] != 0.0f)
-        retVal = i;
-    }
-
-    return retVal;
+    Vector2 norm(m_position);
+    norm.normalise();
+    return norm;
   }
 }
 }

@@ -38,7 +38,8 @@ namespace Simulation
     void InterfaceDetection::SphereSphere(bool &result, const SphericalEntity &a, const SphericalEntity &b)
     {
       float d = Vector2::distance2(a.position(), b.position());
-      float r = a.radius2() + b.radius2();
+      float r = a.radius() + b.radius();
+      r *= r;
       result = (d < r);
     }
 
@@ -49,10 +50,7 @@ namespace Simulation
 
     void InterfaceDetection::SpherePlane(bool &result, const SphericalEntity &a, const PlanarEntity &b)
     {
-      const int axis = b.axis();
-      result = (a.position()[axis] > b.position()[axis]);
-      if (b.direction() == 1)
-        result = !result;
+      result = (Vector2::dot(b.normal(), a.position()) + b.position().length() < a.radius());
     }
   }
 }
