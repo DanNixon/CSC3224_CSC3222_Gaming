@@ -77,5 +77,5 @@ Vector4 Ball::colour(float alpha) const
 void Ball::setPosition(const Engine::Maths::Vector2 &pos)
 {
   SphericalEntity::setPosition(pos);
-  setModelMatrix(Matrix4::Translation(Vector3(pos.x(), pos.y(), 1.0f)));
+  setModelMatrix(Matrix4::Translation(Vector3(pos.x(), pos.y(), 0.0f)));
 }

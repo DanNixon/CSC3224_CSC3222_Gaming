@@ -5,8 +5,12 @@
 
 #include "InterfaceDetection.h"
 
+#include <Vector2.h>
+
 #include "SphericalEntity.h"
 #include "PlanarEntity.h"
+
+using namespace Engine::Maths;
 
 namespace Simulation
 {
@@ -14,21 +18,18 @@ namespace Simulation
   {
     bool InterfaceDetection::Detect(const Entity &a, const Entity &b)
     {
-      const std::type_info &aType = typeid(a);
-      const std::type_info &bType = typeid(b);
-
-      const std::type_info &sphereType = typeid(SphericalEntity);
-      const std::type_info &planeType = typeid(PlanarEntity);
-
       bool retVal = false;
 
-      if (aType == sphereType && bType == sphereType)
+      if (dynamic_cast<const SphericalEntity *>(&a) && dynamic_cast<const SphericalEntity *>(&b))
         SphereSphere(retVal, static_cast<const SphericalEntity &>(a), static_cast<const SphericalEntity &>(b));
-      else if (aType == planeType && bType == planeType)
+
+      else if (dynamic_cast<const PlanarEntity *>(&a) && dynamic_cast<const PlanarEntity *>(&b))
         PlanePlane(retVal, static_cast<const PlanarEntity &>(a), static_cast<const PlanarEntity &>(b));
-      else if (aType == sphereType && bType == planeType)
+
+      else if (dynamic_cast<const SphericalEntity *>(&a) && dynamic_cast<const PlanarEntity *>(&b))
         SpherePlane(retVal, static_cast<const SphericalEntity &>(a), static_cast<const PlanarEntity &>(b));
-      else if (aType == planeType && bType == sphereType)
+
+      else if (dynamic_cast<const PlanarEntity *>(&a) && dynamic_cast<const SphericalEntity *>(&b))
         SpherePlane(retVal, static_cast<const SphericalEntity &>(b), static_cast<const PlanarEntity &>(a));
 
       return retVal;
@@ -36,7 +37,9 @@ namespace Simulation
 
     void InterfaceDetection::SphereSphere(bool &result, const SphericalEntity &a, const SphericalEntity &b)
     {
-      // TODO
+      float d = Vector2::distance2(a.position(), b.position());
+      float r = a.radius2() + b.radius2();
+      result = (d < r);
     }
 
     void InterfaceDetection::PlanePlane(bool &result, const PlanarEntity &a, const PlanarEntity &b)

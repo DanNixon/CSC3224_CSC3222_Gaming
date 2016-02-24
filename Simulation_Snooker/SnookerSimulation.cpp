@@ -70,7 +70,7 @@ void SnookerSimulation::gameStartup()
   }
 
   // Sample physics
-  m_balls[0]->setVelocity(Vector2(-2.5f, 0.0f));
+  m_balls[0]->setVelocity(Vector2(-1.0f, 0.0f));
 
   // Scene
   Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
@@ -80,6 +80,9 @@ void SnookerSimulation::gameStartup()
   // Times loops
   m_graphicsLoop = addTimedLoop(16, "graphics");
   m_physicsLoop = addTimedLoop(8, "physics");
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glEnable(GL_BLEND);
 }
 
 /**
@@ -98,6 +101,15 @@ void SnookerSimulation::gameLoop(Uint8 id, Uint32 dtMilliSec)
   else if (id == m_physicsLoop)
   {
     PhysicsUpdate::Update(m_entities, (float)dtMilliSec);
+
+    for (Entity::EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
+    {
+      Ball * b = dynamic_cast<Ball *>(*it);
+      if (!b)
+        continue;
+
+      b->mesh()->setStaticColour(b->colour(1.0f - (0.5f * b->interface())));
+    }
   }
 }
 

@@ -26,6 +26,11 @@ namespace Physics
      */
     static void Update(Entity::EntityPtrList entities, float dtMilliSec)
     {
+      // Clear interface flags
+      for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end(); ++it)
+        (*it)->m_interface = false;
+
+      // Perform updates
       UpdatePositions(entities, dtMilliSec);
       DetectInterfaces(entities);
       ResolveInterfaces(entities);
