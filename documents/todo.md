@@ -7,6 +7,7 @@ To Do
   - [x] Move setup code into engine
   - [ ] Managed memory
   - [x] Loop timing
+  - [ ] Clean startup routine
 - [ ] `Engine_Graphics`
   - [x] Asset import
   - [x] Texture encapsulation
