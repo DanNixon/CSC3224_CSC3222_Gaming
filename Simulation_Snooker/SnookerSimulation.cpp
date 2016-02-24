@@ -70,8 +70,7 @@ void SnookerSimulation::gameStartup()
   }
 
   // Sample physics
-  m_balls[0]->setVelocity(Vector2(-0.5f, 0.0f));
-  // m_balls[0]->setAcceleration(Vector2(0.0001f, 0.0f));
+  m_balls[0]->setVelocity(Vector2(-2.5f, 0.0f));
 
   // Scene
   Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));

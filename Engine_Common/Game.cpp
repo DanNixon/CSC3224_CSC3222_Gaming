@@ -107,6 +107,13 @@ namespace Common
 
     this->gameStartup();
 
+    // Set time on loops
+    for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
+    {
+      if (m_loops[i] != NULL)
+        m_loops[i]->lastFired = SDL_GetTicks();
+    }
+
     SDL_Event e;
     bool exit = false;
     while (!exit)
