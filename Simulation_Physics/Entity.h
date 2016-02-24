@@ -95,10 +95,11 @@ namespace Physics
     }
 
   private:
-    friend class PhysicsUpdate;
-
     bool clampVelocity();
     void multiplyDragCoeff();
+
+  protected:
+    friend class PhysicsUpdate;
 
     const bool m_stationary;      //!< Flag indicating this entity is stationary
     const float m_dragCoeff;      //!< Velocity coefficient due to simple drag

@@ -19,8 +19,18 @@ namespace Physics
   class PlanarEntity : public Entity
   {
   public:
-    PlanarEntity(const Engine::Maths::Vector2 &pos);
+    PlanarEntity(const Engine::Maths::Vector2 &pos, int direction);
     virtual ~PlanarEntity();
+
+    int direction() const
+    {
+      return m_direction;
+    }
+
+    int axis() const;
+
+  private:
+    int m_direction;
   };
 }
 }

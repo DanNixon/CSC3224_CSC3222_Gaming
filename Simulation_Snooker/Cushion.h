@@ -15,6 +15,6 @@
 class Cushion : public Simulation::Physics::PlanarEntity
 {
 public:
-  Cushion(const Engine::Maths::Vector2 &pos);
+  Cushion(const Engine::Maths::Vector2 &pos, int direction);
   virtual ~Cushion();
 };

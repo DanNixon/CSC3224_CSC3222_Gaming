@@ -44,12 +44,15 @@ namespace Simulation
 
     void InterfaceDetection::PlanePlane(bool &result, const PlanarEntity &a, const PlanarEntity &b)
     {
-      // TODO
+      result = (a.position() == b.position());
     }
 
     void InterfaceDetection::SpherePlane(bool &result, const SphericalEntity &a, const PlanarEntity &b)
     {
-      // TODO
+      const int axis = b.axis();
+      result = (a.position()[axis] > b.position()[axis]);
+      if (b.direction() == 1)
+        result = !result;
     }
   }
 }
