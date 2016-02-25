@@ -1,9 +1,19 @@
+/**
+ * @file
+ * @author Dan Nixon
+ */
+
 #pragma once
 
 namespace Engine
 {
 namespace Maths
 {
+  /**
+   * @class VectorOperations
+   * @brief Contains common operations to be performed using vectors.
+   * @author Dan Nixon
+   */
   class VectorOperations
   {
   public:

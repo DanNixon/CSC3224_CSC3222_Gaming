@@ -120,6 +120,9 @@ namespace Common
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   }
 
+  /**
+   * @brief Shows a loading screen between initialisation and first render.
+   */
   void Game::gameLoadScreen()
   {
     // TODO
