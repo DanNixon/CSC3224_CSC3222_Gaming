@@ -69,7 +69,7 @@ namespace Common
 
           // Dispatch event
           for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
-            it != m_eventHandlers.end(); ++it)
+               it != m_eventHandlers.end(); ++it)
             (*it)->handleEvent(e);
         }
 
@@ -133,7 +133,7 @@ namespace Common
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) < 0)
     {
       std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
-        << std::endl;
+                << std::endl;
       result = 1;
     }
     else
@@ -142,18 +142,18 @@ namespace Common
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-        SDL_GL_CONTEXT_PROFILE_CORE);
+                          SDL_GL_CONTEXT_PROFILE_CORE);
 
       /* Create window */
       m_window = SDL_CreateWindow(
-        m_windowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED,
-        SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight,
-        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+          m_windowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED,
+          SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight,
+          SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
       if (m_window == NULL)
       {
         std::cerr << "Window could not be created! SDL Error: "
-          << SDL_GetError() << std::endl;
+                  << SDL_GetError() << std::endl;
         result = 2;
       }
       else
@@ -163,7 +163,7 @@ namespace Common
         if (m_context == NULL)
         {
           std::cerr << "OpenGL context could not be created! SDL Error: "
-            << SDL_GetError() << std::endl;
+                    << SDL_GetError() << std::endl;
           result = 3;
         }
         else
@@ -174,7 +174,7 @@ namespace Common
           if (glewError != GLEW_OK)
           {
             std::cerr << "Error initializing GLEW: "
-              << glewGetErrorString(glewError) << std::endl;
+                      << glewGetErrorString(glewError) << std::endl;
             result = 4;
           }
         }

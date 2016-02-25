@@ -102,9 +102,10 @@ void SnookerSimulation::gameLoop(Uint8 id, Uint32 dtMilliSec)
   {
     PhysicsUpdate::Update(m_entities, (float)dtMilliSec);
 
-    for (Entity::EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
+    for (Entity::EntityPtrListIter it = m_entities.begin();
+         it != m_entities.end(); ++it)
     {
-      Ball * b = dynamic_cast<Ball *>(*it);
+      Ball *b = dynamic_cast<Ball *>(*it);
       if (!b)
         continue;
 

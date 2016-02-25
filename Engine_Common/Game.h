@@ -114,12 +114,12 @@ namespace Common
     SDL_GLContext m_context; //!< GL context
 
   protected:
-    std::string m_windowTitle; //!< Window title
-    int m_windowWidth;         //!< Window width
-    int m_windowHeight;        //!< Window height
+    std::string m_windowTitle;                  //!< Window title
+    int m_windowWidth;                          //!< Window width
+    int m_windowHeight;                         //!< Window height
     IEventHandler::HandlerList m_eventHandlers; //!< List of event handlers
-    GameLoopConfiguration
-        *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
+    GameLoopConfiguration *
+        m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
   };
 }
 }

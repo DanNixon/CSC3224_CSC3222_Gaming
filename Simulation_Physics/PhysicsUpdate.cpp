@@ -79,7 +79,7 @@ namespace Physics
   void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrList entities)
   {
     for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end();
-      ++it)
+         ++it)
     {
       // TODO
     }
