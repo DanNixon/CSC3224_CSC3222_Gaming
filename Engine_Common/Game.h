@@ -45,25 +45,11 @@ namespace Common
     Game(std::string WindowTitle, std::pair<int, int> resolution);
     virtual ~Game();
 
-    bool init();
-    void run();
-
-    /**
-     * @brief Checks to see if the framework is initialised after a call to
-     *        init().
-     * @return True for a successful initialisation
-     * @see Game::init
-     */
-    bool isInitialised() const
-    {
-      return m_initialised;
-    }
-
-    void addEventHandler(IEventHandler *handler);
+    int run();
 
     /** @name Window functions
-    *  @{
-    */
+     *  @{
+     */
 
     /**
      * @brief Gets the width of the window.
@@ -90,15 +76,19 @@ namespace Common
     /** @} */
 
     /** @name Timer/loop functions
-    *  @{
-    */
+     *  @{
+     */
 
     Uint8 addTimedLoop(Uint32 interval, const std::string &name);
     void removeTimedLoop(Uint8 id);
 
     /** @} */
 
+    void addEventHandler(IEventHandler *handler);
+
   protected:
+    virtual void gameLoadScreen();
+
     /**
      * @brief Performs any setup specific to the game.
      */
@@ -117,13 +107,13 @@ namespace Common
     virtual void gameShutdown() = 0;
 
   private:
+    int init();
     void close();
 
     SDL_Window *m_window;    //!< SDL window
     SDL_GLContext m_context; //!< GL context
 
   protected:
-    bool m_initialised;        //!< If the framework is initialised
     std::string m_windowTitle; //!< Window title
     int m_windowWidth;         //!< Window width
     int m_windowHeight;        //!< Window height

@@ -36,118 +36,64 @@ namespace Common
   }
 
   /**
-   * @brief Initializes the game engine.
-   * @return True if engine is successfully initialised
-   * @see Game::isInitialised
+   * @brief Run the game and process the main game loop.
    */
-  bool Game::init()
+  int Game::run()
   {
-    /* Initialize SDL */
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) < 0)
-    {
-      std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
-                << std::endl;
-      m_initialised = false;
-    }
-    else
-    {
-      /* Use OpenGL 3.1 core */
-      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-      SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-                          SDL_GL_CONTEXT_PROFILE_CORE);
+    int status = init();
 
-      /* Create window */
-      m_window = SDL_CreateWindow(
-          m_windowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED,
-          SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight,
-          SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    if (status == 0)
+    {
+      this->gameLoadScreen();
+      this->gameStartup();
 
-      if (m_window == NULL)
+      // Set time on loops
+      for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       {
-        std::cerr << "Window could not be created! SDL Error: "
-                  << SDL_GetError() << std::endl;
-        m_initialised = false;
+        if (m_loops[i] != NULL)
+          m_loops[i]->lastFired = SDL_GetTicks();
       }
-      else
+
+      SDL_Event e;
+      bool exit = false;
+      while (!exit)
       {
-        /* Create context */
-        m_context = SDL_GL_CreateContext(m_window);
-        if (m_context == NULL)
+        // Handle SDL events
+        while (SDL_PollEvent(&e) == 1)
         {
-          std::cerr << "OpenGL context could not be created! SDL Error: "
-                    << SDL_GetError() << std::endl;
-          m_initialised = false;
-        }
-        else
-        {
-          /* Initialize GLEW */
-          glewExperimental = GL_TRUE;
-          GLenum glewError = glewInit();
-          if (glewError != GLEW_OK)
+          if (e.type == SDL_QUIT)
           {
-            std::cerr << "Error initializing GLEW: "
-                      << glewGetErrorString(glewError) << std::endl;
+            exit = true;
+            break;
+          }
+
+          // Dispatch event
+          for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
+            it != m_eventHandlers.end(); ++it)
+            (*it)->handleEvent(e);
+        }
+
+        // Poll timed loops
+        for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
+        {
+          if (m_loops[i] == NULL)
+            continue;
+
+          Uint32 t = SDL_GetTicks();
+          Uint32 deltaT = t - m_loops[i]->lastFired;
+
+          if (deltaT >= m_loops[i]->interval)
+          {
+            m_loops[i]->lastFired = t;
+            this->gameLoop(i, deltaT);
           }
         }
       }
+
+      this->gameShutdown();
     }
 
-    m_initialised = true;
-    return m_initialised;
-  }
-
-  /**
-   * @brief Run the game and process the main game loop.
-   */
-  void Game::run()
-  {
-    if (!m_initialised)
-      return;
-
-    this->gameStartup();
-
-    // Set time on loops
-    for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
-    {
-      if (m_loops[i] != NULL)
-        m_loops[i]->lastFired = SDL_GetTicks();
-    }
-
-    SDL_Event e;
-    bool exit = false;
-    while (!exit)
-    {
-      while (SDL_PollEvent(&e) == 1)
-      {
-        if (e.type == SDL_QUIT)
-        {
-          exit = true;
-          break;
-        }
-
-        for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
-             it != m_eventHandlers.end(); ++it)
-          (*it)->handleEvent(e);
-      }
-
-      for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
-      {
-        if (m_loops[i] == NULL)
-          continue;
-
-        Uint32 t = SDL_GetTicks();
-        Uint32 deltaT = t - m_loops[i]->lastFired;
-
-        if (deltaT >= m_loops[i]->interval)
-        {
-          m_loops[i]->lastFired = t;
-          this->gameLoop(i, deltaT);
-        }
-      }
-    }
-
-    this->gameShutdown();
+    return status;
   }
 
   /**
@@ -174,9 +120,73 @@ namespace Common
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   }
 
+  void Game::gameLoadScreen()
+  {
+    // TODO
+  }
+
+  int Game::init()
+  {
+    int result = 0;
+
+    /* Initialize SDL */
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) < 0)
+    {
+      std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
+        << std::endl;
+      result = 1;
+    }
+    else
+    {
+      /* Use OpenGL 3.1 core */
+      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+      SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+        SDL_GL_CONTEXT_PROFILE_CORE);
+
+      /* Create window */
+      m_window = SDL_CreateWindow(
+        m_windowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight,
+        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+
+      if (m_window == NULL)
+      {
+        std::cerr << "Window could not be created! SDL Error: "
+          << SDL_GetError() << std::endl;
+        result = 2;
+      }
+      else
+      {
+        /* Create context */
+        m_context = SDL_GL_CreateContext(m_window);
+        if (m_context == NULL)
+        {
+          std::cerr << "OpenGL context could not be created! SDL Error: "
+            << SDL_GetError() << std::endl;
+          result = 3;
+        }
+        else
+        {
+          /* Initialize GLEW */
+          glewExperimental = GL_TRUE;
+          GLenum glewError = glewInit();
+          if (glewError != GLEW_OK)
+          {
+            std::cerr << "Error initializing GLEW: "
+              << glewGetErrorString(glewError) << std::endl;
+            result = 4;
+          }
+        }
+      }
+    }
+
+    return result;
+  }
+
   /**
-  * @brief Shuts down the game engine.
-  */
+   * @brief Shuts down the game engine.
+   */
   void Game::close()
   {
     SDL_DestroyWindow(m_window);

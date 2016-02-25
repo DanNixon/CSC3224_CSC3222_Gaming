@@ -14,8 +14,5 @@ using namespace Simulation::Physics;
 int main(int argc, char *argv[])
 {
   SnookerSimulation s;
-  s.init();
-  s.run();
-
-  return 0;
+  return s.run();;
 }

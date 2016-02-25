@@ -10,9 +10,5 @@
 int main(int argc, char *args[])
 {
   DemoGame g;
-
-  g.init();
-  g.run();
-
-  return 0;
+  return g.run();
 }
