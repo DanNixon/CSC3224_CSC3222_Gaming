@@ -29,7 +29,7 @@ namespace Common
 
   /**
    * @class Game
-   * @author Dan Nxion
+   * @author Dan Nixon
    * @brief Contains setup and shutdown logic for the game engine, should be the
    *        base class of any game using the engine.
    */

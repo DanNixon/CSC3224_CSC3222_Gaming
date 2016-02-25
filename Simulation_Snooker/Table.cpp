@@ -38,10 +38,10 @@ Table::Table()
   tex->load("table.bmp");
   setTexture(tex);
 
-  m_cushions[0] = new Cushion(Vector2(-HALF_DIMENSIONS.x(), 0.0f), 1);
-  m_cushions[1] = new Cushion(Vector2(HALF_DIMENSIONS.x(), 0.0f), -1);
-  m_cushions[2] = new Cushion(Vector2(0.0f, -HALF_DIMENSIONS.y()), 1);
-  m_cushions[3] = new Cushion(Vector2(0.0f, HALF_DIMENSIONS.y()), -1);
+  m_cushions[0] = new Cushion(Vector2(-HALF_DIMENSIONS.x(), 0.0f));
+  m_cushions[1] = new Cushion(Vector2(HALF_DIMENSIONS.x(), 0.0f));
+  m_cushions[2] = new Cushion(Vector2(0.0f, -HALF_DIMENSIONS.y()));
+  m_cushions[3] = new Cushion(Vector2(0.0f, HALF_DIMENSIONS.y()));
 }
 
 Table::~Table()

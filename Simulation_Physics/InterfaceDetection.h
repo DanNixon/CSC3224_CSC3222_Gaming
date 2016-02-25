@@ -14,6 +14,11 @@ namespace Simulation
     class SphericalEntity;
     class PlanarEntity;
 
+    /**
+     * @class InterfaceDetection
+     * @brief Contains tests for interface between two entities.
+     * @author Dan Nixon
+     */
     class InterfaceDetection
     {
     public:
