@@ -19,7 +19,7 @@ namespace Test
 TEST_CLASS(Vector3Test)
 {
 public:
-  TEST_METHOD(test_InitEmpty)
+  TEST_METHOD(Vector3_InitEmpty)
   {
     Vector3 v;
     Assert::AreEqual(v.x(), 0.0f);
@@ -27,7 +27,7 @@ public:
     Assert::AreEqual(v.z(), 0.0f);
   }
 
-  TEST_METHOD(test_Init)
+  TEST_METHOD(Vector3_Init)
   {
     Vector3 v(3.5f, 8.9f, 4.7f);
     Assert::AreEqual(v.x(), 3.5f);
@@ -35,7 +35,7 @@ public:
     Assert::AreEqual(v.z(), 4.7f);
   }
 
-  TEST_METHOD(test_toZero)
+  TEST_METHOD(Vector3_toZero)
   {
     Vector3 v(3.5f, 8.9f, 4.7f);
     v.toZero();
@@ -44,29 +44,19 @@ public:
     Assert::AreEqual(v.z(), 0.0f);
   }
 
-  TEST_METHOD(test_length2)
+  TEST_METHOD(Vector3_length2)
   {
     Vector3 v(5.0f, 5.0f, 5.0f);
     Assert::AreEqual(75.0f, v.length2());
   }
 
-  TEST_METHOD(test_length)
+  TEST_METHOD(Vector3_length)
   {
     Vector3 v(5.0f, 5.0f, 5.0f);
     Assert::AreEqual(8.6603f, v.length(), 0.001f);
   }
 
-  TEST_METHOD(test_normalise)
-  {
-    Vector3 v(5.0f, 3.0f, 2.0f);
-    v.normalise();
-    Assert::AreEqual(0.811f, v.x(), 0.001f);
-    Assert::AreEqual(0.486f, v.y(), 0.001f);
-    Assert::AreEqual(0.324f, v.z(), 0.001f);
-    Assert::AreEqual(1.0f, v.length(), 0.001f);
-  }
-
-  TEST_METHOD(test_invert)
+  TEST_METHOD(Vector3_invert)
   {
     Vector3 v(5.0f, 3.0f, 2.0f);
     v.invert();
@@ -75,7 +65,7 @@ public:
     Assert::AreEqual(-2.0f, v.z());
   }
 
-  TEST_METHOD(test_operatorMinusInverse)
+  TEST_METHOD(Vector3_operatorMinusInverse)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2 = -v1;
@@ -84,7 +74,7 @@ public:
     Assert::AreEqual(-2.0f, v2.z());
   }
 
-  TEST_METHOD(test_operatorPlus)
+  TEST_METHOD(Vector3_operatorPlus)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(2.0f, 1.0f, 0.5f);
@@ -94,7 +84,7 @@ public:
     Assert::AreEqual(2.5f, v3.z());
   }
 
-  TEST_METHOD(test_operatorPlusEquals)
+  TEST_METHOD(Vector3_operatorPlusEquals)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(2.0f, 1.0f, 0.5f);
@@ -104,7 +94,7 @@ public:
     Assert::AreEqual(2.5f, v1.z());
   }
 
-  TEST_METHOD(test_operatorMinus)
+  TEST_METHOD(Vector3_operatorMinus)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(2.0f, 1.0f, 0.5f);
@@ -114,7 +104,7 @@ public:
     Assert::AreEqual(1.5f, v3.z());
   }
 
-  TEST_METHOD(test_operatorMinusEquals)
+  TEST_METHOD(Vector3_operatorMinusEquals)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(2.0f, 1.0f, 0.5f);
@@ -124,7 +114,7 @@ public:
     Assert::AreEqual(1.5f, v1.z());
   }
 
-  TEST_METHOD(test_operatorMultVec)
+  TEST_METHOD(Vector3_operatorMultVec)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(2.0f, 3.0f, 0.5f);
@@ -134,7 +124,7 @@ public:
     Assert::AreEqual(1.0f, v3.z());
   }
 
-  TEST_METHOD(test_operatorMultFloat)
+  TEST_METHOD(Vector3_operatorMultFloat)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v3 = v1 * 2.0;
@@ -143,7 +133,7 @@ public:
     Assert::AreEqual(4.0f, v3.z());
   }
 
-  TEST_METHOD(test_operatorDivVec)
+  TEST_METHOD(Vector3_operatorDivVec)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(3.0f, 1.5f, 0.5f);
@@ -153,7 +143,7 @@ public:
     Assert::AreEqual(4.0f, v3.z());
   }
 
-  TEST_METHOD(test_operatorDivFloat)
+  TEST_METHOD(Vector3_operatorDivFloat)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v3 = v1 / 2.0;
@@ -162,7 +152,7 @@ public:
     Assert::AreEqual(1.0f, v3.z());
   }
 
-  TEST_METHOD(test_operatorEqual)
+  TEST_METHOD(Vector3_operatorEqual)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(5.0f, 3.0f, 2.0f);
@@ -177,7 +167,7 @@ public:
     Assert::IsFalse(v1 == v3);
   }
 
-  TEST_METHOD(test_operatorNotEqual)
+  TEST_METHOD(Vector3_operatorNotEqual)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(5.0f, 3.0f, 2.0f);
@@ -192,7 +182,7 @@ public:
     Assert::IsTrue(v1 != v3);
   }
 
-  TEST_METHOD(test_operatorIndexConst)
+  TEST_METHOD(Vector3_operatorIndexConst)
   {
     const Vector3 v1(5.0f, 3.0f, 2.0f);
     Assert::AreEqual(5.0f, v1[0]);
@@ -201,7 +191,7 @@ public:
     Assert::AreEqual(0.0f, v1[3]);
   }
 
-  TEST_METHOD(test_operatorIndex)
+  TEST_METHOD(Vector3_operatorIndex)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Assert::AreEqual(5.0f, v1[0]);
@@ -215,7 +205,7 @@ public:
     Assert::AreEqual(16.0f, v1[2]);
   }
 
-  TEST_METHOD(test_operatorStreamOutput)
+  TEST_METHOD(Vector3_operatorStreamOutput)
   {
     Vector3 v(5.1f, 3.2f, 2.3f);
     std::stringstream stream;
@@ -223,7 +213,7 @@ public:
     Assert::AreEqual(std::string("[5.1,3.2,2.3]"), stream.str());
   }
 
-  TEST_METHOD(test_operatorStreamInput)
+  TEST_METHOD(Vector3_operatorStreamInput)
   {
     std::stringstream stream;
     stream << "[5.1,3.2,2.3]";
@@ -236,7 +226,7 @@ public:
     Assert::AreEqual(2.3f, v.z());
   }
 
-  TEST_METHOD(test_dot)
+  TEST_METHOD(Vector3_dot)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(2.0f, -2.0f, 8.0f);
@@ -244,7 +234,7 @@ public:
     Assert::AreEqual(20.0f, dotProd, 0.0001f);
   }
 
-  TEST_METHOD(test_cross)
+  TEST_METHOD(Vector3_cross)
   {
     Vector3 v1(5.0f, 3.0f, 2.0f);
     Vector3 v2(2.0f, -2.0f, 8.0f);
@@ -252,22 +242,6 @@ public:
     Assert::AreEqual(28.0f, crossProd.x(), 0.0001f);
     Assert::AreEqual(-36.0f, crossProd.y(), 0.0001f);
     Assert::AreEqual(-16.0f, crossProd.z(), 0.0001f);
-  }
-
-  TEST_METHOD(test_distance)
-  {
-    Vector3 v1(5.0f, 3.0f, 2.0f);
-    Vector3 v2(6.0f, 4.0f, 9.0f);
-    float dist = Vector3::distance(v1, v2);
-    Assert::AreEqual(7.1414f, dist, 0.001f);
-  }
-
-  TEST_METHOD(test_distance2)
-  {
-    Vector3 v1(5.0f, 3.0f, 2.0f);
-    Vector3 v2(6.0f, 4.0f, 9.0f);
-    float dist2 = Vector3::distance2(v1, v2);
-    Assert::AreEqual(51.0f, dist2, 0.001f);
   }
 };
 #endif /* DOXYGEN_SKIP */

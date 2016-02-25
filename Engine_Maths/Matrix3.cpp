@@ -5,6 +5,8 @@
 
 #include "Matrix3.h"
 
+#include "VectorOperations.h"
+
 namespace Engine
 {
 namespace Maths
@@ -95,7 +97,7 @@ namespace Maths
 
     Vector3 axis = inaxis;
 
-    axis.normalise();
+    VectorOperations::Normalise(axis);
 
     float c = cos((float)DegToRad(degrees));
     float s = sin((float)DegToRad(degrees));

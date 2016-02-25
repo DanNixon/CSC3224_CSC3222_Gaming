@@ -5,6 +5,8 @@
 
 #include "Matrix4.h"
 
+#include "VectorOperations.h"
+
 namespace Engine
 {
 namespace Maths
@@ -163,7 +165,7 @@ namespace Maths
     Matrix4 m;
 
     Vector3 f = (lookingAt - from);
-    f.normalise();
+    VectorOperations::Normalise(f);
 
     Vector3 s = Vector3::cross(f, up);
     Vector3 u = Vector3::cross(s, f);
@@ -198,7 +200,7 @@ namespace Maths
 
     Vector3 axis = inaxis;
 
-    axis.normalise();
+    VectorOperations::Normalise(axis);
 
     float c = cos((float)DegToRad(degrees));
     float s = sin((float)DegToRad(degrees));

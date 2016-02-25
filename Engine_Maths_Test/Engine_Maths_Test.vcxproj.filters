@@ -7,5 +7,6 @@
     <ClCompile Include="Vector2Test.cpp" />
     <ClCompile Include="Vector3Test.cpp" />
     <ClCompile Include="Vector4Test.cpp" />
+    <ClCompile Include="VectorOperationsTest.cpp" />
   </ItemGroup>
 </Project>

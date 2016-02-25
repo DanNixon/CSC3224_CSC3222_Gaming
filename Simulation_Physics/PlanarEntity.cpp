@@ -5,6 +5,8 @@
 
 #include "PlanarEntity.h"
 
+#include <VectorOperations.h>
+
 using namespace Engine::Maths;
 
 namespace Simulation
@@ -31,8 +33,7 @@ namespace Physics
 
   Vector2 PlanarEntity::normal() const
   {
-    Vector2 norm(m_position);
-    norm.normalise();
+    Vector2 norm = VectorOperations::GetNormalised(m_position);
     return norm;
   }
 }

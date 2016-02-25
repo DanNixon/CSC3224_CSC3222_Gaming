@@ -5,7 +5,8 @@
 
 #include "Mesh.h"
 
-#include "math_common.h"
+#include <math_common.h>
+#include <VectorOperations.h>
 
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
@@ -130,7 +131,7 @@ namespace Graphics
       Vector3 &c = m_vertices[i + 2];
 
       Vector3 normal = Vector3::cross(b - a, c - a);
-      normal.normalise();
+      VectorOperations::Normalise(normal);
 
       m_normals[i] = normal;
       m_normals[i + 1] = normal;

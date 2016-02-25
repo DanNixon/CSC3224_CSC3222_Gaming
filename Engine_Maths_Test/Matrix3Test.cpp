@@ -19,7 +19,7 @@ namespace Test
 TEST_CLASS(Matrix3Test)
 {
 public:
-  TEST_METHOD(test_InitEmpty)
+  TEST_METHOD(Matrix3_InitEmpty)
   {
     Matrix3 m;
   }

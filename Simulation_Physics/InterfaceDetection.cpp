@@ -6,6 +6,7 @@
 #include "InterfaceDetection.h"
 
 #include <Vector2.h>
+#include <VectorOperations.h>
 
 #include "SphericalEntity.h"
 #include "PlanarEntity.h"
@@ -37,7 +38,7 @@ namespace Simulation
 
     void InterfaceDetection::SphereSphere(bool &result, const SphericalEntity &a, const SphericalEntity &b)
     {
-      float d = Vector2::distance2(a.position(), b.position());
+      float d = VectorOperations::Distance2(a.position(), b.position());
       float r = a.radius() + b.radius();
       r *= r;
       result = (d < r);

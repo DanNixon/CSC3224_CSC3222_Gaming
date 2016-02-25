@@ -20,7 +20,7 @@ namespace Test
 TEST_CLASS(INIKeyValueStoreTest)
 {
 public:
-  TEST_METHOD(test_LoadINIFromStream)
+  TEST_METHOD(INIKeyValueStore_LoadINIFromStream)
   {
     // Sample INI string
     std::stringstream stream;
@@ -64,7 +64,7 @@ public:
     Assert::AreEqual(std::string("maybe"), child1.get("a b c"));
   }
 
-  TEST_METHOD(test_BuildINIFromStream)
+  TEST_METHOD(INIKeyValueStore_BuildINIFromStream)
   {
     // Build test structure
     INIKeyValueStore store;

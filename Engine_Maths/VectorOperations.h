@@ -14,7 +14,7 @@ namespace Engine
        * @return Distance
        */
       template <typename T>
-      inline T distance(const T &a, const T &b)
+      inline static float Distance(const T &a, const T &b)
       {
         return (b - a).length();
       }
@@ -26,18 +26,20 @@ namespace Engine
        * @return Distance squared
        */
       template <typename T>
-      inline T distance2(const T &a, const T &b)
+      inline static float Distance2(const T &a, const T &b)
       {
         return (b - a).length2();
       }
 
       /**
        * @brief Normalises a vector to a length of 1.0.
-       *
+       * @param a Vector
+       * @return Normalised vector
+
        * Divides each component of the vector by its length.
        */
       template <typename T>
-      inline T normalise(const T &a)
+      inline static T GetNormalised(const T &a)
       {
         float len = a.length();
 
@@ -45,6 +47,21 @@ namespace Engine
           return a / len;
         else
           return a;
+      }
+
+      /**
+      * @brief Normalises a vector to a length of 1.0.
+      * @param a Vector
+
+      * Divides each component of the vector by its length.
+      */
+      template <typename T>
+      inline static void Normalise(T &a)
+      {
+        float len = a.length();
+
+        if (len != 0.0)
+          a = a / len;
       }
     };
   }

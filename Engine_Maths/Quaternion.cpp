@@ -8,6 +8,7 @@
 #include <cmath>
 #include <stdexcept>
 
+#include "VectorOperations.h"
 #include "math_common.h"
 
 namespace Engine
@@ -63,7 +64,7 @@ namespace Maths
     m_w = (float)cos(0.5f * DegToRad(angle));
     const float s = (float)sin(0.5f * DegToRad(angle));
     Vector3 temp(axis);
-    temp.normalise();
+    VectorOperations::Normalise(temp);
     m_i = s * temp.x();
     m_j = s * temp.y();
     m_k = s * temp.z();
