@@ -14,6 +14,11 @@
 
 namespace Engine
 {
+namespace Utility
+{
+  class Profiler;
+}
+
 namespace Common
 {
   /**
@@ -112,6 +117,7 @@ namespace Common
 
     SDL_Window *m_window;    //!< SDL window
     SDL_GLContext m_context; //!< GL context
+    Engine::Utility::Profiler * m_profiler;
 
   protected:
     std::string m_windowTitle;                  //!< Window title

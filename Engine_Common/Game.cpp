@@ -7,8 +7,8 @@
 
 #include <iostream>
 
-#include <SDL\SDL_opengl.h>
 #include <gl\glew.h>
+#include <SDL\SDL_opengl.h>
 #include <gl\glu.h>
 
 #include "IEventHandler.h"
@@ -26,6 +26,7 @@ namespace Common
       : m_windowTitle(windowTitle)
       , m_windowWidth(resolution.first)
       , m_windowHeight(resolution.second)
+      , m_profiler(NULL)
   {
     for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       m_loops[i] = NULL;
