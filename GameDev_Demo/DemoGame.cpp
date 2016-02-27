@@ -7,8 +7,8 @@
 
 #include <SDL/SDL.h>
 
-#include <Shaders.h>
 #include <KeyboardHandler.h>
+#include <Shaders.h>
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;

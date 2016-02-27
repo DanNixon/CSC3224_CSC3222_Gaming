@@ -5,13 +5,13 @@
 
 #include "Mesh.h"
 
-#include <math_common.h>
 #include <VectorOperations.h>
+#include <math_common.h>
 
-#include <assimp/cimport.h>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
+#include <assimp/cimport.h>
+#include <assimp/postprocess.h>
+#include <assimp/scene.h>
 
 using namespace Engine::Maths;
 

@@ -104,7 +104,7 @@ namespace Physics
     const bool m_stationary;      //!< Flag indicating this entity is stationary
     const float m_dragCoeff;      //!< Velocity coefficient due to simple drag
     const float m_velocityFloor2; //!< Velcoity magnitude squared at which
-                                  //velocity is set to zero
+                                  // velocity is set to zero
 
     Engine::Maths::Vector2 m_position;     //!< Position of Entity
     Engine::Maths::Vector2 m_velocity;     //!< Velocity in current timestep

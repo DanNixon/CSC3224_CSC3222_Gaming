@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include <iostream>
 #include "Vector3.h"
+#include <iostream>
 
 namespace Engine
 {

@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include "SceneObject.h"
 #include "Mesh.h"
+#include "SceneObject.h"
 #include "ShaderProgram.h"
 #include "Texture.h"
 

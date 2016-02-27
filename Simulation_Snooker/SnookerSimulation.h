@@ -12,8 +12,8 @@
 
 #include <Entity.h>
 
-#include "Table.h"
 #include "Ball.h"
+#include "Table.h"
 
 /**
  * @class SnookerSimulation

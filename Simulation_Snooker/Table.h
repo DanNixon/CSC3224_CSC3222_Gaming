@@ -5,9 +5,9 @@
 
 #pragma once
 
+#include "Cushion.h"
 #include <RenderableObject.h>
 #include <Vector2.h>
-#include "Cushion.h"
 
 /**
  * @class Table

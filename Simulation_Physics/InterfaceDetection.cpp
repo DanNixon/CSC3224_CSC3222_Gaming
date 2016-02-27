@@ -8,8 +8,8 @@
 #include <Vector2.h>
 #include <VectorOperations.h>
 
-#include "SphericalEntity.h"
 #include "PlanarEntity.h"
+#include "SphericalEntity.h"
 
 using namespace Engine::Maths;
 

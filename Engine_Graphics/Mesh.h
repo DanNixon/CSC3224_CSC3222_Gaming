@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include <vector>
-#include <string>
 #include <fstream>
+#include <string>
+#include <vector>
 
 #include <GL/glew.h>
 #include <SDL/SDL_opengl.h>
@@ -82,8 +82,8 @@ namespace Graphics
 
     Engine::Maths::Vector3 *m_vertices; //!< Pointer to vertex position data
     Engine::Maths::Vector4 *m_colours;  //!< Pointer to vertex colour data
-    Engine::Maths::Vector2 *
-        m_textureCoords; //!< Pointer to vertex texture coordinate data
+    Engine::Maths::Vector2
+        *m_textureCoords; //!< Pointer to vertex texture coordinate data
     Engine::Maths::Vector3 *m_normals;  //!< Pointer to vertex normals data
     Engine::Maths::Vector3 *m_tangents; //!< Pointer to vertex tangents data
     size_t *m_indices;                  //!< Pointer to vertex indices data

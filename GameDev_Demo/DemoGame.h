@@ -7,12 +7,12 @@
 
 #include <Game.h>
 
-#include <Scene.h>
-#include <RenderableObject.h>
-#include <ShaderProgram.h>
+#include "DemoJoystickHandler.h"
 #include "DemoKeyboardHandler.h"
 #include "DemoMouseHandler.h"
-#include "DemoJoystickHandler.h"
+#include <RenderableObject.h>
+#include <Scene.h>
+#include <ShaderProgram.h>
 
 /**
  * @class DemoGame

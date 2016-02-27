@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include <string>
 #include <istream>
 #include <ostream>
+#include <string>
 
 #include "KVNode.h"
 

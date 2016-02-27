@@ -5,8 +5,8 @@
 
 #include "ShaderProgram.h"
 
-#include "Shader.h"
 #include "Mesh.h"
+#include "Shader.h"
 
 namespace Engine
 {

@@ -6,8 +6,8 @@
 #pragma once
 
 #include <RenderableObject.h>
-#include <Vector4.h>
 #include <SphericalEntity.h>
+#include <Vector4.h>
 
 /**
  * @class Ball

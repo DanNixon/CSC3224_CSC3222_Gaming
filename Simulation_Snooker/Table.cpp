@@ -6,8 +6,8 @@
 #include "Table.h"
 
 #include <Mesh.h>
-#include <Texture.h>
 #include <Shaders.h>
+#include <Texture.h>
 
 using namespace Engine::Maths;
 using namespace Engine::Graphics;

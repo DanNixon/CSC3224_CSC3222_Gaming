@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include <string>
 #include <GL/glew.h>
 #include <SOIL/SOIL.h>
+#include <string>
 
 namespace Engine
 {
