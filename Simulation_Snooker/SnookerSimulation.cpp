@@ -88,7 +88,7 @@ void SnookerSimulation::gameStartup()
 /**
  * @copydoc Game::gameLoop
  */
-void SnookerSimulation::gameLoop(Uint8 id, Uint32 dtMilliSec)
+void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
 {
   // Handle graphics
   if (id == m_graphicsLoop)

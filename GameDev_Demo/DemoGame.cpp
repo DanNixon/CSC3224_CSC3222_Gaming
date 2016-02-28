@@ -65,8 +65,8 @@ void DemoGame::gameStartup()
   m_joystick.open(0);
   addEventHandler(&m_joystick);
 
-  m_graphicsLoop = addTimedLoop(16, "graphics");
-  m_physicsLoop = addTimedLoop(8, "physics");
+  m_graphicsLoop = addTimedLoop(16.66, "graphics");
+  m_physicsLoop = addTimedLoop(8.33, "physics");
   m_profileLoop = addTimedLoop(1000, "profile");
 
   m_profiler = new Profiler(this);
@@ -75,7 +75,7 @@ void DemoGame::gameStartup()
 /**
  * @copydoc Game::gameLoop
  */
-void DemoGame::gameLoop(Uint8 id, Uint32 dtMilliSec)
+void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
 {
   if (id == m_graphicsLoop)
   {

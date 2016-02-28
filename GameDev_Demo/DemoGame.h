@@ -27,7 +27,7 @@ public:
 
 protected:
   void gameStartup();
-  void gameLoop(Uint8 id, Uint32 dtMilliSec);
+  void gameLoop(Uint8 id, float dtMilliSec);
   void gameShutdown();
 
 private:

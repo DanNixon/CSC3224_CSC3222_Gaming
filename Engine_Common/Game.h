@@ -9,6 +9,7 @@
 #include <vector>
 
 #include <SDL/SDL.h>
+#include <Windows.h>
 
 #include "IEventHandler.h"
 
@@ -24,8 +25,8 @@ namespace Common
    */
   struct GameLoopConfiguration
   {
-    Uint32 lastFired;     //!< Last time the timer fired (in milliseconds)
-    Uint32 interval;      //!< Timer interval (in milliseconds)
+    float lastFired;     //!< Last time the timer fired (in milliseconds)
+    float interval;      //!< Timer interval (in milliseconds)
     std::string loopName; //!< Name of loop
   };
 
@@ -48,6 +49,8 @@ namespace Common
     virtual ~Game();
 
     int run();
+
+    float time() const;
 
     /** @name Window functions
      *  @{
@@ -81,7 +84,7 @@ namespace Common
      *  @{
      */
 
-    Uint8 addTimedLoop(Uint32 interval, const std::string &name);
+    Uint8 addTimedLoop(float interval, const std::string &name);
     void removeTimedLoop(Uint8 id);
 
     /** @} */
@@ -101,7 +104,7 @@ namespace Common
      * @param id Loop ID
      * @param dtMilliSec Time in milliseconds since this loop last executed
      */
-    virtual void gameLoop(Uint8 id, Uint32 dtMilliSec) = 0;
+    virtual void gameLoop(Uint8 id, float dtMilliSec) = 0;
 
     /**
      * @brief Performs any shutdown logic specific to the game.
@@ -116,6 +119,9 @@ namespace Common
 
     SDL_Window *m_window;    //!< SDL window
     SDL_GLContext m_context; //!< GL context
+
+    LARGE_INTEGER m_freq;
+    LARGE_INTEGER m_start;
 
   protected:
     friend class Profiler;

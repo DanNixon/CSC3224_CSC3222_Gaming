@@ -31,6 +31,8 @@ namespace Common
   {
     for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       m_loops[i] = NULL;
+
+    QueryPerformanceFrequency(&m_freq);
   }
 
   Game::~Game()
@@ -50,6 +52,7 @@ namespace Common
       this->gameStartup();
 
       // Set time on loops
+      QueryPerformanceCounter(&m_start);
       for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       {
         if (m_loops[i] != NULL)
@@ -84,8 +87,8 @@ namespace Common
           if (m_loops[i] == NULL)
             continue;
 
-          Uint32 t = SDL_GetTicks();
-          Uint32 deltaT = t - m_loops[i]->lastFired;
+          float t = time();
+          float deltaT = t - m_loops[i]->lastFired;
 
           if (deltaT >= m_loops[i]->interval)
           {
@@ -101,6 +104,13 @@ namespace Common
     }
 
     return status;
+  }
+
+  float Game::time() const
+  {
+    LARGE_INTEGER t;
+    QueryPerformanceCounter(&t);
+    return (float)((t.QuadPart - m_start.QuadPart) * 1000.0f / m_freq.QuadPart);
   }
 
   /**
@@ -204,7 +214,7 @@ namespace Common
     SDL_Quit();
   }
 
-  Uint8 Game::addTimedLoop(Uint32 interval, const std::string &name)
+  Uint8 Game::addTimedLoop(float interval, const std::string &name)
   {
     Uint8 idx = 0;
     while (m_loops[idx] != NULL && idx < MAX_TIMED_LOOPS)
@@ -214,7 +224,7 @@ namespace Common
 
     config->interval = interval;
     config->loopName = name;
-    config->lastFired = 0;
+    config->lastFired = 0.0f;
 
     m_loops[idx] = config;
 
