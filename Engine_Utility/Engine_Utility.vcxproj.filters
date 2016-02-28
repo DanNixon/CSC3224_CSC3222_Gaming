@@ -2,10 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Random.cpp" />
-    <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Random.h" />
-    <ClInclude Include="Profiler.h" />
   </ItemGroup>
 </Project>

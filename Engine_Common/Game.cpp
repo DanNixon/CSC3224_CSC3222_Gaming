@@ -12,6 +12,7 @@
 #include <gl\glu.h>
 
 #include "IEventHandler.h"
+#include "Profiler.h"
 
 namespace Engine
 {
@@ -59,6 +60,9 @@ namespace Common
       bool exit = false;
       while (!exit)
       {
+        if (m_profiler)
+          m_profiler->m_loopUpdates[Profiler::MAIN_LOOP]++;
+
         // Handle SDL events
         while (SDL_PollEvent(&e) == 1)
         {
@@ -85,6 +89,8 @@ namespace Common
 
           if (deltaT >= m_loops[i]->interval)
           {
+            if (m_profiler != NULL)
+              m_profiler->m_loopUpdates[i]++;
             m_loops[i]->lastFired = t;
             this->gameLoop(i, deltaT);
           }

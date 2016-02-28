@@ -10,6 +10,8 @@
 #include <KeyboardHandler.h>
 #include <Shaders.h>
 
+#include <Profiler.h>
+
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -65,6 +67,9 @@ void DemoGame::gameStartup()
 
   m_graphicsLoop = addTimedLoop(16, "graphics");
   m_physicsLoop = addTimedLoop(8, "physics");
+  m_profileLoop = addTimedLoop(1000, "profile");
+
+  m_profiler = new Profiler(this);
 }
 
 /**
@@ -85,6 +90,11 @@ void DemoGame::gameLoop(Uint8 id, Uint32 dtMilliSec)
 
     if (m_joystick.button(0))
       std::cout << "JS button 0 pressed" << std::endl;
+  }
+  else if (id == m_profileLoop)
+  {
+    m_profiler->computeStats(dtMilliSec);
+    m_profiler->detailRates(std::cout);
   }
 }
 

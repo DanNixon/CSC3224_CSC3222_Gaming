@@ -14,13 +14,10 @@
 
 namespace Engine
 {
-namespace Utility
-{
-  class Profiler;
-}
-
 namespace Common
 {
+  class Profiler;
+
   /**
    * @struct GameLoopConfiguration
    * @brief Holds configuration and state for loop timers.
@@ -111,15 +108,18 @@ namespace Common
      */
     virtual void gameShutdown() = 0;
 
+    Profiler * m_profiler;
+
   private:
     int init();
     void close();
 
     SDL_Window *m_window;    //!< SDL window
     SDL_GLContext m_context; //!< GL context
-    Engine::Utility::Profiler * m_profiler;
 
   protected:
+    friend class Profiler;
+
     std::string m_windowTitle;                  //!< Window title
     int m_windowWidth;                          //!< Window width
     int m_windowHeight;                         //!< Window height

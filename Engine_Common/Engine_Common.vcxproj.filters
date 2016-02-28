@@ -5,10 +5,12 @@
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />
+    <ClInclude Include="Profiler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
 </Project>

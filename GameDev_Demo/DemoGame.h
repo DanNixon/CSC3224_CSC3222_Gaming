@@ -33,6 +33,7 @@ protected:
 private:
   Uint8 m_graphicsLoop;
   Uint8 m_physicsLoop;
+  Uint8 m_profileLoop;
 
   Engine::Graphics::ShaderProgram *m_sp;
   Engine::Common::Scene *m_s;
