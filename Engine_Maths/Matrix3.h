@@ -3,7 +3,8 @@
  * @author Rich Davison, Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_MATHS_MATRIX3_H_
+#define _ENGINE_MATHS_MATRIX3_H_
 
 #include "Matrix4.h"
 
@@ -155,3 +156,5 @@ namespace Maths
   };
 }
 }
+
+#endif

@@ -3,7 +3,8 @@
  * @author Rich Davison, Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_GRAPHICS_MESH_H_
+#define _ENGINE_GRAPHICS_MESH_H_
 
 #include <fstream>
 #include <string>
@@ -90,3 +91,5 @@ namespace Graphics
   };
 }
 }
+
+#endif

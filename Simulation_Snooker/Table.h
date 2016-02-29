@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _SIMULATIONSNOOKER_TABLE_H_
+#define _SIMULATIONSNOOKER_TABLE_H_
 
 #include "Cushion.h"
 #include <RenderableObject.h>
@@ -36,3 +37,5 @@ public:
 private:
   Cushion *m_cushions[4]; //!< Side cushions
 };
+
+#endif

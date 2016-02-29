@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_GRAPHICS_SHADERS_H_
+#define _ENGINE_GRAPHICS_SHADERS_H_
 
 #include "Shader.h"
 
@@ -102,3 +103,5 @@ namespace Graphics
   };
 }
 }
+
+#endif

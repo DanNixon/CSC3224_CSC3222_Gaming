@@ -3,7 +3,8 @@
 * @author Dan Nixon
 */
 
-#pragma once
+#ifndef _DEMOMOUSEHANDLER_H_
+#define _DEMOMOUSEHANDLER_H_
 
 #include <MouseHandler.h>
 
@@ -48,3 +49,5 @@ public:
               << std::endl;
   }
 };
+
+#endif

@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_GRAPHICS_SHADERPROGRAM_H_
+#define _ENGINE_GRAPHICS_SHADERPROGRAM_H_
 
 #include "GL/glew.h"
 
@@ -62,3 +63,5 @@ namespace Graphics
   };
 }
 }
+
+#endif

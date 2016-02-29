@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_GRAPHICS_TEXTURE_H_
+#define _ENGINE_GRAPHICS_TEXTURE_H_
 
 #include <GL/glew.h>
 #include <SOIL/SOIL.h>
@@ -43,3 +44,5 @@ namespace Graphics
   };
 }
 }
+
+#endif

@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _SIMULATION_PHYSICS_INTERFACEDETECTION_H_
+#define _SIMULATION_PHYSICS_INTERFACEDETECTION_H_
 
 #include "Entity.h"
 
@@ -33,3 +34,5 @@ namespace Physics
   };
 }
 }
+
+#endif

@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_MATHS_QUATERNION_H_
+#define _ENGINE_MATHS_QUATERNION_H_
 
 #include "Vector3.h"
 #include <iostream>
@@ -70,3 +71,5 @@ namespace Maths
   std::istream &operator>>(std::istream &stream, Quaternion &q);
 }
 }
+
+#endif

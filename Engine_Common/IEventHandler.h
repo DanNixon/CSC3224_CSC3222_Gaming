@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_COMMON_IEVENTHANDLER_H_
+#define _ENGINE_COMMON_IEVENTHANDLER_H_
 
 #include <initializer_list>
 #include <vector>
@@ -92,3 +93,5 @@ namespace Common
   };
 }
 }
+
+#endif

@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_COMMON_SCENE_H_
+#define _ENGINE_COMMON_SCENE_H_
 
 #include "Matrix4.h"
 
@@ -41,3 +42,5 @@ namespace Common
   };
 }
 }
+
+#endif

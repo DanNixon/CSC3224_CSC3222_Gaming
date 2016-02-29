@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_COMMON_SCENEOBJECT_H_
+#define _ENGINE_COMMON_SCENEOBJECT_H_
 
 #include <vector>
 
@@ -96,3 +97,5 @@ namespace Common
   };
 }
 }
+
+#endif

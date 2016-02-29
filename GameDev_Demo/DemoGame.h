@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _DEMOGAME_H_
+#define _DEMOGAME_H_
 
 #include <Game.h>
 
@@ -45,3 +46,5 @@ private:
   DemoMouseHandler m_mouse;
   DemoJoystickHandler m_joystick;
 };
+
+#endif

@@ -3,7 +3,8 @@
 * @author Dan Nixon
 */
 
-#pragma once
+#ifndef _SIMULATIONSNOOKER_BALL_H_
+#define _SIMULATIONSNOOKER_BALL_H_
 
 #include <RenderableObject.h>
 #include <SphericalEntity.h>
@@ -33,3 +34,5 @@ public:
 private:
   int m_points; //!< Number of points potting this ball gets
 };
+
+#endif

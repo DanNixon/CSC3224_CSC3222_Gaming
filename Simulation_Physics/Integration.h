@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _SIMULATION_PHYSICS_INTEGRATION_H_
+#define _SIMULATION_PHYSICS_INTEGRATION_H_
 
 #include <Vector3.h>
 
@@ -43,3 +44,5 @@ namespace Physics
   };
 }
 }
+
+#endif

@@ -3,7 +3,8 @@
 * @author Dan Nixon
 */
 
-#pragma once
+#ifndef _DEMOKEYBOARDHANDLER_H_
+#define _DEMOKEYBOARDHANDLER_H_
 
 #include <KeyboardHandler.h>
 
@@ -36,3 +37,5 @@ public:
               << "Key: " << e.keysym.sym << std::endl;
   }
 };
+
+#endif

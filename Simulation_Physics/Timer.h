@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _SIMULATION_PHYSICS_TIMER_H_
+#define _SIMULATION_PHYSICS_TIMER_H_
 
 #include <Windows.h>
 
@@ -42,3 +43,5 @@ namespace Physics
   };
 }
 }
+
+#endif

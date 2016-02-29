@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_MATHS_VECTOR4_H_
+#define _ENGINE_MATHS_VECTOR4_H_
 
 #include <iostream>
 
@@ -343,3 +344,5 @@ namespace Maths
   };
 }
 }
+
+#endif

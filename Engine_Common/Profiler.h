@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_COMMON_PROFILER_H_
+#define _ENGINE_COMMON_PROFILER_H_
 
 #include "Game.h"
 
@@ -42,3 +43,5 @@ namespace Common
   };
 }
 }
+
+#endif

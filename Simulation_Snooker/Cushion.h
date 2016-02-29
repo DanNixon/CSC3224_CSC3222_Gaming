@@ -3,7 +3,8 @@
 * @author Dan Nixon
 */
 
-#pragma once
+#ifndef _SIMULATIONSNOOKER_CUSHION_H_
+#define _SIMULATIONSNOOKER_CUSHION_H_
 
 #include <PlanarEntity.h>
 
@@ -18,3 +19,5 @@ public:
   Cushion(const Engine::Maths::Vector2 &pos);
   virtual ~Cushion();
 };
+
+#endif

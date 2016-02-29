@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_IO_IKEYVALUESTORE_H_
+#define _ENGINE_IO_IKEYVALUESTORE_H_
 
 #include <istream>
 #include <ostream>
@@ -63,3 +64,5 @@ namespace IO
   };
 }
 }
+
+#endif

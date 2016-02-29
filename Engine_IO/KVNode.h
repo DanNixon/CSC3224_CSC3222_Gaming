@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_IO_KVNODE_H_
+#define _ENGINE_IO_KVNODE_H_
 
 #include <map>
 #include <string>
@@ -167,3 +168,5 @@ namespace IO
   };
 }
 }
+
+#endif

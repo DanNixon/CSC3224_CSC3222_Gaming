@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_COMMON_GAME_H_
+#define _ENGINE_COMMON_GAME_H_
 
 #include <string>
 #include <vector>
@@ -136,3 +137,5 @@ namespace Common
   };
 }
 }
+
+#endif

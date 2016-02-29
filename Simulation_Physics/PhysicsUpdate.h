@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _SIMULATION_PHYSICS_PHYSICSUPDATE_H_
+#define _SIMULATION_PHYSICS_PHYSICSUPDATE_H_
 
 #include "Entity.h"
 
@@ -45,3 +46,5 @@ namespace Physics
   };
 }
 }
+
+#endif

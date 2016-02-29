@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _SIMULATIONSNOOKER_SNOOKERSIMULATION_H_
+#define _SIMULATIONSNOOKER_SNOOKERSIMULATION_H_
 
 #include <Game.h>
 
@@ -47,3 +48,5 @@ private:
 
   Simulation::Physics::Entity::EntityPtrList m_entities;
 };
+
+#endif

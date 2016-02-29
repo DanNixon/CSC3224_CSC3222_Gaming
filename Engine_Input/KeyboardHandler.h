@@ -3,7 +3,8 @@
 * @author Dan Nixon
 */
 
-#pragma once
+#ifndef _ENGINE_INPUT_KEYBOARDHANDLER_H_
+#define _ENGINE_INPUT_KEYBOARDHANDLER_H_
 
 #include <IEventHandler.h>
 
@@ -35,3 +36,5 @@ namespace Input
   };
 }
 }
+
+#endif

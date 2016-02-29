@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_MATHS_VECTOROPERATIONS_H_
+#define _ENGINE_MATHS_VECTOROPERATIONS_H_
 
 namespace Engine
 {
@@ -72,3 +73,5 @@ namespace Maths
   };
 }
 }
+
+#endif

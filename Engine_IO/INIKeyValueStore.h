@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_IO_INIKEYVALUESTORE_H_
+#define _ENGINE_IO_INIKEYVALUESTORE_H_
 
 #include "IKeyValueStore.h"
 
@@ -31,3 +32,5 @@ namespace IO
   };
 }
 }
+
+#endif

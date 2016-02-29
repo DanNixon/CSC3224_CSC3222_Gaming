@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_GRAPHICS_RENDERABLEOBJECT_H_
+#define _ENGINE_GRAPHICS_RENDERABLEOBJECT_H_
 
 #include "Mesh.h"
 #include "SceneObject.h"
@@ -94,3 +95,5 @@ namespace Graphics
   };
 }
 }
+
+#endif

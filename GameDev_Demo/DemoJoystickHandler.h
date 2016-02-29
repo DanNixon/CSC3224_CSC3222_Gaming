@@ -3,7 +3,8 @@
 * @author Dan Nixon
 */
 
-#pragma once
+#ifndef _DEMOJOYSTICKHANDLER_H_
+#define _DEMOJOYSTICKHANDLER_H_
 
 #include <JoystickHandler.h>
 
@@ -45,3 +46,5 @@ public:
               << "Value: " << e.value << std::endl;
   }
 };
+
+#endif

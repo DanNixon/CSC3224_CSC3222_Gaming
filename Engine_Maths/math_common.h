@@ -5,7 +5,8 @@
  * @author Rich Davison
  */
 
-#pragma once
+#ifndef _ENGINE_MATHS_MATHCOMMON_H_
+#define _ENGINE_MATHS_MATHCOMMON_H_
 
 namespace Engine
 {
@@ -50,3 +51,5 @@ namespace Maths
   typedef unsigned int uint;
 }
 }
+
+#endif

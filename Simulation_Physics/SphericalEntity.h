@@ -3,7 +3,8 @@
 * @author Dan Nixon
 */
 
-#pragma once
+#ifndef _SIMULATION_PHYSICS_SPHERICALENTITY_H_
+#define _SIMULATION_PHYSICS_SPHERICALENTITY_H_
 
 #include "Entity.h"
 
@@ -34,3 +35,5 @@ namespace Physics
   };
 }
 }
+
+#endif

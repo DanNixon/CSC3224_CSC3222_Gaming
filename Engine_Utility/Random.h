@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _ENGINE_UTILITY_RANDOM_H_
+#define _ENGINE_UTILITY_RANDOM_H_
 
 namespace Engine
 {
@@ -21,3 +22,5 @@ namespace Utility
   };
 }
 }
+
+#endif
