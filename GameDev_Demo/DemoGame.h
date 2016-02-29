@@ -8,12 +8,13 @@
 
 #include <Game.h>
 
-#include "DemoJoystickHandler.h"
-#include "DemoKeyboardHandler.h"
-#include "DemoMouseHandler.h"
 #include <RenderableObject.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
+
+#include "DemoJoystickHandler.h"
+#include "DemoKeyboardHandler.h"
+#include "DemoMouseHandler.h"
 
 /**
  * @class DemoGame

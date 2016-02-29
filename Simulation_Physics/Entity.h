@@ -90,7 +90,7 @@ namespace Physics
      * @brief Checks to see if this Entity interfaces with another.
      * @return If this Entity has an interface
      */
-    inline bool interface() const
+    inline bool hasInterface() const
     {
       return m_interface;
     }

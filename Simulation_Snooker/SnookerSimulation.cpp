@@ -9,6 +9,8 @@
 
 #include <PhysicsUpdate.h>
 
+#include <Profiler.h>
+
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -78,8 +80,8 @@ void SnookerSimulation::gameStartup()
   m_scene = new Scene(m_table, view, proj);
 
   // Times loops
-  m_graphicsLoop = addTimedLoop(16, "graphics");
-  m_physicsLoop = addTimedLoop(8, "physics");
+  m_graphicsLoop = addTimedLoop(16.66f, "graphics");
+  m_physicsLoop = addTimedLoop(8.33f, "physics");
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
@@ -109,7 +111,7 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
       if (!b)
         continue;
 
-      b->mesh()->setStaticColour(b->colour(1.0f - (0.5f * b->interface())));
+      b->mesh()->setStaticColour(b->colour(1.0f - (0.5f * b->hasInterface())));
     }
   }
 }

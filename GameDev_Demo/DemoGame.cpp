@@ -5,8 +5,6 @@
 
 #include "DemoGame.h"
 
-#include <SDL/SDL.h>
-
 #include <KeyboardHandler.h>
 #include <Shaders.h>
 
