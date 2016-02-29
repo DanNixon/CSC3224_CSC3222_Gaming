@@ -7,9 +7,11 @@
 
 #include <iostream>
 
+// clang-format off
 #include <gl\glew.h>
 #include <SDL\SDL_opengl.h>
 #include <gl\glu.h>
+// clang-formmat on
 
 #include "Profiler.h"
 

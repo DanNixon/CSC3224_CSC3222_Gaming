@@ -20,7 +20,7 @@ namespace Common
     static const int MAIN_LOOP = Game::MAX_TIMED_LOOPS;
     static const int EVENTS = Game::MAX_TIMED_LOOPS + 1;
 
-    Profiler(Engine::Common::Game * target);
+    Profiler(Engine::Common::Game *target);
     virtual ~Profiler();
 
     void computeStats(float dtMilliSec);
@@ -39,7 +39,7 @@ namespace Common
   private:
     friend class Engine::Common::Game;
 
-    Game * m_target;
+    Game *m_target;
 
     unsigned long m_loopUpdates[NUM_PROFILES];
     float m_duration[NUM_PROFILES];

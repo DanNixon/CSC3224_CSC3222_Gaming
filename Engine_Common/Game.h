@@ -26,8 +26,8 @@ namespace Common
    */
   struct GameLoopConfiguration
   {
-    float lastFired;     //!< Last time the timer fired (in milliseconds)
-    float interval;      //!< Timer interval (in milliseconds)
+    float lastFired; //!< Last time the timer fired (in milliseconds)
+    float interval;  //!< Timer interval (in milliseconds)
     float profileStartTime;
     std::string loopName; //!< Name of loop
   };
@@ -113,7 +113,7 @@ namespace Common
      */
     virtual void gameShutdown() = 0;
 
-    Profiler * m_profiler;
+    Profiler *m_profiler;
 
   private:
     int init();

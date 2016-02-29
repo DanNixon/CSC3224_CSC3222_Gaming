@@ -5,8 +5,8 @@
 
 #include "SnookerSimulation.h"
 
-#include <Shaders.h>
 #include <Profiler.h>
+#include <Shaders.h>
 
 #include <PhysicsUpdate.h>
 
@@ -120,7 +120,8 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   else if (id == m_profileLoop)
   {
     m_profiler->computeStats(dtMilliSec);
-    std::cout << "Performance statistics:" << std::endl << *m_profiler << std::endl;
+    std::cout << "Performance statistics:" << std::endl
+              << *m_profiler << std::endl;
   }
 }
 

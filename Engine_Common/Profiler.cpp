@@ -10,8 +10,8 @@ namespace Engine
 {
 namespace Common
 {
-  Profiler::Profiler(Game * target)
-    : m_target(target)
+  Profiler::Profiler(Game *target)
+      : m_target(target)
   {
   }
 
@@ -47,20 +47,32 @@ namespace Common
 
   void Profiler::outputToStream(std::ostream &o) const
   {
+    std::streamsize p = o.precision();
+    o.precision(3);
+
+    std::string quantity = "FPS";
     for (int i = 0; i < NUM_PROFILES; i++)
     {
       if (i == MAIN_LOOP)
+      {
         o << "Main loop";
+        quantity = "iterations";
+      }
       else if (i == EVENTS)
+      {
         o << "Event handling";
+        quantity = "events";
+      }
       else if (m_target->m_loops[i])
         o << "Loop \"" << m_target->m_loops[i]->loopName << "\"";
       else
         continue;
 
-      o << ": " << m_avgFrameRate[i] << " FPS, average duration: " <<
-        m_avgDuration[i] << "ms" << std::endl;
+      o << ": " << m_avgFrameRate[i] << " " << quantity
+        << ", average duration: " << m_avgDuration[i] << "ms" << std::endl;
     }
+
+    o.precision(p);
   }
 }
 }
