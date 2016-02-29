@@ -167,7 +167,18 @@ namespace Common
    */
   void Game::gameLoadScreen()
   {
-    // TODO
+    glOrtho(-1.0f, 1.0f, -1.0f, 1.0f, 0.0f, -1.0f);
+
+    glColor3f(0.0, 1.0, 0.0);
+
+    glBegin(GL_TRIANGLE_STRIP);
+    glVertex2f(-1.0f, 1.0f);
+    glVertex2f(1.0f, 1.0f);
+    glVertex2f(-1.0f, -1.0f);
+    glVertex2f(1.0f, -1.0f);
+    glEnd();
+
+    swapBuffers();
   }
 
   int Game::init()
