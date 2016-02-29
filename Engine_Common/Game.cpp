@@ -11,7 +11,6 @@
 #include <SDL\SDL_opengl.h>
 #include <gl\glu.h>
 
-#include "IEventHandler.h"
 #include "Profiler.h"
 
 namespace Engine
