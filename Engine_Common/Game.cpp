@@ -56,7 +56,7 @@ namespace Common
       for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       {
         if (m_loops[i] != NULL)
-          m_loops[i]->lastFired = SDL_GetTicks();
+          m_loops[i]->lastFired = time();
       }
 
       SDL_Event e;

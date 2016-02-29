@@ -23,7 +23,7 @@ namespace Common
     Profiler(Engine::Common::Game * target);
     virtual ~Profiler();
 
-    void computeStats(Uint32 dtMilliSec);
+    void computeStats(float dtMilliSec);
 
     float frameRate(int idx) const;
     float averageDuration(int idx) const;

@@ -19,11 +19,11 @@ namespace Common
   {
   }
 
-  void Profiler::computeStats(Uint32 dtMilliSec)
+  void Profiler::computeStats(float dtMilliSec)
   {
     for (int i = 0; i < NUM_PROFILES; i++)
     {
-      m_avgFrameRate[i] = ((float)m_loopUpdates[i] / (float)dtMilliSec) * 1000.0f;
+      m_avgFrameRate[i] = ((float)m_loopUpdates[i] / dtMilliSec) * 1000.0f;
 
       if (m_loopUpdates[i] > 0)
         m_avgDuration[i] = m_duration[i] / (float)m_loopUpdates[i];
