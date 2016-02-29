@@ -28,7 +28,13 @@ namespace Common
     float frameRate(int idx) const;
     float averageDuration(int idx) const;
 
-    void detailRates(std::ostream &stream) const;
+    void outputToStream(std::ostream &o) const;
+
+    friend std::ostream &operator<<(std::ostream &o, const Profiler &p)
+    {
+      p.outputToStream(o);
+      return o;
+    }
 
   private:
     friend class Engine::Common::Game;

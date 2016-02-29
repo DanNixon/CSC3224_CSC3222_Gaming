@@ -6,10 +6,9 @@
 #include "SnookerSimulation.h"
 
 #include <Shaders.h>
+#include <Profiler.h>
 
 #include <PhysicsUpdate.h>
-
-#include <Profiler.h>
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -82,9 +81,12 @@ void SnookerSimulation::gameStartup()
   // Times loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
+  m_profileLoop = addTimedLoop(1000.0f, "profile");
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
+
+  m_profiler = new Profiler(this);
 }
 
 /**
@@ -113,6 +115,12 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
 
       b->mesh()->setStaticColour(b->colour(1.0f - (0.5f * b->hasInterface())));
     }
+  }
+  // Output profiling data
+  else if (id == m_profileLoop)
+  {
+    m_profiler->computeStats(dtMilliSec);
+    std::cout << "Performance statistics:" << std::endl << *m_profiler << std::endl;
   }
 }
 

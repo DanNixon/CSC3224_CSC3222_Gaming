@@ -45,20 +45,20 @@ namespace Common
     return m_avgDuration[idx];
   }
 
-  void Profiler::detailRates(std::ostream &stream) const
+  void Profiler::outputToStream(std::ostream &o) const
   {
     for (int i = 0; i < NUM_PROFILES; i++)
     {
       if (i == MAIN_LOOP)
-        stream << "Main loop";
+        o << "Main loop";
       else if (i == EVENTS)
-        stream << "Event handling";
+        o << "Event handling";
       else if (m_target->m_loops[i])
-        stream << m_target->m_loops[i]->loopName;
+        o << "Loop \"" << m_target->m_loops[i]->loopName << "\"";
       else
         continue;
 
-      stream << " " << m_avgFrameRate[i] << " FPS, average duration: " <<
+      o << ": " << m_avgFrameRate[i] << " FPS, average duration: " <<
         m_avgDuration[i] << "ms" << std::endl;
     }
   }

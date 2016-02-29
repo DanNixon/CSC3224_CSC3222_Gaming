@@ -92,7 +92,7 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   else if (id == m_profileLoop)
   {
     m_profiler->computeStats(dtMilliSec);
-    m_profiler->detailRates(std::cout);
+    std::cout << "Performance statistics:" << std::endl << *m_profiler << std::endl;
   }
 }
 

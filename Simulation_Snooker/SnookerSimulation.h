@@ -40,6 +40,7 @@ protected:
 private:
   Uint8 m_graphicsLoop;
   Uint8 m_physicsLoop;
+  Uint8 m_profileLoop;
 
   Engine::Common::Scene *m_scene;
 
