@@ -8,6 +8,7 @@ To Do
   - [ ] Managed memory
   - [x] Loop timing
   - [x] Clean startup routine
+  - [x] Profiling
 - [ ] `Engine_Graphics`
   - [x] Asset import
   - [x] Texture encapsulation
@@ -20,6 +21,4 @@ To Do
   - [x] INI
 - [ ] `Engine_Physics`
 - [ ] `Engine_Utility`
-  - [ ] Profiling
   - [ ] More random distributions
-- [ ] `Engine_Environment`
