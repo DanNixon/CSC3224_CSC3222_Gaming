@@ -27,6 +27,7 @@ namespace Common
   {
     float lastFired;     //!< Last time the timer fired (in milliseconds)
     float interval;      //!< Timer interval (in milliseconds)
+    float profileStartTime;
     std::string loopName; //!< Name of loop
   };
 

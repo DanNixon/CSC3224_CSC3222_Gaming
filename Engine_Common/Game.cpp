@@ -61,6 +61,7 @@ namespace Common
 
       SDL_Event e;
       bool exit = false;
+      float startTime;
       while (!exit)
       {
         if (m_profiler)
@@ -69,6 +70,14 @@ namespace Common
         // Handle SDL events
         while (SDL_PollEvent(&e) == 1)
         {
+          // Start event profiling
+          if (m_profiler != NULL)
+          {
+            m_profiler->m_loopUpdates[Profiler::EVENTS]++;
+            startTime = time();
+          }
+
+          // Handle quit
           if (e.type == SDL_QUIT)
           {
             exit = true;
@@ -79,6 +88,10 @@ namespace Common
           for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
                it != m_eventHandlers.end(); ++it)
             (*it)->handleEvent(e);
+
+          // End event profiling
+          if (m_profiler != NULL)
+            m_profiler->m_duration[Profiler::EVENTS] += time() - startTime;
         }
 
         // Poll timed loops
@@ -90,12 +103,23 @@ namespace Common
           float t = time();
           float deltaT = t - m_loops[i]->lastFired;
 
+          // If interval has elapsed
           if (deltaT >= m_loops[i]->interval)
           {
+            // Start loop profiling
             if (m_profiler != NULL)
+            {
               m_profiler->m_loopUpdates[i]++;
+              startTime = time();
+            }
+
+            // Dispatch handler
             m_loops[i]->lastFired = t;
             this->gameLoop(i, deltaT);
+
+            // End loop profiling
+            if (m_profiler != NULL)
+              m_profiler->m_duration[i] += time() - startTime;
           }
         }
       }
