@@ -19,10 +19,7 @@ class Ball : public Simulation::Physics::SphericalEntity,
              public Engine::Graphics::RenderableObject
 {
 public:
-  /**
-   * @brief Radius of a ball in mm.
-   */
-  static const int RADIUS = 21;
+  static const float RADIUS;
 
   Ball(const Engine::Maths::Vector2 &pos, int points);
   virtual ~Ball();

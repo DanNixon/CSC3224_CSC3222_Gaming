@@ -12,14 +12,19 @@ using namespace Engine::Maths;
 using namespace Engine::Graphics;
 
 /**
+ * @brief Radius of a ball in mm.
+ */
+const float Ball::RADIUS = 26.25f;
+
+/**
  * @copydoc SphericalEntity::SphericalEntity(const Vector2 &)
  * @param pos Position of the ball
  * @param points Number of points awarded for potting this ball (-1 for cue
  *               ball)
  */
 Ball::Ball(const Vector2 &pos, int points)
-    : SphericalEntity(pos, (float)RADIUS, false, 0.99f, 0.005f)
-    , RenderableObject(Mesh::GenerateDisc2D((float)RADIUS), NULL)
+    : SphericalEntity(pos, RADIUS, false, 0.99f, 0.005f)
+    , RenderableObject(Mesh::GenerateDisc2D(RADIUS), NULL)
     , m_points(points)
 {
   ShaderProgram *sp = new ShaderProgram();

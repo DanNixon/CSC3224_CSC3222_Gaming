@@ -21,6 +21,9 @@ public:
   static const Engine::Maths::Vector2 DIMENSIONS;
   static const Engine::Maths::Vector2 HALF_DIMENSIONS;
 
+  static const Engine::Maths::Vector2 PLAY_AREA;
+  static const Engine::Maths::Vector2 HALF_PLAY_AREA;
+
   Table();
   virtual ~Table();
 

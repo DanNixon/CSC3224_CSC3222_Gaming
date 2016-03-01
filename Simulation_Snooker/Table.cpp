@@ -45,7 +45,7 @@ Table::Table()
   setShader(sp);
 
   Texture *tex = new Texture("tabletopTex");
-  tex->load("table.bmp");
+  tex->load("table.png");
   setTexture(tex);
 
   m_cushions[0] = new Cushion(Vector2(-HALF_PLAY_AREA.x(), 0.0f));
