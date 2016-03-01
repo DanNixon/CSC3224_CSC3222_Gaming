@@ -12,9 +12,9 @@
 #include <Scene.h>
 #include <ShaderProgram.h>
 
-#include "DemoJoystickHandler.h"
-#include "DemoKeyboardHandler.h"
-#include "DemoMouseHandler.h"
+#include <MouseController.h>
+#include <KeyboardController.h>
+#include <JoystickController.h>
 
 /**
  * @class DemoGame
@@ -43,9 +43,9 @@ private:
   Engine::Graphics::RenderableObject *m_cube;
   Engine::Graphics::RenderableObject *m_child;
 
-  DemoKeyboardHandler m_keyboard;
-  DemoMouseHandler m_mouse;
-  DemoJoystickHandler m_joystick;
+  Engine::Input::MouseController m_mouse;
+  Engine::Input::KeyboardController m_keyboard;
+  Engine::Input::JoystickController m_joystick;
 };
 
 #endif

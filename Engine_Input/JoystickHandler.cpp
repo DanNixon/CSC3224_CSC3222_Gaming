@@ -1,7 +1,7 @@
 /**
-* @file
-* @author Dan Nixon
-*/
+ * @file
+ * @author Dan Nixon
+ */
 
 #include "JoystickHandler.h"
 

@@ -4,10 +4,18 @@
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="MouseHandler.h" />
     <ClInclude Include="JoystickHandler.h" />
+    <ClInclude Include="IController.h" />
+    <ClInclude Include="MouseController.h" />
+    <ClInclude Include="JoystickController.h" />
+    <ClInclude Include="KeyboardController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="MouseHandler.cpp" />
     <ClCompile Include="JoystickHandler.cpp" />
+    <ClCompile Include="IController.cpp" />
+    <ClCompile Include="MouseController.cpp" />
+    <ClCompile Include="JoystickController.cpp" />
+    <ClCompile Include="KeyboardController.cpp" />
   </ItemGroup>
 </Project>

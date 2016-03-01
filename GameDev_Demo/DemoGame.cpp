@@ -57,10 +57,8 @@ void DemoGame::gameStartup()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
 
-  addEventHandler(&m_keyboard);
   addEventHandler(&m_mouse);
-
-  m_joystick.open(0);
+  addEventHandler(&m_keyboard);
   addEventHandler(&m_joystick);
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
