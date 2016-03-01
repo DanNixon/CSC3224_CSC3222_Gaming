@@ -38,7 +38,7 @@ void SnookerSimulation::gameStartup()
   m_entities.push_back(m_table->cushion(3));
 
   // Balls
-  m_balls[0] = new Ball(Vector2(900.0f, 0.0f), -1); // Cue ball
+  m_balls[0] = new Ball(Vector2(-1100.0f, 0.0f), -1); // Cue ball
   // m_balls[1] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
   // m_balls[2] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
   // m_balls[3] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
@@ -54,12 +54,12 @@ void SnookerSimulation::gameStartup()
   // m_balls[13] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
   // m_balls[14] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
   // m_balls[15] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  m_balls[16] = new Ball(Vector2(600.0f, 200.0f), 2);  // Yellow
-  m_balls[17] = new Ball(Vector2(600.0f, -200.0f), 3); // Green
-  m_balls[18] = new Ball(Vector2(600.0f, 0.0f), 4);    // Brown
+  m_balls[16] = new Ball(Vector2(-1047.75f, -291.1f), 2);  // Yellow
+  m_balls[17] = new Ball(Vector2(-1047.75f, 291.1f), 3); // Green
+  m_balls[18] = new Ball(Vector2(-1047.75f, 0.0f), 4);    // Brown
   m_balls[19] = new Ball(Vector2(0.0f, 0.0f), 5);      // Blue
-  m_balls[20] = new Ball(Vector2(-600.0f, 0.0f), 6);   // Pink
-  m_balls[21] = new Ball(Vector2(-900.0f, 0.0f), 7);   // Black
+  m_balls[20] = new Ball(Vector2(895.35f, 0.0f), 6);   // Pink
+  m_balls[21] = new Ball(Vector2(1466.85f, 0.0f), 7);   // Black
 
   for (size_t i = 0; i < NUM_BALLS; i++)
   {
