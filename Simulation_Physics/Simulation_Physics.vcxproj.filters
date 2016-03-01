@@ -8,6 +8,7 @@
     <ClCompile Include="PlanarEntity.cpp" />
     <ClCompile Include="PhysicsUpdate.cpp" />
     <ClCompile Include="InterfaceDetection.cpp" />
+    <ClCompile Include="InterfaceResolution.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
@@ -18,5 +19,6 @@
     <ClInclude Include="PlanarEntity.h" />
     <ClInclude Include="PhysicsUpdate.h" />
     <ClInclude Include="InterfaceDetection.h" />
+    <ClInclude Include="InterfaceResolution.h" />
   </ItemGroup>
 </Project>

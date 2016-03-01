@@ -8,6 +8,7 @@
 
 #include <istream>
 #include <list>
+#include <vector>
 
 #include <Vector2.h>
 
@@ -35,7 +36,19 @@ namespace Physics
      */
     typedef EntityPtrList::iterator EntityPtrListIter;
 
-    Entity(const Engine::Maths::Vector2 &pos, bool stationary = false,
+    /**
+     * @typedef EntityPtrPairList
+     * @brief List of pairs of pointers to Entity instances.
+     */
+    typedef std::vector<std::pair<Entity *, Entity *>> EntityPtrPairList;
+
+    /**
+     * @typedef EntityPtrPairListIter
+     * @brief Iterator ofver a list of pairs of pointers to Entity instances.
+     */
+    typedef EntityPtrPairList::iterator EntityPtrPairListIter;
+
+    Entity(const Engine::Maths::Vector2 &pos, float mass, bool stationary = false,
            float dragCoeff = 1.0f, float velocityFloor = 0.0f);
     virtual ~Entity();
 
@@ -61,6 +74,24 @@ namespace Physics
 
     virtual void setPosition(const Engine::Maths::Vector2 &pos);
     virtual void shiftPosition(const Engine::Maths::Vector2 &offset);
+
+    /**
+     * @brief Gets the mass of this entity.
+     * @return Mass
+     */
+    inline float mass() const
+    {
+      return 1.0f / m_inverseMass;
+    }
+
+    /**
+     * @brief Gets the inverse mass of thiss entity.
+     * @return 1 over mass
+     */
+    inline float inverseMass() const
+    {
+      return m_inverseMass;
+    }
 
     /**
      * @brief Gets the velocity of this entity in the current timestep.
@@ -107,6 +138,7 @@ namespace Physics
     const float m_velocityFloor2; //!< Velcoity magnitude squared at which
                                   // velocity is set to zero
 
+    float m_inverseMass;                   //!< 1/mass
     Engine::Maths::Vector2 m_position;     //!< Position of Entity
     Engine::Maths::Vector2 m_velocity;     //!< Velocity in current timestep
     Engine::Maths::Vector2 m_acceleration; //!< Acceleration in current timestep

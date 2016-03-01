@@ -9,6 +9,7 @@
 
 #include "Integration.h"
 #include "InterfaceDetection.h"
+#include "InterfaceResolution.h"
 
 using namespace Engine::Maths;
 
@@ -50,8 +51,12 @@ namespace Physics
    * @brief Detects interfaces between entities.
    * @param entities List of entities to update
    */
-  void PhysicsUpdate::DetectInterfaces(Entity::EntityPtrList entities)
+  Entity::EntityPtrPairList PhysicsUpdate::DetectInterfaces(Entity::EntityPtrList entities)
   {
+    // TODO: use sort and sweep along x axis
+
+    Entity::EntityPtrPairList res;
+
     for (Entity::EntityPtrListIter oit = entities.begin();
          oit != entities.end(); ++oit)
     {
@@ -64,24 +69,31 @@ namespace Physics
         // Check for interface
         if (InterfaceDetection::Detect(**oit, **iit))
         {
+          res.push_back(std::make_pair(*oit, *iit));
+
           // Set interface flag
           (*oit)->m_interface = true;
           (*iit)->m_interface = true;
         }
       }
     }
+
+    return res;
   }
 
   /**
    * @brief Resolves detected interfaces.
    * @param entities List of entities to update
    */
-  void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrList entities)
+  void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrPairList interfaces)
   {
-    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end();
+    for (Entity::EntityPtrPairListIter it = interfaces.begin(); it != interfaces.end();
          ++it)
     {
-      // TODO
+      Entity * a = it->first;
+      Entity * b = it->second;
+
+      InterfaceResolution::Impulse(*a, *b, 0.9f);
     }
   }
 }

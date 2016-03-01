@@ -16,15 +16,17 @@ namespace Physics
   /**
    * @brief Creates an Entity with a given position.
    * @param pos Position
+   * @param mass Mass of the entity
    * @param stationary If this Entity is fixed in position
    * @param dragCoeff Velocity coefficient for simple drag simulation
    * @param velocityFloor Minimum velocity magnitude
    */
-  Entity::Entity(const Vector2 &pos, bool stationary, float dragCoeff,
+  Entity::Entity(const Vector2 &pos, float mass, bool stationary, float dragCoeff,
                  float velocityFloor)
       : m_stationary(stationary)
       , m_dragCoeff(dragCoeff)
       , m_velocityFloor2(velocityFloor * velocityFloor)
+      , m_inverseMass(1.0f / mass)
       , m_position(pos)
       , m_interface(false)
   {

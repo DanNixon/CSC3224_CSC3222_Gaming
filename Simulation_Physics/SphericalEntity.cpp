@@ -15,9 +15,10 @@ namespace Physics
    * @copydoc Entity::Entity(const Vector 2 &)
    */
   SphericalEntity::SphericalEntity(const Engine::Maths::Vector2 &pos,
+                                   float mass,
                                    float radius, bool stationary,
                                    float dragCoeff, float velocityFloor)
-      : Entity(pos, stationary, dragCoeff, velocityFloor)
+      : Entity(pos, mass, stationary, dragCoeff, velocityFloor)
       , m_radius2(radius * radius)
   {
   }

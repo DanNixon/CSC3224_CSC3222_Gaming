@@ -20,6 +20,7 @@ class Ball : public Simulation::Physics::SphericalEntity,
 {
 public:
   static const float RADIUS;
+  static const float MASS;
 
   Ball(const Engine::Maths::Vector2 &pos, int points);
   virtual ~Ball();

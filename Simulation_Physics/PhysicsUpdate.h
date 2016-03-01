@@ -34,15 +34,15 @@ namespace Physics
 
       // Perform updates
       UpdatePositions(entities, dtMilliSec);
-      DetectInterfaces(entities);
-      ResolveInterfaces(entities);
+      Entity::EntityPtrPairList interfaces = DetectInterfaces(entities);
+      ResolveInterfaces(interfaces);
     }
 
   private:
     static void UpdatePositions(Entity::EntityPtrList entities,
                                 float dtMilliSec);
-    static void DetectInterfaces(Entity::EntityPtrList entities);
-    static void ResolveInterfaces(Entity::EntityPtrList entities);
+    static Entity::EntityPtrPairList DetectInterfaces(Entity::EntityPtrList entities);
+    static void ResolveInterfaces(Entity::EntityPtrPairList interfaces);
   };
 }
 }
