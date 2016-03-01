@@ -58,7 +58,7 @@ namespace Physics
     Entity::EntityPtrPairList res;
 
     for (Entity::EntityPtrListIter oit = entities.begin();
-         oit != entities.end(); ++oit)
+         oit != entities.end();)
     {
       for (Entity::EntityPtrListIter iit = entities.begin();
            iit != entities.end(); ++iit)
@@ -76,6 +76,11 @@ namespace Physics
           (*iit)->m_interface = true;
         }
       }
+
+      if ((*oit)->m_interface)
+        oit = entities.erase(oit);
+      else
+        ++oit;
     }
 
     return res;
@@ -93,7 +98,7 @@ namespace Physics
       Entity * a = it->first;
       Entity * b = it->second;
 
-      InterfaceResolution::Impulse(*a, *b, 0.9f);
+      InterfaceResolution::Impulse(*a, *b, 0.35f);
     }
   }
 }
