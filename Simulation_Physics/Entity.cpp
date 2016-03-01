@@ -44,7 +44,8 @@ namespace Physics
    */
   void Entity::setPosition(const Vector2 &pos)
   {
-    m_position = pos;
+    if (!m_stationary)
+      m_position = pos;
   }
 
   /**
@@ -55,7 +56,8 @@ namespace Physics
    */
   void Entity::shiftPosition(const Vector2 &offset)
   {
-    m_position += offset;
+    if (!m_stationary)
+      m_position += offset;
   }
 
   /**

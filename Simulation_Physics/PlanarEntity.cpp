@@ -17,7 +17,7 @@ namespace Physics
    * @copydoc Entity::Entity(const Vector2 &)
    */
   PlanarEntity::PlanarEntity(const Vector2 &pos)
-      : Entity(pos, std::numeric_limits<float>::max())
+      : Entity(pos, 1.0f, true)
   {
   }
 

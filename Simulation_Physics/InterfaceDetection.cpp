@@ -82,7 +82,7 @@ namespace Physics
 
   /**
    * @brief Tests for interface between a spherical entitity and a planar
-   * entity.
+   *        entity.
    * @param result [out] Result of test
    * @param a Spherical entity
    * @param b Planar entity
