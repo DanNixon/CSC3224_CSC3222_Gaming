@@ -3,8 +3,8 @@
  * @author Dan Nixon
  */
 
-#ifndef _KSSIMULATORCONTROLS_H_
-#define _KSSIMULATORCONTROLS_H_
+#ifndef _KMSIMULATORCONTROLS_H_
+#define _KMSIMULATORCONTROLS_H_
 
 #include <IControlScheme.h>
 
@@ -33,7 +33,7 @@ public:
 
     m_mouse->setXMapping(A_ROLL);
     m_mouse->setYMapping(A_PITCH);
-    m_mouse->setMapping(SDL_BUTTON_LEFT, S_FPV);
+    m_mouse->setButtonMapping(SDL_BUTTON_LEFT, S_FPV);
 
     addController(m_keyboard);
     addController(m_mouse);

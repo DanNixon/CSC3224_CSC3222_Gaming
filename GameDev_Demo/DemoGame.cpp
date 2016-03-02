@@ -11,6 +11,8 @@
 #include <Profiler.h>
 
 #include "control.h"
+#include "KMSimulatorControls.h"
+#include "KJSSimulatorControls.h"
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -59,7 +61,9 @@ void DemoGame::gameStartup()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
 
-  m_simControls = new KMSimulatorControls(this);
+  //m_simControls = new KMSimulatorControls(this);
+  m_simControls = new KJSSimulatorControls(this);
+  static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(0);
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");

@@ -20,7 +20,7 @@ namespace Engine
 
       void setXMapping(size_t state);
       void setYMapping(size_t state);
-      void setMapping(Uint8 button, size_t state);
+      void setButtonMapping(Uint8 button, size_t state);
 
     private:
       virtual void handleButton(const SDL_MouseButtonEvent &e);

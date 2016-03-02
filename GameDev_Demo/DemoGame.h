@@ -11,8 +11,7 @@
 #include <RenderableObject.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
-
-#include "KMSimulatorControls.h"
+#include <IControlScheme.h>
 
 /**
  * @class DemoGame
@@ -41,7 +40,7 @@ private:
   Engine::Graphics::RenderableObject *m_cube;
   Engine::Graphics::RenderableObject *m_child;
 
-  KMSimulatorControls * m_simControls;
+  Engine::Input::IControlScheme * m_simControls;
 };
 
 #endif

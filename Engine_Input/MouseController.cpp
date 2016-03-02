@@ -43,7 +43,7 @@ namespace Engine
       m_yMapping = new size_t(state);
     }
 
-    void MouseController::setMapping(Uint8 button, size_t state)
+    void MouseController::setButtonMapping(Uint8 button, size_t state)
     {
       m_buttonMappings[button] = state;
     }
