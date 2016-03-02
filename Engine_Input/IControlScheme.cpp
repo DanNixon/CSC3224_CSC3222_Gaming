@@ -58,6 +58,11 @@ namespace Input
     m_state.set(state, active);
   }
 
+  void IControlScheme::flipState(size_t state)
+  {
+    m_state.flip(state);
+  }
+
   void IControlScheme::setAnalog(size_t state, float value)
   {
     m_analogs[state] = value;

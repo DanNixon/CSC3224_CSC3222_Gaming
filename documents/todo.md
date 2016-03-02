@@ -13,11 +13,11 @@ To Do
   - [x] Asset import
   - [x] Texture encapsulation
   - [ ] Menu interface (programmatic/generic)
-- [ ] `Engine_Input`
+- [x] `Engine_Input`
   - [x] Keyboard
   - [x] Mouse
   - [x] Joystick
-  - [ ] Mapping control structure
+  - [x] Mapping control structure
 - [x] `Engine_IO`
   - [x] INI
 - [ ] `Engine_Physics`

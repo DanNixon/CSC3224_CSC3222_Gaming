@@ -23,8 +23,8 @@ public:
       , m_keyboard(new Engine::Input::KeyboardController(this))
       , m_joystick(new Engine::Input::JoystickController(this))
   {
-    m_keyboard->setMapping(SDLK_f, S_FPV);
-    m_keyboard->setMapping(SDLK_p, S_PAUSE);
+    m_keyboard->setMapping(SDLK_f, S_FPV, true);
+    m_keyboard->setMapping(SDLK_p, S_PAUSE, true);
     m_keyboard->setMapping(SDLK_r, S_RESET);
 
     m_joystick->setAxisMapping(1, A_PITCH);

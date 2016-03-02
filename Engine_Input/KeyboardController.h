@@ -18,12 +18,12 @@ namespace Input
     KeyboardController(IControlScheme *parent);
     virtual ~KeyboardController();
 
-    void setMapping(SDL_Keycode key, size_t state);
+    void setMapping(SDL_Keycode key, size_t state, bool flip = false);
 
   private:
     virtual void handleKey(const SDL_KeyboardEvent &e);
 
-    std::map<SDL_Keycode, size_t> m_mappings;
+    std::map<SDL_Keycode, std::pair<size_t, bool>> m_mappings;
   };
 }
 }

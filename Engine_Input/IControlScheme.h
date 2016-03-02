@@ -37,6 +37,7 @@ namespace Input
     float analog(size_t a) const;
 
     virtual void setState(size_t state, bool active);
+    virtual void flipState(size_t state);
     virtual void setAnalog(size_t state, float value);
 
   private:
