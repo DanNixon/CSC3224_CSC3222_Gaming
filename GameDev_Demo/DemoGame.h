@@ -12,9 +12,7 @@
 #include <Scene.h>
 #include <ShaderProgram.h>
 
-#include <MouseController.h>
-#include <KeyboardController.h>
-#include <JoystickController.h>
+#include "KMSimulatorControls.h"
 
 /**
  * @class DemoGame
@@ -43,9 +41,7 @@ private:
   Engine::Graphics::RenderableObject *m_cube;
   Engine::Graphics::RenderableObject *m_child;
 
-  Engine::Input::MouseController m_mouse;
-  Engine::Input::KeyboardController m_keyboard;
-  Engine::Input::JoystickController m_joystick;
+  KMSimulatorControls * m_simControls;
 };
 
 #endif

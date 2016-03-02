@@ -10,6 +10,8 @@
 
 #include <Profiler.h>
 
+#include "control.h"
+
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -57,9 +59,7 @@ void DemoGame::gameStartup()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
 
-  addEventHandler(&m_mouse);
-  addEventHandler(&m_keyboard);
-  addEventHandler(&m_joystick);
+  m_simControls = new KMSimulatorControls(this);
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
@@ -83,15 +83,16 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   {
     if (KeyboardHandler::KeyPressed(SDLK_ESCAPE))
       std::cout << "Esc pressed" << std::endl;
-
-    if (m_joystick.button(0))
-      std::cout << "JS button 0 pressed" << std::endl;
   }
   else if (id == m_profileLoop)
   {
     m_profiler->computeStats(dtMilliSec);
     std::cout << "Performance statistics:" << std::endl
               << *m_profiler << std::endl;
+
+    // TODO
+    std::cout << m_simControls->analog(A_THROT) << std::endl
+              << m_simControls->analog(A_YAW) << std::endl;
   }
 }
 
@@ -100,5 +101,4 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
  */
 void DemoGame::gameShutdown()
 {
-  m_joystick.close();
 }

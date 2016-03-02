@@ -9,7 +9,8 @@ namespace Engine
 {
   namespace Input
   {
-    JoystickController::JoystickController()
+    JoystickController::JoystickController(IControlScheme * parent)
+      : IController(parent)
     {
     }
 

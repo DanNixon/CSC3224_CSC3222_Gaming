@@ -15,11 +15,15 @@ namespace Engine
     class KeyboardController : public IController, public KeyboardHandler
     {
     public:
-      KeyboardController();
+      KeyboardController(IControlScheme * parent);
       virtual ~KeyboardController();
+
+      void setMapping(SDL_Keycode key, size_t state);
 
     private:
       virtual void handleKey(const SDL_KeyboardEvent &e);
+
+      std::map<SDL_Keycode, size_t> m_mappings;
     };
   }
 }

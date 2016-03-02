@@ -9,7 +9,8 @@ namespace Engine
 {
   namespace Input
   {
-    MouseController::MouseController()
+    MouseController::MouseController(IControlScheme * parent)
+      : IController(parent)
     {
     }
 

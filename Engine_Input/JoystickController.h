@@ -15,7 +15,7 @@ namespace Engine
     class JoystickController : public IController, public JoystickHandler
     {
     public:
-      JoystickController();
+      JoystickController(IControlScheme * parent);
       virtual ~JoystickController();
 
     protected:

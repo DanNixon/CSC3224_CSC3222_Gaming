@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IController.h" />
+    <ClInclude Include="IControlScheme.h" />
     <ClInclude Include="JoystickController.h" />
     <ClInclude Include="JoystickHandler.h" />
     <ClInclude Include="KeyboardController.h" />
@@ -28,7 +29,7 @@
     <ClInclude Include="MouseController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IController.cpp" />
+    <ClCompile Include="IControlScheme.cpp" />
     <ClCompile Include="JoystickController.cpp" />
     <ClCompile Include="JoystickHandler.cpp" />
     <ClCompile Include="KeyboardController.cpp" />

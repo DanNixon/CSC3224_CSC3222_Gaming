@@ -9,5 +9,7 @@
     <ClInclude Include="DemoJoystickHandler.h" />
     <ClInclude Include="DemoKeyboardHandler.h" />
     <ClInclude Include="DemoMouseHandler.h" />
+    <ClInclude Include="KMSimulatorControls.h" />
+    <ClInclude Include="controls.h" />
   </ItemGroup>
 </Project>

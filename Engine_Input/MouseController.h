@@ -15,7 +15,7 @@ namespace Engine
     class MouseController : public IController, public MouseHandler
     {
     public:
-      MouseController();
+      MouseController(IControlScheme * parent);
       virtual ~MouseController();
 
     protected:

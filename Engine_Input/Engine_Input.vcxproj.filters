@@ -8,14 +8,15 @@
     <ClInclude Include="MouseController.h" />
     <ClInclude Include="JoystickController.h" />
     <ClInclude Include="KeyboardController.h" />
+    <ClInclude Include="IControlScheme.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="MouseHandler.cpp" />
     <ClCompile Include="JoystickHandler.cpp" />
-    <ClCompile Include="IController.cpp" />
     <ClCompile Include="MouseController.cpp" />
     <ClCompile Include="JoystickController.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
+    <ClCompile Include="IControlScheme.cpp" />
   </ItemGroup>
 </Project>
