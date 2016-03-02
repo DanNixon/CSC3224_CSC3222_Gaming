@@ -29,6 +29,7 @@ namespace Engine
       virtual ~IControlScheme();
 
       void addController(IController * controller);
+      void poll();
 
       bool state(size_t s) const;
 

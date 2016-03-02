@@ -61,13 +61,24 @@ void DemoGame::gameStartup()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
 
-  //m_simControls = new KMSimulatorControls(this);
-  m_simControls = new KJSSimulatorControls(this);
-  static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(0);
+  if (JoystickHandler::NumJoysticks() == 0)
+  {
+    std::cout << "Using mouse and keyboard" << std::endl;
+    m_simControls = new KMSimulatorControls(this);
+  }
+  else
+  {
+    std::cout << "Using joystick and keyboard" << std::endl;
+    m_simControls = new KJSSimulatorControls(this);
+    std::cout << static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(0) << std::endl;
+  }
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
+  m_controlInputLoop = addTimedLoop(8.33f, "control");
   m_profileLoop = addTimedLoop(1000.0f, "profile");
+
+  m_testLoop = addTimedLoop(1000.0f, "test");
 
   m_profiler = new Profiler(this);
 }
@@ -88,18 +99,24 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
     if (KeyboardHandler::KeyPressed(SDLK_ESCAPE))
       std::cout << "Esc pressed" << std::endl;
   }
+  else if (id == m_controlInputLoop)
+  {
+    m_simControls->poll();
+  }
   else if (id == m_profileLoop)
   {
     m_profiler->computeStats(dtMilliSec);
     std::cout << "Performance statistics:" << std::endl
-              << *m_profiler << std::endl;
-
-    // TODO: demo only
-    std::cout << m_simControls->analog(A_THROT) << std::endl
-      << m_simControls->analog(A_YAW) << std::endl
-      << m_simControls->analog(A_PITCH) << std::endl
-      << m_simControls->analog(A_ROLL) << std::endl
-      << m_simControls->state(S_FPV) << std::endl;
+      << *m_profiler << std::endl;
+  }
+  else if (id == m_testLoop)
+  {
+    std::cout
+      << "P: " << m_simControls->analog(A_PITCH) << std::endl
+      << "R: " << m_simControls->analog(A_ROLL) << std::endl
+      << "T: " << m_simControls->analog(A_THROT) << std::endl
+      << "Y: " << m_simControls->analog(A_YAW) << std::endl
+      << "FPV: " << m_simControls->state(S_FPV) << std::endl;
   }
 }
 

@@ -50,6 +50,43 @@ namespace Input
   }
 
   /**
+   * @brief Checks if the joystick has been opened.
+   * @return True if the joystick is ready to use
+   */
+  bool JoystickHandler::isOpen() const
+  {
+    return (m_joystick != NULL);
+  }
+
+  /**
+   * @brief Gets the number of buttons on the open joystick.
+   * @return Number of buttons
+   *
+   * May also return 0 if there is no open joystick.
+   */
+  int JoystickHandler::numButtons() const
+  {
+    if (m_joystick == NULL)
+      return 0;
+
+    return SDL_JoystickNumButtons(m_joystick);
+  }
+
+  /**
+   * @brief Gets the number of axes on the open joystick.
+   * @return Number of axes
+   *
+   * May also return 0 if there is no open joystick.
+   */
+  int JoystickHandler::numAxes() const
+  {
+    if (m_joystick == NULL)
+      return 0;
+
+    return SDL_JoystickNumAxes(m_joystick);
+  }
+
+  /**
    * @brief Gets the state of a button
    * @param button Button index
    * @return True if button is pressed

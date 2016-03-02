@@ -31,6 +31,7 @@ public:
     m_joystick->setAxisMapping(1, A_ROLL);
     m_joystick->setAxisMapping(2, A_THROT);
     m_joystick->setAxisMapping(3, A_YAW);
+    m_joystick->setButtonMapping(0, S_FPV);
 
     addController(m_keyboard);
     addController(m_joystick);

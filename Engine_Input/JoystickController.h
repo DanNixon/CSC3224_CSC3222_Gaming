@@ -18,6 +18,8 @@ namespace Engine
       JoystickController(IControlScheme * parent);
       virtual ~JoystickController();
 
+      virtual void poll();
+
       void setButtonMapping(Uint8 button, size_t state);
       void setAxisMapping(Uint8 axis, size_t state);
 

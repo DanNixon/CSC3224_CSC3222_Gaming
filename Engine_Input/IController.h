@@ -23,6 +23,10 @@ namespace Engine
       {
       }
 
+      virtual void poll()
+      {
+      }
+
     protected:
       IControlScheme * m_controlScheme;
 		};
