@@ -9,26 +9,26 @@
 
 namespace Engine
 {
-	namespace Input
-	{
-		class IController
-		{
-		public:
-      IController(IControlScheme * parent)
+namespace Input
+{
+  class IController
+  {
+  public:
+    IController(IControlScheme *parent)
         : m_controlScheme(parent)
-      {
-      }
+    {
+    }
 
-      virtual ~IController()
-      {
-      }
+    virtual ~IController()
+    {
+    }
 
-      virtual void poll()
-      {
-      }
+    virtual void poll()
+    {
+    }
 
-    protected:
-      IControlScheme * m_controlScheme;
-		};
-	}
+  protected:
+    IControlScheme *m_controlScheme;
+  };
+}
 }

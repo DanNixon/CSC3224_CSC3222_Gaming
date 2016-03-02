@@ -10,18 +10,19 @@
 
 #include <Game.h>
 
-#include <MouseController.h>
 #include <KeyboardController.h>
+#include <MouseController.h>
 
 #include "controls.h"
 
 class KMSimulatorControls : public Engine::Input::IControlScheme
 {
 public:
-  KMSimulatorControls(Engine::Common::Game * game) :
-    m_game(game), 
-    m_keyboard(new Engine::Input::KeyboardController(this)),
-    m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
+  KMSimulatorControls(Engine::Common::Game *game)
+      : m_game(game)
+      , m_keyboard(new Engine::Input::KeyboardController(this))
+      , m_mouse(new Engine::Input::MouseController(this, game->windowX(),
+                                                   game->windowY()))
   {
     m_keyboard->setMapping(SDLK_w, S_INCTHROT);
     m_keyboard->setMapping(SDLK_s, S_DECTHROT);
@@ -75,9 +76,9 @@ public:
   }
 
 private:
-  Engine::Common::Game * m_game;
-  Engine::Input::KeyboardController * m_keyboard;
-  Engine::Input::MouseController * m_mouse;
+  Engine::Common::Game *m_game;
+  Engine::Input::KeyboardController *m_keyboard;
+  Engine::Input::MouseController *m_mouse;
 };
 
 #endif

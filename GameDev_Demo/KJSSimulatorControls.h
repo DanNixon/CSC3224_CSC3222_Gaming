@@ -18,10 +18,10 @@
 class KJSSimulatorControls : public Engine::Input::IControlScheme
 {
 public:
-  KJSSimulatorControls(Engine::Common::Game * game) :
-    m_game(game), 
-    m_keyboard(new Engine::Input::KeyboardController(this)),
-    m_joystick(new Engine::Input::JoystickController(this))
+  KJSSimulatorControls(Engine::Common::Game *game)
+      : m_game(game)
+      , m_keyboard(new Engine::Input::KeyboardController(this))
+      , m_joystick(new Engine::Input::JoystickController(this))
   {
     m_keyboard->setMapping(SDLK_f, S_FPV);
     m_keyboard->setMapping(SDLK_p, S_PAUSE);
@@ -49,15 +49,15 @@ public:
     delete m_joystick;
   }
 
-  Engine::Input::JoystickHandler * joystick()
+  Engine::Input::JoystickHandler *joystick()
   {
     return m_joystick;
   }
 
 private:
-  Engine::Common::Game * m_game;
-  Engine::Input::KeyboardController * m_keyboard;
-  Engine::Input::JoystickController * m_joystick;
+  Engine::Common::Game *m_game;
+  Engine::Input::KeyboardController *m_keyboard;
+  Engine::Input::JoystickController *m_joystick;
 };
 
 #endif

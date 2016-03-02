@@ -6,46 +6,46 @@
 #pragma once
 
 #include <bitset>
-#include <map>
 #include <list>
+#include <map>
 
 namespace Engine
 {
-  namespace Common
+namespace Common
+{
+  class Game;
+}
+
+namespace Input
+{
+  class IController;
+
+  class IControlScheme
   {
-    class Game;
-  }
+  public:
+    static const size_t MAX_STATES = 256;
 
-  namespace Input
-  {
-    class IController;
+    IControlScheme();
+    virtual ~IControlScheme();
 
-    class IControlScheme
-    {
-    public:
-      static const size_t MAX_STATES = 256;
+    void addController(IController *controller);
+    void poll();
 
-      IControlScheme();
-      virtual ~IControlScheme();
+    bool state(size_t s) const;
 
-      void addController(IController * controller);
-      void poll();
+    bool hasAnalog(size_t a) const;
+    float analog(size_t a) const;
 
-      bool state(size_t s) const;
+    virtual void setState(size_t state, bool active);
+    virtual void setAnalog(size_t state, float value);
 
-      bool hasAnalog(size_t a) const;
-      float analog(size_t a) const;
+  private:
+    friend class IController;
 
-      virtual void setState(size_t state, bool active);
-      virtual void setAnalog(size_t state, float value);
+    std::list<IController *> m_controllers;
 
-    private:
-      friend class IController;
-
-      std::list<IController *> m_controllers;
-
-      std::bitset<MAX_STATES> m_state;
-      std::map<size_t, float> m_analogs;
-    };
-  }
+    std::bitset<MAX_STATES> m_state;
+    std::map<size_t, float> m_analogs;
+  };
+}
 }

@@ -9,9 +9,9 @@
 
 #include <Profiler.h>
 
-#include "control.h"
-#include "KMSimulatorControls.h"
 #include "KJSSimulatorControls.h"
+#include "KMSimulatorControls.h"
+#include "control.h"
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -69,7 +69,10 @@ void DemoGame::gameStartup()
   {
     std::cout << "Using joystick and keyboard" << std::endl;
     m_simControls = new KJSSimulatorControls(this);
-    std::cout << static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(0) << std::endl;
+    std::cout << static_cast<KJSSimulatorControls *>(m_simControls)
+                     ->joystick()
+                     ->open(0)
+              << std::endl;
   }
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
@@ -100,16 +103,15 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   {
     m_profiler->computeStats(dtMilliSec);
     std::cout << "Performance statistics:" << std::endl
-      << *m_profiler << std::endl;
+              << *m_profiler << std::endl;
   }
   else if (id == m_testLoop)
   {
-    std::cout
-      << "P: " << m_simControls->analog(A_PITCH) << std::endl
-      << "R: " << m_simControls->analog(A_ROLL) << std::endl
-      << "T: " << m_simControls->analog(A_THROT) << std::endl
-      << "Y: " << m_simControls->analog(A_YAW) << std::endl
-      << "FPV: " << m_simControls->state(S_FPV) << std::endl;
+    std::cout << "P: " << m_simControls->analog(A_PITCH) << std::endl
+              << "R: " << m_simControls->analog(A_ROLL) << std::endl
+              << "T: " << m_simControls->analog(A_THROT) << std::endl
+              << "Y: " << m_simControls->analog(A_YAW) << std::endl
+              << "FPV: " << m_simControls->state(S_FPV) << std::endl;
   }
 }
 

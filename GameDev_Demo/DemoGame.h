@@ -8,10 +8,10 @@
 
 #include <Game.h>
 
+#include <IControlScheme.h>
 #include <RenderableObject.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
-#include <IControlScheme.h>
 
 /**
  * @class DemoGame
@@ -41,7 +41,7 @@ private:
   Engine::Graphics::RenderableObject *m_cube;
   Engine::Graphics::RenderableObject *m_child;
 
-  Engine::Input::IControlScheme * m_simControls;
+  Engine::Input::IControlScheme *m_simControls;
 };
 
 #endif

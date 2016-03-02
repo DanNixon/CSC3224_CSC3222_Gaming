@@ -10,24 +10,23 @@
 
 namespace Engine
 {
-  namespace Input
+namespace Input
+{
+  class JoystickController : public IController, public JoystickHandler
   {
-    class JoystickController : public IController, public JoystickHandler
-    {
-    public:
-      JoystickController(IControlScheme * parent);
-      virtual ~JoystickController();
+  public:
+    JoystickController(IControlScheme *parent);
+    virtual ~JoystickController();
 
-      void setButtonMapping(Uint8 button, size_t state);
-      void setAxisMapping(Uint8 axis, size_t state);
+    void setButtonMapping(Uint8 button, size_t state);
+    void setAxisMapping(Uint8 axis, size_t state);
 
-    private:
-      virtual void handleButton(const SDL_JoyButtonEvent &e);
-      virtual void handleMotion(const SDL_JoyAxisEvent &e);
+  private:
+    virtual void handleButton(const SDL_JoyButtonEvent &e);
+    virtual void handleMotion(const SDL_JoyAxisEvent &e);
 
-      std::map<Uint8, size_t> m_buttonMappings;
-      std::map<Uint8, size_t> m_axisMappings;
-    };
-  }
+    std::map<Uint8, size_t> m_buttonMappings;
+    std::map<Uint8, size_t> m_axisMappings;
+  };
 }
-
+}
