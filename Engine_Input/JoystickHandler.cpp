@@ -117,8 +117,8 @@ namespace Input
    */
   void JoystickHandler::handleEvent(const SDL_Event &e)
   {
-    // Fire if enabled and is not a repeat
-    if (m_enabled && e.key.repeat == 0 && (m_joystick != NULL))
+    // Fire if enabled and joystick is open
+    if (m_enabled && (m_joystick != NULL))
     {
       SDL_JoystickID jsID = SDL_JoystickInstanceID(m_joystick);
 
@@ -128,7 +128,6 @@ namespace Input
         if (e.jaxis.which == jsID)
           handleMotion(e.jaxis);
         break;
-      // Annoyingly only the key up events seem to be fired
       case SDL_JOYBUTTONDOWN:
       case SDL_JOYBUTTONUP:
         if (e.jbutton.which == jsID)

@@ -18,19 +18,6 @@ namespace Engine
     {
     }
 
-    void JoystickController::poll()
-    {
-      if (!isOpen())
-        return;
-
-      for (int i = 0; i < numButtons(); i++)
-      {
-        auto it = m_buttonMappings.find(i);
-        if (it != m_buttonMappings.end())
-          m_controlScheme->setState(it->second, button(i));
-      }
-    }
-
     void JoystickController::setButtonMapping(Uint8 button, size_t state)
     {
       m_buttonMappings[button] = state;
@@ -43,7 +30,9 @@ namespace Engine
 
     void JoystickController::handleButton(const SDL_JoyButtonEvent &e)
     {
-      (void)e;
+      auto it = m_buttonMappings.find(e.button);
+      if (it != m_buttonMappings.end())
+        m_controlScheme->setState(it->second, e.type == SDL_JOYBUTTONDOWN);
     }
 
     void JoystickController::handleMotion(const SDL_JoyAxisEvent &e)

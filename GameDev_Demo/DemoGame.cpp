@@ -5,7 +5,6 @@
 
 #include "DemoGame.h"
 
-#include <KeyboardHandler.h>
 #include <Shaders.h>
 
 #include <Profiler.h>
@@ -75,7 +74,6 @@ void DemoGame::gameStartup()
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
-  m_controlInputLoop = addTimedLoop(8.33f, "control");
   m_profileLoop = addTimedLoop(1000.0f, "profile");
 
   m_testLoop = addTimedLoop(1000.0f, "test");
@@ -96,12 +94,7 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   }
   else if (id == m_physicsLoop)
   {
-    if (KeyboardHandler::KeyPressed(SDLK_ESCAPE))
-      std::cout << "Esc pressed" << std::endl;
-  }
-  else if (id == m_controlInputLoop)
-  {
-    m_simControls->poll();
+    // TODO
   }
   else if (id == m_profileLoop)
   {
