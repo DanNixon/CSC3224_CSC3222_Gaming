@@ -148,6 +148,17 @@ namespace Common
   }
 
   /**
+   * @brief Removes an event handler.
+   * @param handler Event hander to remove
+   */
+  void Game::removeEventHandler(IEventHandler *handler)
+  {
+    auto it = std::find(m_eventHandlers.begin(), m_eventHandlers.end(), handler);
+    if (it != m_eventHandlers.end())
+      m_eventHandlers.erase(it);
+  }
+
+  /**
    * @brief Gets the window aspect ratio.
    * @return Aspect ratio
    */

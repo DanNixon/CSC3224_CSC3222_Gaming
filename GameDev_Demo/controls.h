@@ -3,7 +3,8 @@
  * @author Dan Nixon
  */
 
-#pragma once
+#ifndef _CONTROLS_H_
+#define _CONTROLS_H_
 
 enum Controls
 {
@@ -19,3 +20,5 @@ enum Controls
   S_PAUSE,
   S_RESET
 };
+
+#endif

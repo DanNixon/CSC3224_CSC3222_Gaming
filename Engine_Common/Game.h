@@ -92,6 +92,7 @@ namespace Common
     /** @} */
 
     void addEventHandler(IEventHandler *handler);
+    void removeEventHandler(IEventHandler *handler);
 
   protected:
     virtual void gameLoadScreen();

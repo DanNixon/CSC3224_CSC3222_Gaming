@@ -90,9 +90,12 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
     std::cout << "Performance statistics:" << std::endl
               << *m_profiler << std::endl;
 
-    // TODO
+    // TODO: demo only
     std::cout << m_simControls->analog(A_THROT) << std::endl
-              << m_simControls->analog(A_YAW) << std::endl;
+      << m_simControls->analog(A_YAW) << std::endl
+      << m_simControls->analog(A_PITCH) << std::endl
+      << m_simControls->analog(A_ROLL) << std::endl
+      << m_simControls->state(S_FPV) << std::endl;
   }
 }
 
