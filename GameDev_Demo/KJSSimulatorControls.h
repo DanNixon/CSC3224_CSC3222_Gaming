@@ -15,9 +15,18 @@
 
 #include "controls.h"
 
+/**
+ * @class KJSSimulatorControls
+ * @brief Control scheme for flight simulation using a keyboard and joystick.
+ * @author Dan Nixon
+ */
 class KJSSimulatorControls : public Engine::Input::IControlScheme
 {
 public:
+  /**
+   * @brief Create a new keyboard and joystick control scheme.
+   * @param game Target game
+   */
   KJSSimulatorControls(Engine::Common::Game *game)
       : m_game(game)
       , m_keyboard(new Engine::Input::KeyboardController(this))
@@ -49,6 +58,10 @@ public:
     delete m_joystick;
   }
 
+  /**
+   * @brief Gets a pointer to the joystick handler.
+   * @return Joystick handler
+   */
   Engine::Input::JoystickHandler *joystick()
   {
     return m_joystick;

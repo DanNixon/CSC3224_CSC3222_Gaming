@@ -9,6 +9,9 @@ namespace Engine
 {
 namespace Input
 {
+  /**
+   * @copydoc IController::IController
+   */
   JoystickController::JoystickController(IControlScheme *parent)
       : IController(parent)
   {
@@ -18,16 +21,29 @@ namespace Input
   {
   }
 
+  /**
+   * @brief Sets the state mapping for a given buton.
+   * @param button Button ID
+   * @param state State ID
+   */
   void JoystickController::setButtonMapping(Uint8 button, size_t state)
   {
     m_buttonMappings[button] = state;
   }
 
+  /**
+   * @brief Sets the analog state mapping for a given axis.
+   * @param axis Axis ID
+   * @param state Analog state ID
+   */
   void JoystickController::setAxisMapping(Uint8 axis, size_t state)
   {
     m_axisMappings[axis] = state;
   }
 
+  /**
+   * @copydoc JoystickHandler::handleButton
+   */
   void JoystickController::handleButton(const SDL_JoyButtonEvent &e)
   {
     auto it = m_buttonMappings.find(e.button);
@@ -35,6 +51,9 @@ namespace Input
       m_controlScheme->setState(it->second, e.type == SDL_JOYBUTTONDOWN);
   }
 
+  /**
+   * @copydoc JoystickHandler::handleMotion
+   */
   void JoystickController::handleMotion(const SDL_JoyAxisEvent &e)
   {
     auto it = m_axisMappings.find(e.axis);

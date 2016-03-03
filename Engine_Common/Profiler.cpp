@@ -10,6 +10,10 @@ namespace Engine
 {
 namespace Common
 {
+  /**
+   * @brief Creates a new profiler for a given Game.
+   * @param target Game to profile
+   */
   Profiler::Profiler(Game *target)
       : m_target(target)
   {
@@ -19,6 +23,10 @@ namespace Common
   {
   }
 
+  /**
+   * @brief Compute statistics on accumulated data.
+   * @param dtMilliSec Time since last call to computeStats (in milliseconds)
+   */
   void Profiler::computeStats(float dtMilliSec)
   {
     for (int i = 0; i < NUM_PROFILES; i++)
@@ -35,16 +43,30 @@ namespace Common
     }
   }
 
+  /**
+   * @brief Gets the frame rate for a given profile.
+   * @param idx Profile ID
+   * @return Frame rate
+   */
   float Profiler::frameRate(int idx) const
   {
     return m_avgFrameRate[idx];
   }
 
+  /**
+   * @brief Gets the average execution duration of a profiled loop.
+   * @param idx Profile ID
+   * @return Average execution duration (milliseconds)
+   */
   float Profiler::averageDuration(int idx) const
   {
     return m_avgDuration[idx];
   }
 
+  /**
+   * @brief Outputs friendly formatted performance statistics to a stream.
+   * @param o Stream
+   */
   void Profiler::outputToStream(std::ostream &o) const
   {
     std::streamsize p = o.precision();

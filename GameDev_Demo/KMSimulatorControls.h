@@ -23,6 +23,10 @@
 class KMSimulatorControls : public Engine::Input::IControlScheme
 {
 public:
+  /**
+   * @brief Create a new keyboard and mouse control scheme.
+   * @param game Target game
+   */
   KMSimulatorControls(Engine::Common::Game *game)
       : m_game(game)
       , m_keyboard(new Engine::Input::KeyboardController(this))
@@ -57,6 +61,9 @@ public:
     delete m_mouse;
   }
 
+  /**
+   * @copydoc IControlScheme::setState
+   */
   virtual void setState(size_t state, bool active)
   {
     IControlScheme::setState(state, active);

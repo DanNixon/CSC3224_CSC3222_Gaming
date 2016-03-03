@@ -9,6 +9,9 @@ namespace Engine
 {
 namespace Input
 {
+  /**
+   * @copydoc IController::IController
+   */
   KeyboardController::KeyboardController(IControlScheme *parent)
       : IController(parent)
   {
@@ -18,11 +21,20 @@ namespace Input
   {
   }
 
-  void KeyboardController::setMapping(SDL_Keycode key, size_t s, bool flip)
+  /**
+   * @brief Sets the state mapping for a given key.
+   * @param key Key code
+   * @param state State ID
+   * @param flip If the key should toggle the state
+   */
+  void KeyboardController::setMapping(SDL_Keycode key, size_t state, bool flip)
   {
-    m_mappings[key] = std::make_pair(s, flip);
+    m_mappings[key] = std::make_pair(state, flip);
   }
 
+  /**
+   * @copydoc KeyboardHandler::handleKey
+   */
   void KeyboardController::handleKey(const SDL_KeyboardEvent &e)
   {
     auto it = m_mappings.find(e.keysym.sym);
