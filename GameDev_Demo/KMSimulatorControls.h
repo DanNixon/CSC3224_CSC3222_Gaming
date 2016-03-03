@@ -90,7 +90,7 @@ public:
 private:
   Engine::Common::Game *m_game; //!< Game instance this scheme is attached to
   Engine::Input::KeyboardController *m_keyboard; //!< Keyboard used in scheme
-  Engine::Input::MouseController *m_mouse; //!< Mouse used in scheme
+  Engine::Input::MouseController *m_mouse;       //!< Mouse used in scheme
 };
 
 #endif

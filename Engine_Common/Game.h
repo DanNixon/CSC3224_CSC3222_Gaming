@@ -26,10 +26,11 @@ namespace Common
    */
   struct GameLoopConfiguration
   {
-    float lastFired; //!< Last time the timer fired (in milliseconds)
-    float interval;  //!< Timer interval (in milliseconds)
-    float profileStartTime; //!< Time at which loop began (in milliseconds, for profiling)
-    std::string loopName; //!< Name of loop
+    float lastFired;        //!< Last time the timer fired (in milliseconds)
+    float interval;         //!< Timer interval (in milliseconds)
+    float profileStartTime; //!< Time at which loop began (in milliseconds, for
+                            //!profiling)
+    std::string loopName;   //!< Name of loop
   };
 
   /**
@@ -123,7 +124,7 @@ namespace Common
     SDL_Window *m_window;    //!< SDL window
     SDL_GLContext m_context; //!< GL context
 
-    LARGE_INTEGER m_freq; //!< Performance counter frequency
+    LARGE_INTEGER m_freq;  //!< Performance counter frequency
     LARGE_INTEGER m_start; //!< Performance timer start time
 
   protected:

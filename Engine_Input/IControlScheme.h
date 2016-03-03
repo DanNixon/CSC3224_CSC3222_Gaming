@@ -55,7 +55,7 @@ namespace Input
 
     std::list<IController *> m_controllers; //!< All controls in this scheme
 
-    std::bitset<MAX_STATES> m_state; //!< Binary states
+    std::bitset<MAX_STATES> m_state;   //!< Binary states
     std::map<size_t, float> m_analogs; //!< Analog states
   };
 }

@@ -68,11 +68,13 @@ namespace Common
 
     Game *m_target; //!< Game being profiled
 
-    unsigned long m_loopUpdates[NUM_PROFILES]; //!< Counter of updates per time frame
-    float m_duration[NUM_PROFILES]; //!< Cumulative duration of each loop per time frame
+    unsigned long
+        m_loopUpdates[NUM_PROFILES]; //!< Counter of updates per time frame
+    float m_duration[NUM_PROFILES];  //!< Cumulative duration of each loop per
+                                     //!time frame
 
     float m_avgFrameRate[NUM_PROFILES]; //!< Average frame rate for each profile
-    float m_avgDuration[NUM_PROFILES]; //!< Average duration for each profile
+    float m_avgDuration[NUM_PROFILES];  //!< Average duration for each profile
   };
 }
 }
