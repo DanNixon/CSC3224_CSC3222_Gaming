@@ -20,9 +20,19 @@ namespace Input
 {
   class IController;
 
+  /**
+   * @class IControlScheme
+   * @brief Represents a collection of control devices and their mapping to
+   *        analog and binary states.
+   * @author Dan Nixon
+   */
   class IControlScheme
   {
   public:
+    /**
+     * @var MAX_STATES
+     * @brief Maximum number of binary states.
+     */
     static const size_t MAX_STATES = 256;
 
     IControlScheme();
@@ -43,10 +53,10 @@ namespace Input
   private:
     friend class IController;
 
-    std::list<IController *> m_controllers;
+    std::list<IController *> m_controllers; //!< All controls in this scheme
 
-    std::bitset<MAX_STATES> m_state;
-    std::map<size_t, float> m_analogs;
+    std::bitset<MAX_STATES> m_state; //!< Binary states
+    std::map<size_t, float> m_analogs; //!< Analog states
   };
 }
 }

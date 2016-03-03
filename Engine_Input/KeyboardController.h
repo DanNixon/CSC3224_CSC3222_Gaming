@@ -12,6 +12,11 @@ namespace Engine
 {
 namespace Input
 {
+  /**
+   * @class KeyboardController
+   * @brief Represents a keyboard control device.
+   * @author Dan Nixon
+   */
   class KeyboardController : public IController, public KeyboardHandler
   {
   public:

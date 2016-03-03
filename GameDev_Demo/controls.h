@@ -6,6 +6,11 @@
 #ifndef _CONTROLS_H_
 #define _CONTROLS_H_
 
+/**
+ * @enum Controls
+ * @brief Enumeration of all control states required in the demo.
+ * @author Dan Nixon
+ */
 enum Controls
 {
   A_PITCH,

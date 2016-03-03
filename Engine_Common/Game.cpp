@@ -131,6 +131,10 @@ namespace Common
     return status;
   }
 
+  /**
+   * @brief Gets the time since startup in milliseconds.
+   * @return Time in ms
+   */
   float Game::time() const
   {
     LARGE_INTEGER t;

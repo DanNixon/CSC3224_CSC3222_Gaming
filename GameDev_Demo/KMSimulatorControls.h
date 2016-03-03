@@ -15,6 +15,11 @@
 
 #include "controls.h"
 
+/**
+ * @class KMSimulatorControls
+ * @brief Control scheme for flight simulation using a keyboard and mouse.
+ * @author Dan Nixon
+ */
 class KMSimulatorControls : public Engine::Input::IControlScheme
 {
 public:
@@ -76,9 +81,9 @@ public:
   }
 
 private:
-  Engine::Common::Game *m_game;
-  Engine::Input::KeyboardController *m_keyboard;
-  Engine::Input::MouseController *m_mouse;
+  Engine::Common::Game *m_game; //!< Game instance this scheme is attached to
+  Engine::Input::KeyboardController *m_keyboard; //!< Keyboard used in scheme
+  Engine::Input::MouseController *m_mouse; //!< Mouse used in scheme
 };
 
 #endif

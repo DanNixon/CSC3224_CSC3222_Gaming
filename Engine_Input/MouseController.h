@@ -12,6 +12,11 @@ namespace Engine
 {
 namespace Input
 {
+  /**
+   * @class MouseController
+   * @brief Represents a mouse control device.
+   * @author Dan Nixon
+   */
   class MouseController : public IController, public MouseHandler
   {
   public:
@@ -26,12 +31,12 @@ namespace Input
     virtual void handleButton(const SDL_MouseButtonEvent &e);
     virtual void handleMotion(const SDL_MouseMotionEvent &e);
 
-    const int m_screenX;
-    const int m_screenY;
+    const int m_screenX; //!< Screen width
+    const int m_screenY; //!< Screen height
 
-    size_t *m_xMapping;
-    size_t *m_yMapping;
-    std::map<Uint8, size_t> m_buttonMappings;
+    size_t *m_xMapping; //!< Analog state mapping for X position
+    size_t *m_yMapping; //!< ANalog state mapping for Y position
+    std::map<Uint8, size_t> m_buttonMappings; //!< Binary mappings for buttons
   };
 }
 }

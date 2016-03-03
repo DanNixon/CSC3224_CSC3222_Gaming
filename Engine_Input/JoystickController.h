@@ -12,6 +12,11 @@ namespace Engine
 {
 namespace Input
 {
+  /**
+   * @class JoystickController
+   * @brief Represents a joystick control device.
+   * @author Dan Nixon
+   */
   class JoystickController : public IController, public JoystickHandler
   {
   public:
