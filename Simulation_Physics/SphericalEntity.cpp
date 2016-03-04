@@ -16,9 +16,10 @@ namespace Physics
    */
   SphericalEntity::SphericalEntity(const Engine::Maths::Vector2 &pos,
                                    float mass, float radius, bool stationary,
-                                   float dragCoeff, float velocityFloor)
+                                   float dragCoeff, float velocityFloor, float impactDistance)
       : Entity(pos, mass, stationary, dragCoeff, velocityFloor)
       , m_radius2(radius * radius)
+      , m_impactDistance(impactDistance)
   {
   }
 
@@ -51,6 +52,11 @@ namespace Physics
   void SphericalEntity::setRadius(float radius)
   {
     m_radius2 = radius * radius;
+  }
+
+  float SphericalEntity::impactDistance() const
+  {
+    return m_impactDistance;
   }
 }
 }

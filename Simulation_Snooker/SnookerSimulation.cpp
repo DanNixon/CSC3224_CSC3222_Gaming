@@ -29,12 +29,8 @@ SnookerSimulation::~SnookerSimulation()
 void SnookerSimulation::gameStartup()
 {
   // Table
-  m_table = new Table();
+  m_table = new Table(m_entities);
   m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
-  m_entities.push_back(m_table->cushion(0));
-  m_entities.push_back(m_table->cushion(1));
-  m_entities.push_back(m_table->cushion(2));
-  m_entities.push_back(m_table->cushion(3));
 
   // Balls
   m_balls[0] = new Ball(Vector2(-1150.0f, 0.0f), -1);     // Cue ball

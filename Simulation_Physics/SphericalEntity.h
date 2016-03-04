@@ -22,7 +22,7 @@ namespace Physics
   public:
     SphericalEntity(const Engine::Maths::Vector2 &pos, float mass, float radius,
                     bool stationary = false, float dragCoeff = 1.0f,
-                    float velocityFloor = 0.0f);
+                    float velocityFloor = 0.0f, float impactDistance = 0.0f);
     virtual ~SphericalEntity();
 
     float radius() const;
@@ -30,8 +30,11 @@ namespace Physics
 
     void setRadius(float radius);
 
+    float impactDistance() const;
+
   private:
     float m_radius2; //!< Radius squared
+    float m_impactDistance; //!< The distance the entity can travel into another spherebefore a collision is reported
   };
 }
 }
