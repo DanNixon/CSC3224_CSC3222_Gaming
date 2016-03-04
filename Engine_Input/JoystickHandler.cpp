@@ -1,7 +1,7 @@
 /**
-* @file
-* @author Dan Nixon
-*/
+ * @file
+ * @author Dan Nixon
+ */
 
 #include "JoystickHandler.h"
 
@@ -50,6 +50,43 @@ namespace Input
   }
 
   /**
+   * @brief Checks if the joystick has been opened.
+   * @return True if the joystick is ready to use
+   */
+  bool JoystickHandler::isOpen() const
+  {
+    return (m_joystick != NULL);
+  }
+
+  /**
+   * @brief Gets the number of buttons on the open joystick.
+   * @return Number of buttons
+   *
+   * May also return 0 if there is no open joystick.
+   */
+  int JoystickHandler::numButtons() const
+  {
+    if (m_joystick == NULL)
+      return 0;
+
+    return SDL_JoystickNumButtons(m_joystick);
+  }
+
+  /**
+   * @brief Gets the number of axes on the open joystick.
+   * @return Number of axes
+   *
+   * May also return 0 if there is no open joystick.
+   */
+  int JoystickHandler::numAxes() const
+  {
+    if (m_joystick == NULL)
+      return 0;
+
+    return SDL_JoystickNumAxes(m_joystick);
+  }
+
+  /**
    * @brief Gets the state of a button
    * @param button Button index
    * @return True if button is pressed
@@ -80,8 +117,8 @@ namespace Input
    */
   void JoystickHandler::handleEvent(const SDL_Event &e)
   {
-    // Fire if enabled and is not a repeat
-    if (m_enabled && e.key.repeat == 0 && (m_joystick != NULL))
+    // Fire if enabled and joystick is open
+    if (m_enabled && (m_joystick != NULL))
     {
       SDL_JoystickID jsID = SDL_JoystickInstanceID(m_joystick);
 
@@ -91,7 +128,6 @@ namespace Input
         if (e.jaxis.which == jsID)
           handleMotion(e.jaxis);
         break;
-      // Annoyingly only the key up events seem to be fired
       case SDL_JOYBUTTONDOWN:
       case SDL_JOYBUTTONUP:
         if (e.jbutton.which == jsID)

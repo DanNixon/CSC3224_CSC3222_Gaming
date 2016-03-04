@@ -131,6 +131,10 @@ namespace Common
     return status;
   }
 
+  /**
+   * @brief Gets the time since startup in milliseconds.
+   * @return Time in ms
+   */
   float Game::time() const
   {
     LARGE_INTEGER t;
@@ -145,6 +149,17 @@ namespace Common
   void Game::addEventHandler(IEventHandler *handler)
   {
     m_eventHandlers.push_back(handler);
+  }
+
+  /**
+   * @brief Removes an event handler.
+   * @param handler Event hander to remove
+   */
+  void Game::removeEventHandler(IEventHandler *handler)
+  {
+    auto it = std::find(m_eventHandlers.begin(), m_eventHandlers.end(), handler);
+    if (it != m_eventHandlers.end())
+      m_eventHandlers.erase(it);
   }
 
   /**

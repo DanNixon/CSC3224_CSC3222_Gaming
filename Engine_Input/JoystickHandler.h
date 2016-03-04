@@ -27,6 +27,10 @@ namespace Input
 
     bool open(int deviceIndex);
     void close();
+    bool isOpen() const;
+
+    int numButtons() const;
+    int numAxes() const;
 
     bool button(int button) const;
     Sint32 axis(int axis) const;

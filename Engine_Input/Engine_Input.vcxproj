@@ -19,14 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IController.h" />
+    <ClInclude Include="IControlScheme.h" />
+    <ClInclude Include="JoystickController.h" />
     <ClInclude Include="JoystickHandler.h" />
+    <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="MouseHandler.h" />
+    <ClInclude Include="MouseController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IControlScheme.cpp" />
+    <ClCompile Include="JoystickController.cpp" />
     <ClCompile Include="JoystickHandler.cpp" />
+    <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="MouseHandler.cpp" />
+    <ClCompile Include="MouseController.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9A0AC220-38BE-4509-A118-AED58284B9B5}</ProjectGuid>

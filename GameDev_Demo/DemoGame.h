@@ -8,13 +8,10 @@
 
 #include <Game.h>
 
+#include <IControlScheme.h>
 #include <RenderableObject.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
-
-#include "DemoJoystickHandler.h"
-#include "DemoKeyboardHandler.h"
-#include "DemoMouseHandler.h"
 
 /**
  * @class DemoGame
@@ -36,6 +33,7 @@ private:
   Uint8 m_graphicsLoop;
   Uint8 m_physicsLoop;
   Uint8 m_profileLoop;
+  Uint8 m_testLoop;
 
   Engine::Graphics::ShaderProgram *m_sp;
   Engine::Common::Scene *m_s;
@@ -43,9 +41,7 @@ private:
   Engine::Graphics::RenderableObject *m_cube;
   Engine::Graphics::RenderableObject *m_child;
 
-  DemoKeyboardHandler m_keyboard;
-  DemoMouseHandler m_mouse;
-  DemoJoystickHandler m_joystick;
+  Engine::Input::IControlScheme *m_simControls;
 };
 
 #endif

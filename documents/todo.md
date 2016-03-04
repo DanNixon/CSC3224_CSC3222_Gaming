@@ -17,6 +17,7 @@ To Do
   - [x] Keyboard
   - [x] Mouse
   - [x] Joystick
+  - [x] Mapping control structure
 - [x] `Engine_IO`
   - [x] INI
 - [ ] `Engine_Physics`
