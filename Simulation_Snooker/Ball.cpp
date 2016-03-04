@@ -63,7 +63,7 @@ Vector4 Ball::colour(float alpha) const
   case -1:
     return Vector4(1.0f, 1.0f, 1.0f, alpha); // White (cue ball)
   case 1:
-    return Vector4(1.0f, 1.0f, 1.0f, alpha); // Red
+    return Vector4(1.0f, 0.0f, 0.0f, alpha); // Red
   case 2:
     return Vector4(1.0f, 1.0f, 0.0f, alpha); // Yellow
   case 3:

@@ -37,22 +37,22 @@ void SnookerSimulation::gameStartup()
   m_entities.push_back(m_table->cushion(3));
 
   // Balls
-  m_balls[0] = new Ball(Vector2(-1150.0f, 0.0f), -1); // Cue ball
-  // m_balls[1] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[2] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[3] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[4] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[5] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[6] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[7] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[8] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[9] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[10] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[11] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[12] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[13] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[14] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
-  // m_balls[15] = new Ball(Vector2(0.0f, 0.0f), 1); // Red
+  m_balls[0] = new Ball(Vector2(-1150.0f, 0.0f), -1);     // Cue ball
+  m_balls[1] = new Ball(Vector2(957.85f, 0.0f), 1);       // Red
+  m_balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);    // Red
+  m_balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);   // Red
+  m_balls[4] = new Ball(Vector2(1062.85f, 52.5f), 1);     // Red
+  m_balls[5] = new Ball(Vector2(1062.85f, 0.0f), 1);      // Red
+  m_balls[6] = new Ball(Vector2(1062.85f, -52.5f), 1);    // Red
+  m_balls[7] = new Ball(Vector2(1115.35f, 78.75f), 1);    // Red
+  m_balls[8] = new Ball(Vector2(1115.35f, 26.25f), 1);    // Red
+  m_balls[9] = new Ball(Vector2(1115.35f, -26.25f), 1);   // Red
+  m_balls[10] = new Ball(Vector2(1115.35f, -78.75f), 1);  // Red
+  m_balls[11] = new Ball(Vector2(1167.85f, 105.0f), 1);   // Red
+  m_balls[12] = new Ball(Vector2(1167.85f, 52.5f), 1);    // Red
+  m_balls[13] = new Ball(Vector2(1167.85f, 0.0f), 1);     // Red
+  m_balls[14] = new Ball(Vector2(1167.85f, -52.5f), 1);   // Red
+  m_balls[15] = new Ball(Vector2(1167.85f, -105.0f), 1);  // Red
   m_balls[16] = new Ball(Vector2(-1047.75f, -291.1f), 2); // Yellow
   m_balls[17] = new Ball(Vector2(-1047.75f, 291.1f), 3);  // Green
   m_balls[18] = new Ball(Vector2(-1047.75f, 0.0f), 4);    // Brown
