@@ -128,7 +128,7 @@ void SnookerSimulation::handleKey(const SDL_KeyboardEvent &e)
 {
   if (e.state == SDL_PRESSED)
   {
-    Ball * cueBall = m_balls[0];
+    Ball *cueBall = m_balls[0];
     Vector2 cueBallVel = cueBall->velocity();
 
     switch (e.keysym.sym)

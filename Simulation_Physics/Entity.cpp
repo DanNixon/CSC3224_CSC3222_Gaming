@@ -21,8 +21,8 @@ namespace Physics
    * @param dragCoeff Velocity coefficient for simple drag simulation
    * @param velocityFloor Minimum velocity magnitude
    */
-  Entity::Entity(const Vector2 &pos, float mass, bool stationary, float dragCoeff,
-                 float velocityFloor)
+  Entity::Entity(const Vector2 &pos, float mass, bool stationary,
+                 float dragCoeff, float velocityFloor)
       : m_stationary(stationary)
       , m_dragCoeff(dragCoeff)
       , m_velocityFloor2(velocityFloor * velocityFloor)
@@ -110,12 +110,9 @@ namespace Physics
   std::ostream &operator<<(std::ostream &o, const Entity &e)
   {
     o << "Entity["
-      << "stationary=" << e.m_stationary
-      << ",mass=" << e.mass()
-      << ",position=" << e.m_position
-      << ",velocity=" << e.m_velocity
-      << ",acceleration=" << e.m_acceleration
-      << "]";
+      << "stationary=" << e.m_stationary << ",mass=" << e.mass()
+      << ",position=" << e.m_position << ",velocity=" << e.m_velocity
+      << ",acceleration=" << e.m_acceleration << "]";
 
     return o;
   }

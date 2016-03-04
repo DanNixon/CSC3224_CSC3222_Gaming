@@ -73,7 +73,11 @@ namespace Physics
         // Check for interface
         bool detected = InterfaceDetection::Detect(**oit, **iit);
 
-        auto it = std::find_if(m_interfaces.begin(), m_interfaces.end(), [entPair](InterfaceDef d){ return d.first == entPair; });
+        auto it = std::find_if(m_interfaces.begin(), m_interfaces.end(),
+                               [entPair](InterfaceDef d)
+                               {
+                                 return d.first == entPair;
+                               });
 
         // Remove a resolved interface that is no longer detected
         if (it != m_interfaces.end() && !(detected || !it->second))
@@ -99,8 +103,8 @@ namespace Physics
       // If the interface is yet to be resolved
       if (!it->second)
       {
-        Entity * a = it->first.first;
-        Entity * b = it->first.second;
+        Entity *a = it->first.first;
+        Entity *b = it->first.second;
 
         InterfaceResolution::Impulse(*a, *b, 0.9f);
 

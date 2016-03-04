@@ -36,8 +36,9 @@ namespace Physics
      */
     typedef EntityPtrList::iterator EntityPtrListIter;
 
-    Entity(const Engine::Maths::Vector2 &pos, float mass, bool stationary = false,
-           float dragCoeff = 1.0f, float velocityFloor = 0.0f);
+    Entity(const Engine::Maths::Vector2 &pos, float mass,
+           bool stationary = false, float dragCoeff = 1.0f,
+           float velocityFloor = 0.0f);
     virtual ~Entity();
 
     /**

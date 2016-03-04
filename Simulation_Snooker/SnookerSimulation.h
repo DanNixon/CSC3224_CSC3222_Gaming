@@ -23,7 +23,8 @@
  * @brief Game application for the snooker simulation.
  * @author Dan Nixon
  */
-class SnookerSimulation : public Engine::Common::Game, public Engine::Input::KeyboardHandler
+class SnookerSimulation : public Engine::Common::Game,
+                          public Engine::Input::KeyboardHandler
 {
 public:
   /**
