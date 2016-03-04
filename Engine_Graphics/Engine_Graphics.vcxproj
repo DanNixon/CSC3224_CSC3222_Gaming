@@ -70,23 +70,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -155,6 +155,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
