@@ -20,6 +20,12 @@ namespace Physics
   class PhysicsUpdate
   {
   public:
+    /**
+     * @typedef InterfaceDef
+     * @brief Type for recording an interface.
+     *
+     * In format {{first entity, second entity}, resolved flag}.
+     */
     typedef std::pair<std::pair<Entity *, Entity *>, bool> InterfaceDef;
 
     PhysicsUpdate()

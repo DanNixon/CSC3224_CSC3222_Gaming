@@ -26,6 +26,10 @@ namespace Physics
   {
   }
 
+  /**
+   * @brief Sets the direction the plane is facing.
+   * @param p Point the plane is facing
+   */
   void PlanarEntity::facing(const Vector2 &p)
   {
     m_normal = VectorOperations::GetNormalised(p - m_position);

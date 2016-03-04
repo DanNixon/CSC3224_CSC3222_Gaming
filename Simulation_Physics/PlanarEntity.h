@@ -14,7 +14,7 @@ namespace Physics
 {
   /**
    * @class PlanarEntity
-   * @brief Represents an entity that exists along a 2D plane.
+   * @brief Represents an entity that exists in any orientation.
    * @author Dan Nixon
    */
   class PlanarEntity : public Entity
@@ -28,7 +28,7 @@ namespace Physics
     Engine::Maths::Vector2 normal() const;
 
   private:
-    Engine::Maths::Vector2 m_normal;
+    Engine::Maths::Vector2 m_normal; //!< Plane normal
   };
 }
 }

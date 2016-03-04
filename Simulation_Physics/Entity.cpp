@@ -79,6 +79,10 @@ namespace Physics
     m_acceleration = acc;
   }
 
+  /**
+   * @brief Clamps the velocity of this Entity it its lower limit.
+   * @return True if the velocity was clamped
+   */
   bool Entity::clampVelocity()
   {
     bool clamp = (m_velocity.length2() < m_velocityFloor2);
@@ -89,11 +93,20 @@ namespace Physics
     return clamp;
   }
 
+  /**
+   * @brief Multiplies the velocity of this Entity by its drag coefficient.
+   */
   void Entity::multiplyDragCoeff()
   {
     m_velocity = m_velocity * m_dragCoeff;
   }
 
+  /**
+   * @brief Outputs this Entity to a stream in a friendly format.
+   * @param o Stream
+   * @param e Entity
+   * @return Stream
+   */
   std::ostream &operator<<(std::ostream &o, const Entity &e)
   {
     o << "Entity["

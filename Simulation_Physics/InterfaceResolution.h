@@ -12,6 +12,11 @@ namespace Simulation
 {
   namespace Physics
   {
+    /**
+     * @class InterfaceResolution
+     * @brief Contains functions for resolving interfaces between objects.
+     * @author Dan Nixon
+     */
     class InterfaceResolution
     {
     public:

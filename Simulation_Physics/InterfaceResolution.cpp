@@ -16,6 +16,12 @@ namespace Simulation
 {
   namespace Physics
   {
+    /** 
+     * @brief Gets the interface normal between two interfacing entities.
+     * @param a First entity
+     * @param b Second entity
+     * @return Normal
+     */
     Vector2 InterfaceResolution::InterfaceNormal(Entity &a, Entity &b)
     {
       Vector2 n;
@@ -30,6 +36,12 @@ namespace Simulation
       return n;
     }
 
+    /** 
+     * @brief Resolves an interface using the impulse method.
+     * @param a First entity
+     * @param b Second entity
+     * @param epsilon Elasticity coefficient
+     */
     void InterfaceResolution::Impulse(Entity &a, Entity &b, float epsilon)
     {
       Vector2 vAB = a.velocity() + b.velocity();
