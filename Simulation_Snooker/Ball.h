@@ -26,6 +26,7 @@ public:
   virtual ~Ball();
 
   Engine::Maths::Vector4 colour(float alpha = 1.0f) const;
+  bool isCueBall() const;
 
   virtual void setPosition(const Engine::Maths::Vector2 &pos);
 

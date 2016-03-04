@@ -81,6 +81,11 @@ Vector4 Ball::colour(float alpha) const
   }
 }
 
+bool Ball::isCueBall() const
+{
+  return m_points == -1;
+}
+
 /**
  * @copydoc SphericalEntity::setPosition
  */

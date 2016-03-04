@@ -38,6 +38,7 @@ Essential:
 - [x] Interface detection
 - [x] Interface resolution
 - [ ] Pocket detection
+  - [ ] Use lines instead of planes for cushions in between pockets
 - [ ] D-zone detection
 - [ ] Display profiling data on screen
 
@@ -45,3 +46,4 @@ Extras:
 
 - [ ] Mouse based shots
 - [ ] Proper snooker rules and scoring
+- [ ] Sort and sweep broadphase interface checks

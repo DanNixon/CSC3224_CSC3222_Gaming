@@ -36,6 +36,11 @@ namespace Physics
     {
     }
 
+    std::vector<InterfaceDef> interfaces()
+    {
+      return m_interfaces;
+    }
+
     /**
      * @brief Performs all physics updates.
      * @param entities List of entities to update

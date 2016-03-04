@@ -100,6 +100,19 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   else if (id == m_physicsLoop)
   {
     m_physics.update(m_entities, dtMilliSec);
+
+    // TODO
+    auto inters = m_physics.interfaces();
+    for (auto it = inters.begin(); it != inters.end(); ++it)
+    {
+      Entity *a = it->first.first;
+      Entity *b = it->first.second;
+
+      if (dynamic_cast<Pocket *>(a))
+        std::cout << "Ball in pocket" << std::endl;
+      else
+        std::cout << it->first.first << " - " << it->first.second << " [" << it->second << "]" << std::endl;
+    }
   }
   // Output profiling data
   else if (id == m_profileLoop)

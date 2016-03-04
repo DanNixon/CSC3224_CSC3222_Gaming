@@ -63,7 +63,12 @@ namespace Physics
       for (Entity::EntityPtrListIter iit = entities.begin();
            iit != entities.end(); ++iit)
       {
+        // Don't comapre the same entity
         if (*oit == *iit)
+          continue;
+
+        // Don't compare two stationary entities
+        if ((*oit)->stationary() && (*iit)->stationary())
           continue;
 
         auto entPair = std::make_pair(*oit, *iit);
