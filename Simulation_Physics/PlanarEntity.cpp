@@ -19,10 +19,16 @@ namespace Physics
   PlanarEntity::PlanarEntity(const Vector2 &pos)
       : Entity(pos, 1.0f, true)
   {
+    facing();
   }
 
   PlanarEntity::~PlanarEntity()
   {
+  }
+
+  void PlanarEntity::facing(const Vector2 &p)
+  {
+    m_normal = VectorOperations::GetNormalised(p - m_position);
   }
 
   /**
@@ -31,8 +37,7 @@ namespace Physics
    */
   Vector2 PlanarEntity::normal() const
   {
-    Vector2 norm = VectorOperations::GetNormalised(m_position);
-    return norm;
+    return m_normal;
   }
 }
 }

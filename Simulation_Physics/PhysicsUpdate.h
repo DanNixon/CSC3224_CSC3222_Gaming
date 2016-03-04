@@ -32,9 +32,13 @@ namespace Physics
            it != entities.end(); ++it)
         (*it)->m_interface = false;
 
-      // Perform updates
+      // Perform position updates
       UpdatePositions(entities, dtMilliSec);
+
+      // Detect interfaces
       Entity::EntityPtrPairList interfaces = DetectInterfaces(entities);
+
+      // Resolve interfaces
       ResolveInterfaces(interfaces);
     }
 

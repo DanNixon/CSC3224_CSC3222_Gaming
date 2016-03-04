@@ -90,8 +90,9 @@ namespace Physics
   void InterfaceDetection::SpherePlane(bool &result, const SphericalEntity &a,
                                        const PlanarEntity &b)
   {
-    result = (Vector2::dot(b.normal(), a.position()) + b.position().length() <
-              a.radius());
+    float d = -Vector2::dot(b.position(), b.normal());
+    float v = Vector2::dot(b.normal(), a.position()) + d;
+    result = (v < a.radius());
   }
 }
 }
