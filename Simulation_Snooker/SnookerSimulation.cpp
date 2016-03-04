@@ -11,6 +11,7 @@
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
+using namespace Engine::Input;
 using namespace Simulation::Physics;
 
 SnookerSimulation::SnookerSimulation()
@@ -68,9 +69,6 @@ void SnookerSimulation::gameStartup()
     }
   }
 
-  // Sample physics
-  m_balls[0]->setVelocity(Vector2(3.0f, 0.5f));
-
   // Scene
   Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
   Matrix4 proj = Matrix4::Perspective(1, 100000, 1.33f, 45.0f);
@@ -83,6 +81,9 @@ void SnookerSimulation::gameStartup()
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
+
+  // Handle keyboard presses myself
+  addEventHandler(this);
 
   m_profiler = new Profiler(this);
 }
@@ -102,7 +103,7 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   // Handle physics
   else if (id == m_physicsLoop)
   {
-    m_physics.update(m_entities, (float)dtMilliSec);
+    m_physics.update(m_entities, dtMilliSec);
   }
   // Output profiling data
   else if (id == m_profileLoop)
@@ -118,4 +119,32 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
  */
 void SnookerSimulation::gameShutdown()
 {
+}
+
+/**
+ * @copydoc KeyboardHandler::handleKey
+ */
+void SnookerSimulation::handleKey(const SDL_KeyboardEvent &e)
+{
+  if (e.state == SDL_PRESSED)
+  {
+    Ball * cueBall = m_balls[0];
+    Vector2 cueBallVel = cueBall->velocity();
+
+    switch (e.keysym.sym)
+    {
+    case SDLK_w:
+      cueBall->setVelocity(cueBallVel + Vector2(0.0f, 1.0f));
+      break;
+    case SDLK_a:
+      cueBall->setVelocity(cueBallVel + Vector2(-1.0f, 0.0f));
+      break;
+    case SDLK_s:
+      cueBall->setVelocity(cueBallVel + Vector2(0.0f, -1.0f));
+      break;
+    case SDLK_d:
+      cueBall->setVelocity(cueBallVel + Vector2(1.0f, 0.0f));
+      break;
+    }
+  }
 }

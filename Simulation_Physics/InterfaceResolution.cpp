@@ -32,9 +32,6 @@ namespace Simulation
 
     void InterfaceResolution::Impulse(Entity &a, Entity &b, float epsilon)
     {
-      std::cout << "a: " << a << std::endl;
-      std::cout << "b: " << b << std::endl;
-
       Vector2 vAB = a.velocity() + b.velocity();
       Vector2 vN = InterfaceNormal(a, b);
 
@@ -47,12 +44,6 @@ namespace Simulation
 
       Vector2 vAf = a.velocity() + (vN * j * a.inverseMass());
       Vector2 vBf = b.velocity() - (vN * j * b.inverseMass());
-
-      std::cout << "norm=" << vN << std::endl;
-      std::cout << "J=" << j << std::endl;
-
-      std::cout << "vAf=" << vAf << std::endl;
-      std::cout << "vBf=" << vBf << std::endl;
 
       a.setVelocity(vAf);
       b.setVelocity(vBf);
