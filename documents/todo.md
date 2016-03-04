@@ -1,6 +1,9 @@
 To Do
 =====
 
+Game Development: Project 1
+---------------------------
+
 - [x] Engine structure outline
 - [ ] `Engine_Audio`
 - [ ] `Engine_Common`
@@ -23,3 +26,22 @@ To Do
 - [ ] `Engine_Physics`
 - [ ] `Engine_Utility`
   - [ ] More random distributions
+
+Game Simulations: Project 1
+---------------------------
+
+Essential:
+
+- [x] Entity representation
+- [x] Graphics
+- [x] Positional updates
+- [x] Interface detection
+- [x] Interface resolution
+- [ ] Pocket detection
+- [ ] D-zone detection
+- [ ] Display profiling data on screen
+
+Extras:
+
+- [ ] Mouse based shots
+- [ ] Proper snooker rules and scoring
