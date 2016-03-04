@@ -5,6 +5,8 @@
 
 #include "PhysicsUpdate.h"
 
+#include <algorithm>
+
 #include <Vector3.h>
 
 #include "Integration.h"
@@ -51,11 +53,9 @@ namespace Physics
    * @brief Detects interfaces between entities.
    * @param entities List of entities to update
    */
-  Entity::EntityPtrPairList PhysicsUpdate::DetectInterfaces(Entity::EntityPtrList entities)
+  void PhysicsUpdate::detectInterfaces(Entity::EntityPtrList entities)
   {
     // TODO: use sort and sweep along x axis
-
-    Entity::EntityPtrPairList res;
 
     for (Entity::EntityPtrListIter oit = entities.begin();
          oit != entities.end();)
@@ -66,41 +66,47 @@ namespace Physics
         if (*oit == *iit)
           continue;
 
-        // Check for interface
-        if (InterfaceDetection::Detect(**oit, **iit))
-        {
-          res.push_back(std::make_pair(*oit, *iit));
+        auto entPair = std::make_pair(*oit, *iit);
+        if (*oit > *iit)
+          entPair = std::make_pair(*iit, *oit);
 
-          // Set interface flag
-          (*oit)->m_interface = true;
-          (*iit)->m_interface = true;
-        }
+        // Check for interface
+        bool detected = InterfaceDetection::Detect(**oit, **iit);
+
+        auto it = std::find_if(m_interfaces.begin(), m_interfaces.end(), [entPair](InterfaceDef d){ return d.first == entPair; });
+
+        // Remove a resolved interface that is no longer detected
+        if (it != m_interfaces.end() && !(detected || !it->second))
+          m_interfaces.erase(it);
+
+        // Add a newly detected interface if it is not already detected
+        if (detected && it == m_interfaces.end())
+          m_interfaces.push_back(std::make_pair(entPair, false));
       }
 
-      if ((*oit)->m_interface)
-        oit = entities.erase(oit);
-      else
-        ++oit;
+      oit = entities.erase(oit);
     }
-
-    return res;
   }
 
   /**
    * @brief Resolves detected interfaces.
    * @param entities List of entities to update
    */
-  void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrPairList interfaces)
+  void PhysicsUpdate::resolveInterfaces()
   {
-    std::cout << "inter" << std::endl;
-
-    for (Entity::EntityPtrPairListIter it = interfaces.begin(); it != interfaces.end();
-         ++it)
+    for (auto it = m_interfaces.begin(); it != m_interfaces.end(); ++it)
     {
-      Entity * a = it->first;
-      Entity * b = it->second;
+      // If the interface is yet to be resolved
+      if (!it->second)
+      {
+        Entity * a = it->first.first;
+        Entity * b = it->first.second;
 
-      InterfaceResolution::Impulse(*a, *b, 0.35f);
+        InterfaceResolution::Impulse(*a, *b, 0.9f);
+
+        // Mark the interface as having been resolved
+        it->second = true;
+      }
     }
   }
 }

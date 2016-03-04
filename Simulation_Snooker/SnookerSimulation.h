@@ -12,6 +12,7 @@
 #include <ShaderProgram.h>
 
 #include <Entity.h>
+#include <PhysicsUpdate.h>
 
 #include "Ball.h"
 #include "Table.h"
@@ -48,6 +49,7 @@ private:
   Ball *m_balls[NUM_BALLS];
 
   Simulation::Physics::Entity::EntityPtrList m_entities;
+  Simulation::Physics::PhysicsUpdate m_physics;
 };
 
 #endif

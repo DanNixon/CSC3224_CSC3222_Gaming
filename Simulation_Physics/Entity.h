@@ -36,18 +36,6 @@ namespace Physics
      */
     typedef EntityPtrList::iterator EntityPtrListIter;
 
-    /**
-     * @typedef EntityPtrPairList
-     * @brief List of pairs of pointers to Entity instances.
-     */
-    typedef std::vector<std::pair<Entity *, Entity *>> EntityPtrPairList;
-
-    /**
-     * @typedef EntityPtrPairListIter
-     * @brief Iterator ofver a list of pairs of pointers to Entity instances.
-     */
-    typedef EntityPtrPairList::iterator EntityPtrPairListIter;
-
     Entity(const Engine::Maths::Vector2 &pos, float mass, bool stationary = false,
            float dragCoeff = 1.0f, float velocityFloor = 0.0f);
     virtual ~Entity();
@@ -117,15 +105,6 @@ namespace Physics
 
     void setAcceleration(const Engine::Maths::Vector2 &acc);
 
-    /**
-     * @brief Checks to see if this Entity interfaces with another.
-     * @return If this Entity has an interface
-     */
-    inline bool hasInterface() const
-    {
-      return m_interface;
-    }
-
     friend std::ostream &operator<<(std::ostream &o, const Entity &e);
 
   private:
@@ -144,7 +123,6 @@ namespace Physics
     Engine::Maths::Vector2 m_position;     //!< Position of Entity
     Engine::Maths::Vector2 m_velocity;     //!< Velocity in current timestep
     Engine::Maths::Vector2 m_acceleration; //!< Acceleration in current timestep
-    bool m_interface; //!< Flag indicating interface detection
   };
 }
 }

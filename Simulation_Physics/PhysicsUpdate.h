@@ -20,33 +20,42 @@ namespace Physics
   class PhysicsUpdate
   {
   public:
+    typedef std::pair<std::pair<Entity *, Entity *>, bool> InterfaceDef;
+
+    PhysicsUpdate()
+    {
+    }
+
+    virtual ~PhysicsUpdate()
+    {
+    }
+
     /**
      * @brief Performs all physics updates.
      * @param entities List of entities to update
      * @param dtMilliSec Time step in milliseconds
      */
-    static void Update(Entity::EntityPtrList entities, float dtMilliSec)
+    void update(Entity::EntityPtrList entities, float dtMilliSec)
     {
-      // Clear interface flags
-      for (Entity::EntityPtrListIter it = entities.begin();
-           it != entities.end(); ++it)
-        (*it)->m_interface = false;
-
       // Perform position updates
       UpdatePositions(entities, dtMilliSec);
 
       // Detect interfaces
-      Entity::EntityPtrPairList interfaces = DetectInterfaces(entities);
+      detectInterfaces(entities);
 
       // Resolve interfaces
-      ResolveInterfaces(interfaces);
+      resolveInterfaces();
     }
 
   private:
     static void UpdatePositions(Entity::EntityPtrList entities,
                                 float dtMilliSec);
-    static Entity::EntityPtrPairList DetectInterfaces(Entity::EntityPtrList entities);
-    static void ResolveInterfaces(Entity::EntityPtrPairList interfaces);
+
+    void detectInterfaces(Entity::EntityPtrList entities);
+    void resolveInterfaces();
+
+  private:
+    std::vector<InterfaceDef> m_interfaces;
   };
 }
 }

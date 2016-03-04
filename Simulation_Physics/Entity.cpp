@@ -28,7 +28,6 @@ namespace Physics
       , m_velocityFloor2(velocityFloor * velocityFloor)
       , m_inverseMass(1.0f / mass)
       , m_position(pos)
-      , m_interface(false)
   {
   }
 
@@ -103,7 +102,6 @@ namespace Physics
       << ",position=" << e.m_position
       << ",velocity=" << e.m_velocity
       << ",acceleration=" << e.m_acceleration
-      << ",interface=" << e.m_interface
       << "]";
 
     return o;
