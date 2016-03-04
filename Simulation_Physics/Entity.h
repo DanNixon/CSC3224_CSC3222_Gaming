@@ -126,6 +126,8 @@ namespace Physics
       return m_interface;
     }
 
+    friend std::ostream &operator<<(std::ostream &o, const Entity &e);
+
   private:
     bool clampVelocity();
     void multiplyDragCoeff();

@@ -92,6 +92,8 @@ namespace Physics
    */
   void PhysicsUpdate::ResolveInterfaces(Entity::EntityPtrPairList interfaces)
   {
+    std::cout << "inter" << std::endl;
+
     for (Entity::EntityPtrPairListIter it = interfaces.begin(); it != interfaces.end();
          ++it)
     {

@@ -94,5 +94,19 @@ namespace Physics
   {
     m_velocity = m_velocity * m_dragCoeff;
   }
+
+  std::ostream &operator<<(std::ostream &o, const Entity &e)
+  {
+    o << "Entity["
+      << "stationary=" << e.m_stationary
+      << ",mass=" << e.mass()
+      << ",position=" << e.m_position
+      << ",velocity=" << e.m_velocity
+      << ",acceleration=" << e.m_acceleration
+      << ",interface=" << e.m_interface
+      << "]";
+
+    return o;
+  }
 }
 }

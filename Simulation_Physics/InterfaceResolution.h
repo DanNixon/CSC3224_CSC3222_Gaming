@@ -15,6 +15,8 @@ namespace Simulation
     class InterfaceResolution
     {
     public:
+      static Engine::Maths::Vector2 InterfaceNormal(Entity &a, Entity &b);
+
       static void Impulse(Entity &a, Entity &b, float epsilon);
     };
   }
