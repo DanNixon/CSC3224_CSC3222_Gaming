@@ -354,6 +354,11 @@ namespace Graphics
     m->m_type = GL_TRIANGLE_STRIP;
     m->m_numVertices = 4;
 
+    return UpdateRect2D(m, dimensions);
+  }
+
+  Mesh *Mesh::UpdateRect2D(Mesh *m, const Engine::Maths::Vector2 &dimensions)
+  {
     Vector2 halfDim = dimensions / 2;
 
     m->m_vertices = new Vector3[m->m_numVertices];

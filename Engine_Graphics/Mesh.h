@@ -57,6 +57,7 @@ namespace Graphics
     static Mesh *GenerateRing2D(float radiusOuter, float radiusInner,
                                 int resolution = 64);
     static Mesh *GenerateRect2D(const Engine::Maths::Vector2 &dimensions);
+    static Mesh *UpdateRect2D(Mesh *m, const Engine::Maths::Vector2 &dimensions);
     static Mesh *LoadASCIIMeshFile(const string &filename);
     static Mesh *LoadModelFile(const string &filename, size_t meshIdx);
 

@@ -88,7 +88,7 @@ namespace Graphics
 
     virtual void render();
 
-  private:
+  protected:
     Mesh *m_mesh;                   //!< Mesh represented by this object
     ShaderProgram *m_shaderProgram; //!< Shader used to render m_mesh
     Texture *m_texture;             //!< Texture used on m_mesh

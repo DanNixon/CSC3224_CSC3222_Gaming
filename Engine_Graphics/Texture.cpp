@@ -20,6 +20,7 @@ namespace Graphics
   Texture::Texture(const std::string &name)
       : m_name(name)
       , m_texture(0)
+      , m_size(0.0f, 0.0f)
   {
   }
 
@@ -49,6 +50,9 @@ namespace Graphics
    */
   void Texture::text(const std::string & text, TTF_Font * font, const Colour &colour)
   {
+    if (m_texture != 0)
+      glDeleteTextures(1, &m_texture);
+
     glGenTextures(1, &m_texture);
     glBindTexture(GL_TEXTURE_2D, m_texture);
 
@@ -57,6 +61,8 @@ namespace Graphics
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+
+    m_size = Vector2((float) img->w, (float) img->h);
 
     glBindTexture(GL_TEXTURE_2D, 0);
   }

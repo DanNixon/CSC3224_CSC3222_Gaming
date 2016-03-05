@@ -9,6 +9,7 @@
 
 #include <Profiler.h>
 #include <Shaders.h>
+#include <TextPane.h>
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -31,9 +32,7 @@ SnookerSimulation::~SnookerSimulation()
 void SnookerSimulation::gameStartup()
 {
   // Load font for text display
-  m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 75);
-
-  //tex->text("hello", font);
+  m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
 
   // Table
   m_table = new Table(m_entities);
@@ -78,9 +77,16 @@ void SnookerSimulation::gameStartup()
   m_scene = new Scene(m_table, view, proj);
 
   // UI
-  //Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
+  ShaderProgram *sp = new ShaderProgram();
+  sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+  sp->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
+  sp->link();
+  TextPane * p = new TextPane(0.8f, sp, m_font);
+  p->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.9f, 0.0f)));
+  p->setText("Snooker Loopy!");
+
   Matrix4 orth = Matrix4::Orthographic(0.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f);
-  //m_ui = new Scene(m_table, view, orth);
+  m_ui = new Scene(p, view, orth);
 
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
@@ -106,6 +112,8 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   {
     m_scene->update();
     m_scene->render();
+    m_ui->update();
+    m_ui->render();
     swapBuffers();
   }
   // Handle physics

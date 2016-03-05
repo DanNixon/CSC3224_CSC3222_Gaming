@@ -12,6 +12,7 @@
 #include <SOIL/SOIL.h>
 #include <SDL_ttf.h>
 
+#include <Vector2.h>
 #include <Vector4.h>
 
 #include "Colour.h"
@@ -46,9 +47,16 @@ namespace Graphics
       return m_texture;
     }
 
+    Engine::Maths::Vector2 dimensions() const
+    {
+      return m_size;
+    }
+
   private:
     std::string m_name; //!< Name of texture
     GLuint m_texture;   //!< GL texture
+
+    Engine::Maths::Vector2 m_size; //!< Dimensions of texture
   };
 }
 }
