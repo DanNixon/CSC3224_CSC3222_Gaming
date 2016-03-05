@@ -343,10 +343,10 @@ namespace Graphics
   }
 
   /**
-  * @brief Generates a 2D rectangle.
-  * @param dimensions Dimensions of rectangle
-  * @return New mesh
-  */
+   * @brief Generates a 2D rectangle.
+   * @param dimensions Dimensions of rectangle
+   * @return New mesh
+   */
   Mesh *Mesh::GenerateRect2D(const Engine::Maths::Vector2 &dimensions)
   {
     Mesh *m = new Mesh();
@@ -357,6 +357,14 @@ namespace Graphics
     return UpdateRect2D(m, dimensions);
   }
 
+  /**
+   * @brief Updates the dimensions of a rectangular mesh.
+   * @param m Existing mesh
+   * @param dimensions Dimensions of rectangle
+   * @return Mesh
+   *
+   * It is assumed that the Mesh given to this function has exactly 4 vertices.
+   */
   Mesh *Mesh::UpdateRect2D(Mesh *m, const Engine::Maths::Vector2 &dimensions)
   {
     Vector2 halfDim = dimensions / 2;

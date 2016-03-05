@@ -36,6 +36,10 @@ namespace Physics
     {
     }
 
+    /**
+     * @brief Gets a list of all current interfaces.
+     * @return Interfaces
+     */
     std::vector<InterfaceDef> interfaces()
     {
       return m_interfaces;

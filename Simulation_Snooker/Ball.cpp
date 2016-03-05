@@ -81,6 +81,10 @@ Vector4 Ball::colour(float alpha) const
   }
 }
 
+/**
+ * @brief Test to see if this is the cue ball (based on points).
+ * @return True if this is the cue ball.
+ */
 bool Ball::isCueBall() const
 {
   return m_points == -1;

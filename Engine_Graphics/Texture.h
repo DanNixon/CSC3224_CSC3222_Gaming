@@ -43,12 +43,16 @@ namespace Graphics
      * @brief Gets the GL texture for use in rendering.
      * @return GL texture
      */
-    GLuint texture() const
+    inline GLuint texture() const
     {
       return m_texture;
     }
 
-    Engine::Maths::Vector2 dimensions() const
+    /**
+     * @brief Gets the dimensions of the texture image.
+     * @return Texture dimensions
+     */
+    inline Engine::Maths::Vector2 dimensions() const
     {
       return m_size;
     }

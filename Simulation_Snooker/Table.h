@@ -20,7 +20,16 @@
 class Table : public Engine::Graphics::RenderableObject
 {
 public:
+  /**
+   * @var NUM_CUSHIONS
+   * @brief Number of cushions on the table.
+   */
   static const int NUM_CUSHIONS = 4;
+
+  /**
+   * @var NUM_POCKETS
+   * @brief Number of pockets on the table.
+   */
   static const int NUM_POCKETS = 6;
 
   static const Engine::Maths::Vector2 DIMENSIONS;
@@ -45,6 +54,11 @@ public:
     return m_cushions[idx];
   }
 
+  /**
+   * @brief Gets a pocket.
+   * @param idx Pocket index
+   * @return Pocket
+   */
   Pocket *pocket(size_t idx)
   {
     if (idx > NUM_POCKETS)

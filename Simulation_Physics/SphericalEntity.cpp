@@ -55,6 +55,11 @@ namespace Physics
     m_radius2 = radius * radius;
   }
 
+  /**
+   * @brief Gets the distance an Entity must travel into this to detect an
+   *        interface.
+   * @return Impact distance (in mm)
+   */
   float SphericalEntity::impactDistance() const
   {
     return m_impactDistance;

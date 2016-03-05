@@ -14,6 +14,11 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @class TextPane
+   * @brief Used for drawing text along an axis aligned plane.
+   * @author Dan Nixon
+   */
   class TextPane : public RenderableObject
   {
   public:
@@ -24,9 +29,9 @@ namespace Graphics
     void setColour(const Engine::Graphics::Colour &col);
 
   private:
-    const float m_height;
-    TTF_Font *m_font;
-    Engine::Graphics::Colour m_colour;
+    const float m_height;              //!< Height of the text
+    TTF_Font *m_font;                  //!< Text font
+    Engine::Graphics::Colour m_colour; //!< Text colour
   };
 }
 }
