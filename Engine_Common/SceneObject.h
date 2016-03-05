@@ -86,7 +86,7 @@ namespace Common
     virtual void update(float msec);
     virtual void render();
 
-    SceneObject * findChild(const std::string &name);
+    SceneObject *findChild(const std::string &name);
 
   protected:
     friend class Scene;

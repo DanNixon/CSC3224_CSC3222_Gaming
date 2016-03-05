@@ -34,7 +34,8 @@ void SnookerSimulation::gameStartup()
 {
   // Load font for text display
   m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
-  m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
+  m_fontMedium =
+      TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
   // Table
   m_table = new Table(m_entities);
@@ -83,8 +84,10 @@ void SnookerSimulation::gameStartup()
   m_ui = new Scene(new SceneObject("root"), view, orth);
 
   m_uiShader = new ShaderProgram();
-  m_uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
-  m_uiShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
+  m_uiShader->addShader(
+      new VertexShader("../resources/shader/vert_simple.glsl"));
+  m_uiShader->addShader(
+      new FragmentShader("../resources/shader/frag_tex.glsl"));
   m_uiShader->link();
 
   TextPane *title = new TextPane("title", 0.15f, m_uiShader, m_fontLarge);
@@ -92,13 +95,17 @@ void SnookerSimulation::gameStartup()
   title->setText("Snooker Loopy!");
   m_ui->root()->addChild(*title);
 
-  m_profileGraphics = new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profileGraphics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
+  m_profileGraphics =
+      new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profileGraphics->setModelMatrix(
+      Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
   m_profileGraphics->setText("Graphics: ");
   m_ui->root()->addChild(*m_profileGraphics);
 
-  m_profilePhysics = new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profilePhysics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
+  m_profilePhysics =
+      new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profilePhysics->setModelMatrix(
+      Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
   m_profilePhysics->setText("Physics: ");
   m_ui->root()->addChild(*m_profilePhysics);
 
@@ -157,16 +164,16 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
     std::stringstream graphStr;
     graphStr.precision(3);
     graphStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
-      << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
+             << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
     m_profileGraphics->setText(graphStr.str());
 
     std::stringstream physStr;
     physStr.precision(3);
     physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
-      << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
+            << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
     m_profilePhysics->setText(physStr.str());
 
-    //std::cout << "Performance statistics:" << std::endl
+    // std::cout << "Performance statistics:" << std::endl
     //          << *m_profiler << std::endl;
   }
 }

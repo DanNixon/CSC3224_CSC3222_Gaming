@@ -35,7 +35,7 @@ namespace Common
     void update();
     void render();
 
-    SceneObject * root()
+    SceneObject *root()
     {
       return m_root;
     }

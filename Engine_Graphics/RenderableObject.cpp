@@ -21,7 +21,8 @@ namespace Graphics
    * @param s Shader
    * @param t Texture
    */
-  RenderableObject::RenderableObject(const std::string &name, Mesh *m, ShaderProgram *s, Texture *t)
+  RenderableObject::RenderableObject(const std::string &name, Mesh *m,
+                                     ShaderProgram *s, Texture *t)
       : SceneObject(name)
       , m_mesh(m)
       , m_shaderProgram(s)

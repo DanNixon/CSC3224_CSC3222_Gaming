@@ -78,11 +78,9 @@ namespace Physics
         // Check for interface
         bool detected = InterfaceDetection::Detect(**oit, **iit);
 
-        auto it = std::find_if(m_interfaces.begin(), m_interfaces.end(),
-                               [entPair](InterfaceDef d)
-                               {
-                                 return d.first == entPair;
-                               });
+        auto it = std::find_if(
+            m_interfaces.begin(), m_interfaces.end(),
+            [entPair](InterfaceDef d) { return d.first == entPair; });
 
         // Remove a resolved interface that is no longer detected
         if (it != m_interfaces.end() && !(detected || !it->second))

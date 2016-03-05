@@ -35,7 +35,7 @@ namespace Physics
   private:
     float m_radius2;        //!< Radius squared
     float m_impactDistance; //!< The distance the entity can travel into another
-                            //!spherebefore a collision is reported
+                            //! spherebefore a collision is reported
   };
 }
 }

@@ -61,7 +61,7 @@ private:
 
   TTF_Font *m_fontLarge;
   TTF_Font *m_fontMedium;
-  Engine::Graphics::ShaderProgram * m_uiShader;
+  Engine::Graphics::ShaderProgram *m_uiShader;
   Engine::Graphics::TextPane *m_profileGraphics;
   Engine::Graphics::TextPane *m_profilePhysics;
 };
