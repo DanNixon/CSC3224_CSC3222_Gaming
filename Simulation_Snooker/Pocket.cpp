@@ -23,7 +23,8 @@ const float Pocket::RADIUS = 44.45f;
  * @param pos Position of the pocket
  */
 Pocket::Pocket(const Vector2 &pos)
-    : SphericalEntity(pos, std::numeric_limits<float>::max(), RADIUS, true, 0.99f, 0.005f, Ball::RADIUS)
+    : SphericalEntity(pos, std::numeric_limits<float>::max(), RADIUS, true,
+                      0.99f, 0.005f, Ball::RADIUS)
     , RenderableObject(Mesh::GenerateDisc2D(RADIUS), NULL)
 {
   ShaderProgram *sp = new ShaderProgram();
@@ -40,7 +41,7 @@ Pocket::~Pocket()
 {
 }
 
-//TEMP
+// TEMP
 void Pocket::setPosition(const Engine::Maths::Vector2 &pos)
 {
   SphericalEntity::setPosition(pos);

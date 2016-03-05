@@ -16,7 +16,7 @@
  * @author Dan Nixon
  */
 class Pocket : public Simulation::Physics::SphericalEntity,
-             public Engine::Graphics::RenderableObject
+               public Engine::Graphics::RenderableObject
 {
 public:
   static const float RADIUS;
@@ -24,7 +24,7 @@ public:
   Pocket(const Engine::Maths::Vector2 &pos);
   virtual ~Pocket();
 
-  //TEMP
+  // TEMP
   virtual void setPosition(const Engine::Maths::Vector2 &pos);
 };
 

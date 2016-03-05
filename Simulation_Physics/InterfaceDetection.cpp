@@ -63,7 +63,8 @@ namespace Physics
                                         const SphericalEntity &b)
   {
     float d = VectorOperations::Distance2(a.position(), b.position());
-    float r = (a.radius() - a.impactDistance()) + (b.radius() - b.impactDistance());
+    float r =
+        (a.radius() - a.impactDistance()) + (b.radius() - b.impactDistance());
     r *= r;
     result = (d < r);
   }

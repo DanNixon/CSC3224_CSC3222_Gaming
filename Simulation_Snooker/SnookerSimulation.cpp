@@ -81,7 +81,7 @@ void SnookerSimulation::gameStartup()
   sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
   sp->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
   sp->link();
-  TextPane * p = new TextPane(0.8f, sp, m_font);
+  TextPane *p = new TextPane(0.8f, sp, m_font);
   p->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.9f, 0.0f)));
   p->setText("Snooker Loopy!");
 
@@ -131,7 +131,8 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
       if (dynamic_cast<Pocket *>(a))
         std::cout << "Ball in pocket" << std::endl;
       else
-        std::cout << it->first.first << " - " << it->first.second << " [" << it->second << "]" << std::endl;
+        std::cout << it->first.first << " - " << it->first.second << " ["
+                  << it->second << "]" << std::endl;
     }
   }
   // Output profiling data

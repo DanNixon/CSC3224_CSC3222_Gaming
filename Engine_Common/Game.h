@@ -29,7 +29,7 @@ namespace Common
     float lastFired;        //!< Last time the timer fired (in milliseconds)
     float interval;         //!< Timer interval (in milliseconds)
     float profileStartTime; //!< Time at which loop began (in milliseconds, for
-                            //!profiling)
+                            //! profiling)
     std::string loopName;   //!< Name of loop
   };
 
@@ -134,8 +134,8 @@ namespace Common
     int m_windowWidth;                          //!< Window width
     int m_windowHeight;                         //!< Window height
     IEventHandler::HandlerList m_eventHandlers; //!< List of event handlers
-    GameLoopConfiguration *
-        m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
+    GameLoopConfiguration
+        *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
   };
 }
 }

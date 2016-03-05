@@ -15,6 +15,7 @@ Game Development: Project 1
 - [ ] `Engine_Graphics`
   - [x] Asset import
   - [x] Texture encapsulation
+  - [x] Text rendering
   - [ ] Menu interface (programmatic/generic)
 - [x] `Engine_Input`
   - [x] Keyboard

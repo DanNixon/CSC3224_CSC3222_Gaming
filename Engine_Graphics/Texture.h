@@ -9,8 +9,8 @@
 #include <string>
 
 #include <GL/glew.h>
-#include <SOIL/SOIL.h>
 #include <SDL_ttf.h>
+#include <SOIL/SOIL.h>
 
 #include <Vector2.h>
 #include <Vector4.h>
@@ -33,7 +33,8 @@ namespace Graphics
     virtual ~Texture();
 
     bool load(const std::string &filename);
-    void text(const std::string & text, TTF_Font * font, const Colour &colour = Colour());
+    void text(const std::string &text, TTF_Font *font,
+              const Colour &colour = Colour());
 
     bool valid() const;
     void use(GLuint shaderProgram, int idx) const;

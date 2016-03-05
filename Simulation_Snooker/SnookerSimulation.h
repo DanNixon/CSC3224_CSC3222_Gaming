@@ -10,9 +10,9 @@
 
 #include <SDL_ttf.h>
 
+#include <KeyboardHandler.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
-#include <KeyboardHandler.h>
 
 #include <Entity.h>
 #include <PhysicsUpdate.h>

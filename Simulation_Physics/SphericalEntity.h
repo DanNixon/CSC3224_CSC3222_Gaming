@@ -33,8 +33,9 @@ namespace Physics
     float impactDistance() const;
 
   private:
-    float m_radius2; //!< Radius squared
-    float m_impactDistance; //!< The distance the entity can travel into another spherebefore a collision is reported
+    float m_radius2;        //!< Radius squared
+    float m_impactDistance; //!< The distance the entity can travel into another
+                            //!spherebefore a collision is reported
   };
 }
 }

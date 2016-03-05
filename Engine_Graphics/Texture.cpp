@@ -48,7 +48,8 @@ namespace Graphics
    * @param colour Text colour
    * @return GL texture, 0 if loading/generation failed
    */
-  void Texture::text(const std::string & text, TTF_Font * font, const Colour &colour)
+  void Texture::text(const std::string &text, TTF_Font *font,
+                     const Colour &colour)
   {
     if (m_texture != 0)
       glDeleteTextures(1, &m_texture);
@@ -56,13 +57,15 @@ namespace Graphics
     glGenTextures(1, &m_texture);
     glBindTexture(GL_TEXTURE_2D, m_texture);
 
-    SDL_Surface * img = TTF_RenderText_Blended(font, text.c_str(), colour.sdlColour());
+    SDL_Surface *img =
+        TTF_RenderText_Blended(font, text.c_str(), colour.sdlColour());
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA,
+                 GL_UNSIGNED_BYTE, img->pixels);
 
-    m_size = Vector2((float) img->w, (float) img->h);
+    m_size = Vector2((float)img->w, (float)img->h);
 
     glBindTexture(GL_TEXTURE_2D, 0);
   }

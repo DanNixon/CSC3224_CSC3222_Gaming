@@ -71,7 +71,8 @@ void DemoGame::gameStartup()
     m_simControls = new KJSSimulatorControls(this);
     std::cout << static_cast<KJSSimulatorControls *>(m_simControls)
                      ->joystick()
-                     ->open(0) << std::endl;
+                     ->open(0)
+              << std::endl;
   }
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");

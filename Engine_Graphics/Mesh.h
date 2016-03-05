@@ -57,7 +57,8 @@ namespace Graphics
     static Mesh *GenerateRing2D(float radiusOuter, float radiusInner,
                                 int resolution = 64);
     static Mesh *GenerateRect2D(const Engine::Maths::Vector2 &dimensions);
-    static Mesh *UpdateRect2D(Mesh *m, const Engine::Maths::Vector2 &dimensions);
+    static Mesh *UpdateRect2D(Mesh *m,
+                              const Engine::Maths::Vector2 &dimensions);
     static Mesh *LoadASCIIMeshFile(const string &filename);
     static Mesh *LoadModelFile(const string &filename, size_t meshIdx);
 
@@ -84,8 +85,8 @@ namespace Graphics
 
     Engine::Maths::Vector3 *m_vertices; //!< Pointer to vertex position data
     Engine::Maths::Vector4 *m_colours;  //!< Pointer to vertex colour data
-    Engine::Maths::Vector2 *
-        m_textureCoords; //!< Pointer to vertex texture coordinate data
+    Engine::Maths::Vector2
+        *m_textureCoords; //!< Pointer to vertex texture coordinate data
     Engine::Maths::Vector3 *m_normals;  //!< Pointer to vertex normals data
     Engine::Maths::Vector3 *m_tangents; //!< Pointer to vertex tangents data
     size_t *m_indices;                  //!< Pointer to vertex indices data

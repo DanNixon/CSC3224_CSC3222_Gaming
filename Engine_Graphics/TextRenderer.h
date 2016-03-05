@@ -10,22 +10,18 @@
 
 namespace Engine
 {
-  namespace Graphics
+namespace Graphics
+{
+  class TextRenderer
   {
-    class TextRenderer
-    {
-    public:
-      TextRenderer();
-      virtual ~TextRenderer();
+  public:
+    TextRenderer();
+    virtual ~TextRenderer();
 
-      void drawString(SDL_Surface* screen,
-        char* string,
-        int size,
-        int x, int y,
-        int fR, int fG, int fB,
-        int bR, int bG, int bB);
-    };
-  }
+    void drawString(SDL_Surface *screen, char *string, int size, int x, int y,
+                    int fR, int fG, int fB, int bR, int bG, int bB);
+  };
+}
 }
 
 #endif

@@ -55,8 +55,7 @@ public:
 
 private:
   Cushion *m_cushions[4]; //!< Side cushions
-  Pocket *m_pockets[6]; //!< Pockets
-
+  Pocket *m_pockets[6];   //!< Pockets
 };
 
 #endif

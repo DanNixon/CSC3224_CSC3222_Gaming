@@ -12,23 +12,23 @@
 
 namespace Engine
 {
-  namespace Graphics
+namespace Graphics
+{
+  class TextPane : public RenderableObject
   {
-    class TextPane : public RenderableObject
-    {
-    public:
-      TextPane(float height, ShaderProgram * s, TTF_Font * font);
-      virtual ~TextPane();
+  public:
+    TextPane(float height, ShaderProgram *s, TTF_Font *font);
+    virtual ~TextPane();
 
-      void setText(const std::string &str);
-      void setColour(const Engine::Graphics::Colour &col);
+    void setText(const std::string &str);
+    void setColour(const Engine::Graphics::Colour &col);
 
-    private:
-      const float m_height;
-      TTF_Font *m_font;
-      Engine::Graphics::Colour m_colour;
-    };
-  }
+  private:
+    const float m_height;
+    TTF_Font *m_font;
+    Engine::Graphics::Colour m_colour;
+  };
+}
 }
 
 #endif
