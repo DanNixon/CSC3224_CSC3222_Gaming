@@ -296,7 +296,7 @@ namespace Maths
       return stream;
     }
 
-  private:
+  protected:
     float m_x; //!< X coordinate
     float m_y; //!< Y coordinate
   };

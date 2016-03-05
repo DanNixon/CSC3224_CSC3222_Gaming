@@ -40,13 +40,13 @@ Table::Table(Entity::EntityPtrList &entityList)
     : RenderableObject(Mesh::GenerateRect2D(DIMENSIONS), NULL)
 {
   ShaderProgram *sp = new ShaderProgram();
-  sp->addShader(new VertexShader("vert.glsl"));
-  sp->addShader(new FragmentShader("frag_tex.glsl"));
+  sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+  sp->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
   sp->link();
   setShader(sp);
 
   Texture *tex = new Texture("tabletopTex");
-  tex->load("table.png");
+  tex->load("../resources/table.png");
   setTexture(tex);
 
   m_cushions[0] = new Cushion(Vector2(-HALF_PLAY_AREA.x(), 0.0f));

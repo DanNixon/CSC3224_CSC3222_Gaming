@@ -11,6 +11,7 @@
 #include <gl\glew.h>
 #include <SDL\SDL_opengl.h>
 #include <gl\glu.h>
+#include <SDL_ttf.h>
 // clang-formmat on
 
 #include "Profiler.h"
@@ -209,6 +210,8 @@ namespace Common
     }
     else
     {
+      TTF_Init();
+
       /* Use OpenGL 3.1 core */
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
@@ -262,6 +265,7 @@ namespace Common
   {
     SDL_DestroyWindow(m_window);
     m_window = NULL;
+    TTF_Quit();
     SDL_Quit();
   }
 

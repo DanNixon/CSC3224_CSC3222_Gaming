@@ -5,6 +5,8 @@
 
 #include "SnookerSimulation.h"
 
+#include <SDL_ttf.h>
+
 #include <Profiler.h>
 #include <Shaders.h>
 
@@ -28,6 +30,11 @@ SnookerSimulation::~SnookerSimulation()
  */
 void SnookerSimulation::gameStartup()
 {
+  // Load font for text display
+  m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 75);
+
+  //tex->text("hello", font);
+
   // Table
   m_table = new Table(m_entities);
   m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
@@ -70,7 +77,12 @@ void SnookerSimulation::gameStartup()
   Matrix4 proj = Matrix4::Perspective(1, 100000, 1.33f, 45.0f);
   m_scene = new Scene(m_table, view, proj);
 
-  // Times loops
+  // UI
+  //Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
+  Matrix4 orth = Matrix4::Orthographic(0.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f);
+  //m_ui = new Scene(m_table, view, orth);
+
+  // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
   m_profileLoop = addTimedLoop(1000.0f, "profile");

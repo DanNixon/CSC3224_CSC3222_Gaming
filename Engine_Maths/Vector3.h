@@ -332,7 +332,7 @@ namespace Maths
       return stream;
     }
 
-  private:
+  protected:
     friend class Matrix3;
     friend class Matrix4;
 

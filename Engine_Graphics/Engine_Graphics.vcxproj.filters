@@ -6,7 +6,6 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TextUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
@@ -15,6 +14,6 @@
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextUtils.h" />
+    <ClInclude Include="Colour.h" />
   </ItemGroup>
 </Project>

@@ -369,10 +369,10 @@ namespace Graphics
     m->m_colours[3] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
     m->m_textureCoords = new Vector2[m->m_numVertices];
-    m->m_textureCoords[0] = Vector2(0, 1);
-    m->m_textureCoords[1] = Vector2(1, 1);
-    m->m_textureCoords[2] = Vector2(0, 0);
-    m->m_textureCoords[3] = Vector2(1, 0);
+    m->m_textureCoords[0] = Vector2(0, 0);
+    m->m_textureCoords[1] = Vector2(1, 0);
+    m->m_textureCoords[2] = Vector2(0, 1);
+    m->m_textureCoords[3] = Vector2(1, 1);
 
     m->bufferData();
     return m;

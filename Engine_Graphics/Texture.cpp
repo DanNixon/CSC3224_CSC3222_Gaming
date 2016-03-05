@@ -5,6 +5,8 @@
 
 #include "Texture.h"
 
+using namespace Engine::Maths;
+
 namespace Engine
 {
 namespace Graphics
@@ -17,11 +19,13 @@ namespace Graphics
    */
   Texture::Texture(const std::string &name)
       : m_name(name)
+      , m_texture(0)
   {
   }
 
   Texture::~Texture()
   {
+    glDeleteTextures(1, &m_texture);
   }
 
   /**
@@ -34,6 +38,27 @@ namespace Graphics
     m_texture = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO,
                                       SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
     return (m_texture != 0);
+  }
+
+  /**
+   * @brief Generates a texture with text.
+   * @param text Text to display
+   * @param font Font to display with
+   * @param colour Text colour
+   * @return GL texture, 0 if loading/generation failed
+   */
+  void Texture::text(const std::string & text, TTF_Font * font, const Colour &colour)
+  {
+    glGenTextures(1, &m_texture);
+    glBindTexture(GL_TEXTURE_2D, m_texture);
+
+    SDL_Surface * img = TTF_RenderText_Blended(font, text.c_str(), colour.sdlColour());
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
   }
 
   /**

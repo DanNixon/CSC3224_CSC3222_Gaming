@@ -334,7 +334,7 @@ namespace Maths
       return stream;
     }
 
-  private:
+  protected:
     friend class Matrix4;
 
     float m_x; //!< X coordinate

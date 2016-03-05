@@ -27,8 +27,8 @@ Pocket::Pocket(const Vector2 &pos)
     , RenderableObject(Mesh::GenerateDisc2D(RADIUS), NULL)
 {
   ShaderProgram *sp = new ShaderProgram();
-  sp->addShader(new VertexShader("vert.glsl"));
-  sp->addShader(new FragmentShader("frag_col.glsl"));
+  sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+  sp->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
   sp->link();
   setShader(sp);
 

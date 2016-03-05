@@ -6,9 +6,15 @@
 #ifndef _ENGINE_GRAPHICS_TEXTURE_H_
 #define _ENGINE_GRAPHICS_TEXTURE_H_
 
+#include <string>
+
 #include <GL/glew.h>
 #include <SOIL/SOIL.h>
-#include <string>
+#include <SDL_ttf.h>
+
+#include <Vector4.h>
+
+#include "Colour.h"
 
 namespace Engine
 {
@@ -26,6 +32,8 @@ namespace Graphics
     virtual ~Texture();
 
     bool load(const std::string &filename);
+    void text(const std::string & text, TTF_Font * font, const Colour &colour = Colour());
+
     bool valid() const;
     void use(GLuint shaderProgram, int idx) const;
 

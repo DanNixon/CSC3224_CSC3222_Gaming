@@ -8,6 +8,8 @@
 
 #include <Game.h>
 
+#include <SDL_ttf.h>
+
 #include <Scene.h>
 #include <ShaderProgram.h>
 #include <KeyboardHandler.h>
@@ -48,12 +50,15 @@ private:
   Uint8 m_profileLoop;
 
   Engine::Common::Scene *m_scene;
+  Engine::Common::Scene *m_ui;
 
   Table *m_table;
   Ball *m_balls[NUM_BALLS];
 
   Simulation::Physics::Entity::EntityPtrList m_entities;
   Simulation::Physics::PhysicsUpdate m_physics;
+
+  TTF_Font *m_font;
 };
 
 #endif
