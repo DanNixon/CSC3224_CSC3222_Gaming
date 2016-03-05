@@ -40,13 +40,13 @@ void DemoGame::gameStartup()
   m_sp->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
   m_sp->link();
 
-  m_cube = new RenderableObject(
+  m_cube = new RenderableObject("test_cube",
       Mesh::LoadASCIIMeshFile("../resources/cube.asciimesh"), m_sp);
   m_cube->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
                          Matrix4::Rotation(45, Vector3(0, 1, 0)) *
                          Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
-  m_child = new RenderableObject(
+  m_child = new RenderableObject("test_sphere",
       Mesh::LoadModelFile("../resources/sphere.stl", 0), m_sp);
   m_child->setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
                           Matrix4::Rotation(30, Vector3(1, 0, 0)));

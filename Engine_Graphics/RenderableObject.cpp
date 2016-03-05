@@ -14,24 +14,16 @@ namespace Engine
 namespace Graphics
 {
   /**
-   * @brief Creates a new, empty renderable object.
-   */
-  RenderableObject::RenderableObject()
-      : m_mesh(NULL)
-      , m_shaderProgram(NULL)
-      , m_texture(NULL)
-  {
-  }
-
-  /**
    * @brief Creates a new renderable object with a given mesh, shader and
    * texture.
+   * @param name Name of the obejct
    * @param m Mesh
    * @param s Shader
    * @param t Texture
    */
-  RenderableObject::RenderableObject(Mesh *m, ShaderProgram *s, Texture *t)
-      : m_mesh(m)
+  RenderableObject::RenderableObject(const std::string &name, Mesh *m, ShaderProgram *s, Texture *t)
+      : SceneObject(name)
+      , m_mesh(m)
       , m_shaderProgram(s)
       , m_texture(t)
   {

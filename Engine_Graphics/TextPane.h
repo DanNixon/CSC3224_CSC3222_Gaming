@@ -22,10 +22,11 @@ namespace Graphics
   class TextPane : public RenderableObject
   {
   public:
-    TextPane(float height, ShaderProgram *s, TTF_Font *font);
+    TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font);
     virtual ~TextPane();
 
     void setText(const std::string &str);
+
     void setColour(const Engine::Graphics::Colour &col);
 
   private:

@@ -37,7 +37,7 @@ const Vector2 Table::HALF_PLAY_AREA = PLAY_AREA / 2;
  * @brief Creates a new table.
  */
 Table::Table(Entity::EntityPtrList &entityList)
-    : RenderableObject(Mesh::GenerateRect2D(DIMENSIONS), NULL)
+    : RenderableObject("table", Mesh::GenerateRect2D(DIMENSIONS), NULL)
 {
   ShaderProgram *sp = new ShaderProgram();
   sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));

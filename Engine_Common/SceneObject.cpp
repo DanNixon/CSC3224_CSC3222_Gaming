@@ -5,6 +5,8 @@
 
 #include "SceneObject.h"
 
+#include <algorithm>
+
 using namespace Engine::Maths;
 
 namespace Engine
@@ -13,9 +15,11 @@ namespace Common
 {
   /**
    * @brief Creates a new, empty scene object.
+   * @param name Name of the object
    */
-  SceneObject::SceneObject()
-      : m_modelMatrix(Matrix4())
+  SceneObject::SceneObject(const std::string &name)
+      : m_name(name)
+      , m_modelMatrix(Matrix4())
       , m_worldTransform(Matrix4())
       , m_parent(NULL)
   {
@@ -47,6 +51,14 @@ namespace Common
   {
     for (SceneObjectIter i = m_children.begin(); i != m_children.end(); ++i)
       (*i)->render();
+  }
+
+  SceneObject * SceneObject::findChild(const std::string &name)
+  {
+    auto it = std::find_if(m_children.begin(), m_children.end(), [name](SceneObject* o){ return o->name() == name; });
+    if (it != m_children.end())
+      return *it;
+    return NULL;
   }
 
   /**

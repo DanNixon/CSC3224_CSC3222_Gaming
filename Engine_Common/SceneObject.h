@@ -28,8 +28,13 @@ namespace Common
      */
     typedef std::vector<SceneObject *>::const_iterator SceneObjectIter;
 
-    SceneObject();
+    SceneObject(const std::string &name);
     ~SceneObject();
+
+    inline std::string name() const
+    {
+      return m_name;
+    }
 
     /**
      * @brief Adds a SceneObject as a child of this object.
@@ -64,7 +69,7 @@ namespace Common
      * @brief Gets the model matrix (relative to parent)
      * @return Model matrix
      */
-    Engine::Maths::Matrix4 modelMatrix() const
+    inline Engine::Maths::Matrix4 modelMatrix() const
     {
       return m_modelMatrix;
     }
@@ -73,7 +78,7 @@ namespace Common
      * @brief Gets the position in world space (absolute position)
      * @return World position
      */
-    Engine::Maths::Matrix4 worldTransform() const
+    inline Engine::Maths::Matrix4 worldTransform() const
     {
       return m_worldTransform;
     }
@@ -81,10 +86,14 @@ namespace Common
     virtual void update(float msec);
     virtual void render();
 
+    SceneObject * findChild(const std::string &name);
+
   protected:
     friend class Scene;
 
     void addToScene(Scene *scene);
+
+    const std::string m_name;
 
     Engine::Maths::Matrix4
         m_modelMatrix; //!< Local model matrix (relative to parent)

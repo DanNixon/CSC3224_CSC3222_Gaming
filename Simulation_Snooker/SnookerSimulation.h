@@ -13,6 +13,7 @@
 #include <KeyboardHandler.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
+#include <TextPane.h>
 
 #include <Entity.h>
 #include <PhysicsUpdate.h>
@@ -58,7 +59,11 @@ private:
   Simulation::Physics::Entity::EntityPtrList m_entities;
   Simulation::Physics::PhysicsUpdate m_physics;
 
-  TTF_Font *m_font;
+  TTF_Font *m_fontLarge;
+  TTF_Font *m_fontMedium;
+  Engine::Graphics::ShaderProgram * m_uiShader;
+  Engine::Graphics::TextPane *m_profileGraphics;
+  Engine::Graphics::TextPane *m_profilePhysics;
 };
 
 #endif

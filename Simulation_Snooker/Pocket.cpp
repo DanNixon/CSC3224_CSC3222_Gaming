@@ -25,7 +25,7 @@ const float Pocket::RADIUS = 44.45f;
 Pocket::Pocket(const Vector2 &pos)
     : SphericalEntity(pos, std::numeric_limits<float>::max(), RADIUS, true,
                       0.99f, 0.005f, Ball::RADIUS)
-    , RenderableObject(Mesh::GenerateDisc2D(RADIUS), NULL)
+    , RenderableObject("pocket", Mesh::GenerateDisc2D(RADIUS), NULL)
 {
   ShaderProgram *sp = new ShaderProgram();
   sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));

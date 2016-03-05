@@ -35,6 +35,11 @@ namespace Common
     void update();
     void render();
 
+    SceneObject * root()
+    {
+      return m_root;
+    }
+
   private:
     SceneObject *m_root;                       //!< Root node in the scene tree
     Engine::Maths::Matrix4 m_viewMatrix;       //!< View matrix
