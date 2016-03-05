@@ -40,13 +40,14 @@ void DemoGame::gameStartup()
   m_sp->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
   m_sp->link();
 
-  m_cube =
-      new RenderableObject(Mesh::LoadASCIIMeshFile("../resources/cube.asciimesh"), m_sp);
+  m_cube = new RenderableObject(
+      Mesh::LoadASCIIMeshFile("../resources/cube.asciimesh"), m_sp);
   m_cube->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
                          Matrix4::Rotation(45, Vector3(0, 1, 0)) *
                          Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
-  m_child = new RenderableObject(Mesh::LoadModelFile("../resources/sphere.stl", 0), m_sp);
+  m_child = new RenderableObject(
+      Mesh::LoadModelFile("../resources/sphere.stl", 0), m_sp);
   m_child->setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
                           Matrix4::Rotation(30, Vector3(1, 0, 0)));
 
@@ -71,8 +72,7 @@ void DemoGame::gameStartup()
     m_simControls = new KJSSimulatorControls(this);
     std::cout << static_cast<KJSSimulatorControls *>(m_simControls)
                      ->joystick()
-                     ->open(0)
-              << std::endl;
+                     ->open(0) << std::endl;
   }
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
