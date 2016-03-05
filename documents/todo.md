@@ -1,8 +1,8 @@
 To Do
 =====
 
-Game Development: Project 1
----------------------------
+Game Development: Project 1 (20 Apr)
+------------------------------------
 
 - [x] Engine structure outline
 - [ ] `Engine_Audio`
@@ -28,8 +28,13 @@ Game Development: Project 1
 - [ ] `Engine_Utility`
   - [ ] More random distributions
 
-Game Simulations: Project 1
----------------------------
+Game Development: Project 2 (12 May)
+------------------------------------
+
+TODO
+
+Game Simulations: Project 1 (13 Apr)
+------------------------------------
 
 Essential:
 
@@ -41,10 +46,15 @@ Essential:
 - [ ] Pocket detection
   - [ ] Use lines instead of planes for cushions in between pockets
 - [ ] D-zone detection
-- [ ] Display profiling data on screen
+- [x] Display profiling data on screen
 
 Extras:
 
 - [ ] Mouse based shots
 - [ ] Proper snooker rules and scoring
 - [ ] Sort and sweep broadphase interface checks
+
+Game Simulations: Project 2 (4 May)
+-----------------------------------
+
+TODO
