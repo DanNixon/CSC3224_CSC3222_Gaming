@@ -32,6 +32,16 @@ namespace Maths
     }
 
     /**
+     * @brief Calculates the orthogonal to a vector.
+     * @param a Vector
+     * @return Orthogonal vector
+     */
+    static Vector2 Orth(const Vector2 &a)
+    {
+      return Vector2(-a.m_y, a.m_x);
+    }
+
+    /**
      * @brief Creates a new vector with default values of [0, 0].
      */
     Vector2()

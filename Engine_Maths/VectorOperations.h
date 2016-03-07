@@ -44,7 +44,7 @@ namespace Maths
      * @brief Normalises a vector to a length of 1.0.
      * @param a Vector
      * @return Normalised vector
-
+     *
      * Divides each component of the vector by its length.
      */
     template <typename T> inline static T GetNormalised(const T &a)
@@ -58,17 +58,29 @@ namespace Maths
     }
 
     /**
-    * @brief Normalises a vector to a length of 1.0.
-    * @param a Vector
-
-    * Divides each component of the vector by its length.
-    */
+     * @brief Normalises a vector to a length of 1.0.
+     * @param a Vector
+     *
+     * Divides each component of the vector by its length.
+     */
     template <typename T> inline static void Normalise(T &a)
     {
       float len = a.length();
 
       if (len != 0.0)
         a = a / len;
+    }
+
+    /**
+     * @brief Projects a vector onto another.
+     * @param a Vector to project
+     * @param b Vector on which to project
+     * @return Vector a projected onto vector b
+     */
+    template <typename T> inline static T Project(const T &a, const T &b)
+    {
+      float fact = T::dot(a, b) / T::dot(b, b);
+      return b * fact;
     }
   };
 }

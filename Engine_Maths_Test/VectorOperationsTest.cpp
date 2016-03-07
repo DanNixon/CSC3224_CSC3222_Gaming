@@ -93,6 +93,15 @@ public:
     float dist2 = VectorOperations::Distance2(v1, v2);
     Assert::AreEqual(67.0f, dist2, 0.001f);
   }
+
+  TEST_METHOD(VectorOperatons_Vector2_Projection)
+  {
+    Vector2 a(2.0f, 1.0f);
+    Vector2 b(-3.0f, 4.0f);
+    Vector2 p = VectorOperations::Project(a, b);
+    Assert::AreEqual(0.24f, p.x(), 0.001f);
+    Assert::AreEqual(-0.32f, p.y(), 0.001f);
+  }
 };
 }
 }
