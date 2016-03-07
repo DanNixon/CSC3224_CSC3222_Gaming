@@ -63,14 +63,14 @@ Table::Table(Entity::EntityPtrList &entityList)
 
   size_t i;
 
-  for (i = 0; i < NUM_CUSHIONS; i++)
-    entityList.push_back(m_cushions[i]);
-
   for (i = 0; i < NUM_POCKETS; i++)
   {
     entityList.push_back(m_pockets[i]);
     addChild(*m_pockets[i]);
   }
+
+  for (i = 0; i < NUM_CUSHIONS; i++)
+    entityList.push_back(m_cushions[i]);
 }
 
 Table::~Table()

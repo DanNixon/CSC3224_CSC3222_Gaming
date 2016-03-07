@@ -43,8 +43,7 @@ Essential:
 - [x] Positional updates
 - [x] Interface detection
 - [x] Interface resolution
-- [ ] Pocket detection
-  - [ ] Use lines instead of planes for cushions in between pockets
+- [x] Pocket detection
 - [ ] D-zone detection
 - [x] Display profiling data on screen
 
