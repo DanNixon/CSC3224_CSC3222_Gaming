@@ -8,11 +8,6 @@
 #include <VectorOperations.h>
 #include <math_common.h>
 
-#include <assimp/Importer.hpp>
-#include <assimp/cimport.h>
-#include <assimp/postprocess.h>
-#include <assimp/scene.h>
-
 using namespace Engine::Maths;
 
 namespace Engine
@@ -461,28 +456,19 @@ namespace Graphics
   }
 
   /**
-   * @brief Loads a mesh from a model file (supported by Assimp).
-   * @param filename Filename to load
-   * @param meshIdx Index of mesh (within scene) to load
+   * @brief Loads a mesh from an Assimp mesh.
+   * @param mesh Assimp mesh to load
    * @return Mesh containing loaded model
    */
-  Mesh *Mesh::LoadModelFile(const string &filename, size_t meshIdx)
+  Mesh *Mesh::LoadMesh(const struct aiMesh * mesh)
   {
-    Assimp::Importer i;
-    const struct aiScene *scene =
-        i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
-
-    if (meshIdx > scene->mNumMeshes)
-      return NULL;
-
     Mesh *m = new Mesh();
-    m->m_type = GL_TRIANGLES;
-    // m->m_type = GL_LINES;
+    //m->m_type = GL_TRIANGLES;
+    m->m_type = GL_LINES;
 
-    aiMesh *mesh = scene->mMeshes[meshIdx];
     aiVector3D *vertices = mesh->mVertices;
 
-    m->m_numVertices = mesh->mNumVertices * 3;
+    m->m_numVertices = mesh->mNumFaces * 3;
     m->m_vertices = new Vector3[m->m_numVertices];
     m->m_colours = new Vector4[m->m_numVertices];
 
@@ -503,7 +489,10 @@ namespace Graphics
       m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
 
       m->m_colours[idx] = Vector4(1, 1, 1, 1);
-      m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
+	  if (face.mNumIndices == 3)
+		m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
+	  else
+		  m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
     }
 
     m->generateNormals();

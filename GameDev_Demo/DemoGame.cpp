@@ -6,6 +6,7 @@
 #include "DemoGame.h"
 
 #include <Shaders.h>
+#include <ModelLoader.h>
 
 #include <Profiler.h>
 
@@ -40,27 +41,25 @@ int DemoGame::gameStartup()
   m_sp->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
   m_sp->link();
 
-  m_cube = new RenderableObject(
-      "test_cube", Mesh::LoadASCIIMeshFile("../resources/cube.asciimesh"),
-      m_sp);
-  m_cube->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
-                         Matrix4::Rotation(45, Vector3(0, 1, 0)) *
-                         Matrix4::Rotation(45, Vector3(1, 0, 0)));
+  ModelLoader l;
+  m_model = l.load("../resources/models/Gaui_R5/Gaui_R5.obj", m_sp);
+  //m_model = l.load("../resources/sphere.stl", m_sp);
 
-  m_child = new RenderableObject(
-      "test_sphere", Mesh::LoadModelFile("../resources/sphere.stl", 0), m_sp);
-  m_child->setModelMatrix(Matrix4::Translation(Vector3(-2.0, 0.0, 0.0)) *
-                          Matrix4::Rotation(30, Vector3(1, 0, 0)));
+  float sf = 10.0f;
+  m_model->setModelMatrix(Matrix4::Scale(Vector3(sf, sf, sf)) *
+						  Matrix4::Translation(Vector3(0.0, 0.0, -10.0)) *
+                          Matrix4::Rotation(45, Vector3(0, 1, 0)) *
+                          Matrix4::Rotation(45, Vector3(1, 0, 0)));
 
-  m_cube->addChild(*m_child);
-
+  m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
+  m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
   m_s = new Scene(
-      m_cube, Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)),
-      Matrix4::Perspective(1, 100, 1.33f, 45.0f));
+	  m_model, Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
+	  m_losPMatrix);
 
-  glEnable(GL_DEPTH_TEST);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glEnable(GL_BLEND);
+  //glEnable(GL_DEPTH_TEST);
+  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  //glEnable(GL_BLEND);
 
   if (JoystickHandler::NumJoysticks() == 0)
   {

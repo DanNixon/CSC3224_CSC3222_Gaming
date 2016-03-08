@@ -9,7 +9,7 @@
 #include <Game.h>
 
 #include <IControlScheme.h>
-#include <RenderableObject.h>
+#include <SceneObject.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
 
@@ -36,10 +36,13 @@ private:
   Uint8 m_testLoop;
 
   Engine::Graphics::ShaderProgram *m_sp;
-  Engine::Common::Scene *m_s;
 
-  Engine::Graphics::RenderableObject *m_cube;
-  Engine::Graphics::RenderableObject *m_child;
+  Engine::Maths::Matrix4 m_losPMatrix;	//!< Perspective matrix for line of sight flying
+  Engine::Maths::Matrix4 m_fpvPMatrix;	//!< Perspective matrix for first person view flying
+  Engine::Common::Scene *m_s;			//!< Scene containing world (terrain and models)
+  Engine::Common::Scene *m_ui;			//!< Scene containing UI
+
+  Engine::Common::SceneObject *m_model;
 
   Engine::Input::IControlScheme *m_simControls;
 };

@@ -172,7 +172,7 @@ namespace Common
    */
   float Game::windowAspect() const
   {
-    return ((float)m_windowHeight / (float)m_windowWidth);
+    return ((float)m_windowWidth / (float)m_windowHeight);
   }
 
   void Game::swapBuffers()
