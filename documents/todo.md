@@ -17,6 +17,8 @@ Game Development: Project 1 (20 Apr)
   - [x] Texture encapsulation
   - [x] Text rendering
   - [ ] Menu interface (programmatic/generic)
+  - [ ] Render alpha meshes in correct order
+  - [ ] Load textures in asset loading
 - [x] `Engine_Input`
   - [x] Keyboard
   - [x] Mouse
