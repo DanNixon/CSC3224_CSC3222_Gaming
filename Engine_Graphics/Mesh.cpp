@@ -463,7 +463,7 @@ namespace Graphics
   Mesh *Mesh::LoadMesh(const struct aiMesh * mesh)
   {
     Mesh *m = new Mesh();
-    //m->m_type = GL_TRIANGLES;
+    // m->m_type = GL_TRIANGLES;
     m->m_type = GL_LINES;
 
     aiVector3D *vertices = mesh->mVertices;

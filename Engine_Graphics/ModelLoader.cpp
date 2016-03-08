@@ -43,12 +43,12 @@ namespace Engine
 
 		void ModelLoader::loadRecursive(SceneObject * sn, const struct aiScene * scene, const struct aiNode * node, ShaderProgram *sp)
 		{
+			const aiMatrix4x4 transform = node->mTransformation;
+
 			// Meshes in this node
 			for (size_t i = 0; i < node->mNumMeshes; i++)
 			{
 				const struct aiMesh * m = scene->mMeshes[node->mMeshes[i]];
-
-				std::cout << "nverts: " << m->mNumVertices << std::endl;
 
 				if (m->mNumVertices == 0)
 					continue;

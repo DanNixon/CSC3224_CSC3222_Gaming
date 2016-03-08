@@ -46,6 +46,8 @@ namespace Input
     bool hasAnalog(size_t a) const;
     float analog(size_t a) const;
 
+    void setAnalogDeadbands(float deadbandCentre = 0.0f, float deadbandLimit = 0.0f);
+
     virtual void setState(size_t state, bool active);
     virtual void flipState(size_t state);
     virtual void setAnalog(size_t state, float value);
@@ -57,6 +59,8 @@ namespace Input
 
     std::bitset<MAX_STATES> m_state;   //!< Binary states
     std::map<size_t, float> m_analogs; //!< Analog states
+
+    float m_analogDeadbands[3];
   };
 }
 }

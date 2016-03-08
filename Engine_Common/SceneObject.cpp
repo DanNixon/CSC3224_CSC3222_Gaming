@@ -36,7 +36,7 @@ namespace Common
   void SceneObject::update(float msec)
   {
     if (m_parent)
-      m_worldTransform = m_parent->m_modelMatrix * m_modelMatrix;
+      m_worldTransform = m_parent->m_worldTransform * m_modelMatrix;
     else
       m_worldTransform = m_modelMatrix;
 

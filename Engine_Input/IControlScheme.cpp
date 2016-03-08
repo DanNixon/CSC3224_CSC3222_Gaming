@@ -21,6 +21,7 @@ namespace Input
    */
   IControlScheme::IControlScheme()
   {
+    setAnalogDeadbands(0.0f, 0.0f);
   }
 
   IControlScheme::~IControlScheme()
@@ -80,6 +81,13 @@ namespace Input
     return (*it).second;
   }
 
+  void IControlScheme::setAnalogDeadbands(float deadbandCentre, float deadbandLimit)
+  {
+    m_analogDeadbands[0] = deadbandLimit;
+    m_analogDeadbands[1] = deadbandCentre;
+    m_analogDeadbands[2] = deadbandLimit;
+  }
+
   /**
    * @brief Sets the value of a binary state.
    * @param state State ID
@@ -106,9 +114,11 @@ namespace Input
    */
   void IControlScheme::setAnalog(size_t state, float value)
   {
-    if (value > 1.0f)
+    if (value >= -m_analogDeadbands[1] && value <= m_analogDeadbands[1])
+      value = 0.0f;
+    else if (value > (1.0f - m_analogDeadbands[2]))
       value = 1.0f;
-    else if (value < -1.0f)
+    else if (value < (-1.0f + m_analogDeadbands[0]))
       value = -1.0f;
 
     m_analogs[state] = value;
