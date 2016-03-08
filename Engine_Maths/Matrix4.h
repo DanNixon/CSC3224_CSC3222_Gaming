@@ -30,13 +30,11 @@ namespace Maths
     static Matrix4 Scale(const Vector3 &scale);
     static Matrix4 Translation(const Vector3 &translation);
 
-    static Matrix4 Perspective(float zNear, float zfar, float aspect,
-                               float fov);
-    static Matrix4 Orthographic(float zNear, float zfar, float right,
-                                float left, float top, float bottom);
+    static Matrix4 Perspective(float zNear, float zfar, float aspect, float fov);
+    static Matrix4 Orthographic(float zNear, float zfar, float right, float left, float top,
+                                float bottom);
 
-    static Matrix4 BuildViewMatrix(const Vector3 &from,
-                                   const Vector3 &lookingAt,
+    static Matrix4 BuildViewMatrix(const Vector3 &from, const Vector3 &lookingAt,
                                    const Vector3 up = Vector3(0, 1, 0));
 
     Matrix4();
@@ -140,8 +138,7 @@ namespace Maths
           out.m_values[c + (r * 4)] = 0.0f;
           for (unsigned int i = 0; i < 4; ++i)
           {
-            out.m_values[c + (r * 4)] +=
-                m_values[c + (i * 4)] * a.m_values[(r * 4) + i];
+            out.m_values[c + (r * 4)] += m_values[c + (i * 4)] * a.m_values[(r * 4) + i];
           }
         }
       }
@@ -159,15 +156,11 @@ namespace Maths
 
       float temp;
 
-      vec.m_x = v.m_x * m_values[0] + v.m_y * m_values[4] +
-                v.m_z * m_values[8] + m_values[12];
-      vec.m_y = v.m_x * m_values[1] + v.m_y * m_values[5] +
-                v.m_z * m_values[9] + m_values[13];
-      vec.m_z = v.m_x * m_values[2] + v.m_y * m_values[6] +
-                v.m_z * m_values[10] + m_values[14];
+      vec.m_x = v.m_x * m_values[0] + v.m_y * m_values[4] + v.m_z * m_values[8] + m_values[12];
+      vec.m_y = v.m_x * m_values[1] + v.m_y * m_values[5] + v.m_z * m_values[9] + m_values[13];
+      vec.m_z = v.m_x * m_values[2] + v.m_y * m_values[6] + v.m_z * m_values[10] + m_values[14];
 
-      temp = v.m_x * m_values[3] + v.m_y * m_values[7] + v.m_z * m_values[11] +
-             m_values[15];
+      temp = v.m_x * m_values[3] + v.m_y * m_values[7] + v.m_z * m_values[11] + m_values[15];
 
       vec.m_x = vec.m_x / temp;
       vec.m_y = vec.m_y / temp;
@@ -183,14 +176,11 @@ namespace Maths
      */
     inline Vector4 operator*(const Vector4 &v) const
     {
-      return Vector4(v.m_x * m_values[0] + v.m_y * m_values[4] +
-                         v.m_z * m_values[8] + v.m_w * m_values[12],
-                     v.m_x * m_values[1] + v.m_y * m_values[5] +
-                         v.m_z * m_values[9] + v.m_w * m_values[13],
-                     v.m_x * m_values[2] + v.m_y * m_values[6] +
-                         v.m_z * m_values[10] + v.m_w * m_values[14],
-                     v.m_x * m_values[3] + v.m_y * m_values[7] +
-                         v.m_z * m_values[11] + v.m_w * m_values[15]);
+      return Vector4(
+          v.m_x * m_values[0] + v.m_y * m_values[4] + v.m_z * m_values[8] + v.m_w * m_values[12],
+          v.m_x * m_values[1] + v.m_y * m_values[5] + v.m_z * m_values[9] + v.m_w * m_values[13],
+          v.m_x * m_values[2] + v.m_y * m_values[6] + v.m_z * m_values[10] + v.m_w * m_values[14],
+          v.m_x * m_values[3] + v.m_y * m_values[7] + v.m_z * m_values[11] + v.m_w * m_values[15]);
     };
 
     /**
@@ -202,14 +192,14 @@ namespace Maths
     inline friend std::ostream &operator<<(std::ostream &o, const Matrix4 &m)
     {
       o << "Mat4["
-        << "\t" << m.m_values[0] << "," << m.m_values[4] << "," << m.m_values[8]
-        << "," << m.m_values[12] << std::endl
-        << "\t\t" << m.m_values[1] << "," << m.m_values[5] << ","
-        << m.m_values[9] << "," << m.m_values[13] << std::endl
-        << "\t\t" << m.m_values[2] << "," << m.m_values[6] << ","
-        << m.m_values[10] << "," << m.m_values[14] << std::endl
-        << "\t\t" << m.m_values[3] << "," << m.m_values[7] << ","
-        << m.m_values[11] << "," << m.m_values[15] << "]";
+        << "\t" << m.m_values[0] << "," << m.m_values[4] << "," << m.m_values[8] << ","
+        << m.m_values[12] << std::endl
+        << "\t\t" << m.m_values[1] << "," << m.m_values[5] << "," << m.m_values[9] << ","
+        << m.m_values[13] << std::endl
+        << "\t\t" << m.m_values[2] << "," << m.m_values[6] << "," << m.m_values[10] << ","
+        << m.m_values[14] << std::endl
+        << "\t\t" << m.m_values[3] << "," << m.m_values[7] << "," << m.m_values[11] << ","
+        << m.m_values[15] << "]";
       return o;
     }
 

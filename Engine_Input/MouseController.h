@@ -34,8 +34,8 @@ namespace Input
     const int m_screenX; //!< Screen width
     const int m_screenY; //!< Screen height
 
-    size_t *m_xMapping; //!< Analog state mapping for X position
-    size_t *m_yMapping; //!< ANalog state mapping for Y position
+    size_t *m_xMapping;                       //!< Analog state mapping for X position
+    size_t *m_yMapping;                       //!< ANalog state mapping for Y position
     std::map<Uint8, size_t> m_buttonMappings; //!< Binary mappings for buttons
   };
 }

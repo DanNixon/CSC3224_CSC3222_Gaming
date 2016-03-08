@@ -23,8 +23,7 @@ namespace Physics
     PlanarEntity(const Engine::Maths::Vector2 &pos);
     virtual ~PlanarEntity();
 
-    void facing(const Engine::Maths::Vector2 &p = Engine::Maths::Vector2(0.0f,
-                                                                         0.0f));
+    void facing(const Engine::Maths::Vector2 &p = Engine::Maths::Vector2(0.0f, 0.0f));
 
     Engine::Maths::Vector2 normal() const;
 

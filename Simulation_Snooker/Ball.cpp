@@ -25,24 +25,24 @@ std::pair<std::string, Colour> Ball::Info(int points)
 {
   switch (points)
   {
-    case -1:
-      return std::make_pair("cue_ball", Colour(1.0f, 1.0f, 1.0f));
-    case 1:
-      return std::make_pair("red", Colour(1.0f, 0.0f, 0.0f));
-    case 2:
-      return std::make_pair("yellow", Colour(1.0f, 1.0f, 0.0f));
-    case 3:
-      return std::make_pair("green", Colour(0.0f, 1.0f, 0.0f));
-    case 4:
-      return std::make_pair("brown", Colour(0.8f, 0.2f, 0.2f));
-    case 5:
-      return std::make_pair("blue", Colour(0.0f, 0.0f, 1.0f));
-    case 6:
-      return std::make_pair("pink", Colour(1.0f, 0.75f, 0.8f));
-    case 7:
-      return std::make_pair("black", Colour(0.0f, 0.0f, 0.0f));
-    default:
-      return std::make_pair("", Colour(1.0f, 0.0f, 1.0f));
+  case -1:
+    return std::make_pair("cue_ball", Colour(1.0f, 1.0f, 1.0f));
+  case 1:
+    return std::make_pair("red", Colour(1.0f, 0.0f, 0.0f));
+  case 2:
+    return std::make_pair("yellow", Colour(1.0f, 1.0f, 0.0f));
+  case 3:
+    return std::make_pair("green", Colour(0.0f, 1.0f, 0.0f));
+  case 4:
+    return std::make_pair("brown", Colour(0.8f, 0.2f, 0.2f));
+  case 5:
+    return std::make_pair("blue", Colour(0.0f, 0.0f, 1.0f));
+  case 6:
+    return std::make_pair("pink", Colour(1.0f, 0.75f, 0.8f));
+  case 7:
+    return std::make_pair("black", Colour(0.0f, 0.0f, 0.0f));
+  default:
+    return std::make_pair("", Colour(1.0f, 0.0f, 1.0f));
   }
 }
 

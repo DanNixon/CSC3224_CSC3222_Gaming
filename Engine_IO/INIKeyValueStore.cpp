@@ -43,15 +43,13 @@ namespace IO
   {
     outputNode(stream, m_root);
 
-    for (auto it = m_root.m_children.begin(); it != m_root.m_children.end();
-         ++it)
+    for (auto it = m_root.m_children.begin(); it != m_root.m_children.end(); ++it)
       outputNode(stream, it->second);
 
     return true;
   }
 
-  void INIKeyValueStore::parseNode(std::istream &stream, KVNode &node,
-                                   bool root)
+  void INIKeyValueStore::parseNode(std::istream &stream, KVNode &node, bool root)
   {
     const auto n = std::numeric_limits<std::streamsize>::max();
     std::string name;

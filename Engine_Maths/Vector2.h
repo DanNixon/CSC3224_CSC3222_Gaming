@@ -266,8 +266,7 @@ namespace Maths
       case 1:
         return m_y;
       default:
-        throw new std::runtime_error(
-            "Index out of range when selecting a reference to retrun");
+        throw new std::runtime_error("Index out of range when selecting a reference to retrun");
       }
     }
 

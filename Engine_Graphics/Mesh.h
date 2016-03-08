@@ -52,19 +52,15 @@ namespace Graphics
   {
   public:
     static Mesh *GenerateTriangle();
-    static Mesh *GenerateLine(const Engine::Maths::Vector3 &from,
-                              const Engine::Maths::Vector3 &to);
+    static Mesh *GenerateLine(const Engine::Maths::Vector3 &from, const Engine::Maths::Vector3 &to);
     static Mesh *GenerateDisc2D(float radius, int resolution = 64);
-    static Mesh *GenerateRing2D(float radiusOuter, float radiusInner,
-                                int resolution = 64);
+    static Mesh *GenerateRing2D(float radiusOuter, float radiusInner, int resolution = 64);
     static Mesh *GenerateRect2D(const Engine::Maths::Vector2 &dimensions);
-    static Mesh *UpdateRect2D(Mesh *m,
-                              const Engine::Maths::Vector2 &dimensions);
+    static Mesh *UpdateRect2D(Mesh *m, const Engine::Maths::Vector2 &dimensions);
     static Mesh *LoadASCIIMeshFile(const string &filename);
-    static Mesh *LoadMesh(const struct aiMesh * mesh);
+    static Mesh *LoadMesh(const struct aiMesh *mesh);
 
-    static std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3>
-    GetBoundingBox(Mesh *m);
+    static std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3> GetBoundingBox(Mesh *m);
 
     Mesh();
     virtual ~Mesh();
@@ -82,15 +78,14 @@ namespace Graphics
     GLuint m_bufferObject[MAX_BUFFER]; //!< OGL buffer objects for each buffer
                                        //!  used in this mesh
     unsigned long m_numVertices;       //!< Number of vertices for the mesh
-	unsigned long m_numIndices;        //!< Number of indices for the mesh
+    unsigned long m_numIndices;        //!< Number of indices for the mesh
 
-    Engine::Maths::Vector3 *m_vertices; //!< Pointer to vertex position data
-    Engine::Maths::Vector4 *m_colours;  //!< Pointer to vertex colour data
-    Engine::Maths::Vector2
-        *m_textureCoords; //!< Pointer to vertex texture coordinate data
-    Engine::Maths::Vector3 *m_normals;  //!< Pointer to vertex normals data
-    Engine::Maths::Vector3 *m_tangents; //!< Pointer to vertex tangents data
-    size_t *m_indices;                  //!< Pointer to vertex indices data
+    Engine::Maths::Vector3 *m_vertices;      //!< Pointer to vertex position data
+    Engine::Maths::Vector4 *m_colours;       //!< Pointer to vertex colour data
+    Engine::Maths::Vector2 *m_textureCoords; //!< Pointer to vertex texture coordinate data
+    Engine::Maths::Vector3 *m_normals;       //!< Pointer to vertex normals data
+    Engine::Maths::Vector3 *m_tangents;      //!< Pointer to vertex tangents data
+    size_t *m_indices;                       //!< Pointer to vertex indices data
   };
 }
 }

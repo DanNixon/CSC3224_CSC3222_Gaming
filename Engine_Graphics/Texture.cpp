@@ -36,8 +36,8 @@ namespace Graphics
    */
   bool Texture::load(const std::string &filename)
   {
-    m_texture = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO,
-                                      SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
+    m_texture = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,
+                                      SOIL_FLAG_MIPMAPS);
     return (m_texture != 0);
   }
 
@@ -48,8 +48,7 @@ namespace Graphics
    * @param colour Text colour
    * @return GL texture, 0 if loading/generation failed
    */
-  void Texture::text(const std::string &text, TTF_Font *font,
-                     const Colour &colour)
+  void Texture::text(const std::string &text, TTF_Font *font, const Colour &colour)
   {
     if (m_texture != 0)
       glDeleteTextures(1, &m_texture);
@@ -57,13 +56,12 @@ namespace Graphics
     glGenTextures(1, &m_texture);
     glBindTexture(GL_TEXTURE_2D, m_texture);
 
-    SDL_Surface *img =
-        TTF_RenderText_Blended(font, text.c_str(), colour.sdlColour());
+    SDL_Surface *img = TTF_RenderText_Blended(font, text.c_str(), colour.sdlColour());
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA,
-                 GL_UNSIGNED_BYTE, img->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE,
+                 img->pixels);
 
     m_size = Vector2((float)img->w, (float)img->h);
 

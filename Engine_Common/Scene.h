@@ -21,8 +21,7 @@ namespace Common
   class Scene
   {
   public:
-    Scene(SceneObject *root,
-          Engine::Maths::Matrix4 view = Engine::Maths::Matrix4(),
+    Scene(SceneObject *root, Engine::Maths::Matrix4 view = Engine::Maths::Matrix4(),
           Engine::Maths::Matrix4 projection = Engine::Maths::Matrix4());
     virtual ~Scene();
 

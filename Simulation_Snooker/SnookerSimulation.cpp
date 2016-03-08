@@ -34,8 +34,7 @@ int SnookerSimulation::gameStartup()
 {
   // Load font for text display
   m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
-  m_fontMedium =
-      TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
+  m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
   // Table
   m_table = new Table(m_entities);
@@ -84,23 +83,17 @@ int SnookerSimulation::gameStartup()
   m_ui = new Scene(new SceneObject("root"), view, orth);
 
   m_uiShader = new ShaderProgram();
-  m_uiShader->addShader(
-      new VertexShader("../resources/shader/vert_simple.glsl"));
-  m_uiShader->addShader(
-      new FragmentShader("../resources/shader/frag_tex.glsl"));
+  m_uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+  m_uiShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
   m_uiShader->link();
 
-  m_profileGraphics =
-      new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profileGraphics->setModelMatrix(
-      Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
+  m_profileGraphics = new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profileGraphics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
   m_profileGraphics->setText("Graphics: ");
   m_ui->root()->addChild(*m_profileGraphics);
 
-  m_profilePhysics =
-      new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profilePhysics->setModelMatrix(
-      Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
+  m_profilePhysics = new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profilePhysics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
   m_profilePhysics->setText("Physics: ");
   m_ui->root()->addChild(*m_profilePhysics);
 
@@ -150,7 +143,7 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
         std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
       if (dynamic_cast<Pocket *>(b))
         std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
-      //else
+      // else
       //  std::cout << it->first.first << " - " << it->first.second << " ["
       //            << it->second << "]" << std::endl;
     }

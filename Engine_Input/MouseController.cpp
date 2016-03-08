@@ -14,8 +14,7 @@ namespace Input
    * @param screenX Screen width
    * @param screenY Screen height
    */
-  MouseController::MouseController(IControlScheme *parent, int screenX,
-                                   int screenY)
+  MouseController::MouseController(IControlScheme *parent, int screenX, int screenY)
       : IController(parent)
       , m_screenX(screenX)
       , m_screenY(screenY)

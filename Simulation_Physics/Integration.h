@@ -36,8 +36,7 @@ namespace Physics
     * For explicit Euler y is the current change value, for implicit Euler y is
     * the next change value.
     */
-    template <typename T>
-    inline static void Euler(T &out, const T &x, const T &y, float dT)
+    template <typename T> inline static void Euler(T &out, const T &x, const T &y, float dT)
     {
       out = x + (y * dT);
     }

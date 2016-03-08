@@ -15,8 +15,7 @@
  * @brief Represents a snooker ball.
  * @author Dan Nixon
  */
-class Ball : public Simulation::Physics::SphericalEntity,
-             public Engine::Graphics::RenderableObject
+class Ball : public Simulation::Physics::SphericalEntity, public Engine::Graphics::RenderableObject
 {
 public:
   static const float RADIUS;

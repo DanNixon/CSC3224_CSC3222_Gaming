@@ -40,8 +40,7 @@ namespace Maths
      */
     static Vector3 cross(const Vector3 &a, const Vector3 &b)
     {
-      return Vector3((a.m_y * b.m_z) - (a.m_z * b.m_y),
-                     (a.m_z * b.m_x) - (a.m_x * b.m_z),
+      return Vector3((a.m_y * b.m_z) - (a.m_z * b.m_y), (a.m_z * b.m_x) - (a.m_x * b.m_z),
                      (a.m_x * b.m_y) - (a.m_y * b.m_x));
     }
 
@@ -290,8 +289,7 @@ namespace Maths
       case 2:
         return m_z;
       default:
-        throw new std::runtime_error(
-            "Index out of range when selecting a reference to retrun");
+        throw new std::runtime_error("Index out of range when selecting a reference to retrun");
       }
     }
 

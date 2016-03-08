@@ -22,8 +22,8 @@ namespace Graphics
   class RenderableObject : public Engine::Common::SceneObject
   {
   public:
-    RenderableObject(const std::string &name, Mesh *m = NULL,
-                     ShaderProgram *s = NULL, Texture *t = NULL);
+    RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL,
+                     Texture *t = NULL);
     ~RenderableObject();
 
     /**

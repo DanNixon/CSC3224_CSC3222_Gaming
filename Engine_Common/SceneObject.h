@@ -95,10 +95,8 @@ namespace Common
 
     const std::string m_name;
 
-    Engine::Maths::Matrix4
-        m_modelMatrix; //!< Local model matrix (relative to parent)
-    Engine::Maths::Matrix4
-        m_worldTransform; //!< World matrix (relative to world origin)
+    Engine::Maths::Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
+    Engine::Maths::Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
 
     SceneObject *m_parent;                 //!< Parent SceneObject
     Scene *m_scene;                        //!< Scene this object belongs to

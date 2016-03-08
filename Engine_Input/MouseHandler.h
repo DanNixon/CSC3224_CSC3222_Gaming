@@ -20,8 +20,7 @@ namespace Input
   class MouseHandler : public Engine::Common::IEventHandler
   {
   public:
-    std::pair<float, float> GetNormalisedPos(const SDL_MouseMotionEvent &e,
-                                             int width, int height);
+    std::pair<float, float> GetNormalisedPos(const SDL_MouseMotionEvent &e, int width, int height);
 
     MouseHandler();
     virtual ~MouseHandler();

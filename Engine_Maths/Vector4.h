@@ -142,8 +142,7 @@ namespace Maths
      */
     inline Vector4 operator+(const Vector4 &rhs) const
     {
-      return Vector4(m_x + rhs.m_x, m_y + rhs.m_y, m_z + rhs.m_z,
-                     m_w + rhs.m_w);
+      return Vector4(m_x + rhs.m_x, m_y + rhs.m_y, m_z + rhs.m_z, m_w + rhs.m_w);
     }
 
     /**
@@ -168,8 +167,7 @@ namespace Maths
      */
     inline Vector4 operator-(const Vector4 &rhs) const
     {
-      return Vector4(m_x - rhs.m_x, m_y - rhs.m_y, m_z - rhs.m_z,
-                     m_w - rhs.m_w);
+      return Vector4(m_x - rhs.m_x, m_y - rhs.m_y, m_z - rhs.m_z, m_w - rhs.m_w);
     }
 
     /**
@@ -194,8 +192,7 @@ namespace Maths
      */
     inline Vector4 operator*(const Vector4 &rhs) const
     {
-      return Vector4(m_x * rhs.m_x, m_y * rhs.m_y, m_z * rhs.m_z,
-                     m_w * rhs.m_w);
+      return Vector4(m_x * rhs.m_x, m_y * rhs.m_y, m_z * rhs.m_z, m_w * rhs.m_w);
     }
 
     /**
@@ -215,8 +212,7 @@ namespace Maths
      */
     inline Vector4 operator/(const Vector4 &rhs) const
     {
-      return Vector4(m_x / rhs.m_x, m_y / rhs.m_y, m_z / rhs.m_z,
-                     m_w / rhs.m_w);
+      return Vector4(m_x / rhs.m_x, m_y / rhs.m_y, m_z / rhs.m_z, m_w / rhs.m_w);
     }
 
     /**
@@ -236,8 +232,7 @@ namespace Maths
      */
     inline bool operator==(const Vector4 &other) const
     {
-      return (m_x == other.m_x) && (m_y == other.m_y) && (m_z == other.m_z) &&
-             (m_w == other.m_w);
+      return (m_x == other.m_x) && (m_y == other.m_y) && (m_z == other.m_z) && (m_w == other.m_w);
     }
 
     /**
@@ -290,8 +285,7 @@ namespace Maths
       case 3:
         return m_w;
       default:
-        throw new std::runtime_error(
-            "Index out of range when selecting a reference to retrun");
+        throw new std::runtime_error("Index out of range when selecting a reference to retrun");
       }
     }
 

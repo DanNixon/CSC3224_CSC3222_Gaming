@@ -131,8 +131,8 @@ namespace Maths
    *
   http://www.opengl.org/sdk/docs/man/xhtml/glOrtho.xml
    */
-  Matrix4 Matrix4::Orthographic(float zNear, float zFar, float right,
-                                float left, float top, float bottom)
+  Matrix4 Matrix4::Orthographic(float zNear, float zFar, float right, float left, float top,
+                                float bottom)
   {
     Matrix4 m;
 
@@ -156,8 +156,7 @@ namespace Maths
    * @param up Upwards (top of screen) direction
    * @return View matrix
    */
-  Matrix4 Matrix4::BuildViewMatrix(const Vector3 &from,
-                                   const Vector3 &lookingAt, const Vector3 up)
+  Matrix4 Matrix4::BuildViewMatrix(const Vector3 &from, const Vector3 &lookingAt, const Vector3 up)
   {
     Matrix4 r;
     r.setPositionVector(Vector3(-from.m_x, -from.m_y, -from.m_z));

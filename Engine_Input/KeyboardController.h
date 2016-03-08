@@ -28,8 +28,7 @@ namespace Input
   private:
     virtual void handleKey(const SDL_KeyboardEvent &e);
 
-    std::map<SDL_Keycode, std::pair<size_t, bool>>
-        m_mappings; //!< Key state mappings
+    std::map<SDL_Keycode, std::pair<size_t, bool>> m_mappings; //!< Key state mappings
   };
 }
 }

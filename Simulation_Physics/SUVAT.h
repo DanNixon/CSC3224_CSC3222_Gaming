@@ -27,14 +27,11 @@ namespace Physics
     static float getSfromVTA(float v, float t, float a);
 
     static Engine::Maths::Vector3 getVfromUAT(const Engine::Maths::Vector3 &u,
-                                              const Engine::Maths::Vector3 &a,
-                                              float &t);
+                                              const Engine::Maths::Vector3 &a, float &t);
     static Engine::Maths::Vector3 getSfromUAT(const Engine::Maths::Vector3 &u,
-                                              const Engine::Maths::Vector3 &a,
-                                              float &t);
+                                              const Engine::Maths::Vector3 &a, float &t);
     static Engine::Maths::Vector3 getSfromUVT(const Engine::Maths::Vector3 &u,
-                                              const Engine::Maths::Vector3 &v,
-                                              float &t);
+                                              const Engine::Maths::Vector3 &v, float &t);
     static Engine::Maths::Vector3 getV2fromUAS(const Engine::Maths::Vector3 &u,
                                                const Engine::Maths::Vector3 &a,
                                                const Engine::Maths::Vector3 &s);

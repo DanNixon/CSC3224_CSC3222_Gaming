@@ -21,8 +21,7 @@ namespace Graphics
    * @param s Shader
    * @param t Texture
    */
-  RenderableObject::RenderableObject(const std::string &name, Mesh *m,
-                                     ShaderProgram *s, Texture *t)
+  RenderableObject::RenderableObject(const std::string &name, Mesh *m, ShaderProgram *s, Texture *t)
       : SceneObject(name)
       , m_mesh(m)
       , m_shaderProgram(s)
@@ -59,8 +58,7 @@ namespace Graphics
       Matrix3 rotation = Matrix3(m_scene->viewMatrix());
       Vector3 invCamPos = m_scene->viewMatrix().positionVector();
       Vector3 camPos = rotation * -invCamPos;
-      glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1,
-                   (float *)&camPos);
+      glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1, (float *)&camPos);
 
       if (m_texture != NULL)
         m_texture->use(program, 0);

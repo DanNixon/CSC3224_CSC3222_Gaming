@@ -42,10 +42,10 @@ private:
   Engine::Graphics::RenderableObject *m_leftStick;
   Engine::Graphics::RenderableObject *m_rightStick;
 
-  Engine::Maths::Matrix4 m_losPMatrix;	//!< Perspective matrix for line of sight flying
-  Engine::Maths::Matrix4 m_fpvPMatrix;	//!< Perspective matrix for first person view flying
-  Engine::Common::Scene *m_s;			//!< Scene containing world (terrain and models)
-  Engine::Common::Scene *m_ui;			//!< Scene containing UI
+  Engine::Maths::Matrix4 m_losPMatrix; //!< Perspective matrix for line of sight flying
+  Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
+  Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
+  Engine::Common::Scene *m_ui;         //!< Scene containing UI
 
   Engine::Common::SceneObject *m_model;
 

@@ -45,8 +45,7 @@ namespace Maths
    * @param j Coefficient of j
    * @param k Coefficient of k
    */
-  Quaternion::Quaternion(const float w, const float i, const float j,
-                         const float k)
+  Quaternion::Quaternion(const float w, const float i, const float j, const float k)
       : m_w(w)
       , m_i(i)
       , m_j(j)
@@ -108,8 +107,7 @@ namespace Maths
    */
   bool Quaternion::operator==(const Quaternion &rhs) const
   {
-    return (m_w == rhs.m_w && m_i == rhs.m_i && m_j == rhs.m_j &&
-            m_k == rhs.m_k);
+    return (m_w == rhs.m_w && m_i == rhs.m_i && m_j == rhs.m_j && m_k == rhs.m_k);
   }
 
   /**
@@ -210,8 +208,7 @@ namespace Maths
    */
   Quaternion Quaternion::operator+(const Quaternion &rhs) const
   {
-    return Quaternion(m_w + rhs.m_w, m_i + rhs.m_i, m_j + rhs.m_j,
-                      m_k + rhs.m_k);
+    return Quaternion(m_w + rhs.m_w, m_i + rhs.m_i, m_j + rhs.m_j, m_k + rhs.m_k);
   }
 
   /**
@@ -221,8 +218,7 @@ namespace Maths
    */
   Quaternion Quaternion::operator-(const Quaternion &rhs) const
   {
-    return Quaternion(m_w - rhs.m_w, m_i - rhs.m_i, m_j - rhs.m_j,
-                      m_k - rhs.m_k);
+    return Quaternion(m_w - rhs.m_w, m_i - rhs.m_i, m_j - rhs.m_j, m_k - rhs.m_k);
   }
 
   /**
@@ -339,8 +335,7 @@ namespace Maths
    */
   std::ostream &operator<<(std::ostream &stream, const Quaternion &q)
   {
-    stream << "[" << q.m_w << "," << q.m_i << "," << q.m_j << "," << q.m_k
-           << "]";
+    stream << "[" << q.m_w << "," << q.m_i << "," << q.m_j << "," << q.m_k << "]";
     return stream;
   }
 

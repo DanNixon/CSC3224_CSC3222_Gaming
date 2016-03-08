@@ -63,8 +63,7 @@ namespace Physics
     }
 
   private:
-    static void UpdatePositions(Entity::EntityPtrList entities,
-                                float dtMilliSec);
+    static void UpdatePositions(Entity::EntityPtrList entities, float dtMilliSec);
 
     void detectInterfaces(Entity::EntityPtrList entities);
     void resolveInterfaces();

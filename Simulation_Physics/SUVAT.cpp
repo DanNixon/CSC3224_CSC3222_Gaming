@@ -116,8 +116,7 @@ namespace Physics
    * @param s Displacement
    * @return Final velocity squared
    */
-  Vector3 SUVAT::getV2fromUAS(const Vector3 &u, const Vector3 &a,
-                              const Vector3 &s)
+  Vector3 SUVAT::getV2fromUAS(const Vector3 &u, const Vector3 &a, const Vector3 &s)
   {
     return (u * u) + (a * s * 2.0f);
   }
@@ -129,8 +128,7 @@ namespace Physics
    * @param a Acceleration
    * @return Displacement
    */
-  Vector3 SUVAT::getSfromVTA(const Vector3 &v, const Vector3 &t,
-                             const Vector3 &a)
+  Vector3 SUVAT::getSfromVTA(const Vector3 &v, const Vector3 &t, const Vector3 &a)
   {
     return (v * t) - ((a * t * t) * 0.5f);
   }

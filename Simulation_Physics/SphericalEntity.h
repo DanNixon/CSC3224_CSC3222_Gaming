@@ -21,8 +21,8 @@ namespace Physics
   {
   public:
     SphericalEntity(const Engine::Maths::Vector2 &pos, float mass, float radius,
-                    bool stationary = false, float dragCoeff = 1.0f,
-                    float velocityFloor = 0.0f, float impactDistance = 0.0f);
+                    bool stationary = false, float dragCoeff = 1.0f, float velocityFloor = 0.0f,
+                    float impactDistance = 0.0f);
     virtual ~SphericalEntity();
 
     float radius() const;

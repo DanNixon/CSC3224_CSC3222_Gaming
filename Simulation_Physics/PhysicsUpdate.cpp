@@ -25,24 +25,22 @@ namespace Physics
    * @param entities List of entities to update
    * @param dtMilliSec Time step in milliseconds
    */
-  void PhysicsUpdate::UpdatePositions(Entity::EntityPtrList entities,
-                                      float dtMilliSec)
+  void PhysicsUpdate::UpdatePositions(Entity::EntityPtrList entities, float dtMilliSec)
   {
-    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end();
-         ++it)
+    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end(); ++it)
     {
       if ((*it)->m_stationary)
         continue;
 
       // Calculate new velocity
-      Integration::Euler<Vector2>((*it)->m_velocity, (*it)->m_velocity,
-                                  (*it)->m_acceleration, dtMilliSec);
+      Integration::Euler<Vector2>((*it)->m_velocity, (*it)->m_velocity, (*it)->m_acceleration,
+                                  dtMilliSec);
       if (!(*it)->clampVelocity())
         (*it)->multiplyDragCoeff();
 
       // Calculate new position/displacement
-      Integration::Euler<Vector2>((*it)->m_position, (*it)->m_position,
-                                  (*it)->m_velocity, dtMilliSec);
+      Integration::Euler<Vector2>((*it)->m_position, (*it)->m_position, (*it)->m_velocity,
+                                  dtMilliSec);
 
       // Update position
       (*it)->setPosition((*it)->m_position);
@@ -57,11 +55,9 @@ namespace Physics
   {
     // TODO: use sort and sweep along x axis
 
-    for (Entity::EntityPtrListIter oit = entities.begin();
-         oit != entities.end();)
+    for (Entity::EntityPtrListIter oit = entities.begin(); oit != entities.end();)
     {
-      for (Entity::EntityPtrListIter iit = entities.begin();
-           iit != entities.end(); ++iit)
+      for (Entity::EntityPtrListIter iit = entities.begin(); iit != entities.end(); ++iit)
       {
         // Don't comapre the same entity
         if (*oit == *iit)
@@ -78,9 +74,10 @@ namespace Physics
         // Check for interface
         bool detected = InterfaceDetection::Detect(**oit, **iit);
 
-        auto it = std::find_if(
-            m_interfaces.begin(), m_interfaces.end(),
-            [entPair](InterfaceDef d) { return d.first == entPair; });
+        auto it = std::find_if(m_interfaces.begin(), m_interfaces.end(), [entPair](InterfaceDef d)
+                               {
+                                 return d.first == entPair;
+                               });
 
         // Remove a resolved interface that is no longer detected
         if (it != m_interfaces.end() && !(detected || !it->second))

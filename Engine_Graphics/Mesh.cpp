@@ -147,8 +147,7 @@ namespace Graphics
 
     glGenBuffers(1, &m_bufferObject[VERTEX_BUFFER]);
     glBindBuffer(GL_ARRAY_BUFFER, m_bufferObject[VERTEX_BUFFER]);
-    glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector3), m_vertices,
-                 GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector3), m_vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(VERTEX_BUFFER, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(VERTEX_BUFFER);
 
@@ -157,8 +156,8 @@ namespace Graphics
     {
       glGenBuffers(1, &m_bufferObject[TEXTURE_BUFFER]);
       glBindBuffer(GL_ARRAY_BUFFER, m_bufferObject[TEXTURE_BUFFER]);
-      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector2),
-                   m_textureCoords, GL_STATIC_DRAW);
+      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector2), m_textureCoords,
+                   GL_STATIC_DRAW);
       glVertexAttribPointer(TEXTURE_BUFFER, 2, GL_FLOAT, GL_FALSE, 0, 0);
       glEnableVertexAttribArray(TEXTURE_BUFFER);
     }
@@ -168,8 +167,7 @@ namespace Graphics
     {
       glGenBuffers(1, &m_bufferObject[COLOUR_BUFFER]);
       glBindBuffer(GL_ARRAY_BUFFER, m_bufferObject[COLOUR_BUFFER]);
-      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector4), m_colours,
-                   GL_STATIC_DRAW);
+      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector4), m_colours, GL_STATIC_DRAW);
       glVertexAttribPointer(COLOUR_BUFFER, 4, GL_FLOAT, GL_FALSE, 0, 0);
       glEnableVertexAttribArray(COLOUR_BUFFER);
     }
@@ -179,8 +177,8 @@ namespace Graphics
     {
       glGenBuffers(1, &m_bufferObject[INDEX_BUFFER]);
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_bufferObject[INDEX_BUFFER]);
-      glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint),
-                   m_indices, GL_STATIC_DRAW);
+      glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices,
+                   GL_STATIC_DRAW);
     }
 
     /* Buffer normals data */
@@ -188,8 +186,7 @@ namespace Graphics
     {
       glGenBuffers(1, &m_bufferObject[NORMAL_BUFFER]);
       glBindBuffer(GL_ARRAY_BUFFER, m_bufferObject[NORMAL_BUFFER]);
-      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector3), m_normals,
-                   GL_STATIC_DRAW);
+      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector3), m_normals, GL_STATIC_DRAW);
 
       glVertexAttribPointer(NORMAL_BUFFER, 3, GL_FLOAT, GL_FALSE, 0, 0);
       glEnableVertexAttribArray(NORMAL_BUFFER);
@@ -301,8 +298,7 @@ namespace Graphics
   * @param resolution Number of "slices" in angle
   * @return Mesh containing 2D ring
   */
-  Mesh *Mesh::GenerateRing2D(float radiusOuter, float radiusInner,
-                             int resolution)
+  Mesh *Mesh::GenerateRing2D(float radiusOuter, float radiusInner, int resolution)
   {
     Mesh *m = new Mesh();
     m->m_type = GL_TRIANGLE_STRIP;
@@ -320,14 +316,12 @@ namespace Graphics
     {
       const float a = i * deltaA;
 
-      m->m_vertices[n] =
-          Vector3(cos(a) * radiusOuter, sin(a) * radiusOuter, 0.0f);
+      m->m_vertices[n] = Vector3(cos(a) * radiusOuter, sin(a) * radiusOuter, 0.0f);
       m->m_colours[n] = c;
       m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
       n++;
 
-      m->m_vertices[n] =
-          Vector3(cos(a) * radiusInner, sin(a) * radiusInner, 0.0f);
+      m->m_vertices[n] = Vector3(cos(a) * radiusInner, sin(a) * radiusInner, 0.0f);
       m->m_colours[n] = c;
       m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
       n++;
@@ -436,8 +430,7 @@ namespace Graphics
         f >> g;
         f >> b;
         f >> a;
-        m->m_colours[i] =
-            Vector4(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
+        m->m_colours[i] = Vector4(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
       }
     }
 
@@ -460,7 +453,7 @@ namespace Graphics
    * @param mesh Assimp mesh to load
    * @return Mesh containing loaded model
    */
-  Mesh *Mesh::LoadMesh(const struct aiMesh * mesh)
+  Mesh *Mesh::LoadMesh(const struct aiMesh *mesh)
   {
     Mesh *m = new Mesh();
     // m->m_type = GL_TRIANGLES;
@@ -489,10 +482,10 @@ namespace Graphics
       m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
 
       m->m_colours[idx] = Vector4(1, 1, 1, 1);
-	  if (face.mNumIndices == 3)
-		m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
-	  else
-		  m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
+      if (face.mNumIndices == 3)
+        m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
+      else
+        m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
     }
 
     m->generateNormals();

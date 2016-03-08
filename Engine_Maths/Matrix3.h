@@ -142,12 +142,9 @@ namespace Maths
     inline friend std::ostream &operator<<(std::ostream &o, const Matrix3 &m)
     {
       o << "Mat3["
-        << "\t" << m.m_values[0] << "," << m.m_values[3] << "," << m.m_values[6]
-        << std::endl
-        << "\t\t" << m.m_values[1] << "," << m.m_values[4] << ","
-        << m.m_values[7] << std::endl
-        << "\t\t" << m.m_values[2] << "," << m.m_values[5] << ","
-        << m.m_values[8] << "]";
+        << "\t" << m.m_values[0] << "," << m.m_values[3] << "," << m.m_values[6] << std::endl
+        << "\t\t" << m.m_values[1] << "," << m.m_values[4] << "," << m.m_values[7] << std::endl
+        << "\t\t" << m.m_values[2] << "," << m.m_values[5] << "," << m.m_values[8] << "]";
       return o;
     }
 
