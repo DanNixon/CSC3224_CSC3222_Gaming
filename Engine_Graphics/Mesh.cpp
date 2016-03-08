@@ -506,15 +506,6 @@ namespace Graphics
       m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
     }
 
-    // Normalise vertex coordinates to 1
-    std::pair<Vector3, Vector3> bBox = GetBoundingBox(m);
-    Vector3 norm = bBox.second;
-    if (bBox.first.length2() > bBox.second.length2())
-      norm = bBox.first;
-
-    for (size_t i = 0; i < m->m_numVertices; i++)
-      m->m_vertices[i] = m->m_vertices[i] / norm;
-
     m->generateNormals();
     m->bufferData();
 

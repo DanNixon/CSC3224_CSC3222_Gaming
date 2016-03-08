@@ -30,7 +30,7 @@ SnookerSimulation::~SnookerSimulation()
 /**
  * @copydoc Game::gameStartup
  */
-void SnookerSimulation::gameStartup()
+int SnookerSimulation::gameStartup()
 {
   // Load font for text display
   m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
@@ -121,6 +121,8 @@ void SnookerSimulation::gameStartup()
   addEventHandler(this);
 
   m_profiler = new Profiler(this);
+
+  return 0;
 }
 
 /**

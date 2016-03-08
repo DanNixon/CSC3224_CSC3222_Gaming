@@ -39,7 +39,7 @@ public:
   ~SnookerSimulation();
 
 protected:
-  void gameStartup();
+  int gameStartup();
   void gameLoop(Uint8 id, float dtMilliSec);
   void gameShutdown();
 

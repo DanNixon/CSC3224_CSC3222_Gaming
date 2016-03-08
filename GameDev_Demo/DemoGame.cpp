@@ -33,7 +33,7 @@ DemoGame::~DemoGame()
 /**
  * @copydoc Game::gameStartup
  */
-void DemoGame::gameStartup()
+int DemoGame::gameStartup()
 {
   m_sp = new ShaderProgram();
   m_sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
@@ -71,10 +71,13 @@ void DemoGame::gameStartup()
   {
     std::cout << "Using joystick and keyboard" << std::endl;
     m_simControls = new KJSSimulatorControls(this);
-    std::cout << static_cast<KJSSimulatorControls *>(m_simControls)
-                     ->joystick()
-                     ->open(0)
-              << std::endl;
+	if (!static_cast<KJSSimulatorControls *>(m_simControls)
+		->joystick()
+		->open(0))
+	{
+		std::cerr << "Could not open joystick" << std::endl;
+		return 50;
+	}
   }
 
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
@@ -84,6 +87,8 @@ void DemoGame::gameStartup()
   m_testLoop = addTimedLoop(1000.0f, "test");
 
   m_profiler = new Profiler(this);
+
+  return 0;
 }
 
 /**

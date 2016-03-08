@@ -48,10 +48,14 @@ namespace Common
   {
     int status = init();
 
-    if (status == 0)
-    {
+	if (status != 0)
+		return status;
+
       this->gameLoadScreen();
-      this->gameStartup();
+      status = this->gameStartup();
+
+	  if (status != 0)
+		  return status;
 
       // Set time on loops
       QueryPerformanceCounter(&m_start);
@@ -127,7 +131,6 @@ namespace Common
       }
 
       this->gameShutdown();
-    }
 
     return status;
   }

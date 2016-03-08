@@ -100,8 +100,9 @@ namespace Common
 
     /**
      * @brief Performs any setup specific to the game.
+	 * @return Result (0 for succesful startup)
      */
-    virtual void gameStartup() = 0;
+    virtual int gameStartup() = 0;
 
     /**
      * @brief Callback for a given loop.
