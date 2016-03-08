@@ -11,6 +11,7 @@
 #include <IControlScheme.h>
 #include <SceneObject.h>
 #include <Scene.h>
+#include <RenderableObject.h>
 #include <ShaderProgram.h>
 
 /**
@@ -36,6 +37,10 @@ private:
   Uint8 m_testLoop;
 
   Engine::Graphics::ShaderProgram *m_sp;
+  Engine::Graphics::ShaderProgram *m_uiShader;
+
+  Engine::Graphics::RenderableObject *m_leftStick;
+  Engine::Graphics::RenderableObject *m_rightStick;
 
   Engine::Maths::Matrix4 m_losPMatrix;	//!< Perspective matrix for line of sight flying
   Engine::Maths::Matrix4 m_fpvPMatrix;	//!< Perspective matrix for first person view flying
