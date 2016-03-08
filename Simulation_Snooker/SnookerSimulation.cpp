@@ -90,11 +90,6 @@ int SnookerSimulation::gameStartup()
       new FragmentShader("../resources/shader/frag_tex.glsl"));
   m_uiShader->link();
 
-  TextPane *title = new TextPane("title", 0.15f, m_uiShader, m_fontLarge);
-  title->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.9f, 0.0f)));
-  title->setText("Snooker Loopy!");
-  m_ui->root()->addChild(*title);
-
   m_profileGraphics =
       new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
   m_profileGraphics->setModelMatrix(
@@ -152,10 +147,12 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
       Entity *b = it->first.second;
 
       if (dynamic_cast<Pocket *>(a))
-        std::cout << "Ball in pocket" << std::endl;
-      else
-        std::cout << it->first.first << " - " << it->first.second << " ["
-                  << it->second << "]" << std::endl;
+        std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
+      if (dynamic_cast<Pocket *>(b))
+        std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
+      //else
+      //  std::cout << it->first.first << " - " << it->first.second << " ["
+      //            << it->second << "]" << std::endl;
     }
   }
   // Output profiling data

@@ -21,6 +21,31 @@ const float Ball::RADIUS = 26.25f;
 */
 const float Ball::MASS = 100.0f;
 
+std::pair<std::string, Colour> Ball::Info(int points)
+{
+  switch (points)
+  {
+    case -1:
+      return std::make_pair("cue_ball", Colour(1.0f, 1.0f, 1.0f));
+    case 1:
+      return std::make_pair("red", Colour(1.0f, 0.0f, 0.0f));
+    case 2:
+      return std::make_pair("yellow", Colour(1.0f, 1.0f, 0.0f));
+    case 3:
+      return std::make_pair("green", Colour(0.0f, 1.0f, 0.0f));
+    case 4:
+      return std::make_pair("brown", Colour(0.8f, 0.2f, 0.2f));
+    case 5:
+      return std::make_pair("blue", Colour(0.0f, 0.0f, 1.0f));
+    case 6:
+      return std::make_pair("pink", Colour(1.0f, 0.75f, 0.8f));
+    case 7:
+      return std::make_pair("black", Colour(0.0f, 0.0f, 0.0f));
+    default:
+      return std::make_pair("", Colour(1.0f, 0.0f, 1.0f));
+  }
+}
+
 /**
  * @copydoc SphericalEntity::SphericalEntity(const Vector2 &)
  * @param pos Position of the ball
@@ -29,7 +54,7 @@ const float Ball::MASS = 100.0f;
  */
 Ball::Ball(const Vector2 &pos, int points)
     : SphericalEntity(pos, MASS, RADIUS, false, 0.99f, 0.005f)
-    , RenderableObject("ball", Mesh::GenerateDisc2D(RADIUS), NULL)
+    , RenderableObject(Info(points).first, Mesh::GenerateDisc2D(RADIUS), NULL)
     , m_points(points)
 {
   ShaderProgram *sp = new ShaderProgram();
@@ -56,29 +81,11 @@ Ball::~Ball()
  *
  * Colour is determined by the number of points (-1 being the cue ball).
  */
-Vector4 Ball::colour(float alpha) const
+Colour Ball::colour(float alpha) const
 {
-  switch (m_points)
-  {
-  case -1:
-    return Vector4(1.0f, 1.0f, 1.0f, alpha); // White (cue ball)
-  case 1:
-    return Vector4(1.0f, 0.0f, 0.0f, alpha); // Red
-  case 2:
-    return Vector4(1.0f, 1.0f, 0.0f, alpha); // Yellow
-  case 3:
-    return Vector4(0.0f, 1.0f, 0.0f, alpha); // Green
-  case 4:
-    return Vector4(0.8f, 0.2f, 0.2f, alpha); // Brown
-  case 5:
-    return Vector4(0.0f, 0.0f, 1.0f, alpha); // Blue
-  case 6:
-    return Vector4(1.0f, 0.75f, 0.8f, alpha); // Pink
-  case 7:
-    return Vector4(0.0f, 0.0f, 0.0f, alpha); // Black
-  default:
-    return Vector4(1.0f, 0.0f, 1.0f, 1.0f); // Magenta (invalid points)
-  }
+  Colour c = Info(m_points).second;
+  c[3] = alpha;
+  return c;
 }
 
 /**

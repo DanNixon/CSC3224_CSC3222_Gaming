@@ -8,7 +8,7 @@
 
 #include <RenderableObject.h>
 #include <SphericalEntity.h>
-#include <Vector4.h>
+#include <Colour.h>
 
 /**
  * @class Ball
@@ -22,10 +22,12 @@ public:
   static const float RADIUS;
   static const float MASS;
 
+  static std::pair<std::string, Engine::Graphics::Colour> Ball::Info(int points);
+
   Ball(const Engine::Maths::Vector2 &pos, int points);
   virtual ~Ball();
 
-  Engine::Maths::Vector4 colour(float alpha = 1.0f) const;
+  Engine::Graphics::Colour colour(float alpha = 1.0f) const;
   bool isCueBall() const;
 
   virtual void setPosition(const Engine::Maths::Vector2 &pos);
