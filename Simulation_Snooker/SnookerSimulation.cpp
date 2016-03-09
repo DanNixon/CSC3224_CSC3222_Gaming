@@ -174,6 +174,7 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
 
     if (m_controls->state(S_SELECT))
     {
+      // Get position of cue ball in normalised screen space
       Matrix4 p = m_scene->projectionMatrix();
       Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
       Vector3 pos = m_balls[0]->position();
@@ -187,14 +188,15 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
       glGetIntegerv(GL_VIEWPORT, viewport);
 
       GLdouble sp[3];
-      int res = gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2);
 
-      Vector3 screenPos(sp[0], sp[1], sp[2]);
+      if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
+      {
+        Vector3 screenPos(sp[0], sp[1], sp[2]);
 
-      bool good = res == GLU_TRUE;
-
-      // TODO
-      std::cout << good << " : " << pos << " - " << screenPos << std::endl;
+        std::cout
+          << "cue ball: " << pos << " - " << screenPos << std::endl
+          << "mouse: " << m_controls->analog(A_MOUSE_X) << "," << m_controls->analog(A_MOUSE_Y) << std::endl;
+      }
 
       m_controls->setState(S_SELECT, false);
     }

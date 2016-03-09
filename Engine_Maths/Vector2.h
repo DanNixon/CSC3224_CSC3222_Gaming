@@ -42,20 +42,11 @@ namespace Maths
     }
 
     /**
-     * @brief Creates a new vector with default values of [0, 0].
+     * @brief Creates a new vector.
+     * @param x X coordinate value (default 0)
+     * @param y Y coordinate value (default 0)
      */
-    Vector2()
-        : m_x(0.0)
-        , m_y(0.0)
-    {
-    }
-
-    /**
-     * @brief Creates a new vector with specified values.
-     * @param x X coordinate value
-     * @param y Y coordinate value
-     */
-    Vector2(const float x, const float y)
+    Vector2(float x = 0.0f, float y = 0.0f)
         : m_x(x)
         , m_y(y)
     {
