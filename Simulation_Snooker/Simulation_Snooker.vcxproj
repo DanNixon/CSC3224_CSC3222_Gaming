@@ -186,6 +186,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(O
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Cushion.h" />
     <ClInclude Include="Pocket.h" />
+    <ClInclude Include="SnookerControls.h" />
     <ClInclude Include="SnookerSimulation.h" />
     <ClInclude Include="Table.h" />
   </ItemGroup>

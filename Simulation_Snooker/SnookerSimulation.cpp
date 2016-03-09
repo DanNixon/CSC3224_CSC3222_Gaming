@@ -12,6 +12,8 @@
 #include <Profiler.h>
 #include <Shaders.h>
 
+#include "SnookerControls.h"
+
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -112,8 +114,7 @@ int SnookerSimulation::gameStartup()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
 
-  // Handle keyboard presses myself
-  addEventHandler(this);
+  m_controls = new SnookerControls(this);
 
   m_profiler = new Profiler(this);
 
@@ -128,6 +129,49 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   // Handle graphics
   if (id == m_graphicsLoop)
   {
+    // Control
+    Vector2 acc;
+    const float accMag = 0.01f;
+
+    if (m_controls->state(S_CUEBALL_UP))
+      acc[1] = accMag;
+    else if (m_controls->state(S_CUEBALL_DOWN))
+      acc[1] = -accMag;
+
+    if (m_controls->state(S_CUEBALL_RIGHT))
+      acc[0] = accMag;
+    else if (m_controls->state(S_CUEBALL_LEFT))
+      acc[0] = -accMag;
+
+    m_balls[0]->setAcceleration(acc);
+
+    if (m_controls->state(S_SELECT))
+    {
+      Matrix4 p = m_scene->projectionMatrix();
+      Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
+      Vector3 pos = m_balls[0]->position();
+
+      GLdouble dp[16];
+      p.toGLdoubleMtx(dp);
+      GLdouble dmv[16];
+      mv.toGLdoubleMtx(dmv);
+
+      GLint viewport[4];
+      glGetIntegerv(GL_VIEWPORT, viewport);
+
+      GLdouble sp[3];
+      int res = gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2);
+
+      Vector3 screenPos(sp[0], sp[1], sp[2]);
+
+      bool good = res == GLU_TRUE;
+
+      // TODO
+      std::cout << good << " : " << pos << " - " << screenPos << std::endl;
+
+      m_controls->setState(S_SELECT, false);
+    }
+
     m_scene->update();
     m_scene->render();
     m_ui->update();
@@ -176,56 +220,4 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
  */
 void SnookerSimulation::gameShutdown()
 {
-}
-
-/**
- * @copydoc KeyboardHandler::handleKey
- */
-void SnookerSimulation::handleKey(const SDL_KeyboardEvent &e)
-{
-  if (e.state == SDL_PRESSED)
-  {
-    Ball *cueBall = m_balls[0];
-    Vector2 cueBallVel = cueBall->velocity();
-
-    switch (e.keysym.sym)
-    {
-    case SDLK_w:
-      cueBall->setVelocity(cueBallVel + Vector2(0.0f, 1.0f));
-      break;
-    case SDLK_a:
-      cueBall->setVelocity(cueBallVel + Vector2(-1.0f, 0.0f));
-      break;
-    case SDLK_s:
-      cueBall->setVelocity(cueBallVel + Vector2(0.0f, -1.0f));
-      break;
-    case SDLK_d:
-      cueBall->setVelocity(cueBallVel + Vector2(1.0f, 0.0f));
-      break;
-    case SDLK_SPACE:
-      Matrix4 p = m_scene->projectionMatrix();
-      Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
-      Vector3 pos = m_balls[0]->position();
-      
-      GLdouble dp[16];
-      p.toGLdoubleMtx(dp);
-      GLdouble dmv[16];
-      mv.toGLdoubleMtx(dmv);
-
-      GLint viewport[4];
-      glGetIntegerv(GL_VIEWPORT, viewport);
-
-      GLdouble sp[3];
-      int res = gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp+1, sp+2);
-
-      Vector3 screenPos(sp[0], sp[1], sp[2]);
-
-      bool good = res == GLU_TRUE;
-
-      // TODO
-      std::cout << good << " : " << pos << " - " << screenPos << std::endl;
-      
-      break;
-    }
-  }
 }

@@ -10,7 +10,7 @@
 
 #include <SDL_ttf.h>
 
-#include <KeyboardHandler.h>
+#include <IControlScheme.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
 #include <TextPane.h>
@@ -26,8 +26,7 @@
  * @brief Game application for the snooker simulation.
  * @author Dan Nixon
  */
-class SnookerSimulation : public Engine::Common::Game,
-                          public Engine::Input::KeyboardHandler
+class SnookerSimulation : public Engine::Common::Game
 {
 public:
   /**
@@ -43,12 +42,12 @@ protected:
   void gameLoop(Uint8 id, float dtMilliSec);
   void gameShutdown();
 
-  void handleKey(const SDL_KeyboardEvent &e);
-
 private:
   Uint8 m_graphicsLoop;
   Uint8 m_physicsLoop;
   Uint8 m_profileLoop;
+
+  Engine::Input::IControlScheme * m_controls;
 
   Engine::Common::Scene *m_scene;
   Engine::Common::Scene *m_ui;
