@@ -139,7 +139,7 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   {
     m_physics.update(m_entities, dtMilliSec);
 
-    // TODO
+    // Check for potted balls
     auto inters = m_physics.interfaces();
     for (auto it = inters.begin(); it != inters.end(); ++it)
     {
@@ -150,9 +150,6 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
         std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
       if (dynamic_cast<Pocket *>(b))
         std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
-      //else
-      //  std::cout << it->first.first << " - " << it->first.second << " ["
-      //            << it->second << "]" << std::endl;
     }
   }
   // Output profiling data
@@ -171,9 +168,6 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
     physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
             << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
     m_profilePhysics->setText(physStr.str());
-
-    // std::cout << "Performance statistics:" << std::endl
-    //          << *m_profiler << std::endl;
   }
 }
 
@@ -207,6 +201,9 @@ void SnookerSimulation::handleKey(const SDL_KeyboardEvent &e)
       break;
     case SDLK_d:
       cueBall->setVelocity(cueBallVel + Vector2(1.0f, 0.0f));
+      break;
+    case SDLK_SPACE:
+      // TODO
       break;
     }
   }
