@@ -109,6 +109,7 @@ int SnookerSimulation::gameStartup()
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
+  m_controlLoop = addTimedLoop(25.0f, "control");
   m_profileLoop = addTimedLoop(1000.0f, "profile");
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -129,7 +130,33 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   // Handle graphics
   if (id == m_graphicsLoop)
   {
-    // Control
+    m_scene->update();
+    m_scene->render();
+    m_ui->update();
+    m_ui->render();
+    swapBuffers();
+  }
+  // Handle physics
+  else if (id == m_physicsLoop)
+  {
+    m_physics.update(m_entities, dtMilliSec);
+
+    // Check for potted balls
+    auto inters = m_physics.interfaces();
+    for (auto it = inters.begin(); it != inters.end(); ++it)
+    {
+      Entity *a = it->first.first;
+      Entity *b = it->first.second;
+
+      if (dynamic_cast<Pocket *>(a))
+        std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
+      if (dynamic_cast<Pocket *>(b))
+        std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
+    }
+  }
+  // Handle control
+  else if (id == m_controlLoop)
+  {
     Vector2 acc;
     const float accMag = 0.01f;
 
@@ -170,30 +197,6 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
       std::cout << good << " : " << pos << " - " << screenPos << std::endl;
 
       m_controls->setState(S_SELECT, false);
-    }
-
-    m_scene->update();
-    m_scene->render();
-    m_ui->update();
-    m_ui->render();
-    swapBuffers();
-  }
-  // Handle physics
-  else if (id == m_physicsLoop)
-  {
-    m_physics.update(m_entities, dtMilliSec);
-
-    // Check for potted balls
-    auto inters = m_physics.interfaces();
-    for (auto it = inters.begin(); it != inters.end(); ++it)
-    {
-      Entity *a = it->first.first;
-      Entity *b = it->first.second;
-
-      if (dynamic_cast<Pocket *>(a))
-        std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
-      if (dynamic_cast<Pocket *>(b))
-        std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
     }
   }
   // Output profiling data

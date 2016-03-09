@@ -45,6 +45,7 @@ protected:
 private:
   Uint8 m_graphicsLoop;
   Uint8 m_physicsLoop;
+  Uint8 m_controlLoop;
   Uint8 m_profileLoop;
 
   Engine::Input::IControlScheme * m_controls;
