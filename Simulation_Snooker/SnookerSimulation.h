@@ -64,6 +64,8 @@ private:
   Engine::Graphics::ShaderProgram *m_uiShader;
   Engine::Graphics::TextPane *m_profileGraphics;
   Engine::Graphics::TextPane *m_profilePhysics;
+
+  Engine::Maths::Vector2 *m_mouseStartPosition;
 };
 
 #endif

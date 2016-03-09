@@ -21,7 +21,7 @@ enum Controls
   S_CUEBALL_DOWN,
   S_CUEBALL_LEFT,
   S_CUEBALL_RIGHT,
-  S_SELECT,
+  S_TAKE_SHOT,
   S_TEST
 };
 
@@ -47,11 +47,11 @@ public:
     m_keyboard->setMapping(SDLK_s, S_CUEBALL_DOWN);
     m_keyboard->setMapping(SDLK_a, S_CUEBALL_LEFT);
     m_keyboard->setMapping(SDLK_d, S_CUEBALL_RIGHT);
-    m_keyboard->setMapping(SDLK_SPACE, S_TEST, true);
+    m_keyboard->setMapping(SDLK_SPACE, S_TEST);
 
     m_mouse->setXMapping(A_MOUSE_X);
     m_mouse->setYMapping(A_MOUSE_Y);
-    m_mouse->setButtonMapping(SDL_BUTTON_LEFT, S_SELECT);
+    m_mouse->setButtonMapping(SDL_BUTTON_LEFT, S_TAKE_SHOT);
 
     addController(m_keyboard);
     addController(m_mouse);

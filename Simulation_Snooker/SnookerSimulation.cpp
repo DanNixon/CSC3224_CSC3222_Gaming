@@ -21,7 +21,8 @@ using namespace Engine::Input;
 using namespace Simulation::Physics;
 
 SnookerSimulation::SnookerSimulation()
-    : Game("Snooker Loopy", std::make_pair(1024, 768))
+  : Game("Snooker Loopy", std::make_pair(1024, 768))
+  , m_mouseStartPosition(NULL)
 {
 }
 
@@ -172,33 +173,51 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
 
     m_balls[0]->setAcceleration(acc);
 
-    if (m_controls->state(S_SELECT))
-    {
-      // Get position of cue ball in normalised screen space
-      Matrix4 p = m_scene->projectionMatrix();
-      Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
-      Vector3 pos = m_balls[0]->position();
-
-      GLdouble dp[16];
-      p.toGLdoubleMtx(dp);
-      GLdouble dmv[16];
-      mv.toGLdoubleMtx(dmv);
-
-      GLint viewport[4];
-      glGetIntegerv(GL_VIEWPORT, viewport);
-
-      GLdouble sp[3];
-
-      if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
+    if (m_controls->state(S_TAKE_SHOT) && m_mouseStartPosition == NULL)
       {
-        Vector3 screenPos(sp[0], sp[1], sp[2]);
+        // Record starting position of mouse
+        m_mouseStartPosition = new Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
 
-        std::cout
-          << "cue ball: " << pos << " - " << screenPos << std::endl
-          << "mouse: " << m_controls->analog(A_MOUSE_X) << "," << m_controls->analog(A_MOUSE_Y) << std::endl;
-      }
+        // Get position of cue ball in normalised screen space
+        Matrix4 p = m_scene->projectionMatrix();
+        Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
+        Vector3 pos = m_balls[0]->position();
 
-      m_controls->setState(S_SELECT, false);
+        GLdouble dp[16];
+        p.toGLdoubleMtx(dp);
+        GLdouble dmv[16];
+        mv.toGLdoubleMtx(dmv);
+
+        GLint viewport[4];
+        glGetIntegerv(GL_VIEWPORT, viewport);
+
+        GLdouble sp[3];
+
+        if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
+        {
+          Vector3 screenPos(sp[0], sp[1], sp[2]);
+
+          std::cout
+            << "MOUSE DOWN" << std::endl
+            << "cue ball: " << pos << " - " << screenPos << std::endl
+            << "mouse: " << *m_mouseStartPosition << std::endl
+            << std::endl;
+        }
+    }
+    else if (!m_controls->state(S_TAKE_SHOT) && m_mouseStartPosition != NULL)
+    {
+      Vector2 newMousePosition = Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
+      Vector2 deltaMouse = newMousePosition - *m_mouseStartPosition;
+      
+      std::cout
+        << "MOUSE UP" << std::endl
+        << "delta mouse: " << deltaMouse << std::endl
+        << std::endl;
+
+      m_balls[0]->setAcceleration(deltaMouse);
+
+      delete m_mouseStartPosition;
+      m_mouseStartPosition = NULL;
     }
   }
   // Output profiling data
