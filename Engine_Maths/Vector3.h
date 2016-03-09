@@ -9,6 +9,8 @@
 #include <cmath>
 #include <iostream>
 
+#include "Vector2.h"
+
 namespace Engine
 {
 namespace Maths
@@ -65,6 +67,13 @@ namespace Maths
         : m_x(x)
         , m_y(y)
         , m_z(z)
+    {
+    }
+
+    Vector3(const Vector2 &vec2, float z = 1.0f)
+      : m_x(vec2.m_x)
+      , m_y(vec2.m_y)
+      , m_z(z)
     {
     }
 
@@ -333,6 +342,7 @@ namespace Maths
     }
 
   protected:
+    friend class Vector4;
     friend class Matrix3;
     friend class Matrix4;
 

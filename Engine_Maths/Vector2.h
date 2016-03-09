@@ -307,6 +307,8 @@ namespace Maths
     }
 
   protected:
+    friend class Vector3;
+
     float m_x; //!< X coordinate
     float m_y; //!< Y coordinate
   };

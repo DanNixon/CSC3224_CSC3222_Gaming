@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include "Vector3.h"
+
 namespace Engine
 {
 namespace Maths
@@ -21,28 +23,25 @@ namespace Maths
   {
   public:
     /**
-     * @brief Creates a new vector with default values of [0, 0, 0, 0].
+     * @brief Creates a new vector.
+     * @param x X coordinate value (default 0)
+     * @param y Y coordinate value (default 0)
+     * @param z Z coordinate value (default 0)
+     * @param w W coordinate value (default 1)
      */
-    Vector4()
-        : m_x(0.0)
-        , m_y(0.0)
-        , m_z(0.0)
-        , m_w(0.0)
-    {
-    }
-
-    /**
-     * @brief Creates a new vector with specified values.
-     * @param x X coordinate value
-     * @param y Y coordinate value
-     * @param z Z coordinate value
-     * @param w W coordinate value
-     */
-    Vector4(const float x, const float y, const float z, const float w)
+    Vector4(float x = 0.0f, float y = 0.0f, float z = 0.0f, float w = 1.0f)
         : m_x(x)
         , m_y(y)
         , m_z(z)
         , m_w(w)
+    {
+    }
+
+    Vector4(const Vector3 &vec3, float w = 1.0f)
+      : m_x(vec3.m_x)
+      , m_y(vec3.m_y)
+      , m_z(vec3.m_z)
+      , m_w(w)
     {
     }
 

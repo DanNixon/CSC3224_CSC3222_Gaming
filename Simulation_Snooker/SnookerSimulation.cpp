@@ -203,7 +203,28 @@ void SnookerSimulation::handleKey(const SDL_KeyboardEvent &e)
       cueBall->setVelocity(cueBallVel + Vector2(1.0f, 0.0f));
       break;
     case SDLK_SPACE:
+      Matrix4 p = m_scene->projectionMatrix();
+      Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
+      Vector3 pos = m_balls[0]->position();
+      
+      GLdouble dp[16];
+      p.toGLdoubleMtx(dp);
+      GLdouble dmv[16];
+      mv.toGLdoubleMtx(dmv);
+
+      GLint viewport[4];
+      glGetIntegerv(GL_VIEWPORT, viewport);
+
+      GLdouble sp[3];
+      int res = gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp+1, sp+2);
+
+      Vector3 screenPos(sp[0], sp[1], sp[2]);
+
+      bool good = res == GLU_TRUE;
+
       // TODO
+      std::cout << good << " : " << pos << " - " << screenPos << std::endl;
+      
       break;
     }
   }

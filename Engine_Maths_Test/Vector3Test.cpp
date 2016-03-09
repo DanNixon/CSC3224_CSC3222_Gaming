@@ -6,6 +6,7 @@
 #include <CppUnitTest.h>
 
 #include <Vector3.h>
+#include <Vector2.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -33,6 +34,14 @@ public:
     Assert::AreEqual(v.x(), 3.5f);
     Assert::AreEqual(v.y(), 8.9f);
     Assert::AreEqual(v.z(), 4.7f);
+  }
+
+  TEST_METHOD(Vector3_InitVector2)
+  {
+    Vector2 v2(3.5f, 8.9f);
+    Vector3 v(v2);
+    Assert::AreEqual(v.x(), 3.5f);
+    Assert::AreEqual(v.y(), 8.9f);
   }
 
   TEST_METHOD(Vector3_toZero)
