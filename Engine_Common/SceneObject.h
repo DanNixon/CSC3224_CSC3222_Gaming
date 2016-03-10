@@ -8,7 +8,9 @@
 
 #include <vector>
 
-#include "Matrix4.h"
+#include <Matrix4.h>
+
+#include "IMemoryManaged.h"
 #include "Scene.h"
 
 namespace Engine
@@ -19,7 +21,7 @@ namespace Common
    * @class SceneObject
    * @brief Represents an item in a Scene.
    */
-  class SceneObject
+  class SceneObject : public IMemoryManaged
   {
   public:
     /**

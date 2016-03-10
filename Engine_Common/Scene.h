@@ -6,7 +6,9 @@
 #ifndef _ENGINE_COMMON_SCENE_H_
 #define _ENGINE_COMMON_SCENE_H_
 
-#include "Matrix4.h"
+#include <Matrix4.h>
+
+#include "IMemoryManaged.h"
 
 namespace Engine
 {
@@ -18,7 +20,7 @@ namespace Common
    * @class Scene
    * @brief Represents a 3D scene.
    */
-  class Scene
+  class Scene : public IMemoryManaged
   {
   public:
     Scene(SceneObject *root, Engine::Maths::Matrix4 view = Engine::Maths::Matrix4(),

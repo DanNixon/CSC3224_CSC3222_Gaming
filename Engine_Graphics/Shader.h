@@ -10,7 +10,9 @@
 #include <iostream>
 #include <string>
 
-#include "GL/glew.h"
+#include <GL/glew.h>
+
+#include <IMemoryManaged.h>
 
 namespace Engine
 {
@@ -21,11 +23,16 @@ namespace Graphics
    * @brief Encapsulation for a single OpenGL shader.
    * @author Dan Nixon
    */
-  class Shader
+  class Shader : public Engine::Common::IMemoryManaged
   {
   public:
     Shader(std::string filename, GLuint stage);
     virtual ~Shader();
+
+    virtual int releasePriority() const
+    {
+      return 6;
+    }
 
     /**
      * @brief Returns the type of shader (shader stage).

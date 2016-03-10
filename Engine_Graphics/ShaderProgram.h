@@ -6,7 +6,9 @@
 #ifndef _ENGINE_GRAPHICS_SHADERPROGRAM_H_
 #define _ENGINE_GRAPHICS_SHADERPROGRAM_H_
 
-#include "GL/glew.h"
+#include <GL/glew.h>
+
+#include <IMemoryManaged.h>
 
 namespace Engine
 {
@@ -19,7 +21,7 @@ namespace Graphics
    * @brief Encapsulation for a GL shader program.
    * @author Dan Nixon
    */
-  class ShaderProgram
+  class ShaderProgram : public Engine::Common::IMemoryManaged
   {
   public:
     /**
@@ -30,6 +32,11 @@ namespace Graphics
 
     ShaderProgram();
     ~ShaderProgram();
+
+    virtual int releasePriority() const
+    {
+      return 5;
+    }
 
     bool addShader(Shader *s);
 

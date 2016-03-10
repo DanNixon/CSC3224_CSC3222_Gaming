@@ -6,11 +6,15 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="Profiler.h" />
+    <ClInclude Include="MemoryManager.h" />
+    <ClInclude Include="IMemoryManaged.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Profiler.cpp" />
+    <ClCompile Include="MemoryManager.cpp" />
+    <ClCompile Include="IMemoryManaged.cpp" />
   </ItemGroup>
 </Project>

@@ -14,6 +14,7 @@
 
 #include <Vector2.h>
 #include <Vector4.h>
+#include <IMemoryManaged.h>
 
 #include "Colour.h"
 
@@ -26,7 +27,7 @@ namespace Graphics
    * @brief Encapsulates a GL texture and image loading.
    * @author Dan Nixon
    */
-  class Texture
+  class Texture : public Engine::Common::IMemoryManaged
   {
   public:
     Texture(const std::string &name = "tex");

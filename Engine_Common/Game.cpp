@@ -14,6 +14,7 @@
 #include <SDL_ttf.h>
 // clang-formmat on
 
+#include "MemoryManager.h"
 #include "Profiler.h"
 
 namespace Engine
@@ -48,7 +49,7 @@ namespace Common
   {
     int status = init();
 
-	if (status != 0)
+  if (status != 0)
 		return status;
 
       this->gameLoadScreen();
@@ -132,7 +133,9 @@ namespace Common
 
       this->gameShutdown();
 
-    return status;
+      MemoryManager::Instance().releaseAll();
+
+      return status;
   }
 
   /**

@@ -31,7 +31,10 @@ namespace Graphics
   ShaderProgram::~ShaderProgram()
   {
     for (size_t i = 0; i < NUM_SHADERS; i++)
-      glDetachShader(m_program, m_shaders[i]->object());
+    {
+      if (m_shaders[i] != NULL)
+        glDetachShader(m_program, m_shaders[i]->object());
+    }
 
     glDeleteProgram(m_program);
   }

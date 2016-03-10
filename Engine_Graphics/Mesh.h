@@ -14,6 +14,8 @@
 #include <SDL/SDL_opengl.h>
 #include <assimp/scene.h>
 
+#include <IMemoryManaged.h>
+
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
@@ -48,7 +50,7 @@ namespace Graphics
    *
    * Modified from the nclgl library.
    */
-  class Mesh
+  class Mesh : public Engine::Common::IMemoryManaged
   {
   public:
     static Mesh *GenerateDisc2D(float radius, int resolution = 64);
