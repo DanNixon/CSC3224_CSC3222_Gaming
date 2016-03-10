@@ -3,7 +3,7 @@
  * @author Dan Nixon
  */
 
-#include "Line.h"
+#include "LineMesh.h"
 
 #include <Vector3.h>
 
@@ -13,7 +13,7 @@ namespace Engine
 {
   namespace Graphics
   {
-    Line::Line(const Vector3 &from, const Vector3 &to)
+    LineMesh::LineMesh(const Vector3 &from, const Vector3 &to)
     {
       m_type = GL_LINES;
       m_numVertices = 2;
@@ -31,21 +31,21 @@ namespace Engine
       updateMesh(from, to);
     }
 
-    Line::~Line()
+    LineMesh::~LineMesh()
     {
     }
 
-    void Line::setFrom(const Vector3 &from)
+    void LineMesh::setFrom(const Vector3 &from)
     {
       updateMesh(from, m_vertices[1]);
     }
 
-    void Line::setTo(const Vector3 &to)
+    void LineMesh::setTo(const Vector3 &to)
     {
       updateMesh(m_vertices[0], to);
     }
 
-    void Line::updateMesh(const Vector3 &from, const Vector3 &to)
+    void LineMesh::updateMesh(const Vector3 &from, const Vector3 &to)
     {
       m_vertices[0] = from;
       m_vertices[1] = to;

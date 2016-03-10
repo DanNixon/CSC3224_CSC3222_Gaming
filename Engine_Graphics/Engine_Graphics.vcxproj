@@ -154,10 +154,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="LineMesh.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="RectangleMesh.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
@@ -166,10 +166,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Colour.h" />
-    <ClInclude Include="Line.h" />
+    <ClInclude Include="LineMesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />
-    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RectangleMesh.h" />
     <ClInclude Include="RenderableObject.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />

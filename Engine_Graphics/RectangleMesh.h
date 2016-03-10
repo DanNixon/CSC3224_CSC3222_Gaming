@@ -3,8 +3,8 @@
  * @author Dan Nixon
  */
 
-#ifndef _ENGINE_GRAPHICS_RECTANGLE_H_
-#define _ENGINE_GRAPHICS_RECTANGLE_H_
+#ifndef _ENGINE_GRAPHICS_RectangleMeshMESH_H_
+#define _ENGINE_GRAPHICS_RectangleMeshMESH_H_
 
 #include "Mesh.h"
 
@@ -14,11 +14,11 @@ namespace Engine
 {
   namespace Graphics
   {
-    class Rectangle : public Mesh
+    class RectangleMesh : public Mesh
     {
     public:
-      Rectangle(const Engine::Maths::Vector2 &dimensions);
-      virtual ~Rectangle();
+      RectangleMesh(const Engine::Maths::Vector2 &dimensions);
+      virtual ~RectangleMesh();
 
       void resize(const Engine::Maths::Vector2 &dimensions);
     };

@@ -5,7 +5,7 @@
 
 #include "TextPane.h"
 
-#include "Rectangle.h"
+#include "RectangleMesh.h"
 
 using namespace Engine::Maths;
 
@@ -20,7 +20,7 @@ namespace Graphics
    * @param font Text font
    */
   TextPane::TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font)
-      : RenderableObject(name, new Rectangle(Vector2(height, 1.0f)), s, new Texture())
+      : RenderableObject(name, new RectangleMesh(Vector2(height, 1.0f)), s, new Texture())
       , m_height(height)
       , m_font(font)
   {
@@ -42,7 +42,7 @@ namespace Graphics
     float ratio = m_height / dim.y();
     dim = dim * ratio;
 
-    static_cast<Rectangle *>(m_mesh)->resize(dim);
+    static_cast<RectangleMesh *>(m_mesh)->resize(dim);
   }
 
   /**

@@ -8,7 +8,7 @@
 #include <Shaders.h>
 #include <ModelLoader.h>
 #include <Profiler.h>
-#include <Rectangle.h>
+#include <RectangleMesh.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -64,7 +64,7 @@ int DemoGame::gameStartup()
                    Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
   RenderableObject *leftStickArea = new RenderableObject(
-      "left_stick_area", new Engine::Graphics::Rectangle(Vector2(2.0f, 2.0f)), m_uiShader);
+      "left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
   leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.0f)));
   leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
   m_ui->root()->addChild(*leftStickArea);
@@ -75,7 +75,7 @@ int DemoGame::gameStartup()
   leftStickArea->addChild(*m_leftStick);
 
   RenderableObject *rightStickArea = new RenderableObject(
-    "right_stick_area", new Engine::Graphics::Rectangle(Vector2(2.0f, 2.0f)), m_uiShader);
+    "right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
   rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.0f)));
   rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
   m_ui->root()->addChild(*rightStickArea);

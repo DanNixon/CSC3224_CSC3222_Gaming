@@ -3,8 +3,8 @@
  * @author Dan Nixon
  */
 
-#ifndef _ENGINE_GRAPHICS_LINE_H_
-#define _ENGINE_GRAPHICS_LINE_H_
+#ifndef _ENGINE_GRAPHICS_LINEMESH_H_
+#define _ENGINE_GRAPHICS_LINEMESH_H_
 
 #include "Mesh.h"
 
@@ -12,11 +12,11 @@ namespace Engine
 {
   namespace Graphics
   {
-    class Line : public Mesh
+    class LineMesh : public Mesh
     {
     public:
-      Line(const Engine::Maths::Vector3 &from, const Engine::Maths::Vector3 &to);
-      virtual ~Line();
+      LineMesh(const Engine::Maths::Vector3 &from, const Engine::Maths::Vector3 &to);
+      virtual ~LineMesh();
 
       inline Engine::Maths::Vector3 from() const
       {

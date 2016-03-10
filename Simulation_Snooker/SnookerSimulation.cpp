@@ -11,7 +11,7 @@
 
 #include <Profiler.h>
 #include <Shaders.h>
-#include <Line.h>
+#include <LineMesh.h>
 
 #include "SnookerControls.h"
 
@@ -111,7 +111,7 @@ int SnookerSimulation::gameStartup()
   m_ui->root()->addChild(*m_profilePhysics);
 
 
-  m_shotAimLine = new RenderableObject("aim_line", new Line(Vector3(), Vector3()), m_uiShader);
+  m_shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
   m_shotAimLine->setVisible(false);
   m_balls[0]->addChild(*m_shotAimLine);
 
@@ -235,7 +235,7 @@ void SnookerSimulation::updateControl()
           << std::endl;
       }
 
-      static_cast<Line *>(m_shotAimLine->mesh())->setTo(Vector3());
+      static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(Vector3());
       m_shotAimLine->setVisible(true);
     }
     else
@@ -264,7 +264,7 @@ void SnookerSimulation::updateControl()
     }
     else
     {
-      static_cast<Line *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
+      static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
     }
   }
 }

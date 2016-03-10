@@ -8,8 +8,8 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextPane.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
-    <ClCompile Include="Line.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="RectangleMesh.cpp" />
+    <ClCompile Include="LineMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
@@ -21,7 +21,7 @@
     <ClInclude Include="Colour.h" />
     <ClInclude Include="TextPane.h" />
     <ClInclude Include="ModelLoader.h" />
-    <ClInclude Include="Line.h" />
-    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RectangleMesh.h" />
+    <ClInclude Include="LineMesh.h" />
   </ItemGroup>
 </Project>

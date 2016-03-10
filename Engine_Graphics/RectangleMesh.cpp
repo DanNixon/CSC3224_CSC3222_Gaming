@@ -3,7 +3,7 @@
  * @author Dan Nixon
  */
 
-#include "Rectangle.h"
+#include "RectangleMesh.h"
 
 #include <Vector4.h>
 
@@ -13,7 +13,7 @@ namespace Engine
 {
   namespace Graphics
   {
-    Rectangle::Rectangle(const Vector2 &dimensions)
+    RectangleMesh::RectangleMesh(const Vector2 &dimensions)
     {
       m_type = GL_TRIANGLE_STRIP;
       m_numVertices = 4;
@@ -35,11 +35,11 @@ namespace Engine
       resize(dimensions);
     }
 
-    Rectangle::~Rectangle()
+    RectangleMesh::~RectangleMesh()
     {
     }
 
-    void Rectangle::resize(const Vector2 &dimensions)
+    void RectangleMesh::resize(const Vector2 &dimensions)
     {
       Vector2 halfDim = dimensions / 2;
 
