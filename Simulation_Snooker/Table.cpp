@@ -46,7 +46,7 @@ Table::Table(Entity::EntityPtrList &entityList)
   setShader(sp);
 
   Texture *tex = new Texture("tabletopTex");
-  tex->load("../resources/table.png");
+  tex->load("../resources/6x12_snooker_table.png");
   setTexture(tex);
 
   m_cushions[0] = new Cushion(Vector2(-HALF_PLAY_AREA.x(), 0.0f));
