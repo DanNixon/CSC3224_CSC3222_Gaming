@@ -14,6 +14,11 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @class RectangleMesh
+   * @brief A mesh containing a rectangle.
+   * @author Dan Nixon
+   */
   class RectangleMesh : public Mesh
   {
   public:

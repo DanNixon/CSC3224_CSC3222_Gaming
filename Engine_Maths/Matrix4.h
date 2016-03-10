@@ -169,6 +169,10 @@ namespace Maths
       return vec;
     };
 
+    /**
+     * @brief Outputs this matrix as a column-major GLdouble matrix.
+     * @param m [out] Pointer to output matrix
+     */
     inline void toGLdoubleMtx(GLdouble *m) const
     {
       for (int i = 0; i < 16; i++)

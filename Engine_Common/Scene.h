@@ -36,6 +36,10 @@ namespace Common
     void update();
     void render();
 
+    /**
+     * @brief Gets the root node of the scene.
+     * @return Root node
+     */
     SceneObject *root()
     {
       return m_root;

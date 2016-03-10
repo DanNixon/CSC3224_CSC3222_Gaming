@@ -15,6 +15,7 @@ namespace Graphics
 {
   /**
    * @brief Creates a new text pane.
+   * @param name Name of the text pane
    * @param height Height of the text
    * @param s Shader used to render text
    * @param font Text font

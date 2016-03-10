@@ -53,6 +53,11 @@ namespace Common
       (*i)->render();
   }
 
+  /**
+   * @brief Finds a child item.
+   * @param name Name of the item
+   * @return Pointer to the item, NULL if not found
+   */
   SceneObject *SceneObject::findChild(const std::string &name)
   {
     auto it = std::find_if(m_children.begin(), m_children.end(), [name](SceneObject *o) { return o->name() == name; });

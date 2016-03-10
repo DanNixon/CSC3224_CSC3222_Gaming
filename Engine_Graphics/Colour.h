@@ -14,6 +14,11 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @class Colour
+   * @brief Wrapper around a Vector4 for holding colours.
+   * @author Dan Nixon
+   */
   class Colour : public Engine::Maths::Vector4
   {
   public:

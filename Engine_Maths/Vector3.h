@@ -59,6 +59,11 @@ namespace Maths
     {
     }
 
+    /**
+     * @brief Create a vector using values of a Vector2.
+     * @param vec2 Vector2
+     * @param z Z component
+     */
     Vector3(const Vector2 &vec2, float z = 1.0f)
         : m_x(vec2.m_x)
         , m_y(vec2.m_y)

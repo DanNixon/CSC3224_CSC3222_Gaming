@@ -190,6 +190,9 @@ void SnookerSimulation::gameShutdown()
 {
 }
 
+/**
+ * @brief Update the controls.
+ */
 void SnookerSimulation::updateControl()
 {
   m_profileGraphics->setVisible(m_controls->state(S_PROFILE_DISPLAY));

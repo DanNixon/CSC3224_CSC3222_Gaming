@@ -33,6 +33,10 @@ namespace Common
     SceneObject(const std::string &name);
     ~SceneObject();
 
+    /**
+     * @brief Gets the name of the object.
+     * @return Object name
+     */
     inline std::string name() const
     {
       return m_name;
@@ -95,7 +99,7 @@ namespace Common
 
     void addToScene(Scene *scene);
 
-    const std::string m_name;
+    const std::string m_name; //!< Name of the object
 
     Engine::Maths::Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
     Engine::Maths::Matrix4 m_worldTransform; //!< World matrix (relative to world origin)

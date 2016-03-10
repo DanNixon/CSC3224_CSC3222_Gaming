@@ -33,6 +33,9 @@ namespace Graphics
     ShaderProgram();
     ~ShaderProgram();
 
+    /**
+     * @copydoc IMemoryManaged::releasePriority()
+     */
     virtual int releasePriority() const
     {
       return 5;

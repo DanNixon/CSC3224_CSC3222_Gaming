@@ -26,6 +26,12 @@ namespace Graphics
   {
   }
 
+  /**
+   * @brief Load a 3D model into a tree of SceneObject.
+   * @param filename File to load
+   * @param sp Shader to assign to new RenderableObject
+   * @return SceneObject tree
+   */
   SceneObject *ModelLoader::load(const std::string &filename, ShaderProgram *sp)
   {
     Assimp::Importer i;
@@ -40,6 +46,13 @@ namespace Graphics
     return obj;
   }
 
+  /**
+   * @brief Load a node of the scene tree.
+   * @param sn SceneObject node
+   * @param scene Assimp scene
+   * @param node Assimp scene node
+   * @param sp Shader to assign to new RenderableObject
+   */
   void ModelLoader::loadRecursive(SceneObject *sn, const struct aiScene *scene, const struct aiNode *node,
                                   ShaderProgram *sp)
   {

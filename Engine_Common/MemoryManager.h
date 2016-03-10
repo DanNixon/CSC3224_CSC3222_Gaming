@@ -14,9 +14,18 @@ namespace Engine
 {
 namespace Common
 {
+  /**
+   * @class MemoryManager
+   * @brief Manager for deallocating memory on game exit.
+   * @author Dan Nixon
+   */
   class MemoryManager
   {
   public:
+    /**
+     * @brief Gets the instance of the manager.
+     * @return Manager instance
+     */
     static MemoryManager &Instance()
     {
       static MemoryManager instance;
@@ -32,15 +41,17 @@ namespace Common
     size_t numAllocations() const;
 
   private:
-    std::vector<IMemoryManaged *> m_allocatedItems;
+    std::vector<IMemoryManaged *> m_allocatedItems; //!< Pointer to all allocated items
 
   private:
     MemoryManager()
     {
     }
+
     MemoryManager(const MemoryManager &)
     {
     }
+
     void operator=(const MemoryManager &)
     {
     }

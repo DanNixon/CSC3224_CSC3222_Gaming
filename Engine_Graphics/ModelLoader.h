@@ -18,6 +18,11 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @class ModelLoader
+   * @brief Loader for 3D models (supported by Assimp).
+   * @author Dan Nixon
+   */
   class ModelLoader
   {
   public:

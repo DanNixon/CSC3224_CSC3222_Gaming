@@ -37,6 +37,11 @@ namespace Maths
     {
     }
 
+    /**
+     * @brief Create a vector using values of a Vector3.
+     * @param vec3 Vector3
+     * @param w W component
+     */
     Vector4(const Vector3 &vec3, float w = 1.0f)
         : m_x(vec3.m_x)
         , m_y(vec3.m_y)

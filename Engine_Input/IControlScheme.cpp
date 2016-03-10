@@ -81,6 +81,11 @@ namespace Input
     return (*it).second;
   }
 
+  /**
+   * @brief Sets deadbands for analog states.
+   * @param deadbandCentre Centre deadband
+   * @param deadbandLimit High/low deadbands
+   */
   void IControlScheme::setAnalogDeadbands(float deadbandCentre, float deadbandLimit)
   {
     m_analogDeadbands[0] = deadbandLimit;

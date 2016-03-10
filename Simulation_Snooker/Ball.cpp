@@ -21,6 +21,11 @@ const float Ball::RADIUS = 26.25f;
 */
 const float Ball::MASS = 100.0f;
 
+/**
+ * @brief Gets info about a snooker ball.
+ * @param points Number of points the ball is worth (-1 for cue ball)
+ * @return Pair of name and colour
+ */
 std::pair<std::string, Colour> Ball::Info(int points)
 {
   switch (points)

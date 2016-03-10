@@ -10,12 +10,23 @@ namespace Engine
 {
 namespace Common
 {
+  /**
+   * @class IMemoryManaged
+   * @brief Abstract class for classes that are deallocated at game exit.
+   * @author Dan Nixon
+   */
   class IMemoryManaged
   {
   public:
     IMemoryManaged();
     virtual ~IMemoryManaged();
 
+    /**
+     * @brief Determines the order in which deallocation occurs.
+     * @return Priority
+     *
+     * Higher priorities are released later.
+     */
     virtual int releasePriority() const
     {
       return 0;

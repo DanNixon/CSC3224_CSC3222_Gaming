@@ -13,6 +13,9 @@
 #include <KeyboardController.h>
 #include <MouseController.h>
 
+/**
+ * @brief Enumeration of control states for the snooker simulation.
+ */
 enum Controls
 {
   A_MOUSE_X,
@@ -22,7 +25,7 @@ enum Controls
 };
 
 /**
- * @class SnooerControls
+ * @class SnookerControls
  * @brief Control scheme for snooker simulation.
  * @author Dan Nixon
  */

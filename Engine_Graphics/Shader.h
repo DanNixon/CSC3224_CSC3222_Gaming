@@ -29,6 +29,9 @@ namespace Graphics
     Shader(std::string filename, GLuint stage);
     virtual ~Shader();
 
+    /**
+     * @copydoc IMemoryManaged::releasePriority()
+     */
     virtual int releasePriority() const
     {
       return 6;

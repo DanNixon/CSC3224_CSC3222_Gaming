@@ -13,6 +13,12 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @brief Creates a new rectangle mesh.
+   * @param dimensions Dimensions of the rectangle
+   *
+   * Rectangle is generated centered about the current position.
+   */
   RectangleMesh::RectangleMesh(const Vector2 &dimensions)
   {
     m_type = GL_TRIANGLE_STRIP;
@@ -39,6 +45,10 @@ namespace Graphics
   {
   }
 
+  /**
+   * @brief Updates the vertices of the rectangle.
+   * @param dimensions New dimensions of the rectangle
+   */
   void RectangleMesh::resize(const Vector2 &dimensions)
   {
     Vector2 halfDim = dimensions / 2;

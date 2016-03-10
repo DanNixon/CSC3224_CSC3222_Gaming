@@ -13,6 +13,11 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @brief Create a new line mesh.
+   * @param from Starting point
+   * @param to Finishing point
+   */
   LineMesh::LineMesh(const Vector3 &from, const Vector3 &to)
   {
     m_type = GL_LINES;
@@ -35,16 +40,29 @@ namespace Graphics
   {
   }
 
+  /**
+   * @brief Sets starting point of the line.
+   * @param from Starting point
+   */
   void LineMesh::setFrom(const Vector3 &from)
   {
     updateMesh(from, m_vertices[1]);
   }
 
+  /**
+   * @brief Sets finishing point of the line.
+   * @param to Finishing point
+   */
   void LineMesh::setTo(const Vector3 &to)
   {
     updateMesh(m_vertices[0], to);
   }
 
+  /**
+   * @brief Updates the vertices of the mesh.
+   * @param from Starting point
+   * @param to Finishing point
+   */
   void LineMesh::updateMesh(const Vector3 &from, const Vector3 &to)
   {
     m_vertices[0] = from;

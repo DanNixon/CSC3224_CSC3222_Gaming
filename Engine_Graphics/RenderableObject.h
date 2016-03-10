@@ -25,11 +25,19 @@ namespace Graphics
     RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL, Texture *t = NULL);
     ~RenderableObject();
 
+    /**
+     * @brief Sets the visibility of this object.
+     * @param visible Visibility
+     */
     void setVisible(bool visible)
     {
       m_draw = visible;
     }
 
+    /**
+     * @brief Gets the visibility of this object.
+     * @return Visibility
+     */
     inline bool visible() const
     {
       return m_draw;
