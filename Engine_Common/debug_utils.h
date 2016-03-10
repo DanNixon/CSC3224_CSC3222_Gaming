@@ -5,14 +5,14 @@
  * @see https://msdn.microsoft.com/en-us/library/x98tx3cf.aspx
  */
 
-#ifdef _DEBUG 
-  #ifndef DBG_NEW
-    #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-    #define new DBG_NEW
-  #endif
+#ifdef _DEBUG
+#ifndef DBG_NEW
+#define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DBG_NEW
+#endif
 
-  #define _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
 
-  #include <stdlib.h>
-  #include <crtdbg.h>
+#include <crtdbg.h>
+#include <stdlib.h>
 #endif

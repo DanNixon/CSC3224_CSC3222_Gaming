@@ -12,9 +12,9 @@
 #include <SDL_ttf.h>
 #include <SOIL/SOIL.h>
 
+#include <IMemoryManaged.h>
 #include <Vector2.h>
 #include <Vector4.h>
-#include <IMemoryManaged.h>
 
 #include "Colour.h"
 

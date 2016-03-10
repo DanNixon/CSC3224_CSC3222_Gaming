@@ -6,9 +6,9 @@
 #ifndef _SIMULATIONSNOOKER_BALL_H_
 #define _SIMULATIONSNOOKER_BALL_H_
 
+#include <Colour.h>
 #include <RenderableObject.h>
 #include <SphericalEntity.h>
-#include <Colour.h>
 
 /**
  * @class Ball

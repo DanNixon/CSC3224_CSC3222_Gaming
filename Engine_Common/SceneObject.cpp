@@ -55,10 +55,7 @@ namespace Common
 
   SceneObject *SceneObject::findChild(const std::string &name)
   {
-    auto it = std::find_if(m_children.begin(), m_children.end(), [name](SceneObject *o)
-                           {
-                             return o->name() == name;
-                           });
+    auto it = std::find_if(m_children.begin(), m_children.end(), [name](SceneObject *o) { return o->name() == name; });
     if (it != m_children.end())
       return *it;
     return NULL;

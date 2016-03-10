@@ -9,9 +9,9 @@
 
 #include <SDL_ttf.h>
 
+#include <LineMesh.h>
 #include <Profiler.h>
 #include <Shaders.h>
-#include <LineMesh.h>
 
 #include "SnookerControls.h"
 

@@ -8,20 +8,20 @@
 
 namespace Engine
 {
-  namespace Common
+namespace Common
+{
+  class IMemoryManaged
   {
-    class IMemoryManaged
-    {
-    public:
-      IMemoryManaged();
-      virtual ~IMemoryManaged();
+  public:
+    IMemoryManaged();
+    virtual ~IMemoryManaged();
 
-      virtual int releasePriority() const
-      {
-        return 0;
-      }
-    };
-  }
+    virtual int releasePriority() const
+    {
+      return 0;
+    }
+  };
+}
 }
 
 #endif

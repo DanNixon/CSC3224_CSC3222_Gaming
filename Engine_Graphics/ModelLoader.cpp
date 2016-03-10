@@ -9,8 +9,8 @@
 #include <assimp/cimport.h>
 #include <assimp/postprocess.h>
 
-#include "RenderableObject.h"
 #include "Mesh.h"
+#include "RenderableObject.h"
 
 using namespace Engine::Common;
 

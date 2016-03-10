@@ -5,11 +5,11 @@
 
 #include "DemoGame.h"
 
-#include <Shaders.h>
+#include <MemoryManager.h>
 #include <ModelLoader.h>
 #include <Profiler.h>
 #include <RectangleMesh.h>
-#include <MemoryManager.h>
+#include <Shaders.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"

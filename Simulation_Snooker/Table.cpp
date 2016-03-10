@@ -6,9 +6,9 @@
 #include "Table.h"
 
 #include <Mesh.h>
+#include <RectangleMesh.h>
 #include <Shaders.h>
 #include <Texture.h>
-#include <RectangleMesh.h>
 
 using namespace Engine::Maths;
 using namespace Engine::Graphics;

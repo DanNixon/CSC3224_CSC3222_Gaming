@@ -11,10 +11,10 @@
 #include <SDL_ttf.h>
 
 #include <IControlScheme.h>
+#include <RenderableObject.h>
 #include <Scene.h>
 #include <ShaderProgram.h>
 #include <TextPane.h>
-#include <RenderableObject.h>
 
 #include <Entity.h>
 #include <PhysicsUpdate.h>

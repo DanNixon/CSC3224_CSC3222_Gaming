@@ -9,9 +9,9 @@
 #include <Game.h>
 
 #include <IControlScheme.h>
-#include <SceneObject.h>
-#include <Scene.h>
 #include <RenderableObject.h>
+#include <Scene.h>
+#include <SceneObject.h>
 #include <ShaderProgram.h>
 
 /**

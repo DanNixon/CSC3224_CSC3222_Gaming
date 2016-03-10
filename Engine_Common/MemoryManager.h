@@ -12,34 +12,40 @@
 
 namespace Engine
 {
-	namespace Common
-	{
-		class MemoryManager
-		{
-    public:
-      static MemoryManager &Instance()
-      {
-        static MemoryManager instance;
-        return instance;
-      }
+namespace Common
+{
+  class MemoryManager
+  {
+  public:
+    static MemoryManager &Instance()
+    {
+      static MemoryManager instance;
+      return instance;
+    }
 
-      static bool CompareItems(IMemoryManaged * a, IMemoryManaged * b);
+    static bool CompareItems(IMemoryManaged *a, IMemoryManaged *b);
 
-      void recordAllocation(IMemoryManaged * item);
-      void release(IMemoryManaged * item);
-      void releaseAll();
+    void recordAllocation(IMemoryManaged *item);
+    void release(IMemoryManaged *item);
+    void releaseAll();
 
-      size_t numAllocations() const;
+    size_t numAllocations() const;
 
-    private:
-      std::vector<IMemoryManaged *> m_allocatedItems;
+  private:
+    std::vector<IMemoryManaged *> m_allocatedItems;
 
-		private:
-      MemoryManager() {}
-      MemoryManager(const MemoryManager &) {}
-      void operator=(const MemoryManager &) {}
-		};
-	}
+  private:
+    MemoryManager()
+    {
+    }
+    MemoryManager(const MemoryManager &)
+    {
+    }
+    void operator=(const MemoryManager &)
+    {
+    }
+  };
+}
 }
 
 #endif

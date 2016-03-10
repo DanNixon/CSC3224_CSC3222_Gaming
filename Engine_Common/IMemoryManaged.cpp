@@ -9,15 +9,15 @@
 
 namespace Engine
 {
-  namespace Common
+namespace Common
+{
+  IMemoryManaged::IMemoryManaged()
   {
-    IMemoryManaged::IMemoryManaged()
-    {
-      MemoryManager::Instance().recordAllocation(this);
-    }
-
-    IMemoryManaged::~IMemoryManaged()
-    {
-    }
+    MemoryManager::Instance().recordAllocation(this);
   }
+
+  IMemoryManaged::~IMemoryManaged()
+  {
+  }
+}
 }
