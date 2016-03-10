@@ -196,36 +196,6 @@ namespace Graphics
   }
 
   /**
-   * @brief Creates a coloured triangle for demonstration.
-   * @return Mesh containing triangle
-   */
-  Mesh *Mesh::GenerateTriangle()
-  {
-    Mesh *m = new Mesh();
-    m->m_numVertices = 3;
-
-    m->m_vertices = new Vector3[m->m_numVertices];
-    m->m_vertices[0] = Vector3(0.0f, 0.5f, 0.0f);
-    m->m_vertices[1] = Vector3(0.5f, -0.5f, 0.0f);
-    m->m_vertices[2] = Vector3(-0.5f, -0.5f, 0.0f);
-
-    m->m_textureCoords = new Vector2[m->m_numVertices];
-    m->m_textureCoords[0] = Vector2(0.5f, 0.0f);
-    m->m_textureCoords[1] = Vector2(1.0f, 1.0f);
-    m->m_textureCoords[2] = Vector2(0.0f, 1.0f);
-
-    m->m_colours = new Vector4[m->m_numVertices];
-    m->m_colours[0] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-    m->m_colours[1] = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-    m->m_colours[2] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-
-    m->bufferData();
-    m->generateNormals();
-
-    return m;
-  }
-
-  /**
    * @brief Generates a 2D filled circle/disc.
    * @param radius Radius (default 1.0)
    * @param resolution Number of "slices" in angle
@@ -350,71 +320,6 @@ namespace Graphics
     m->m_textureCoords[2] = Vector2(0, 1);
     m->m_textureCoords[3] = Vector2(1, 1);
 
-    m->bufferData();
-    return m;
-  }
-
-  /**
-   * @brief Loads a mesh from an ASCII file.
-   * @param filename Filename to load
-   * @return Mesh containing loaded mesh
-   */
-  Mesh *Mesh::LoadASCIIMeshFile(const string &filename)
-  {
-    ifstream f(filename);
-
-    if (!f)
-      return NULL;
-
-    Mesh *m = new Mesh();
-    m->m_type = GL_TRIANGLES;
-    f >> m->m_numVertices;
-
-    int hasTex = 0;
-    int hasColour = 0;
-
-    f >> hasTex;
-    f >> hasColour;
-
-    m->m_vertices = new Vector3[m->m_numVertices];
-
-    if (hasTex)
-    {
-      m->m_textureCoords = new Vector2[m->m_numVertices];
-      m->m_colours = new Vector4[m->m_numVertices];
-    }
-
-    for (unsigned int i = 0; i < m->m_numVertices; ++i)
-    {
-      f >> m->m_vertices[i][0];
-      f >> m->m_vertices[i][1];
-      f >> m->m_vertices[i][2];
-    }
-
-    if (hasColour)
-    {
-      for (unsigned int i = 0; i < m->m_numVertices; ++i)
-      {
-        unsigned int r, g, b, a;
-
-        f >> r;
-        f >> g;
-        f >> b;
-        f >> a;
-        m->m_colours[i] = Vector4(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
-      }
-    }
-
-    if (hasTex)
-    {
-      for (unsigned int i = 0; i < m->m_numVertices; ++i)
-      {
-        f >> m->m_textureCoords[i][0];
-        f >> m->m_textureCoords[i][1];
-      }
-    }
-
-    m->generateNormals();
     m->bufferData();
     return m;
   }
