@@ -93,7 +93,7 @@ int DemoGame::gameStartup()
   {
     std::cout << "Using mouse and keyboard" << std::endl;
     m_simControls = new KMSimulatorControls(this);
-    m_simControls->setAnalogDeadbands(0.1f);
+    m_simControls->setAnalogDeadbands(0.05f);
   }
   else
   {
