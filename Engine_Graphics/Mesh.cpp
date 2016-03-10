@@ -229,35 +229,6 @@ namespace Graphics
   }
 
   /**
-   * @brief Generates a line between two points.
-   * @param from Start point
-   * @param to End point
-   * @return Mesh containing line
-   */
-  Mesh *Mesh::GenerateLine(const Vector3 &from, const Vector3 &to)
-  {
-    Mesh *m = new Mesh();
-    m->m_type = GL_LINES;
-    m->m_numVertices = 2;
-
-    m->m_vertices = new Vector3[m->m_numVertices];
-    m->m_vertices[0] = from;
-    m->m_vertices[1] = to;
-
-    m->m_textureCoords = new Vector2[m->m_numVertices];
-    m->m_textureCoords[0] = Vector2(1.0f, 1.0f);
-    m->m_textureCoords[1] = Vector2(0.0f, 1.0f);
-
-    m->m_colours = new Vector4[m->m_numVertices];
-    m->m_colours[0] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-    m->m_colours[1] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-
-    m->bufferData();
-
-    return m;
-  }
-
-  /**
    * @brief Generates a 2D filled circle/disc.
    * @param radius Radius (default 1.0)
    * @param resolution Number of "slices" in angle

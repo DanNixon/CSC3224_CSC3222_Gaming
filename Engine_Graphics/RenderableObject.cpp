@@ -24,6 +24,7 @@ namespace Graphics
   RenderableObject::RenderableObject(const std::string &name, Mesh *m,
                                      ShaderProgram *s, Texture *t)
       : SceneObject(name)
+      , m_draw(true)
       , m_mesh(m)
       , m_shaderProgram(s)
       , m_texture(t)
@@ -32,11 +33,6 @@ namespace Graphics
 
   RenderableObject::~RenderableObject()
   {
-    if (m_mesh != NULL)
-      delete m_mesh;
-
-    //  if (m_shaderProgram != NULL)
-    //    delete m_shaderProgram;
   }
 
   /**
@@ -44,7 +40,7 @@ namespace Graphics
    */
   void RenderableObject::render()
   {
-    if (m_mesh && m_shaderProgram)
+    if (m_draw && m_mesh && m_shaderProgram)
     {
       GLuint program = m_shaderProgram->program();
 

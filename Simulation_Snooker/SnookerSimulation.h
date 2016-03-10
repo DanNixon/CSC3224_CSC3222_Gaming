@@ -14,6 +14,7 @@
 #include <Scene.h>
 #include <ShaderProgram.h>
 #include <TextPane.h>
+#include <RenderableObject.h>
 
 #include <Entity.h>
 #include <PhysicsUpdate.h>
@@ -66,6 +67,7 @@ private:
   Engine::Graphics::TextPane *m_profilePhysics;
 
   Engine::Maths::Vector2 *m_mouseStartPosition;
+  Engine::Graphics::RenderableObject *m_shotAimLine;
 };
 
 #endif

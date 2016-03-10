@@ -52,8 +52,6 @@ namespace Graphics
   {
   public:
     static Mesh *GenerateTriangle();
-    static Mesh *GenerateLine(const Engine::Maths::Vector3 &from,
-                              const Engine::Maths::Vector3 &to);
     static Mesh *GenerateDisc2D(float radius, int resolution = 64);
     static Mesh *GenerateRing2D(float radiusOuter, float radiusInner,
                                 int resolution = 64);
@@ -82,7 +80,7 @@ namespace Graphics
     GLuint m_bufferObject[MAX_BUFFER]; //!< OGL buffer objects for each buffer
                                        //!  used in this mesh
     unsigned long m_numVertices;       //!< Number of vertices for the mesh
-	unsigned long m_numIndices;        //!< Number of indices for the mesh
+    unsigned long m_numIndices;        //!< Number of indices for the mesh
 
     Engine::Maths::Vector3 *m_vertices; //!< Pointer to vertex position data
     Engine::Maths::Vector4 *m_colours;  //!< Pointer to vertex colour data

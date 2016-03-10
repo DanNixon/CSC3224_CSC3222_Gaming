@@ -11,6 +11,7 @@
 
 #include <Profiler.h>
 #include <Shaders.h>
+#include <Line.h>
 
 #include "SnookerControls.h"
 
@@ -107,6 +108,11 @@ int SnookerSimulation::gameStartup()
   m_profilePhysics->setText("Physics: ");
   m_ui->root()->addChild(*m_profilePhysics);
 
+
+  m_shotAimLine = new RenderableObject("aim_line", new Line(Vector3(), Vector3()), m_uiShader);
+  m_shotAimLine->setVisible(false);
+  m_balls[0]->addChild(*m_shotAimLine);
+
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
@@ -173,7 +179,9 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
 
     m_balls[0]->setAcceleration(acc);
 
-    if (m_controls->state(S_TAKE_SHOT) && m_mouseStartPosition == NULL)
+    if (m_mouseStartPosition == NULL)
+    {
+      if (m_controls->state(S_TAKE_SHOT))
       {
         // Record starting position of mouse
         m_mouseStartPosition = new Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
@@ -203,21 +211,34 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
             << "mouse: " << *m_mouseStartPosition << std::endl
             << std::endl;
         }
+
+        static_cast<Line *>(m_shotAimLine->mesh())->setTo(Vector3());
+        m_shotAimLine->setVisible(true);
+      }
     }
-    else if (!m_controls->state(S_TAKE_SHOT) && m_mouseStartPosition != NULL)
+    else
     {
       Vector2 newMousePosition = Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
-      Vector2 deltaMouse = newMousePosition - *m_mouseStartPosition;
-      
-      std::cout
-        << "MOUSE UP" << std::endl
-        << "delta mouse: " << deltaMouse << std::endl
-        << std::endl;
+      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
 
-      m_balls[0]->setAcceleration(deltaMouse);
+      if (!m_controls->state(S_TAKE_SHOT))
+      {
+        m_shotAimLine->setVisible(false);
 
-      delete m_mouseStartPosition;
-      m_mouseStartPosition = NULL;
+        std::cout
+          << "MOUSE UP" << std::endl
+          << "delta mouse: " << deltaMouse << std::endl
+          << std::endl;
+
+        m_balls[0]->setAcceleration(deltaMouse);
+
+        delete m_mouseStartPosition;
+        m_mouseStartPosition = NULL;
+      }
+      else
+      {
+        static_cast<Line *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
+      }
     }
   }
   // Output profiling data
