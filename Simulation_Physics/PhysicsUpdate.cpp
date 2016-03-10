@@ -106,7 +106,7 @@ namespace Physics
         Entity *a = it->first.first;
         Entity *b = it->first.second;
 
-        InterfaceResolution::Impulse(*a, *b, 0.9f);
+        InterfaceResolution::Impulse(*a, *b, 0.6f);
 
         // Mark the interface as having been resolved
         it->second = true;

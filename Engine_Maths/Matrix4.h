@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include <gl/glew.h>
+
 #include "Vector3.h"
 #include "Vector4.h"
 #include "math_common.h"
@@ -168,6 +170,12 @@ namespace Maths
 
       return vec;
     };
+
+    inline void toGLdoubleMtx(GLdouble *m) const
+    {
+      for (int i = 0; i < 16; i++)
+        m[i] = m_values[i];
+    }
 
     /**
      * @brief Multiplies this matrix with a Vector4.

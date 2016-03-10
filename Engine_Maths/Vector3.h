@@ -9,6 +9,8 @@
 #include <cmath>
 #include <iostream>
 
+#include "Vector2.h"
+
 namespace Engine
 {
 namespace Maths
@@ -45,25 +47,22 @@ namespace Maths
     }
 
     /**
-     * @brief Creates a new vector with default values of [0, 0, 0].
+     * @brief Creates a new vector.
+     * @param x X coordinate value (default 0)
+     * @param y Y coordinate value (default 0)
+     * @param z Z coordinate value (default 0)
      */
-    Vector3()
-        : m_x(0.0)
-        , m_y(0.0)
-        , m_z(0.0)
-    {
-    }
-
-    /**
-     * @brief Creates a new vector with specified values.
-     * @param x X coordinate value
-     * @param y Y coordinate value
-     * @param z Z coordinate value
-     */
-    Vector3(const float x, const float y, const float z)
+    Vector3(float x = 0.0f, float y = 0.0f, float z = 0.0f)
         : m_x(x)
         , m_y(y)
         , m_z(z)
+    {
+    }
+
+    Vector3(const Vector2 &vec2, float z = 1.0f)
+      : m_x(vec2.m_x)
+      , m_y(vec2.m_y)
+      , m_z(z)
     {
     }
 
@@ -331,6 +330,7 @@ namespace Maths
     }
 
   protected:
+    friend class Vector4;
     friend class Matrix3;
     friend class Matrix4;
 

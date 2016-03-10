@@ -11,6 +11,9 @@
 
 #include <Profiler.h>
 #include <Shaders.h>
+#include <Line.h>
+
+#include "SnookerControls.h"
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -19,7 +22,8 @@ using namespace Engine::Input;
 using namespace Simulation::Physics;
 
 SnookerSimulation::SnookerSimulation()
-    : Game("Snooker Loopy", std::make_pair(1024, 768))
+  : Game("Snooker Loopy", std::make_pair(1024, 768))
+  , m_mouseStartPosition(NULL)
 {
 }
 
@@ -34,7 +38,8 @@ int SnookerSimulation::gameStartup()
 {
   // Load font for text display
   m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
-  m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
+  m_fontMedium =
+      TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
   // Table
   m_table = new Table(m_entities);
@@ -83,30 +88,43 @@ int SnookerSimulation::gameStartup()
   m_ui = new Scene(new SceneObject("root"), view, orth);
 
   m_uiShader = new ShaderProgram();
-  m_uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
-  m_uiShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
+  m_uiShader->addShader(
+      new VertexShader("../resources/shader/vert_simple.glsl"));
+  m_uiShader->addShader(
+      new FragmentShader("../resources/shader/frag_tex.glsl"));
   m_uiShader->link();
 
-  m_profileGraphics = new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profileGraphics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
+  m_profileGraphics =
+      new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profileGraphics->setVisible(false);
+  m_profileGraphics->setModelMatrix(
+      Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
   m_profileGraphics->setText("Graphics: ");
   m_ui->root()->addChild(*m_profileGraphics);
 
-  m_profilePhysics = new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profilePhysics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
+  m_profilePhysics =
+      new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profilePhysics->setVisible(false);
+  m_profilePhysics->setModelMatrix(
+      Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
   m_profilePhysics->setText("Physics: ");
   m_ui->root()->addChild(*m_profilePhysics);
+
+
+  m_shotAimLine = new RenderableObject("aim_line", new Line(Vector3(), Vector3()), m_uiShader);
+  m_shotAimLine->setVisible(false);
+  m_balls[0]->addChild(*m_shotAimLine);
 
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
+  m_controlLoop = addTimedLoop(25.0f, "control");
   m_profileLoop = addTimedLoop(1000.0f, "profile");
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
 
-  // Handle keyboard presses myself
-  addEventHandler(this);
+  m_controls = new SnookerControls(this);
 
   m_profiler = new Profiler(this);
 
@@ -132,7 +150,7 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   {
     m_physics.update(m_entities, dtMilliSec);
 
-    // TODO
+    // Check for potted balls
     auto inters = m_physics.interfaces();
     for (auto it = inters.begin(); it != inters.end(); ++it)
     {
@@ -143,30 +161,32 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
         std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
       if (dynamic_cast<Pocket *>(b))
         std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
-      // else
-      //  std::cout << it->first.first << " - " << it->first.second << " ["
-      //            << it->second << "]" << std::endl;
     }
+  }
+  // Handle control
+  else if (id == m_controlLoop)
+  {
+    updateControl();
   }
   // Output profiling data
   else if (id == m_profileLoop)
   {
     m_profiler->computeStats(dtMilliSec);
 
-    std::stringstream graphStr;
-    graphStr.precision(3);
-    graphStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
-             << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
-    m_profileGraphics->setText(graphStr.str());
+    if (m_controls->state(S_PROFILE_DISPLAY))
+    {
+      std::stringstream graphStr;
+      graphStr.precision(3);
+      graphStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
+        << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
+      m_profileGraphics->setText(graphStr.str());
 
-    std::stringstream physStr;
-    physStr.precision(3);
-    physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
-            << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
-    m_profilePhysics->setText(physStr.str());
-
-    // std::cout << "Performance statistics:" << std::endl
-    //          << *m_profiler << std::endl;
+      std::stringstream physStr;
+      physStr.precision(3);
+      physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
+        << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
+      m_profilePhysics->setText(physStr.str());
+    }
   }
 }
 
@@ -177,30 +197,74 @@ void SnookerSimulation::gameShutdown()
 {
 }
 
-/**
- * @copydoc KeyboardHandler::handleKey
- */
-void SnookerSimulation::handleKey(const SDL_KeyboardEvent &e)
+void SnookerSimulation::updateControl()
 {
-  if (e.state == SDL_PRESSED)
-  {
-    Ball *cueBall = m_balls[0];
-    Vector2 cueBallVel = cueBall->velocity();
+  m_profileGraphics->setVisible(m_controls->state(S_PROFILE_DISPLAY));
+  m_profilePhysics->setVisible(m_controls->state(S_PROFILE_DISPLAY));
 
-    switch (e.keysym.sym)
+  if (m_mouseStartPosition == NULL)
+  {
+    if (m_controls->state(S_TAKE_SHOT))
     {
-    case SDLK_w:
-      cueBall->setVelocity(cueBallVel + Vector2(0.0f, 1.0f));
-      break;
-    case SDLK_a:
-      cueBall->setVelocity(cueBallVel + Vector2(-1.0f, 0.0f));
-      break;
-    case SDLK_s:
-      cueBall->setVelocity(cueBallVel + Vector2(0.0f, -1.0f));
-      break;
-    case SDLK_d:
-      cueBall->setVelocity(cueBallVel + Vector2(1.0f, 0.0f));
-      break;
+      // Record starting position of mouse
+      m_mouseStartPosition = new Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
+
+      // Get position of cue ball in normalised screen space
+      Matrix4 p = m_scene->projectionMatrix();
+      Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
+      Vector3 pos = m_balls[0]->position();
+
+      GLdouble dp[16];
+      p.toGLdoubleMtx(dp);
+      GLdouble dmv[16];
+      mv.toGLdoubleMtx(dmv);
+
+      GLint viewport[4];
+      glGetIntegerv(GL_VIEWPORT, viewport);
+
+      GLdouble sp[3];
+
+      if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
+      {
+        Vector3 screenPos((float)sp[0], (float)sp[1], (float)sp[2]);
+
+        std::cout
+          << "MOUSE DOWN" << std::endl
+          << "cue ball: " << pos << " - " << screenPos << std::endl
+          << "mouse: " << *m_mouseStartPosition << std::endl
+          << std::endl;
+      }
+
+      static_cast<Line *>(m_shotAimLine->mesh())->setTo(Vector3());
+      m_shotAimLine->setVisible(true);
+    }
+    else
+    {
+      m_balls[0]->setAcceleration(Vector2());
+    }
+  }
+  else
+  {
+    Vector2 newMousePosition = Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
+    Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+
+    if (!m_controls->state(S_TAKE_SHOT))
+    {
+      m_shotAimLine->setVisible(false);
+
+      std::cout
+        << "MOUSE UP" << std::endl
+        << "delta mouse: " << deltaMouse << std::endl
+        << std::endl;
+
+      m_balls[0]->setAcceleration(deltaMouse);
+
+      delete m_mouseStartPosition;
+      m_mouseStartPosition = NULL;
+    }
+    else
+    {
+      static_cast<Line *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
     }
   }
 }

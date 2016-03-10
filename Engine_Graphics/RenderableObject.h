@@ -26,6 +26,16 @@ namespace Graphics
                      Texture *t = NULL);
     ~RenderableObject();
 
+    void setVisible(bool visible)
+    {
+      m_draw = visible;
+    }
+
+    inline bool visible() const
+    {
+      return m_draw;
+    }
+
     /**
      * @brief Sets the Mesh this object renders.
      * @param m Mesh
@@ -41,7 +51,7 @@ namespace Graphics
      * @return Mesh
      * @see RenderableObject::setMesh
      */
-    Mesh *mesh() const
+    inline Mesh *mesh() const
     {
       return m_mesh;
     }
@@ -61,7 +71,7 @@ namespace Graphics
      * @return Shader program
      * @see RenderableObject::setShader
      */
-    ShaderProgram *shader() const
+    inline ShaderProgram *shader() const
     {
       return m_shaderProgram;
     }
@@ -81,7 +91,7 @@ namespace Graphics
      * @return Texture
      * @see RenderableObject::setTexture
      */
-    Texture *texture() const
+    inline Texture *texture() const
     {
       return m_texture;
     }
@@ -89,6 +99,7 @@ namespace Graphics
     virtual void render();
 
   protected:
+    bool m_draw; //!< Flag indicating if this object should be rendered
     Mesh *m_mesh;                   //!< Mesh represented by this object
     ShaderProgram *m_shaderProgram; //!< Shader used to render m_mesh
     Texture *m_texture;             //!< Texture used on m_mesh

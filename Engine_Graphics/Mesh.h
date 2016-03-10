@@ -52,7 +52,6 @@ namespace Graphics
   {
   public:
     static Mesh *GenerateTriangle();
-    static Mesh *GenerateLine(const Engine::Maths::Vector3 &from, const Engine::Maths::Vector3 &to);
     static Mesh *GenerateDisc2D(float radius, int resolution = 64);
     static Mesh *GenerateRing2D(float radiusOuter, float radiusInner, int resolution = 64);
     static Mesh *GenerateRect2D(const Engine::Maths::Vector2 &dimensions);
