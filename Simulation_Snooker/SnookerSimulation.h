@@ -43,6 +43,8 @@ protected:
   void gameLoop(Uint8 id, float dtMilliSec);
   void gameShutdown();
 
+  void updateControl();
+
 private:
   Uint8 m_graphicsLoop;
   Uint8 m_physicsLoop;

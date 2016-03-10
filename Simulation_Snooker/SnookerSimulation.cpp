@@ -96,6 +96,7 @@ int SnookerSimulation::gameStartup()
 
   m_profileGraphics =
       new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profileGraphics->setVisible(false);
   m_profileGraphics->setModelMatrix(
       Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
   m_profileGraphics->setText("Graphics: ");
@@ -103,6 +104,7 @@ int SnookerSimulation::gameStartup()
 
   m_profilePhysics =
       new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profilePhysics->setVisible(false);
   m_profilePhysics->setModelMatrix(
       Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
   m_profilePhysics->setText("Physics: ");
@@ -164,99 +166,27 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   // Handle control
   else if (id == m_controlLoop)
   {
-    Vector2 acc;
-    const float accMag = 0.01f;
-
-    if (m_controls->state(S_CUEBALL_UP))
-      acc[1] = accMag;
-    else if (m_controls->state(S_CUEBALL_DOWN))
-      acc[1] = -accMag;
-
-    if (m_controls->state(S_CUEBALL_RIGHT))
-      acc[0] = accMag;
-    else if (m_controls->state(S_CUEBALL_LEFT))
-      acc[0] = -accMag;
-
-    m_balls[0]->setAcceleration(acc);
-
-    if (m_mouseStartPosition == NULL)
-    {
-      if (m_controls->state(S_TAKE_SHOT))
-      {
-        // Record starting position of mouse
-        m_mouseStartPosition = new Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
-
-        // Get position of cue ball in normalised screen space
-        Matrix4 p = m_scene->projectionMatrix();
-        Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
-        Vector3 pos = m_balls[0]->position();
-
-        GLdouble dp[16];
-        p.toGLdoubleMtx(dp);
-        GLdouble dmv[16];
-        mv.toGLdoubleMtx(dmv);
-
-        GLint viewport[4];
-        glGetIntegerv(GL_VIEWPORT, viewport);
-
-        GLdouble sp[3];
-
-        if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
-        {
-          Vector3 screenPos((float)sp[0], (float)sp[1], (float)sp[2]);
-
-          std::cout
-            << "MOUSE DOWN" << std::endl
-            << "cue ball: " << pos << " - " << screenPos << std::endl
-            << "mouse: " << *m_mouseStartPosition << std::endl
-            << std::endl;
-        }
-
-        static_cast<Line *>(m_shotAimLine->mesh())->setTo(Vector3());
-        m_shotAimLine->setVisible(true);
-      }
-    }
-    else
-    {
-      Vector2 newMousePosition = Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
-      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
-
-      if (!m_controls->state(S_TAKE_SHOT))
-      {
-        m_shotAimLine->setVisible(false);
-
-        std::cout
-          << "MOUSE UP" << std::endl
-          << "delta mouse: " << deltaMouse << std::endl
-          << std::endl;
-
-        m_balls[0]->setAcceleration(deltaMouse);
-
-        delete m_mouseStartPosition;
-        m_mouseStartPosition = NULL;
-      }
-      else
-      {
-        static_cast<Line *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
-      }
-    }
+    updateControl();
   }
   // Output profiling data
   else if (id == m_profileLoop)
   {
     m_profiler->computeStats(dtMilliSec);
 
-    std::stringstream graphStr;
-    graphStr.precision(3);
-    graphStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
-             << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
-    m_profileGraphics->setText(graphStr.str());
+    if (m_controls->state(S_PROFILE_DISPLAY))
+    {
+      std::stringstream graphStr;
+      graphStr.precision(3);
+      graphStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
+        << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
+      m_profileGraphics->setText(graphStr.str());
 
-    std::stringstream physStr;
-    physStr.precision(3);
-    physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
-            << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
-    m_profilePhysics->setText(physStr.str());
+      std::stringstream physStr;
+      physStr.precision(3);
+      physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
+        << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
+      m_profilePhysics->setText(physStr.str());
+    }
   }
 }
 
@@ -265,4 +195,76 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
  */
 void SnookerSimulation::gameShutdown()
 {
+}
+
+void SnookerSimulation::updateControl()
+{
+  m_profileGraphics->setVisible(m_controls->state(S_PROFILE_DISPLAY));
+  m_profilePhysics->setVisible(m_controls->state(S_PROFILE_DISPLAY));
+
+  if (m_mouseStartPosition == NULL)
+  {
+    if (m_controls->state(S_TAKE_SHOT))
+    {
+      // Record starting position of mouse
+      m_mouseStartPosition = new Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
+
+      // Get position of cue ball in normalised screen space
+      Matrix4 p = m_scene->projectionMatrix();
+      Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
+      Vector3 pos = m_balls[0]->position();
+
+      GLdouble dp[16];
+      p.toGLdoubleMtx(dp);
+      GLdouble dmv[16];
+      mv.toGLdoubleMtx(dmv);
+
+      GLint viewport[4];
+      glGetIntegerv(GL_VIEWPORT, viewport);
+
+      GLdouble sp[3];
+
+      if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
+      {
+        Vector3 screenPos((float)sp[0], (float)sp[1], (float)sp[2]);
+
+        std::cout
+          << "MOUSE DOWN" << std::endl
+          << "cue ball: " << pos << " - " << screenPos << std::endl
+          << "mouse: " << *m_mouseStartPosition << std::endl
+          << std::endl;
+      }
+
+      static_cast<Line *>(m_shotAimLine->mesh())->setTo(Vector3());
+      m_shotAimLine->setVisible(true);
+    }
+    else
+    {
+      m_balls[0]->setAcceleration(Vector2());
+    }
+  }
+  else
+  {
+    Vector2 newMousePosition = Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
+    Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+
+    if (!m_controls->state(S_TAKE_SHOT))
+    {
+      m_shotAimLine->setVisible(false);
+
+      std::cout
+        << "MOUSE UP" << std::endl
+        << "delta mouse: " << deltaMouse << std::endl
+        << std::endl;
+
+      m_balls[0]->setAcceleration(deltaMouse);
+
+      delete m_mouseStartPosition;
+      m_mouseStartPosition = NULL;
+    }
+    else
+    {
+      static_cast<Line *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
+    }
+  }
 }

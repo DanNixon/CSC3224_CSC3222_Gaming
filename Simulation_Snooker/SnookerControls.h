@@ -17,12 +17,8 @@ enum Controls
 {
   A_MOUSE_X,
   A_MOUSE_Y,
-  S_CUEBALL_UP,
-  S_CUEBALL_DOWN,
-  S_CUEBALL_LEFT,
-  S_CUEBALL_RIGHT,
-  S_TAKE_SHOT,
-  S_TEST
+  S_PROFILE_DISPLAY,
+  S_TAKE_SHOT
 };
 
 /**
@@ -43,11 +39,7 @@ public:
       , m_mouse(new Engine::Input::MouseController(this, game->windowX(),
                                                    game->windowY()))
   {
-    m_keyboard->setMapping(SDLK_w, S_CUEBALL_UP);
-    m_keyboard->setMapping(SDLK_s, S_CUEBALL_DOWN);
-    m_keyboard->setMapping(SDLK_a, S_CUEBALL_LEFT);
-    m_keyboard->setMapping(SDLK_d, S_CUEBALL_RIGHT);
-    m_keyboard->setMapping(SDLK_SPACE, S_TEST);
+    m_keyboard->setMapping(SDLK_f, S_PROFILE_DISPLAY, true);
 
     m_mouse->setXMapping(A_MOUSE_X);
     m_mouse->setYMapping(A_MOUSE_Y);
