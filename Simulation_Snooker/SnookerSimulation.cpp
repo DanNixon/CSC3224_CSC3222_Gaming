@@ -12,6 +12,7 @@
 #include <LineMesh.h>
 #include <Profiler.h>
 #include <Shaders.h>
+#include <VectorOperations.h>
 
 #include "SnookerControls.h"
 
@@ -238,6 +239,11 @@ void SnookerSimulation::updateControl()
   {
     Vector2 newMousePosition = Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
     Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+
+    // Clamp max acceleration to a sensible level
+    float maxShotMagnitude = 0.5f;
+    if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
+      deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
 
     if (!m_controls->state(S_TAKE_SHOT))
     {
