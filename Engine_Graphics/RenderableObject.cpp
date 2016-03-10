@@ -44,10 +44,8 @@ namespace Graphics
       GLuint program = m_shaderProgram->program();
 
       glUseProgram(program);
-      glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix"), 1, false,
-                         (float *)&m_worldTransform);
-      glUniformMatrix4fv(glGetUniformLocation(program, "viewMatrix"), 1, false,
-                         (float *)&(m_scene->viewMatrix()));
+      glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix"), 1, false, (float *)&m_worldTransform);
+      glUniformMatrix4fv(glGetUniformLocation(program, "viewMatrix"), 1, false, (float *)&(m_scene->viewMatrix()));
       glUniformMatrix4fv(glGetUniformLocation(program, "projMatrix"), 1, false,
                          (float *)&(m_scene->projectionMatrix()));
 

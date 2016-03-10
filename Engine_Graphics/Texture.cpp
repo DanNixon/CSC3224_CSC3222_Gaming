@@ -36,8 +36,7 @@ namespace Graphics
    */
   bool Texture::load(const std::string &filename)
   {
-    m_texture = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,
-                                      SOIL_FLAG_MIPMAPS);
+    m_texture = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
     return (m_texture != 0);
   }
 
@@ -60,8 +59,7 @@ namespace Graphics
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE,
-                 img->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
 
     m_size = Vector2((float)img->w, (float)img->h);
 

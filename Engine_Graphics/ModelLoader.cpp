@@ -29,8 +29,7 @@ namespace Graphics
   SceneObject *ModelLoader::load(const std::string &filename, ShaderProgram *sp)
   {
     Assimp::Importer i;
-    const struct aiScene *scene =
-        i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+    const struct aiScene *scene = i.ReadFile(filename.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
     if (scene == NULL)
       return NULL;
@@ -41,8 +40,8 @@ namespace Graphics
     return obj;
   }
 
-  void ModelLoader::loadRecursive(SceneObject *sn, const struct aiScene *scene,
-                                  const struct aiNode *node, ShaderProgram *sp)
+  void ModelLoader::loadRecursive(SceneObject *sn, const struct aiScene *scene, const struct aiNode *node,
+                                  ShaderProgram *sp)
   {
     const aiMatrix4x4 transform = node->mTransformation;
 

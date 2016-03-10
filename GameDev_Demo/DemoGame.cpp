@@ -50,8 +50,7 @@ int DemoGame::gameStartup()
 
   m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
   m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-  m_s = new Scene(m_model, Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
-                  m_losPMatrix);
+  m_s = new Scene(m_model, Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)), m_losPMatrix);
 
   // UI
   m_uiShader = new ShaderProgram();
@@ -59,12 +58,11 @@ int DemoGame::gameStartup()
   m_uiShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
   m_uiShader->link();
 
-  m_ui = new Scene(new SceneObject("root"),
-                   Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
+  m_ui = new Scene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
                    Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
-  RenderableObject *leftStickArea = new RenderableObject(
-      "left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
+  RenderableObject *leftStickArea =
+      new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
   leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.0f)));
   leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
   m_ui->root()->addChild(*leftStickArea);
@@ -74,8 +72,8 @@ int DemoGame::gameStartup()
   m_leftStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
   leftStickArea->addChild(*m_leftStick);
 
-  RenderableObject *rightStickArea = new RenderableObject(
-    "right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
+  RenderableObject *rightStickArea =
+      new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
   rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.0f)));
   rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
   m_ui->root()->addChild(*rightStickArea);
@@ -132,17 +130,16 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
     float yawRate = 12.0f;
     float prRate = 10.0f;
 
-    m_leftStick->setModelMatrix(Matrix4::Translation(
-        Vector3(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT), 0.1f)));
-    m_rightStick->setModelMatrix(Matrix4::Translation(
-        Vector3(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH), 0.1f)));
+    m_leftStick->setModelMatrix(
+        Matrix4::Translation(Vector3(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT), 0.1f)));
+    m_rightStick->setModelMatrix(
+        Matrix4::Translation(Vector3(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH), 0.1f)));
 
     float roll = m_simControls->analog(A_ROLL) * prRate;
     float pitch = -m_simControls->analog(A_PITCH) * prRate;
     float yaw = -m_simControls->analog(A_YAW) * yawRate;
 
-    m_model->setModelMatrix(m_model->modelMatrix() *
-                            Matrix4::Rotation(roll, Vector3(1.0f, 0.0f, 0.0f)) *
+    m_model->setModelMatrix(m_model->modelMatrix() * Matrix4::Rotation(roll, Vector3(1.0f, 0.0f, 0.0f)) *
                             Matrix4::Rotation(pitch, Vector3(0.0f, 0.0f, 1.0f)) *
                             Matrix4::Rotation(yaw, Vector3(0.0f, 1.0f, 0.0f)));
 

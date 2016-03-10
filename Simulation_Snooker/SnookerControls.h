@@ -36,8 +36,7 @@ public:
   SnookerControls(Engine::Common::Game *game)
       : m_game(game)
       , m_keyboard(new Engine::Input::KeyboardController(this))
-      , m_mouse(new Engine::Input::MouseController(this, game->windowX(),
-                                                   game->windowY()))
+      , m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
   {
     m_keyboard->setMapping(SDLK_f, S_PROFILE_DISPLAY, true);
 
@@ -62,7 +61,7 @@ public:
   }
 
 private:
-  Engine::Common::Game *m_game; //!< Game instance this scheme is attached to
+  Engine::Common::Game *m_game;                  //!< Game instance this scheme is attached to
   Engine::Input::KeyboardController *m_keyboard; //!< Keyboard used in scheme
   Engine::Input::MouseController *m_mouse;       //!< Mouse used in scheme
 };

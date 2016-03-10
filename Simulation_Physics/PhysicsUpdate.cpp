@@ -33,14 +33,12 @@ namespace Physics
         continue;
 
       // Calculate new velocity
-      Integration::Euler<Vector2>((*it)->m_velocity, (*it)->m_velocity, (*it)->m_acceleration,
-                                  dtMilliSec);
+      Integration::Euler<Vector2>((*it)->m_velocity, (*it)->m_velocity, (*it)->m_acceleration, dtMilliSec);
       if (!(*it)->clampVelocity())
         (*it)->multiplyDragCoeff();
 
       // Calculate new position/displacement
-      Integration::Euler<Vector2>((*it)->m_position, (*it)->m_position, (*it)->m_velocity,
-                                  dtMilliSec);
+      Integration::Euler<Vector2>((*it)->m_position, (*it)->m_position, (*it)->m_velocity, dtMilliSec);
 
       // Update position
       (*it)->setPosition((*it)->m_position);

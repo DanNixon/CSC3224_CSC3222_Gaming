@@ -38,10 +38,10 @@ namespace Maths
     }
 
     Vector4(const Vector3 &vec3, float w = 1.0f)
-      : m_x(vec3.m_x)
-      , m_y(vec3.m_y)
-      , m_z(vec3.m_z)
-      , m_w(w)
+        : m_x(vec3.m_x)
+        , m_y(vec3.m_y)
+        , m_z(vec3.m_z)
+        , m_w(w)
     {
     }
 

@@ -22,8 +22,7 @@ namespace Graphics
   class RenderableObject : public Engine::Common::SceneObject
   {
   public:
-    RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL,
-                     Texture *t = NULL);
+    RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL, Texture *t = NULL);
     ~RenderableObject();
 
     void setVisible(bool visible)
@@ -99,7 +98,7 @@ namespace Graphics
     virtual void render();
 
   protected:
-    bool m_draw; //!< Flag indicating if this object should be rendered
+    bool m_draw;                    //!< Flag indicating if this object should be rendered
     Mesh *m_mesh;                   //!< Mesh represented by this object
     ShaderProgram *m_shaderProgram; //!< Shader used to render m_mesh
     Texture *m_texture;             //!< Texture used on m_mesh

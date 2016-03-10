@@ -156,8 +156,7 @@ namespace Graphics
     {
       glGenBuffers(1, &m_bufferObject[TEXTURE_BUFFER]);
       glBindBuffer(GL_ARRAY_BUFFER, m_bufferObject[TEXTURE_BUFFER]);
-      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector2), m_textureCoords,
-                   GL_STATIC_DRAW);
+      glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector2), m_textureCoords, GL_STATIC_DRAW);
       glVertexAttribPointer(TEXTURE_BUFFER, 2, GL_FLOAT, GL_FALSE, 0, 0);
       glEnableVertexAttribArray(TEXTURE_BUFFER);
     }
@@ -177,8 +176,7 @@ namespace Graphics
     {
       glGenBuffers(1, &m_bufferObject[INDEX_BUFFER]);
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_bufferObject[INDEX_BUFFER]);
-      glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices,
-                   GL_STATIC_DRAW);
+      glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices, GL_STATIC_DRAW);
     }
 
     /* Buffer normals data */

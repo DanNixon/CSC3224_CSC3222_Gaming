@@ -22,8 +22,7 @@ namespace Input
    * Normalisation is such that the centre of the screen is (0, 0) and each
    * axis has range [-1, 1].
    */
-  std::pair<float, float> MouseHandler::GetNormalisedPos(const SDL_MouseMotionEvent &e, int width,
-                                                         int height)
+  std::pair<float, float> MouseHandler::GetNormalisedPos(const SDL_MouseMotionEvent &e, int width, int height)
   {
     float x = ((float)(2 * e.x) / (float)width) - 1.0f;
     float y = -((float)(2 * e.y) / (float)height) + 1.0f;

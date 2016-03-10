@@ -131,8 +131,7 @@ namespace Maths
    *
   http://www.opengl.org/sdk/docs/man/xhtml/glOrtho.xml
    */
-  Matrix4 Matrix4::Orthographic(float zNear, float zFar, float right, float left, float top,
-                                float bottom)
+  Matrix4 Matrix4::Orthographic(float zNear, float zFar, float right, float left, float top, float bottom)
   {
     Matrix4 m;
 

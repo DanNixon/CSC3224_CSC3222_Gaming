@@ -12,17 +12,17 @@
 
 namespace Engine
 {
-  namespace Graphics
+namespace Graphics
+{
+  class RectangleMesh : public Mesh
   {
-    class RectangleMesh : public Mesh
-    {
-    public:
-      RectangleMesh(const Engine::Maths::Vector2 &dimensions);
-      virtual ~RectangleMesh();
+  public:
+    RectangleMesh(const Engine::Maths::Vector2 &dimensions);
+    virtual ~RectangleMesh();
 
-      void resize(const Engine::Maths::Vector2 &dimensions);
-    };
-  }
+    void resize(const Engine::Maths::Vector2 &dimensions);
+  };
+}
 }
 
 #endif

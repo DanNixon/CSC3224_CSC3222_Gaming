@@ -22,8 +22,8 @@ using namespace Engine::Input;
 using namespace Simulation::Physics;
 
 SnookerSimulation::SnookerSimulation()
-  : Game("Snooker Loopy", std::make_pair(1024, 768))
-  , m_mouseStartPosition(NULL)
+    : Game("Snooker Loopy", std::make_pair(1024, 768))
+    , m_mouseStartPosition(NULL)
 {
 }
 
@@ -38,8 +38,7 @@ int SnookerSimulation::gameStartup()
 {
   // Load font for text display
   m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
-  m_fontMedium =
-      TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
+  m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
   // Table
   m_table = new Table(m_entities);
@@ -88,28 +87,21 @@ int SnookerSimulation::gameStartup()
   m_ui = new Scene(new SceneObject("root"), view, orth);
 
   m_uiShader = new ShaderProgram();
-  m_uiShader->addShader(
-      new VertexShader("../resources/shader/vert_simple.glsl"));
-  m_uiShader->addShader(
-      new FragmentShader("../resources/shader/frag_tex.glsl"));
+  m_uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+  m_uiShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
   m_uiShader->link();
 
-  m_profileGraphics =
-      new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profileGraphics = new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
   m_profileGraphics->setVisible(false);
-  m_profileGraphics->setModelMatrix(
-      Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
+  m_profileGraphics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
   m_profileGraphics->setText("Graphics: ");
   m_ui->root()->addChild(*m_profileGraphics);
 
-  m_profilePhysics =
-      new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
+  m_profilePhysics = new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
   m_profilePhysics->setVisible(false);
-  m_profilePhysics->setModelMatrix(
-      Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
+  m_profilePhysics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
   m_profilePhysics->setText("Physics: ");
   m_ui->root()->addChild(*m_profilePhysics);
-
 
   m_shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
   m_shotAimLine->setVisible(false);
@@ -178,13 +170,13 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
       std::stringstream graphStr;
       graphStr.precision(3);
       graphStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
-        << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
+               << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
       m_profileGraphics->setText(graphStr.str());
 
       std::stringstream physStr;
       physStr.precision(3);
       physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
-        << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
+              << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
       m_profilePhysics->setText(physStr.str());
     }
   }
@@ -228,11 +220,10 @@ void SnookerSimulation::updateControl()
       {
         Vector3 screenPos((float)sp[0], (float)sp[1], (float)sp[2]);
 
-        std::cout
-          << "MOUSE DOWN" << std::endl
-          << "cue ball: " << pos << " - " << screenPos << std::endl
-          << "mouse: " << *m_mouseStartPosition << std::endl
-          << std::endl;
+        std::cout << "MOUSE DOWN" << std::endl
+                  << "cue ball: " << pos << " - " << screenPos << std::endl
+                  << "mouse: " << *m_mouseStartPosition << std::endl
+                  << std::endl;
       }
 
       static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(Vector3());
@@ -252,10 +243,7 @@ void SnookerSimulation::updateControl()
     {
       m_shotAimLine->setVisible(false);
 
-      std::cout
-        << "MOUSE UP" << std::endl
-        << "delta mouse: " << deltaMouse << std::endl
-        << std::endl;
+      std::cout << "MOUSE UP" << std::endl << "delta mouse: " << deltaMouse << std::endl << std::endl;
 
       m_balls[0]->setAcceleration(deltaMouse);
 

@@ -31,20 +31,16 @@ namespace Physics
     bool retVal = false;
 
     if (dynamic_cast<const SphericalEntity *>(&a) && dynamic_cast<const SphericalEntity *>(&b))
-      SphereSphere(retVal, static_cast<const SphericalEntity &>(a),
-                   static_cast<const SphericalEntity &>(b));
+      SphereSphere(retVal, static_cast<const SphericalEntity &>(a), static_cast<const SphericalEntity &>(b));
 
     else if (dynamic_cast<const PlanarEntity *>(&a) && dynamic_cast<const PlanarEntity *>(&b))
-      PlanePlane(retVal, static_cast<const PlanarEntity &>(a),
-                 static_cast<const PlanarEntity &>(b));
+      PlanePlane(retVal, static_cast<const PlanarEntity &>(a), static_cast<const PlanarEntity &>(b));
 
     else if (dynamic_cast<const SphericalEntity *>(&a) && dynamic_cast<const PlanarEntity *>(&b))
-      SpherePlane(retVal, static_cast<const SphericalEntity &>(a),
-                  static_cast<const PlanarEntity &>(b));
+      SpherePlane(retVal, static_cast<const SphericalEntity &>(a), static_cast<const PlanarEntity &>(b));
 
     else if (dynamic_cast<const PlanarEntity *>(&a) && dynamic_cast<const SphericalEntity *>(&b))
-      SpherePlane(retVal, static_cast<const SphericalEntity &>(b),
-                  static_cast<const PlanarEntity &>(a));
+      SpherePlane(retVal, static_cast<const SphericalEntity &>(b), static_cast<const PlanarEntity &>(a));
 
     return retVal;
   }
@@ -55,8 +51,7 @@ namespace Physics
    * @param a First spherical entity
    * @param b Second spherical entity
    */
-  void InterfaceDetection::SphereSphere(bool &result, const SphericalEntity &a,
-                                        const SphericalEntity &b)
+  void InterfaceDetection::SphereSphere(bool &result, const SphericalEntity &a, const SphericalEntity &b)
   {
     float d = VectorOperations::Distance2(a.position(), b.position());
     float r = (a.radius() - a.impactDistance()) + (b.radius() - b.impactDistance());
@@ -82,8 +77,7 @@ namespace Physics
    * @param a Spherical entity
    * @param b Planar entity
    */
-  void InterfaceDetection::SpherePlane(bool &result, const SphericalEntity &a,
-                                       const PlanarEntity &b)
+  void InterfaceDetection::SpherePlane(bool &result, const SphericalEntity &a, const PlanarEntity &b)
   {
     float d = -Vector2::dot(b.position(), b.normal());
     float v = Vector2::dot(b.normal(), a.position()) + d;

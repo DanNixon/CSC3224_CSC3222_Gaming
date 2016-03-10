@@ -60,9 +60,9 @@ namespace Maths
     }
 
     Vector3(const Vector2 &vec2, float z = 1.0f)
-      : m_x(vec2.m_x)
-      , m_y(vec2.m_y)
-      , m_z(z)
+        : m_x(vec2.m_x)
+        , m_y(vec2.m_y)
+        , m_z(z)
     {
     }
 

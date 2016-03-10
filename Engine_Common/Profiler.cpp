@@ -90,8 +90,8 @@ namespace Common
       else
         continue;
 
-      o << ": " << m_avgFrameRate[i] << " " << quantity
-        << ", average duration: " << m_avgDuration[i] << "ms" << std::endl;
+      o << ": " << m_avgFrameRate[i] << " " << quantity << ", average duration: " << m_avgDuration[i] << "ms"
+        << std::endl;
     }
 
     o.precision(p);

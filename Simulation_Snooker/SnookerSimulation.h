@@ -51,7 +51,7 @@ private:
   Uint8 m_controlLoop;
   Uint8 m_profileLoop;
 
-  Engine::Input::IControlScheme * m_controls;
+  Engine::Input::IControlScheme *m_controls;
 
   Engine::Common::Scene *m_scene;
   Engine::Common::Scene *m_ui;

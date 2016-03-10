@@ -15,8 +15,7 @@
  * @brief Represents a snooker pocket.
  * @author Dan Nixon
  */
-class Pocket : public Simulation::Physics::SphericalEntity,
-               public Engine::Graphics::RenderableObject
+class Pocket : public Simulation::Physics::SphericalEntity, public Engine::Graphics::RenderableObject
 {
 public:
   static const float RADIUS;
