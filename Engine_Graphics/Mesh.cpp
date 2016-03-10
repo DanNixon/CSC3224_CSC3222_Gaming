@@ -273,58 +273,6 @@ namespace Graphics
   }
 
   /**
-   * @brief Generates a 2D rectangle.
-   * @param dimensions Dimensions of rectangle
-   * @return New mesh
-   */
-  Mesh *Mesh::GenerateRect2D(const Engine::Maths::Vector2 &dimensions)
-  {
-    Mesh *m = new Mesh();
-
-    m->m_type = GL_TRIANGLE_STRIP;
-    m->m_numVertices = 4;
-
-    m->m_vertices = new Vector3[m->m_numVertices];
-    m->m_colours = new Vector4[m->m_numVertices];
-    m->m_textureCoords = new Vector2[m->m_numVertices];
-
-    m = UpdateRect2D(m, dimensions);
-
-    return m;
-  }
-
-  /**
-   * @brief Updates the dimensions of a rectangular mesh.
-   * @param m Existing mesh
-   * @param dimensions Dimensions of rectangle
-   * @return Mesh
-   *
-   * It is assumed that the Mesh given to this function has exactly 4 vertices.
-   */
-  Mesh *Mesh::UpdateRect2D(Mesh *m, const Engine::Maths::Vector2 &dimensions)
-  {
-    Vector2 halfDim = dimensions / 2;
-
-    m->m_vertices[0] = Vector3(-halfDim.x(), halfDim.y(), 0);
-    m->m_vertices[1] = Vector3(halfDim.x(), halfDim.y(), 0);
-    m->m_vertices[2] = Vector3(-halfDim.x(), -halfDim.y(), 0);
-    m->m_vertices[3] = Vector3(halfDim.x(), -halfDim.y(), 0);
-
-    m->m_colours[0] = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-    m->m_colours[1] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-    m->m_colours[2] = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-    m->m_colours[3] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-
-    m->m_textureCoords[0] = Vector2(0, 0);
-    m->m_textureCoords[1] = Vector2(1, 0);
-    m->m_textureCoords[2] = Vector2(0, 1);
-    m->m_textureCoords[3] = Vector2(1, 1);
-
-    m->bufferData();
-    return m;
-  }
-
-  /**
    * @brief Loads a mesh from an Assimp mesh.
    * @param mesh Assimp mesh to load
    * @return Mesh containing loaded model

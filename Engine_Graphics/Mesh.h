@@ -54,9 +54,6 @@ namespace Graphics
     static Mesh *GenerateDisc2D(float radius, int resolution = 64);
     static Mesh *GenerateRing2D(float radiusOuter, float radiusInner, int resolution = 64);
 
-    static Mesh *GenerateRect2D(const Engine::Maths::Vector2 &dimensions);
-    static Mesh *UpdateRect2D(Mesh *m, const Engine::Maths::Vector2 &dimensions);
-
     static Mesh *LoadMesh(const struct aiMesh *mesh);
 
     static std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3> GetBoundingBox(Mesh *m);
