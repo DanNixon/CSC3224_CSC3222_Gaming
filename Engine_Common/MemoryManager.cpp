@@ -39,7 +39,6 @@ namespace Engine
 
       for (auto it = m_allocatedItems.begin(); it != m_allocatedItems.end(); ++it)
       {
-        std::cout << (*it)->releasePriority() << std::endl;
         delete *it;
       }
 

@@ -53,9 +53,6 @@ public:
   {
     m_game->removeEventHandler(m_keyboard);
     m_game->removeEventHandler(m_joystick);
-
-    delete m_keyboard;
-    delete m_joystick;
   }
 
   /**

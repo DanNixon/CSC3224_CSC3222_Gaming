@@ -17,6 +17,8 @@
 #include "MemoryManager.h"
 #include "Profiler.h"
 
+#include "debug_utils.h"
+
 namespace Engine
 {
 namespace Common
@@ -36,10 +38,22 @@ namespace Common
       m_loops[i] = NULL;
 
     QueryPerformanceFrequency(&m_freq);
+
+#ifdef _DEBUG
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
   }
 
   Game::~Game()
   {
+    for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
+    {
+      if (m_loops[i])
+        delete m_loops[i];
+    }
+
+    if (m_profiler)
+      delete m_profiler;
   }
 
   /**
@@ -133,6 +147,7 @@ namespace Common
 
       this->gameShutdown();
 
+      // Free ALL the memory
       MemoryManager::Instance().releaseAll();
 
       return status;

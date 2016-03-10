@@ -162,6 +162,7 @@
     <ClCompile Include="SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="debug_utils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="IMemoryManaged.h" />

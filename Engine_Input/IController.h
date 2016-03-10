@@ -7,6 +7,8 @@
 
 #include "IControlScheme.h"
 
+#include <IMemoryManaged.h>
+
 namespace Engine
 {
 namespace Input
@@ -16,7 +18,7 @@ namespace Input
    * @brief Interface for a control device.
    * @author Dan Nixon
    */
-  class IController
+  class IController : public Engine::Common::IMemoryManaged
   {
   public:
     /**

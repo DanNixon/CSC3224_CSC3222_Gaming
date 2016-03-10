@@ -8,6 +8,7 @@
     <ClInclude Include="Profiler.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="IMemoryManaged.h" />
+    <ClInclude Include="debug_utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp" />

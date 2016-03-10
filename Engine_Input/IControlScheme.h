@@ -9,6 +9,8 @@
 #include <list>
 #include <map>
 
+#include <IMemoryManaged.h>
+
 namespace Engine
 {
 namespace Common
@@ -26,7 +28,7 @@ namespace Input
    *        analog and binary states.
    * @author Dan Nixon
    */
-  class IControlScheme
+  class IControlScheme : public Engine::Common::IMemoryManaged
   {
   public:
     /**
