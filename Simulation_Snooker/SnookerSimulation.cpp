@@ -195,7 +195,7 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
 
         if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
         {
-          Vector3 screenPos(sp[0], sp[1], sp[2]);
+          Vector3 screenPos((float)sp[0], (float)sp[1], (float)sp[2]);
 
           std::cout
             << "MOUSE DOWN" << std::endl
