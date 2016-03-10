@@ -6,9 +6,9 @@ Game Development: Project 1 (20 Apr)
 
 - [x] Engine structure outline
 - [ ] `Engine_Audio`
-- [ ] `Engine_Common`
+- [x] `Engine_Common`
   - [x] Move setup code into engine
-  - [ ] Managed memory
+  - [x] Managed memory
   - [x] Loop timing
   - [x] Clean startup routine
   - [x] Profiling
@@ -52,8 +52,10 @@ Essential:
 Extras:
 
 - [ ] Mouse based shots
-- [ ] Proper snooker rules and scoring
+  - [x] Set ball acceleration using mouse
+  - [ ] Require player to click the cue ball to start a shot
 - [ ] Sort and sweep broadphase interface checks
+- [ ] Proper snooker rules and scoring
 
 Game Simulations: Project 2 (4 May)
 -----------------------------------

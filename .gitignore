@@ -3,6 +3,8 @@
 # Generated documentation
 doxygen_docs/
 
+*Autorecover*
+
 # User-specific files
 *.suo
 *.user
