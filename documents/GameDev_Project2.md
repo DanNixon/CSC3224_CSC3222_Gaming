@@ -1,4 +1,4 @@
-# Game Development project 2
+# Game Development Project (12 May)
 
 RC flight simulator with parametric/randomly generated finite terrains.
 
