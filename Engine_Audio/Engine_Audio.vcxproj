@@ -18,6 +18,16 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Context.h" />
+    <ClInclude Include="Listener.h" />
+    <ClInclude Include="Source.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="Listener.cpp" />
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{10914E89-A90B-44ED-A316-93807DFF6588}</ProjectGuid>
     <RootNamespace>Engine_Audio</RootNamespace>
