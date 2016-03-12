@@ -13,6 +13,9 @@
 #include <Scene.h>
 #include <SceneObject.h>
 #include <ShaderProgram.h>
+#include <Context.h>
+#include <Listener.h>
+#include <Source.h>
 
 /**
  * @class DemoGame
@@ -46,6 +49,10 @@ private:
   Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
   Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
   Engine::Common::Scene *m_ui;         //!< Scene containing UI
+
+  Engine::Audio::Context * m_audioContext;
+  Engine::Audio::Listener * m_audioListener;
+  Engine::Audio::Source * m_audioSource;
 
   Engine::Common::SceneObject *m_model;
 

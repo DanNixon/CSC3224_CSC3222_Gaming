@@ -1,14 +1,26 @@
-#pragma once
+/**
+ * @file
+ * @author Dan Nixon
+ */
+
+#ifndef _ENGINE_AUDIO_LISTENER_H_
+#define _ENGINE_AUDIO_LISTENER_H_
+
+#include <SceneObject.h>
 
 namespace Engine
 {
   namespace Audio
   {
-    class Listener
+    class Listener : public Engine::Common::SceneObject
     {
     public:
-      Listener();
+      Listener(const std::string &name);
       ~Listener();
+
+      void use();
     };
   }
 }
+
+#endif

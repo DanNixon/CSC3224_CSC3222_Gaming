@@ -19,6 +19,7 @@ using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
 using namespace Engine::Input;
+using namespace Engine::Audio;
 
 /**
  * @brief Creates a new demonstration game instance.
@@ -37,21 +38,34 @@ DemoGame::~DemoGame()
  */
 int DemoGame::gameStartup()
 {
-  // Scene
+  // Shaders
   m_sp = new ShaderProgram();
   m_sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
   m_sp->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
   m_sp->link();
 
-  ModelLoader l;
-  m_model = l.load("../resources/models/Gaui_R5/Gaui_R5.obj", m_sp);
-
-  m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -25.0f)) *
-                          Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
-
+  // Scene
   m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
   m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-  m_s = new Scene(m_model, Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)), m_losPMatrix);
+  m_s = new Scene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)), m_losPMatrix);
+
+  // Model
+  ModelLoader l;
+  m_model = l.load("../resources/models/Gaui_R5/Gaui_R5.obj", m_sp);
+  m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -25.0f)) *
+                          Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
+  m_s->root()->addChild(*m_model);
+
+  // Audio
+  m_audioContext = new Context();
+  std::cout << "audio context: " << m_audioContext->open() << std::endl;
+
+  m_audioListener = new Listener("test_audio_listener");
+  m_s->root()->addChild(*m_audioListener);
+
+  m_audioSource = new Source("test_audio_source");
+  std::cout << "audio source: " << m_audioSource->valid() << std::endl;
+  m_s->root()->addChild(*m_audioSource);
 
   // UI
   m_uiShader = new ShaderProgram();
