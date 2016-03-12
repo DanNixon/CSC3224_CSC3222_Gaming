@@ -22,12 +22,12 @@ namespace Engine
       static bool CheckALError(const std::string &msg)
       {
         ALCenum error = alGetError();
-        bool hasError = (error == AL_NO_ERROR);
+        bool hasError = (error != AL_NO_ERROR);
 
         if (hasError)
-          std::cerr << "AL error " << error << "(" << msg << ")" << std::endl;
+          std::cerr << "AL error " << error << " (" << msg << ")" << std::endl;
 
-        return hasError;
+        return !hasError;
       }
     };
   }

@@ -16,7 +16,7 @@ namespace Engine
     {
     public:
       Listener(const std::string &name);
-      ~Listener();
+      virtual ~Listener();
 
       void use();
     };

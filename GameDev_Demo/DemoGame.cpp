@@ -10,6 +10,7 @@
 #include <Profiler.h>
 #include <RectangleMesh.h>
 #include <Shaders.h>
+#include <WAVSource.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -63,7 +64,9 @@ int DemoGame::gameStartup()
   m_audioListener = new Listener("test_audio_listener");
   m_s->root()->addChild(*m_audioListener);
 
-  m_audioSource = new Source("test_audio_source");
+  m_audioSource = new WAVSource("test_audio_source", m_audioListener);
+  std::cout << "load res: " << static_cast<WAVSource *>(m_audioSource)->load("../resources/models/Gaui_R5/Gaui_R5.wav") << std::endl;
+  m_audioSource->setLooping(true);
   std::cout << "audio source: " << m_audioSource->valid() << std::endl;
   m_s->root()->addChild(*m_audioSource);
 
@@ -125,9 +128,9 @@ int DemoGame::gameStartup()
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
-  m_profileLoop = addTimedLoop(1000.0f, "profile");
+  //m_profileLoop = addTimedLoop(1000.0f, "profile");
 
-  m_testLoop = addTimedLoop(1000.0f, "test");
+  m_testLoop = addTimedLoop(5000.0f, "test");
 
   // Profiling
   m_profiler = new Profiler(this);
@@ -177,6 +180,12 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   }
   else if (id == m_testLoop)
   {
+    std::cout << "TEST LOOP" << std::endl;
+
+    if (!m_audioSource->isPlaying())
+    {
+      std::cout << "not playing, will play: " << m_audioSource->play() << std::endl;
+    }
   }
 }
 

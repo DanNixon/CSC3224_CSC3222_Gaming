@@ -50,7 +50,7 @@ namespace Common
     {
       m_children.push_back(&child);
       child.m_parent = this;
-      child.m_scene = m_scene;
+      child.addToScene(m_scene);
     }
 
     /**

@@ -44,7 +44,13 @@ namespace Engine
       // Set orientation
       Vector3 facing = m_worldTransform.facingVector();
       VectorOperations::Normalise(facing);
-      alListener3f(AL_ORIENTATION, facing.x(), facing.y(), facing.z());
+
+      Vector3 up = m_worldTransform.facingVector();
+      VectorOperations::Normalise(up);
+
+      float orientation[] = {facing.x(), facing.y(), facing.z(), up.x(), up.y(), up.z()};
+
+      alListenerfv(AL_ORIENTATION, orientation);
       AudioUtil::CheckALError("listener orientation");
     }
   }

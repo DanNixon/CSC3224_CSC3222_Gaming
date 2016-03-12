@@ -5,9 +5,9 @@
 
 #include "Source.h"
 
-#include "AudioUtil.h"
-
 #include <Vector4.h>
+
+#include "AudioUtil.h"
 
 using namespace Engine::Maths;
 
@@ -15,11 +15,14 @@ namespace Engine
 {
   namespace Audio
   {
-    Source::Source(const std::string &name)
+    Source::Source(const std::string &name, Listener * listener)
       : SceneObject(name)
+      , m_listener(listener)
     {
       alGenSources(1, &m_sourceID);
       alGenBuffers(1, &m_buffer);
+
+      alSourcei(m_sourceID, AL_BUFFER, m_buffer);
 
       alSourcef(m_sourceID, AL_PITCH, 1);
       alSourcef(m_sourceID, AL_GAIN, 1);
@@ -29,13 +32,15 @@ namespace Engine
 
     Source::~Source()
     {
+      alSourcei(m_sourceID, AL_BUFFER, NULL);
+
       alDeleteSources(1, &m_sourceID);
       alDeleteBuffers(1, &m_buffer);
     }
 
     bool Source::valid() const
     {
-      return (m_sourceID > 0 && m_buffer > 0);
+      return (m_sourceID > 0 && m_buffer > 0 && m_listener);
     }
 
     bool Source::setLooping(bool loop)
@@ -66,6 +71,8 @@ namespace Engine
     void Source::update(float msec)
     {
       SceneObject::update(msec);
+
+      m_listener->use();
 
       // Set position
       Vector4 position = m_worldTransform.positionVector();

@@ -4,11 +4,13 @@
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Listener.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="WAVSource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Listener.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="AudioUtil.h" />
     <ClInclude Include="Context.h" />
+    <ClInclude Include="WAVSource.h" />
   </ItemGroup>
 </Project>

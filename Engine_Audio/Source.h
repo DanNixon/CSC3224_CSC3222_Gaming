@@ -10,6 +10,8 @@
 
 #include <al.h>
 
+#include "Listener.h"
+
 namespace Engine
 {
   namespace Audio
@@ -17,10 +19,10 @@ namespace Engine
     class Source : public Engine::Common::SceneObject
     {
     public:
-      Source(const std::string &name);
-      ~Source();
+      Source(const std::string &name, Listener * listener);
+      virtual ~Source();
 
-      bool valid() const;
+      virtual bool valid() const;
 
       bool setLooping(bool loop);
 
@@ -41,9 +43,10 @@ namespace Engine
 
       virtual void update(float msec);
 
-    private:
+    protected:
       ALuint m_sourceID;
       ALuint m_buffer;
+      Listener *m_listener;
     };
   }
 }
