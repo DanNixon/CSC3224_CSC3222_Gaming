@@ -118,8 +118,6 @@ int DemoGame::gameStartup()
   // Profiling
   m_profiler = new Profiler(this);
 
-  std::cout << "Num allocations: " << MemoryManager::Instance().numAllocations() << std::endl;
-
   return 0;
 }
 
@@ -178,5 +176,4 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
  */
 void DemoGame::gameShutdown()
 {
-  std::cout << "Num allocations: " << MemoryManager::Instance().numAllocations() << std::endl;
 }

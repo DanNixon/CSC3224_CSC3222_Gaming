@@ -113,9 +113,15 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"</Command>
+
+xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy DLLs to build directory</Message>
@@ -136,9 +142,15 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(O
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"</Command>
+
+xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy DLLs to build directory</Message>
@@ -162,9 +174,15 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(O
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"</Command>
+
+xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
       <Message>Copy DLLs to build directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -186,9 +204,15 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(O
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\*.dll" "$(OutDir)"
+
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"</Command>
+
+xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
       <Message>Copy DLLs to build directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>

@@ -64,94 +64,94 @@ namespace Common
   {
     int status = init();
 
-  if (status != 0)
-		return status;
+    if (status != 0)
+		  return status;
 
-      this->gameLoadScreen();
-      status = this->gameStartup();
+    this->gameLoadScreen();
+    status = this->gameStartup();
 
 	  if (status != 0)
 		  return status;
 
-      // Set time on loops
-      QueryPerformanceCounter(&m_start);
-      for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
+    // Set time on loops
+    QueryPerformanceCounter(&m_start);
+    for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
+    {
+      if (m_loops[i] != NULL)
+        m_loops[i]->lastFired = time();
+    }
+
+    SDL_Event e;
+    bool exit = false;
+    float startTime;
+    while (!exit)
+    {
+      if (m_profiler)
+        m_profiler->m_loopUpdates[Profiler::MAIN_LOOP]++;
+
+      // Handle SDL events
+      while (SDL_PollEvent(&e) == 1)
       {
-        if (m_loops[i] != NULL)
-          m_loops[i]->lastFired = time();
+        // Start event profiling
+        if (m_profiler != NULL)
+        {
+          m_profiler->m_loopUpdates[Profiler::EVENTS]++;
+          startTime = time();
+        }
+
+        // Handle quit
+        if (e.type == SDL_QUIT)
+        {
+          exit = true;
+          break;
+        }
+
+        // Dispatch event
+        for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
+             it != m_eventHandlers.end(); ++it)
+          (*it)->handleEvent(e);
+
+        // End event profiling
+        if (m_profiler != NULL)
+          m_profiler->m_duration[Profiler::EVENTS] += time() - startTime;
       }
 
-      SDL_Event e;
-      bool exit = false;
-      float startTime;
-      while (!exit)
+      // Poll timed loops
+      for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       {
-        if (m_profiler)
-          m_profiler->m_loopUpdates[Profiler::MAIN_LOOP]++;
+        if (m_loops[i] == NULL)
+          continue;
 
-        // Handle SDL events
-        while (SDL_PollEvent(&e) == 1)
+        float t = time();
+        float deltaT = t - m_loops[i]->lastFired;
+
+        // If interval has elapsed
+        if (deltaT >= m_loops[i]->interval)
         {
-          // Start event profiling
+          // Start loop profiling
           if (m_profiler != NULL)
           {
-            m_profiler->m_loopUpdates[Profiler::EVENTS]++;
+            m_profiler->m_loopUpdates[i]++;
             startTime = time();
           }
 
-          // Handle quit
-          if (e.type == SDL_QUIT)
-          {
-            exit = true;
-            break;
-          }
+          // Dispatch handler
+          m_loops[i]->lastFired = t;
+          this->gameLoop(i, deltaT);
 
-          // Dispatch event
-          for (IEventHandler::HandlerListIter it = m_eventHandlers.begin();
-               it != m_eventHandlers.end(); ++it)
-            (*it)->handleEvent(e);
-
-          // End event profiling
+          // End loop profiling
           if (m_profiler != NULL)
-            m_profiler->m_duration[Profiler::EVENTS] += time() - startTime;
-        }
-
-        // Poll timed loops
-        for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
-        {
-          if (m_loops[i] == NULL)
-            continue;
-
-          float t = time();
-          float deltaT = t - m_loops[i]->lastFired;
-
-          // If interval has elapsed
-          if (deltaT >= m_loops[i]->interval)
-          {
-            // Start loop profiling
-            if (m_profiler != NULL)
-            {
-              m_profiler->m_loopUpdates[i]++;
-              startTime = time();
-            }
-
-            // Dispatch handler
-            m_loops[i]->lastFired = t;
-            this->gameLoop(i, deltaT);
-
-            // End loop profiling
-            if (m_profiler != NULL)
-              m_profiler->m_duration[i] += time() - startTime;
-          }
+            m_profiler->m_duration[i] += time() - startTime;
         }
       }
+    }
 
-      this->gameShutdown();
+    this->gameShutdown();
 
-      // Free ALL the memory
-      MemoryManager::Instance().releaseAll();
+    // Free ALL the memory
+    MemoryManager::Instance().releaseAll();
 
-      return status;
+    return status;
   }
 
   /**
@@ -226,14 +226,24 @@ namespace Common
     /* Initialize SDL */
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) < 0)
     {
-      std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError()
+      std::cerr << "SDL failed to initialize! SDL Error: " << SDL_GetError()
                 << std::endl;
       result = 1;
     }
     else
     {
-      TTF_Init();
-      alutInit(0, NULL);
+      if (TTF_Init() < 0)
+      {
+        std::cerr << "TTF extension failed to initialize! Error: " << TTF_GetError() << std::endl;
+        result = 10;
+      }
+
+      if (!alutInit(0, NULL))
+      {
+        std::cerr << "ALUT failed to initialize! Error: " <<
+          alutGetErrorString(alutGetError()) << std::endl;
+        result = 11;
+      }
 
       /* Use OpenGL 3.1 core */
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
