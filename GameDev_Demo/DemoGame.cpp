@@ -163,11 +163,6 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   }
   else if (id == m_testLoop)
   {
-    std::cout << "P: " << m_simControls->analog(A_PITCH) << std::endl
-              << "R: " << m_simControls->analog(A_ROLL) << std::endl
-              << "T: " << m_simControls->analog(A_THROT) << std::endl
-              << "Y: " << m_simControls->analog(A_YAW) << std::endl
-              << "FPV: " << m_simControls->state(S_FPV) << std::endl;
   }
 }
 
