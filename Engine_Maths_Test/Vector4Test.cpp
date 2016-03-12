@@ -26,7 +26,7 @@ public:
     Assert::AreEqual(v.x(), 0.0f);
     Assert::AreEqual(v.y(), 0.0f);
     Assert::AreEqual(v.z(), 0.0f);
-    Assert::AreEqual(v.w(), 0.0f);
+    Assert::AreEqual(v.w(), 1.0f);
   }
   
   TEST_METHOD(Vector4_Init)

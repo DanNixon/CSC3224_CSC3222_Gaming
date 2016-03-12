@@ -51,12 +51,12 @@ namespace Maths
      */
     Vector4 row(unsigned int row)
     {
-      Vector4 out(0, 0, 0, 1);
+      Vector4 out;
       if (row <= 3)
       {
-        int start = 4 * row;
+        int start = row;
 
-        out.m_x = m_values[start += 4];
+        out.m_x = m_values[start];
         out.m_y = m_values[start += 4];
         out.m_z = m_values[start += 4];
         out.m_w = m_values[start += 4];
@@ -73,9 +73,9 @@ namespace Maths
     {
       if (row <= 3)
       {
-        int start = 4 * row;
+        int start = row;
 
-        m_values[start += 4] = val.m_x;
+        m_values[start] = val.m_x;
         m_values[start += 4] = val.m_y;
         m_values[start += 4] = val.m_z;
         m_values[start += 4] = val.m_w;
@@ -90,7 +90,7 @@ namespace Maths
      */
     Vector4 column(unsigned int column)
     {
-      Vector4 out(0, 0, 0, 1);
+      Vector4 out;
 
       if (column <= 3)
       {
@@ -118,6 +118,10 @@ namespace Maths
 
     Vector3 scalingVector() const;
     void setScalingVector(const Vector3 &scaling);
+
+    Vector3 leftVector() const;
+    Vector3 upVector() const;
+    Vector3 facingVector() const;
 
     /**
      * @brief Multiplies this matrix by another matrix.

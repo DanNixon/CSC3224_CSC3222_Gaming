@@ -95,6 +95,33 @@ namespace Maths
   }
 
   /**
+   * @brief Extracts the left vector from this matrix.
+   * @return Left direction vector
+   */
+  Vector3 Matrix4::leftVector() const
+  {
+    return Vector3(m_values[0], m_values[4], m_values[8]);
+  }
+
+  /**
+   * @brief Extracts the up vector from this matrix.
+   * @return Up direction vector
+   */
+  Vector3 Matrix4::upVector() const
+  {
+    return Vector3(m_values[1], m_values[5], m_values[9]);
+  }
+
+  /**
+   * @brief Extracts the facing vector from this matrix.
+   * @return Face direction vector
+   */
+  Vector3 Matrix4::facingVector() const
+  {
+    return Vector3(m_values[2], m_values[6], m_values[10]);
+  }
+
+  /**
    * @brief Creates a perspective matrix,
    * @param zNear Near plane depth
    * @param zFar Far plane depth

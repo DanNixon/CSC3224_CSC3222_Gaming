@@ -40,12 +40,12 @@ namespace Maths
      */
     Vector3 row(size_t row)
     {
-      Vector3 out(0, 0, 0);
+      Vector3 out;
       if (row < 3)
       {
-        size_t start = 3 * row;
+        size_t start = row;
 
-        out.m_x = m_values[start += 3];
+        out.m_x = m_values[start];
         out.m_y = m_values[start += 3];
         out.m_z = m_values[start += 3];
       }
@@ -61,9 +61,9 @@ namespace Maths
     {
       if (row < 3)
       {
-        size_t start = 3 * row;
+        size_t start = row;
 
-        m_values[start += 3] = val.m_x;
+        m_values[start] = val.m_x;
         m_values[start += 3] = val.m_y;
         m_values[start += 3] = val.m_z;
       }
