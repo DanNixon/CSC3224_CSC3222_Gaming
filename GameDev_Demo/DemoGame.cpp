@@ -59,16 +59,20 @@ int DemoGame::gameStartup()
 
   // Audio
   m_audioContext = new Context();
-  std::cout << "audio context: " << m_audioContext->open() << std::endl;
+  m_audioContext->open();
 
   m_audioListener = new Listener("test_audio_listener");
   m_s->root()->addChild(*m_audioListener);
 
-  m_audioSource = new WAVSource("test_audio_source", m_audioListener);
-  std::cout << "load res: " << static_cast<WAVSource *>(m_audioSource)->load("../resources/models/Gaui_R5/Gaui_R5.wav") << std::endl;
-  m_audioSource->setLooping(true);
-  std::cout << "audio source: " << m_audioSource->valid() << std::endl;
-  m_s->root()->addChild(*m_audioSource);
+  m_audioSource1 = new WAVSource("test_audio_source_1", m_audioListener);
+  static_cast<WAVSource *>(m_audioSource1)->load("../resources/models/Gaui_R5/Gaui_R5.wav");
+  m_audioSource1->setLooping(true);
+  m_s->root()->addChild(*m_audioSource1);
+
+  m_audioSource2 = new WAVSource("test_audio_source_2", m_audioListener);
+  static_cast<WAVSource *>(m_audioSource2)->load("../resources/models/Gaui_R5/blade.wav");
+  m_audioSource2->setLooping(true);
+  m_s->root()->addChild(*m_audioSource2);
 
   // UI
   m_uiShader = new ShaderProgram();
@@ -128,12 +132,14 @@ int DemoGame::gameStartup()
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
-  //m_profileLoop = addTimedLoop(1000.0f, "profile");
+  m_profileLoop = addTimedLoop(1000.0f, "profile");
 
   m_testLoop = addTimedLoop(5000.0f, "test");
 
   // Profiling
   m_profiler = new Profiler(this);
+
+  m_audioSource1->play();
 
   return 0;
 }
@@ -145,6 +151,13 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
 {
   if (id == m_graphicsLoop)
   {
+    // Blade sound when throttle is high
+    if (abs(m_simControls->analog(A_THROT)) > 0.2 && !m_audioSource2->isPlaying())
+      m_audioSource2->play();
+    else if (abs(m_simControls->analog(A_THROT)) < 0.2 && m_audioSource2->isPlaying())
+      m_audioSource2->stop();
+
+    // Stick indicators
     float yawRate = 12.0f;
     float prRate = 10.0f;
 
@@ -153,6 +166,7 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
     m_rightStick->setModelMatrix(
         Matrix4::Translation(Vector3(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH), 0.1f)));
 
+    // Model orientation
     float roll = m_simControls->analog(A_ROLL) * prRate;
     float pitch = -m_simControls->analog(A_PITCH) * prRate;
     float yaw = -m_simControls->analog(A_YAW) * yawRate;
@@ -181,11 +195,6 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   else if (id == m_testLoop)
   {
     std::cout << "TEST LOOP" << std::endl;
-
-    if (!m_audioSource->isPlaying())
-    {
-      std::cout << "not playing, will play: " << m_audioSource->play() << std::endl;
-    }
   }
 }
 

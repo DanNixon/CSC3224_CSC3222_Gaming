@@ -51,6 +51,7 @@ namespace Engine
 
     bool Source::play()
     {
+      m_listener->use();
       alSourcePlay(m_sourceID);
       return AudioUtil::CheckALError("source play");
     }
@@ -71,6 +72,7 @@ namespace Engine
     void Source::update(float msec)
     {
       SceneObject::update(msec);
+      return;
 
       m_listener->use();
 

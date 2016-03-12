@@ -52,7 +52,8 @@ private:
 
   Engine::Audio::Context * m_audioContext;
   Engine::Audio::Listener * m_audioListener;
-  Engine::Audio::Source * m_audioSource;
+  Engine::Audio::Source * m_audioSource1;
+  Engine::Audio::Source * m_audioSource2;
 
   Engine::Common::SceneObject *m_model;
 

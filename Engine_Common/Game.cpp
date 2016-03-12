@@ -238,7 +238,7 @@ namespace Common
         result = 10;
       }
 
-      if (!alutInit(0, NULL))
+      if (!alutInitWithoutContext(0, NULL))
       {
         std::cerr << "ALUT failed to initialize! Error: " <<
           alutGetErrorString(alutGetError()) << std::endl;
