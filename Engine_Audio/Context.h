@@ -12,33 +12,33 @@
 
 namespace Engine
 {
-  namespace Audio
+namespace Audio
+{
+  class Context
   {
-    class Context
+  public:
+    Context();
+    virtual ~Context();
+
+    bool open();
+    void close();
+    bool isOpen() const;
+
+    inline ALCdevice *getDevice()
     {
-    public:
-      Context();
-      virtual ~Context();
+      return m_device;
+    }
 
-      bool open();
-      void close();
-      bool isOpen() const;
+    inline ALCcontext *getContext()
+    {
+      return m_context;
+    }
 
-      inline ALCdevice *getDevice()
-      {
-        return m_device;
-      }
-
-      inline ALCcontext *getContext()
-      {
-        return m_context;
-      }
-
-    private:
-      ALCdevice * m_device;
-      ALCcontext * m_context;
-    };
-  }
+  private:
+    ALCdevice *m_device;
+    ALCcontext *m_context;
+  };
+}
 }
 
 #endif

@@ -10,17 +10,17 @@
 
 namespace Engine
 {
-  namespace Audio
+namespace Audio
+{
+  class Listener : public Engine::Common::SceneObject
   {
-    class Listener : public Engine::Common::SceneObject
-    {
-    public:
-      Listener(const std::string &name);
-      virtual ~Listener();
+  public:
+    Listener(const std::string &name);
+    virtual ~Listener();
 
-      void use();
-    };
-  }
+    void use();
+  };
+}
 }
 
 #endif

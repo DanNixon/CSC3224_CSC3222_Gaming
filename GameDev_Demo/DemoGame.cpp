@@ -48,7 +48,8 @@ int DemoGame::gameStartup()
   // Scene
   m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
   m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-  m_s = new Scene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)), m_losPMatrix);
+  m_s = new Scene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
+                  m_losPMatrix);
 
   // Model
   ModelLoader l;

@@ -10,17 +10,17 @@
 
 namespace Engine
 {
-  namespace Audio
+namespace Audio
+{
+  class WAVSource : public Source
   {
-    class WAVSource : public Source
-    {
-    public:
-      WAVSource(const std::string &name, Listener * listener);
-      virtual ~WAVSource();
+  public:
+    WAVSource(const std::string &name, Listener *listener);
+    virtual ~WAVSource();
 
-      bool load(const std::string &filename);
-    };
-  }
+    bool load(const std::string &filename);
+  };
+}
 }
 
 #endif

@@ -8,13 +8,13 @@
 
 #include <Game.h>
 
+#include <Context.h>
 #include <IControlScheme.h>
+#include <Listener.h>
 #include <RenderableObject.h>
 #include <Scene.h>
 #include <SceneObject.h>
 #include <ShaderProgram.h>
-#include <Context.h>
-#include <Listener.h>
 #include <Source.h>
 
 /**
@@ -50,10 +50,10 @@ private:
   Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
   Engine::Common::Scene *m_ui;         //!< Scene containing UI
 
-  Engine::Audio::Context * m_audioContext;
-  Engine::Audio::Listener * m_audioListener;
-  Engine::Audio::Source * m_audioSource1;
-  Engine::Audio::Source * m_audioSource2;
+  Engine::Audio::Context *m_audioContext;
+  Engine::Audio::Listener *m_audioListener;
+  Engine::Audio::Source *m_audioSource1;
+  Engine::Audio::Source *m_audioSource2;
 
   Engine::Common::SceneObject *m_model;
 
