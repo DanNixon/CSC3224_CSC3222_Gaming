@@ -6,6 +6,8 @@
 #ifndef _SIMULATION_AI_STATE_H_
 #define _SIMULATION_AI_STATE_H_
 
+#include <vector>
+
 namespace Simulation
 {
 namespace AI
