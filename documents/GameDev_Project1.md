@@ -4,11 +4,11 @@
 
 - [x] Engine structure outline
 - [ ] `Engine_Audio`
-  -[x] Context
-  -[x] Listener
-  -[x] Source
-  -[ ] Investigate what physical simulations OpenAL does
-  -[ ] Test with moving sources
+  - [x] Context
+  - [x] Listener
+  - [x] Source
+  - [ ] Investigate what physical simulations OpenAL does
+  - [ ] Test with moving sources
 - [ ] `Engine_Common`
   - [x] Move setup code into engine
   - [x] Managed memory
