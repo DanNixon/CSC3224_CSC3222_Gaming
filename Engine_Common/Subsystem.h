@@ -8,22 +8,22 @@
 
 namespace Engine
 {
-  namespace Common
+namespace Common
+{
+  enum class Subsystem
   {
-    enum class Subsystem
-    {
-      NONE,
+    NONE,
 
-      GRAPHICS,
-      PHYSICS,
-      AUDIO,
-      INPUT,
-      AI,
+    GRAPHICS,
+    PHYSICS,
+    AUDIO,
+    INPUT,
+    AI,
 
-      AUX1,
-      AUX2
-    };
-  }
+    AUX1,
+    AUX2
+  };
+}
 }
 
 #endif
