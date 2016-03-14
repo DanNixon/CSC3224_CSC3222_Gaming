@@ -11,6 +11,9 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @copydoc Source::Source()
+   */
   WAVSource::WAVSource(const std::string &name, Listener *listener)
       : Source(name, listener)
   {
@@ -20,6 +23,11 @@ namespace Audio
   {
   }
 
+  /**
+   * @brief Loads a WAV file.
+   * @param filename File to load
+   * @return True if file was successfully loaded
+   */
   bool WAVSource::load(const std::string &filename)
   {
     // Delete the buffer created by the constructor

@@ -10,6 +10,10 @@ namespace Engine
 {
 namespace Common
 {
+  /**
+   * @brief ENumeration of each subsystem.
+   * @author Dan Nixon
+   */
   enum class Subsystem
   {
     NONE,

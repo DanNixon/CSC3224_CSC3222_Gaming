@@ -12,6 +12,11 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @class WAVSource
+   * @brief An audio source that loads WAV files.
+   * @author Dan Nixon
+   */
   class WAVSource : public Source
   {
   public:

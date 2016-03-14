@@ -22,6 +22,7 @@ namespace Graphics
    * @param m Mesh
    * @param s Shader
    * @param t Texture
+   * @param transparent Flag indicating transparency
    */
   RenderableObject::RenderableObject(const std::string &name, Mesh *m, ShaderProgram *s, Texture *t, bool transparent)
       : SceneObject(name)
@@ -53,6 +54,9 @@ namespace Graphics
     SceneObject::update(msec, sys);
   }
 
+  /**
+   * @brief Renders this object.
+   */
   void RenderableObject::render()
   {
     GLuint program = m_shaderProgram->program();
@@ -75,6 +79,9 @@ namespace Graphics
     glBindTexture(GL_TEXTURE_2D, 0);
   }
 
+  /**
+   * @copydoc SceneObject::addToScene()
+   */
   void RenderableObject::addToScene(Scene *scene)
   {
     SceneObject::addToScene(scene);

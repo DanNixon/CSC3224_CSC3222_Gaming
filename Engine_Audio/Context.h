@@ -16,6 +16,11 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @class Context
+   * @brief Manages an AL context for playing audio.
+   * @author Dan Nixon
+   */
   class Context : public Engine::Common::IMemoryManaged
   {
   public:
@@ -26,19 +31,27 @@ namespace Audio
     void close();
     bool isOpen() const;
 
-    inline ALCdevice *getDevice()
+    /**
+     * @brief Gets the device used for this context.
+     * @return Device
+     */
+    inline ALCdevice *getDevice() const
     {
       return m_device;
     }
 
-    inline ALCcontext *getContext()
+    /**
+     * @brief Gets the context.
+     * @return Context
+     */
+    inline ALCcontext *getContext() const
     {
       return m_context;
     }
 
   private:
-    ALCdevice *m_device;
-    ALCcontext *m_context;
+    ALCdevice *m_device;   //!< AL device
+    ALCcontext *m_context; //!< AL context
   };
 }
 }

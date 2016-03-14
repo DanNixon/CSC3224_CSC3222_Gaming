@@ -14,6 +14,11 @@ namespace Simulation
 {
 namespace AI
 {
+  /**
+   * @class StateMachine
+   * @brief Represents a state machine
+   * @author Dan Nixon
+   */
   class StateMachine
   {
   public:
@@ -21,7 +26,7 @@ namespace AI
     virtual ~StateMachine();
 
   private:
-    std::vector<State *> m_states;
+    std::vector<State *> m_states; //!< All first level states
   };
 }
 }

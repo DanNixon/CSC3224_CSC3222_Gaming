@@ -16,9 +16,21 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @class AudioUtil
+   * @brief Contains utility functions for audio managment/processing.
+   * @author Dan Nixon
+   */
   class AudioUtil
   {
   public:
+    /**
+     * @brief Tests for an OpenAL error.
+     * @param msg Error identification message
+     * @return Ture if no error is found
+     *
+     * If error is found details are printed to stderr.
+     */
     static bool CheckALError(const std::string &msg)
     {
       ALCenum error = alGetError();

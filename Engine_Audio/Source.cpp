@@ -17,6 +17,10 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @copydoc SceneObject::SceneObject()
+   * @param listener Listener to use for output
+   */
   Source::Source(const std::string &name, Listener *listener)
       : SceneObject(name)
       , m_listener(listener)
@@ -40,29 +44,50 @@ namespace Audio
     alDeleteBuffers(1, &m_buffer);
   }
 
+  /**
+   * @brief Tests if the source is valid.
+   * @return True if source is valid
+   */
   bool Source::valid() const
   {
     return (m_sourceID > 0 && m_buffer > 0 && m_listener);
   }
 
+  /**
+   * @brief Sets if the source should play one of loop.
+   * @param loop If source should loop
+   * @return True if property was set
+   */
   bool Source::setLooping(bool loop)
   {
     alSourcei(m_sourceID, AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
     return AudioUtil::CheckALError("set source looping");
   }
 
+  /**
+   * @brief Starts the source playing.
+   * @return True on success
+   */
   bool Source::play()
   {
     alSourcePlay(m_sourceID);
     return AudioUtil::CheckALError("source play");
   }
 
+  /**
+   * @brief Stops the source playing.
+   * @return True on success
+   */
   bool Source::stop()
   {
     alSourceStop(m_sourceID);
     return AudioUtil::CheckALError("source stop");
   }
 
+  /**
+   * @brief Tests if the source is currently playing.
+   * @return True if playing
+   */
   bool Source::isPlaying() const
   {
     ALint state;
@@ -70,6 +95,9 @@ namespace Audio
     return (state == AL_PLAYING);
   }
 
+  /**
+   * @copydoc SceneObject::update()
+   */
   void Source::update(float msec, Subsystem sys)
   {
     SceneObject::update(msec, sys);

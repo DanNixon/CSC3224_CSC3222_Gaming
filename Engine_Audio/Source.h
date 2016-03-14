@@ -16,6 +16,11 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @class Source
+   * @brief Represents a sound source.
+   * @author Dan Nixon
+   */
   class Source : public Engine::Common::SceneObject
   {
   public:
@@ -31,11 +36,19 @@ namespace Audio
 
     bool isPlaying() const;
 
+    /**
+     * @brief Gets the source ID.
+     * @return Source ID
+     */
     ALuint id() const
     {
       return m_sourceID;
     }
 
+    /**
+     * @brief Gets the buffer used for this source.
+     * @return Buffer
+     */
     ALuint buffer() const
     {
       return m_buffer;
@@ -44,9 +57,9 @@ namespace Audio
     virtual void update(float msec, Engine::Common::Subsystem sys);
 
   protected:
-    ALuint m_sourceID;
-    ALuint m_buffer;
-    Listener *m_listener;
+    ALuint m_sourceID;    //!< Source ID
+    ALuint m_buffer;      //!< Buffer used for source
+    Listener *m_listener; //!< Listener used to output sound to
   };
 }
 }

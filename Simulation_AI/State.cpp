@@ -9,6 +9,10 @@ namespace Simulation
 {
 namespace AI
 {
+  /**
+   * @brief Create a new state.
+   * @param parent Parent state
+   */
   State::State(State *parent)
       : m_parent(parent)
   {

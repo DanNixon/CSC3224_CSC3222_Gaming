@@ -9,6 +9,9 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @brief Creates a new context container.
+   */
   Context::Context()
       : m_device(NULL)
       , m_context(NULL)
@@ -19,6 +22,10 @@ namespace Audio
   {
   }
 
+  /**
+   * @brief Creates the context and opens the default audio device.
+   * @return True on success
+   */
   bool Context::open()
   {
     if (isOpen())
@@ -36,6 +43,9 @@ namespace Audio
     return alcMakeContextCurrent(m_context) == ALC_TRUE;
   }
 
+  /**
+   * @brief Closes the device and removes the context.
+   */
   void Context::close()
   {
     alcMakeContextCurrent(NULL);
@@ -43,6 +53,10 @@ namespace Audio
     alcCloseDevice(m_device);
   }
 
+  /**
+   * @brief Tests for an open device and context.
+   * @return True if open.
+   */
   bool Context::isOpen() const
   {
     return (m_device && m_context);

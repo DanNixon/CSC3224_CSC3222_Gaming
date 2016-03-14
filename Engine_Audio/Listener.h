@@ -12,6 +12,11 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @class Listener
+   * @brief Represents an audio listener.
+   * @author Dan Nixon
+   */
   class Listener : public Engine::Common::SceneObject
   {
   public:

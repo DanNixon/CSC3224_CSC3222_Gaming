@@ -20,6 +20,9 @@ namespace Engine
 {
 namespace Audio
 {
+  /**
+   * @copydoc SceneObject::SceneObject()
+   */
   Listener::Listener(const std::string &name)
       : SceneObject(name)
   {
@@ -29,6 +32,9 @@ namespace Audio
   {
   }
 
+  /**
+   * @brief Use this listener to output a sound to.
+   */
   void Listener::use()
   {
     // Set position

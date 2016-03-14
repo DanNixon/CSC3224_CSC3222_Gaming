@@ -19,6 +19,11 @@ namespace Graphics
 {
   class RenderableObject;
 
+  /**
+   * @class GraphicalScene
+   * @brief An extension to Scene that renders transparent objects last.
+   * @author Dan Nixon
+   */
   class GraphicalScene : public Engine::Common::Scene
   {
   public:
@@ -31,7 +36,7 @@ namespace Graphics
   protected:
     friend class RenderableObject;
 
-    std::vector<RenderableObject *> m_transparent;
+    std::vector<RenderableObject *> m_transparent; //!< Transparent objects to be rendered last
   };
 }
 }
