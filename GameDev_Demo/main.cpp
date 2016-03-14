@@ -5,8 +5,13 @@
 
 #include "DemoGame.h"
 
+#include <test.h>
+
 int main(int argc, char *args[])
 {
-  DemoGame g;
-  return g.run();
+  test::run();
+  return 0;
+
+  //DemoGame g;
+  //return g.run();
 }
