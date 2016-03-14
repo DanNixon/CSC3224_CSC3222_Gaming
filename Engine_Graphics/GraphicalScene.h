@@ -15,25 +15,25 @@
 
 namespace Engine
 {
-  namespace Graphics
+namespace Graphics
+{
+  class RenderableObject;
+
+  class GraphicalScene : public Engine::Common::Scene
   {
-    class RenderableObject;
+  public:
+    GraphicalScene(Engine::Common::SceneObject *root, Engine::Maths::Matrix4 view = Engine::Maths::Matrix4(),
+                   Engine::Maths::Matrix4 projection = Engine::Maths::Matrix4());
+    virtual ~GraphicalScene();
 
-    class GraphicalScene : public Engine::Common::Scene
-    {
-    public:
-      GraphicalScene(Engine::Common::SceneObject *root, Engine::Maths::Matrix4 view = Engine::Maths::Matrix4(),
-        Engine::Maths::Matrix4 projection = Engine::Maths::Matrix4());
-      virtual ~GraphicalScene();
+    virtual void update(float msec, Engine::Common::Subsystem sys);
 
-      virtual void update(float msec, Engine::Common::Subsystem sys);
+  protected:
+    friend class RenderableObject;
 
-    protected:
-      friend class RenderableObject;
-
-      std::vector<RenderableObject *> m_transparent;
-    };
-  }
+    std::vector<RenderableObject *> m_transparent;
+  };
+}
 }
 
 #endif

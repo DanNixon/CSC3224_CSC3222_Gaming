@@ -5,13 +5,13 @@
 
 #include "DemoGame.h"
 
+#include <GraphicalScene.h>
 #include <MemoryManager.h>
 #include <ModelLoader.h>
 #include <Profiler.h>
 #include <RectangleMesh.h>
 #include <Shaders.h>
 #include <WAVSource.h>
-#include <GraphicalScene.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -50,7 +50,7 @@ int DemoGame::gameStartup()
   m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
   m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
   m_s = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
-                  m_losPMatrix);
+                           m_losPMatrix);
 
   // Model
   ModelLoader l;
@@ -83,7 +83,7 @@ int DemoGame::gameStartup()
   m_uiShader->link();
 
   m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
-                   Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
+                            Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
   RenderableObject *leftStickArea =
       new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);

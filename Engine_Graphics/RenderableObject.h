@@ -8,10 +8,10 @@
 
 #include <SceneObject.h>
 
+#include "GraphicalScene.h"
 #include "Mesh.h"
 #include "ShaderProgram.h"
 #include "Texture.h"
-#include "GraphicalScene.h"
 
 namespace Engine
 {
@@ -24,7 +24,8 @@ namespace Graphics
   class RenderableObject : public Engine::Common::SceneObject
   {
   public:
-    RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL, Texture *t = NULL, bool transparent = false);
+    RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL, Texture *t = NULL,
+                     bool transparent = false);
     ~RenderableObject();
 
     /**
@@ -129,7 +130,7 @@ namespace Graphics
   protected:
     virtual void addToScene(Engine::Common::Scene *scene);
 
-    GraphicalScene * m_graphicalScene;
+    GraphicalScene *m_graphicalScene;
     bool m_draw;                    //!< Flag indicating if this object should be rendered
     bool m_transparent;             //!< Flag indicating transparency of this object
     Mesh *m_mesh;                   //!< Mesh represented by this object
