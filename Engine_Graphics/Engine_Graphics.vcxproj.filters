@@ -10,6 +10,7 @@
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="RectangleMesh.cpp" />
     <ClCompile Include="LineMesh.cpp" />
+    <ClCompile Include="GraphicalScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
@@ -23,5 +24,6 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="RectangleMesh.h" />
     <ClInclude Include="LineMesh.h" />
+    <ClInclude Include="GraphicalScene.h" />
   </ItemGroup>
 </Project>

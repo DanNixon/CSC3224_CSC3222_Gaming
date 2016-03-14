@@ -21,7 +21,7 @@
   - [x] Texture encapsulation
   - [x] Text rendering
   - [ ] Menu interface (programmatic/generic)
-  - [ ] Render alpha meshes in correct order
+  - [x] Render alpha meshes in correct order
   - [ ] Load textures in asset loading
 - [x] `Engine_Input`
   - [x] Keyboard

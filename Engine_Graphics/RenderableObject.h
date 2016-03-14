@@ -6,10 +6,12 @@
 #ifndef _ENGINE_GRAPHICS_RENDERABLEOBJECT_H_
 #define _ENGINE_GRAPHICS_RENDERABLEOBJECT_H_
 
+#include <SceneObject.h>
+
 #include "Mesh.h"
-#include "SceneObject.h"
 #include "ShaderProgram.h"
 #include "Texture.h"
+#include "GraphicalScene.h"
 
 namespace Engine
 {
@@ -22,7 +24,7 @@ namespace Graphics
   class RenderableObject : public Engine::Common::SceneObject
   {
   public:
-    RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL, Texture *t = NULL);
+    RenderableObject(const std::string &name, Mesh *m = NULL, ShaderProgram *s = NULL, Texture *t = NULL, bool transparent = false);
     ~RenderableObject();
 
     /**
@@ -41,6 +43,24 @@ namespace Graphics
     inline bool visible() const
     {
       return m_draw;
+    }
+
+    /**
+     * @brief Sets the transparency of this object.
+     * @param transparent Transparency
+     */
+    void setTransparent(bool transparent)
+    {
+      m_transparent = transparent;
+    }
+
+    /**
+     * @brief Gets the transparency of this object.
+     * @return Transparency
+     */
+    inline bool transparent() const
+    {
+      return m_transparent;
     }
 
     /**
@@ -104,9 +124,14 @@ namespace Graphics
     }
 
     virtual void update(float msec, Engine::Common::Subsystem sys);
+    void render();
 
   protected:
+    virtual void addToScene(Engine::Common::Scene *scene);
+
+    GraphicalScene * m_graphicalScene;
     bool m_draw;                    //!< Flag indicating if this object should be rendered
+    bool m_transparent;             //!< Flag indicating transparency of this object
     Mesh *m_mesh;                   //!< Mesh represented by this object
     ShaderProgram *m_shaderProgram; //!< Shader used to render m_mesh
     Texture *m_texture;             //!< Texture used on m_mesh

@@ -97,7 +97,7 @@ namespace Common
   protected:
     friend class Scene;
 
-    void addToScene(Scene *scene);
+    virtual void addToScene(Scene *scene);
 
     const std::string m_name; //!< Name of the object
 

@@ -34,7 +34,7 @@ namespace Common
     void setProjectionMatrix(Engine::Maths::Matrix4 projection);
     Engine::Maths::Matrix4 projectionMatrix();
 
-    void update(float msec, Subsystem sys);
+    virtual void update(float msec, Subsystem sys);
 
     /**
      * @brief Gets the root node of the scene.
@@ -45,7 +45,7 @@ namespace Common
       return m_root;
     }
 
-  private:
+  protected:
     SceneObject *m_root;                       //!< Root node in the scene tree
     Engine::Maths::Matrix4 m_viewMatrix;       //!< View matrix
     Engine::Maths::Matrix4 m_projectionMatrix; //!< Projection matrix
