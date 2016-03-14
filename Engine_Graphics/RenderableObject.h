@@ -103,7 +103,7 @@ namespace Graphics
       return m_texture;
     }
 
-    virtual void render();
+    virtual void update(float msec, Engine::Common::Subsystem sys);
 
   protected:
     bool m_draw;                    //!< Flag indicating if this object should be rendered

@@ -5,8 +5,10 @@
 
 #include "RenderableObject.h"
 
-#include "Matrix3.h"
+#include <Matrix3.h>
+#include <Subsystem.h>
 
+using namespace Engine::Common;
 using namespace Engine::Maths;
 
 namespace Engine
@@ -35,11 +37,11 @@ namespace Graphics
   }
 
   /**
-   * @copydoc SceneObject::render
+   * @copydoc SceneObject::update()
    */
-  void RenderableObject::render()
+  void RenderableObject::update(float msec, Subsystem sys)
   {
-    if (m_draw && m_mesh && m_shaderProgram)
+    if (sys == Subsystem::GRAPHICS && m_draw && m_mesh && m_shaderProgram)
     {
       GLuint program = m_shaderProgram->program();
 
@@ -62,7 +64,7 @@ namespace Graphics
       glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    SceneObject::render();
+    SceneObject::update(msec, sys);
   }
 }
 }

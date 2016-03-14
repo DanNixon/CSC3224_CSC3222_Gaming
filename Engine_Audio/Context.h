@@ -10,11 +10,13 @@
 
 #include <alc.h>
 
+#include <IMemoryManaged.h>
+
 namespace Engine
 {
 namespace Audio
 {
-  class Context
+  class Context : public Engine::Common::IMemoryManaged
   {
   public:
     Context();

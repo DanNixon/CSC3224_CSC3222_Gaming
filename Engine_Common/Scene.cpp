@@ -69,18 +69,12 @@ namespace Common
 
   /**
    * @brief Updates elements in the scene.
+   * @param msec Time since last update (in milliseconds)
+   * @param sys Subsystem being updated
    */
-  void Scene::update()
+  void Scene::update(float msec, Subsystem sys)
   {
-    m_root->update(0);
-  }
-
-  /**
-   * @brief Renders the scene.
-   */
-  void Scene::render()
-  {
-    m_root->render();
+    m_root->update(msec, sys);
   }
 }
 }

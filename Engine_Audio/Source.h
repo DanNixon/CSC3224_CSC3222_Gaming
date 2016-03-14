@@ -41,7 +41,7 @@ namespace Audio
       return m_buffer;
     }
 
-    virtual void update(float msec);
+    virtual void update(float msec, Engine::Common::Subsystem sys);
 
   protected:
     ALuint m_sourceID;

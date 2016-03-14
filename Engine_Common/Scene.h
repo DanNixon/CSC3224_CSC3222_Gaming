@@ -9,6 +9,7 @@
 #include <Matrix4.h>
 
 #include "IMemoryManaged.h"
+#include "Subsystem.h"
 
 namespace Engine
 {
@@ -33,8 +34,7 @@ namespace Common
     void setProjectionMatrix(Engine::Maths::Matrix4 projection);
     Engine::Maths::Matrix4 projectionMatrix();
 
-    void update();
-    void render();
+    void update(float msec, Subsystem sys);
 
     /**
      * @brief Gets the root node of the scene.

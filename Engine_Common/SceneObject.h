@@ -12,6 +12,7 @@
 
 #include "IMemoryManaged.h"
 #include "Scene.h"
+#include "Subsystem.h"
 
 namespace Engine
 {
@@ -89,8 +90,7 @@ namespace Common
       return m_worldTransform;
     }
 
-    virtual void update(float msec);
-    virtual void render();
+    virtual void update(float msec, Subsystem sys);
 
     SceneObject *findChild(const std::string &name);
 

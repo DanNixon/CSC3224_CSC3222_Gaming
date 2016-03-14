@@ -9,6 +9,7 @@
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="IMemoryManaged.h" />
     <ClInclude Include="debug_utils.h" />
+    <ClInclude Include="Subsystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp" />

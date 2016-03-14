@@ -6,9 +6,11 @@
 #include "Source.h"
 
 #include <Vector4.h>
+#include <Subsystem.h>
 
 #include "AudioUtil.h"
 
+using namespace Engine::Common;
 using namespace Engine::Maths;
 
 namespace Engine
@@ -68,21 +70,24 @@ namespace Audio
     return (state == AL_PLAYING);
   }
 
-  void Source::update(float msec)
+  void Source::update(float msec, Subsystem sys)
   {
-    SceneObject::update(msec);
+    SceneObject::update(msec, sys);
 
-    m_listener->use();
+    if (sys == Subsystem::AUDIO)
+    {
+      m_listener->use();
 
-    // Set position
-    Vector4 position = m_worldTransform.positionVector();
-    alSource3f(m_sourceID, AL_POSITION, position.x(), position.y(), position.z());
-    AudioUtil::CheckALError("source position");
+      // Set position
+      Vector4 position = m_worldTransform.positionVector();
+      alSource3f(m_sourceID, AL_POSITION, position.x(), position.y(), position.z());
+      AudioUtil::CheckALError("source position");
 
-    // Set velocity
-    // TODO: set this when physics engine is implemented
-    alSource3f(m_sourceID, AL_VELOCITY, 0.0f, 0.0f, 0.0f);
-    AudioUtil::CheckALError("source velocity");
+      // Set velocity
+      // TODO: set this when physics engine is implemented
+      alSource3f(m_sourceID, AL_VELOCITY, 0.0f, 0.0f, 0.0f);
+      AudioUtil::CheckALError("source velocity");
+    }
   }
 }
 }

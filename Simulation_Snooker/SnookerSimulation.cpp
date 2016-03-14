@@ -132,10 +132,9 @@ void SnookerSimulation::gameLoop(Uint8 id, float dtMilliSec)
   // Handle graphics
   if (id == m_graphicsLoop)
   {
-    m_scene->update();
-    m_scene->render();
-    m_ui->update();
-    m_ui->render();
+    m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
+    m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
+
     swapBuffers();
   }
   // Handle physics

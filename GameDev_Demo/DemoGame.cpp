@@ -133,6 +133,7 @@ int DemoGame::gameStartup()
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
   m_physicsLoop = addTimedLoop(8.33f, "physics");
+  m_audioLoop = addTimedLoop(16.66f, "audio");
   m_profileLoop = addTimedLoop(1000.0f, "profile");
 
   m_testLoop = addTimedLoop(5000.0f, "test");
@@ -176,17 +177,18 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
                             Matrix4::Rotation(pitch, Vector3(0.0f, 0.0f, 1.0f)) *
                             Matrix4::Rotation(yaw, Vector3(0.0f, 1.0f, 0.0f)));
 
-    m_s->update();
-    m_s->render();
-
-    m_ui->update();
-    m_ui->render();
+    m_s->update(dtMilliSec, Subsystem::GRAPHICS);
+    m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
 
     swapBuffers();
   }
   else if (id == m_physicsLoop)
   {
     // TODO
+  }
+  else if (id == m_audioLoop)
+  {
+    m_s->update(dtMilliSec, Subsystem::AUDIO);
   }
   else if (id == m_profileLoop)
   {
@@ -204,4 +206,5 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
  */
 void DemoGame::gameShutdown()
 {
+  m_audioContext->close();
 }

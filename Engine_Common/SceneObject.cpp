@@ -32,8 +32,9 @@ namespace Common
   /**
    * @brief Updates the state of the object.
    * @param msec Elapsed time since last update in milliseconds
+   * @param sys The subsystem being updated
    */
-  void SceneObject::update(float msec)
+  void SceneObject::update(float msec, Subsystem sys)
   {
     if (m_parent)
       m_worldTransform = m_parent->m_worldTransform * m_modelMatrix;
@@ -41,16 +42,7 @@ namespace Common
       m_worldTransform = m_modelMatrix;
 
     for (SceneObjectIter i = m_children.begin(); i != m_children.end(); ++i)
-      (*i)->update(msec);
-  }
-
-  /**
-   * @brief Renders renderable objects.
-   */
-  void SceneObject::render()
-  {
-    for (SceneObjectIter i = m_children.begin(); i != m_children.end(); ++i)
-      (*i)->render();
+      (*i)->update(msec, sys);
   }
 
   /**
