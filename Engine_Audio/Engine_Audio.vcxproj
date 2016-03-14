@@ -88,13 +88,13 @@
     </LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <ExecutablePath>$(SolutionDir)ThirdParty\freealut\include;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenAL\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
-    <ExecutablePath>$(SolutionDir)ThirdParty\freealut\include;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenAL\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
@@ -102,13 +102,13 @@
     </LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <ExecutablePath>$(SolutionDir)ThirdParty\freealut\include;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenAL\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
-    <ExecutablePath>$(SolutionDir)ThirdParty\freealut\include;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
