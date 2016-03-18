@@ -279,8 +279,11 @@ namespace Graphics
   Mesh *Mesh::LoadMesh(const struct aiMesh *mesh, const struct aiMaterial * material)
   {
     Mesh *m = new Mesh();
-    m->m_type = GL_TRIANGLES;
-    // m->m_type = GL_LINES;
+
+    // Check if this should be rendered as a wireframe
+    int wireFrame = 0;
+    bool lines = AI_SUCCESS == aiGetMaterialInteger(material, AI_MATKEY_ENABLE_WIREFRAME, &wireFrame) && wireFrame;
+    m->m_type = lines ? GL_LINES : GL_TRIANGLES;
 
     aiVector3D *vertices = mesh->mVertices;
 

@@ -52,6 +52,11 @@ namespace Graphics
     return obj;
   }
 
+  /**
+   * @brief Loads textures for each material used in the model.
+   * @param scene Assimp scene being loaded
+   * @param directory DIrectory in which textures are stored
+   */
   void ModelLoader::loadTextures(const struct aiScene * scene, const std::string &directory)
   {
     m_textures = new Texture*[scene->mNumMaterials];
