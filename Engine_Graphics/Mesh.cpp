@@ -276,7 +276,7 @@ namespace Graphics
    * @param material Material used on mesh
    * @return Mesh containing loaded model
    */
-  Mesh *Mesh::LoadMesh(const struct aiMesh *mesh, const struct aiMaterial * material)
+  Mesh *Mesh::LoadMesh(const struct aiMesh *mesh, const struct aiMaterial *material)
   {
     Mesh *m = new Mesh();
 
@@ -307,8 +307,8 @@ namespace Graphics
 
         const aiVector3D &v = vertices[index];
 
-        //aiColor4D c;
-        //bool good = AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &c);
+        // aiColor4D c;
+        // bool good = AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &c);
 
         if (mesh->mColors[0] != NULL)
           m->m_colours[idx] = Colour(mesh->mColors[0][index]);

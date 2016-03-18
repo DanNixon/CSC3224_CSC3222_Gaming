@@ -44,7 +44,8 @@ namespace Graphics
       return NULL;
 
     SceneObject *obj = new SceneObject(filename);
-    std::string directory = StringUtils::DirectoryFromPath(filename);;
+    std::string directory = StringUtils::DirectoryFromPath(filename);
+    ;
 
     loadTextures(scene, directory);
     loadRecursive(obj, scene, scene->mRootNode, sp);
@@ -57,12 +58,12 @@ namespace Graphics
    * @param scene Assimp scene being loaded
    * @param directory DIrectory in which textures are stored
    */
-  void ModelLoader::loadTextures(const struct aiScene * scene, const std::string &directory)
+  void ModelLoader::loadTextures(const struct aiScene *scene, const std::string &directory)
   {
-    m_textures = new Texture*[scene->mNumMaterials];
+    m_textures = new Texture *[scene->mNumMaterials];
     for (size_t i = 0; i < scene->mNumMaterials; i++)
     {
-      const aiMaterial* material = scene->mMaterials[i];
+      const aiMaterial *material = scene->mMaterials[i];
 
       m_textures[i] = NULL;
       if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0)
@@ -77,8 +78,7 @@ namespace Graphics
 
           if (!m_textures[i]->valid())
           {
-            std::cerr << "Failed to load testure \"" << filename
-              << "\", for material " << material << std::endl;
+            std::cerr << "Failed to load testure \"" << filename << "\", for material " << material << std::endl;
             m_textures[i] = NULL;
           }
         }
@@ -107,7 +107,7 @@ namespace Graphics
         continue;
 
       size_t matIdx = m->mMaterialIndex;
-      const struct aiMaterial * mat = scene->mMaterials[matIdx];
+      const struct aiMaterial *mat = scene->mMaterials[matIdx];
 
       Mesh *mesh = Mesh::LoadMesh(m, mat);
       RenderableObject *obj = new RenderableObject("obj", mesh, sp, m_textures[matIdx]);

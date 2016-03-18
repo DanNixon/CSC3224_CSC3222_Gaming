@@ -39,8 +39,8 @@ namespace Graphics
      * @brief Creates a new colour from an Assimp 4D colour.
      * @param col Assimp colour
      */
-    Colour(const aiColor4D & col)
-      : Vector4(col.r, col.g, col.b, col.a)
+    Colour(const aiColor4D &col)
+        : Vector4(col.r, col.g, col.b, col.a)
     {
     }
 
