@@ -273,13 +273,14 @@ namespace Graphics
   /**
    * @brief Loads a mesh from an Assimp mesh.
    * @param mesh Assimp mesh to load
+   * @param material Material used on mesh
    * @return Mesh containing loaded model
    */
-  Mesh *Mesh::LoadMesh(const struct aiMesh *mesh)
+  Mesh *Mesh::LoadMesh(const struct aiMesh *mesh, const struct aiMaterial * material)
   {
     Mesh *m = new Mesh();
-    // m->m_type = GL_TRIANGLES;
-    m->m_type = GL_LINES;
+    m->m_type = GL_TRIANGLES;
+    // m->m_type = GL_LINES;
 
     aiVector3D *vertices = mesh->mVertices;
 
@@ -293,21 +294,15 @@ namespace Graphics
     {
       const aiFace &face = mesh->mFaces[i];
 
-      const aiVector3D &v0 = vertices[face.mIndices[0]];
-      const aiVector3D &v1 = vertices[face.mIndices[1]];
-      const aiVector3D &v2 = vertices[face.mIndices[2]];
+      aiVector3D v;
+      for (int j = 0; j < 3; j++)
+      {
+        if (face.mNumIndices > j)
+          v = vertices[face.mIndices[j]];
 
-      m->m_colours[idx] = Vector4(1, 1, 1, 1);
-      m->m_vertices[idx++] = Vector3(v0[0], v0[1], v0[2]);
-
-      m->m_colours[idx] = Vector4(1, 1, 1, 1);
-      m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
-
-      m->m_colours[idx] = Vector4(1, 1, 1, 1);
-      if (face.mNumIndices == 3)
-        m->m_vertices[idx++] = Vector3(v2[0], v2[1], v2[2]);
-      else
-        m->m_vertices[idx++] = Vector3(v1[0], v1[1], v1[2]);
+        m->m_colours[idx] = Vector4(1, 1, 1, 1);
+        m->m_vertices[idx++] = Vector3(v[0], v[1], v[2]);
+      }
     }
 
     m->generateNormals();

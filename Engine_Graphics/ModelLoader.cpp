@@ -66,7 +66,10 @@ namespace Graphics
       if (m->mNumVertices == 0)
         continue;
 
-      Mesh *mesh = Mesh::LoadMesh(m);
+      size_t matIdx = m->mMaterialIndex;
+      const struct aiMaterial * mat = scene->mMaterials[matIdx];
+
+      Mesh *mesh = Mesh::LoadMesh(m, mat);
       RenderableObject *obj = new RenderableObject("obj", mesh, sp);
       sn->addChild(*obj);
     }
