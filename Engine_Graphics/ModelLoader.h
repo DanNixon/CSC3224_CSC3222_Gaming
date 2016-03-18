@@ -33,6 +33,7 @@ namespace Graphics
     Engine::Common::SceneObject *load(const std::string &filename, ShaderProgram *sp);
 
   private:
+    void loadTextures(const struct aiScene *scene, const std::string &directory);
     void loadRecursive(Engine::Common::SceneObject *parent, const struct aiScene *scene, const struct aiNode *node,
                        ShaderProgram *sp);
 

@@ -9,10 +9,13 @@
 #include <assimp/cimport.h>
 #include <assimp/postprocess.h>
 
+#include <StringUtils.h>
+
 #include "Mesh.h"
 #include "RenderableObject.h"
 
 using namespace Engine::Common;
+using namespace Engine::Utility;
 
 namespace Engine
 {
@@ -41,12 +44,17 @@ namespace Graphics
       return NULL;
 
     SceneObject *obj = new SceneObject(filename);
+    std::string directory = StringUtils::DirectoryFromPath(filename);
 
-    // Load textures
-    std::string directory = "../resources/models/Gaui_R5";
+    loadTextures(scene, directory);
+    loadRecursive(obj, scene, scene->mRootNode, sp);
 
+    return obj;
+  }
+
+  void ModelLoader::loadTextures(const struct aiScene * scene, const std::string &directory)
+  {
     m_textures = new Texture*[scene->mNumMaterials];
-
     for (size_t i = 0; i < scene->mNumMaterials; i++)
     {
       const aiMaterial* material = scene->mMaterials[i];
@@ -65,16 +73,12 @@ namespace Graphics
           if (!m_textures[i]->valid())
           {
             std::cerr << "Failed to load testure \"" << filename
-                      << "\", for material " << material << std::endl;
+              << "\", for material " << material << std::endl;
             m_textures[i] = NULL;
           }
         }
       }
     }
-
-    loadRecursive(obj, scene, scene->mRootNode, sp);
-
-    return obj;
   }
 
   /**
