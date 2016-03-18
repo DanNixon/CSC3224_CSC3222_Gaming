@@ -44,7 +44,7 @@ namespace Graphics
       return NULL;
 
     SceneObject *obj = new SceneObject(filename);
-    std::string directory = StringUtils::DirectoryFromPath(filename);
+    std::string directory = StringUtils::DirectoryFromPath(filename);;
 
     loadTextures(scene, directory);
     loadRecursive(obj, scene, scene->mRootNode, sp);

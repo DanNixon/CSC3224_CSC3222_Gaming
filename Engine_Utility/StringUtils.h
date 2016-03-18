@@ -22,6 +22,12 @@ namespace Utility
   public:
     static std::string DirectoryFromPath(const std::string &path);
     static std::string FilenameFromPath(const std::string &path);
+
+    static std::string BasenameFromFilename(const std::string &path);
+    static std::string ExtFromFilename(const std::string &path);
+
+  private:
+    static size_t findSlash(const std::string &str);
   };
 }
 }
