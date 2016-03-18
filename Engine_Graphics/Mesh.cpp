@@ -94,7 +94,7 @@ namespace Graphics
    * @brief Sets all vertix colours in the mesh to a solid colour.
    * @param col Colour to set
    */
-  void Mesh::setStaticColour(const Vector4 &col)
+  void Mesh::setStaticColour(const Colour &col)
   {
     if (m_colours != NULL)
     {
@@ -206,14 +206,14 @@ namespace Graphics
 
     m->m_numVertices = resolution + 2;
     m->m_vertices = new Vector3[m->m_numVertices];
-    m->m_colours = new Vector4[m->m_numVertices];
+    m->m_colours = new Colour[m->m_numVertices];
     m->m_textureCoords = new Vector2[m->m_numVertices];
 
     const float deltaA = ((PI * 2) / resolution);
 
     // "Origin" vertex
     m->m_vertices[0] = Vector3(0.0f, 0.0f, 0.0f);
-    m->m_colours[0] = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+    m->m_colours[0] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
     m->m_textureCoords[0] = Vector2(0.5f, 0.5f);
 
     for (int i = 1; i < resolution + 2; ++i)
@@ -221,7 +221,7 @@ namespace Graphics
       const float a = i * deltaA;
 
       m->m_vertices[i] = Vector3(cos(a) * radius, sin(a) * radius, 0.0f);
-      m->m_colours[i] = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+      m->m_colours[i] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
       Vector2 v = Vector2(abs(cos(a)), abs(sin(a)));
       m->m_textureCoords[i] = v;
     }
@@ -244,11 +244,11 @@ namespace Graphics
 
     m->m_numVertices = (resolution + 2) * 2;
     m->m_vertices = new Vector3[m->m_numVertices];
-    m->m_colours = new Vector4[m->m_numVertices];
+    m->m_colours = new Colour[m->m_numVertices];
     m->m_textureCoords = new Vector2[m->m_numVertices];
 
     const float deltaA = ((PI * 2) / resolution);
-    const Vector4 c(1, 1, 1, 127);
+    const Colour c(1, 1, 1, 127);
 
     int n = 0;
     for (int i = 0; i < resolution + 2; i++)
@@ -286,7 +286,9 @@ namespace Graphics
 
     m->m_numVertices = mesh->mNumFaces * 3;
     m->m_vertices = new Vector3[m->m_numVertices];
-    m->m_colours = new Vector4[m->m_numVertices];
+    m->m_colours = new Colour[m->m_numVertices];
+    if (mesh->HasTextureCoords(0))
+      m->m_textureCoords = new Vector2[m->m_numVertices];
 
     // Load vertices
     size_t idx = 0;
@@ -294,13 +296,28 @@ namespace Graphics
     {
       const aiFace &face = mesh->mFaces[i];
 
-      aiVector3D v;
-      for (int j = 0; j < 3; j++)
+      int index;
+      for (size_t j = 0; j < 3; j++)
       {
         if (face.mNumIndices > j)
-          v = vertices[face.mIndices[j]];
+          index = face.mIndices[j];
 
-        m->m_colours[idx] = Vector4(1, 1, 1, 1);
+        const aiVector3D &v = vertices[index];
+
+        //aiColor4D c;
+        //bool good = AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &c);
+
+        if (mesh->mColors[0] != NULL)
+          m->m_colours[idx] = Colour(mesh->mColors[0][index]);
+        else
+          m->m_colours[idx] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
+
+        if (mesh->HasTextureCoords(0))
+        {
+          const aiVector3D tex = mesh->mTextureCoords[0][index];
+          m->m_textureCoords[idx] = Vector2(tex[0], tex[1]);
+        }
+
         m->m_vertices[idx++] = Vector3(v[0], v[1], v[2]);
       }
     }

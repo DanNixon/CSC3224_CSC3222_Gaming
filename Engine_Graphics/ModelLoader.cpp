@@ -41,6 +41,37 @@ namespace Graphics
       return NULL;
 
     SceneObject *obj = new SceneObject(filename);
+
+    // Load textures
+    std::string directory = "../resources/models/Gaui_R5";
+
+    m_textures = new Texture*[scene->mNumMaterials];
+
+    for (size_t i = 0; i < scene->mNumMaterials; i++)
+    {
+      const aiMaterial* material = scene->mMaterials[i];
+
+      m_textures[i] = NULL;
+      if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0)
+      {
+        aiString path;
+
+        if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
+        {
+          std::string filename = directory + "/" + path.data;
+          m_textures[i] = new Texture();
+          m_textures[i]->load(filename);
+
+          if (!m_textures[i]->valid())
+          {
+            std::cerr << "Failed to load testure \"" << filename
+                      << "\", for material " << material << std::endl;
+            m_textures[i] = NULL;
+          }
+        }
+      }
+    }
+
     loadRecursive(obj, scene, scene->mRootNode, sp);
 
     return obj;
@@ -70,7 +101,7 @@ namespace Graphics
       const struct aiMaterial * mat = scene->mMaterials[matIdx];
 
       Mesh *mesh = Mesh::LoadMesh(m, mat);
-      RenderableObject *obj = new RenderableObject("obj", mesh, sp);
+      RenderableObject *obj = new RenderableObject("obj", mesh, sp, m_textures[matIdx]);
       sn->addChild(*obj);
     }
 

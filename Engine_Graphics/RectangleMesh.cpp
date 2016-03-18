@@ -26,11 +26,11 @@ namespace Graphics
 
     m_vertices = new Vector3[m_numVertices];
 
-    m_colours = new Vector4[m_numVertices];
-    m_colours[0] = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-    m_colours[1] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-    m_colours[2] = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-    m_colours[3] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+    m_colours = new Colour[m_numVertices];
+    m_colours[0] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
+    m_colours[1] = Colour(1.0f, 0.0f, 0.0f, 1.0f);
+    m_colours[2] = Colour(0.0f, 1.0f, 0.0f, 1.0f);
+    m_colours[3] = Colour(0.0f, 0.0f, 1.0f, 1.0f);
 
     m_textureCoords = new Vector2[m_numVertices];
     m_textureCoords[0] = Vector2(0, 0);

@@ -29,9 +29,9 @@ namespace Graphics
     m_textureCoords[0] = Vector2(1.0f, 1.0f);
     m_textureCoords[1] = Vector2(0.0f, 1.0f);
 
-    m_colours = new Vector4[m_numVertices];
-    m_colours[0] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-    m_colours[1] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+    m_colours = new Colour[m_numVertices];
+    m_colours[0] = Colour(1.0f, 0.0f, 0.0f, 1.0f);
+    m_colours[1] = Colour(1.0f, 0.0f, 0.0f, 1.0f);
 
     updateMesh(from, to);
   }

@@ -13,6 +13,7 @@
 #include <SceneObject.h>
 
 #include "ShaderProgram.h"
+#include "Texture.h"
 
 namespace Engine
 {
@@ -34,6 +35,8 @@ namespace Graphics
   private:
     void loadRecursive(Engine::Common::SceneObject *parent, const struct aiScene *scene, const struct aiNode *node,
                        ShaderProgram *sp);
+
+    Texture **m_textures; //!< Textures for each material
   };
 }
 }

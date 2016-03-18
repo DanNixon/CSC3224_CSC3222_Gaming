@@ -7,6 +7,7 @@
 #define _ENGINE_GRAPHICS_COLOUR_H_
 
 #include <SDL/SDL.h>
+#include <assimp/color4.h>
 
 #include <Vector4.h>
 
@@ -31,6 +32,15 @@ namespace Graphics
      */
     Colour(float r = 1.0f, float g = 1.0f, float b = 1.0f, float a = 1.0f)
         : Vector4(r, g, b, a)
+    {
+    }
+
+    /**
+     * @brief Creates a new colour from an Assimp 4D colour.
+     * @param col Assimp colour
+     */
+    Colour(const aiColor4D & col)
+      : Vector4(col.r, col.g, col.b, col.a)
     {
     }
 
