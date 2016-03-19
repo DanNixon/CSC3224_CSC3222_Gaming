@@ -295,11 +295,18 @@ namespace Graphics
 
     aiVector3D *vertices = mesh->mVertices;
 
+    const bool hasColours = mesh->mColors[0] != NULL;
+    const bool hasTexCoords = mesh->HasTextureCoords(0);
+    const bool hasNormals = mesh->HasNormals();
+
+    // Allocate storage
     m->m_numVertices = mesh->mNumFaces * 3;
     m->m_vertices = new Vector3[m->m_numVertices];
     m->m_colours = new Colour[m->m_numVertices];
-    if (mesh->HasTextureCoords(0))
+    if (hasTexCoords)
       m->m_textureCoords = new Vector2[m->m_numVertices];
+    if (hasNormals)
+      m->m_normals = new Vector3[m->m_numVertices];
 
     // Get lighting data
     aiColor4D c;
@@ -330,22 +337,31 @@ namespace Graphics
 
         const aiVector3D &v = vertices[index];
 
-        if (mesh->mColors[0] != NULL)
+        if (hasColours)
           m->m_colours[idx] = Colour(mesh->mColors[0][index]);
         else
           m->m_colours[idx] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
 
-        if (mesh->HasTextureCoords(0))
+        if (hasTexCoords)
         {
-          const aiVector3D tex = mesh->mTextureCoords[0][index];
+          const aiVector3D &tex = mesh->mTextureCoords[0][index];
           m->m_textureCoords[idx] = Vector2(tex[0], tex[1]);
+        }
+
+        if (hasNormals)
+        {
+          const aiVector3D &norm = mesh->mNormals[index];
+          m->m_normals[idx] = Vector3(norm.x, norm.y, norm.z);
         }
 
         m->m_vertices[idx++] = Vector3(v[0], v[1], v[2]);
       }
     }
 
-    m->generateNormals();
+    // Calculate normals if the model does not have any
+    if (!hasNormals)
+      m->generateNormals();
+
     m->bufferData();
 
     return m;

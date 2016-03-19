@@ -40,6 +40,8 @@ DemoGame::~DemoGame()
  */
 int DemoGame::gameStartup()
 {
+  glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
+
   // Shaders
   m_sp = new ShaderProgram();
   m_sp->addShader(new VertexShader("../resources/shader/vert_lighting.glsl"));
@@ -54,8 +56,8 @@ int DemoGame::gameStartup()
 
   // Model
   ModelLoader l;
-  m_model = l.load("../resources/models/Gaui_R5/Gaui_R5.obj", m_sp);
-  m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -25.0f)) *
+  m_model = l.load("../resources/models/Gaui_X7/Gaui_X7.obj", m_sp);
+  m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -100.0f)) *
                           Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
   m_s->root()->addChild(*m_model);
 

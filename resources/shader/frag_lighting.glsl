@@ -23,7 +23,7 @@ out vec4 fragCol;
 
 void main(void)
 {
-	vec3 lightPos = vec3(0, -500, 0);
+	vec3 lightPos = vec3(0, 500, 0);
 	float lightRadius = 10000.0;
 
   vec3 incident = normalize(lightPos - IN.worldPos);
