@@ -44,7 +44,8 @@ namespace Graphics
       aiProcess_JoinIdenticalVertices |
       aiProcess_SortByPType |
       aiProcess_GenUVCoords |
-      aiProcess_TransformUVCoords );
+      aiProcess_TransformUVCoords |
+      aiProcess_FlipUVs );
 
     if (scene == NULL)
       return NULL;

@@ -63,7 +63,7 @@ int DemoGame::gameStartup()
   // Model
   ModelLoader l;
   m_model = l.load(modelObjStr.str(), m_sp);
-  m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -100.0f)) *
+  m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -50.0f)) *
                           Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
   m_s->root()->addChild(*m_model);
 
