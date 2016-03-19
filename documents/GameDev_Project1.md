@@ -20,7 +20,6 @@
   - [x] Asset import
   - [x] Texture encapsulation
   - [x] Text rendering
-  - [ ] Menu interface (programmatic/generic)
   - [x] Render alpha meshes in correct order
   - [x] Load textures in asset loading
   - [ ] Fix texture/normal loading
@@ -32,6 +31,11 @@
 - [x] `Engine_IO`
   - [x] INI
 - [ ] `Engine_Physics`
+- [ ] `Engine_UIMenu`
+  - [ ] Menu structure definition
+  - [ ] Top bar menu
+  - [ ] Menu options that hold a value
+  - [ ] Menu options loading/saving an `.ini` file
 - [ ] `Engine_Utility`
   - [ ] More random distributions
   - [x] Filesystem string utilities
