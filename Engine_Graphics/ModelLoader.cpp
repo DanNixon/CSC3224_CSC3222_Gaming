@@ -38,14 +38,10 @@ namespace Graphics
   SceneObject *ModelLoader::load(const std::string &filename, ShaderProgram *sp)
   {
     Assimp::Importer i;
-    const struct aiScene *scene = i.ReadFile(filename.c_str(),
-      aiProcess_CalcTangentSpace |
-      aiProcess_Triangulate |
-      aiProcess_JoinIdenticalVertices |
-      aiProcess_SortByPType |
-      aiProcess_GenUVCoords |
-      aiProcess_TransformUVCoords |
-      aiProcess_FlipUVs );
+    const struct aiScene *scene =
+        i.ReadFile(filename.c_str(), aiProcess_CalcTangentSpace | aiProcess_Triangulate |
+                                         aiProcess_JoinIdenticalVertices | aiProcess_SortByPType |
+                                         aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_FlipUVs);
 
     if (scene == NULL)
       return NULL;

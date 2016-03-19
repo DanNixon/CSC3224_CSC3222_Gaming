@@ -22,7 +22,8 @@
   - [x] Text rendering
   - [ ] Menu interface (programmatic/generic)
   - [x] Render alpha meshes in correct order
-  - [ ] Load textures in asset loading
+  - [x] Load textures in asset loading
+  - [ ] Fix texture/normal loading
 - [x] `Engine_Input`
   - [x] Keyboard
   - [x] Mouse
@@ -33,3 +34,4 @@
 - [ ] `Engine_Physics`
 - [ ] `Engine_Utility`
   - [ ] More random distributions
+  - [x] Filesystem string utilities
