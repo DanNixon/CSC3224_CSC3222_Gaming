@@ -5,6 +5,8 @@
 
 #include "DemoGame.h"
 
+#include <sstream>
+
 #include <GraphicalScene.h>
 #include <MemoryManager.h>
 #include <ModelLoader.h>
@@ -54,9 +56,13 @@ int DemoGame::gameStartup()
   m_s = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
                            m_losPMatrix);
 
+  const std::string modelName("Gaui_X7");
+  std::stringstream modelObjStr;
+  modelObjStr << "../resources/models/" << modelName << "/" << modelName << ".obj";
+
   // Model
   ModelLoader l;
-  m_model = l.load("../resources/models/Gaui_X7/Gaui_X7.obj", m_sp);
+  m_model = l.load(modelObjStr.str(), m_sp);
   m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -100.0f)) *
                           Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
   m_s->root()->addChild(*m_model);

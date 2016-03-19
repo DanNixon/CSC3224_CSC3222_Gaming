@@ -329,11 +329,9 @@ namespace Graphics
     {
       const aiFace &face = mesh->mFaces[i];
 
-      int index;
       for (size_t j = 0; j < 3; j++)
       {
-        if (face.mNumIndices > j)
-          index = face.mIndices[j];
+        int index = face.mIndices[j];
 
         const aiVector3D &v = vertices[index];
 
@@ -345,7 +343,7 @@ namespace Graphics
         if (hasTexCoords)
         {
           const aiVector3D &tex = mesh->mTextureCoords[0][index];
-          m->m_textureCoords[idx] = Vector2(tex[0], tex[1]);
+          m->m_textureCoords[idx] = Vector2(tex[0], 1.0f - tex[1]);
         }
 
         if (hasNormals)

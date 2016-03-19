@@ -23,8 +23,8 @@ out vec4 fragCol;
 
 void main(void)
 {
-	vec3 lightPos = vec3(0, 500, 0);
-	float lightRadius = 10000.0;
+	vec3 lightPos = vec3(0, 10000, 0);
+	float lightRadius = 20000.0;
 
   vec3 incident = normalize(lightPos - IN.worldPos);
   vec3 viewDir = normalize(cameraPos - IN.worldPos);
@@ -44,5 +44,4 @@ void main(void)
   vec4 specular = specularColour * sFactor * atten;
 	
 	fragCol = vec4(ambient.rgb + diffuse.rgb + specular.rgb, texCol.a);
-	//fragCol = ambientColour;
 }
