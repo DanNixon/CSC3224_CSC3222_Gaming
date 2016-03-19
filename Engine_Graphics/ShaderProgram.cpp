@@ -65,7 +65,10 @@ namespace Graphics
   bool ShaderProgram::link()
   {
     if (m_valid)
+    {
+      std::cerr << "Not all shaders are compiled, cannot link shader program" << std::endl;
       return false;
+    }
 
     glBindAttribLocation(m_program, VERTEX_BUFFER, "position");
     glBindAttribLocation(m_program, COLOUR_BUFFER, "colour");
@@ -99,6 +102,14 @@ namespace Graphics
     }
 
     m_valid = (status != GL_FALSE);
+
+    if (!m_valid)
+    {
+      char errorMsg[2048];
+      glGetInfoLogARB(m_program, sizeof(errorMsg), NULL, errorMsg);
+      std::cerr << "Shader program failed to link: " << errorMsg << std::endl;
+    }
+
     return m_valid;
   }
 }

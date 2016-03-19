@@ -74,7 +74,7 @@ namespace Graphics
     if (m_texture != NULL)
       m_texture->use(program, 0);
 
-    m_mesh->draw();
+    m_mesh->draw(program);
 
     glBindTexture(GL_TEXTURE_2D, 0);
   }

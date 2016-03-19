@@ -76,10 +76,18 @@ namespace Graphics
   }
 
   /**
-   * @brief Draws mesh.
+   * @brief Draws the mesh.
+   * @param program The shader program used to draw the mesh
    */
-  void Mesh::draw()
+  void Mesh::draw(GLuint program)
   {
+    glUniform4fv(glGetUniformLocation(program, "ambientColour"), 1, (float *)&m_ambientColour);
+    glUniform4fv(glGetUniformLocation(program, "diffuseColour"), 1, (float *)&m_diffuseColour);
+    glUniform4fv(glGetUniformLocation(program, "specularColour"), 1, (float *)&m_specularColour);
+    glUniform1f(glGetUniformLocation(program, "ambientStrength"), 0.2f);
+    glUniform1f(glGetUniformLocation(program, "shininess"), m_shininess);
+    glUniform1f(glGetUniformLocation(program, "shininessStrength"), m_shininessStrength);
+
     glBindVertexArray(m_arrayObject);
 
     if (m_bufferObject[INDEX_BUFFER])
@@ -293,6 +301,21 @@ namespace Graphics
     if (mesh->HasTextureCoords(0))
       m->m_textureCoords = new Vector2[m->m_numVertices];
 
+    // Get lighting data
+    aiColor4D c;
+
+    if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &c))
+      m->m_ambientColour = Colour(c);
+
+    if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &c))
+      m->m_diffuseColour = Colour(c);
+
+    if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &c))
+      m->m_specularColour = Colour(c);
+
+    aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &(m->m_shininess));
+    aiGetMaterialFloat(material, AI_MATKEY_SHININESS_STRENGTH, &(m->m_shininessStrength));
+
     // Load vertices
     size_t idx = 0;
     for (size_t i = 0; i < mesh->mNumFaces; i++)
@@ -306,9 +329,6 @@ namespace Graphics
           index = face.mIndices[j];
 
         const aiVector3D &v = vertices[index];
-
-        // aiColor4D c;
-        // bool good = AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &c);
 
         if (mesh->mColors[0] != NULL)
           m->m_colours[idx] = Colour(mesh->mColors[0][index]);

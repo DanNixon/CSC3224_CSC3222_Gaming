@@ -42,8 +42,8 @@ int DemoGame::gameStartup()
 {
   // Shaders
   m_sp = new ShaderProgram();
-  m_sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
-  m_sp->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
+  m_sp->addShader(new VertexShader("../resources/shader/vert_lighting.glsl"));
+  m_sp->addShader(new FragmentShader("../resources/shader/frag_lighting.glsl"));
   m_sp->link();
 
   // Scene

@@ -65,7 +65,7 @@ namespace Graphics
     Mesh();
     virtual ~Mesh();
 
-    virtual void draw();
+    virtual void draw(GLuint program);
 
     void setStaticColour(const Colour &col);
 
@@ -85,7 +85,13 @@ namespace Graphics
     Engine::Maths::Vector2 *m_textureCoords; //!< Pointer to vertex texture coordinate data
     Engine::Maths::Vector3 *m_normals;       //!< Pointer to vertex normals data
     Engine::Maths::Vector3 *m_tangents;      //!< Pointer to vertex tangents data
-    size_t *m_indices;                       //!< Pointer to vertex indices data
+    size_t *m_indices;                       //!< Pointer to vertex indices
+
+    Colour m_ambientColour;    //!< Colour of scattered ambient light
+    Colour m_diffuseColour;    //!< Colour of diffuse scattered light
+    Colour m_specularColour;   //!< Colour of specular reflected light
+    float m_shininess;         //!< Shininess of the material (specular exponent)
+    float m_shininessStrength; //!< Coefficient of specular lighting contribution
   };
 }
 }

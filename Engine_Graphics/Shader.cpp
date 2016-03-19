@@ -74,7 +74,16 @@ namespace Graphics
 
     GLint status;
     glGetShaderiv(m_shaderObject, GL_COMPILE_STATUS, &status);
-    return (status != GL_FALSE);
+    bool success = (status != GL_FALSE);
+
+    if (!success)
+    {
+      char errorMsg[2048];
+      glGetInfoLogARB(m_shaderObject, sizeof(errorMsg), NULL, errorMsg);
+      std::cerr << "Shader failed to compile (from file: " << filename << "): " << errorMsg << std::endl;
+    }
+
+    return success;
   }
 }
 }
