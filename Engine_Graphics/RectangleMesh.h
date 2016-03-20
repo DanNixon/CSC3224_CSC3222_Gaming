@@ -10,6 +10,8 @@
 
 #include <Vector2.h>
 
+#include "Alignment.h"
+
 namespace Engine
 {
 namespace Graphics
@@ -22,10 +24,28 @@ namespace Graphics
   class RectangleMesh : public Mesh
   {
   public:
-    RectangleMesh(const Engine::Maths::Vector2 &dimensions);
+    RectangleMesh(const Engine::Maths::Vector2 &dimensions, Alignment_bitset alignment = Alignment_bitset());
     virtual ~RectangleMesh();
 
-    void resize(const Engine::Maths::Vector2 &dimensions);
+    inline Engine::Maths::Vector2 dimensions() const
+    {
+      return m_dimensions;
+    }
+
+    void setDimensions(const Engine::Maths::Vector2 &dimensions);
+
+    inline Alignment_bitset alignment() const
+    {
+      return m_alignment;
+    }
+
+    void setAlignment(const Alignment_bitset &alignment);
+
+  private:
+    void resize();
+
+    Engine::Maths::Vector2 m_dimensions;
+    Alignment_bitset m_alignment;
   };
 }
 }

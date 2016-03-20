@@ -7,5 +7,6 @@
   <ItemGroup>
     <ClInclude Include="Random.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="EnumClassBitset.h" />
   </ItemGroup>
 </Project>

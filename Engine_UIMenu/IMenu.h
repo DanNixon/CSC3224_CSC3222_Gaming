@@ -44,7 +44,7 @@ namespace Engine
 
       virtual void layout() = 0;
 
-    private:
+    protected:
       Engine::Graphics::ShaderProgram *m_shaderProg;
       TTF_Font *m_font;
       float m_textHeight;

@@ -10,6 +10,8 @@
 
 #include <SDL_ttf.h>
 
+#include "Alignment.h"
+
 namespace Engine
 {
 namespace Graphics
@@ -22,7 +24,7 @@ namespace Graphics
   class TextPane : public RenderableObject
   {
   public:
-    TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font);
+    TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font, Alignment_bitset alignment = Alignment_bitset());
     virtual ~TextPane();
 
     void setText(const std::string &str);

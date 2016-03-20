@@ -25,5 +25,6 @@
     <ClInclude Include="RectangleMesh.h" />
     <ClInclude Include="LineMesh.h" />
     <ClInclude Include="GraphicalScene.h" />
+    <ClInclude Include="Alignment.h" />
   </ItemGroup>
 </Project>

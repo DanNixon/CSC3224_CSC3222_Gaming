@@ -20,8 +20,8 @@ namespace Graphics
    * @param s Shader used to render text
    * @param font Text font
    */
-  TextPane::TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font)
-      : RenderableObject(name, new RectangleMesh(Vector2(height, 1.0f)), s, new Texture())
+  TextPane::TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font, Alignment_bitset alignment)
+      : RenderableObject(name, new RectangleMesh(Vector2(height, 1.0f), alignment), s, new Texture())
       , m_height(height)
       , m_font(font)
   {
@@ -43,7 +43,7 @@ namespace Graphics
     float ratio = m_height / dim.y();
     dim = dim * ratio;
 
-    static_cast<RectangleMesh *>(m_mesh)->resize(dim);
+    static_cast<RectangleMesh *>(m_mesh)->setDimensions(dim);
   }
 
   /**

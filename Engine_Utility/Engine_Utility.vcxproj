@@ -158,6 +158,7 @@
     <ClCompile Include="StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnumClassBitset.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="StringUtils.h" />
   </ItemGroup>

@@ -18,7 +18,7 @@ namespace Engine
       : IMenu(font, height)
       , m_margin(0.05f, 0.05f)
     {
-      setPosition(Vector3(-1.0f, 1.0f - height, 0.0f));
+      setPosition(Vector3(-1.0f, 1.0f - height - m_margin.y(), 0.0f));
     }
 
     TopBarMenu::~TopBarMenu()
@@ -27,7 +27,7 @@ namespace Engine
 
     void TopBarMenu::layout()
     {
-      Vector3 lastX(0.0f, 0.0f, 0.0f);
+      Vector3 nextPos(m_margin.x() * 0.5f, m_textHeight * 0.5f, 0.0f);
 
       for (auto it = m_root->children().begin(); it != m_root->children().end(); ++it)
       {
@@ -35,16 +35,11 @@ namespace Engine
 
         if (m)
         {
+          (*it)->setModelMatrix(Matrix4::Translation(nextPos));
+
           auto bBox = m->boundingBox();
-
-          Vector3 offset = (bBox.second - bBox.first);
-          offset[0] += m_margin.x();
-
-          Vector3 pos = lastX + (offset * 0.5f);
-
-          lastX[0] += offset.x();
-
-          (*it)->setModelMatrix(Matrix4::Translation(pos));
+          Vector3 boxDims = (bBox.second - bBox.first);
+          nextPos[0] += boxDims.x() + m_margin.x();
         }
       }
     }

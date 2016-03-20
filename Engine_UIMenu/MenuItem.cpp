@@ -5,7 +5,12 @@
 
 #include "MenuItem.h"
 
+#include <Alignment.h>
+#include <RectangleMesh.h>
+
 #include "IMenu.h"
+
+using namespace Engine::Graphics;
 
 namespace Engine
 {
@@ -16,6 +21,11 @@ namespace Engine
     {
       parent->addChild(*this);
       setText(name);
+
+      Alignment_bitset align;
+      align.set(Alignment::X_LEFT);
+      align.set(Alignment::Y_BOTTOM);
+      static_cast<RectangleMesh *>(m_mesh)->setAlignment(align);
     }
 
     MenuItem::~MenuItem()
