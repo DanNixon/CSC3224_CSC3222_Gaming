@@ -8,9 +8,12 @@
 
 #include <GraphicalScene.h>
 
+#include <map>
+
 #include <SDL_ttf.h>
 
 #include <ShaderProgram.h>
+#include <Colour.h>
 
 #include "MenuItem.h"
 
@@ -18,10 +21,18 @@ namespace Engine
 {
   namespace UIMenu
   {
+    enum class MenuItemState
+    {
+      NORMAL,
+      HOVER,
+      SELECTED,
+      DISABLED
+    };
+
     class IMenu : public Engine::Graphics::GraphicalScene
     {
     public:
-      IMenu(TTF_Font *font, float height = 1.0f);
+      IMenu(TTF_Font *font, float height = 0.1f);
       virtual ~IMenu();
 
       inline Engine::Graphics::ShaderProgram *shader() const
@@ -39,6 +50,11 @@ namespace Engine
         return m_textHeight;
       }
 
+      inline Engine::Graphics::Colour itemColour(MenuItemState state)
+      {
+        return m_itemColours[state];
+      }
+
       Engine::Maths::Vector3 position() const;
       void setPosition(const Engine::Maths::Vector3 &position);
 
@@ -48,6 +64,7 @@ namespace Engine
       Engine::Graphics::ShaderProgram *m_shaderProg;
       TTF_Font *m_font;
       float m_textHeight;
+      std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours;
     };
   }
 }

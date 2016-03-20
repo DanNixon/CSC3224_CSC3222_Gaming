@@ -28,6 +28,12 @@ namespace Engine
       m_shaderProg->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
       m_shaderProg->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
       m_shaderProg->link();
+
+      // Defualt colours
+      m_itemColours[MenuItemState::NORMAL] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
+      m_itemColours[MenuItemState::HOVER] = Colour(0.8f, 0.9f, 1.0f, 1.0f);
+      m_itemColours[MenuItemState::SELECTED] = Colour(0.5f, 0.8f, 1.0f, 1.0f);
+      m_itemColours[MenuItemState::DISABLED] = Colour(0.5f, 0.5f, 0.5f, 1.0f);
     }
 
     IMenu::~IMenu()

@@ -27,6 +27,9 @@ namespace Graphics
   Texture::~Texture()
   {
     glDeleteTextures(1, &m_texture);
+
+    if (m_sdlSurface)
+      SDL_FreeSurface(m_sdlSurface);
   }
 
   /**
@@ -44,10 +47,12 @@ namespace Graphics
    * @brief Generates a texture with text.
    * @param text Text to display
    * @param font Font to display with
-   * @param colour Text colour
+   * @param fgColour Text colour
+   * @param mode Rendering mode
+   * @param bgColour Background colour
    * @return GL texture, 0 if loading/generation failed
    */
-  void Texture::text(const std::string &text, TTF_Font *font, const Colour &colour)
+  void Texture::text(const std::string &text, TTF_Font *font, const Colour &fgColour, TextMode mode, const Colour &bgColour)
   {
     if (m_texture != 0)
       glDeleteTextures(1, &m_texture);
@@ -55,11 +60,42 @@ namespace Graphics
     glGenTextures(1, &m_texture);
     glBindTexture(GL_TEXTURE_2D, m_texture);
 
-    SDL_Surface *img = TTF_RenderText_Blended(font, text.c_str(), colour.sdlColour());
+    SDL_Surface *pallate;
+    switch (mode)
+    {
+    case TextMode::SHADED:
+    {
+      pallate = TTF_RenderText_Shaded(font, text.c_str(), fgColour.sdlColour(), bgColour.sdlColour());
+      break;
+    }
+    default:
+      pallate = TTF_RenderText_Blended(font, text.c_str(), fgColour.sdlColour());
+    }
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+    Uint32 rmask, gmask, bmask, amask;
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+
+    SDL_Surface *img = SDL_CreateRGBSurface(0, pallate->w, pallate->h, 32, rmask, gmask, bmask, amask);
+    SDL_BlitSurface(pallate, NULL, img, NULL);
+    SDL_FreeSurface(pallate);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+    GLenum error = glGetError();
+    bool good = error == GL_NO_ERROR;
 
     m_size = Vector2((float)img->w, (float)img->h);
 

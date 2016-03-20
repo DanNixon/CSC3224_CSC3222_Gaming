@@ -22,6 +22,12 @@ namespace Engine
 {
 namespace Graphics
 {
+  enum class TextMode
+  {
+    BLENDED,
+    SHADED
+  };
+
   /**
    * @class Texture
    * @brief Encapsulates a GL texture and image loading.
@@ -34,7 +40,7 @@ namespace Graphics
     virtual ~Texture();
 
     bool load(const std::string &filename);
-    void text(const std::string &text, TTF_Font *font, const Colour &colour = Colour());
+    void text(const std::string &text, TTF_Font *font, const Colour &fgColour = Colour(), TextMode mode = TextMode::BLENDED, const Colour & bgColour = Colour(0.0f, 0.0f, 0.0f, 1.0f));
 
     bool valid() const;
     void use(GLuint shaderProgram, int idx) const;
@@ -60,6 +66,8 @@ namespace Graphics
   private:
     std::string m_name; //!< Name of texture
     GLuint m_texture;   //!< GL texture
+
+    SDL_Surface *m_sdlSurface;
 
     Engine::Maths::Vector2 m_size; //!< Dimensions of texture
   };

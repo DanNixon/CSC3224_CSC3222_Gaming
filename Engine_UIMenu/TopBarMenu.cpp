@@ -16,10 +16,11 @@ namespace Engine
   {
     TopBarMenu::TopBarMenu(TTF_Font *font, float height)
       : IMenu(font, height)
-      , m_margin(0.05f, 0.02f)
+      , m_margin(0.01f, 0.01f)
       , m_boxHeight(height)
     {
-      setPosition(Vector3(-1.0f, 1.0f - (height + m_margin.y()), 0.0f));
+      Vector2 dMargin = m_margin * 2.0f;
+      setPosition(Vector3(-1.0f + dMargin.x(), 1.0f - height - dMargin.y(), 0.0f));
     }
 
     TopBarMenu::~TopBarMenu()
@@ -28,7 +29,7 @@ namespace Engine
 
     void TopBarMenu::layout()
     {
-      Vector3 pos(m_margin.x() * 0.5f, 0.0f, 0.0f);
+      Vector3 pos;
 
       for (auto it = m_root->children().begin(); it != m_root->children().end(); ++it)
       {

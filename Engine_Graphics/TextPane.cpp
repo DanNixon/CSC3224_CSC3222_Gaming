@@ -20,15 +20,24 @@ namespace Graphics
    * @param s Shader used to render text
    * @param font Text font
    */
-  TextPane::TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font, Alignment_bitset alignment)
-      : RenderableObject(name, new RectangleMesh(Vector2(height, 1.0f), alignment), s, new Texture())
+  TextPane::TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font, TextMode mode)
+      : RenderableObject(name, new RectangleMesh(Vector2(height, 1.0f)), s, new Texture())
       , m_height(height)
       , m_font(font)
+      , m_mode(mode)
+      , m_fgColour()
+      , m_bgColour(0.0f, 0.0f, 0.0f, 1.0f)
   {
   }
 
   TextPane::~TextPane()
   {
+  }
+  
+  void TextPane::setAlignment(Alignment_bitset alignment)
+  {
+    static_cast<RectangleMesh *>(m_mesh)->setAlignment(alignment);
+    redraw();
   }
 
   /**
@@ -37,22 +46,39 @@ namespace Graphics
    */
   void TextPane::setText(const std::string &str)
   {
-    m_texture->text(str, m_font, m_colour);
+    m_text = str;
+    redraw();
+  }
+
+  /**
+   * @brief Sets the colour of the text.
+   * @param col Text colour
+   */
+  void TextPane::setTextColour(const Colour &col)
+  {
+    m_fgColour = col;
+    redraw();
+  }
+
+  /**
+   * @brief Sets the colour of the text background.
+   * @param col Background colour
+   */
+  void TextPane::setBackgroundColour(const Colour &col)
+  {
+    m_bgColour = col;
+    redraw();
+  }
+
+  void TextPane::redraw()
+  {
+    m_texture->text(m_text, m_font, m_fgColour, m_mode, m_bgColour);
 
     Vector2 dim = m_texture->dimensions();
     float ratio = m_height / dim.y();
     dim = dim * ratio;
 
     static_cast<RectangleMesh *>(m_mesh)->setDimensions(dim);
-  }
-
-  /**
-   * @brief Sets the colour fo the text,
-   * @param col Text colour
-   */
-  void TextPane::setColour(const Colour &col)
-  {
-    m_colour = col;
   }
 }
 }

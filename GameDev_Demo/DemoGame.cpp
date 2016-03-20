@@ -48,7 +48,7 @@ int DemoGame::gameStartup()
 
   // Menu (testing)
   m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
-  m_menu = new TopBarMenu(m_font, 0.1f);
+  m_menu = new TopBarMenu(m_font, 0.08f);
 
   MenuItem *root = static_cast<MenuItem *>(m_menu->root());
   MenuItem *item1;
@@ -56,14 +56,18 @@ int DemoGame::gameStartup()
   MenuItem *item3;
 
   item1 = new MenuItem(m_menu, root, "Option One");
+  item1->setState(MenuItemState::SELECTED);
+
   item2 = new MenuItem(m_menu, item1, "Option 1.1");
   item3 = new MenuItem(m_menu, item2, "Option 1.1.1");
   new MenuItem(m_menu, item3, "Option 1.1.1.1");
   item2 = new MenuItem(m_menu, item1, "Option 1.2");
 
   item1 = new MenuItem(m_menu, root, "Option Two");
+  item1->setState(MenuItemState::HOVER);
 
   item1 = new MenuItem(m_menu, root, "Option Three");
+  item1->setState(MenuItemState::DISABLED);
 
   item1 = new MenuItem(m_menu, root, "Option Four");
 
@@ -142,8 +146,8 @@ int DemoGame::gameStartup()
 
   // GL
   glEnable(GL_DEPTH_TEST);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   // Input
   if (JoystickHandler::NumJoysticks() == 0)
