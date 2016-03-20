@@ -13,8 +13,8 @@
 #include <Profiler.h>
 #include <RectangleMesh.h>
 #include <Shaders.h>
-#include <WAVSource.h>
 #include <TopBarMenu.h>
+#include <WAVSource.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"

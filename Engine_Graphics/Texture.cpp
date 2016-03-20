@@ -52,7 +52,8 @@ namespace Graphics
    * @param bgColour Background colour
    * @return GL texture, 0 if loading/generation failed
    */
-  void Texture::text(const std::string &text, TTF_Font *font, const Colour &fgColour, TextMode mode, const Colour &bgColour)
+  void Texture::text(const std::string &text, TTF_Font *font, const Colour &fgColour, TextMode mode,
+                     const Colour &bgColour)
   {
     if (m_texture != 0)
       glDeleteTextures(1, &m_texture);

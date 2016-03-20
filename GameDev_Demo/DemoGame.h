@@ -12,13 +12,13 @@
 
 #include <Context.h>
 #include <IControlScheme.h>
+#include <IMenu.h>
 #include <Listener.h>
 #include <RenderableObject.h>
 #include <Scene.h>
 #include <SceneObject.h>
 #include <ShaderProgram.h>
 #include <Source.h>
-#include <IMenu.h>
 
 /**
  * @class DemoGame
@@ -55,7 +55,7 @@ private:
   Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
   Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
   Engine::Common::Scene *m_ui;         //!< Scene containing UI
-  Engine::UIMenu::IMenu * m_menu;
+  Engine::UIMenu::IMenu *m_menu;
 
   Engine::Audio::Context *m_audioContext;
   Engine::Audio::Listener *m_audioListener;

@@ -12,61 +12,61 @@
 
 #include <SDL_ttf.h>
 
-#include <ShaderProgram.h>
 #include <Colour.h>
+#include <ShaderProgram.h>
 
 #include "MenuItem.h"
 
 namespace Engine
 {
-  namespace UIMenu
+namespace UIMenu
+{
+  enum class MenuItemState
   {
-    enum class MenuItemState
+    NORMAL,
+    HOVER,
+    SELECTED,
+    DISABLED
+  };
+
+  class IMenu : public Engine::Graphics::GraphicalScene
+  {
+  public:
+    IMenu(TTF_Font *font, float height = 0.1f);
+    virtual ~IMenu();
+
+    inline Engine::Graphics::ShaderProgram *shader() const
     {
-      NORMAL,
-      HOVER,
-      SELECTED,
-      DISABLED
-    };
+      return m_shaderProg;
+    }
 
-    class IMenu : public Engine::Graphics::GraphicalScene
+    inline TTF_Font *font() const
     {
-    public:
-      IMenu(TTF_Font *font, float height = 0.1f);
-      virtual ~IMenu();
+      return m_font;
+    }
 
-      inline Engine::Graphics::ShaderProgram *shader() const
-      {
-        return m_shaderProg;
-      }
+    inline float textHeight() const
+    {
+      return m_textHeight;
+    }
 
-      inline TTF_Font *font() const
-      {
-        return m_font;
-      }
+    inline Engine::Graphics::Colour itemColour(MenuItemState state)
+    {
+      return m_itemColours[state];
+    }
 
-      inline float textHeight() const
-      {
-        return m_textHeight;
-      }
+    Engine::Maths::Vector3 position() const;
+    void setPosition(const Engine::Maths::Vector3 &position);
 
-      inline Engine::Graphics::Colour itemColour(MenuItemState state)
-      {
-        return m_itemColours[state];
-      }
+    virtual void layout() = 0;
 
-      Engine::Maths::Vector3 position() const;
-      void setPosition(const Engine::Maths::Vector3 &position);
-
-      virtual void layout() = 0;
-
-    protected:
-      Engine::Graphics::ShaderProgram *m_shaderProg;
-      TTF_Font *m_font;
-      float m_textHeight;
-      std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours;
-    };
-  }
+  protected:
+    Engine::Graphics::ShaderProgram *m_shaderProg;
+    TTF_Font *m_font;
+    float m_textHeight;
+    std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours;
+  };
+}
 }
 
 #endif

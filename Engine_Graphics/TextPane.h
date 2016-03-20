@@ -24,7 +24,8 @@ namespace Graphics
   class TextPane : public RenderableObject
   {
   public:
-    TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font, TextMode mode = TextMode::BLENDED);
+    TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font,
+             TextMode mode = TextMode::BLENDED);
     virtual ~TextPane();
 
     void setText(const std::string &str);
@@ -35,8 +36,8 @@ namespace Graphics
     void redraw();
 
   private:
-    const float m_height;              //!< Height of the text
-    TTF_Font *m_font;                  //!< Text font
+    const float m_height; //!< Height of the text
+    TTF_Font *m_font;     //!< Text font
     TextMode m_mode;
     std::string m_text;
     Engine::Graphics::Colour m_fgColour; //!< Text colour

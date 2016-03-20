@@ -33,7 +33,7 @@ namespace Graphics
   TextPane::~TextPane()
   {
   }
-  
+
   void TextPane::setAlignment(Alignment_bitset alignment)
   {
     static_cast<RectangleMesh *>(m_mesh)->setAlignment(alignment);

@@ -21,8 +21,8 @@ namespace Graphics
    * Rectangle is generated centered about the current position.
    */
   RectangleMesh::RectangleMesh(const Vector2 &dimensions, Alignment_bitset alignment)
-    : m_dimensions(dimensions)
-    , m_alignment(alignment)
+      : m_dimensions(dimensions)
+      , m_alignment(alignment)
   {
     m_type = GL_TRIANGLE_STRIP;
     m_numVertices = 4;

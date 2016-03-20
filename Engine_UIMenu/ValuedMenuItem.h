@@ -10,33 +10,33 @@
 
 namespace Engine
 {
-  namespace UIMenu
+namespace UIMenu
+{
+  template <class T> class ValuedMenuItem : public MenuItem
   {
-    template <class T> class ValuedMenuItem : public MenuItem
+  public:
+    ValuedMenuItem()
     {
-    public:
-      ValuedMenuItem()
-      {
-      }
+    }
 
-      virtual ~ValuedMenuItem()
-      {
-      }
+    virtual ~ValuedMenuItem()
+    {
+    }
 
-      T value() const
-      {
-        return m_value;
-      }
+    T value() const
+    {
+      return m_value;
+    }
 
-      void setValue(const T &value)
-      {
-        m_value = value;
-      }
+    void setValue(const T &value)
+    {
+      m_value = value;
+    }
 
-    private:
-      T m_value;
-    };
-  }
+  private:
+    T m_value;
+  };
+}
 }
 
 #endif

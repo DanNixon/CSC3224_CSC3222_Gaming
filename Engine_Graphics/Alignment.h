@@ -12,27 +12,27 @@
 
 namespace Engine
 {
-  namespace Graphics
+namespace Graphics
+{
+  enum class Alignment : size_t
   {
-    enum class Alignment : size_t
-    {
-      X_LEFT,
-      X_CENTRE,
-      X_RIGHT,
+    X_LEFT,
+    X_CENTRE,
+    X_RIGHT,
 
-      Y_TOP,
-      Y_CENTRE,
-      Y_BOTTOM,
+    Y_TOP,
+    Y_CENTRE,
+    Y_BOTTOM,
 
-      Z_NEAR,
-      Z_CENTRE,
-      Z_FAR,
+    Z_NEAR,
+    Z_CENTRE,
+    Z_FAR,
 
-      MAX_VALUE
-    };
+    MAX_VALUE
+  };
 
-    typedef Engine::Utility::EnumClassBitset<Alignment> Alignment_bitset;
-  }
+  typedef Engine::Utility::EnumClassBitset<Alignment> Alignment_bitset;
+}
 }
 
 #endif

@@ -12,29 +12,29 @@
 
 namespace Engine
 {
-  namespace UIMenu
+namespace UIMenu
+{
+  enum class MenuItemState;
+  class IMenu;
+
+  class MenuItem : public Engine::Graphics::TextPane
   {
-    enum class MenuItemState;
-    class IMenu;
+  public:
+    MenuItem(IMenu *menu, MenuItem *parent, const std::string &name);
+    virtual ~MenuItem();
 
-    class MenuItem : public Engine::Graphics::TextPane
+    MenuItemState state() const
     {
-    public:
-      MenuItem(IMenu *menu, MenuItem *parent, const std::string &name);
-      virtual ~MenuItem();
+      return m_state;
+    }
 
-      MenuItemState state() const
-      {
-        return m_state;
-      }
+    void setState(MenuItemState state);
 
-      void setState(MenuItemState state);
-
-    protected:
-      IMenu *m_menu;
-      MenuItemState m_state;
-    };
-  }
+  protected:
+    IMenu *m_menu;
+    MenuItemState m_state;
+  };
+}
 }
 
 #endif
