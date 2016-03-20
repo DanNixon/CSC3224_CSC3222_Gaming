@@ -15,35 +15,6 @@ namespace Engine
 namespace Graphics
 {
   /**
-   * @brief Gets the upper and lower bounds of the vertices of a mesh.
-   * @param m Mesh to get bounds for
-   * @return Pair containing upper and lower bounding vertices
-   */
-  std::pair<Vector3, Vector3> Mesh::GetBoundingBox(Mesh *m)
-  {
-    const float maxFloat = std::numeric_limits<float>::max();
-    const float minFloat = std::numeric_limits<float>::min();
-
-    Vector3 min(maxFloat, maxFloat, maxFloat);
-    Vector3 max(minFloat, minFloat, minFloat);
-
-    for (size_t i = 0; i < m->m_numVertices; i++)
-    {
-      const Vector3 &v = m->m_vertices[i];
-
-      for (int j = 0; j < 3; j++)
-      {
-        if (v[j] < min[j])
-          min[j] = v[j];
-        else if (v[j] > max[j])
-          max[j] = v[j];
-      }
-    }
-
-    return std::make_pair(min, max);
-  }
-
-  /**
    * @brief Creates a new empty mesh.
    */
   Mesh::Mesh()
@@ -111,6 +82,34 @@ namespace Graphics
     }
 
     bufferData();
+  }
+
+  /**
+   * @brief Gets the upper and lower bounds of the vertices of the mesh.
+   * @return Pair containing upper and lower bounding vertices
+   */
+  std::pair<Vector3, Vector3> Mesh::boundingBox()
+  {
+    const float maxFloat = std::numeric_limits<float>::max();
+    const float minFloat = std::numeric_limits<float>::min();
+
+    Vector3 min(maxFloat, maxFloat, maxFloat);
+    Vector3 max(minFloat, minFloat, minFloat);
+
+    for (size_t i = 0; i < m_numVertices; i++)
+    {
+      const Vector3 &v = m_vertices[i];
+
+      for (int j = 0; j < 3; j++)
+      {
+        if (v[j] < min[j])
+          min[j] = v[j];
+        else if (v[j] > max[j])
+          max[j] = v[j];
+      }
+    }
+
+    return std::make_pair(min, max);
   }
 
   /**

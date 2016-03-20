@@ -60,14 +60,14 @@ namespace Graphics
 
     static Mesh *LoadMesh(const struct aiMesh *mesh, const struct aiMaterial *material = NULL);
 
-    static std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3> GetBoundingBox(Mesh *m);
-
     Mesh();
     virtual ~Mesh();
 
     virtual void draw(GLuint program);
 
     void setStaticColour(const Colour &col);
+
+    std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3> boundingBox();
 
   protected:
     bool generateNormals();

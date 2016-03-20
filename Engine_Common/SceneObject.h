@@ -57,10 +57,21 @@ namespace Common
     /**
      * @brief Gets the list of children SceneObject of this object.
      * @return List of children
+     * @see SceneObject::numChildren()
      */
     const std::vector<SceneObject *> &children() const
     {
       return m_children;
+    }
+
+    /**
+     * @brief Gets the number of children SceneObject of this object.
+     * @return Number of children
+     * @see SceneObject::children()
+     */
+    size_t numChildren() const
+    {
+      return m_children.size();
     }
 
     /**

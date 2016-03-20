@@ -33,5 +33,15 @@ namespace Engine
     IMenu::~IMenu()
     {
     }
+
+    Vector3 IMenu::position() const
+    {
+      return m_root->modelMatrix().positionVector();
+    }
+
+    void IMenu::setPosition(const Vector3 &position)
+    {
+      m_root->setModelMatrix(Matrix4::Translation(position));
+    }
   }
 }

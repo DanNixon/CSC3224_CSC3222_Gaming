@@ -48,7 +48,7 @@ int DemoGame::gameStartup()
 
   // Menu
   m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
-  m_menu = new TopBarMenu(m_font, 0.1);
+  m_menu = new TopBarMenu(m_font, 0.1f);
 
   MenuItem *item;
   MenuItem *root = static_cast<MenuItem *>(m_menu->root());
@@ -57,6 +57,8 @@ int DemoGame::gameStartup()
   item = new MenuItem(m_menu, root, "Option Two");
   item = new MenuItem(m_menu, root, "Option Three");
   item = new MenuItem(m_menu, root, "Option Four");
+
+  m_menu->layout();
 
   // Shaders
   m_sp = new ShaderProgram();
@@ -200,7 +202,7 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
                             Matrix4::Rotation(pitch, Vector3(0.0f, 0.0f, 1.0f)) *
                             Matrix4::Rotation(yaw, Vector3(0.0f, 1.0f, 0.0f)));
 
-    //m_s->update(dtMilliSec, Subsystem::GRAPHICS);
+    m_s->update(dtMilliSec, Subsystem::GRAPHICS);
     m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
     m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
 

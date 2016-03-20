@@ -24,20 +24,23 @@ namespace Engine
       IMenu(TTF_Font *font, float height = 1.0f);
       virtual ~IMenu();
 
-      Engine::Graphics::ShaderProgram *shader() const
+      inline Engine::Graphics::ShaderProgram *shader() const
       {
         return m_shaderProg;
       }
 
-      TTF_Font *font() const
+      inline TTF_Font *font() const
       {
         return m_font;
       }
 
-      float textHeight() const
+      inline float textHeight() const
       {
         return m_textHeight;
       }
+
+      Engine::Maths::Vector3 position() const;
+      void setPosition(const Engine::Maths::Vector3 &position);
 
       virtual void layout() = 0;
 
