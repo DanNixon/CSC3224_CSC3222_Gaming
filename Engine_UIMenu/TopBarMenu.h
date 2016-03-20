@@ -15,8 +15,10 @@ namespace Engine
     class TopBarMenu : public IMenu
     {
     public:
-      TopBarMenu();
+      TopBarMenu(TTF_Font *font, float height = 1.0f);
       virtual ~TopBarMenu();
+
+      virtual void layout();
     };
   }
 }

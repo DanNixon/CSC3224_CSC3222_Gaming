@@ -6,16 +6,20 @@
 #ifndef _ENGINE_UIMENU_MENUITEM_H_
 #define _ENGINE_UIMENU_MENUITEM_H_
 
-#include <IMemoryManaged.h>
+#include <TextPane.h>
+
+#include <vector>
 
 namespace Engine
 {
   namespace UIMenu
   {
-    class MenuItem : public Engine::Common::IMemoryManaged
+    class IMenu;
+
+    class MenuItem : public Engine::Graphics::TextPane
     {
     public:
-      MenuItem();
+      MenuItem(IMenu *menu, MenuItem *parent, const std::string &name);
       virtual ~MenuItem();
     };
   }

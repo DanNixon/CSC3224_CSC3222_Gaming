@@ -8,6 +8,8 @@
 
 #include <Game.h>
 
+#include <SDL_ttf.h>
+
 #include <Context.h>
 #include <IControlScheme.h>
 #include <Listener.h>
@@ -16,6 +18,7 @@
 #include <SceneObject.h>
 #include <ShaderProgram.h>
 #include <Source.h>
+#include <IMenu.h>
 
 /**
  * @class DemoGame
@@ -40,6 +43,8 @@ private:
   Uint8 m_profileLoop;
   Uint8 m_testLoop;
 
+  TTF_Font *m_font;
+
   Engine::Graphics::ShaderProgram *m_sp;
   Engine::Graphics::ShaderProgram *m_uiShader;
 
@@ -50,6 +55,7 @@ private:
   Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
   Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
   Engine::Common::Scene *m_ui;         //!< Scene containing UI
+  Engine::UIMenu::IMenu * m_menu;
 
   Engine::Audio::Context *m_audioContext;
   Engine::Audio::Listener *m_audioListener;

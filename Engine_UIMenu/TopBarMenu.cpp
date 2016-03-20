@@ -9,12 +9,18 @@ namespace Engine
 {
   namespace UIMenu
   {
-    TopBarMenu::TopBarMenu()
+    TopBarMenu::TopBarMenu(TTF_Font *font, float height)
+      : IMenu(font, height)
     {
     }
 
     TopBarMenu::~TopBarMenu()
     {
+    }
+
+    void TopBarMenu::layout()
+    {
+      // TODO
     }
   }
 }

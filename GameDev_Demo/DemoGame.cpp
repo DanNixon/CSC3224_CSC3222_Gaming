@@ -14,6 +14,7 @@
 #include <RectangleMesh.h>
 #include <Shaders.h>
 #include <WAVSource.h>
+#include <TopBarMenu.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -24,6 +25,7 @@ using namespace Engine::Graphics;
 using namespace Engine::Maths;
 using namespace Engine::Input;
 using namespace Engine::Audio;
+using namespace Engine::UIMenu;
 
 /**
  * @brief Creates a new demonstration game instance.
@@ -43,6 +45,18 @@ DemoGame::~DemoGame()
 int DemoGame::gameStartup()
 {
   glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
+
+  // Menu
+  m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
+  m_menu = new TopBarMenu(m_font, 0.1);
+
+  MenuItem *item;
+  MenuItem *root = static_cast<MenuItem *>(m_menu->root());
+
+  item = new MenuItem(m_menu, root, "Option One");
+  item = new MenuItem(m_menu, root, "Option Two");
+  item = new MenuItem(m_menu, root, "Option Three");
+  item = new MenuItem(m_menu, root, "Option Four");
 
   // Shaders
   m_sp = new ShaderProgram();
@@ -90,7 +104,7 @@ int DemoGame::gameStartup()
   m_uiShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
   m_uiShader->link();
 
-  m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
+  m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
                             Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
   RenderableObject *leftStickArea =
@@ -186,8 +200,9 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
                             Matrix4::Rotation(pitch, Vector3(0.0f, 0.0f, 1.0f)) *
                             Matrix4::Rotation(yaw, Vector3(0.0f, 1.0f, 0.0f)));
 
-    m_s->update(dtMilliSec, Subsystem::GRAPHICS);
+    //m_s->update(dtMilliSec, Subsystem::GRAPHICS);
     m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
+    m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
 
     swapBuffers();
   }
