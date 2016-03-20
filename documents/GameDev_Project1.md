@@ -32,8 +32,9 @@
   - [x] INI
 - [ ] `Engine_Physics`
 - [ ] `Engine_UIMenu`
-  - [ ] Menu structure definition
-  - [ ] Top bar menu
+  - [x] Menu structure definition
+  - [x] Top bar menu
+  - [ ] Mouse interaction
   - [ ] Menu options that hold a value
   - [ ] Menu options loading/saving an `.ini` file
 - [ ] `Engine_Utility`
