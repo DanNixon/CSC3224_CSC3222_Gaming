@@ -46,17 +46,26 @@ int DemoGame::gameStartup()
 {
   glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
 
-  // Menu
+  // Menu (testing)
   m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
   m_menu = new TopBarMenu(m_font, 0.1f);
 
-  MenuItem *item;
   MenuItem *root = static_cast<MenuItem *>(m_menu->root());
+  MenuItem *item1;
+  MenuItem *item2;
+  MenuItem *item3;
 
-  item = new MenuItem(m_menu, root, "Option One");
-  item = new MenuItem(m_menu, root, "Option Two");
-  item = new MenuItem(m_menu, root, "Option Three");
-  item = new MenuItem(m_menu, root, "Option Four");
+  item1 = new MenuItem(m_menu, root, "Option One");
+  item2 = new MenuItem(m_menu, item1, "Option 1.1");
+  item3 = new MenuItem(m_menu, item2, "Option 1.1.1");
+  new MenuItem(m_menu, item3, "Option 1.1.1.1");
+  item2 = new MenuItem(m_menu, item1, "Option 1.2");
+
+  item1 = new MenuItem(m_menu, root, "Option Two");
+
+  item1 = new MenuItem(m_menu, root, "Option Three");
+
+  item1 = new MenuItem(m_menu, root, "Option Four");
 
   m_menu->layout();
 

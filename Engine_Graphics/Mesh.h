@@ -67,7 +67,8 @@ namespace Graphics
 
     void setStaticColour(const Colour &col);
 
-    std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3> boundingBox();
+    std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3> boundingBox() const;
+    Engine::Maths::Vector3 boundingBoxDimensions() const;
 
   protected:
     bool generateNormals();

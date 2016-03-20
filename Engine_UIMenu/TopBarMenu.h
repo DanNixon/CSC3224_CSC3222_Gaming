@@ -30,8 +30,12 @@ namespace Engine
 
       virtual void layout();
 
+    protected:
+      void layoutChildRecursive(Engine::Graphics::RenderableObject *item, unsigned int level);
+
     private:
       Engine::Maths::Vector2 m_margin;
+      float m_boxHeight;
     };
   }
 }

@@ -88,7 +88,7 @@ namespace Graphics
    * @brief Gets the upper and lower bounds of the vertices of the mesh.
    * @return Pair containing upper and lower bounding vertices
    */
-  std::pair<Vector3, Vector3> Mesh::boundingBox()
+  std::pair<Vector3, Vector3> Mesh::boundingBox() const
   {
     const float maxFloat = std::numeric_limits<float>::max();
     const float minFloat = std::numeric_limits<float>::min();
@@ -110,6 +110,16 @@ namespace Graphics
     }
 
     return std::make_pair(min, max);
+  }
+
+  /**
+   * @brief Gets dimensions of the bounding box of the vertices of the mesh.
+   * @return Dimensions
+   */
+  Vector3 Mesh::boundingBoxDimensions() const
+  {
+    auto box = boundingBox();
+    return box.second - box.first;
   }
 
   /**
