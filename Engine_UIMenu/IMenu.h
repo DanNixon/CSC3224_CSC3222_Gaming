@@ -68,7 +68,7 @@ namespace UIMenu
     virtual void handleButton(const SDL_MouseButtonEvent &e);
     virtual void handleMotion(const SDL_MouseMotionEvent &e);
 
-    void checkMouseOver(const Engine::Maths::Vector3 &mousePos, Engine::Common::SceneObject *node);
+    bool checkMouseOver(const Engine::Maths::Vector3 &mousePos, Engine::Common::SceneObject *node);
 
   protected:
     Engine::Graphics::ShaderProgram *m_shaderProg;
@@ -77,6 +77,7 @@ namespace UIMenu
     int m_screenHeight;
     float m_textHeight;
     std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours;
+    MenuItem *m_currentMouseOver;
   };
 }
 }

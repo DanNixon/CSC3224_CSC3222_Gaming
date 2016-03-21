@@ -74,8 +74,11 @@ namespace UIMenu
 
   void IMenu::handleButton(const SDL_MouseButtonEvent &e)
   {
-    // TODO
-    std::cout << "click" << std::endl;
+    if (e.button == SDL_BUTTON_LEFT && e.type == SDL_MOUSEBUTTONUP)
+    {
+      // TODO
+      std::cout << m_currentMouseOver->name() << std::endl;
+    }
   }
 
   void IMenu::handleMotion(const SDL_MouseMotionEvent &e)
@@ -85,8 +88,10 @@ namespace UIMenu
     checkMouseOver(mousePos, m_root);
   }
 
-  void IMenu::checkMouseOver(const Vector3 &mousePos, SceneObject *node)
+  bool IMenu::checkMouseOver(const Vector3 &mousePos, SceneObject *node)
   {
+    bool retVal = false;
+
     for (SceneObject::SceneObjectListIter it = node->children().begin(); it != node->children().end(); ++it)
     {
       MenuItem *obj = static_cast<MenuItem *>(*it);
@@ -94,14 +99,31 @@ namespace UIMenu
       if (obj->state() != MenuItemState::DISABLED)
       {
         auto bb = m->boundingBox();
+        bb *= 1.15f;
         bb += obj->worldTransform().positionVector();
 
-        if (bb.pointInside(mousePos))
+        bool mouseOver = bb.pointInside(mousePos);
+        if (mouseOver)
+          m_currentMouseOver = obj;
+
+        if (mouseOver || (obj->state() == MenuItemState::HOVER && checkMouseOver(mousePos, obj)))
+        {
           obj->setState(MenuItemState::HOVER);
+          obj->setActive(true, 1);
+
+          retVal = true;
+        }
         else
+        {
           obj->setState(MenuItemState::NORMAL);
+          bool v = obj->active();
+          obj->setActive(false, 1);
+          obj->setActive(v);
+        }
       }
     }
+
+    return retVal;
   }
 }
 }

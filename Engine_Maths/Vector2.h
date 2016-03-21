@@ -186,6 +186,19 @@ namespace Maths
     }
 
     /**
+     * @brief Multiplies components of this vector by a scalar.
+     * @param a Scalar to multiply by
+     * @return This vector
+     */
+    inline Vector2 &operator*=(float a)
+    {
+      m_x *= a;
+      m_y *= a;
+
+      return *this;
+    }
+
+    /**
      * @brief Divides components of this vector by another.
      * @param rhs Vector to divide by
      * @return Result

@@ -55,6 +55,14 @@ namespace Engine
         return *this;
       }
 
+      BoundingBox &operator*=(float f)
+      {
+        m_lowerLeft *= f;
+        m_upperRight *= f;
+
+        return *this;
+      }
+
     private:
       T m_lowerLeft;
       T m_upperRight;
