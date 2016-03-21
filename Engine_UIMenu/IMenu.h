@@ -14,6 +14,7 @@
 
 #include <Colour.h>
 #include <ShaderProgram.h>
+#include <MouseHandler.h>
 
 #include "MenuItem.h"
 
@@ -28,7 +29,7 @@ namespace UIMenu
     DISABLED
   };
 
-  class IMenu : public Engine::Graphics::GraphicalScene
+  class IMenu : public Engine::Graphics::GraphicalScene, public Engine::Input::MouseHandler
   {
   public:
     IMenu(TTF_Font *font, float height = 0.1f);
@@ -62,6 +63,10 @@ namespace UIMenu
     virtual void hide();
 
     virtual void layout() = 0;
+
+  protected:
+    virtual void handleButton(const SDL_MouseButtonEvent &e);
+    virtual void handleMotion(const SDL_MouseMotionEvent &e);
 
   protected:
     Engine::Graphics::ShaderProgram *m_shaderProg;

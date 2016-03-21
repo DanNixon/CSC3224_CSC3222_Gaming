@@ -51,6 +51,9 @@ namespace UIMenu
   void TopBarMenu::show()
   {
     m_root->setActive(true, 1);
+
+    // Enable mouse event handling
+    enable();
   }
 
   void TopBarMenu::layoutChildRecursive(RenderableObject *item, unsigned int level)

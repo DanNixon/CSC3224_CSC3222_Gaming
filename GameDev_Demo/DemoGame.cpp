@@ -72,6 +72,7 @@ int DemoGame::gameStartup()
 
   m_menu->layout();
   m_menu->hide();
+  addEventHandler(m_menu);
 
   // Shaders
   m_sp = new ShaderProgram();

@@ -57,11 +57,28 @@ namespace UIMenu
   void IMenu::show()
   {
     m_root->setActive(true, std::numeric_limits<size_t>::max());
+
+    // Enable mouse event handling
+    enable();
   }
 
   void IMenu::hide()
   {
+    // Disable mouse event handling
+    disable();
+
     m_root->setActive(false, std::numeric_limits<size_t>::max());
+  }
+
+  void IMenu::handleButton(const SDL_MouseButtonEvent &e)
+  {
+    // TODO
+    std::cout << "click" << std::endl;
+  }
+
+  void IMenu::handleMotion(const SDL_MouseMotionEvent &e)
+  {
+    // TODO
   }
 }
 }
