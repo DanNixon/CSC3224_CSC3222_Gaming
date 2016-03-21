@@ -33,8 +33,7 @@ public:
       , m_joystick(new Engine::Input::JoystickController(this))
   {
     m_keyboard->setMapping(SDLK_f, S_FPV, true);
-    m_keyboard->setMapping(SDLK_p, S_PAUSE, true);
-    m_keyboard->setMapping(SDLK_r, S_RESET);
+    m_keyboard->setMapping(SDLK_ESCAPE, S_OPENMENU, true);
 
     m_joystick->setAxisMapping(1, A_PITCH);
     m_joystick->setAxisMapping(0, A_ROLL);

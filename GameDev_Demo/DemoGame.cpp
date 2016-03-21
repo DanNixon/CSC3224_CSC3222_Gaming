@@ -74,6 +74,7 @@ int DemoGame::gameStartup()
   item1 = new MenuItem(m_menu, root, "Option Four");
 
   m_menu->layout();
+  m_menu->hide();
 
   // Shaders
   m_sp = new ShaderProgram();
@@ -193,6 +194,12 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
 {
   if (id == m_graphicsLoop)
   {
+    if (m_simControls->state(S_OPENMENU))
+    {
+      m_menu->visible() ? m_menu->hide() : m_menu->show();
+      m_simControls->setState(S_OPENMENU, false);
+    }
+
     // Blade sound when throttle is high
     if (abs(m_simControls->analog(A_THROT)) > 0.2 && !m_audioSource2->isPlaying())
       m_audioSource2->play();

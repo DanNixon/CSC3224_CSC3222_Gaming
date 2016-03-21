@@ -26,7 +26,6 @@ namespace Graphics
    */
   RenderableObject::RenderableObject(const std::string &name, Mesh *m, ShaderProgram *s, Texture *t, bool transparent)
       : SceneObject(name)
-      , m_draw(true)
       , m_transparent(transparent)
       , m_mesh(m)
       , m_shaderProgram(s)
@@ -43,7 +42,7 @@ namespace Graphics
    */
   void RenderableObject::update(float msec, Subsystem sys)
   {
-    if (sys == Subsystem::GRAPHICS && m_draw && m_mesh && m_shaderProgram)
+    if (sys == Subsystem::GRAPHICS && m_active && m_mesh && m_shaderProgram)
     {
       if (m_transparent && m_graphicalScene)
         m_graphicalScene->m_transparent.push_back(this);

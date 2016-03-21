@@ -49,5 +49,20 @@ namespace UIMenu
   {
     m_root->setModelMatrix(Matrix4::Translation(position));
   }
+
+  bool IMenu::visible() const
+  {
+    return m_root->active();
+  }
+
+  void IMenu::show()
+  {
+    m_root->setActive(true, true);
+  }
+
+  void IMenu::hide()
+  {
+    m_root->setActive(false, true);
+  }
 }
 }

@@ -43,6 +43,17 @@ namespace Common
       return m_name;
     }
 
+    void setActive(bool active, bool recursive = true);
+
+    /**
+    * @brief Gets the activ state of this object.
+    * @return Active
+    */
+    inline bool active() const
+    {
+      return m_active;
+    }
+
     /**
      * @brief Adds a SceneObject as a child of this object.
      * @param child Child SceneObject
@@ -111,6 +122,7 @@ namespace Common
     virtual void addToScene(Scene *scene);
 
     const std::string m_name; //!< Name of the object
+    bool m_active;
 
     Engine::Maths::Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
     Engine::Maths::Matrix4 m_worldTransform; //!< World matrix (relative to world origin)

@@ -29,24 +29,6 @@ namespace Graphics
     ~RenderableObject();
 
     /**
-     * @brief Sets the visibility of this object.
-     * @param visible Visibility
-     */
-    void setVisible(bool visible)
-    {
-      m_draw = visible;
-    }
-
-    /**
-     * @brief Gets the visibility of this object.
-     * @return Visibility
-     */
-    inline bool visible() const
-    {
-      return m_draw;
-    }
-
-    /**
      * @brief Sets the transparency of this object.
      * @param transparent Transparency
      */
@@ -131,7 +113,6 @@ namespace Graphics
     virtual void addToScene(Engine::Common::Scene *scene);
 
     GraphicalScene *m_graphicalScene; //!< Graphical scene object is part of
-    bool m_draw;                      //!< Flag indicating if this object should be rendered
     bool m_transparent;               //!< Flag indicating transparency of this object
     Mesh *m_mesh;                     //!< Mesh represented by this object
     ShaderProgram *m_shaderProgram;   //!< Shader used to render m_mesh

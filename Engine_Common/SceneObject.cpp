@@ -19,6 +19,7 @@ namespace Common
    */
   SceneObject::SceneObject(const std::string &name)
       : m_name(name)
+      , m_active(true)
       , m_modelMatrix(Matrix4())
       , m_worldTransform(Matrix4())
       , m_parent(NULL)
@@ -27,6 +28,21 @@ namespace Common
 
   SceneObject::~SceneObject()
   {
+  }
+
+  /**
+   * @brief Sets the active state of this object.
+   * @param active Active
+   */
+  void SceneObject::setActive(bool active, bool recursive)
+  {
+    m_active = active;
+
+    if (recursive)
+    {
+      for (auto it = m_children.begin(); it != m_children.end(); ++it)
+        (*it)->setActive(active);
+    }
   }
 
   /**

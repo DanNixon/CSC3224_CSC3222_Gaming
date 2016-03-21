@@ -58,6 +58,10 @@ namespace UIMenu
     Engine::Maths::Vector3 position() const;
     void setPosition(const Engine::Maths::Vector3 &position);
 
+    bool visible() const;
+    virtual void show();
+    virtual void hide();
+
     virtual void layout() = 0;
 
   protected:

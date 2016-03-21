@@ -22,8 +22,7 @@ enum Controls
   S_YAWCW,
   S_YAWCCW,
   S_FPV,
-  S_PAUSE,
-  S_RESET
+  S_OPENMENU
 };
 
 #endif

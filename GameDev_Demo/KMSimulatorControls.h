@@ -36,9 +36,9 @@ public:
     m_keyboard->setMapping(SDLK_s, S_DECTHROT);
     m_keyboard->setMapping(SDLK_a, S_YAWCCW);
     m_keyboard->setMapping(SDLK_d, S_YAWCW);
+
     m_keyboard->setMapping(SDLK_f, S_FPV, true);
-    m_keyboard->setMapping(SDLK_p, S_PAUSE, true);
-    m_keyboard->setMapping(SDLK_r, S_RESET);
+    m_keyboard->setMapping(SDLK_ESCAPE, S_OPENMENU, true);
 
     m_mouse->setXMapping(A_ROLL);
     m_mouse->setYMapping(A_PITCH);
