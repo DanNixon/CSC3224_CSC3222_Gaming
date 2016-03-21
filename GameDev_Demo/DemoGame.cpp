@@ -55,6 +55,8 @@ int DemoGame::gameStartup()
   MenuItem *item2;
   MenuItem *item3;
 
+  new MenuItem(m_menu, root, "Exit");
+
   item1 = new MenuItem(m_menu, root, "Option One");
   item1->setState(MenuItemState::SELECTED);
 
