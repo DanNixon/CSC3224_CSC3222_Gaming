@@ -28,6 +28,7 @@ namespace UIMenu
       m_margin = margin;
     }
 
+    virtual void show();
     virtual void layout();
 
   protected:

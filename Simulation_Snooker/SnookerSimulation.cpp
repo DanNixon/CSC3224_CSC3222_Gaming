@@ -73,7 +73,7 @@ int SnookerSimulation::gameStartup()
   {
     if (m_balls[i] != NULL)
     {
-      m_table->addChild(*(m_balls[i]));
+      m_table->addChild(m_balls[i]);
       m_entities.push_back(m_balls[i]);
     }
   }
@@ -93,20 +93,20 @@ int SnookerSimulation::gameStartup()
   m_uiShader->link();
 
   m_profileGraphics = new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profileGraphics->setVisible(false);
+  m_profileGraphics->setActive(false);
   m_profileGraphics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
   m_profileGraphics->setText("Graphics: ");
-  m_ui->root()->addChild(*m_profileGraphics);
+  m_ui->root()->addChild(m_profileGraphics);
 
   m_profilePhysics = new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
-  m_profilePhysics->setVisible(false);
+  m_profilePhysics->setActive(false);
   m_profilePhysics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
   m_profilePhysics->setText("Physics: ");
-  m_ui->root()->addChild(*m_profilePhysics);
+  m_ui->root()->addChild(m_profilePhysics);
 
   m_shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
-  m_shotAimLine->setVisible(false);
-  m_balls[0]->addChild(*m_shotAimLine);
+  m_shotAimLine->setActive(false);
+  m_balls[0]->addChild(m_shotAimLine);
 
   // Timed loops
   m_graphicsLoop = addTimedLoop(16.66f, "graphics");
@@ -194,8 +194,8 @@ void SnookerSimulation::gameShutdown()
  */
 void SnookerSimulation::updateControl()
 {
-  m_profileGraphics->setVisible(m_controls->state(S_PROFILE_DISPLAY));
-  m_profilePhysics->setVisible(m_controls->state(S_PROFILE_DISPLAY));
+  m_profileGraphics->setActive(m_controls->state(S_PROFILE_DISPLAY));
+  m_profilePhysics->setActive(m_controls->state(S_PROFILE_DISPLAY));
 
   if (m_mouseStartPosition == NULL)
   {
@@ -230,7 +230,7 @@ void SnookerSimulation::updateControl()
       }
 
       static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(Vector3());
-      m_shotAimLine->setVisible(true);
+      m_shotAimLine->setActive(true);
     }
     else
     {
@@ -249,7 +249,7 @@ void SnookerSimulation::updateControl()
 
     if (!m_controls->state(S_TAKE_SHOT))
     {
-      m_shotAimLine->setVisible(false);
+      m_shotAimLine->setActive(false);
 
       std::cout << "MOUSE UP" << std::endl << "delta mouse: " << deltaMouse << std::endl << std::endl;
 

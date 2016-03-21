@@ -58,7 +58,6 @@ int DemoGame::gameStartup()
   new MenuItem(m_menu, root, "Exit");
 
   item1 = new MenuItem(m_menu, root, "Option One");
-  item1->setState(MenuItemState::SELECTED);
 
   item2 = new MenuItem(m_menu, item1, "Option 1.1");
   item3 = new MenuItem(m_menu, item2, "Option 1.1.1");
@@ -66,10 +65,8 @@ int DemoGame::gameStartup()
   item2 = new MenuItem(m_menu, item1, "Option 1.2");
 
   item1 = new MenuItem(m_menu, root, "Option Two");
-  item1->setState(MenuItemState::HOVER);
 
   item1 = new MenuItem(m_menu, root, "Option Three");
-  item1->setState(MenuItemState::DISABLED);
 
   item1 = new MenuItem(m_menu, root, "Option Four");
 
@@ -97,24 +94,24 @@ int DemoGame::gameStartup()
   m_model = l.load(modelObjStr.str(), m_sp);
   m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -50.0f)) *
                           Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
-  m_s->root()->addChild(*m_model);
+  m_s->root()->addChild(m_model);
 
   // Audio
   m_audioContext = new Context();
   m_audioContext->open();
 
   m_audioListener = new Listener("test_audio_listener");
-  m_s->root()->addChild(*m_audioListener);
+  m_s->root()->addChild(m_audioListener);
 
   m_audioSource1 = new WAVSource("test_audio_source_1", m_audioListener);
   static_cast<WAVSource *>(m_audioSource1)->load("../resources/models/Gaui_R5/Gaui_R5.wav");
   m_audioSource1->setLooping(true);
-  m_s->root()->addChild(*m_audioSource1);
+  m_s->root()->addChild(m_audioSource1);
 
   m_audioSource2 = new WAVSource("test_audio_source_2", m_audioListener);
   static_cast<WAVSource *>(m_audioSource2)->load("../resources/models/Gaui_R5/blade.wav");
   m_audioSource2->setLooping(true);
-  m_s->root()->addChild(*m_audioSource2);
+  m_s->root()->addChild(m_audioSource2);
 
   // UI
   m_uiShader = new ShaderProgram();
@@ -129,23 +126,23 @@ int DemoGame::gameStartup()
       new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
   leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
   leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
-  m_ui->root()->addChild(*leftStickArea);
+  m_ui->root()->addChild(leftStickArea);
 
   m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
   m_leftStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
   m_leftStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
-  leftStickArea->addChild(*m_leftStick);
+  leftStickArea->addChild(m_leftStick);
 
   RenderableObject *rightStickArea =
       new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
   rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
   rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
-  m_ui->root()->addChild(*rightStickArea);
+  m_ui->root()->addChild(rightStickArea);
 
   m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
   m_rightStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
   m_rightStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
-  rightStickArea->addChild(*m_rightStick);
+  rightStickArea->addChild(m_rightStick);
 
   // GL
   glEnable(GL_DEPTH_TEST);

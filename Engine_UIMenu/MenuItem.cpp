@@ -20,7 +20,7 @@ namespace UIMenu
       : TextPane(name, menu->textHeight(), menu->shader(), menu->font(), TextMode::SHADED)
       , m_menu(menu)
   {
-    parent->addChild(*this);
+    parent->addChild(this);
 
     // Set alignment of text textured rectangle
     Alignment_bitset align;

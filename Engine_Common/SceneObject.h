@@ -26,10 +26,16 @@ namespace Common
   {
   public:
     /**
-     * @typedef SceneObjectIter
-     * @brief Const iterator for items of a vector of SceneObject.
+     * @typedef SceneObjectList
+     * @brief List of pointers to SceneObject.
      */
-    typedef std::vector<SceneObject *>::const_iterator SceneObjectIter;
+    typedef std::vector<SceneObject *> SceneObjectList;
+
+    /**
+     * @typedef SceneObjectListIter
+     * @brief Const iterator for items of a SceneObjectList.
+     */
+    typedef SceneObjectList::const_iterator SceneObjectListIter;
 
     SceneObject(const std::string &name);
     ~SceneObject();
@@ -43,7 +49,7 @@ namespace Common
       return m_name;
     }
 
-    void setActive(bool active, bool recursive = true);
+    void setActive(bool active, size_t recursionLevels = 0, size_t currentLevel = 0);
 
     /**
     * @brief Gets the activ state of this object.
@@ -58,11 +64,11 @@ namespace Common
      * @brief Adds a SceneObject as a child of this object.
      * @param child Child SceneObject
      */
-    void addChild(SceneObject &child)
+    void addChild(SceneObject *child)
     {
-      m_children.push_back(&child);
-      child.m_parent = this;
-      child.addToScene(m_scene);
+      m_children.push_back(child);
+      child->m_parent = this;
+      child->addToScene(m_scene);
     }
 
     /**
@@ -129,7 +135,7 @@ namespace Common
 
     SceneObject *m_parent;                 //!< Parent SceneObject
     Scene *m_scene;                        //!< Scene this object belongs to
-    std::vector<SceneObject *> m_children; //!< Children
+    SceneObjectList m_children; //!< Children
   };
 }
 }

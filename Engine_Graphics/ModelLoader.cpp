@@ -114,7 +114,7 @@ namespace Graphics
 
       Mesh *mesh = Mesh::LoadMesh(m, mat);
       RenderableObject *obj = new RenderableObject("obj", mesh, sp, m_textures[matIdx]);
-      sn->addChild(*obj);
+      sn->addChild(obj);
     }
 
     // Children in this node
@@ -122,7 +122,7 @@ namespace Graphics
     {
       SceneObject *child = new SceneObject("child");
       loadRecursive(child, scene, node->mChildren[i], sp);
-      sn->addChild(*child);
+      sn->addChild(child);
     }
   }
 }

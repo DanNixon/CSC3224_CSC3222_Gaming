@@ -34,14 +34,14 @@ namespace Common
    * @brief Sets the active state of this object.
    * @param active Active
    */
-  void SceneObject::setActive(bool active, bool recursive)
+  void SceneObject::setActive(bool active, size_t recursionLevels, size_t currentLevel)
   {
     m_active = active;
 
-    if (recursive)
+    if (currentLevel < recursionLevels)
     {
       for (auto it = m_children.begin(); it != m_children.end(); ++it)
-        (*it)->setActive(active);
+        (*it)->setActive(active, recursionLevels, currentLevel + 1);
     }
   }
 
@@ -57,7 +57,7 @@ namespace Common
     else
       m_worldTransform = m_modelMatrix;
 
-    for (SceneObjectIter i = m_children.begin(); i != m_children.end(); ++i)
+    for (SceneObjectListIter i = m_children.begin(); i != m_children.end(); ++i)
       (*i)->update(msec, sys);
   }
 
@@ -82,7 +82,7 @@ namespace Common
   {
     m_scene = scene;
 
-    for (SceneObjectIter i = m_children.begin(); i != m_children.end(); ++i)
+    for (SceneObjectListIter i = m_children.begin(); i != m_children.end(); ++i)
       (*i)->addToScene(scene);
   }
 }

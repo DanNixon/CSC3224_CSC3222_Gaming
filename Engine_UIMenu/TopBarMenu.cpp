@@ -9,6 +9,7 @@
 
 using namespace Engine::Maths;
 using namespace Engine::Graphics;
+using namespace Engine::Common;
 
 namespace Engine
 {
@@ -45,6 +46,11 @@ namespace UIMenu
         layoutChildRecursive(obj, 1);
       }
     }
+  }
+
+  void TopBarMenu::show()
+  {
+    m_root->setActive(true, 1);
   }
 
   void TopBarMenu::layoutChildRecursive(RenderableObject *item, unsigned int level)

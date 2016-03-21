@@ -32,7 +32,6 @@ namespace UIMenu
     // Defualt colours
     m_itemColours[MenuItemState::NORMAL] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
     m_itemColours[MenuItemState::HOVER] = Colour(0.8f, 0.9f, 1.0f, 1.0f);
-    m_itemColours[MenuItemState::SELECTED] = Colour(0.5f, 0.8f, 1.0f, 1.0f);
     m_itemColours[MenuItemState::DISABLED] = Colour(0.5f, 0.5f, 0.5f, 1.0f);
   }
 
@@ -57,12 +56,12 @@ namespace UIMenu
 
   void IMenu::show()
   {
-    m_root->setActive(true, true);
+    m_root->setActive(true, std::numeric_limits<size_t>::max());
   }
 
   void IMenu::hide()
   {
-    m_root->setActive(false, true);
+    m_root->setActive(false, std::numeric_limits<size_t>::max());
   }
 }
 }

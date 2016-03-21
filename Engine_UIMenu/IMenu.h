@@ -25,7 +25,6 @@ namespace UIMenu
   {
     NORMAL,
     HOVER,
-    SELECTED,
     DISABLED
   };
 
