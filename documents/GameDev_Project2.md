@@ -24,7 +24,7 @@ Extra:
 - [ ] Multirotors
 - [ ] Fixed wings
 
-## Terrain generator:
+## Terrain generator
 
 Parameters:
 
@@ -38,3 +38,26 @@ Parameters:
 Objects:
 
 - Tree
+
+## Options
+
+Menu:
+
+- Exit
+- Simulation
+  - Pause
+  - Reset
+  - Speed?
+- Aircraft
+  - (list all models in `models` directory)
+- Terrain
+  - (list all terrain generator presets)
+- Help (show some help/control listing of some sort)
+
+Config file:
+
+- Terrain generator
+  - (presets)
+- Telemetry
+  - Protocol
+  - COM port
