@@ -1,0 +1,28 @@
+version: 1.0.{build}-{branch}
+
+clone_depth: 1
+skip_tags: true
+
+image:
+  - Visual Studio 2013
+  - Visual Studio 2015
+
+configuration:
+  - Debug
+  - Release
+
+platform:
+  - Win32
+  - X64
+
+build:
+  verbosity: normal
+
+notifications:
+  - provider: Email
+    to:
+      - dan@dan-nixon.com
+    subject: Game engineering build notification
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: true
