@@ -75,10 +75,7 @@ namespace UIMenu
   void IMenu::handleButton(const SDL_MouseButtonEvent &e)
   {
     if (e.button == SDL_BUTTON_LEFT && e.type == SDL_MOUSEBUTTONUP)
-    {
-      // TODO
-      std::cout << m_currentMouseOver->name() << std::endl;
-    }
+      handleMenuOptionSelection(m_currentMouseOver);
   }
 
   void IMenu::handleMotion(const SDL_MouseMotionEvent &e)
@@ -95,7 +92,7 @@ namespace UIMenu
     for (SceneObject::SceneObjectListIter it = node->children().begin(); it != node->children().end(); ++it)
     {
       MenuItem *obj = static_cast<MenuItem *>(*it);
-      Mesh * m = obj->mesh();
+      Mesh *m = obj->mesh();
       if (obj->state() != MenuItemState::DISABLED)
       {
         auto bb = m->boundingBox();

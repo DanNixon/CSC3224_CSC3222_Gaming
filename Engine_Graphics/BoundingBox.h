@@ -8,66 +8,66 @@
 
 namespace Engine
 {
-  namespace Graphics
+namespace Graphics
+{
+  template <class T> class BoundingBox
   {
-    template <class T> class BoundingBox
-    {
-    public:
-      BoundingBox(const T &lowerLeft, const T &upperRight)
+  public:
+    BoundingBox(const T &lowerLeft, const T &upperRight)
         : m_lowerLeft(lowerLeft)
         , m_upperRight(upperRight)
-      {
-      }
+    {
+    }
 
-      T lowerLeft() const
-      {
-        return m_lowerLeft;
-      }
+    T lowerLeft() const
+    {
+      return m_lowerLeft;
+    }
 
-      T upperRight() const
-      {
-        return m_upperRight;
-      }
+    T upperRight() const
+    {
+      return m_upperRight;
+    }
 
-      T size() const
-      {
-        return m_upperRight - m_lowerLeft;
-      }
+    T size() const
+    {
+      return m_upperRight - m_lowerLeft;
+    }
 
-      bool pointInside(T point) const
-      {
-        return m_lowerLeft <= point && point <= m_upperRight;
-      }
+    bool pointInside(T point) const
+    {
+      return m_lowerLeft <= point && point <= m_upperRight;
+    }
 
-      BoundingBox &operator+=(const T &vector)
-      {
-        m_lowerLeft += vector;
-        m_upperRight += vector;
+    BoundingBox &operator+=(const T &vector)
+    {
+      m_lowerLeft += vector;
+      m_upperRight += vector;
 
-        return *this;
-      }
+      return *this;
+    }
 
-      BoundingBox &operator-=(const T &vector)
-      {
-        m_lowerLeft -= vector;
-        m_upperRight -= vector;
+    BoundingBox &operator-=(const T &vector)
+    {
+      m_lowerLeft -= vector;
+      m_upperRight -= vector;
 
-        return *this;
-      }
+      return *this;
+    }
 
-      BoundingBox &operator*=(float f)
-      {
-        m_lowerLeft *= f;
-        m_upperRight *= f;
+    BoundingBox &operator*=(float f)
+    {
+      m_lowerLeft *= f;
+      m_upperRight *= f;
 
-        return *this;
-      }
+      return *this;
+    }
 
-    private:
-      T m_lowerLeft;
-      T m_upperRight;
-    };
-  }
+  private:
+    T m_lowerLeft;
+    T m_upperRight;
+  };
+}
 }
 
 #endif

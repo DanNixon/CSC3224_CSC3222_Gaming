@@ -70,6 +70,8 @@ namespace UIMenu
 
     bool checkMouseOver(const Engine::Maths::Vector3 &mousePos, Engine::Common::SceneObject *node);
 
+    virtual void handleMenuOptionSelection(MenuItem *item) = 0;
+
   protected:
     Engine::Graphics::ShaderProgram *m_shaderProg;
     TTF_Font *m_font;

@@ -243,7 +243,7 @@ namespace Maths
      * @param other Vector to test against
      * @return True if all elements of this vector are less than corresponding elements of other
      */
-    inline bool operator<(const Vector2 & other) const
+    inline bool operator<(const Vector2 &other) const
     {
       return m_x < other.m_x && m_y < other.m_y;
     }
@@ -253,7 +253,7 @@ namespace Maths
      * @param other Vector to test against
      * @return True if all elements of this vector are less than or equal to corresponding elements of other
      */
-    inline bool operator<=(const Vector2 & other) const
+    inline bool operator<=(const Vector2 &other) const
     {
       return m_x <= other.m_x && m_y <= other.m_y;
     }
@@ -263,7 +263,7 @@ namespace Maths
      * @param other Vector to test against
      * @return True if all elements of this vector are greater than corresponding elements of other
      */
-    inline bool operator>(const Vector2 & other) const
+    inline bool operator>(const Vector2 &other) const
     {
       return m_x > other.m_x && m_y > other.m_y;
     }
@@ -273,7 +273,7 @@ namespace Maths
      * @param other Vector to test against
      * @return True if all elements of this vector are greater than or equal to corresponding elements of other
      */
-    inline bool operator>=(const Vector2 & other) const
+    inline bool operator>=(const Vector2 &other) const
     {
       return m_x >= other.m_x && m_y >= other.m_y;
     }
