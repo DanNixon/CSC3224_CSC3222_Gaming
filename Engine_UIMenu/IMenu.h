@@ -13,8 +13,8 @@
 #include <SDL_ttf.h>
 
 #include <Colour.h>
-#include <ShaderProgram.h>
 #include <MouseHandler.h>
+#include <ShaderProgram.h>
 
 #include "MenuItem.h"
 

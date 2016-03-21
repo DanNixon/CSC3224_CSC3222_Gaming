@@ -95,7 +95,8 @@ namespace Graphics
 
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_sdlSurface->w, m_sdlSurface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_sdlSurface->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_sdlSurface->w, m_sdlSurface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+                 m_sdlSurface->pixels);
 
     m_size = Vector2((float)m_sdlSurface->w, (float)m_sdlSurface->h);
 

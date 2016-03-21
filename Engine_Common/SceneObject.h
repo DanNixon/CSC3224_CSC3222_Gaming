@@ -133,8 +133,8 @@ namespace Common
     Engine::Maths::Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
     Engine::Maths::Matrix4 m_worldTransform; //!< World matrix (relative to world origin)
 
-    SceneObject *m_parent;                 //!< Parent SceneObject
-    Scene *m_scene;                        //!< Scene this object belongs to
+    SceneObject *m_parent;      //!< Parent SceneObject
+    Scene *m_scene;             //!< Scene this object belongs to
     SceneObjectList m_children; //!< Children
   };
 }
