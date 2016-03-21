@@ -32,7 +32,7 @@ namespace UIMenu
   class IMenu : public Engine::Graphics::GraphicalScene, public Engine::Input::MouseHandler
   {
   public:
-    IMenu(TTF_Font *font, float height = 0.1f);
+    IMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight = 0.1f);
     virtual ~IMenu();
 
     inline Engine::Graphics::ShaderProgram *shader() const
@@ -68,9 +68,13 @@ namespace UIMenu
     virtual void handleButton(const SDL_MouseButtonEvent &e);
     virtual void handleMotion(const SDL_MouseMotionEvent &e);
 
+    void checkMouseOver(const Engine::Maths::Vector3 &mousePos, Engine::Common::SceneObject *node);
+
   protected:
     Engine::Graphics::ShaderProgram *m_shaderProg;
     TTF_Font *m_font;
+    int m_screenWidth;
+    int m_screenHeight;
     float m_textHeight;
     std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours;
   };

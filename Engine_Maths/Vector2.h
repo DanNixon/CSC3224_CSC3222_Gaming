@@ -226,6 +226,46 @@ namespace Maths
     }
 
     /**
+     * @brief Performs less than test on two vectors.
+     * @param other Vector to test against
+     * @return True if all elements of this vector are less than corresponding elements of other
+     */
+    inline bool operator<(const Vector2 & other) const
+    {
+      return m_x < other.m_x && m_y < other.m_y;
+    }
+
+    /**
+     * @brief Performs less than or equal to test on two vectors.
+     * @param other Vector to test against
+     * @return True if all elements of this vector are less than or equal to corresponding elements of other
+     */
+    inline bool operator<=(const Vector2 & other) const
+    {
+      return m_x <= other.m_x && m_y <= other.m_y;
+    }
+
+    /**
+     * @brief Performs greater than test on two vectors.
+     * @param other Vector to test against
+     * @return True if all elements of this vector are greater than corresponding elements of other
+     */
+    inline bool operator>(const Vector2 & other) const
+    {
+      return m_x > other.m_x && m_y > other.m_y;
+    }
+
+    /**
+     * @brief Performs greater than or equal to test on two vectors.
+     * @param other Vector to test against
+     * @return True if all elements of this vector are greater than or equal to corresponding elements of other
+     */
+    inline bool operator>=(const Vector2 & other) const
+    {
+      return m_x >= other.m_x && m_y >= other.m_y;
+    }
+
+    /**
      * @brief Returns the value of a component of the vector.
      * @param i Index of component to return
      * @return Value of component

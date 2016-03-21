@@ -26,5 +26,6 @@
     <ClInclude Include="LineMesh.h" />
     <ClInclude Include="GraphicalScene.h" />
     <ClInclude Include="Alignment.h" />
+    <ClInclude Include="BoundingBox.h" />
   </ItemGroup>
 </Project>

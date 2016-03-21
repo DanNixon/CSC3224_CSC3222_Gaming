@@ -20,6 +20,7 @@
 #include <Vector3.h>
 #include <Vector4.h>
 
+#include "BoundingBox.h"
 #include "Colour.h"
 
 using std::ifstream;
@@ -67,8 +68,7 @@ namespace Graphics
 
     void setStaticColour(const Colour &col);
 
-    std::pair<Engine::Maths::Vector3, Engine::Maths::Vector3> boundingBox() const;
-    Engine::Maths::Vector3 boundingBoxDimensions() const;
+    BoundingBox<Engine::Maths::Vector3> boundingBox() const;
 
   protected:
     bool generateNormals();

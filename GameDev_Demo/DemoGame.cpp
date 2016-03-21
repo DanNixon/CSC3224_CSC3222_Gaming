@@ -48,7 +48,7 @@ int DemoGame::gameStartup()
 
   // Menu (testing)
   m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
-  m_menu = new TopBarMenu(m_font, 0.08f);
+  m_menu = new TopBarMenu(m_font, windowX(), windowY(), 0.08f);
 
   MenuItem *root = static_cast<MenuItem *>(m_menu->root());
   MenuItem *item1;

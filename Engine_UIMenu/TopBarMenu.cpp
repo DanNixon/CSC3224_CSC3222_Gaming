@@ -15,13 +15,13 @@ namespace Engine
 {
 namespace UIMenu
 {
-  TopBarMenu::TopBarMenu(TTF_Font *font, float height)
-      : IMenu(font, height)
+  TopBarMenu::TopBarMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight)
+      : IMenu(font, screenWidth, screenHeight, textHeight)
       , m_margin(0.01f, 0.01f)
-      , m_boxHeight(height)
+      , m_boxHeight(textHeight)
   {
     Vector2 dMargin = m_margin * 2.0f;
-    setPosition(Vector3(-1.0f + dMargin.x(), 1.0f - height - dMargin.y(), 0.0f));
+    setPosition(Vector3(-1.0f + dMargin.x(), 1.0f - textHeight - dMargin.y(), 0.0f));
   }
 
   TopBarMenu::~TopBarMenu()
@@ -40,7 +40,7 @@ namespace UIMenu
       {
         (*it)->setModelMatrix(Matrix4::Translation(pos));
 
-        Vector3 boxDims = obj->mesh()->boundingBoxDimensions();
+        Vector3 boxDims = obj->mesh()->boundingBox().size();
         pos[0] += boxDims.x() + m_margin.x();
 
         layoutChildRecursive(obj, 1);
@@ -62,7 +62,7 @@ namespace UIMenu
 
     if (level > 1)
     {
-      Vector3 boxDims = item->mesh()->boundingBoxDimensions();
+      Vector3 boxDims = item->mesh()->boundingBox().size();
       pos[0] += boxDims.x() + m_margin.x();
     }
     else

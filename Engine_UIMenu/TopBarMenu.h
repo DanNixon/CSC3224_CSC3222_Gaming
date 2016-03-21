@@ -15,7 +15,7 @@ namespace UIMenu
   class TopBarMenu : public IMenu
   {
   public:
-    TopBarMenu(TTF_Font *font, float height = 1.0f);
+    TopBarMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight = 0.1f);
     virtual ~TopBarMenu();
 
     inline Engine::Maths::Vector2 margin() const

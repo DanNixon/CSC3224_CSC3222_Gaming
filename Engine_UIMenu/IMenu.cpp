@@ -16,12 +16,14 @@ namespace Engine
 {
 namespace UIMenu
 {
-  IMenu::IMenu(TTF_Font *font, float height)
+  IMenu::IMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight)
       : GraphicalScene(new SceneObject("/"),
                        Matrix4::BuildViewMatrix(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, -1.0f)),
                        Matrix4::Orthographic(0.0f, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f))
       , m_font(font)
-      , m_textHeight(height)
+      , m_textHeight(textHeight)
+      , m_screenWidth(screenWidth)
+      , m_screenHeight(screenHeight)
   {
     // Create shaders
     m_shaderProg = new ShaderProgram();
@@ -78,7 +80,28 @@ namespace UIMenu
 
   void IMenu::handleMotion(const SDL_MouseMotionEvent &e)
   {
-    // TODO
+    std::pair<float, float> pos = MouseHandler::GetNormalisedPos(e, m_screenWidth, m_screenHeight);
+    const Vector3 mousePos(pos.first, pos.second, 0.0f);
+    checkMouseOver(mousePos, m_root);
+  }
+
+  void IMenu::checkMouseOver(const Vector3 &mousePos, SceneObject *node)
+  {
+    for (SceneObject::SceneObjectListIter it = node->children().begin(); it != node->children().end(); ++it)
+    {
+      MenuItem *obj = static_cast<MenuItem *>(*it);
+      Mesh * m = obj->mesh();
+      if (obj->state() != MenuItemState::DISABLED)
+      {
+        auto bb = m->boundingBox();
+        bb += obj->worldTransform().positionVector();
+
+        if (bb.pointInside(mousePos))
+          obj->setState(MenuItemState::HOVER);
+        else
+          obj->setState(MenuItemState::NORMAL);
+      }
+    }
   }
 }
 }

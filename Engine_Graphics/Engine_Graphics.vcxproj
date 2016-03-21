@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alignment.h" />
+    <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="GraphicalScene.h" />
     <ClInclude Include="LineMesh.h" />
