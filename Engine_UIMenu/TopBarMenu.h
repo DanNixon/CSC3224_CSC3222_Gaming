@@ -24,7 +24,7 @@ namespace UIMenu
   class TopBarMenu : public IMenu
   {
   public:
-    TopBarMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight = 0.1f);
+    TopBarMenu(Engine::Common::Game *game, TTF_Font *font, float textHeight = 0.1f);
     virtual ~TopBarMenu();
 
     /**

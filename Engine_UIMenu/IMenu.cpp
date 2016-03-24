@@ -7,6 +7,7 @@
 
 #include <Matrix4.h>
 #include <Shaders.h>
+#include <Game.h>
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -18,21 +19,17 @@ namespace UIMenu
 {
   /**
    * @brief Creates a new menu.
+   * @param game Game instance menu is used in
    * @param font Font to render text with
-   * @param screenWidth Width of the screen in pixels
-   * @param screenHeight Height of the screen in pixels
    * @param textHeight Height of the text
-   *
-   * TODO: pass a pointer to the host Game
    */
-  IMenu::IMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight)
+  IMenu::IMenu(Game * game, TTF_Font *font, float textHeight)
       : GraphicalScene(new SceneObject("/"),
                        Matrix4::BuildViewMatrix(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, -1.0f)),
                        Matrix4::Orthographic(0.0f, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f))
+      , m_game(game)
       , m_font(font)
       , m_textHeight(textHeight)
-      , m_screenWidth(screenWidth)
-      , m_screenHeight(screenHeight)
   {
     // Create shaders
     m_shaderProg = new ShaderProgram();
@@ -135,7 +132,7 @@ namespace UIMenu
    */
   void IMenu::handleMotion(const SDL_MouseMotionEvent &e)
   {
-    std::pair<float, float> pos = MouseHandler::GetNormalisedPos(e, m_screenWidth, m_screenHeight);
+    std::pair<float, float> pos = MouseHandler::GetNormalisedPos(e, m_game->windowX(), m_game->windowY());
     const Vector3 mousePos(pos.first, pos.second, 0.0f);
     checkMouseOver(mousePos, m_root);
   }

@@ -11,7 +11,7 @@
 class OptionsMenu : public Engine::UIMenu::TopBarMenu
 {
 public:
-  OptionsMenu(TTF_Font *font, Engine::Common::Game *game, float textSize = 0.08f);
+  OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize = 0.08f);
   virtual ~OptionsMenu();
 
 protected:

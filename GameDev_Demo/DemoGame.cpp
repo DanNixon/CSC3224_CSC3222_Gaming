@@ -48,7 +48,7 @@ int DemoGame::gameStartup()
 
   // Menu
   m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
-  m_menu = new OptionsMenu(m_font, this);
+  m_menu = new OptionsMenu(this, m_font);
 
   m_menu->addNewItem(NULL, "exit", "Exit");
   m_menu->addNewItem(NULL, "pause", "Pause");

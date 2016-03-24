@@ -15,8 +15,8 @@ namespace Engine
 {
 namespace UIMenu
 {
-  TopBarMenu::TopBarMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight)
-      : IMenu(font, screenWidth, screenHeight, textHeight)
+  TopBarMenu::TopBarMenu(Game *game, TTF_Font *font, float textHeight)
+      : IMenu(game, font, textHeight)
       , m_margin(0.01f, 0.01f)
       , m_boxHeight(textHeight)
   {

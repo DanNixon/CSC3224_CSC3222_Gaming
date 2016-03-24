@@ -8,6 +8,7 @@
 
 #include <GraphicalScene.h>
 
+#include <limits>
 #include <map>
 
 #include <SDL_ttf.h>
@@ -20,6 +21,11 @@
 
 namespace Engine
 {
+  namespace Common
+  {
+    class Game;
+  }
+
 namespace UIMenu
 {
   /**
@@ -40,7 +46,7 @@ namespace UIMenu
   class IMenu : public Engine::Graphics::GraphicalScene, public Engine::Input::MouseHandler
   {
   public:
-    IMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight = 0.1f);
+    IMenu(Engine::Common::Game * game, TTF_Font *font, float textHeight = 0.1f);
     virtual ~IMenu();
 
     /**
@@ -107,12 +113,11 @@ namespace UIMenu
     virtual void handleMenuOptionSelection(MenuItem *item) = 0;
 
   protected:
+    Engine::Common::Game *m_game;
     Engine::Graphics::ShaderProgram *m_shaderProg;                      //!< Shader program used for rendering menu
     TTF_Font *m_font;                                                   //!< Font used for rendering menu text
-    int m_screenWidth;                                                  //!< Width of the screen in pixels
-    int m_screenHeight;                                                 //!< Height of the screen in pixels
     float m_textHeight;                                                 //!< Height of the text
-    std::map<MenuItemState, Engine::Graphics::C / olour> m_itemColours; //!< Mapping of item state to colour
+    std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours;    //!< Mapping of item state to colour
     MenuItem *m_currentMouseOver; //!< Pointer to the item currently under the cursor
   };
 }

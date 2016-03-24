@@ -6,6 +6,8 @@
 #ifndef _ENGINE_COMMON_GAME_H_
 #define _ENGINE_COMMON_GAME_H_
 
+#define NOMINMAX
+
 #include <string>
 #include <vector>
 
