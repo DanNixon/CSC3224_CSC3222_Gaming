@@ -3,8 +3,6 @@
  * @author Dan Nixon
  */
 
-//
-
 #include <bitset>
 #include <type_traits>
 
@@ -25,40 +23,65 @@ namespace Utility
   */
   template <typename T> class EnumClassBitset
   {
-  private:
-    std::bitset<static_cast<typename std::underlying_type<T>::type>(T::MAX_VALUE)> m_bitset;
-
-    typename std::underlying_type<T>::type get_value(T v) const
-    {
-      return static_cast<typename std::underlying_type<T>::type>(v);
-    }
-
   public:
     EnumClassBitset()
     {
     }
 
-    bool test(T pos) const
+    /**
+     * @brief Tests if a bit is set.
+     * @param v Enum value
+     * @return True if the bit is set
+     */
+    bool test(T v) const
     {
-      return m_bitset.test(get_value(pos));
+      return m_bitset.test(getValueOf(v));
     }
 
-    EnumClassBitset &set(T pos)
+    /**
+     * @brief Sets the bit corresponding to a given enum value.
+     * @param v Enum value
+     * @return Bitset
+     */
+    EnumClassBitset &set(T v)
     {
-      m_bitset.set(get_value(pos));
+      m_bitset.set(getValueOf(v));
       return *this;
     }
 
-    EnumClassBitset &reset(T pos)
+    /**
+     * @brief Resets the bit corresponding to a given enum value.
+     * @param v Enum value
+     * @return Bitset
+     */
+    EnumClassBitset &reset(T v)
     {
-      m_bitset.reset(get_value(pos));
+      m_bitset.reset(getValueOf(v));
       return *this;
     }
 
-    EnumClassBitset &flip(T pos)
+    /**
+     * @brief Flips the bit corresponding to a given enum value.
+     * @param v Enum value
+     * @return Bitset
+     */
+    EnumClassBitset &flip(T v)
     {
-      m_bitset.flip(get_value(pos));
+      m_bitset.flip(getValueOf(v));
       return *this;
+    }
+
+  private:
+    std::bitset<static_cast<typename std::underlying_type<T>::type>(T::MAX_VALUE)> m_bitset; //!< Wrapped bitset
+
+    /**
+     * @brief Gets the value of a given enum value.
+     * @param v Enum value
+     * @return Underlying value
+     */
+    typename std::underlying_type<T>::type getValueOf(T v) const
+    {
+      return static_cast<typename std::underlying_type<T>::type>(v);
     }
   };
 }

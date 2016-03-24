@@ -52,9 +52,9 @@ namespace Common
     void setActive(bool active, size_t recursionLevels = 0, size_t currentLevel = 0);
 
     /**
-    * @brief Gets the activ state of this object.
-    * @return Active
-    */
+     * @brief Gets the active state of this object.
+     * @return Active
+     */
     inline bool active() const
     {
       return m_active;
@@ -137,7 +137,7 @@ namespace Common
     virtual void addToScene(Scene *scene);
 
     const std::string m_name; //!< Name of the object
-    bool m_active;
+    bool m_active;            //!< Flag indicating if this object is active in the scene
 
     Engine::Maths::Matrix4 m_modelMatrix;    //!< Local model matrix (relative to parent)
     Engine::Maths::Matrix4 m_worldTransform; //!< World matrix (relative to world origin)

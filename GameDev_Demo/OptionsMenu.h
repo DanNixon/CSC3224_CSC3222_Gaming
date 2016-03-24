@@ -3,6 +3,11 @@
 #include <Game.h>
 #include <TopBarMenu.h>
 
+/**
+ * @class OptionsMenu
+ * @brief Menu used to display simulation options.
+ * @auhor Dan Nixon
+ */
 class OptionsMenu : public Engine::UIMenu::TopBarMenu
 {
 public:

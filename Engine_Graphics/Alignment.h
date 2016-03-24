@@ -14,6 +14,10 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @brief Alignment options.
+   * @author Dan Nixon
+   */
   enum class Alignment : size_t
   {
     X_LEFT,
@@ -31,6 +35,9 @@ namespace Graphics
     MAX_VALUE
   };
 
+  /**
+   * @brief Bitset used for defining alignment options.
+   */
   typedef Engine::Utility::EnumClassBitset<Alignment> Alignment_bitset;
 }
 }

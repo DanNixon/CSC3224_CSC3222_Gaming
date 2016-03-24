@@ -28,6 +28,9 @@ namespace UIMenu
   {
   }
 
+  /**
+   * @copydoc IMenu::layout
+   */
   void TopBarMenu::layout()
   {
     Vector3 pos;
@@ -48,6 +51,9 @@ namespace UIMenu
     }
   }
 
+  /**
+   * @copydoc IMenu::show
+   */
   void TopBarMenu::show()
   {
     m_root->setActive(true, 1);
@@ -56,6 +62,11 @@ namespace UIMenu
     enable();
   }
 
+  /**
+   * @brief Performs layout for a given node in the item tree.
+   * @param item Node to layout children of
+   * @param level Level in the item tree (0 = root node)
+   */
   void TopBarMenu::layoutChildRecursive(RenderableObject *item, unsigned int level)
   {
     Vector3 pos = Vector3(0.0f, -m_margin.y(), 0.0f);

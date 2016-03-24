@@ -16,6 +16,15 @@ namespace Engine
 {
 namespace UIMenu
 {
+  /**
+   * @brief Creates a new menu.
+   * @param font Font to render text with
+   * @param screenWidth Width of the screen in pixels
+   * @param screenHeight Height of the screen in pixels
+   * @param textHeight Height of the text
+   *
+   * TODO: pass a pointer to the host Game
+   */
   IMenu::IMenu(TTF_Font *font, int screenWidth, int screenHeight, float textHeight)
       : GraphicalScene(new SceneObject("/"),
                        Matrix4::BuildViewMatrix(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, -1.0f)),
@@ -41,21 +50,36 @@ namespace UIMenu
   {
   }
 
+  /**
+   * @brief Gets the position of the menu origin.
+   * @return Position of origin
+   */
   Vector3 IMenu::position() const
   {
     return m_root->modelMatrix().positionVector();
   }
 
+  /**
+   * @brief Sets the position of the menu.
+   * @param position New origin position
+   */
   void IMenu::setPosition(const Vector3 &position)
   {
     m_root->setModelMatrix(Matrix4::Translation(position));
   }
 
+  /**
+   * @brief Tests if the menu is currently visible.
+   * @return True if visible
+   */
   bool IMenu::visible() const
   {
     return m_root->active();
   }
 
+  /**
+   * @brief Displays the menu.
+   */
   void IMenu::show()
   {
     m_root->setActive(true, std::numeric_limits<size_t>::max());
@@ -64,6 +88,9 @@ namespace UIMenu
     enable();
   }
 
+  /**
+   * @brief Hides the menu.
+   */
   void IMenu::hide()
   {
     // Disable mouse event handling
@@ -72,6 +99,13 @@ namespace UIMenu
     m_root->setActive(false, std::numeric_limits<size_t>::max());
   }
 
+  /**
+   * @brief Adds a new basic item to the menu.
+   * @param parent Parent item (NULL to insert at root)
+   * @param name Name of the item
+   * @param text Text to be displayed on the item
+   * @return Pointer to the new item
+   */
   MenuItem *IMenu::addNewItem(MenuItem *parent, const std::string &name, const std::string &text)
   {
     MenuItem *item;
@@ -87,12 +121,18 @@ namespace UIMenu
     return item;
   }
 
+  /**
+   * @copydoc MouseHandler::handleButton
+   */
   void IMenu::handleButton(const SDL_MouseButtonEvent &e)
   {
     if (e.button == SDL_BUTTON_LEFT && e.type == SDL_MOUSEBUTTONUP)
       handleMenuOptionSelection(m_currentMouseOver);
   }
 
+  /**
+   * @copydoc MouseHandler::handleMotion
+   */
   void IMenu::handleMotion(const SDL_MouseMotionEvent &e)
   {
     std::pair<float, float> pos = MouseHandler::GetNormalisedPos(e, m_screenWidth, m_screenHeight);
@@ -100,6 +140,12 @@ namespace UIMenu
     checkMouseOver(mousePos, m_root);
   }
 
+  /**
+   * @brief Recursively checks for intersection between the mouse pointer and a menu option.
+   * @param mousePos Position of the mouse in normalised screen space
+   * @param node Node to test
+   * @return True if intersection is detected
+   */
   bool IMenu::checkMouseOver(const Vector3 &mousePos, SceneObject *node)
   {
     bool retVal = false;
