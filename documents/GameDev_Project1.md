@@ -31,11 +31,11 @@
 - [x] `Engine_IO`
   - [x] INI
 - [ ] `Engine_Physics`
-- [ ] `Engine_UIMenu`
+- [x] `Engine_UIMenu`
   - [x] Menu structure definition
   - [x] Top bar menu
   - [x] Mouse interaction
-  - [ ] Build menu from a nested map
+  - [x] Simple programatic menu generation
 - [ ] `Engine_Utility`
   - [ ] More random distributions
   - [x] Filesystem string utilities
