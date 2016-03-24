@@ -3,9 +3,9 @@
 using namespace Engine::Common;
 using namespace Engine::UIMenu;
 
-OptionsMenu::OptionsMenu(TTF_Font * font, Game * game, float textSize)
-  : TopBarMenu(font, game->windowX(), game->windowY(), textSize)
-  , m_game(game)
+OptionsMenu::OptionsMenu(TTF_Font *font, Game *game, float textSize)
+    : TopBarMenu(font, game->windowX(), game->windowY(), textSize)
+    , m_game(game)
 {
 }
 

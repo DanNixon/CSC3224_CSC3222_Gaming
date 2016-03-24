@@ -62,7 +62,7 @@ namespace UIMenu
     virtual void show();
     virtual void hide();
 
-    MenuItem * addNewItem(MenuItem * parent, const std::string &name, const std::string &text = std::string());
+    MenuItem *addNewItem(MenuItem *parent, const std::string &name, const std::string &text = std::string());
 
     virtual void layout() = 0;
 

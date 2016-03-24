@@ -72,9 +72,9 @@ namespace UIMenu
     m_root->setActive(false, std::numeric_limits<size_t>::max());
   }
 
-  MenuItem * IMenu::addNewItem(MenuItem * parent, const std::string &name, const std::string &text)
+  MenuItem *IMenu::addNewItem(MenuItem *parent, const std::string &name, const std::string &text)
   {
-    MenuItem * item;
+    MenuItem *item;
 
     if (parent == NULL)
       item = new MenuItem(this, m_root, name);

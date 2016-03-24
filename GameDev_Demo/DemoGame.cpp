@@ -17,8 +17,8 @@
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
-#include "control.h"
 #include "OptionsMenu.h"
+#include "control.h"
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -237,9 +237,9 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   {
     std::cout << "TEST LOOP" << std::endl;
 
-    //MenuItem *a = static_cast<MenuItem *>(m_menu->root()->findChild("Option One"));
-    //a->setText("a");
-    //m_menu->layout();
+    // MenuItem *a = static_cast<MenuItem *>(m_menu->root()->findChild("Option One"));
+    // a->setText("a");
+    // m_menu->layout();
   }
 }
 
