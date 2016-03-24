@@ -5,9 +5,9 @@
 
 #include "IMenu.h"
 
+#include <Game.h>
 #include <Matrix4.h>
 #include <Shaders.h>
-#include <Game.h>
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -23,7 +23,7 @@ namespace UIMenu
    * @param font Font to render text with
    * @param textHeight Height of the text
    */
-  IMenu::IMenu(Game * game, TTF_Font *font, float textHeight)
+  IMenu::IMenu(Game *game, TTF_Font *font, float textHeight)
       : GraphicalScene(new SceneObject("/"),
                        Matrix4::BuildViewMatrix(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, -1.0f)),
                        Matrix4::Orthographic(0.0f, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f))

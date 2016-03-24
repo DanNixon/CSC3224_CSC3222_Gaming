@@ -21,10 +21,10 @@
 
 namespace Engine
 {
-  namespace Common
-  {
-    class Game;
-  }
+namespace Common
+{
+  class Game;
+}
 
 namespace UIMenu
 {
@@ -46,7 +46,7 @@ namespace UIMenu
   class IMenu : public Engine::Graphics::GraphicalScene, public Engine::Input::MouseHandler
   {
   public:
-    IMenu(Engine::Common::Game * game, TTF_Font *font, float textHeight = 0.1f);
+    IMenu(Engine::Common::Game *game, TTF_Font *font, float textHeight = 0.1f);
     virtual ~IMenu();
 
     /**
@@ -114,11 +114,11 @@ namespace UIMenu
 
   protected:
     Engine::Common::Game *m_game;
-    Engine::Graphics::ShaderProgram *m_shaderProg;                      //!< Shader program used for rendering menu
-    TTF_Font *m_font;                                                   //!< Font used for rendering menu text
-    float m_textHeight;                                                 //!< Height of the text
-    std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours;    //!< Mapping of item state to colour
-    MenuItem *m_currentMouseOver; //!< Pointer to the item currently under the cursor
+    Engine::Graphics::ShaderProgram *m_shaderProg;                   //!< Shader program used for rendering menu
+    TTF_Font *m_font;                                                //!< Font used for rendering menu text
+    float m_textHeight;                                              //!< Height of the text
+    std::map<MenuItemState, Engine::Graphics::Colour> m_itemColours; //!< Mapping of item state to colour
+    MenuItem *m_currentMouseOver;                                    //!< Pointer to the item currently under the cursor
   };
 }
 }
