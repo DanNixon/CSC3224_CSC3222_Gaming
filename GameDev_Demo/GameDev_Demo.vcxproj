@@ -26,9 +26,6 @@
   <ItemGroup>
     <ClInclude Include="controls.h" />
     <ClInclude Include="DemoGame.h" />
-    <ClInclude Include="DemoJoystickHandler.h" />
-    <ClInclude Include="DemoKeyboardHandler.h" />
-    <ClInclude Include="DemoMouseHandler.h" />
     <ClInclude Include="KJSSimulatorControls.h" />
     <ClInclude Include="KMSimulatorControls.h" />
     <ClInclude Include="OptionsMenu.h" />

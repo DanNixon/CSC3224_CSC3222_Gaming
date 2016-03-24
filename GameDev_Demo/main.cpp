@@ -9,6 +9,6 @@
 
 int main(int argc, char *args[])
 {
-  DemoGame g;
+  GameDev::Demo::DemoGame g;
   return g.run();
 }
