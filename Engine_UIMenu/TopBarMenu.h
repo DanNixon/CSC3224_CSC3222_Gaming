@@ -53,7 +53,6 @@ namespace UIMenu
 
   private:
     Engine::Maths::Vector2 m_margin; //!< Margin around menu items
-    float m_boxHeight; //!< TODO: This can be replaces with text height from IMenu
   };
 }
 }

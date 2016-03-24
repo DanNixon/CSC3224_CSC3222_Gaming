@@ -18,7 +18,6 @@ namespace UIMenu
   TopBarMenu::TopBarMenu(Game *game, TTF_Font *font, float textHeight)
       : IMenu(game, font, textHeight)
       , m_margin(0.01f, 0.01f)
-      , m_boxHeight(textHeight)
   {
     Vector2 dMargin = m_margin * 2.0f;
     setPosition(Vector3(-1.0f + dMargin.x(), 1.0f - textHeight - dMargin.y(), 0.0f));
@@ -78,7 +77,7 @@ namespace UIMenu
     }
     else
     {
-      pos[1] -= m_boxHeight;
+      pos[1] -= m_textHeight;
     }
 
     for (auto it = item->children().begin(); it != item->children().end(); ++it)
@@ -88,7 +87,7 @@ namespace UIMenu
       if (obj)
       {
         (*it)->setModelMatrix(Matrix4::Translation(pos));
-        pos[1] -= (m_boxHeight + m_margin.y());
+        pos[1] -= (m_textHeight + m_margin.y());
 
         layoutChildRecursive(obj, level + 1);
       }
