@@ -10,8 +10,8 @@ namespace Engine
 namespace Utility
 {
   /**
-   * @breif Gets the directory given the path to a file.
-   * @param File path
+   * @brief Gets the directory given the path to a file.
+   * @param path File path
    * @return Directory to file
    *
    * e.g. DirectoryFromPath("c:\stuff\thing.txt") = "c:\stuff"
@@ -28,8 +28,8 @@ namespace Utility
   }
 
   /**
-   * @breif Gets the name of a file given a path to it.
-   * @param File path
+   * @brief Gets the name of a file given a path to it.
+   * @param path File path
    * @return Filename
    *
    * e.g. FilenameFromPath("c:\stuff\thing.txt") = "thing.txt"
@@ -46,8 +46,8 @@ namespace Utility
   }
 
   /**
-   * @breif Gets the base name of a file given its filename.
-   * @param Filename
+   * @brief Gets the base name of a file given its filename.
+   * @param filename Filename
    * @return Base name
    *
    * e.g. BasenameFromFilename("thing.txt") = "thing"
@@ -66,8 +66,8 @@ namespace Utility
   }
 
   /**
-   * @breif Gets the extension of a file given its filename.
-   * @param Filename
+   * @brief Gets the extension of a file given its filename.
+   * @param filename Filename
    * @return Extension
    *
    * e.g. ExtFromFilename("thing.txt") = "txt"
@@ -84,7 +84,7 @@ namespace Utility
   }
 
   /**
-   * @breif Searches a string for a directory delimiting slash.
+   * @brief Searches a string for a directory delimiting slash.
    * @param str String to search in
    * @return Index of slash
    *

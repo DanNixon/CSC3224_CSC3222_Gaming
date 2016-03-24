@@ -18,7 +18,7 @@ namespace Engine
 namespace Audio
 {
   /**
-   * @copydoc SceneObject::SceneObject()
+   * @copydoc SceneObject::SceneObject
    * @param listener Listener to use for output
    */
   Source::Source(const std::string &name, Listener *listener)
