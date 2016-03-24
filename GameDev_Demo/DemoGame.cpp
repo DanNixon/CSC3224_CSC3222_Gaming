@@ -13,12 +13,12 @@
 #include <Profiler.h>
 #include <RectangleMesh.h>
 #include <Shaders.h>
-#include <TopBarMenu.h>
 #include <WAVSource.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
 #include "control.h"
+#include "OptionsMenu.h"
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -46,9 +46,9 @@ int DemoGame::gameStartup()
 {
   glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
 
-  // Menu (testing)
+  // Menu
   m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
-  m_menu = new TopBarMenu(m_font, windowX(), windowY(), 0.08f);
+  m_menu = new OptionsMenu(m_font, this);
 
   MenuItem *root = static_cast<MenuItem *>(m_menu->root());
   MenuItem *item1;

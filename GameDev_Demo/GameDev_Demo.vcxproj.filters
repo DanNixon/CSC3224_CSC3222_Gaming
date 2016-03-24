@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DemoGame.cpp" />
+    <ClCompile Include="OptionsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoGame.h" />
@@ -12,5 +13,6 @@
     <ClInclude Include="KMSimulatorControls.h" />
     <ClInclude Include="controls.h" />
     <ClInclude Include="KJSSimulatorControls.h" />
+    <ClInclude Include="OptionsMenu.h" />
   </ItemGroup>
 </Project>

@@ -81,10 +81,11 @@ namespace Common
         m_loops[i]->lastFired = time();
     }
 
+    m_run = true;
+
     SDL_Event e;
-    bool exit = false;
     float startTime;
-    while (!exit)
+    while (m_run)
     {
       if (m_profiler)
         m_profiler->m_loopUpdates[Profiler::MAIN_LOOP]++;
@@ -102,7 +103,7 @@ namespace Common
         // Handle quit
         if (e.type == SDL_QUIT)
         {
-          exit = true;
+          m_run = false;
           break;
         }
 
@@ -152,6 +153,14 @@ namespace Common
     MemoryManager::Instance().releaseAll();
 
     return status;
+  }
+
+  /**
+   * @brief Stops the game loop executing and exits.
+   */
+  void Game::exit()
+  {
+    m_run = false;
   }
 
   /**

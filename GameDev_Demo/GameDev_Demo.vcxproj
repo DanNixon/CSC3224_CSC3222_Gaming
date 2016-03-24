@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="DemoGame.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OptionsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controls.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="DemoMouseHandler.h" />
     <ClInclude Include="KJSSimulatorControls.h" />
     <ClInclude Include="KMSimulatorControls.h" />
+    <ClInclude Include="OptionsMenu.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4F6104E8-AC92-4DED-AB32-7BD100B04761}</ProjectGuid>
