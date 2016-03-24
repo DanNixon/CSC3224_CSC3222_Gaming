@@ -58,6 +58,7 @@ int DemoGame::gameStartup()
   new MenuItem(m_menu, root, "Exit");
 
   item1 = new MenuItem(m_menu, root, "Option One");
+  item1->setText("Pause");
 
   item2 = new MenuItem(m_menu, item1, "Option 1.1");
   item3 = new MenuItem(m_menu, item2, "Option 1.1.1");
@@ -244,6 +245,10 @@ void DemoGame::gameLoop(Uint8 id, float dtMilliSec)
   else if (id == m_testLoop)
   {
     std::cout << "TEST LOOP" << std::endl;
+
+    //MenuItem *a = static_cast<MenuItem *>(m_menu->root()->findChild("Option One"));
+    //a->setText("a");
+    //m_menu->layout();
   }
 }
 

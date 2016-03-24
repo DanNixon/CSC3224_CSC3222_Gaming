@@ -19,6 +19,7 @@ namespace UIMenu
   MenuItem::MenuItem(IMenu *menu, MenuItem *parent, const std::string &name)
       : TextPane(name, menu->textHeight(), menu->shader(), menu->font(), TextMode::SHADED)
       , m_menu(menu)
+      , m_text(name)
   {
     parent->addChild(this);
 
@@ -29,7 +30,7 @@ namespace UIMenu
     static_cast<RectangleMesh *>(m_mesh)->setAlignment(align);
 
     // Default values
-    setText(name);
+    TextPane::setText(m_text);
     setTextColour(Colour(0.0f, 0.0f, 0.0f, 1.0f));
     setState(MenuItemState::NORMAL);
   }

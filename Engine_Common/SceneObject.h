@@ -61,6 +61,15 @@ namespace Common
     }
 
     /**
+     * @brief Gets a pointer to the parent object.
+     * @return Parent
+     */
+    inline SceneObject *parent()
+    {
+      return m_parent;
+    }
+
+    /**
      * @brief Adds a SceneObject as a child of this object.
      * @param child Child SceneObject
      */

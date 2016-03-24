@@ -23,7 +23,7 @@ namespace UIMenu
     MenuItem(IMenu *menu, MenuItem *parent, const std::string &name);
     virtual ~MenuItem();
 
-    MenuItemState state() const
+    inline MenuItemState state() const
     {
       return m_state;
     }
@@ -31,8 +31,9 @@ namespace UIMenu
     void setState(MenuItemState state);
 
   protected:
-    IMenu *m_menu;
-    MenuItemState m_state;
+    IMenu *m_menu; //!< Menu this item belongs to
+    std::string m_text; //!< Text displayed on this item
+    MenuItemState m_state; //!< Selection state of this item
   };
 }
 }
