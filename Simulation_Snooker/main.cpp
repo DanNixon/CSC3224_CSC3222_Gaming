@@ -13,6 +13,6 @@ using namespace Simulation::Physics;
 
 int main(int argc, char *argv[])
 {
-  SnookerSimulation s;
+  Simulation::Snooker::SnookerSimulation s;
   return s.run();
 }
