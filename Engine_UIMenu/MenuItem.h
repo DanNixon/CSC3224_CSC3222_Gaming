@@ -8,8 +8,6 @@
 
 #include <TextPane.h>
 
-#include <vector>
-
 namespace Engine
 {
 namespace UIMenu
@@ -20,7 +18,7 @@ namespace UIMenu
   class MenuItem : public Engine::Graphics::TextPane
   {
   public:
-    MenuItem(IMenu *menu, MenuItem *parent, const std::string &name);
+    MenuItem(IMenu *menu, SceneObject *parent, const std::string &name);
     virtual ~MenuItem();
 
     inline MenuItemState state() const

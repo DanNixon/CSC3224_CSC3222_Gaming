@@ -16,7 +16,7 @@ namespace Engine
 {
 namespace UIMenu
 {
-  MenuItem::MenuItem(IMenu *menu, MenuItem *parent, const std::string &name)
+  MenuItem::MenuItem(IMenu *menu, SceneObject *parent, const std::string &name)
       : TextPane(name, menu->textHeight(), menu->shader(), menu->font(), TextMode::SHADED)
       , m_menu(menu)
       , m_text(name)

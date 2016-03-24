@@ -50,26 +50,17 @@ int DemoGame::gameStartup()
   m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
   m_menu = new OptionsMenu(m_font, this);
 
-  MenuItem *root = static_cast<MenuItem *>(m_menu->root());
-  MenuItem *item1;
-  MenuItem *item2;
-  MenuItem *item3;
+  m_menu->addNewItem(NULL, "exit", "Exit");
+  m_menu->addNewItem(NULL, "pause", "Pause");
 
-  new MenuItem(m_menu, root, "Exit");
+  MenuItem *aircraft = m_menu->addNewItem(NULL, "aircraft", "Aircraft");
+  m_menu->addNewItem(aircraft, "Gaui X5");
+  m_menu->addNewItem(aircraft, "Logo 600");
 
-  item1 = new MenuItem(m_menu, root, "Option One");
-  item1->setText("Pause");
-
-  item2 = new MenuItem(m_menu, item1, "Option 1.1");
-  item3 = new MenuItem(m_menu, item2, "Option 1.1.1");
-  new MenuItem(m_menu, item3, "Option 1.1.1.1");
-  item2 = new MenuItem(m_menu, item1, "Option 1.2");
-
-  item1 = new MenuItem(m_menu, root, "Option Two");
-
-  item1 = new MenuItem(m_menu, root, "Option Three");
-
-  item1 = new MenuItem(m_menu, root, "Option Four");
+  MenuItem *terrain = m_menu->addNewItem(NULL, "terrain", "Terrain");
+  m_menu->addNewItem(terrain, "Flat");
+  m_menu->addNewItem(terrain, "Tall Peaks");
+  m_menu->addNewItem(terrain, "Forest");
 
   m_menu->layout();
   m_menu->hide();

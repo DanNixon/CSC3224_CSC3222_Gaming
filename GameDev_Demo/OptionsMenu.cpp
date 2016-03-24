@@ -15,7 +15,7 @@ OptionsMenu::~OptionsMenu()
 
 void OptionsMenu::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
 {
-  if (item->name() == "Exit")
+  if (item->name() == "exit")
     m_game->exit();
 
   // TODO

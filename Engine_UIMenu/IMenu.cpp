@@ -72,6 +72,21 @@ namespace UIMenu
     m_root->setActive(false, std::numeric_limits<size_t>::max());
   }
 
+  MenuItem * IMenu::addNewItem(MenuItem * parent, const std::string &name, const std::string &text)
+  {
+    MenuItem * item;
+
+    if (parent == NULL)
+      item = new MenuItem(this, m_root, name);
+    else
+      item = new MenuItem(this, parent, name);
+
+    if (!text.empty())
+      item->setText(text);
+
+    return item;
+  }
+
   void IMenu::handleButton(const SDL_MouseButtonEvent &e)
   {
     if (e.button == SDL_BUTTON_LEFT && e.type == SDL_MOUSEBUTTONUP)
