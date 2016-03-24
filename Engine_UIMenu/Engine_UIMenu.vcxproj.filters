@@ -4,7 +4,6 @@
     <ClInclude Include="IMenu.h" />
     <ClInclude Include="MenuItem.h" />
     <ClInclude Include="TopBarMenu.h" />
-    <ClInclude Include="ValuedMenuItem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IMenu.cpp" />

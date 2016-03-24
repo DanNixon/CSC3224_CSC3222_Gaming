@@ -34,9 +34,8 @@
 - [ ] `Engine_UIMenu`
   - [x] Menu structure definition
   - [x] Top bar menu
-  - [ ] Mouse interaction
-  - [ ] Menu options that hold a value
-  - [ ] Menu options loading/saving an `.ini` file
+  - [x] Mouse interaction
+  - [ ] Build menu from a nested map
 - [ ] `Engine_Utility`
   - [ ] More random distributions
   - [x] Filesystem string utilities
