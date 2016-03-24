@@ -7,6 +7,7 @@
   - [x] Context
   - [x] Listener
   - [x] Source
+  - [ ] Fix for running without OpenAL installed
   - [ ] Investigate what physical simulations OpenAL does
   - [ ] Test with moving sources
 - [x] `Engine_Common`
