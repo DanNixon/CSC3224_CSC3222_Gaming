@@ -15,12 +15,22 @@ namespace UIMenu
   enum class MenuItemState;
   class IMenu;
 
+  /**
+   * @class MenuItem
+   * @brief Represents an item on a menu.
+   * @author Dan Nixon
+   */
   class MenuItem : public Engine::Graphics::TextPane
   {
   public:
     MenuItem(IMenu *menu, SceneObject *parent, const std::string &name);
     virtual ~MenuItem();
 
+    /**
+     * @brief Gets the selection state of this menu item.
+     * @return Selection state
+     * @see MenuItem::setState
+     */
     inline MenuItemState state() const
     {
       return m_state;

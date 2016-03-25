@@ -19,6 +19,7 @@ namespace Graphics
    * @param height Height of the text
    * @param s Shader used to render text
    * @param font Text font
+   * @param mode Text rendering mode
    */
   TextPane::TextPane(const std::string &name, float height, ShaderProgram *s, TTF_Font *font, TextMode mode)
       : RenderableObject(name, new RectangleMesh(Vector2(height, 1.0f)), s, new Texture())
@@ -34,6 +35,9 @@ namespace Graphics
   {
   }
 
+  /**
+   * @copydoc RectangleMesh::setAlignment
+   */
   void TextPane::setAlignment(Alignment_bitset alignment)
   {
     static_cast<RectangleMesh *>(m_mesh)->setAlignment(alignment);
@@ -70,6 +74,9 @@ namespace Graphics
     redraw();
   }
 
+  /**
+   * @brief Updates the text pane by redrawing the texture.
+   */
   void TextPane::redraw()
   {
     m_texture->text(m_text, m_font, m_fgColour, m_mode, m_bgColour);

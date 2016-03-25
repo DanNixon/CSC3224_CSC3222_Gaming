@@ -14,7 +14,7 @@ namespace Utility
   /**
    * @brief Trims specified characters from the start and end of a string.
    * @param str String to trim
-   * @param trinChars String containing characters to trim
+   * @param trimChars String containing characters to trim
    * @return Trimmed string
    */
   std::string StringUtils::Trim(std::string str, const std::string &trimChars)

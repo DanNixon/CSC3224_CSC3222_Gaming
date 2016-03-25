@@ -22,6 +22,9 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @brief Defines the modes that can be used to render text.
+   */
   enum class TextMode
   {
     BLENDED,

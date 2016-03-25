@@ -15,6 +15,9 @@ namespace Engine
 {
 namespace UIMenu
 {
+  /**
+   * @copydoc IMenu::IMenu
+   */
   TopBarMenu::TopBarMenu(Game *game, TTF_Font *font, float textHeight)
       : IMenu(game, font, textHeight)
       , m_margin(0.01f, 0.01f)

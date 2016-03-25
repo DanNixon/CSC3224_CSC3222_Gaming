@@ -48,12 +48,24 @@ namespace Graphics
   {
   }
 
+  /**
+   * @brief Sets the dimension of the mesh and resizes the mesh.
+   * @param dimensions Dimensions
+   * @see RectangleMesh::dimensions
+   * @see RectangleMesh::resize
+   */
   void RectangleMesh::setDimensions(const Vector2 &dimensions)
   {
     m_dimensions = dimensions;
     resize();
   }
 
+  /**
+   * @brief Sets the alignment options of the mesh.
+   * @param alignment Alignment options
+   * @see RectangleMesh::alignment
+   * @see RectangleMesh::resize
+   */
   void RectangleMesh::setAlignment(const Alignment_bitset &alignment)
   {
     m_alignment = alignment;

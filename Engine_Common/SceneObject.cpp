@@ -33,6 +33,8 @@ namespace Common
   /**
    * @brief Sets the active state of this object.
    * @param active Active
+   * @param recursionLevels Maximum depth to traverse the tree
+   * @param currentLevel Current recursion level (do not set manually)
    */
   void SceneObject::setActive(bool active, size_t recursionLevels, size_t currentLevel)
   {
