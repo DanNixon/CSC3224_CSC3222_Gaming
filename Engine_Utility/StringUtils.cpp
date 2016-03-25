@@ -5,10 +5,56 @@
 
 #include "StringUtils.h"
 
+#include <sstream>
+
 namespace Engine
 {
 namespace Utility
 {
+  /**
+   * @brief Trims specified characters from the start and end of a string.
+   * @param str String to trim
+   * @param trinChars String containing characters to trim
+   * @return Trimmed string
+   */
+  std::string StringUtils::Trim(std::string str, const std::string &trimChars)
+  {
+    size_t pos;
+
+    // Trim from end
+    pos = str.find_last_not_of(trimChars);
+    if (pos != std::string::npos)
+      str = str.substr(0, pos + 1);
+
+    // Trim from start
+    pos = str.find_first_not_of(trimChars);
+    if (pos != std::string::npos)
+      str = str.substr(pos);
+
+    return str;
+  }
+
+  /**
+   * @brief Splits a string by a delimiter.
+   * @param str String to split
+   * @param delim Delimiter
+   * @return Vector of substrings
+   */
+  std::vector<std::string> StringUtils::Split(const std::string &str, char delim)
+  {
+    std::vector<std::string> retVal;
+    std::stringstream ss(str);
+    std::string item;
+
+    while (std::getline(ss, item, delim))
+    {
+      if (!item.empty())
+        retVal.push_back(item);
+    }
+
+    return retVal;
+  }
+
   /**
    * @brief Gets the directory given the path to a file.
    * @param path File path

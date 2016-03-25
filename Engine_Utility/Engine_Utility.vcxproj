@@ -158,6 +158,8 @@
     <ClCompile Include="StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ProbabilityDistribution.h" />
+    <ClInclude Include="Distributions.h" />
     <ClInclude Include="EnumClassBitset.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="StringUtils.h" />

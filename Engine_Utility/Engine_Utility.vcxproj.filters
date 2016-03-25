@@ -8,5 +8,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="EnumClassBitset.h" />
+    <ClInclude Include="Distributions.h" />
+    <ClInclude Include="ProbabilityDistribution.h" />
   </ItemGroup>
 </Project>

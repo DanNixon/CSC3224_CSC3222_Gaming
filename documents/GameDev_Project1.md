@@ -37,6 +37,7 @@
   - [x] Top bar menu
   - [x] Mouse interaction
   - [x] Simple programatic menu generation
-- [ ] `Engine_Utility`
-  - [ ] More random distributions
+- [x] `Engine_Utility`
+  - [x] More random distributions
   - [x] Filesystem string utilities
+  - [x] General string utilities
