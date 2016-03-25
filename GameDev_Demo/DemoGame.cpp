@@ -241,9 +241,9 @@ namespace Demo
     {
       std::cout << "TEST LOOP" << std::endl;
 
-      // MenuItem *a = static_cast<MenuItem *>(m_menu->root()->findChild("Option One"));
-      // a->setText("a");
-      // m_menu->layout();
+      MenuItem *a = static_cast<MenuItem *>(m_menu->root()->findChild("pause"));
+      a->setText("Resume");
+      m_menu->layout();
     }
   }
 
