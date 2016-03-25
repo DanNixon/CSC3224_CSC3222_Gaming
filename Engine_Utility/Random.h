@@ -28,14 +28,18 @@ namespace Utility
 
     float operator()();
 
+    /**
+     * @brief Gets the generator used.
+     * @return Reference to generator
+     */
     std::mt19937 &generator()
     {
       return m_generator;
     }
 
   protected:
-    std::mt19937 m_generator;
-    ProbabilityDistribution *m_distribution;
+    std::mt19937 m_generator;                //!< Random generator
+    ProbabilityDistribution *m_distribution; //!< Distribution in use
   };
 }
 }

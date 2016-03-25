@@ -17,6 +17,16 @@ namespace Engine
 {
 namespace Utility
 {
+  /**
+   * @brief Creates a new random number generator.
+   * @param function Distribution setup
+   *
+   * Setup is in format "function=[name], [K]=[V]", where [name] is the name of
+   * a distribution and [K],[V] are key-value pairs of options.
+   *
+   * Valid functions are Gaussian, ExpDecay and ChiSq (any subclass of
+   * ProbabilityDistribution).
+   */
   Random::Random(const std::string &function)
   {
     // Create generator
@@ -57,6 +67,10 @@ namespace Utility
     delete m_distribution;
   }
 
+  /**
+   * @brief Generates a new random float.
+   * @return Random float
+   */
   float Random::operator()()
   {
     return m_distribution->next(this);
