@@ -130,30 +130,12 @@ namespace Maths
   }
 
   /**
-   * @brief Return the real part of the quaternion.
-   * @return Real part
-   */
-  float Quaternion::getReal() const
-  {
-    return m_w;
-  }
-
-  /**
    * @brief Sets the i imaginary part of the quaternion.
    * @param i Imaginary part
    */
   void Quaternion::setI(float i)
   {
     m_i = i;
-  }
-
-  /**
-   * @brief Return the i imaginary part of the quaternion.
-   * @return Coefficient of i
-   */
-  float Quaternion::getI() const
-  {
-    return m_i;
   }
 
   /**
@@ -166,15 +148,6 @@ namespace Maths
   }
 
   /**
-   * @brief Return the j imaginary part of the quaternion.
-   * @return Coefficient of j
-   */
-  float Quaternion::getJ() const
-  {
-    return m_j;
-  }
-
-  /**
    * @brief Sets the k imaginary part of the quaternion.
    * @param k Imaginary part
    */
@@ -184,12 +157,12 @@ namespace Maths
   }
 
   /**
-   * @brief Return the k imaginary part of the quaternion.
-   * @return Coefficient of k
+   * @brief Calculate the squared magnitude (length) of the quaternion.
+   * @return Magnitude squared
    */
-  float Quaternion::getK() const
+  float Quaternion::magnitude2() const
   {
-    return m_k;
+    return m_w * m_w + m_i * m_i + m_j * m_j + m_k * m_k;
   }
 
   /**
@@ -199,6 +172,21 @@ namespace Maths
   float Quaternion::magnitude() const
   {
     return sqrt(m_w * m_w + m_i * m_i + m_j * m_j + m_k * m_k);
+  }
+
+  /**
+   * @brief Normalises this quaternion to produce a unit quaternion.
+   */
+  void Quaternion::normalise()
+  {
+    const float len = magnitude();
+    if (len != 0.0f)
+    {
+      m_w /= len;
+      m_i /= len;
+      m_j /= len;
+      m_k /= len;
+    }
   }
 
   /**
@@ -323,7 +311,35 @@ namespace Maths
     Quaternion pos(0.0f, vector.x(), vector.y(), vector.z());
     pos = pos * inv;
     pos = (*this) * pos;
-    return Vector3(pos.getI(), pos.getJ(), pos.getK());
+    return Vector3(pos.i(), pos.j(), pos.k());
+  }
+
+  /**
+   * @brief Creates a matrix to rotate an object by this quaternion.
+   * @return Rotation matrix
+   *
+   * http://content.gpwiki.org/OpenGL:Tutorials:Using_Quaternions_to_represent_rotation#Quaternion_to_Matrix
+   */
+  Matrix4 Quaternion::rotationMatrix() const
+  {
+    Matrix4 mat;
+
+    float i2 = m_i * m_i;
+    float j2 = m_j * m_j;
+    float k2 = m_k * m_k;
+    float ij = m_i * m_j;
+    float jk = m_i * m_k;
+    float ik = m_j * m_k;
+    float wi = m_w * m_i;
+    float wj = m_w * m_j;
+    float wk = m_w * m_k;
+
+    mat.setRow(0, Vector4(1.0f - 2.0f * (j2 + k2), 2.0f * (ij - wk), 2.0f * (ik + wj), 0.0f));
+    mat.setRow(1, Vector4(2.0f * (ij + wk), 1.0f - 2.0f * (i2 + k2), 2.0f * (jk - wi), 0.0f));
+    mat.setRow(2, Vector4(2.0f * (ik - wj), 2.0f * (jk + wi), 1.0f - 2.0f * (i2 + j2), 0.0f));
+    mat.setRow(3, Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+
+    return mat;
   }
 
   /**

@@ -29,9 +29,9 @@ namespace Maths
    * @param rad Angle in radians
    * @return Angle in degrees
    */
-  static inline double RadToDeg(const double rad)
+  static inline float RadToDeg(const float rad)
   {
-    return rad * 180.0 / PI;
+    return rad * 180.0f / PI;
   };
 
   /**
@@ -39,9 +39,9 @@ namespace Maths
    * @param deg Angle in degrees
    * @return Angle in radians
    */
-  static inline double DegToRad(const double deg)
+  static inline float DegToRad(const float deg)
   {
-    return deg * PI / 180.0;
+    return deg * PI / 180.0f;
   };
 
   /**

@@ -7,6 +7,12 @@
 
 #include <Matrix4.h>
 
+/**
+ * @def FP_ACC
+ * @brief Accuracy for floating point comparison.
+ */
+#define FP_ACC 0.001f
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Engine
@@ -127,6 +133,60 @@ public:
     Assert::AreEqual(8.0f, v.x());
     Assert::AreEqual(9.0f, v.y());
     Assert::AreEqual(10.0f, v.z());
+  }
+
+  TEST_METHOD(Matrix4_Rotation90DegY)
+  {
+    Matrix4 m = Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f));
+
+    Assert::AreEqual(0.0f, m.row(0)[0], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(0)[1], FP_ACC);
+    Assert::AreEqual(1.0f, m.row(0)[2], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(0)[3], FP_ACC);
+
+    Assert::AreEqual(0.0f, m.row(1)[0], FP_ACC);
+    Assert::AreEqual(1.0f, m.row(1)[1], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(1)[2], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(1)[3], FP_ACC);
+
+    Assert::AreEqual(-1.0f, m.row(2)[0], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(2)[1], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(2)[2], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(2)[3], FP_ACC);
+
+    Assert::AreEqual(0.0f, m.row(3)[0], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(3)[1], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(3)[2], FP_ACC);
+    Assert::AreEqual(1.0f, m.row(3)[3], FP_ACC);
+  }
+
+  TEST_METHOD(Matrix4_Rotation45DegZ)
+  {
+    Matrix4 m = Matrix4::Rotation(45.0f, Vector3(0.0f, 0.0f, 1.0f));
+
+    const float theta = DegToRad(45.0f);
+    const float s = std::sin(theta);
+    const float c = std::cos(theta);
+
+    Assert::AreEqual(c, m.row(0)[0], FP_ACC);
+    Assert::AreEqual(-s, m.row(0)[1], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(0)[2], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(0)[3], FP_ACC);
+
+    Assert::AreEqual(s, m.row(1)[0], FP_ACC);
+    Assert::AreEqual(c, m.row(1)[1], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(1)[2], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(1)[3], FP_ACC);
+
+    Assert::AreEqual(0.0f, m.row(2)[0], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(2)[1], FP_ACC);
+    Assert::AreEqual(1.0f, m.row(2)[2], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(2)[3], FP_ACC);
+
+    Assert::AreEqual(0.0f, m.row(3)[0], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(3)[1], FP_ACC);
+    Assert::AreEqual(0.0f, m.row(3)[2], FP_ACC);
+    Assert::AreEqual(1.0f, m.row(3)[3], FP_ACC);
   }
 };
 #endif /* DOXYGEN_SKIP */
