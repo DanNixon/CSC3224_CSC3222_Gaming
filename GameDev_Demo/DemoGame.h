@@ -3,8 +3,8 @@
  * @author Dan Nixon
  */
 
-#ifndef _DEMOGAME_H_
-#define _DEMOGAME_H_
+#ifndef _GAMEDEV_DEMO_DEMOGAME_H_
+#define _GAMEDEV_DEMO_DEMOGAME_H_
 
 #include <Game.h>
 

@@ -3,8 +3,8 @@
  * @author Dan Nixon
  */
 
-#ifndef _KMSIMULATORCONTROLS_H_
-#define _KMSIMULATORCONTROLS_H_
+#ifndef _GAMEDEV_DEMO_KMSIMULATORCONTROLS_H_
+#define _GAMEDEV_DEMO_KMSIMULATORCONTROLS_H_
 
 #include <IControlScheme.h>
 
