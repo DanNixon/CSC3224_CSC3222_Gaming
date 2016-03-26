@@ -8,8 +8,8 @@
 
 #include <iostream>
 
-#include "Vector3.h"
 #include "Matrix4.h"
+#include "Vector3.h"
 
 namespace Engine
 {
@@ -71,7 +71,6 @@ namespace Maths
       return m_k;
     }
 
-    
     void setReal(float w);
     void setI(float i);
     void setJ(float j);

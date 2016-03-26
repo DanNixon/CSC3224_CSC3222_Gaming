@@ -11,10 +11,10 @@
 #include <MemoryManager.h>
 #include <ModelLoader.h>
 #include <Profiler.h>
+#include <Quaternion.h>
 #include <RectangleMesh.h>
 #include <Shaders.h>
 #include <WAVSource.h>
-#include <Quaternion.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -214,7 +214,7 @@ namespace Demo
       float roll = m_simControls->analog(A_ROLL) * prRate;
       float pitch = -m_simControls->analog(A_PITCH) * prRate;
       float yaw = -m_simControls->analog(A_YAW) * yawRate;
-      
+
       Quaternion rq(roll, Vector3(1.0f, 0.0f, 0.0f));
       Quaternion pq(pitch, Vector3(0.0f, 0.0f, 1.0f));
       Quaternion yq(yaw, Vector3(0.0f, 1.0f, 0.0f));
