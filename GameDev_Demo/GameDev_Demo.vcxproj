@@ -78,23 +78,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenAL\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenAL\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VC_ReferencesPath_x86);</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenAL\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenAL\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenAL\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenAL\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VC_ReferencesPath_x86);</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenAL\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenAL\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Graphics;$(SolutionDir)Engine_Maths;$(SolutionDir)Engine_Input;$(SolutionDir)Engine_Audio;$(SolutionDir)Engine_UIMenu;$(SolutionDir)Engine_Utility;$(SolutionDir)Engine_Physics;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\glew-1.13.0\lib\$(Configuration)\$(Platform)\;$(SolutionDir)ThirdParty\soil-0a9a661\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\assimp-3.1.1\lib\$(Platform)\;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\;$(SolutionDir)ThirdParty\freealut\lib\$(Platform)\$(Configuration)\;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\;$(SolutionDir)ThirdParty\bullet-2.83.7\lib\$(Platform)\$(Configuration);$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -119,7 +119,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(O
 
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\*.dll" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
@@ -148,7 +148,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(O
 
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\*.dll" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
@@ -180,7 +180,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(O
 
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\*.dll" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
       <Message>Copy DLLs to build directory</Message>
     </PostBuildEvent>
@@ -210,7 +210,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.dll" "$(O
 
 xcopy /y /d  "$(SolutionDir)\ThirdParty\assimp-3.1.1\lib\$(Platform)\*.exe" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2_ttf-2.0.14\lib\$(Platform)\*.dll" "$(OutDir)"
-xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenAL\lib\$(Platform)\*.dll" "$(OutDir)"
+xcopy /y /d  "$(SolutionDir)\ThirdParty\OpenALSoft-1.17.2\lib\$(Platform)\*.dll" "$(OutDir)"
 xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"</Command>
       <Message>Copy DLLs to build directory</Message>
     </PostBuildEvent>
