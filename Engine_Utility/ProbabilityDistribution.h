@@ -22,7 +22,7 @@ namespace Utility
   class ProbabilityDistribution
   {
   public:
-    ProbabilityDistribution(std::map<std::string, float> params)
+    ProbabilityDistribution()
     {
     }
 
@@ -30,6 +30,11 @@ namespace Utility
     {
     }
 
+    /**
+     * @brief Generates a new random float.
+     * @param rand Random
+     * @return Random float
+     */
     virtual float next(Random *rand) = 0;
   };
 }

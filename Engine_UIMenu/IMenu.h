@@ -113,7 +113,7 @@ namespace UIMenu
     virtual void handleMenuOptionSelection(MenuItem *item) = 0;
 
   protected:
-    Engine::Common::Game *m_game;
+    Engine::Common::Game *m_game;                                    //!< Game instance this menu is used in
     Engine::Graphics::ShaderProgram *m_shaderProg;                   //!< Shader program used for rendering menu
     TTF_Font *m_font;                                                //!< Font used for rendering menu text
     float m_textHeight;                                              //!< Height of the text

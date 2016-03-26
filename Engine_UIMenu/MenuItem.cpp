@@ -16,6 +16,12 @@ namespace Engine
 {
 namespace UIMenu
 {
+  /**
+   * @brief Creates a new menu item.
+   * @param menu Menu this item is a part of
+   * @param parent Parent menu item
+   * @param name Name of this item
+   */
   MenuItem::MenuItem(IMenu *menu, SceneObject *parent, const std::string &name)
       : TextPane(name, menu->textHeight(), menu->shader(), menu->font(), TextMode::SHADED)
       , m_menu(menu)
@@ -39,6 +45,11 @@ namespace UIMenu
   {
   }
 
+  /**
+   * @brief Sets the selection state of this item.
+   * @param state Selection state
+   * @see MenuItem::state
+   */
   void MenuItem::setState(MenuItemState state)
   {
     m_state = state;

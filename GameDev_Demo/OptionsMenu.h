@@ -16,7 +16,7 @@ namespace Demo
   /**
    * @class OptionsMenu
    * @brief Menu used to display simulation options.
-   * @auhor Dan Nixon
+   * @author Dan Nixon
    */
   class OptionsMenu : public Engine::UIMenu::TopBarMenu
   {
@@ -26,9 +26,6 @@ namespace Demo
 
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
-
-  private:
-    Engine::Common::Game *m_game;
   };
 }
 }

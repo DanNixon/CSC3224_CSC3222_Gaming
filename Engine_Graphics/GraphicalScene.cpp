@@ -15,7 +15,7 @@ namespace Engine
 namespace Graphics
 {
   /**
-   * @copydoc Scene::Scene()
+   * @copydoc Scene::Scene
    */
   GraphicalScene::GraphicalScene(SceneObject *root, Matrix4 view, Matrix4 projection)
       : Scene(root, view, projection)
@@ -27,7 +27,7 @@ namespace Graphics
   }
 
   /**
-   * @copydoc Scene::update()
+   * @copydoc Scene::update
    */
   void GraphicalScene::update(float msec, Subsystem sys)
   {

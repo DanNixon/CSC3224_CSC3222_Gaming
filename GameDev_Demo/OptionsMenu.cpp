@@ -12,9 +12,11 @@ namespace GameDev
 {
 namespace Demo
 {
+  /**
+   * @copydoc TopBarMenu::TopBarMenu
+   */
   OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize)
       : TopBarMenu(game, font, textSize)
-      , m_game(game)
   {
   }
 
@@ -22,6 +24,9 @@ namespace Demo
   {
   }
 
+  /**
+   * @copydoc IMenu::handleMenuOptionSelection
+   */
   void OptionsMenu::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
   {
     if (item->name() == "exit")

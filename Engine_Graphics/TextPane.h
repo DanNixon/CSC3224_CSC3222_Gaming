@@ -36,10 +36,10 @@ namespace Graphics
     void redraw();
 
   private:
-    const float m_height; //!< Height of the text
-    TTF_Font *m_font;     //!< Text font
-    TextMode m_mode;
-    std::string m_text;
+    const float m_height;                //!< Height of the text
+    TTF_Font *m_font;                    //!< Text font
+    TextMode m_mode;                     //!< Text rendering mode
+    std::string m_text;                  //!< Displayed text
     Engine::Graphics::Colour m_fgColour; //!< Text colour
     Engine::Graphics::Colour m_bgColour; //!< Background colour
   };

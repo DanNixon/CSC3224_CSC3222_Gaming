@@ -27,6 +27,11 @@ namespace Graphics
     RectangleMesh(const Engine::Maths::Vector2 &dimensions, Alignment_bitset alignment = Alignment_bitset());
     virtual ~RectangleMesh();
 
+    /**
+     * @brief Gets the dimensions of the rectangle.
+     * @return Dimensions
+     * @see RectangleMesh::setDimensions
+     */
     inline Engine::Maths::Vector2 dimensions() const
     {
       return m_dimensions;
@@ -34,6 +39,11 @@ namespace Graphics
 
     void setDimensions(const Engine::Maths::Vector2 &dimensions);
 
+    /**
+     * @brief Gets the alignment of the rectangle.
+     * @return Alignment options
+     * @see RectangleMesh::setAlignment
+     */
     inline Alignment_bitset alignment() const
     {
       return m_alignment;
@@ -44,8 +54,8 @@ namespace Graphics
   private:
     void resize();
 
-    Engine::Maths::Vector2 m_dimensions;
-    Alignment_bitset m_alignment;
+    Engine::Maths::Vector2 m_dimensions; //!< DImensions of the rectangle
+    Alignment_bitset m_alignment;        //!< Alignment from the position origin
   };
 }
 }
