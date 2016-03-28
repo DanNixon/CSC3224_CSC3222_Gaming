@@ -8,15 +8,29 @@
 
 #include <btBulletDynamicsCommon.h>
 
+#include <IMemoryManaged.h>
+
+#include "RigidBody.h"
+
 namespace Engine
 {
 namespace Physics
 {
-  class PhysicalSystem
+  class PhysicalSystem : public Engine::Common::IMemoryManaged
   {
   public:
     PhysicalSystem();
     virtual ~PhysicalSystem();
+
+    virtual int releasePriority() const
+    {
+      return 50;
+    }
+
+    void addBody(RigidBody * body);
+    void removeBody(RigidBody * body);
+
+    void update(float msec);
 
   private:
     btBroadphaseInterface *m_broadphase;

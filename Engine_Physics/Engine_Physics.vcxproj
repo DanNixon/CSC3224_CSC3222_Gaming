@@ -19,10 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PhysicalSystem.h" />
+    <ClInclude Include="PlanarRigidBody.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SceneObjectMotionState.h" />
+    <ClInclude Include="SphericalRigidBody.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PhysicalSystem.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SceneObjectMotionState.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>

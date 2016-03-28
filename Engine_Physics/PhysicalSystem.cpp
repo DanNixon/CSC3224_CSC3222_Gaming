@@ -26,5 +26,22 @@ namespace Physics
     delete m_solver;
     delete m_world;
   }
+
+  void PhysicalSystem::addBody(RigidBody * body)
+  {
+    body->m_system = this;
+    m_world->addRigidBody(body->m_body);
+  }
+
+  void PhysicalSystem::removeBody(RigidBody * body)
+  {
+    body->m_system = nullptr;
+    m_world->removeRigidBody(body->m_body);
+  }
+
+  void PhysicalSystem::update(float msec)
+  {
+    m_world->stepSimulation(msec, 10);
+  }
 }
 }

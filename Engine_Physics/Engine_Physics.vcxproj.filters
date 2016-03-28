@@ -3,9 +3,15 @@
   <ItemGroup>
     <ClInclude Include="test.h" />
     <ClInclude Include="SceneObjectMotionState.h" />
+    <ClInclude Include="PhysicalSystem.h" />
+    <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="PlanarRigidBody.h" />
+    <ClInclude Include="SphericalRigidBody.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
     <ClCompile Include="SceneObjectMotionState.cpp" />
+    <ClCompile Include="PhysicalSystem.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
   </ItemGroup>
 </Project>

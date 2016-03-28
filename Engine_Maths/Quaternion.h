@@ -27,6 +27,7 @@ namespace Maths
     Quaternion(const float w);
     Quaternion(const float w, const float i, const float j, const float k);
     Quaternion(const float angle, const Vector3 &axis);
+    Quaternion(const float pitch, const float roll, const float yaw);
     Quaternion(const Quaternion &other);
     ~Quaternion();
 

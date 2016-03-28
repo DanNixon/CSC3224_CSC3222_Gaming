@@ -5,11 +5,13 @@
 
 #include "DemoGame.h"
 
-#include <Random.h>
 #include <test.h>
 
 int main(int argc, char *args[])
 {
-  GameDev::Demo::DemoGame g;
-  return g.run();
+  test::run();
+  return 0;
+
+  //GameDev::Demo::DemoGame g;
+  //return g.run();
 }

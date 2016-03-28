@@ -70,6 +70,35 @@ namespace Maths
   }
 
   /**
+   * @brief Construct a quaternion from Euler angles.
+   * @param pitch Pitch angle (degrees)
+   * @param roll Roll angle (degrees)
+   * @param yaw Yaw angle (degrees)
+   *
+   * http://content.gpwiki.org/OpenGL:Tutorials:Using_Quaternions_to_represent_rotation#Quaternion_from_Euler_angles
+   */
+  Quaternion::Quaternion(const float pitch, float roll, float yaw)
+  {
+    float p = DegToRad(pitch) * 0.5f;
+    float r = DegToRad(roll) * 0.5f;
+    float y = DegToRad(yaw) * 0.5f;
+
+    float sinp = sin(p);
+    float siny = sin(y);
+    float sinr = sin(r);
+    float cosp = cos(p);
+    float cosy = cos(y);
+    float cosr = cos(r);
+
+    m_i = sinr * cosp * cosy - cosr * sinp * siny;
+    m_j = cosr * sinp * cosy + sinr * cosp * siny;
+    m_k = cosr * cosp * siny - sinr * sinp * cosy;
+    m_w = cosr * cosp * cosy + sinr * sinp * siny;
+
+    normalise();
+  }
+
+  /**
    * @brief Construct a quaternion using the values of another.
    * @param other Quaternion from which to take values
    */

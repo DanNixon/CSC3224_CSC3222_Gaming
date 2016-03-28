@@ -8,15 +8,39 @@
 
 #include <btBulletDynamicsCommon.h>
 
+#include <IMemoryManaged.h>
+
+#include "SceneObjectMotionState.h"
+
 namespace Engine
 {
 namespace Physics
 {
-  class RigidBody : public btRigidBody
+  class PhysicalSystem;
+
+  class RigidBody : public Engine::Common::IMemoryManaged
   {
   public:
-    RigidBody();
+    RigidBody(btMotionState *state, float mass, btVector3 inertia, btCollisionShape *shape);
     virtual ~RigidBody();
+
+    virtual int releasePriority() const
+    {
+      return 40;
+    }
+
+    inline btMotionState *motionState()
+    {
+      return m_body->getMotionState();
+    }
+
+  protected:
+    friend class PhysicalSystem;
+
+    btRigidBody *m_body;
+    btCollisionShape *m_shape;
+
+    PhysicalSystem *m_system;
   };
 }
 }
