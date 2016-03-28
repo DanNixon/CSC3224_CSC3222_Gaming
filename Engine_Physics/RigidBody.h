@@ -37,6 +37,11 @@ namespace Physics
       return m_body->getMotionState();
     }
 
+    inline btRigidBody *body()
+    {
+      return m_body;
+    }
+
   protected:
     friend class PhysicalSystem;
 

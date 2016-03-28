@@ -42,7 +42,7 @@ namespace Physics
 
   void PhysicalSystem::update(float msec)
   {
-    m_world->stepSimulation(msec, 10);
+    m_world->stepSimulation(msec / 1000.0f, 7, 1.0f / 120.0f);
   }
 }
 }

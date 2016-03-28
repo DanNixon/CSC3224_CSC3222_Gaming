@@ -15,6 +15,7 @@
 #include <RectangleMesh.h>
 #include <Shaders.h>
 #include <WAVSource.h>
+#include <StaticPlaneRigidBody.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -27,6 +28,7 @@ using namespace Engine::Maths;
 using namespace Engine::Input;
 using namespace Engine::Audio;
 using namespace Engine::UIMenu;
+using namespace Engine::Physics;
 
 namespace GameDev
 {
@@ -90,9 +92,25 @@ namespace Demo
     // Model
     ModelLoader l;
     m_model = l.load(modelObjStr.str(), m_sp);
-    m_model->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -50.0f)) *
-                            Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
     m_s->root()->addChild(m_model);
+
+    // Physics
+    m_physicalSystem = new PhysicalSystem();
+
+    SceneObject *ground = new SceneObject("ground");
+    SceneObjectMotionState *groundMotionState =
+      new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
+    RigidBody *groundBody = new StaticPlaneRigidBody(
+      groundMotionState, 0, btVector3(0.0f, 0.0f, 0.0f), btVector3(0.0f, 1.0f, 0.0f));
+    m_physicalSystem->addBody(groundBody);
+    m_s->root()->addChild(ground);
+
+    SceneObjectMotionState *modelMotionState =
+      new SceneObjectMotionState(m_model, Vector3(0.0f, 20.0f, -50.0f), Quaternion(0.0f, 0.0f, 0.0f));
+    btCollisionShape *modelShape = new btBoxShape(btVector3(5, 5, 5)); //btConvexHullShape();
+    m_modelBody = new RigidBody(modelMotionState, 10.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
+    m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
+    m_physicalSystem->addBody(m_modelBody);
 
     // Audio
     m_audioContext = new Context();
@@ -202,8 +220,9 @@ namespace Demo
         m_audioSource2->stop();
 
       // Stick indicators
-      float yawRate = 12.0f;
-      float prRate = 10.0f;
+      float yawRate = 2.5f;
+      float prRate = 2.5f;
+      float throtRate = 10.0f;
 
       m_leftStick->setModelMatrix(
           Matrix4::Translation(Vector3(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT), -0.1f)));
@@ -214,10 +233,10 @@ namespace Demo
       float roll = m_simControls->analog(A_ROLL) * prRate;
       float pitch = -m_simControls->analog(A_PITCH) * prRate;
       float yaw = -m_simControls->analog(A_YAW) * yawRate;
+      float throt = -m_simControls->analog(A_THROT) * throtRate;
 
-      Quaternion rot(yaw, roll, pitch);
-
-      m_model->setModelMatrix(m_model->modelMatrix() * rot.rotationMatrix());
+      m_modelBody->body()->setAngularVelocity(btVector3(yaw, roll, pitch));
+      m_modelBody->body()->setLinearVelocity(btVector3(0.0f, throt, 0.0f));
 
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
@@ -227,7 +246,7 @@ namespace Demo
     }
     else if (id == m_physicsLoop)
     {
-      // TODO
+      m_physicalSystem->update(dtMilliSec);
     }
     else if (id == m_audioLoop)
     {

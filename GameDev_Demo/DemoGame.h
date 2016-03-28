@@ -19,6 +19,7 @@
 #include <SceneObject.h>
 #include <ShaderProgram.h>
 #include <Source.h>
+#include <PhysicalSystem.h>
 
 namespace GameDev
 {
@@ -69,6 +70,9 @@ namespace Demo
     Engine::Common::SceneObject *m_model;
 
     Engine::Input::IControlScheme *m_simControls;
+
+    Engine::Physics::PhysicalSystem *m_physicalSystem;
+    Engine::Physics::RigidBody *m_modelBody;
   };
 }
 }
