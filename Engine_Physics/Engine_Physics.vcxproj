@@ -24,13 +24,11 @@
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SceneObjectMotionState.h" />
     <ClInclude Include="SphericalRigidBody.h" />
-    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PhysicalSystem.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SceneObjectMotionState.cpp" />
-    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED213797-22E5-4B35-903F-E18511D137DA}</ProjectGuid>
