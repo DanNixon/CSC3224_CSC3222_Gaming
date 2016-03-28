@@ -30,8 +30,8 @@ namespace Physics
       return 50;
     }
 
-    void addBody(RigidBody * body);
-    void removeBody(RigidBody * body);
+    void addBody(RigidBody *body);
+    void removeBody(RigidBody *body);
 
     void update(float msec);
 

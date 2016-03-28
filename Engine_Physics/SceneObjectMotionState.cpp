@@ -17,11 +17,11 @@ namespace Engine
 namespace Physics
 {
   SceneObjectMotionState::SceneObjectMotionState(SceneObject *object, const Vector3 &initialPos,
-    const Quaternion & initialRot)
+                                                 const Quaternion &initialRot)
       : m_sceneObject(object)
   {
     m_initialPosition = btTransform(btQuaternion(initialRot.i(), initialRot.j(), initialRot.k(), initialRot.w()),
-      btVector3(initialPos.x(), initialPos.y(), initialPos.z()));
+                                    btVector3(initialPos.x(), initialPos.y(), initialPos.z()));
   }
 
   SceneObjectMotionState::~SceneObjectMotionState()

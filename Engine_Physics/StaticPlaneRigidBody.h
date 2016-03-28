@@ -18,10 +18,10 @@ namespace Physics
   {
   public:
     StaticPlaneRigidBody(btMotionState *state, float mass, const btVector3 &inertia, const btVector3 &plane)
-      : RigidBody(state, mass, inertia, new btStaticPlaneShape(plane, 0.0f))
+        : RigidBody(state, mass, inertia, new btStaticPlaneShape(plane, 0.0f))
     {
     }
-    
+
     virtual ~StaticPlaneRigidBody()
     {
     }

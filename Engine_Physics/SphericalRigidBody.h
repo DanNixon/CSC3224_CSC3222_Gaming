@@ -18,10 +18,10 @@ namespace Physics
   {
   public:
     SphericalRigidBody(btMotionState *state, float mass, const btVector3 &inertia, float radius)
-      : RigidBody(state, mass, inertia, new btSphereShape(radius))
+        : RigidBody(state, mass, inertia, new btSphereShape(radius))
     {
     }
-    
+
     virtual ~SphericalRigidBody()
     {
     }

@@ -8,9 +8,9 @@
 
 #include <btBulletDynamicsCommon.h>
 
+#include <QUaternion.h>
 #include <SceneObject.h>
 #include <Vector3.h>
-#include <QUaternion.h>
 
 namespace Engine
 {
@@ -19,9 +19,8 @@ namespace Physics
   class SceneObjectMotionState : public btMotionState
   {
   public:
-    SceneObjectMotionState(Engine::Common::SceneObject *object,
-        const Engine::Maths::Vector3 &initialPos,
-        const Engine::Maths::Quaternion & initialRot);
+    SceneObjectMotionState(Engine::Common::SceneObject *object, const Engine::Maths::Vector3 &initialPos,
+                           const Engine::Maths::Quaternion &initialRot);
     virtual ~SceneObjectMotionState();
 
     void setSceneObject(Engine::Common::SceneObject *object);
