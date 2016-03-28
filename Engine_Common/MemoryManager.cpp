@@ -14,14 +14,14 @@ namespace Engine
 namespace Common
 {
   /**
-   * @brief Compare the priorities two managed items.
+   * @brief Compare the release order of two managed items.
    * @param a First item
    * @param b Second item
    * @return True if a should be deallocated before b
    */
   bool MemoryManager::CompareItems(IMemoryManaged *a, IMemoryManaged *b)
   {
-    return a->releasePriority() < b->releasePriority();
+    return a->releaseOrder() < b->releaseOrder();
   }
 
   /**

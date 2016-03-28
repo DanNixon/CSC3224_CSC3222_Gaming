@@ -30,9 +30,9 @@ namespace Graphics
     virtual ~Shader();
 
     /**
-     * @copydoc IMemoryManaged::releasePriority()
+     * @copydoc IMemoryManaged::releaseOrder
      */
-    virtual int releasePriority() const
+    virtual int releaseOrder() const
     {
       return 6;
     }

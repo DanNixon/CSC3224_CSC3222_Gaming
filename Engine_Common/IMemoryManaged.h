@@ -23,11 +23,11 @@ namespace Common
 
     /**
      * @brief Determines the order in which deallocation occurs.
-     * @return Priority
+     * @return Order
      *
-     * Higher priorities are released later.
+     * Higher order items are released later.
      */
-    virtual int releasePriority() const
+    virtual int releaseOrder() const
     {
       return 0;
     }

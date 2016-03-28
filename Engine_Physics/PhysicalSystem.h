@@ -22,7 +22,10 @@ namespace Physics
     PhysicalSystem();
     virtual ~PhysicalSystem();
 
-    virtual int releasePriority() const
+    /**
+     * @copydoc IMemoryManaged::releaseOrder
+     */
+    virtual int releaseOrder() const
     {
       return 50;
     }

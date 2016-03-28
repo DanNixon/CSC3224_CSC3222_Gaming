@@ -24,7 +24,10 @@ namespace Physics
     RigidBody(btMotionState *state, float mass, btVector3 inertia, btCollisionShape *shape);
     virtual ~RigidBody();
 
-    virtual int releasePriority() const
+    /**
+     * @copydoc IMemoryManaged::releaseOrder
+     */
+    virtual int releaseOrder() const
     {
       return 40;
     }
