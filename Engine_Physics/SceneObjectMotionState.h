@@ -9,6 +9,8 @@
 #include <btBulletDynamicsCommon.h>
 
 #include <SceneObject.h>
+#include <Vector3.h>
+#include <QUaternion.h>
 
 namespace Engine
 {
@@ -17,7 +19,9 @@ namespace Physics
   class SceneObjectMotionState : public btMotionState
   {
   public:
-    SceneObjectMotionState(const btTransform &initialPosition, Engine::Common::SceneObject *object);
+    SceneObjectMotionState(Engine::Common::SceneObject *object,
+        const Engine::Maths::Vector3 &initialPos,
+        const Engine::Maths::Quaternion & initialRot);
     virtual ~SceneObjectMotionState();
 
     void setSceneObject(Engine::Common::SceneObject *object);
@@ -26,8 +30,8 @@ namespace Physics
     virtual void setWorldTransform(const btTransform &worldTrans);
 
   protected:
-    btTransform m_initialPosition;
     Engine::Common::SceneObject *m_sceneObject;
+    btTransform m_initialPosition;
   };
 }
 }

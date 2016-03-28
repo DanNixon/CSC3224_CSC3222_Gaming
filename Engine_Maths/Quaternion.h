@@ -39,8 +39,18 @@ namespace Maths
     /**
      * @brief Return the real part of the quaternion.
      * @return Real part
+     * @see Quaternion:w
      */
     inline float real() const
+    {
+      return m_w;
+    }
+    /**
+     * @brief Return the real part of the quaternion.
+     * @return Real part
+     * @see Quaternion:real
+     */
+    inline float w() const
     {
       return m_w;
     }

@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicalSystem.h" />
-    <ClInclude Include="PlanarRigidBody.h" />
+    <ClInclude Include="StaticPlaneRigidBody.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SceneObjectMotionState.h" />
     <ClInclude Include="SphericalRigidBody.h" />

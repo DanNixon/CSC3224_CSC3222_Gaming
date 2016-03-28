@@ -4,8 +4,8 @@
     <ClInclude Include="SceneObjectMotionState.h" />
     <ClInclude Include="PhysicalSystem.h" />
     <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="PlanarRigidBody.h" />
     <ClInclude Include="SphericalRigidBody.h" />
+    <ClInclude Include="StaticPlaneRigidBody.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneObjectMotionState.cpp" />
