@@ -16,6 +16,7 @@ namespace Physics
   {
     m_collisionDispatcher = new btCollisionDispatcher(m_collisionConfig);
     m_world = new btDiscreteDynamicsWorld(m_collisionDispatcher, m_broadphase, m_solver, m_collisionConfig);
+    m_world->setGravity(btVector3(0.0f, -9.81f, 0.0f));
   }
 
   PhysicalSystem::~PhysicalSystem()

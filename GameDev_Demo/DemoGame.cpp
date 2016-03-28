@@ -215,11 +215,9 @@ namespace Demo
       float pitch = -m_simControls->analog(A_PITCH) * prRate;
       float yaw = -m_simControls->analog(A_YAW) * yawRate;
 
-      Quaternion rq(roll, Vector3(1.0f, 0.0f, 0.0f));
-      Quaternion pq(pitch, Vector3(0.0f, 0.0f, 1.0f));
-      Quaternion yq(yaw, Vector3(0.0f, 1.0f, 0.0f));
+      Quaternion rot(yaw, roll, pitch);
 
-      m_model->setModelMatrix(m_model->modelMatrix() * rq.rotationMatrix() * pq.rotationMatrix() * yq.rotationMatrix());
+      m_model->setModelMatrix(m_model->modelMatrix() * rot.rotationMatrix());
 
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
