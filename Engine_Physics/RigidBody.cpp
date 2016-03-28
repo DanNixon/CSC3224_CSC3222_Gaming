@@ -11,14 +11,15 @@ namespace Engine
 {
 namespace Physics
 {
-  RigidBody::RigidBody(btMotionState *state, float mass, btVector3 inertia, btCollisionShape *shape)
+  RigidBody::RigidBody(btMotionState *state, float mass, const btVector3 &inertia, btCollisionShape *shape)
     : m_body(nullptr)
     , m_shape(shape)
     , m_system(nullptr)
   {
-    m_shape->calculateLocalInertia(mass, inertia);
+    btVector3 localInertia(inertia);
+    m_shape->calculateLocalInertia(mass, localInertia);
 
-    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(mass, state, m_shape, inertia);
+    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(mass, state, m_shape, localInertia);
     m_body = new btRigidBody(groundRigidBodyCI);
   }
 

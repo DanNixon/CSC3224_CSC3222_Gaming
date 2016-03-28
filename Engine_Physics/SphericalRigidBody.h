@@ -17,7 +17,7 @@ namespace Physics
   class SphericalRigidBody : public RigidBody
   {
   public:
-    SphericalRigidBody(btMotionState *state, float mass, btVector3 inertia, float radius)
+    SphericalRigidBody(btMotionState *state, float mass, const btVector3 &inertia, float radius)
       : RigidBody(state, mass, inertia, new btSphereShape(radius))
     {
     }

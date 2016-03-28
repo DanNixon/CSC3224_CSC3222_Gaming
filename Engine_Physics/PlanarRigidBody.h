@@ -17,7 +17,7 @@ namespace Physics
   class PlanarRigidBody : public RigidBody
   {
   public:
-    PlanarRigidBody(btMotionState *state, float mass, btVector3 inertia, btVector3 plane)
+    PlanarRigidBody(btMotionState *state, float mass, const btVector3 &inertia, const btVector3 &plane)
       : RigidBody(state, mass, inertia, new btStaticPlaneShape(plane, 1))
     {
     }

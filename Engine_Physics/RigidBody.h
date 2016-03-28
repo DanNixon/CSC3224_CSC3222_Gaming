@@ -21,7 +21,7 @@ namespace Physics
   class RigidBody : public Engine::Common::IMemoryManaged
   {
   public:
-    RigidBody(btMotionState *state, float mass, btVector3 inertia, btCollisionShape *shape);
+    RigidBody(btMotionState *state, float mass, const btVector3 &inertia, btCollisionShape *shape);
     virtual ~RigidBody();
 
     /**
