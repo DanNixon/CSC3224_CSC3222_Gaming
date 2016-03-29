@@ -28,11 +28,10 @@ namespace Demo
   {
   public:
     /**
-     * @brief Create a new keyboard and joystick control scheme.
-     * @param game Target game
+     * @copydoc IControlScheme:IControlScheme
      */
     KJSSimulatorControls(Engine::Common::Game *game)
-        : m_game(game)
+        : Engine::Input::IControlScheme(game)
         , m_keyboard(new Engine::Input::KeyboardController(this))
         , m_joystick(new Engine::Input::JoystickController(this))
     {
@@ -48,8 +47,8 @@ namespace Demo
       addController(m_keyboard);
       addController(m_joystick);
 
-      m_game->addEventHandler(m_keyboard);
-      m_game->addEventHandler(m_joystick);
+      game->addEventHandler(m_keyboard);
+      game->addEventHandler(m_joystick);
     }
 
     virtual ~KJSSimulatorControls()
@@ -68,7 +67,6 @@ namespace Demo
     }
 
   private:
-    Engine::Common::Game *m_game;
     Engine::Input::KeyboardController *m_keyboard;
     Engine::Input::JoystickController *m_joystick;
   };

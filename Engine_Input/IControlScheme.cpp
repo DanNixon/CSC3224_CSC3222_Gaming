@@ -18,8 +18,10 @@ namespace Input
 {
   /**
    * @brief Create a new control scheme instance.
+   * @param game Game instance this scheme is used in
    */
-  IControlScheme::IControlScheme()
+  IControlScheme::IControlScheme(Game *game)
+      : m_game(game)
   {
     setAnalogDeadbands(0.0f, 0.0f);
   }

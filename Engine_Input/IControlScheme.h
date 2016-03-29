@@ -9,6 +9,7 @@
 #include <list>
 #include <map>
 
+#include <Engine_Common/Game.h>
 #include <Engine_Common/IMemoryManaged.h>
 
 namespace Engine
@@ -37,7 +38,7 @@ namespace Input
      */
     static const size_t MAX_STATES = 256;
 
-    IControlScheme();
+    IControlScheme(Engine::Common::Game *game);
     virtual ~IControlScheme();
 
     void addController(IController *controller);
@@ -53,6 +54,9 @@ namespace Input
     virtual void setState(size_t state, bool active);
     virtual void flipState(size_t state);
     virtual void setAnalog(size_t state, float value);
+
+  protected:
+    Engine::Common::Game *m_game; //!< Game instance control scheme is used in
 
   private:
     friend class IController;

@@ -36,11 +36,10 @@ namespace Snooker
   {
   public:
     /**
-     * @brief Create a new keyboard and mouse control scheme.
-     * @param game Target game
+     * @copydoc IControlScheme:IControlScheme
      */
     SnookerControls(Engine::Common::Game *game)
-        : m_game(game)
+        : Engine::Input::IControlScheme(game)
         , m_keyboard(new Engine::Input::KeyboardController(this))
         , m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
     {
@@ -53,8 +52,8 @@ namespace Snooker
       addController(m_keyboard);
       addController(m_mouse);
 
-      m_game->addEventHandler(m_keyboard);
-      m_game->addEventHandler(m_mouse);
+      game->addEventHandler(m_keyboard);
+      game->addEventHandler(m_mouse);
     }
 
     virtual ~SnookerControls()
@@ -64,7 +63,6 @@ namespace Snooker
     }
 
   private:
-    Engine::Common::Game *m_game;                  //!< Game instance this scheme is attached to
     Engine::Input::KeyboardController *m_keyboard; //!< Keyboard used in scheme
     Engine::Input::MouseController *m_mouse;       //!< Mouse used in scheme
   };
