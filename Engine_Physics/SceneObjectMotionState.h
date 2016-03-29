@@ -20,7 +20,7 @@ namespace Physics
   {
   public:
     SceneObjectMotionState(Engine::Common::SceneObject *object, const Engine::Maths::Vector3 &initialPos,
-                           const Engine::Maths::Quaternion &initialRot);
+                           Engine::Maths::Quaternion initialRot);
     virtual ~SceneObjectMotionState();
 
     void setSceneObject(Engine::Common::SceneObject *object);

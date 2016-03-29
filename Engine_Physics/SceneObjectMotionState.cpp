@@ -17,9 +17,10 @@ namespace Engine
 namespace Physics
 {
   SceneObjectMotionState::SceneObjectMotionState(SceneObject *object, const Vector3 &initialPos,
-                                                 const Quaternion &initialRot)
+                                                 Quaternion initialRot)
       : m_sceneObject(object)
   {
+    initialRot.normalise();
     m_initialPosition = btTransform(btQuaternion(initialRot.i(), initialRot.j(), initialRot.k(), initialRot.w()),
                                     btVector3(initialPos.x(), initialPos.y(), initialPos.z()));
   }
@@ -49,8 +50,7 @@ namespace Physics
     Quaternion rotQuat(rot.w(), rot.x(), rot.y(), rot.z());
     Vector3 posVec(pos.x(), pos.y(), pos.z());
 
-    auto rotmat = rotQuat.rotationMatrix();
-    Matrix4 modelMat = rotmat * Matrix4::Translation(posVec);
+    Matrix4 modelMat = Matrix4::Translation(posVec) * rotQuat.rotationMatrix();
     m_sceneObject->setModelMatrix(modelMat);
   }
 }

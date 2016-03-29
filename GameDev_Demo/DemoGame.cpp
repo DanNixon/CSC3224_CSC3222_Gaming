@@ -82,7 +82,7 @@ namespace Demo
     // Scene
     m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
     m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-    m_s = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1000)),
+    m_s = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 50), Vector3(0, 0, 0)),
                              m_losPMatrix);
 
     const std::string modelName("Gaui_X7");
@@ -106,7 +106,7 @@ namespace Demo
     m_s->root()->addChild(ground);
 
     SceneObjectMotionState *modelMotionState =
-      new SceneObjectMotionState(m_model, Vector3(0.0f, 20.0f, -50.0f), Quaternion(0.0f, 0.0f, 0.0f));
+      new SceneObjectMotionState(m_model, Vector3(0.0f, 0.0f, -50.0f), Quaternion(90.0f, 0.0f, 0.0f));
     btCollisionShape *modelShape = new btBoxShape(btVector3(5, 5, 5)); //btConvexHullShape();
     m_modelBody = new RigidBody(modelMotionState, 10.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
     m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
@@ -220,24 +220,12 @@ namespace Demo
         m_audioSource2->stop();
 
       // Stick indicators
-      float yawRate = 2.5f;
-      float prRate = 2.5f;
-      float throtRate = 10.0f;
-
       m_leftStick->setModelMatrix(
           Matrix4::Translation(Vector3(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT), -0.1f)));
       m_rightStick->setModelMatrix(
           Matrix4::Translation(Vector3(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH), -0.1f)));
 
-      // Model orientation
-      float roll = m_simControls->analog(A_ROLL) * prRate;
-      float pitch = -m_simControls->analog(A_PITCH) * prRate;
-      float yaw = -m_simControls->analog(A_YAW) * yawRate;
-      float throt = -m_simControls->analog(A_THROT) * throtRate;
-
-      m_modelBody->body()->setAngularVelocity(btVector3(yaw, roll, pitch));
-      m_modelBody->body()->setLinearVelocity(btVector3(0.0f, throt, 0.0f));
-
+      // Graphics update
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
@@ -246,10 +234,30 @@ namespace Demo
     }
     else if (id == m_physicsLoop)
     {
+      // Model controls
+      float yawRate = 0.1f;
+      float prRate = 0.1f;
+      float throtRate = 10.0f;
+
+      float roll = m_simControls->analog(A_ROLL) * prRate;
+      float pitch = -m_simControls->analog(A_PITCH) * prRate;
+      float yaw = -m_simControls->analog(A_YAW) * yawRate;
+      float throt = m_simControls->analog(A_THROT) * throtRate;
+
+      btTransform t = m_modelBody->body()->getWorldTransform();
+      btQuaternion q;
+      q.setEuler(yaw, roll, pitch);
+      t.setRotation(t.getRotation() * q);
+      m_modelBody->body()->setWorldTransform(t);
+
+      m_modelBody->body()->setLinearVelocity(btVector3(0.0f, throt, 0.0f));
+
+      // Physics update
       m_physicalSystem->update(dtMilliSec);
     }
     else if (id == m_audioLoop)
     {
+      // Audio update
       m_s->update(dtMilliSec, Subsystem::AUDIO);
     }
     else if (id == m_profileLoop)
