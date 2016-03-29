@@ -11,15 +11,15 @@
 #include <SDL_ttf.h>
 
 #include <Engine_Audio/Context.h>
-#include <Engine_Input/IControlScheme.h>
-#include <Engine_UIMenu/IMenu.h>
 #include <Engine_Audio/Listener.h>
-#include <Engine_Graphics/RenderableObject.h>
+#include <Engine_Audio/Source.h>
 #include <Engine_Common/Scene.h>
 #include <Engine_Common/SceneObject.h>
+#include <Engine_Graphics/RenderableObject.h>
 #include <Engine_Graphics/ShaderProgram.h>
-#include <Engine_Audio/Source.h>
+#include <Engine_Input/IControlScheme.h>
 #include <Engine_Physics/PhysicalSystem.h>
+#include <Engine_UIMenu/IMenu.h>
 
 namespace GameDev
 {

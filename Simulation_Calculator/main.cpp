@@ -5,8 +5,8 @@
 
 #include <iostream>
 
-#include <Simulation_Physics/SUVAT.h>
 #include <Engine_Maths/Vector3.h>
+#include <Simulation_Physics/SUVAT.h>
 
 using namespace Engine::Maths;
 using namespace Simulation::Physics;

@@ -9,8 +9,8 @@
 
 #include <SDL_ttf.h>
 
-#include <Engine_Graphics/LineMesh.h>
 #include <Engine_Common/Profiler.h>
+#include <Engine_Graphics/LineMesh.h>
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_Maths/VectorOperations.h>
 

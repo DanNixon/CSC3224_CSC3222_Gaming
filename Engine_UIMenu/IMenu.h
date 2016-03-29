@@ -14,8 +14,8 @@
 #include <SDL_ttf.h>
 
 #include <Engine_Graphics/Colour.h>
-#include <Engine_Input/MouseHandler.h>
 #include <Engine_Graphics/ShaderProgram.h>
+#include <Engine_Input/MouseHandler.h>
 
 #include "MenuItem.h"
 

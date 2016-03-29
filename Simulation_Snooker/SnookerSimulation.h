@@ -10,11 +10,11 @@
 
 #include <SDL_ttf.h>
 
-#include <Engine_Input/IControlScheme.h>
-#include <Engine_Graphics/RenderableObject.h>
 #include <Engine_Common/Scene.h>
+#include <Engine_Graphics/RenderableObject.h>
 #include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Graphics/TextPane.h>
+#include <Engine_Input/IControlScheme.h>
 
 #include <Simulation_Physics/Entity.h>
 #include <Simulation_Physics/PhysicsUpdate.h>
