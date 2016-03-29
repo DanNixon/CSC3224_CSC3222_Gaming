@@ -3,8 +3,8 @@
  * @author Dan Nixon
  */
 
-#ifndef _ENGINE_GRAPHICS_RectangleMeshMESH_H_
-#define _ENGINE_GRAPHICS_RectangleMeshMESH_H_
+#ifndef _ENGINE_GRAPHICS_RECTANGLEMESH_H_
+#define _ENGINE_GRAPHICS_RECTANGLEMESH_H_
 
 #include "Mesh.h"
 
@@ -54,7 +54,7 @@ namespace Graphics
   private:
     void resize();
 
-    Engine::Maths::Vector2 m_dimensions; //!< DImensions of the rectangle
+    Engine::Maths::Vector2 m_dimensions; //!< Dimensions of the rectangle
     Alignment_bitset m_alignment;        //!< Alignment from the position origin
   };
 }

@@ -11,6 +11,7 @@
     <ClCompile Include="RectangleMesh.cpp" />
     <ClCompile Include="LineMesh.cpp" />
     <ClCompile Include="GraphicalScene.cpp" />
+    <ClCompile Include="PlaneMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
@@ -27,5 +28,6 @@
     <ClInclude Include="GraphicalScene.h" />
     <ClInclude Include="Alignment.h" />
     <ClInclude Include="BoundingBox.h" />
+    <ClInclude Include="PlaneMesh.h" />
   </ItemGroup>
 </Project>

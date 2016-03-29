@@ -14,8 +14,10 @@
 #include <Engine_Graphics/ModelLoader.h>
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
+#include <Engine_Graphics/PlaneMesh.h>
 #include <Engine_Maths/Quaternion.h>
 #include <Engine_Physics/StaticPlaneRigidBody.h>
+#include <Engine_Physics/ConvexHullShape.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -79,10 +81,12 @@ namespace Demo
     m_sp->addShader(new FragmentShader("../resources/shader/frag_lighting.glsl"));
     m_sp->link();
 
+    float initialModelDistance = 250.0f;
+
     // Scene
     m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
     m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-    m_s = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 50), Vector3(0, 0, 0)),
+    m_s = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 50, 0), Vector3(0, 0, -initialModelDistance)),
                              m_losPMatrix);
 
     const std::string modelName("Gaui_X7");
@@ -94,10 +98,42 @@ namespace Demo
     m_model = l.load(modelObjStr.str(), m_sp);
     m_s->root()->addChild(m_model);
 
+    // UI
+    m_uiShader = new ShaderProgram();
+    m_uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+    m_uiShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
+    m_uiShader->link();
+
+    m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
+      Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
+
+    RenderableObject *leftStickArea =
+      new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
+    leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
+    leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
+    m_ui->root()->addChild(leftStickArea);
+
+    m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
+    m_leftStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
+    m_leftStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
+    leftStickArea->addChild(m_leftStick);
+
+    RenderableObject *rightStickArea =
+      new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
+    rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
+    rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
+    m_ui->root()->addChild(rightStickArea);
+
+    m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
+    m_rightStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
+    m_rightStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
+    rightStickArea->addChild(m_rightStick);
+
     // Physics
     m_physicalSystem = new PhysicalSystem();
 
-    SceneObject *ground = new SceneObject("ground");
+    RenderableObject *ground = new RenderableObject("ground", new PlaneMesh('y', 1000.0f), m_uiShader);
+    ground->mesh()->setStaticColour(Colour(0.8f, 0.6f, 0.5f));
     SceneObjectMotionState *groundMotionState =
         new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
     RigidBody *groundBody =
@@ -106,9 +142,10 @@ namespace Demo
     m_s->root()->addChild(ground);
 
     SceneObjectMotionState *modelMotionState =
-        new SceneObjectMotionState(m_model, Vector3(0.0f, 0.0f, -50.0f), Quaternion(90.0f, 0.0f, 0.0f));
-    btCollisionShape *modelShape = new btBoxShape(btVector3(5, 5, 5)); // btConvexHullShape();
-    m_modelBody = new RigidBody(modelMotionState, 10.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
+        new SceneObjectMotionState(m_model, Vector3(0.0f, 0.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
+    ConvexHullShape *modelShape = new ConvexHullShape();
+    modelShape->addSceneTreePoints(m_model);
+    m_modelBody = new RigidBody(modelMotionState, 500000.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
     m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
     m_physicalSystem->addBody(m_modelBody);
 
@@ -129,37 +166,6 @@ namespace Demo
     m_audioSource2->setLooping(true);
     m_s->root()->addChild(m_audioSource2);
 
-    // UI
-    m_uiShader = new ShaderProgram();
-    m_uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
-    m_uiShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
-    m_uiShader->link();
-
-    m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
-                              Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
-
-    RenderableObject *leftStickArea =
-        new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
-    leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
-    leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
-    m_ui->root()->addChild(leftStickArea);
-
-    m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
-    m_leftStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
-    m_leftStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
-    leftStickArea->addChild(m_leftStick);
-
-    RenderableObject *rightStickArea =
-        new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
-    rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
-    rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
-    m_ui->root()->addChild(rightStickArea);
-
-    m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
-    m_rightStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
-    m_rightStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
-    rightStickArea->addChild(m_rightStick);
-
     // GL
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
@@ -176,7 +182,7 @@ namespace Demo
     {
       std::cout << "Using joystick and keyboard" << std::endl;
       m_simControls = new KJSSimulatorControls(this);
-      m_simControls->setAnalogDeadbands(0.02f);
+      m_simControls->setAnalogDeadbands(0.05f);
       if (!static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(0))
       {
         std::cerr << "Could not open joystick" << std::endl;
@@ -207,6 +213,7 @@ namespace Demo
   {
     if (id == m_graphicsLoop)
     {
+      // Show menu if required
       if (m_simControls->state(S_OPENMENU))
       {
         m_menu->visible() ? m_menu->hide() : m_menu->show();
@@ -225,6 +232,9 @@ namespace Demo
       m_rightStick->setModelMatrix(
           Matrix4::Translation(Vector3(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH), -0.1f)));
 
+      // Look at aircraft
+      //m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
+
       // Graphics update
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
@@ -237,20 +247,26 @@ namespace Demo
       // Model controls
       float yawRate = 0.1f;
       float prRate = 0.1f;
-      float throtRate = 10.0f;
+      float throtRate = 100000000.0f;
 
       float roll = m_simControls->analog(A_ROLL) * prRate;
       float pitch = -m_simControls->analog(A_PITCH) * prRate;
       float yaw = -m_simControls->analog(A_YAW) * yawRate;
       float throt = m_simControls->analog(A_THROT) * throtRate;
 
+      // Orientation
       btTransform t = m_modelBody->body()->getWorldTransform();
-      btQuaternion q;
-      q.setEuler(yaw, roll, pitch);
-      t.setRotation(t.getRotation() * q);
-      m_modelBody->body()->setWorldTransform(t);
+      btQuaternion angularOffset;
+      angularOffset.setEuler(yaw, roll, pitch);
+      btQuaternion angle = t.getRotation() * angularOffset;
+      t.setRotation(angle);
+      
+      // Thrust
+      btVector3 rotorThrust(0.0f, throt, 0.0f);
+      // TODO: rotate thrust vector
 
-      m_modelBody->body()->setLinearVelocity(btVector3(0.0f, throt, 0.0f));
+      m_modelBody->body()->setWorldTransform(t);
+      m_modelBody->body()->applyCentralForce(rotorThrust);
 
       // Physics update
       m_physicalSystem->update(dtMilliSec);

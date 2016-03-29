@@ -158,6 +158,7 @@
     <ClCompile Include="LineMesh.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
+    <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="RectangleMesh.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="LineMesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />
+    <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="RectangleMesh.h" />
     <ClInclude Include="RenderableObject.h" />
     <ClInclude Include="Shader.h" />

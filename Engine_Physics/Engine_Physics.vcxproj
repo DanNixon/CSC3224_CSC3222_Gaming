@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConvexHullShape.h" />
     <ClInclude Include="PhysicalSystem.h" />
     <ClInclude Include="StaticPlaneRigidBody.h" />
     <ClInclude Include="RigidBody.h" />
@@ -26,6 +27,7 @@
     <ClInclude Include="SphericalRigidBody.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConvexHullShape.cpp" />
     <ClCompile Include="PhysicalSystem.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SceneObjectMotionState.cpp" />
@@ -82,26 +84,26 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\bullet-2.83.7\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\soil-0a9a661\include;$(SolutionDir)ThirdParty\assimp-3.1.1\include;$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
   </PropertyGroup>

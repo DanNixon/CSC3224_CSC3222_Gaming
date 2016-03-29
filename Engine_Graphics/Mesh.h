@@ -70,6 +70,16 @@ namespace Graphics
 
     BoundingBox<Engine::Maths::Vector3> boundingBox() const;
 
+    unsigned long numVertices() const
+    {
+      return m_numVertices;
+    }
+
+    Engine::Maths::Vector3 * vertices()
+    {
+      return m_vertices;
+    }
+
   protected:
     bool generateNormals();
     void bufferData();
