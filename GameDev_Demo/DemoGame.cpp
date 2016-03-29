@@ -99,15 +99,15 @@ namespace Demo
 
     SceneObject *ground = new SceneObject("ground");
     SceneObjectMotionState *groundMotionState =
-      new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
-    RigidBody *groundBody = new StaticPlaneRigidBody(
-      groundMotionState, 0, btVector3(0.0f, 0.0f, 0.0f), btVector3(0.0f, 1.0f, 0.0f));
+        new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
+    RigidBody *groundBody =
+        new StaticPlaneRigidBody(groundMotionState, 0, btVector3(0.0f, 0.0f, 0.0f), btVector3(0.0f, 1.0f, 0.0f));
     m_physicalSystem->addBody(groundBody);
     m_s->root()->addChild(ground);
 
     SceneObjectMotionState *modelMotionState =
-      new SceneObjectMotionState(m_model, Vector3(0.0f, 0.0f, -50.0f), Quaternion(90.0f, 0.0f, 0.0f));
-    btCollisionShape *modelShape = new btBoxShape(btVector3(5, 5, 5)); //btConvexHullShape();
+        new SceneObjectMotionState(m_model, Vector3(0.0f, 0.0f, -50.0f), Quaternion(90.0f, 0.0f, 0.0f));
+    btCollisionShape *modelShape = new btBoxShape(btVector3(5, 5, 5)); // btConvexHullShape();
     m_modelBody = new RigidBody(modelMotionState, 10.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
     m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
     m_physicalSystem->addBody(m_modelBody);

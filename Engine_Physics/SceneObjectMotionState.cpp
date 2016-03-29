@@ -16,8 +16,7 @@ namespace Engine
 {
 namespace Physics
 {
-  SceneObjectMotionState::SceneObjectMotionState(SceneObject *object, const Vector3 &initialPos,
-                                                 Quaternion initialRot)
+  SceneObjectMotionState::SceneObjectMotionState(SceneObject *object, const Vector3 &initialPos, Quaternion initialRot)
       : m_sceneObject(object)
   {
     initialRot.normalise();
