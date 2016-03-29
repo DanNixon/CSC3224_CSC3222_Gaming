@@ -16,6 +16,11 @@ namespace Engine
 {
 namespace Physics
 {
+  /**
+   * @class SceneObjectMotionState
+   * @brief Motion state for SceneObject instances.
+   * @author Dan Nixon
+   */
   class SceneObjectMotionState : public btMotionState
   {
   public:
@@ -29,8 +34,8 @@ namespace Physics
     virtual void setWorldTransform(const btTransform &worldTrans);
 
   protected:
-    Engine::Common::SceneObject *m_sceneObject;
-    btTransform m_initialPosition;
+    Engine::Common::SceneObject *m_sceneObject; //!< Target scene object
+    btTransform m_initial;                      //!< Initial position and orientation of the object
   };
 }
 }

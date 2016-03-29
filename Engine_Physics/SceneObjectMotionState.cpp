@@ -16,18 +16,28 @@ namespace Engine
 {
 namespace Physics
 {
+  /**
+   * @brief Creates a new motion sate for a SceneObject.
+   * @param object Target scene object
+   * @param initialPos Initial position
+   * @param initialRot Initial orientation
+   */
   SceneObjectMotionState::SceneObjectMotionState(SceneObject *object, const Vector3 &initialPos, Quaternion initialRot)
       : m_sceneObject(object)
   {
     initialRot.normalise();
-    m_initialPosition = btTransform(btQuaternion(initialRot.i(), initialRot.j(), initialRot.k(), initialRot.w()),
-                                    btVector3(initialPos.x(), initialPos.y(), initialPos.z()));
+    m_initial = btTransform(btQuaternion(initialRot.i(), initialRot.j(), initialRot.k(), initialRot.w()),
+                            btVector3(initialPos.x(), initialPos.y(), initialPos.z()));
   }
 
   SceneObjectMotionState::~SceneObjectMotionState()
   {
   }
 
+  /**
+   * @brief Sets the target scene obejct.
+   * @param object Target object
+   */
   void SceneObjectMotionState::setSceneObject(Engine::Common::SceneObject *object)
   {
     m_sceneObject = object;
@@ -35,7 +45,7 @@ namespace Physics
 
   void SceneObjectMotionState::getWorldTransform(btTransform &worldTrans) const
   {
-    worldTrans = m_initialPosition;
+    worldTrans = m_initial;
   }
 
   void SceneObjectMotionState::setWorldTransform(const btTransform &worldTrans)

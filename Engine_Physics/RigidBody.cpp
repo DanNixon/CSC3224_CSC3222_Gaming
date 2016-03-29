@@ -11,6 +11,13 @@ namespace Engine
 {
 namespace Physics
 {
+  /**
+   * @brief Creates a new rigid body.
+   * @param state Motion state to be associated with body
+   * @param mass Mass of body
+   * @param inertia Inertia
+   * @param shape Shape of body
+   */
   RigidBody::RigidBody(btMotionState *state, float mass, const btVector3 &inertia, btCollisionShape *shape)
       : m_body(nullptr)
       , m_shape(shape)

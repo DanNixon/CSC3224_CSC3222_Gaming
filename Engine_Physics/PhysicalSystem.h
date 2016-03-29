@@ -16,6 +16,11 @@ namespace Engine
 {
 namespace Physics
 {
+  /**
+   * @class PhysicalSystem
+   * @brief Used to manage a simulated physical system.
+   * @author Dan Nixon
+   */
   class PhysicalSystem : public Engine::Common::IMemoryManaged
   {
   public:

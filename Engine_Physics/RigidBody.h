@@ -18,6 +18,11 @@ namespace Physics
 {
   class PhysicalSystem;
 
+  /**
+   * @class RigidBody
+   * @brief Represents a rigid body in a physics simulation.
+   * @author Dan Nixon
+   */
   class RigidBody : public Engine::Common::IMemoryManaged
   {
   public:
@@ -32,11 +37,19 @@ namespace Physics
       return 40;
     }
 
+    /**
+     * @brief Gets the motion sttae of this body.
+     * @return Motion state
+     */
     inline btMotionState *motionState()
     {
       return m_body->getMotionState();
     }
 
+    /**
+     * @brief Gets a pointer to the body.
+     * @return Body
+     */
     inline btRigidBody *body()
     {
       return m_body;
@@ -45,10 +58,10 @@ namespace Physics
   protected:
     friend class PhysicalSystem;
 
-    btRigidBody *m_body;
-    btCollisionShape *m_shape;
+    btRigidBody *m_body;       //!< Rigid body
+    btCollisionShape *m_shape; //!< Shape of body
 
-    PhysicalSystem *m_system;
+    PhysicalSystem *m_system; //!< System this body is part of
   };
 }
 }
