@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-#include <Vector3.h>
+#include <Engine_Maths/Vector3.h>
 
 #include "Integration.h"
 #include "InterfaceDetection.h"

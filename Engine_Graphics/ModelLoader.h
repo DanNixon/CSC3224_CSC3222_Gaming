@@ -10,7 +10,7 @@
 
 #include <assimp/scene.h>
 
-#include <SceneObject.h>
+#include <Engine_Common/SceneObject.h>
 
 #include "ShaderProgram.h"
 #include "Texture.h"

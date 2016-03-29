@@ -6,7 +6,7 @@
 #ifndef _ENGINE_UIMENU_MENUITEM_H_
 #define _ENGINE_UIMENU_MENUITEM_H_
 
-#include <TextPane.h>
+#include <Engine_Graphics/TextPane.h>
 
 namespace Engine
 {

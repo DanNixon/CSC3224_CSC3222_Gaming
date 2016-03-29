@@ -5,8 +5,8 @@
 
 #include "Pocket.h"
 
-#include <Mesh.h>
-#include <Shaders.h>
+#include <Engine_Graphics/Mesh.h>
+#include <Engine_Graphics/Shaders.h>
 
 #include "Ball.h"
 

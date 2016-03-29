@@ -5,7 +5,7 @@
 
 #include <CppUnitTest.h>
 
-#include <Matrix3.h>
+#include <Engine_Maths/Matrix3.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

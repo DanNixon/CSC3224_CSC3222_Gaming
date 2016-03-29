@@ -9,7 +9,7 @@
 #include <SDL/SDL.h>
 #include <assimp/color4.h>
 
-#include <Vector4.h>
+#include <Engine_Maths/Vector4.h>
 
 namespace Engine
 {

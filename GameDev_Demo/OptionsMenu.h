@@ -6,8 +6,8 @@
 #ifndef _GAMEDEV_DEMO_OPTIONSMENU_H_
 #define _GAMEDEV_DEMO_OPTIONSMENU_H_
 
-#include <Game.h>
-#include <TopBarMenu.h>
+#include <Engine_Common/Game.h>
+#include <Engine_UIMenu/TopBarMenu.h>
 
 namespace GameDev
 {

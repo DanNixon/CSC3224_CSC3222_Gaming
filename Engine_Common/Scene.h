@@ -6,7 +6,7 @@
 #ifndef _ENGINE_COMMON_SCENE_H_
 #define _ENGINE_COMMON_SCENE_H_
 
-#include <Matrix4.h>
+#include <Engine_Maths/Matrix4.h>
 
 #include "IMemoryManaged.h"
 #include "Subsystem.h"

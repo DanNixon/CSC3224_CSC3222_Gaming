@@ -6,9 +6,10 @@
 #ifndef _SIMULATION_SNOOKER_POCKET_H_
 #define _SIMULATION_SNOOKER_POCKET_H_
 
-#include <RenderableObject.h>
-#include <SphericalEntity.h>
-#include <Vector4.h>
+#include <Engine_Graphics/RenderableObject.h>
+#include <Engine_Maths/Vector4.h>
+
+#include <Simulation_Physics/SphericalEntity.h>
 
 namespace Simulation
 {

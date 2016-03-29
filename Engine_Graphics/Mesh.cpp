@@ -5,8 +5,8 @@
 
 #include "Mesh.h"
 
-#include <VectorOperations.h>
-#include <math_common.h>
+#include <Engine_Maths/VectorOperations.h>
+#include <Engine_Maths/math_common.h>
 
 using namespace Engine::Maths;
 

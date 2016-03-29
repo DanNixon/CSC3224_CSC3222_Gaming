@@ -6,11 +6,10 @@
 #ifndef _SIMULATION_SNOOKER_BALL_H_
 #define _SIMULATION_SNOOKER_BALL_H_
 
-#include <pair>
+#include <Engine_Graphics/Colour.h>
+#include <Engine_Graphics/RenderableObject.h>
 
-#include <Colour.h>
-#include <RenderableObject.h>
-#include <SphericalEntity.h>
+#include <Simulation_Physics/SphericalEntity.h>
 
 namespace Simulation
 {

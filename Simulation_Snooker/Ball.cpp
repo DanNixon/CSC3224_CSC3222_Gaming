@@ -5,8 +5,8 @@
 
 #include "Ball.h"
 
-#include <Mesh.h>
-#include <Shaders.h>
+#include <Engine_Graphics/Mesh.h>
+#include <Engine_Graphics/Shaders.h>
 
 using namespace Engine::Maths;
 using namespace Engine::Graphics;

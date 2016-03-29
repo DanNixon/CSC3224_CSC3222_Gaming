@@ -7,15 +7,15 @@
 
 #include <sstream>
 
-#include <GraphicalScene.h>
-#include <MemoryManager.h>
-#include <ModelLoader.h>
-#include <Profiler.h>
-#include <Quaternion.h>
-#include <RectangleMesh.h>
-#include <Shaders.h>
-#include <WAVSource.h>
-#include <StaticPlaneRigidBody.h>
+#include <Engine_Graphics/GraphicalScene.h>
+#include <Engine_Common/MemoryManager.h>
+#include <Engine_Graphics/ModelLoader.h>
+#include <Engine_Common/Profiler.h>
+#include <Engine_Maths/Quaternion.h>
+#include <Engine_Graphics/RectangleMesh.h>
+#include <Engine_Graphics/Shaders.h>
+#include <Engine_Audio/WAVSource.h>
+#include <Engine_Physics/StaticPlaneRigidBody.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"

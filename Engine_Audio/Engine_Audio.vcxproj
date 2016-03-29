@@ -83,7 +83,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -91,13 +91,13 @@
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -105,7 +105,7 @@
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)Engine_Common;$(SolutionDir)Engine_Maths;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>

@@ -5,8 +5,8 @@
 
 #include "IControlScheme.h"
 
-#include <Game.h>
-#include <IEventHandler.h>
+#include <Engine_Common/Game.h>
+#include <Engine_Common/IEventHandler.h>
 
 #include "IController.h"
 

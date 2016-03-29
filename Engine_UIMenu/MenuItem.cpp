@@ -5,8 +5,8 @@
 
 #include "MenuItem.h"
 
-#include <Alignment.h>
-#include <RectangleMesh.h>
+#include <Engine_Graphics/Alignment.h>
+#include <Engine_Graphics/RectangleMesh.h>
 
 #include "IMenu.h"
 

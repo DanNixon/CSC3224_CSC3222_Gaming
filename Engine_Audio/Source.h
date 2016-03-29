@@ -6,7 +6,7 @@
 #ifndef _ENGINE_AUDIO_SOURCE_H_
 #define _ENGINE_AUDIO_SOURCE_H_
 
-#include <SceneObject.h>
+#include <Engine_Common/SceneObject.h>
 
 #include <al.h>
 

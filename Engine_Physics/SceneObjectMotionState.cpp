@@ -5,9 +5,9 @@
 
 #include "SceneObjectMotionState.h"
 
-#include <Matrix4.h>
-#include <Quaternion.h>
-#include <Vector3.h>
+#include <Engine_Maths/Matrix4.h>
+#include <Engine_Maths/Quaternion.h>
+#include <Engine_Maths/Vector3.h>
 
 using namespace Engine::Common;
 using namespace Engine::Maths;

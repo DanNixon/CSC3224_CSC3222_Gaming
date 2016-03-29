@@ -8,7 +8,7 @@
 
 #include <GL/glew.h>
 
-#include <IMemoryManaged.h>
+#include <Engine_Common/IMemoryManaged.h>
 
 namespace Engine
 {

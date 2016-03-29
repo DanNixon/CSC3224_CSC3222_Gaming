@@ -7,9 +7,9 @@
 
 #include <al.h>
 
-#include <Vector3.h>
-#include <Vector4.h>
-#include <VectorOperations.h>
+#include <Engine_Maths/Vector3.h>
+#include <Engine_Maths/Vector4.h>
+#include <Engine_Maths/VectorOperations.h>
 
 #include "AudioUtil.h"
 

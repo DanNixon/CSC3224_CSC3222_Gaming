@@ -6,7 +6,7 @@
 #ifndef _SIMULATION_SNOOKER_CUSHION_H_
 #define _SIMULATION_SNOOKER_CUSHION_H_
 
-#include <PlanarEntity.h>
+#include <Simulation_Physics/PlanarEntity.h>
 
 namespace Simulation
 {

@@ -14,11 +14,11 @@
 #include <SDL/SDL_opengl.h>
 #include <assimp/scene.h>
 
-#include <IMemoryManaged.h>
+#include <Engine_Common/IMemoryManaged.h>
 
-#include <Vector2.h>
-#include <Vector3.h>
-#include <Vector4.h>
+#include <Engine_Maths/Vector2.h>
+#include <Engine_Maths/Vector3.h>
+#include <Engine_Maths/Vector4.h>
 
 #include "BoundingBox.h"
 #include "Colour.h"

@@ -6,12 +6,12 @@
 #ifndef _ENGINE_GRAPHICS_GRAPHICALSCENE_H_
 #define _ENGINE_GRAPHICS_GRAPHICALSCENE_H_
 
-#include <Scene.h>
+#include <Engine_Common/Scene.h>
 
 #include <vector>
 
-#include <SceneObject.h>
-#include <Subsystem.h>
+#include <Engine_Common/SceneObject.h>
+#include <Engine_Common/Subsystem.h>
 
 namespace Engine
 {

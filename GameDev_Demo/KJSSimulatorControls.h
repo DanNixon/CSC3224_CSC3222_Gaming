@@ -6,12 +6,12 @@
 #ifndef _GAMEDEV_DEMO_KJSSIMULATORCONTROLS_H_
 #define _GAMEDEV_DEMO_KJSSIMULATORCONTROLS_H_
 
-#include <IControlScheme.h>
+#include <Engine_Input/IControlScheme.h>
 
-#include <Game.h>
+#include <Engine_Common/Game.h>
 
-#include <JoystickController.h>
-#include <KeyboardController.h>
+#include <Engine_Input/JoystickController.h>
+#include <Engine_Input/KeyboardController.h>
 
 #include "controls.h"
 

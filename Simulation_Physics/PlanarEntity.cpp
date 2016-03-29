@@ -5,7 +5,7 @@
 
 #include "PlanarEntity.h"
 
-#include <VectorOperations.h>
+#include <Engine_Maths/VectorOperations.h>
 
 using namespace Engine::Maths;
 

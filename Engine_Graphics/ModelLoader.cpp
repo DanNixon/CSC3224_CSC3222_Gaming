@@ -9,7 +9,7 @@
 #include <assimp/cimport.h>
 #include <assimp/postprocess.h>
 
-#include <StringUtils.h>
+#include <Engine_Utility/StringUtils.h>
 
 #include "Mesh.h"
 #include "RenderableObject.h"

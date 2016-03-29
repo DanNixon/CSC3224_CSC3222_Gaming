@@ -5,10 +5,10 @@
 
 #include "Table.h"
 
-#include <Mesh.h>
-#include <RectangleMesh.h>
-#include <Shaders.h>
-#include <Texture.h>
+#include <Engine_Graphics/Mesh.h>
+#include <Engine_Graphics/RectangleMesh.h>
+#include <Engine_Graphics/Shaders.h>
+#include <Engine_Graphics/Texture.h>
 
 using namespace Engine::Maths;
 using namespace Engine::Graphics;

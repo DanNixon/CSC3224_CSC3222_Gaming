@@ -6,8 +6,9 @@
 #ifndef _SIMULATION_SNOOKER_TABLE_H_
 #define _SIMULATION_SNOOKER_TABLE_H_
 
-#include <RenderableObject.h>
-#include <Vector2.h>
+#include <Engine_Graphics/RenderableObject.h>
+
+#include <Engine_Maths/Vector2.h>
 
 #include "Cushion.h"
 #include "Pocket.h"

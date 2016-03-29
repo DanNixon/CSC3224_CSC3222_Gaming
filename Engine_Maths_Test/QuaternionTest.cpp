@@ -5,8 +5,8 @@
 
 #include "CppUnitTest.h"
 
-#include <Quaternion.h>
-#include <Vector3.h>
+#include <Engine_Maths/Quaternion.h>
+#include <Engine_Maths/Vector3.h>
 
 /**
  * @def FP_ACC

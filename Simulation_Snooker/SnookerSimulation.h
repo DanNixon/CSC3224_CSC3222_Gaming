@@ -6,18 +6,18 @@
 #ifndef _SIMULATION_SNOOKER_SNOOKERSIMULATION_H_
 #define _SIMULATION_SNOOKER_SNOOKERSIMULATION_H_
 
-#include <Game.h>
+#include <Engine_Common/Game.h>
 
 #include <SDL_ttf.h>
 
-#include <IControlScheme.h>
-#include <RenderableObject.h>
-#include <Scene.h>
-#include <ShaderProgram.h>
-#include <TextPane.h>
+#include <Engine_Input/IControlScheme.h>
+#include <Engine_Graphics/RenderableObject.h>
+#include <Engine_Common/Scene.h>
+#include <Engine_Graphics/ShaderProgram.h>
+#include <Engine_Graphics/TextPane.h>
 
-#include <Entity.h>
-#include <PhysicsUpdate.h>
+#include <Simulation_Physics/Entity.h>
+#include <Simulation_Physics/PhysicsUpdate.h>
 
 #include "Ball.h"
 #include "Table.h"

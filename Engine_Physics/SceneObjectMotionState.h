@@ -8,9 +8,9 @@
 
 #include <btBulletDynamicsCommon.h>
 
-#include <QUaternion.h>
-#include <SceneObject.h>
-#include <Vector3.h>
+#include <Engine_Maths/QUaternion.h>
+#include <Engine_Common/SceneObject.h>
+#include <Engine_Maths/Vector3.h>
 
 namespace Engine
 {

@@ -8,7 +8,7 @@
 
 #include <SDL/SDL.h>
 
-#include <EnumClassBitset.h>
+#include <Engine_Utility/EnumClassBitset.h>
 
 namespace Engine
 {

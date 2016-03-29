@@ -6,7 +6,7 @@
 #ifndef _ENGINE_GRAPHICS_RENDERABLEOBJECT_H_
 #define _ENGINE_GRAPHICS_RENDERABLEOBJECT_H_
 
-#include <SceneObject.h>
+#include <Engine_Common/SceneObject.h>
 
 #include "GraphicalScene.h"
 #include "Mesh.h"

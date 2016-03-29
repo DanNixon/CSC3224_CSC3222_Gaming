@@ -6,20 +6,20 @@
 #ifndef _GAMEDEV_DEMO_DEMOGAME_H_
 #define _GAMEDEV_DEMO_DEMOGAME_H_
 
-#include <Game.h>
+#include <Engine_Common/Game.h>
 
 #include <SDL_ttf.h>
 
-#include <Context.h>
-#include <IControlScheme.h>
-#include <IMenu.h>
-#include <Listener.h>
-#include <RenderableObject.h>
-#include <Scene.h>
-#include <SceneObject.h>
-#include <ShaderProgram.h>
-#include <Source.h>
-#include <PhysicalSystem.h>
+#include <Engine_Audio/Context.h>
+#include <Engine_Input/IControlScheme.h>
+#include <Engine_UIMenu/IMenu.h>
+#include <Engine_Audio/Listener.h>
+#include <Engine_Graphics/RenderableObject.h>
+#include <Engine_Common/Scene.h>
+#include <Engine_Common/SceneObject.h>
+#include <Engine_Graphics/ShaderProgram.h>
+#include <Engine_Audio/Source.h>
+#include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
 {

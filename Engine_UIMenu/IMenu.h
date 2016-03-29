@@ -6,16 +6,16 @@
 #ifndef _ENGINE_UIMENU_IMENU_H_
 #define _ENGINE_UIMENU_IMENU_H_
 
-#include <GraphicalScene.h>
+#include <Engine_Graphics/GraphicalScene.h>
 
 #include <limits>
 #include <map>
 
 #include <SDL_ttf.h>
 
-#include <Colour.h>
-#include <MouseHandler.h>
-#include <ShaderProgram.h>
+#include <Engine_Graphics/Colour.h>
+#include <Engine_Input/MouseHandler.h>
+#include <Engine_Graphics/ShaderProgram.h>
 
 #include "MenuItem.h"
 

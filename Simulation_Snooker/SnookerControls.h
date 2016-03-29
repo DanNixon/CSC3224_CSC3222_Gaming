@@ -6,12 +6,11 @@
 #ifndef _SIMULATION_SNOOKER_CONTROLS_H_
 #define _SIMULATION_SNOOKER_CONTROLS_H_
 
-#include <IControlScheme.h>
+#include <Engine_Input/IControlScheme.h>
 
-#include <Game.h>
-
-#include <KeyboardController.h>
-#include <MouseController.h>
+#include <Engine_Common/Game.h>
+#include <Engine_Input/KeyboardController.h>
+#include <Engine_Input/MouseController.h>
 
 namespace Simulation
 {

@@ -5,8 +5,8 @@
 
 #include "CppUnitTest.h"
 
-#include <INIKeyValueStore.h>
-#include <KVNode.h>
+#include <Engine_IO/INIKeyValueStore.h>
+#include <Engine_IO/KVNode.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

@@ -5,8 +5,8 @@
 
 #include "InterfaceDetection.h"
 
-#include <Vector2.h>
-#include <VectorOperations.h>
+#include <Engine_Maths/Vector2.h>
+#include <Engine_Maths/VectorOperations.h>
 
 #include "PlanarEntity.h"
 #include "SphericalEntity.h"

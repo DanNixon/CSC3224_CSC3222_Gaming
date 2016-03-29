@@ -5,8 +5,8 @@
 
 #include "RenderableObject.h"
 
-#include <Matrix3.h>
-#include <Subsystem.h>
+#include <Engine_Maths/Matrix3.h>
+#include <Engine_Common/Subsystem.h>
 
 using namespace Engine::Common;
 using namespace Engine::Maths;

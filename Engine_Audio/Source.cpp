@@ -5,8 +5,8 @@
 
 #include "Source.h"
 
-#include <Subsystem.h>
-#include <Vector4.h>
+#include <Engine_Common/Subsystem.h>
+#include <Engine_Maths/Vector4.h>
 
 #include "AudioUtil.h"
 
