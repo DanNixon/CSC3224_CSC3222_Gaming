@@ -357,8 +357,8 @@ namespace Maths
     float j2 = m_j * m_j;
     float k2 = m_k * m_k;
     float ij = m_i * m_j;
-    float jk = m_i * m_k;
-    float ik = m_j * m_k;
+    float ik = m_i * m_k;
+    float jk = m_j * m_k;
     float wi = m_w * m_i;
     float wj = m_w * m_j;
     float wk = m_w * m_k;
