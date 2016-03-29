@@ -75,7 +75,7 @@ namespace Graphics
       return m_numVertices;
     }
 
-    Engine::Maths::Vector3 * vertices()
+    Engine::Maths::Vector3 *vertices()
     {
       return m_vertices;
     }

@@ -12,16 +12,24 @@
 
 namespace Engine
 {
-  namespace Physics
+namespace Physics
+{
+  /**
+   * @class ConvesHullShape
+   * @brief A wrapper around Bullet's btConvexHullShape that builds the hull from a SceneNode tree.
+   * @author Dan Nixon
+   *
+   * Note that building the initial mesh can be very slow for large trees and detailed meshes.
+   */
+  class ConvexHullShape : public btConvexHullShape
   {
-    class ConvexHullShape : public btConvexHullShape
-    {
-    public:
-      ConvexHullShape();
-      virtual ~ConvexHullShape();
+  public:
+    ConvexHullShape();
+    virtual ~ConvexHullShape();
 
-      void addSceneTreePoints(Engine::Common::SceneObject *object, size_t maxDepth = std::numeric_limits<size_t>::max(), size_t level = 0);
-    };
-  }
+    void addSceneTreePoints(Engine::Common::SceneObject *object, size_t maxDepth = std::numeric_limits<size_t>::max(),
+                            size_t level = 0);
+  };
+}
 }
 #endif

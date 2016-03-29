@@ -12,12 +12,12 @@
 #include <Engine_Common/Profiler.h>
 #include <Engine_Graphics/GraphicalScene.h>
 #include <Engine_Graphics/ModelLoader.h>
+#include <Engine_Graphics/PlaneMesh.h>
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
-#include <Engine_Graphics/PlaneMesh.h>
 #include <Engine_Maths/Quaternion.h>
-#include <Engine_Physics/StaticPlaneRigidBody.h>
 #include <Engine_Physics/ConvexHullShape.h>
+#include <Engine_Physics/StaticPlaneRigidBody.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -86,7 +86,8 @@ namespace Demo
     // Scene
     m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
     m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-    m_s = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 50, 0), Vector3(0, 0, -initialModelDistance)),
+    m_s = new GraphicalScene(new SceneObject("root"),
+                             Matrix4::BuildViewMatrix(Vector3(0, 50, 0), Vector3(0, 0, -initialModelDistance)),
                              m_losPMatrix);
 
     const std::string modelName("Gaui_X7");
@@ -105,10 +106,10 @@ namespace Demo
     m_uiShader->link();
 
     m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
-      Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
+                              Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
     RenderableObject *leftStickArea =
-      new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
+        new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
     leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
     leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
     m_ui->root()->addChild(leftStickArea);
@@ -119,7 +120,7 @@ namespace Demo
     leftStickArea->addChild(m_leftStick);
 
     RenderableObject *rightStickArea =
-      new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
+        new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), m_uiShader);
     rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
     rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
     m_ui->root()->addChild(rightStickArea);
@@ -233,7 +234,7 @@ namespace Demo
           Matrix4::Translation(Vector3(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH), -0.1f)));
 
       // Look at aircraft
-      //m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
+      // m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
 
       // Graphics update
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
@@ -260,7 +261,7 @@ namespace Demo
       angularOffset.setEuler(yaw, roll, pitch);
       btQuaternion angle = t.getRotation() * angularOffset;
       t.setRotation(angle);
-      
+
       // Thrust
       btVector3 rotorThrust(0.0f, throt, 0.0f);
       // TODO: rotate thrust vector
