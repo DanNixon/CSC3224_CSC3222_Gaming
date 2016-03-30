@@ -93,6 +93,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine_UIMenu", "Engine_UIM
 		{56842BDD-E5B4-4286-BE60-9F5BDECA7D78} = {56842BDD-E5B4-4286-BE60-9F5BDECA7D78}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine_Graphics_Test", "Engine_Graphics_Test\Engine_Graphics_Test.vcxproj", "{812D7911-A402-4A20-93EB-AB2BABABEAFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -229,6 +231,14 @@ Global
 		{F9960B61-EE73-404A-ACEE-1F553EFA8087}.Release|Win32.Build.0 = Release|Win32
 		{F9960B61-EE73-404A-ACEE-1F553EFA8087}.Release|x64.ActiveCfg = Release|x64
 		{F9960B61-EE73-404A-ACEE-1F553EFA8087}.Release|x64.Build.0 = Release|x64
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Debug|Win32.Build.0 = Debug|Win32
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Debug|x64.ActiveCfg = Debug|x64
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Debug|x64.Build.0 = Debug|x64
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Release|Win32.ActiveCfg = Release|Win32
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Release|Win32.Build.0 = Release|Win32
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Release|x64.ActiveCfg = Release|x64
+		{812D7911-A402-4A20-93EB-AB2BABABEAFB}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
