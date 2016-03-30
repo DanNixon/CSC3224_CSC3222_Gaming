@@ -33,7 +33,7 @@ namespace Audio
     // Delete the buffer created by the constructor
     if (m_buffer)
     {
-      alSourcei(m_sourceID, AL_BUFFER, nullptr);
+      alSourcei(m_sourceID, AL_BUFFER, 0);
       alDeleteBuffers(1, &m_buffer);
     }
 

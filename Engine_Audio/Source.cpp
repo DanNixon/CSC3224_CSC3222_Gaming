@@ -38,7 +38,7 @@ namespace Audio
 
   Source::~Source()
   {
-    alSourcei(m_sourceID, AL_BUFFER, nullptr);
+    alSourcei(m_sourceID, AL_BUFFER, 0);
 
     alDeleteSources(1, &m_sourceID);
     alDeleteBuffers(1, &m_buffer);
