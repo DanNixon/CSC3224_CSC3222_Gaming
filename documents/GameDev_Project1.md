@@ -32,6 +32,11 @@
 - [x] `Engine_IO`
   - [x] INI
 - [ ] `Engine_Physics`
+  - [x] World/simulation representation
+  - [x] Body representation
+  - [ ] Aircraft motion
+  - [x] Convex hull collision shape
+  - [ ] Bounding box collision shape
 - [x] `Engine_UIMenu`
   - [x] Menu structure definition
   - [x] Top bar menu
