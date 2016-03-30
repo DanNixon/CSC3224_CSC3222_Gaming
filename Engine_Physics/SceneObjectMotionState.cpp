@@ -43,11 +43,19 @@ namespace Physics
     m_sceneObject = object;
   }
 
+  /**
+   * @brief Gets world transform.
+   * @param worldTrans Transform to update
+   */
   void SceneObjectMotionState::getWorldTransform(btTransform &worldTrans) const
   {
     worldTrans = m_initial;
   }
 
+  /**
+   * @brief Sets transform of object.
+   * @param worldTrans Transform to update from
+   */
   void SceneObjectMotionState::setWorldTransform(const btTransform &worldTrans)
   {
     if (m_sceneObject == nullptr)

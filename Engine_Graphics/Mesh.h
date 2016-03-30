@@ -70,11 +70,19 @@ namespace Graphics
 
     BoundingBox<Engine::Maths::Vector3> boundingBox() const;
 
+    /**
+     * @brief Returns the number of vertices that make up this mesh.
+     * @return Vertex count
+     */
     unsigned long numVertices() const
     {
       return m_numVertices;
     }
 
+    /**
+     * @brief Returns a pointer to the start of the vertex array.
+     * @return Vertex array
+     */
     Engine::Maths::Vector3 *vertices()
     {
       return m_vertices;

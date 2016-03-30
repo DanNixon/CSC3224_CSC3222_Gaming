@@ -15,7 +15,7 @@ namespace Engine
 namespace Physics
 {
   /**
-   * @class ConvesHullShape
+   * @class ConvexHullShape
    * @brief A wrapper around Bullet's btConvexHullShape that builds the hull from a SceneNode tree.
    * @author Dan Nixon
    *

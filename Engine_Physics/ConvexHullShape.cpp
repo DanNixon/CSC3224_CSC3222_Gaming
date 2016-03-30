@@ -23,6 +23,13 @@ namespace Physics
   {
   }
 
+  /**
+   * @brief Adds the vertices of renderable objects in a scene tree to the
+   *        hull.
+   * @param object Root node of (sub)tree to add
+   * @param maxDepth Maximum recursion depth (defaults to full tree)
+   * @param level Current recursion level (do not set manually)
+   */
   void ConvexHullShape::addSceneTreePoints(Engine::Common::SceneObject *object, size_t maxDepth, size_t level)
   {
     RenderableObject *rendeable = dynamic_cast<RenderableObject *>(object);
