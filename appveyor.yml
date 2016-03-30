@@ -18,6 +18,10 @@ platform:
 build:
   verbosity: normal
 
+test:
+  assemblies:
+    - '**\*_Test.dll'
+
 notifications:
   - provider: Email
     to:
