@@ -42,6 +42,15 @@ namespace Maths
     }
 
     /**
+     * @brief Gets the number of dimensions.
+     * @return Dimension count
+     */
+    static size_t Dimensions()
+    {
+      return 2;
+    }
+
+    /**
      * @brief Creates a new vector.
      * @param x X coordinate value (default 0)
      * @param y Y coordinate value (default 0)
@@ -283,7 +292,7 @@ namespace Maths
      * @param i Index of component to return
      * @return Value of component
      */
-    inline float operator[](const int i) const
+    inline float operator[](size_t i) const
     {
       switch (i)
       {
@@ -301,7 +310,7 @@ namespace Maths
      * @param i Index of component to return
      * @return Reference to component
      */
-    inline float &operator[](const int i)
+    inline float &operator[](size_t i)
     {
       switch (i)
       {

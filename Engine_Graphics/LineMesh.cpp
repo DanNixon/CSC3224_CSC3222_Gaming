@@ -68,6 +68,10 @@ namespace Graphics
     m_vertices[0] = from;
     m_vertices[1] = to;
 
+    m_boundingBox.reset();
+    m_boundingBox.resizeByPoint(m_vertices[0]);
+    m_boundingBox.resizeByPoint(m_vertices[1]);
+
     bufferData();
   }
 }

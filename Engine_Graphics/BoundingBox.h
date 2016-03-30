@@ -20,6 +20,17 @@ namespace Graphics
   {
   public:
     /**
+     * @brief Creates a new box with largest possible dimensions.
+     * @see BoundingBox::resizeByPoint
+     *
+     * Intended to be constrained using calls to BoundingBox::resizeByPoint
+     */
+    BoundingBox()
+    {
+      reset();
+    }
+
+    /**
      * @brief Creates a new box.
      * @param lowerLeft Lower left vertex position
      * @param upperRight Upper right vertex position
@@ -28,6 +39,24 @@ namespace Graphics
         : m_lowerLeft(lowerLeft)
         , m_upperRight(upperRight)
     {
+    }
+
+    /**
+     * @brief Resets the box to the largest possible dimensions.
+     * @see BoundingBox::resizeByPoint
+     *
+     * Intended to be constrained using calls to BoundingBox::resizeByPoint
+     */
+    void reset()
+    {
+      const float maxFloat = std::numeric_limits<float>::max();
+      const float minFloat = std::numeric_limits<float>::min();
+
+      for (size_t i = 0; i < T::Dimensions(); i++)
+      {
+        m_lowerLeft[i] = maxFloat;
+        m_upperRight[i] = minFloat;
+      }
     }
 
     /**
@@ -62,9 +91,25 @@ namespace Graphics
      * @param point Point to test
      * @return True if point is inside the box
      */
-    bool pointInside(T point) const
+    bool pointInside(const T &point) const
     {
       return m_lowerLeft <= point && point <= m_upperRight;
+    }
+
+    /**
+     * @brief Constrains the size of the box by a point.
+     * @param point Point to resize by
+     * @see BoundingBox::resizeByPoint
+     */
+    inline void resizeByPoint(const T &point)
+    {
+      for (size_t i = 0; i < T::Dimensions(); i++)
+      {
+        if (point[i] < m_lowerLeft[i])
+          m_lowerLeft[i] = point[i];
+        else if (point[i] > m_upperRight[i])
+          m_upperRight[i] = point[i];
+      }
     }
 
     /**

@@ -107,6 +107,12 @@ namespace Graphics
     m_vertices[2] = Vector3(bottomLeft.x(), bottomLeft.y(), 0);
     m_vertices[3] = Vector3(topRight.x(), bottomLeft.y(), 0);
 
+    m_boundingBox.reset();
+    m_boundingBox.resizeByPoint(m_vertices[0]);
+    m_boundingBox.resizeByPoint(m_vertices[1]);
+    m_boundingBox.resizeByPoint(m_vertices[2]);
+    m_boundingBox.resizeByPoint(m_vertices[3]);
+
     bufferData();
   }
 }

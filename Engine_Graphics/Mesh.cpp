@@ -85,34 +85,6 @@ namespace Graphics
   }
 
   /**
-   * @brief Gets the upper and lower bounds of the vertices of the mesh.
-   * @return Bounding box
-   */
-  BoundingBox<Vector3> Mesh::boundingBox() const
-  {
-    const float maxFloat = std::numeric_limits<float>::max();
-    const float minFloat = std::numeric_limits<float>::min();
-
-    Vector3 min(maxFloat, maxFloat, maxFloat);
-    Vector3 max(minFloat, minFloat, minFloat);
-
-    for (size_t i = 0; i < m_numVertices; i++)
-    {
-      const Vector3 &v = m_vertices[i];
-
-      for (int j = 0; j < 3; j++)
-      {
-        if (v[j] < min[j])
-          min[j] = v[j];
-        else if (v[j] > max[j])
-          max[j] = v[j];
-      }
-    }
-
-    return BoundingBox<Vector3>(min, max);
-  }
-
-  /**
    * @brief Generates normals for each vertex.
    * @return True if normals were generated
    *
@@ -220,6 +192,7 @@ namespace Graphics
 
     // "Origin" vertex
     m->m_vertices[0] = Vector3(0.0f, 0.0f, 0.0f);
+    m->m_boundingBox.resizeByPoint(m->m_vertices[0]);
     m->m_colours[0] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
     m->m_textureCoords[0] = Vector2(0.5f, 0.5f);
 
@@ -228,9 +201,9 @@ namespace Graphics
       const float a = i * deltaA;
 
       m->m_vertices[i] = Vector3(cos(a) * radius, sin(a) * radius, 0.0f);
+      m->m_boundingBox.resizeByPoint(m->m_vertices[i]);
       m->m_colours[i] = Colour(1.0f, 1.0f, 1.0f, 1.0f);
-      Vector2 v = Vector2(abs(cos(a)), abs(sin(a)));
-      m->m_textureCoords[i] = v;
+      m->m_textureCoords[i] = Vector2(abs(cos(a)), abs(sin(a)));
     }
 
     m->bufferData();
@@ -263,11 +236,13 @@ namespace Graphics
       const float a = i * deltaA;
 
       m->m_vertices[n] = Vector3(cos(a) * radiusOuter, sin(a) * radiusOuter, 0.0f);
+      m->m_boundingBox.resizeByPoint(m->m_vertices[n]);
       m->m_colours[n] = c;
       m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
       n++;
 
       m->m_vertices[n] = Vector3(cos(a) * radiusInner, sin(a) * radiusInner, 0.0f);
+      m->m_boundingBox.resizeByPoint(m->m_vertices[n]);
       m->m_colours[n] = c;
       m->m_textureCoords[n] = Vector2(abs(cos(a)), abs(sin(a)));
       n++;
@@ -351,7 +326,9 @@ namespace Graphics
           m->m_normals[idx] = Vector3(norm.x, norm.y, norm.z);
         }
 
-        m->m_vertices[idx++] = Vector3(v[0], v[1], v[2]);
+        Vector3 vtx(v[0], v[1], v[2]);
+        m->m_boundingBox.resizeByPoint(vtx);
+        m->m_vertices[idx++] = vtx;
       }
     }
 

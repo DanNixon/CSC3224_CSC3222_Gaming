@@ -68,7 +68,14 @@ namespace Graphics
 
     void setStaticColour(const Colour &col);
 
-    BoundingBox<Engine::Maths::Vector3> boundingBox() const;
+    /**
+     * @brief Gets the upper and lower bounds of the vertices of the mesh.
+     * @return Bounding box
+     */
+    BoundingBox<Engine::Maths::Vector3> boundingBox() const
+    {
+      return m_boundingBox;
+    }
 
     /**
      * @brief Returns the number of vertices that make up this mesh.
@@ -105,6 +112,8 @@ namespace Graphics
     Engine::Maths::Vector3 *m_normals;       //!< Pointer to vertex normals data
     Engine::Maths::Vector3 *m_tangents;      //!< Pointer to vertex tangents data
     size_t *m_indices;                       //!< Pointer to vertex indices
+
+    BoundingBox<Engine::Maths::Vector3> m_boundingBox;
 
     Colour m_ambientColour;    //!< Colour of scattered ambient light
     Colour m_diffuseColour;    //!< Colour of diffuse scattered light

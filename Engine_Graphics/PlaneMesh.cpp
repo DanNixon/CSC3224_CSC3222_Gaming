@@ -63,6 +63,11 @@ namespace Graphics
       break;
     }
 
+    m_boundingBox.resizeByPoint(m_vertices[0]);
+    m_boundingBox.resizeByPoint(m_vertices[1]);
+    m_boundingBox.resizeByPoint(m_vertices[2]);
+    m_boundingBox.resizeByPoint(m_vertices[3]);
+
     bufferData();
   }
 
