@@ -33,10 +33,10 @@ namespace Common
       : m_windowTitle(windowTitle)
       , m_windowWidth(resolution.first)
       , m_windowHeight(resolution.second)
-      , m_profiler(NULL)
+      , m_profiler(nullptr)
   {
     for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
-      m_loops[i] = NULL;
+      m_loops[i] = nullptr;
 
     QueryPerformanceFrequency(&m_freq);
 
@@ -77,7 +77,7 @@ namespace Common
     QueryPerformanceCounter(&m_start);
     for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
     {
-      if (m_loops[i] != NULL)
+      if (m_loops[i] != nullptr)
         m_loops[i]->lastFired = time();
     }
 
@@ -94,7 +94,7 @@ namespace Common
       while (SDL_PollEvent(&e) == 1)
       {
         // Start event profiling
-        if (m_profiler != NULL)
+        if (m_profiler != nullptr)
         {
           m_profiler->m_loopUpdates[Profiler::EVENTS]++;
           startTime = time();
@@ -113,14 +113,14 @@ namespace Common
           (*it)->handleEvent(e);
 
         // End event profiling
-        if (m_profiler != NULL)
+        if (m_profiler != nullptr)
           m_profiler->m_duration[Profiler::EVENTS] += time() - startTime;
       }
 
       // Poll timed loops
       for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       {
-        if (m_loops[i] == NULL)
+        if (m_loops[i] == nullptr)
           continue;
 
         float t = time();
@@ -130,7 +130,7 @@ namespace Common
         if (deltaT >= m_loops[i]->interval)
         {
           // Start loop profiling
-          if (m_profiler != NULL)
+          if (m_profiler != nullptr)
           {
             m_profiler->m_loopUpdates[i]++;
             startTime = time();
@@ -141,7 +141,7 @@ namespace Common
           this->gameLoop(i, deltaT);
 
           // End loop profiling
-          if (m_profiler != NULL)
+          if (m_profiler != nullptr)
             m_profiler->m_duration[i] += time() - startTime;
         }
       }
@@ -247,7 +247,7 @@ namespace Common
         result = 10;
       }
 
-      if (!alutInitWithoutContext(0, NULL))
+      if (!alutInitWithoutContext(0, nullptr))
       {
         std::cerr << "ALUT failed to initialize! Error: " <<
           alutGetErrorString(alutGetError()) << std::endl;
@@ -266,7 +266,7 @@ namespace Common
           SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight,
           SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
-      if (m_window == NULL)
+      if (m_window == nullptr)
       {
         std::cerr << "Window could not be created! SDL Error: "
                   << SDL_GetError() << std::endl;
@@ -276,7 +276,7 @@ namespace Common
       {
         /* Create context */
         m_context = SDL_GL_CreateContext(m_window);
-        if (m_context == NULL)
+        if (m_context == nullptr)
         {
           std::cerr << "OpenGL context could not be created! SDL Error: "
                     << SDL_GetError() << std::endl;
@@ -306,7 +306,7 @@ namespace Common
   void Game::close()
   {
     SDL_DestroyWindow(m_window);
-    m_window = NULL;
+    m_window = nullptr;
     TTF_Quit();
     alutExit();
     SDL_Quit();
@@ -315,7 +315,7 @@ namespace Common
   Uint8 Game::addTimedLoop(float interval, const std::string &name)
   {
     Uint8 idx = 0;
-    while (m_loops[idx] != NULL && idx < MAX_TIMED_LOOPS)
+    while (m_loops[idx] != nullptr && idx < MAX_TIMED_LOOPS)
       idx++;
 
     GameLoopConfiguration *config = new GameLoopConfiguration;
@@ -331,10 +331,10 @@ namespace Common
 
   void Game::removeTimedLoop(Uint8 id)
   {
-    if (m_loops[id] != NULL)
+    if (m_loops[id] != nullptr)
       delete m_loops[id];
 
-    m_loops[id] = NULL;
+    m_loops[id] = nullptr;
   }
 }
 }

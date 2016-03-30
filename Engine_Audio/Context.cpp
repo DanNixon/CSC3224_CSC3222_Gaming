@@ -13,8 +13,8 @@ namespace Audio
    * @brief Creates a new context container.
    */
   Context::Context()
-      : m_device(NULL)
-      , m_context(NULL)
+      : m_device(nullptr)
+      , m_context(nullptr)
   {
   }
 
@@ -32,12 +32,12 @@ namespace Audio
       return true;
 
     // Open the default device
-    m_device = alcOpenDevice(NULL);
+    m_device = alcOpenDevice(nullptr);
     if (!m_device)
       return false;
 
     // Create context
-    m_context = alcCreateContext(m_device, NULL);
+    m_context = alcCreateContext(m_device, nullptr);
 
     // Activate context
     return alcMakeContextCurrent(m_context) == ALC_TRUE;
@@ -48,7 +48,7 @@ namespace Audio
    */
   void Context::close()
   {
-    alcMakeContextCurrent(NULL);
+    alcMakeContextCurrent(nullptr);
     alcDestroyContext(m_context);
     alcCloseDevice(m_device);
   }

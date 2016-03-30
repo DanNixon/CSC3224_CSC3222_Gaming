@@ -64,7 +64,7 @@ namespace Snooker
    */
   Ball::Ball(const Vector2 &pos, int points)
       : SphericalEntity(pos, MASS, RADIUS, false, 0.99f, 0.005f)
-      , RenderableObject(Info(points).first, Mesh::GenerateDisc2D(RADIUS), NULL)
+      , RenderableObject(Info(points).first, Mesh::GenerateDisc2D(RADIUS), nullptr)
       , m_points(points)
   {
     ShaderProgram *sp = new ShaderProgram();

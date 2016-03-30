@@ -59,14 +59,14 @@ namespace Demo
     m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
     m_menu = new OptionsMenu(this, m_font);
 
-    m_menu->addNewItem(NULL, "exit", "Exit");
-    m_menu->addNewItem(NULL, "pause", "Pause");
+    m_menu->addNewItem(nullptr, "exit", "Exit");
+    m_menu->addNewItem(nullptr, "pause", "Pause");
 
-    MenuItem *aircraft = m_menu->addNewItem(NULL, "aircraft", "Aircraft");
+    MenuItem *aircraft = m_menu->addNewItem(nullptr, "aircraft", "Aircraft");
     m_menu->addNewItem(aircraft, "Gaui X5");
     m_menu->addNewItem(aircraft, "Logo 600");
 
-    MenuItem *terrain = m_menu->addNewItem(NULL, "terrain", "Terrain");
+    MenuItem *terrain = m_menu->addNewItem(nullptr, "terrain", "Terrain");
     m_menu->addNewItem(terrain, "Flat");
     m_menu->addNewItem(terrain, "Tall Peaks");
     m_menu->addNewItem(terrain, "Forest");
@@ -114,7 +114,7 @@ namespace Demo
     leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
     m_ui->root()->addChild(leftStickArea);
 
-    m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
+    m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, nullptr, true);
     m_leftStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
     m_leftStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
     leftStickArea->addChild(m_leftStick);
@@ -125,7 +125,7 @@ namespace Demo
     rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
     m_ui->root()->addChild(rightStickArea);
 
-    m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, NULL, true);
+    m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f), m_uiShader, nullptr, true);
     m_rightStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
     m_rightStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
     rightStickArea->addChild(m_rightStick);

@@ -20,7 +20,7 @@ namespace Input
 
   JoystickHandler::JoystickHandler()
       : IEventHandler()
-      , m_joystick(NULL)
+      , m_joystick(nullptr)
   {
   }
 
@@ -37,7 +37,7 @@ namespace Input
   {
     m_joystick = SDL_JoystickOpen(deviceIndex);
     SDL_JoystickEventState(SDL_ENABLE);
-    return (m_joystick != NULL);
+    return (m_joystick != nullptr);
   }
 
   /**
@@ -46,7 +46,7 @@ namespace Input
   void JoystickHandler::close()
   {
     SDL_JoystickClose(m_joystick);
-    m_joystick = NULL;
+    m_joystick = nullptr;
   }
 
   /**
@@ -55,7 +55,7 @@ namespace Input
    */
   bool JoystickHandler::isOpen() const
   {
-    return (m_joystick != NULL);
+    return (m_joystick != nullptr);
   }
 
   /**
@@ -66,7 +66,7 @@ namespace Input
    */
   int JoystickHandler::numButtons() const
   {
-    if (m_joystick == NULL)
+    if (m_joystick == nullptr)
       return 0;
 
     return SDL_JoystickNumButtons(m_joystick);
@@ -80,7 +80,7 @@ namespace Input
    */
   int JoystickHandler::numAxes() const
   {
-    if (m_joystick == NULL)
+    if (m_joystick == nullptr)
       return 0;
 
     return SDL_JoystickNumAxes(m_joystick);
@@ -93,7 +93,7 @@ namespace Input
    */
   bool JoystickHandler::button(int button) const
   {
-    if (m_joystick == NULL)
+    if (m_joystick == nullptr)
       return false;
 
     return (SDL_JoystickGetButton(m_joystick, button) == 1);
@@ -106,7 +106,7 @@ namespace Input
    */
   Sint32 JoystickHandler::axis(int axis) const
   {
-    if (m_joystick == NULL)
+    if (m_joystick == nullptr)
       return 0;
 
     return SDL_JoystickGetAxis(m_joystick, axis);
@@ -118,7 +118,7 @@ namespace Input
   void JoystickHandler::handleEvent(const SDL_Event &e)
   {
     // Fire if enabled and joystick is open
-    if (m_enabled && (m_joystick != NULL))
+    if (m_enabled && (m_joystick != nullptr))
     {
       SDL_JoystickID jsID = SDL_JoystickInstanceID(m_joystick);
 

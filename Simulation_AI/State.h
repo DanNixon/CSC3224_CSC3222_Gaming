@@ -30,7 +30,7 @@ namespace AI
 
     /**
      * @brief Test for transfer conditions to another state.
-     * @return The state to transfer to, NULL if no transfer conditions are met
+     * @return The state to transfer to, nullptr if no transfer conditions are met
      */
     virtual State *transferCheck() const = 0;
 

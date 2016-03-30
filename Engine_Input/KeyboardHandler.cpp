@@ -20,7 +20,7 @@ namespace Input
    */
   bool KeyboardHandler::KeyPressed(SDL_Keycode key)
   {
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    const Uint8 *state = SDL_GetKeyboardState(nullptr);
     return state[SDL_GetScancodeFromKey(key)] == 1;
   }
 

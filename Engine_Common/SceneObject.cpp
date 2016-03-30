@@ -22,7 +22,7 @@ namespace Common
       , m_active(true)
       , m_modelMatrix(Matrix4())
       , m_worldTransform(Matrix4())
-      , m_parent(NULL)
+      , m_parent(nullptr)
   {
   }
 
@@ -66,14 +66,14 @@ namespace Common
   /**
    * @brief Finds a child item.
    * @param name Name of the item
-   * @return Pointer to the item, NULL if not found
+   * @return Pointer to the item, nullptr if not found
    */
   SceneObject *SceneObject::findChild(const std::string &name)
   {
     auto it = std::find_if(m_children.begin(), m_children.end(), [name](SceneObject *o) { return o->name() == name; });
     if (it != m_children.end())
       return *it;
-    return NULL;
+    return nullptr;
   }
 
   /**

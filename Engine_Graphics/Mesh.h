@@ -59,7 +59,7 @@ namespace Graphics
     static Mesh *GenerateDisc2D(float radius, int resolution = 64);
     static Mesh *GenerateRing2D(float radiusOuter, float radiusInner, int resolution = 64);
 
-    static Mesh *LoadMesh(const struct aiMesh *mesh, const struct aiMaterial *material = NULL);
+    static Mesh *LoadMesh(const struct aiMesh *mesh, const struct aiMaterial *material = nullptr);
 
     Mesh();
     virtual ~Mesh();

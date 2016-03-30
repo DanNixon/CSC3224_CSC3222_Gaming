@@ -54,7 +54,7 @@ namespace Snooker
     Cushion *cushion(size_t idx)
     {
       if (idx > NUM_CUSHIONS)
-        return NULL;
+        return nullptr;
 
       return m_cushions[idx];
     }
@@ -67,7 +67,7 @@ namespace Snooker
     Pocket *pocket(size_t idx)
     {
       if (idx > NUM_POCKETS)
-        return NULL;
+        return nullptr;
 
       return m_pockets[idx];
     }

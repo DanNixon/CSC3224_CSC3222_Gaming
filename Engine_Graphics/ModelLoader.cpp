@@ -43,8 +43,8 @@ namespace Graphics
                                          aiProcess_JoinIdenticalVertices | aiProcess_SortByPType |
                                          aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_FlipUVs);
 
-    if (scene == NULL)
-      return NULL;
+    if (scene == nullptr)
+      return nullptr;
 
     SceneObject *obj = new SceneObject(filename);
     std::string directory = StringUtils::DirectoryFromPath(filename);
@@ -68,12 +68,12 @@ namespace Graphics
     {
       const aiMaterial *material = scene->mMaterials[i];
 
-      m_textures[i] = NULL;
+      m_textures[i] = nullptr;
       if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0)
       {
         aiString path;
 
-        if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
+        if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
         {
           std::string filename = directory + "/" + path.data;
           m_textures[i] = new Texture();
@@ -82,7 +82,7 @@ namespace Graphics
           if (!m_textures[i]->valid())
           {
             std::cerr << "Failed to load testure \"" << filename << "\", for material " << material << std::endl;
-            m_textures[i] = NULL;
+            m_textures[i] = nullptr;
           }
         }
       }

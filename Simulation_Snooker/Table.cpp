@@ -42,7 +42,7 @@ namespace Snooker
    * @brief Creates a new table.
    */
   Table::Table(Entity::EntityPtrList &entityList)
-      : RenderableObject("table", new RectangleMesh(DIMENSIONS), NULL)
+      : RenderableObject("table", new RectangleMesh(DIMENSIONS), nullptr)
   {
     ShaderProgram *sp = new ShaderProgram();
     sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));

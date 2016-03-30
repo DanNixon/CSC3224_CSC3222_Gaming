@@ -28,7 +28,7 @@ namespace Snooker
 {
   SnookerSimulation::SnookerSimulation()
       : Game("Snooker Loopy", std::make_pair(1024, 768))
-      , m_mouseStartPosition(NULL)
+      , m_mouseStartPosition(nullptr)
   {
   }
 
@@ -75,7 +75,7 @@ namespace Snooker
 
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
-      if (m_balls[i] != NULL)
+      if (m_balls[i] != nullptr)
       {
         m_table->addChild(m_balls[i]);
         m_entities.push_back(m_balls[i]);
@@ -201,7 +201,7 @@ namespace Snooker
     m_profileGraphics->setActive(m_controls->state(S_PROFILE_DISPLAY));
     m_profilePhysics->setActive(m_controls->state(S_PROFILE_DISPLAY));
 
-    if (m_mouseStartPosition == NULL)
+    if (m_mouseStartPosition == nullptr)
     {
       if (m_controls->state(S_TAKE_SHOT))
       {
@@ -260,7 +260,7 @@ namespace Snooker
         m_balls[0]->setAcceleration(deltaMouse);
 
         delete m_mouseStartPosition;
-        m_mouseStartPosition = NULL;
+        m_mouseStartPosition = nullptr;
       }
       else
       {

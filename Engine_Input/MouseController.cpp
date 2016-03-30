@@ -18,8 +18,8 @@ namespace Input
       : IController(parent)
       , m_screenX(screenX)
       , m_screenY(screenY)
-      , m_xMapping(NULL)
-      , m_yMapping(NULL)
+      , m_xMapping(nullptr)
+      , m_yMapping(nullptr)
   {
   }
 

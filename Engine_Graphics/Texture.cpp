@@ -90,7 +90,7 @@ namespace Graphics
 #endif
 
     m_sdlSurface = SDL_CreateRGBSurface(0, pallate->w, pallate->h, 32, rmask, gmask, bmask, amask);
-    SDL_BlitSurface(pallate, NULL, m_sdlSurface, NULL);
+    SDL_BlitSurface(pallate, nullptr, m_sdlSurface, nullptr);
     SDL_FreeSurface(pallate);
 
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

@@ -98,7 +98,7 @@ namespace UIMenu
 
   /**
    * @brief Adds a new basic item to the menu.
-   * @param parent Parent item (NULL to insert at root)
+   * @param parent Parent item (nullptr to insert at root)
    * @param name Name of the item
    * @param text Text to be displayed on the item
    * @return Pointer to the new item
@@ -107,7 +107,7 @@ namespace UIMenu
   {
     MenuItem *item;
 
-    if (parent == NULL)
+    if (parent == nullptr)
       item = new MenuItem(this, m_root, name);
     else
       item = new MenuItem(this, parent, name);

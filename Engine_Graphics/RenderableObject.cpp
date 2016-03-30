@@ -70,7 +70,7 @@ namespace Graphics
     Vector3 camPos = rotation * -invCamPos;
     glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1, (float *)&camPos);
 
-    if (m_texture != NULL)
+    if (m_texture != nullptr)
       m_texture->use(program, 0);
 
     m_mesh->draw(program);

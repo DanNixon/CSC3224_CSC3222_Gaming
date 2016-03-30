@@ -20,12 +20,12 @@ namespace Graphics
   Mesh::Mesh()
       : m_numIndices(0)
       , m_type(GL_TRIANGLES)
-      , m_vertices(NULL)
-      , m_colours(NULL)
-      , m_textureCoords(NULL)
-      , m_normals(NULL)
-      , m_tangents(NULL)
-      , m_indices(NULL)
+      , m_vertices(nullptr)
+      , m_colours(nullptr)
+      , m_textureCoords(nullptr)
+      , m_normals(nullptr)
+      , m_tangents(nullptr)
+      , m_indices(nullptr)
   {
     glGenVertexArrays(1, &m_arrayObject);
 
@@ -75,7 +75,7 @@ namespace Graphics
    */
   void Mesh::setStaticColour(const Colour &col)
   {
-    if (m_colours != NULL)
+    if (m_colours != nullptr)
     {
       for (size_t i = 0; i < m_numVertices; i++)
         m_colours[i] = col;
@@ -294,7 +294,7 @@ namespace Graphics
 
     aiVector3D *vertices = mesh->mVertices;
 
-    const bool hasColours = mesh->mColors[0] != NULL;
+    const bool hasColours = mesh->mColors[0] != nullptr;
     const bool hasTexCoords = mesh->HasTextureCoords(0);
     const bool hasNormals = mesh->HasNormals();
 

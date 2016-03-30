@@ -69,7 +69,7 @@ namespace Graphics
     m_shaderObject = glCreateShader(m_stage);
 
     const char *chars = load.c_str();
-    glShaderSource(m_shaderObject, 1, &chars, NULL);
+    glShaderSource(m_shaderObject, 1, &chars, nullptr);
     glCompileShader(m_shaderObject);
 
     GLint status;
@@ -79,7 +79,7 @@ namespace Graphics
     if (!success)
     {
       char errorMsg[2048];
-      glGetInfoLogARB(m_shaderObject, sizeof(errorMsg), NULL, errorMsg);
+      glGetInfoLogARB(m_shaderObject, sizeof(errorMsg), nullptr, errorMsg);
       std::cerr << "Shader failed to compile (from file: " << filename << "): " << errorMsg << std::endl;
     }
 

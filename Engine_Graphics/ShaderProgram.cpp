@@ -19,7 +19,7 @@ namespace Graphics
       : m_valid(false)
   {
     for (size_t i = 0; i < NUM_SHADERS; i++)
-      m_shaders[i] = NULL;
+      m_shaders[i] = nullptr;
 
     m_program = glCreateProgram();
   }
@@ -32,7 +32,7 @@ namespace Graphics
   {
     for (size_t i = 0; i < NUM_SHADERS; i++)
     {
-      if (m_shaders[i] != NULL)
+      if (m_shaders[i] != nullptr)
         glDetachShader(m_program, m_shaders[i]->object());
     }
 
@@ -48,7 +48,7 @@ namespace Graphics
   {
     for (size_t i = 0; i < NUM_SHADERS; i++)
     {
-      if (m_shaders[i] == NULL)
+      if (m_shaders[i] == nullptr)
       {
         m_shaders[i] = s;
         return true;
@@ -78,7 +78,7 @@ namespace Graphics
 
     for (size_t i = 0; i < NUM_SHADERS; i++)
     {
-      if (m_shaders[i] != NULL)
+      if (m_shaders[i] != nullptr)
       {
         if (!m_shaders[i]->valid())
           return false;
@@ -96,7 +96,7 @@ namespace Graphics
     {
       std::cout << "Linking failed! Error log as follows:" << std::endl;
       char error[2048];
-      glGetProgramInfoLog(m_program, sizeof(error), NULL, error);
+      glGetProgramInfoLog(m_program, sizeof(error), nullptr, error);
       std::cout << error << std::endl;
       return false;
     }
@@ -106,7 +106,7 @@ namespace Graphics
     if (!m_valid)
     {
       char errorMsg[2048];
-      glGetInfoLogARB(m_program, sizeof(errorMsg), NULL, errorMsg);
+      glGetInfoLogARB(m_program, sizeof(errorMsg), nullptr, errorMsg);
       std::cerr << "Shader program failed to link: " << errorMsg << std::endl;
     }
 
