@@ -25,7 +25,6 @@ namespace UIMenu
   MenuItem::MenuItem(IMenu *menu, SceneObject *parent, const std::string &name)
       : TextPane(name, menu->textHeight(), menu->shader(), menu->font(), TextMode::SHADED)
       , m_menu(menu)
-      , m_text(name)
   {
     parent->addChild(this);
 
@@ -36,7 +35,7 @@ namespace UIMenu
     static_cast<RectangleMesh *>(m_mesh)->setAlignment(align);
 
     // Default values
-    TextPane::setText(m_text);
+    setText(name);
     setTextColour(Colour(0.0f, 0.0f, 0.0f, 1.0f));
     setState(MenuItemState::NORMAL);
   }
@@ -56,6 +55,18 @@ namespace UIMenu
 
     Colour bgColour = m_menu->itemColour(m_state);
     setBackgroundColour(bgColour);
+  }
+
+  /**
+   * @copydoc TextPane::setText
+   * @param layout If the layout should be updated after the text is changed
+   */
+  void MenuItem::setText(const std::string &str, bool layout)
+  {
+    TextPane::setText(str);
+
+    if (layout)
+      m_menu->layout();
   }
 }
 }

@@ -38,9 +38,10 @@ namespace UIMenu
 
     void setState(MenuItemState state);
 
+    void setText(const std::string &str, bool layout = false);
+
   protected:
     IMenu *m_menu;         //!< Menu this item belongs to
-    std::string m_text;    //!< Text displayed on this item
     MenuItemState m_state; //!< Selection state of this item
   };
 }

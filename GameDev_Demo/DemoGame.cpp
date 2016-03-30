@@ -131,7 +131,9 @@ namespace Demo
     rightStickArea->addChild(m_rightStick);
 
     // Physics
-    m_physicalSystem = new PhysicalSystem();
+
+    // At best 120Hz, at worst 60Hz
+    m_physicalSystem = new PhysicalSystem(8.33f, 16.66f);
 
     RenderableObject *ground = new RenderableObject("ground", new PlaneMesh('y', 1000.0f), m_uiShader);
     ground->mesh()->setStaticColour(Colour(0.8f, 0.6f, 0.5f));
@@ -196,8 +198,6 @@ namespace Demo
     m_physicsLoop = addTimedLoop(8.33f, "physics");
     m_audioLoop = addTimedLoop(16.66f, "audio");
     m_profileLoop = addTimedLoop(1000.0f, "profile");
-
-    m_testLoop = addTimedLoop(5000.0f, "test");
 
     // Profiling
     m_profiler = new Profiler(this);
@@ -281,14 +281,6 @@ namespace Demo
     {
       m_profiler->computeStats(dtMilliSec);
       std::cout << "Performance statistics:" << std::endl << *m_profiler << std::endl;
-    }
-    else if (id == m_testLoop)
-    {
-      std::cout << "TEST LOOP" << std::endl;
-
-      MenuItem *a = static_cast<MenuItem *>(m_menu->root()->findChild("pause"));
-      a->setText("Resume");
-      m_menu->layout();
     }
   }
 

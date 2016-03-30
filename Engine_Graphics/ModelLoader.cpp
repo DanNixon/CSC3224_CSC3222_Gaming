@@ -73,7 +73,8 @@ namespace Graphics
       {
         aiString path;
 
-        if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
+        if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) ==
+            AI_SUCCESS)
         {
           std::string filename = directory + "/" + path.data;
           m_textures[i] = new Texture();

@@ -11,9 +11,14 @@ namespace Physics
 {
   /**
    * @brief Create a new simulated physical system.
+   * @param targetTimeStep Target time in milliseconds between physics updates
+   * @param maxPossibleTimeStep The longest time in milliseconds between physics updates
    */
-  PhysicalSystem::PhysicalSystem()
-      : m_broadphase(new btDbvtBroadphase())
+  PhysicalSystem::PhysicalSystem(float targetTimeStep, float maxPossibleTimeStep)
+      : m_runSimulation(true)
+      , m_targetTimeStep(targetTimeStep / 1000.0f)
+      , m_maxSubSteps(static_cast<int>(maxPossibleTimeStep / targetTimeStep) + 1)
+      , m_broadphase(new btDbvtBroadphase())
       , m_collisionConfig(new btDefaultCollisionConfiguration())
       , m_solver(new btSequentialImpulseConstraintSolver())
   {
@@ -31,6 +36,11 @@ namespace Physics
     delete m_collisionDispatcher;
     delete m_solver;
     delete m_world;
+  }
+
+  void PhysicalSystem::setSimulationState(bool run)
+  {
+    m_runSimulation = run;
   }
 
   /**
@@ -59,8 +69,8 @@ namespace Physics
    */
   void PhysicalSystem::update(float msec)
   {
-    // TODO: make target frame rate a parameter to constructor
-    m_world->stepSimulation(msec / 1000.0f, 7, 1.0f / 120.0f);
+    if (m_runSimulation)
+      m_world->stepSimulation(msec * 0.001f, m_maxSubSteps, m_targetTimeStep);
   }
 }
 }

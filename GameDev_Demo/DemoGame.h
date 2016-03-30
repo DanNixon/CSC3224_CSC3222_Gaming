@@ -42,11 +42,12 @@ namespace Demo
     void gameShutdown();
 
   private:
+    friend class OptionsMenu;
+
     Uint8 m_graphicsLoop;
     Uint8 m_physicsLoop;
     Uint8 m_audioLoop;
     Uint8 m_profileLoop;
-    Uint8 m_testLoop;
 
     TTF_Font *m_font;
 
