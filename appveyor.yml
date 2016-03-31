@@ -24,3 +24,11 @@ test:
 
 on_finish:
 - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+test_script:
+  - ps: >-
+    vstest.console /logger:Appveyor .\$(CONFIGURATION)\Engine_Graphics_Test.dll
+
+    vstest.console /logger:Appveyor .\$(CONFIGURATION)\Engine_Graphics_IO.dll
+
+    vstest.console /logger:Appveyor .\$(CONFIGURATION)\Engine_Graphics_Maths.dll
