@@ -75,17 +75,38 @@ public:
     BoundingBox<Vector2> b;
 
     b.resizeByPoint(Vector2(-0.5f, -1.0f));
-    b.resizeByPoint(Vector2(1.0f, 0.5f));
+    b.resizeByPoint(Vector2(-0.1f, -0.5f));
     Assert::IsTrue(Vector2(-0.5f, -1.0f) == b.lowerLeft());
-    Assert::IsTrue(Vector2(1.0f, 0.5f) == b.upperRight());
+    Assert::IsTrue(Vector2(-0.1f, -0.5f) == b.upperRight());
 
-    b.resizeByPoint(Vector2(50.0f, 0.0f));
+    b.resizeByPoint(Vector2(50.0f, 0.5f));
     Assert::IsTrue(Vector2(-0.5f, -1.0f) == b.lowerLeft());
     Assert::IsTrue(Vector2(50.0f, 0.5f) == b.upperRight());
     
     b.resizeByPoint(Vector2(0.2f, -10.0f));
     Assert::IsTrue(Vector2(-0.5f, -10.0f) == b.lowerLeft());
     Assert::IsTrue(Vector2(50.0f, 0.5f) == b.upperRight());
+  }
+
+  TEST_METHOD(BoundingBox_ResizeByBoundingBox)
+  {
+    BoundingBox<Vector2> b;
+
+    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(-10.0f, -8.0f), Vector2(-2.0f, -1.0f)));
+    Assert::IsTrue(Vector2(-10.0f, -8.0f) == b.lowerLeft());
+    Assert::IsTrue(Vector2(-2.0f, -1.0f) == b.upperRight());
+
+    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(1.0f, 2.5f), Vector2(9.0f, 12.0f)));
+    Assert::IsTrue(Vector2(-10.0f, -8.0f) == b.lowerLeft());
+    Assert::IsTrue(Vector2(9.0f, 12.0f) == b.upperRight());
+
+    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(5.0f, 3.5f), Vector2(6.0f, 37.0f)));
+    Assert::IsTrue(Vector2(-10.0f, -8.0f) == b.lowerLeft());
+    Assert::IsTrue(Vector2(9.0f, 37.0f) == b.upperRight());
+
+    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(-30.0f, 0.5f), Vector2(1.0f, 1.0f)));
+    Assert::IsTrue(Vector2(-30.0f, -8.0f) == b.lowerLeft());
+    Assert::IsTrue(Vector2(9.0f, 37.0f) == b.upperRight());
   }
 };
 #endif /* DOXYGEN_SKIP */

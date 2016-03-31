@@ -44,13 +44,15 @@ namespace Graphics
     /**
      * @brief Resets the box to the largest possible dimensions.
      * @see BoundingBox::resizeByPoint
+     * @see BoundingBox::resizeByBoundingBox
      *
      * Intended to be constrained using calls to BoundingBox::resizeByPoint
+     * or BoundingBox::resizeByBoundingBox
      */
     void reset()
     {
       const float maxFloat = std::numeric_limits<float>::max();
-      const float minFloat = std::numeric_limits<float>::min();
+      const float minFloat = std::numeric_limits<float>::lowest();
 
       for (size_t i = 0; i < T::Dimensions(); i++)
       {
@@ -99,7 +101,8 @@ namespace Graphics
     /**
      * @brief Constrains the size of the box by a point.
      * @param point Point to resize by
-     * @see BoundingBox::resizeByPoint
+     * @see BoundingBox::reset
+     * @see BoundingBox::resizeByBoundingBox
      */
     inline void resizeByPoint(const T &point)
     {
@@ -107,8 +110,27 @@ namespace Graphics
       {
         if (point[i] < m_lowerLeft[i])
           m_lowerLeft[i] = point[i];
+
         else if (point[i] > m_upperRight[i])
           m_upperRight[i] = point[i];
+      }
+    }
+
+    /**
+     * @brief Constrains the size of the box by another bounding box.
+     * @param box Box to resize by
+     * @see BoundingBox::reset
+     * @see BoundingBox::resizeByPoint
+     */
+    inline void resizeByBoundingBox(const BoundingBox &box)
+    {
+      for (size_t i = 0; i < T::Dimensions(); i++)
+      {
+        if (box.m_lowerLeft[i] < m_lowerLeft[i])
+          m_lowerLeft[i] = box.m_lowerLeft[i];
+
+        if (box.m_upperRight[i] > m_upperRight[i])
+          m_upperRight[i] = box.m_upperRight[i];
       }
     }
 
