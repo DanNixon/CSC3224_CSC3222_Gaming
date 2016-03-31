@@ -23,6 +23,9 @@ TEST_CLASS(INIKeyValueStoreTest)
 public:
   TEST_METHOD(INIKeyValueStore_LoadINIFromStream)
   {
+    // TODO
+    Assert::Fail();
+
     // Sample INI string
     std::stringstream stream;
     stream << "aaa=yes" << std::endl
