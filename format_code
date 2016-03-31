@@ -2,4 +2,4 @@
 
 CLANG_FORMAT=clang-format
 
-find . \( -name '*.h' -or -name '*.cpp' \) -not \( -path './ThirdParty/*' -or -path '*_Test/*' \) -print0 | xargs -0 "$CLANG_FORMAT" -i
+find . \( -name '*.h' -or -name '*.cpp' \) -not -path './ThirdParty/*' -print0 | xargs -0 "$CLANG_FORMAT" -i

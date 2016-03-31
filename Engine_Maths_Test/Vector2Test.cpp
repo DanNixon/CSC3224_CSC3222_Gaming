@@ -9,6 +9,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// clang-format off
 namespace Engine
 {
 namespace Maths

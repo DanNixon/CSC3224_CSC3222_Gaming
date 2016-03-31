@@ -5,11 +5,12 @@
 
 #include <CppUnitTest.h>
 
-#include <Engine_Maths/Vector3.h>
 #include <Engine_Maths/Vector2.h>
+#include <Engine_Maths/Vector3.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// clang-format off
 namespace Engine
 {
 namespace Maths
