@@ -21,8 +21,8 @@ build:
 
 test_script:
 - ps: >-
-    vstest.console /logger:Appveyor .\$(CONFIGURATION)\Engine_Graphics_Test.dll
+    .\RunTest -TestName Engine_Graphics_Test
 
-    vstest.console /logger:Appveyor .\$(CONFIGURATION)\Engine_Graphics_IO.dll
+    .\RunTest -TestName Engine_Maths_Test
 
-    vstest.console /logger:Appveyor .\$(CONFIGURATION)\Engine_Graphics_Maths.dll
+    .\RunTest -TestName Engine_IO_Test

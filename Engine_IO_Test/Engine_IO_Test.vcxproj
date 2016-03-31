@@ -73,22 +73,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

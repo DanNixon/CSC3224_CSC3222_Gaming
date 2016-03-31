@@ -86,7 +86,7 @@
     <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
@@ -95,12 +95,13 @@
     <LibraryPath>
     </LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
@@ -109,6 +110,7 @@
     <LibraryPath>
     </LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
