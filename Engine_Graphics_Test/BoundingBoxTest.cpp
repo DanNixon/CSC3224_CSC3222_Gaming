@@ -24,6 +24,7 @@ public:
   TEST_METHOD(BoundingBox_InitEmpty)
   {
     BoundingBox<Vector3> b;
+    Assert::Fail();
   }
 
   // TODO
