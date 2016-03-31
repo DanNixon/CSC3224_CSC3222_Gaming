@@ -38,6 +38,10 @@ namespace Physics
     delete m_world;
   }
 
+  /**
+   * @brief Sets the execution state of the physics simulation.
+   * @param run If the simulation should be running
+   */
   void PhysicalSystem::setSimulationState(bool run)
   {
     m_runSimulation = run;

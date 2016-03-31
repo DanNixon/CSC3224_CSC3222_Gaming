@@ -113,7 +113,8 @@ namespace Graphics
     Engine::Maths::Vector3 *m_tangents;      //!< Pointer to vertex tangents data
     size_t *m_indices;                       //!< Pointer to vertex indices
 
-    BoundingBox<Engine::Maths::Vector3> m_boundingBox;
+    BoundingBox<Engine::Maths::Vector3>
+        m_boundingBox; //!< Bounding box of all vertices (must be set on population of vertex array)
 
     Colour m_ambientColour;    //!< Colour of scattered ambient light
     Colour m_diffuseColour;    //!< Colour of diffuse scattered light

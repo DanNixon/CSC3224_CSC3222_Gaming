@@ -7,6 +7,9 @@
 
 #include "SnookerSimulation.h"
 
+/**
+ * @brief Entry point of the snooker simulation.
+ */
 int main(int argc, char *argv[])
 {
   Simulation::Snooker::SnookerSimulation s;

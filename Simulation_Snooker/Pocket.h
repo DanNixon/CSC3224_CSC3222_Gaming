@@ -11,6 +11,8 @@
 
 #include <Simulation_Physics/SphericalEntity.h>
 
+// TODO: this should not be a RenderableObject, that was only for debugging
+
 namespace Simulation
 {
 namespace Snooker
@@ -28,7 +30,7 @@ namespace Snooker
     Pocket(const Engine::Maths::Vector2 &pos);
     virtual ~Pocket();
 
-    // TEMP
+    // TODO
     virtual void setPosition(const Engine::Maths::Vector2 &pos);
   };
 }

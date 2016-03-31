@@ -44,7 +44,7 @@ namespace Snooker
   {
   }
 
-  // TEMP
+  // TODO: remove this (was only needed when this has a renderable mesh
   void Pocket::setPosition(const Engine::Maths::Vector2 &pos)
   {
     SphericalEntity::setPosition(pos);

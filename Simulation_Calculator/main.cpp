@@ -11,6 +11,9 @@
 using namespace Engine::Maths;
 using namespace Simulation::Physics;
 
+/**
+ * @brief Entry point of the calculator exercise.
+ */
 int main(int argc, char *argv[])
 {
   std::cout << "Calculate [v,s]: ";
