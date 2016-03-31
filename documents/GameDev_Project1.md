@@ -37,6 +37,7 @@
   - [ ] Aircraft motion
   - [x] Convex hull collision shape
   - [x] Bounding box collision shape
+  - [ ] Heightmap terrain abstraction
 - [x] `Engine_UIMenu`
   - [x] Menu structure definition
   - [x] Top bar menu
