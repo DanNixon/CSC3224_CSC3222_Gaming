@@ -1,7 +1,7 @@
 version: 1.0.{build}-{branch}
 
-clone_depth: 1
 skip_tags: true
+clone_depth: 1
 
 image:
   - Visual Studio 2013
@@ -16,17 +16,8 @@ platform:
   - X64
 
 build:
+  parallel: true
   verbosity: normal
 
 test:
-  assemblies:
-    - '**\*_Test.dll'
-
-notifications:
-  - provider: Email
-    to:
-      - dan@dan-nixon.com
-    subject: Game engineering build notification
-    on_build_success: false
-    on_build_failure: true
-    on_build_status_changed: true
+  assemblies: '**\*Test.dll'
