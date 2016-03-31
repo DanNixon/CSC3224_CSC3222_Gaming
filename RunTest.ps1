@@ -20,6 +20,6 @@ vstest.console `
     /Platform:$test_platform `
     .\bin\$TestName\$Env:PLATFORM\$Env:CONFIGURATION\$TestName.dll
 
-if ($LASTEXITCODE != 0) {
-  $host.SetShouldExit(yourExitCode)
+if ($LASTEXITCODE -ne 0) {
+  $host.SetShouldExit($LASTEXITCODE)
 }
