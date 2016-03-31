@@ -1,7 +1,7 @@
 version: 1.0.{build}-{branch}
 
 skip_tags: true
-clone_depth: 1
+clone_depth: 25
 
 image:
   - Visual Studio 2013
