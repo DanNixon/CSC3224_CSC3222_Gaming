@@ -36,7 +36,7 @@
   - [x] Body representation
   - [ ] Aircraft motion
   - [x] Convex hull collision shape
-  - [ ] Bounding box collision shape
+  - [x] Bounding box collision shape
 - [x] `Engine_UIMenu`
   - [x] Menu structure definition
   - [x] Top bar menu

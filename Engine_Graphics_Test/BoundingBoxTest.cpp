@@ -35,6 +35,15 @@ public:
     Assert::AreEqual(3.0f, b.upperRight().z());
   }
 
+  TEST_METHOD(BoundingBox_LongestBoundDistance)
+  {
+    BoundingBox<Vector2> b1(Vector2(-10.0f, -2.5f), Vector2(5.0f, 7.5f));
+    Assert::IsTrue(b1.longestBoundDistance() == Vector2(10.0f, 7.5f));
+
+    BoundingBox<Vector2> b2(Vector2(-5.0f, -7.5f), Vector2(10.0f, 2.5f));
+    Assert::IsTrue(b2.longestBoundDistance() == Vector2(10.0f, 7.5f));
+  }
+
   TEST_METHOD(BoundingBox_Size)
   {
     BoundingBox<Vector3> b(Vector3(-1.0f, -2.0f, -3.0f), Vector3(1.0f, 2.0f, 3.0f));

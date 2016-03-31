@@ -7,11 +7,13 @@
     <ClInclude Include="SphericalRigidBody.h" />
     <ClInclude Include="StaticPlaneRigidBody.h" />
     <ClInclude Include="ConvexHullShape.h" />
+    <ClInclude Include="BoundingBoxShape.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneObjectMotionState.cpp" />
     <ClCompile Include="PhysicalSystem.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="ConvexHullShape.cpp" />
+    <ClCompile Include="BoundingBoxShape.cpp" />
   </ItemGroup>
 </Project>

@@ -16,6 +16,7 @@
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_Maths/Quaternion.h>
+#include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/ConvexHullShape.h>
 #include <Engine_Physics/StaticPlaneRigidBody.h>
 
@@ -131,9 +132,7 @@ namespace Demo
     rightStickArea->addChild(m_rightStick);
 
     // Physics
-
-    // At best 120Hz, at worst 60Hz
-    m_physicalSystem = new PhysicalSystem(8.33f, 16.66f);
+    m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
 
     RenderableObject *ground = new RenderableObject("ground", new PlaneMesh('y', 1000.0f), m_uiShader);
     ground->mesh()->setStaticColour(Colour(0.8f, 0.6f, 0.5f));
@@ -146,8 +145,8 @@ namespace Demo
 
     SceneObjectMotionState *modelMotionState =
         new SceneObjectMotionState(m_model, Vector3(0.0f, 0.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
-    ConvexHullShape *modelShape = new ConvexHullShape();
-    modelShape->addSceneTreePoints(m_model);
+    BoundingBoxShape *modelShape = new BoundingBoxShape();
+    modelShape->updateDimensionFromSceneTree(m_model);
     m_modelBody = new RigidBody(modelMotionState, 500000.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
     m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
     m_physicalSystem->addBody(m_modelBody);

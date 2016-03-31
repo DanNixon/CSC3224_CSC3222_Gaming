@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoundingBoxShape.h" />
     <ClInclude Include="ConvexHullShape.h" />
     <ClInclude Include="PhysicalSystem.h" />
     <ClInclude Include="StaticPlaneRigidBody.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="SphericalRigidBody.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoundingBoxShape.cpp" />
     <ClCompile Include="ConvexHullShape.cpp" />
     <ClCompile Include="PhysicalSystem.cpp" />
     <ClCompile Include="RigidBody.cpp" />

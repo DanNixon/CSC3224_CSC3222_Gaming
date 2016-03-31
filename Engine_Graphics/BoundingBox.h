@@ -6,6 +6,8 @@
 #ifndef _ENGINE_GRAPHICS_BOUNDINGBOX_H_
 #define _ENGINE_GRAPHICS_BOUNDINGBOX_H_
 
+#include <algorithm>
+
 namespace Engine
 {
 namespace Graphics
@@ -65,7 +67,7 @@ namespace Graphics
      * @brief Gets the position of the lower left vertex.
      * @return Lower left vertex
      */
-    T lowerLeft() const
+    inline T lowerLeft() const
     {
       return m_lowerLeft;
     }
@@ -74,16 +76,36 @@ namespace Graphics
      * @brief Gets the position of the upper right vertex.
      * @return Upper right vertex
      */
-    T upperRight() const
+    inline T upperRight() const
     {
       return m_upperRight;
+    }
+
+    /**
+     * @brief Gets a vector containing the largest distance from the centre of
+     *        the box to its boundary in each axis.
+     * @return Largest centre-bounday distance
+     */
+    T longestBoundDistance() const
+    {
+      T retVal;
+
+      for (size_t i = 0; i < T::Dimensions(); i++)
+      {
+        float val = std::max(std::abs(m_lowerLeft[i]), std::abs(m_upperRight[i]));
+
+        if (val > retVal[i])
+          retVal[i] = val;
+      }
+
+      return retVal;
     }
 
     /**
      * @brief Gets the dimensions of the bounding box.
      * @return Box dimensions
      */
-    T size() const
+    inline T size() const
     {
       return m_upperRight - m_lowerLeft;
     }
@@ -93,7 +115,7 @@ namespace Graphics
      * @param point Point to test
      * @return True if point is inside the box
      */
-    bool pointInside(const T &point) const
+    inline bool pointInside(const T &point) const
     {
       return m_lowerLeft <= point && point <= m_upperRight;
     }
