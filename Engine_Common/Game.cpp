@@ -26,11 +26,11 @@ namespace Common
 {
   /**
    * @brief Creates a new game instance.
-   * @param windowTitle Window title string
+   * @param name Name of the game (as displayed in window title)
    * @param resolution Window resolution
    */
-  Game::Game(std::string windowTitle, std::pair<int, int> resolution)
-      : m_windowTitle(windowTitle)
+  Game::Game(const std::string &name, std::pair<int, int> resolution)
+      : m_name(name)
       , m_windowWidth(resolution.first)
       , m_windowHeight(resolution.second)
       , m_profiler(nullptr)
@@ -262,7 +262,7 @@ namespace Common
 
       /* Create window */
       m_window = SDL_CreateWindow(
-          m_windowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED,
+          m_name.c_str(), SDL_WINDOWPOS_UNDEFINED,
           SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight,
           SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 

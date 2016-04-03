@@ -41,7 +41,7 @@ namespace Demo
    * @brief Creates a new demonstration game instance.
    */
   DemoGame::DemoGame()
-      : Game("Engine Demo", std::make_pair(640, 480))
+      : ConfigurableGame("Engine Demo", std::make_pair(640, 480))
   {
   }
 
