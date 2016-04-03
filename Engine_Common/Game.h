@@ -50,7 +50,7 @@ namespace Common
      */
     static const int MAX_TIMED_LOOPS = 8;
 
-    Game(std::string WindowTitle, std::pair<int, int> resolution);
+    Game(std::string windowTitle, std::pair<int, int> resolution);
     virtual ~Game();
 
     int run();

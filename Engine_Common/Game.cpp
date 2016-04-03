@@ -65,13 +65,13 @@ namespace Common
     int status = init();
 
     if (status != 0)
-		  return status;
+      return status;
 
     this->gameLoadScreen();
     status = this->gameStartup();
 
-	  if (status != 0)
-		  return status;
+    if (status != 0)
+      return status;
 
     // Set time on loops
     QueryPerformanceCounter(&m_start);
