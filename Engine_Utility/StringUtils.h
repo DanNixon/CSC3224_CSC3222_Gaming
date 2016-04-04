@@ -33,7 +33,7 @@ namespace Utility
     static std::string ExtFromFilename(const std::string &filename);
 
   private:
-    static size_t findSlash(const std::string &str);
+    static size_t FindSlash(const std::string &str);
   };
 }
 }

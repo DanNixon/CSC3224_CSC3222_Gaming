@@ -84,7 +84,7 @@ namespace Utility
   std::string StringUtils::DirectoryFromPath(const std::string &path)
   {
     std::string retVal;
-    size_t slashIdx = findSlash(path);
+    size_t slashIdx = FindSlash(path);
 
     if (slashIdx != std::string::npos)
       retVal = path.substr(0, slashIdx);
@@ -102,7 +102,7 @@ namespace Utility
   std::string StringUtils::FilenameFromPath(const std::string &path)
   {
     std::string retVal;
-    size_t slashIdx = findSlash(path);
+    size_t slashIdx = FindSlash(path);
 
     if (slashIdx != std::string::npos)
       retVal = path.substr(slashIdx + 1);
@@ -155,7 +155,7 @@ namespace Utility
    *
    * First searches for Windows style slashes (\) then, if none are found, UNIX style (/).
    */
-  size_t StringUtils::findSlash(const std::string &str)
+  size_t StringUtils::FindSlash(const std::string &str)
   {
     // Look for Windows style slashes
     size_t slashIdx = str.rfind('\\');

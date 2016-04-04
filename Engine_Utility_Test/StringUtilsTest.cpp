@@ -51,7 +51,29 @@ public:
     Assert::AreEqual(std::string("SnookerLoopy"), s);
   }
 
-  // TODO: test remaining functions
+  TEST_METHOD(StringUtils_DirectoryFromPath)
+  {
+    std::string s = StringUtils::DirectoryFromPath("c:\\stuff\\thing.txt");
+    Assert::AreEqual(std::string("c:\\stuff"), s);
+  }
+
+  TEST_METHOD(StringUtils_FilenameFromPath)
+  {
+    std::string s = StringUtils::FilenameFromPath("c:\\stuff\\thing.txt");
+    Assert::AreEqual(std::string("thing.txt"), s);
+  }
+
+  TEST_METHOD(StringUtils_BasenameFromFilename)
+  {
+    std::string s = StringUtils::BasenameFromFilename("thing.txt");
+    Assert::AreEqual(std::string("thing"), s);
+  }
+
+  TEST_METHOD(StringUtils_ExtFromFilename)
+  {
+    std::string s = StringUtils::ExtFromFilename("thing.txt");
+    Assert::AreEqual(std::string("txt"), s);
+  }
 };
 }
 }
