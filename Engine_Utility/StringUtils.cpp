@@ -5,6 +5,7 @@
 
 #include "StringUtils.h"
 
+#include <algorithm>
 #include <sstream>
 
 namespace Engine
@@ -19,19 +20,22 @@ namespace Utility
    */
   std::string StringUtils::Trim(std::string str, const std::string &trimChars)
   {
-    size_t pos;
+    size_t posStart, posEnd;
 
     // Trim from end
-    pos = str.find_last_not_of(trimChars);
-    if (pos != std::string::npos)
-      str = str.substr(0, pos + 1);
+    posEnd = str.find_last_not_of(trimChars);
+    if (posEnd != std::string::npos)
+      str = str.substr(0, posEnd + 1);
 
     // Trim from start
-    pos = str.find_first_not_of(trimChars);
-    if (pos != std::string::npos)
-      str = str.substr(pos);
+    posStart = str.find_first_not_of(trimChars);
+    if (posStart != std::string::npos)
+      str = str.substr(posStart);
 
-    return str;
+    if (posStart != std::string::npos && posEnd != std::string::npos)
+      return str;
+    else
+      return std::string();
   }
 
   /**
@@ -56,6 +60,21 @@ namespace Utility
   }
 
   /**
+   * @brief Converts a string into a string that can be a filename/path by
+   *        removing whitespace and punctuation.
+   * @param str String to sanitize
+   * @return Sanitized string
+   *
+   * e.g. SanitizeFilename("Snooker Loopy!") = "SnookerLoopy"
+   */
+  std::string StringUtils::SanitizeFilename(std::string str)
+  {
+    str.erase(std::remove_if(str.begin(), str.end(), [](const char &c) { return ispunct(c) || isspace(c); }),
+              str.end());
+    return str;
+  }
+
+  /**
    * @brief Gets the directory given the path to a file.
    * @param path File path
    * @return Directory to file
@@ -65,7 +84,7 @@ namespace Utility
   std::string StringUtils::DirectoryFromPath(const std::string &path)
   {
     std::string retVal;
-    size_t slashIdx = findSlash(path);
+    size_t slashIdx = FindSlash(path);
 
     if (slashIdx != std::string::npos)
       retVal = path.substr(0, slashIdx);
@@ -83,7 +102,7 @@ namespace Utility
   std::string StringUtils::FilenameFromPath(const std::string &path)
   {
     std::string retVal;
-    size_t slashIdx = findSlash(path);
+    size_t slashIdx = FindSlash(path);
 
     if (slashIdx != std::string::npos)
       retVal = path.substr(slashIdx + 1);
@@ -136,7 +155,7 @@ namespace Utility
    *
    * First searches for Windows style slashes (\) then, if none are found, UNIX style (/).
    */
-  size_t StringUtils::findSlash(const std::string &str)
+  size_t StringUtils::FindSlash(const std::string &str)
   {
     // Look for Windows style slashes
     size_t slashIdx = str.rfind('\\');

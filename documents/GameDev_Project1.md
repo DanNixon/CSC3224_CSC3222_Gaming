@@ -10,14 +10,14 @@
   - [x] Switch to OpenAL Soft
   - [ ] Investigate what physical simulations OpenAL does
   - [ ] Test with moving sources
-- [ ] `Engine_Common`
+- [x] `Engine_Common`
   - [x] Move setup code into engine
   - [x] Managed memory
   - [x] Loop timing
   - [x] Clean startup routine
   - [x] Profiling
   - [x] Make `SceneObject::update()` generic for different types of updates
-  - [ ] Game that holds a configuration
+  - [x] Game that holds a configuration
 - [ ] `Engine_Graphics`
   - [x] Asset import
   - [x] Texture encapsulation

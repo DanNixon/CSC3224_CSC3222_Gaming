@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConfigurableGame.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="IMemoryManaged.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigurableGame.h" />
     <ClInclude Include="debug_utils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />

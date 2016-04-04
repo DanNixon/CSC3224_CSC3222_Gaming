@@ -50,13 +50,22 @@ namespace Common
      */
     static const int MAX_TIMED_LOOPS = 8;
 
-    Game(std::string WindowTitle, std::pair<int, int> resolution);
+    Game(const std::string &name, std::pair<int, int> resolution);
     virtual ~Game();
 
     int run();
     void exit();
 
     float time() const;
+
+    /**
+     * @brief Returns the name of the game.
+     * @return Game name
+     */
+    inline std::string name() const
+    {
+      return m_name;
+    }
 
     /** @name Window functions
      *  @{
@@ -66,7 +75,7 @@ namespace Common
      * @brief Gets the width of the window.
      * @return Window width
      */
-    int windowX() const
+    inline int windowX() const
     {
       return m_windowWidth;
     }
@@ -75,7 +84,7 @@ namespace Common
      * @brief Gets the height of the window.
      * @return Window height
      */
-    int windowY() const
+    inline int windowY() const
     {
       return m_windowHeight;
     }
@@ -134,9 +143,9 @@ namespace Common
   protected:
     friend class Profiler;
 
-    std::string m_windowTitle;                       //!< Window title
-    int m_windowWidth;                               //!< Window width
-    int m_windowHeight;                              //!< Window height
+    const std::string m_name;                        //!< Name of the game
+    const int m_windowWidth;                         //!< Window width
+    const int m_windowHeight;                        //!< Window height
     bool m_run;                                      //!< Flag indicating the same loop should be executed
     IEventHandler::HandlerList m_eventHandlers;      //!< List of event handlers
     GameLoopConfiguration *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops

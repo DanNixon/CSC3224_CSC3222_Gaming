@@ -10,6 +10,7 @@
     <ClInclude Include="IMemoryManaged.h" />
     <ClInclude Include="debug_utils.h" />
     <ClInclude Include="Subsystem.h" />
+    <ClInclude Include="ConfigurableGame.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp" />
@@ -18,5 +19,6 @@
     <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="IMemoryManaged.cpp" />
+    <ClCompile Include="ConfigurableGame.cpp" />
   </ItemGroup>
 </Project>
