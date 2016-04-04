@@ -24,7 +24,7 @@ namespace Physics
    * @return True if entities interface
    *
    * Will also return false if no interface test between the two entities is
-   *known.
+   * known.
    */
   bool InterfaceDetection::Detect(InterfaceDef &interf)
   {
@@ -33,13 +33,23 @@ namespace Physics
     Entity *b = interf.m_e2;
 
     if (dynamic_cast<const SphericalEntity *>(a) && dynamic_cast<const SphericalEntity *>(b))
+    {
       SphereSphere(retVal, interf.m_normal, static_cast<const SphericalEntity *>(a), static_cast<const SphericalEntity *>(b));
+    }
 
     else if (dynamic_cast<const SphericalEntity *>(a) && dynamic_cast<const PlanarEntity *>(b))
+    {
       SpherePlane(retVal, interf.m_normal, static_cast<const SphericalEntity *>(a), static_cast<const PlanarEntity *>(b));
+      if (interf.swapped())
+        interf.m_normal.invert();
+    }
 
     else if (dynamic_cast<const PlanarEntity *>(a) && dynamic_cast<const SphericalEntity *>(b))
+    {
       SpherePlane(retVal, interf.m_normal, static_cast<const SphericalEntity *>(b), static_cast<const PlanarEntity *>(a));
+      if (interf.swapped())
+        interf.m_normal.invert();
+    }
 
     return retVal;
   }

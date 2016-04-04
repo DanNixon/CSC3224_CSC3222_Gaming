@@ -12,11 +12,13 @@ namespace Simulation
       {
         if (e1 > e2)
         {
+          m_swap = true;
           m_e1 = e2;
           m_e2 = e1;
         }
         else
         {
+          m_swap = false;
           m_e1 = e1;
           m_e2 = e2;
         }
@@ -41,6 +43,11 @@ namespace Simulation
         return m_resolved;
       }
 
+      bool swapped() const
+      {
+        return m_swap;
+      }
+
       Engine::Maths::Vector2 normal() const
       {
         return m_normal;
@@ -60,6 +67,7 @@ namespace Simulation
       Entity * m_e2;
 
       bool m_resolved;
+      bool m_swap;
 
       Engine::Maths::Vector2 m_normal;
     };

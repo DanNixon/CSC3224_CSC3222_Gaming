@@ -246,7 +246,7 @@ namespace Snooker
       Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
 
       // Clamp max acceleration to a sensible level
-      float maxShotMagnitude = 0.3f;
+      float maxShotMagnitude = 0.5f;
       if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
         deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
 
