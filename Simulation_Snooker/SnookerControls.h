@@ -43,7 +43,7 @@ namespace Snooker
         , m_keyboard(new Engine::Input::KeyboardController(this))
         , m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
     {
-      //setAnalogLimits(0.0f, (float) std::max(game->windowX(), game->windowY()));
+      // setAnalogLimits(0.0f, (float) std::max(game->windowX(), game->windowY()));
 
       m_keyboard->setMapping(SDLK_f, S_PROFILE_DISPLAY, true);
 

@@ -26,8 +26,10 @@ namespace Physics
   public:
     static bool Detect(InterfaceDef &interf);
 
-    static void SphereSphere(bool &result, Engine::Maths::Vector2 &normal, const SphericalEntity *a, const SphericalEntity *b);
-    static void SpherePlane(bool &result, Engine::Maths::Vector2 &normal, const SphericalEntity *a, const PlanarEntity *b);
+    static void SphereSphere(bool &result, Engine::Maths::Vector2 &normal, const SphericalEntity *a,
+                             const SphericalEntity *b);
+    static void SpherePlane(bool &result, Engine::Maths::Vector2 &normal, const SphericalEntity *a,
+                            const PlanarEntity *b);
   };
 }
 }

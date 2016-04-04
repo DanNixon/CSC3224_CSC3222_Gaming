@@ -2,74 +2,74 @@
 
 namespace Simulation
 {
-  namespace Physics
+namespace Physics
+{
+  class InterfaceDef
   {
-    class InterfaceDef
-    {
-    public:
-      InterfaceDef(Entity *e1, Entity *e2)
+  public:
+    InterfaceDef(Entity *e1, Entity *e2)
         : m_resolved(false)
+    {
+      if (e1 > e2)
       {
-        if (e1 > e2)
-        {
-          m_swap = true;
-          m_e1 = e2;
-          m_e2 = e1;
-        }
-        else
-        {
-          m_swap = false;
-          m_e1 = e1;
-          m_e2 = e2;
-        }
+        m_swap = true;
+        m_e1 = e2;
+        m_e2 = e1;
       }
-
-      virtual ~InterfaceDef()
+      else
       {
+        m_swap = false;
+        m_e1 = e1;
+        m_e2 = e2;
       }
+    }
 
-      Entity * entityA()
-      {
-        return m_e1;
-      }
+    virtual ~InterfaceDef()
+    {
+    }
 
-      Entity * entityB()
-      {
-        return m_e2;
-      }
+    Entity *entityA()
+    {
+      return m_e1;
+    }
 
-      bool resolved() const
-      {
-        return m_resolved;
-      }
+    Entity *entityB()
+    {
+      return m_e2;
+    }
 
-      bool swapped() const
-      {
-        return m_swap;
-      }
+    bool resolved() const
+    {
+      return m_resolved;
+    }
 
-      Engine::Maths::Vector2 normal() const
-      {
-        return m_normal;
-      }
+    bool swapped() const
+    {
+      return m_swap;
+    }
 
-      bool operator==(const InterfaceDef &other) const
-      {
-        return (m_e1 == other.m_e1) && (m_e2 == other.m_e2);
-      }
+    Engine::Maths::Vector2 normal() const
+    {
+      return m_normal;
+    }
 
-    private:
-      friend class PhysicsUpdate;
-      friend class InterfaceDetection;
-      friend class InterfaceResolution;
+    bool operator==(const InterfaceDef &other) const
+    {
+      return (m_e1 == other.m_e1) && (m_e2 == other.m_e2);
+    }
 
-      Entity * m_e1;
-      Entity * m_e2;
+  private:
+    friend class PhysicsUpdate;
+    friend class InterfaceDetection;
+    friend class InterfaceResolution;
 
-      bool m_resolved;
-      bool m_swap;
+    Entity *m_e1;
+    Entity *m_e2;
 
-      Engine::Maths::Vector2 m_normal;
-    };
-  }
+    bool m_resolved;
+    bool m_swap;
+
+    Engine::Maths::Vector2 m_normal;
+  };
+}
 }
