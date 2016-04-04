@@ -123,7 +123,7 @@ namespace UIMenu
    */
   void IMenu::handleButton(const SDL_MouseButtonEvent &e)
   {
-    if (e.button == SDL_BUTTON_LEFT && e.type == SDL_MOUSEBUTTONUP)
+    if (e.button == SDL_BUTTON_LEFT && e.type == SDL_MOUSEBUTTONUP && m_currentMouseOver != nullptr)
       handleMenuOptionSelection(m_currentMouseOver);
   }
 
@@ -146,6 +146,7 @@ namespace UIMenu
   bool IMenu::checkMouseOver(const Vector3 &mousePos, SceneObject *node)
   {
     bool retVal = false;
+    m_currentMouseOver = nullptr;
 
     for (SceneObject::SceneObjectListIter it = node->children().begin(); it != node->children().end(); ++it)
     {
