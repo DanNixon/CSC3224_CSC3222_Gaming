@@ -65,23 +65,20 @@ namespace Physics
         if ((*oit)->stationary() && (*iit)->stationary())
           continue;
 
-        auto entPair = std::make_pair(*oit, *iit);
-        if (*oit > *iit)
-          entPair = std::make_pair(*iit, *oit);
+        InterfaceDef interf(*oit, *iit);
 
         // Check for interface
-        bool detected = InterfaceDetection::Detect(**oit, **iit);
+        bool detected = InterfaceDetection::Detect(interf);
 
-        auto it = std::find_if(m_interfaces.begin(), m_interfaces.end(),
-                               [entPair](InterfaceDef d) { return d.first == entPair; });
+        auto it = std::find(m_interfaces.begin(), m_interfaces.end(), interf);
 
         // Remove a resolved interface that is no longer detected
-        if (it != m_interfaces.end() && !(detected || !it->second))
+        if (it != m_interfaces.end() && !(detected || !it->m_resolved))
           m_interfaces.erase(it);
 
         // Add a newly detected interface if it is not already detected
         if (detected && it == m_interfaces.end())
-          m_interfaces.push_back(std::make_pair(entPair, false));
+          m_interfaces.push_back(interf);
       }
 
       oit = entities.erase(oit);
@@ -97,15 +94,12 @@ namespace Physics
     for (auto it = m_interfaces.begin(); it != m_interfaces.end(); ++it)
     {
       // If the interface is yet to be resolved
-      if (!it->second)
+      if (!it->m_resolved)
       {
-        Entity *a = it->first.first;
-        Entity *b = it->first.second;
-
-        InterfaceResolution::Impulse(*a, *b, 0.6f);
+        InterfaceResolution::Impulse(*it, 0.5f);
 
         // Mark the interface as having been resolved
-        it->second = true;
+        it->m_resolved = true;
       }
     }
   }

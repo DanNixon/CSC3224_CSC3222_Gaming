@@ -7,6 +7,7 @@
 #define _SIMULATION_PHYSICS_INTERFACEDETECTION_H_
 
 #include "Entity.h"
+#include "InterfaceDef.h"
 
 namespace Simulation
 {
@@ -23,11 +24,10 @@ namespace Physics
   class InterfaceDetection
   {
   public:
-    static bool Detect(const Entity &a, const Entity &b);
+    static bool Detect(InterfaceDef &interf);
 
-    static void SphereSphere(bool &result, const SphericalEntity &a, const SphericalEntity &b);
-    static void PlanePlane(bool &result, const PlanarEntity &a, const PlanarEntity &b);
-    static void SpherePlane(bool &result, const SphericalEntity &a, const PlanarEntity &b);
+    static void SphereSphere(bool &result, Engine::Maths::Vector2 &normal, const SphericalEntity *a, const SphericalEntity *b);
+    static void SpherePlane(bool &result, Engine::Maths::Vector2 &normal, const SphericalEntity *a, const PlanarEntity *b);
   };
 }
 }

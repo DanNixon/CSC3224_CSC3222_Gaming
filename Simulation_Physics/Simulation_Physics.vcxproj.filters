@@ -20,5 +20,6 @@
     <ClInclude Include="PhysicsUpdate.h" />
     <ClInclude Include="InterfaceDetection.h" />
     <ClInclude Include="InterfaceResolution.h" />
+    <ClInclude Include="InterfaceDef.h" />
   </ItemGroup>
 </Project>

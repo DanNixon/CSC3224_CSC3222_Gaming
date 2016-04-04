@@ -31,6 +31,7 @@
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Integration.h" />
+    <ClInclude Include="InterfaceDef.h" />
     <ClInclude Include="InterfaceDetection.h" />
     <ClInclude Include="InterfaceResolution.h" />
     <ClInclude Include="PhysicsUpdate.h" />

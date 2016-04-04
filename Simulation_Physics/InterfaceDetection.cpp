@@ -26,21 +26,20 @@ namespace Physics
    * Will also return false if no interface test between the two entities is
    *known.
    */
-  bool InterfaceDetection::Detect(const Entity &a, const Entity &b)
+  bool InterfaceDetection::Detect(InterfaceDef &interf)
   {
     bool retVal = false;
+    Entity *a = interf.m_e1;
+    Entity *b = interf.m_e2;
 
-    if (dynamic_cast<const SphericalEntity *>(&a) && dynamic_cast<const SphericalEntity *>(&b))
-      SphereSphere(retVal, static_cast<const SphericalEntity &>(a), static_cast<const SphericalEntity &>(b));
+    if (dynamic_cast<const SphericalEntity *>(a) && dynamic_cast<const SphericalEntity *>(b))
+      SphereSphere(retVal, interf.m_normal, static_cast<const SphericalEntity *>(a), static_cast<const SphericalEntity *>(b));
 
-    else if (dynamic_cast<const PlanarEntity *>(&a) && dynamic_cast<const PlanarEntity *>(&b))
-      PlanePlane(retVal, static_cast<const PlanarEntity &>(a), static_cast<const PlanarEntity &>(b));
+    else if (dynamic_cast<const SphericalEntity *>(a) && dynamic_cast<const PlanarEntity *>(b))
+      SpherePlane(retVal, interf.m_normal, static_cast<const SphericalEntity *>(a), static_cast<const PlanarEntity *>(b));
 
-    else if (dynamic_cast<const SphericalEntity *>(&a) && dynamic_cast<const PlanarEntity *>(&b))
-      SpherePlane(retVal, static_cast<const SphericalEntity &>(a), static_cast<const PlanarEntity &>(b));
-
-    else if (dynamic_cast<const PlanarEntity *>(&a) && dynamic_cast<const SphericalEntity *>(&b))
-      SpherePlane(retVal, static_cast<const SphericalEntity &>(b), static_cast<const PlanarEntity &>(a));
+    else if (dynamic_cast<const PlanarEntity *>(a) && dynamic_cast<const SphericalEntity *>(b))
+      SpherePlane(retVal, interf.m_normal, static_cast<const SphericalEntity *>(b), static_cast<const PlanarEntity *>(a));
 
     return retVal;
   }
@@ -51,23 +50,15 @@ namespace Physics
    * @param a First spherical entity
    * @param b Second spherical entity
    */
-  void InterfaceDetection::SphereSphere(bool &result, const SphericalEntity &a, const SphericalEntity &b)
+  void InterfaceDetection::SphereSphere(bool &result, Vector2 &normal, const SphericalEntity *a, const SphericalEntity *b)
   {
-    float d = VectorOperations::Distance2(a.position(), b.position());
-    float r = (a.radius() - a.impactDistance()) + (b.radius() - b.impactDistance());
+    float d = VectorOperations::Distance2(a->position(), b->position());
+    float r = (a->radius() - a->impactDistance()) + (b->radius() - b->impactDistance());
     r *= r;
     result = (d < r);
-  }
 
-  /**
-   * @brief Tests for interface between two planar entities.
-   * @param result [out] Result of test
-   * @param a First planar entity
-   * @param b Second planar entity
-   */
-  void InterfaceDetection::PlanePlane(bool &result, const PlanarEntity &a, const PlanarEntity &b)
-  {
-    result = (a.position() == b.position());
+    if (result)
+      normal = VectorOperations::GetNormalised(a->position() - b->position());
   }
 
   /**
@@ -77,11 +68,12 @@ namespace Physics
    * @param a Spherical entity
    * @param b Planar entity
    */
-  void InterfaceDetection::SpherePlane(bool &result, const SphericalEntity &a, const PlanarEntity &b)
+  void InterfaceDetection::SpherePlane(bool &result, Vector2 &normal, const SphericalEntity *a, const PlanarEntity *b)
   {
-    float d = -Vector2::dot(b.position(), b.normal());
-    float v = Vector2::dot(b.normal(), a.position()) + d;
-    result = (v < (a.radius() - a.impactDistance()));
+    float d = -Vector2::dot(b->position(), b->normal());
+    float v = Vector2::dot(b->normal(), a->position()) + d;
+    result = (v < (a->radius() - a->impactDistance()));
+    normal = -b->normal();
   }
 }
 }

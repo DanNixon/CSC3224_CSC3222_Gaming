@@ -50,7 +50,7 @@ namespace Snooker
     m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
     // Balls
-    m_balls[0] = new Ball(Vector2(-1150.0f, 0.0f), -1);     // Cue ball
+    m_balls[0] = new Ball(Vector2(-1150.0f, 200.0f), -1);   // Cue ball
     m_balls[1] = new Ball(Vector2(957.85f, 0.0f), 1);       // Red
     m_balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);    // Red
     m_balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);   // Red
@@ -150,8 +150,8 @@ namespace Snooker
       auto inters = m_physics.interfaces();
       for (auto it = inters.begin(); it != inters.end(); ++it)
       {
-        Entity *a = it->first.first;
-        Entity *b = it->first.second;
+        Entity *a = it->entityA();
+        Entity *b = it->entityB();
 
         if (dynamic_cast<Pocket *>(a))
           std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
@@ -246,7 +246,7 @@ namespace Snooker
       Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
 
       // Clamp max acceleration to a sensible level
-      float maxShotMagnitude = 0.5f;
+      float maxShotMagnitude = 0.3f;
       if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
         deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
 

@@ -7,6 +7,7 @@
 #define _SIMULATION_PHYSICS_PHYSICSUPDATE_H_
 
 #include "Entity.h"
+#include "InterfaceDef.h"
 
 namespace Simulation
 {
@@ -20,14 +21,6 @@ namespace Physics
   class PhysicsUpdate
   {
   public:
-    /**
-     * @typedef InterfaceDef
-     * @brief Type for recording an interface.
-     *
-     * In format {{first entity, second entity}, resolved flag}.
-     */
-    typedef std::pair<std::pair<Entity *, Entity *>, bool> InterfaceDef;
-
     PhysicsUpdate()
     {
     }

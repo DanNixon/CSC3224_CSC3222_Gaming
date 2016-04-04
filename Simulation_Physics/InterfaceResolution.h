@@ -7,6 +7,7 @@
 #define _SIMULATION_PHYSICS_INTERFACERESOLUTION_H_
 
 #include "Entity.h"
+#include "InterfaceDef.h"
 
 namespace Simulation
 {
@@ -20,9 +21,7 @@ namespace Physics
   class InterfaceResolution
   {
   public:
-    static Engine::Maths::Vector2 InterfaceNormal(Entity &a, Entity &b);
-
-    static void Impulse(Entity &a, Entity &b, float epsilon);
+    static void Impulse(InterfaceDef &interf, float epsilon);
   };
 }
 }
