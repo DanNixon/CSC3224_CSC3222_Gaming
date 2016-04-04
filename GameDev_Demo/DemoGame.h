@@ -37,9 +37,10 @@ namespace Demo
     virtual ~DemoGame();
 
   protected:
-    int gameStartup();
-    void gameLoop(Uint8 id, float dtMilliSec);
-    void gameShutdown();
+    virtual int gameStartup();
+    virtual void gameLoop(Uint8 id, float dtMilliSec);
+    virtual void gameShutdown();
+    virtual void setDefaultConfigOptions();
 
   private:
     friend class OptionsMenu;

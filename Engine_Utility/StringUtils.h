@@ -24,6 +24,8 @@ namespace Utility
     static std::string Trim(std::string str, const std::string &trimChars = " \t");
     static std::vector<std::string> Split(const std::string &str, char delim);
 
+    static std::string SanitizeFilename(std::string str);
+
     static std::string DirectoryFromPath(const std::string &path);
     static std::string FilenameFromPath(const std::string &path);
 

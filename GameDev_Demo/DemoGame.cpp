@@ -15,6 +15,7 @@
 #include <Engine_Graphics/PlaneMesh.h>
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
+#include <Engine_IO/KVNode.h>
 #include <Engine_Maths/Quaternion.h>
 #include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/ConvexHullShape.h>
@@ -32,6 +33,7 @@ using namespace Engine::Input;
 using namespace Engine::Audio;
 using namespace Engine::UIMenu;
 using namespace Engine::Physics;
+using namespace Engine::IO;
 
 namespace GameDev
 {
@@ -54,6 +56,10 @@ namespace Demo
    */
   int DemoGame::gameStartup()
   {
+    int retVal = 0;
+
+    retVal = ConfigurableGame::gameStartup();
+
     glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
 
     // Menu
@@ -203,7 +209,7 @@ namespace Demo
 
     m_audioSource1->play();
 
-    return 0;
+    return retVal;
   }
 
   /**
@@ -289,6 +295,29 @@ namespace Demo
   void DemoGame::gameShutdown()
   {
     m_audioContext->close();
+  }
+
+  /**
+   * @copydoc ConfigurableGame::setDefaultConfigOptions
+   */
+  void DemoGame::setDefaultConfigOptions()
+  {
+    KVNode &root = this->root();
+
+    KVNode aircraft("aircraft");
+    aircraft.set("selected", "Gaui X5");
+    root.addChild(aircraft);
+
+    KVNode terrain("terrain");
+    terrain.set("default_model", "Flat");
+    root.addChild(terrain);
+
+    KVNode telemetry("telemetry");
+    telemetry.set("enable", "false");
+    telemetry.set("protocol", "frsky_sport_uart_bridge");
+    telemetry.set("port", "COM1");
+    telemetry.set("baud", "115200");
+    root.addChild(telemetry);
   }
 }
 }

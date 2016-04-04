@@ -19,6 +19,8 @@ namespace Common
    * @brief Allows a game to store configuration options in an .ini file in
    *        the users home directory.
    * @author Dan Nixon
+   *
+   * Configuration save on exit is enabled by default.
    */
   class ConfigurableGame : public Game, public Engine::IO::INIKeyValueStore
   {
@@ -27,7 +29,7 @@ namespace Common
     virtual ~ConfigurableGame();
 
     void loadConfig();
-    void saveConfig() const;
+    void saveConfig();
 
     /**
      * @brief Checks f this was the first time the game was launched based on
@@ -37,6 +39,15 @@ namespace Common
     inline bool isFirstRun() const
     {
       return m_firstRun;
+    }
+
+    /**
+     * @brief Gets the game save directory.
+     * @return Save directory
+     */
+    inline std::string gameSaveDirectory() const
+    {
+      return m_gameDirectory;
     }
 
     /**
@@ -57,6 +68,11 @@ namespace Common
       return m_saveOnExit;
     }
 
+    inline std::string configFilePath() const
+    {
+      return m_gameDirectory + m_configFilename;
+    }
+
   protected:
     /**
      * @brief Sets the default configuration options.
@@ -65,11 +81,14 @@ namespace Common
     {
     }
 
+    virtual int gameStartup();
     virtual void gameShutdown();
 
   private:
-    bool m_firstRun;   //!< Flag indicating first run based on missing config file
-    bool m_saveOnExit; //!< Falg indicating if config should be saved on game exit
+    std::string m_gameDirectory;  //!< Path to the game save directory
+    std::string m_configFilename; //!< Name of the configuration file
+    bool m_firstRun;              //!< Flag indicating first run based on missing config file
+    bool m_saveOnExit;            //!< Falg indicating if config should be saved on game exit
   };
 }
 }
