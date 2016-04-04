@@ -10,6 +10,8 @@
 
 #include "IController.h"
 
+#include <iostream>
+
 using namespace Engine::Common;
 
 namespace Engine
@@ -24,6 +26,7 @@ namespace Input
       : m_game(game)
   {
     setAnalogDeadbands(0.0f, 0.0f);
+    setAnalogLimits(-1.0f, 1.0f);
   }
 
   IControlScheme::~IControlScheme()
@@ -95,6 +98,12 @@ namespace Input
     m_analogDeadbands[2] = deadbandLimit;
   }
 
+  void IControlScheme::setAnalogLimits(float minValue, float maxValue)
+  {
+    m_analogLimits[0] = minValue;
+    m_analogLimits[1] = maxValue;
+  }
+
   /**
    * @brief Sets the value of a binary state.
    * @param state State ID
@@ -123,10 +132,10 @@ namespace Input
   {
     if (value >= -m_analogDeadbands[1] && value <= m_analogDeadbands[1])
       value = 0.0f;
-    else if (value > (1.0f - m_analogDeadbands[2]))
-      value = 1.0f;
-    else if (value < (-1.0f + m_analogDeadbands[0]))
-      value = -1.0f;
+    else if (value > (m_analogLimits[1] - m_analogDeadbands[2]))
+      value = m_analogLimits[1];
+    else if (value < (m_analogLimits[0] + m_analogDeadbands[0]))
+      value = m_analogLimits[0];
 
     m_analogs[state] = value;
   }

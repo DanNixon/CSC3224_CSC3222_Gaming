@@ -208,30 +208,29 @@ namespace Snooker
         // Record starting position of mouse
         m_mouseStartPosition = new Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
 
-        // Get position of cue ball in normalised screen space
-        Matrix4 p = m_scene->projectionMatrix();
-        Matrix4 mv = m_scene->viewMatrix() * m_balls[0]->worldTransform();
-        Vector3 pos = m_balls[0]->position();
-
-        GLdouble dp[16];
-        p.toGLdoubleMtx(dp);
-        GLdouble dmv[16];
-        mv.toGLdoubleMtx(dmv);
-
+        // TODO
         GLint viewport[4];
+        GLdouble modelview[16];
+        GLdouble projection[16];
+        GLfloat winX, winY, winZ;
+        GLdouble posX, posY, posZ;
+
+        m_scene->viewMatrix().toGLdoubleMtx(modelview);
+        m_scene->projectionMatrix().toGLdoubleMtx(projection);
         glGetIntegerv(GL_VIEWPORT, viewport);
 
-        GLdouble sp[3];
+        winX = m_mouseStartPosition->x();
+        winY = viewport[3] - m_mouseStartPosition->y();
+        glReadPixels(int(winX), int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
 
-        if (gluProject(pos.x(), pos.y(), pos.z(), dmv, dp, viewport, sp, sp + 1, sp + 2) == GLU_TRUE)
-        {
-          Vector3 screenPos((float)sp[0], (float)sp[1], (float)sp[2]);
+        gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
 
-          std::cout << "MOUSE DOWN" << std::endl
-                    << "cue ball: " << pos << " - " << screenPos << std::endl
-                    << "mouse: " << *m_mouseStartPosition << std::endl
-                    << std::endl;
-        }
+        Vector3 pos(posX, posY, posZ);
+
+        std::cout << "MOUSE DOWN" << std::endl
+                  << "screen: " << *m_mouseStartPosition << std::endl
+                  << "world: " << pos << "   " << winZ << std::endl
+                  << std::endl;
 
         static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(Vector3());
         m_shotAimLine->setActive(true);

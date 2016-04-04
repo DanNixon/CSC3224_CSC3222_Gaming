@@ -132,7 +132,7 @@ namespace UIMenu
    */
   void IMenu::handleMotion(const SDL_MouseMotionEvent &e)
   {
-    std::pair<float, float> pos = MouseHandler::GetNormalisedPos(e, m_game->windowX(), m_game->windowY());
+    std::pair<float, float> pos = MouseHandler::GetCentreNormalisedPos(e, m_game->windowX(), m_game->windowY());
     const Vector3 mousePos(pos.first, pos.second, 0.0f);
     checkMouseOver(mousePos, m_root);
   }

@@ -13,9 +13,13 @@ namespace Input
    * @copydoc IController::IController
    * @param screenX Screen width
    * @param screenY Screen height
+   *
+   * If no screen dimensions are provided then coordinate normalisation is
+   * disbaled.
    */
   MouseController::MouseController(IControlScheme *parent, int screenX, int screenY)
       : IController(parent)
+      , m_normalise(screenX > 0 && screenY > 0)
       , m_screenX(screenX)
       , m_screenY(screenY)
       , m_xMapping(nullptr)
@@ -81,13 +85,25 @@ namespace Input
    */
   void MouseController::handleMotion(const SDL_MouseMotionEvent &e)
   {
-    auto relScrn = MouseHandler::GetNormalisedPos(e, m_screenX, m_screenY);
+    float x, y;
+
+    if (m_normalise)
+    {
+      auto relScrn = MouseHandler::GetCentreNormalisedPos(e, m_screenX, m_screenY);
+      x = relScrn.first;
+      y = relScrn.second;
+    }
+    else
+    {
+      x = (float) e.x;
+      y = (float) e.y;
+    }
 
     if (m_xMapping)
-      m_controlScheme->setAnalog(*m_xMapping, relScrn.first);
+      m_controlScheme->setAnalog(*m_xMapping, x);
 
     if (m_yMapping)
-      m_controlScheme->setAnalog(*m_yMapping, relScrn.second);
+      m_controlScheme->setAnalog(*m_yMapping, y);
   }
 }
 }

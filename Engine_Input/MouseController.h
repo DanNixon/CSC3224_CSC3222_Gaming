@@ -20,7 +20,7 @@ namespace Input
   class MouseController : public IController, public MouseHandler
   {
   public:
-    MouseController(IControlScheme *parent, int screenX, int screenY);
+    MouseController(IControlScheme *parent, int screenX = -1, int screenY = -1);
     virtual ~MouseController();
 
     void setXMapping(size_t state);
@@ -34,6 +34,7 @@ namespace Input
     const int m_screenX; //!< Screen width
     const int m_screenY; //!< Screen height
 
+    bool m_normalise;                         //!< Flag indicating if coordinates are normalised
     size_t *m_xMapping;                       //!< Analog state mapping for X position
     size_t *m_yMapping;                       //!< ANalog state mapping for Y position
     std::map<Uint8, size_t> m_buttonMappings; //!< Binary mappings for buttons

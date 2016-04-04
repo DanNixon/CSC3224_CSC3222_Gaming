@@ -50,6 +50,7 @@ namespace Input
     float analog(size_t a) const;
 
     void setAnalogDeadbands(float deadbandCentre = 0.0f, float deadbandLimit = 0.0f);
+    void setAnalogLimits(float minValue, float maxValue);
 
     virtual void setState(size_t state, bool active);
     virtual void flipState(size_t state);
@@ -67,6 +68,7 @@ namespace Input
     std::map<size_t, float> m_analogs; //!< Analog states
 
     float m_analogDeadbands[3];
+    float m_analogLimits[2];
   };
 }
 }

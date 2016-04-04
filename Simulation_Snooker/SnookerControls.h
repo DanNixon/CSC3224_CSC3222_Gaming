@@ -41,8 +41,10 @@ namespace Snooker
     SnookerControls(Engine::Common::Game *game)
         : Engine::Input::IControlScheme(game)
         , m_keyboard(new Engine::Input::KeyboardController(this))
-        , m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
+        , m_mouse(new Engine::Input::MouseController(this))
     {
+      setAnalogLimits(0.0f, std::max(game->windowX(), game->windowY()));
+
       m_keyboard->setMapping(SDLK_f, S_PROFILE_DISPLAY, true);
 
       m_mouse->setXMapping(A_MOUSE_X);
