@@ -133,7 +133,7 @@ namespace IO
      * @param name Name of child not to retrieve
      * @return Child node
      */
-    KVNode child(const std::string &name)
+    KVNode &child(const std::string &name)
     {
       return m_children[name];
     }

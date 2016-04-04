@@ -21,7 +21,7 @@ namespace IO
 
   bool DiskUtils::MakeDirectories(const std::string &path)
   {
-    return CreateDirectory(path.c_str(), NULL);
+    return CreateDirectory(path.c_str(), NULL) == TRUE;
   }
 
   bool DiskUtils::IsFile(const std::string &path)

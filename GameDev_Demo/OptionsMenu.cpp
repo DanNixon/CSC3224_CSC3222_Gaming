@@ -35,12 +35,22 @@ namespace Demo
     {
       m_game->exit();
     }
-    if (item->name() == "pause")
+    else if (item->name() == "pause")
     {
       auto system = static_cast<DemoGame *>(m_game)->m_physicalSystem;
       bool run = !system->simulationRunning();
       system->setSimulationState(run);
       item->setText(run ? "Pause" : "Resume", true);
+    }
+    else if (item->parent()->name() == "aircraft")
+    {
+      std::string selectedAircraftName = item->name();
+      dynamic_cast<ConfigurableGame *>(m_game)->root().child("aircraft").set("selected", selectedAircraftName);
+    }
+    else if (item->parent()->name() == "terrain")
+    {
+      std::string selectedAircraftName = item->name();
+      dynamic_cast<ConfigurableGame *>(m_game)->root().child("terrain").set("default_model", selectedAircraftName);
     }
 
     // TODO

@@ -60,6 +60,12 @@ namespace Demo
 
     retVal = ConfigurableGame::gameStartup();
 
+    // TODO: display dismissible on screen scontrols
+    if (isFirstRun())
+    {
+      std::cout << "This is the first time the game has been launched." << std::endl;
+    }
+
     glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
 
     // Menu
@@ -294,6 +300,8 @@ namespace Demo
    */
   void DemoGame::gameShutdown()
   {
+    ConfigurableGame::gameShutdown();
+
     m_audioContext->close();
   }
 
