@@ -23,8 +23,12 @@ namespace Snooker
   {
     A_MOUSE_X,
     A_MOUSE_Y,
+
+    S_TAKE_SHOT,
+
     S_PROFILE_DISPLAY,
-    S_TAKE_SHOT
+    S_PAUSE,
+    S_RESET
   };
 
   /**
@@ -44,6 +48,8 @@ namespace Snooker
         , m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
     {
       m_keyboard->setMapping(SDLK_f, S_PROFILE_DISPLAY, true);
+      m_keyboard->setMapping(SDLK_p, S_PAUSE, true);
+      m_keyboard->setMapping(SDLK_r, S_RESET);
 
       m_mouse->setXMapping(A_MOUSE_X);
       m_mouse->setYMapping(A_MOUSE_Y);
