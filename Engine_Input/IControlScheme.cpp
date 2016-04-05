@@ -54,16 +54,6 @@ namespace Input
   }
 
   /**
-   * @brief Gets a binary state.
-   * @param s State ID
-   * @return Value of state
-   */
-  bool IControlScheme::state(size_t s) const
-  {
-    return m_state[s];
-  }
-
-  /**
    * @brief Tests if an analog ID is known (has been set at least once).
    * @param a Analog state ID
    * @return True if analog state has a value
@@ -120,7 +110,7 @@ namespace Input
    */
   void IControlScheme::flipState(size_t state)
   {
-    m_state.flip(state);
+    setState(state, !m_state[state]);
   }
 
   /**

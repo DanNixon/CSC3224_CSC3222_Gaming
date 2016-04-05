@@ -20,6 +20,7 @@
 #include <Simulation_Physics/PhysicsSimulation.h>
 
 #include "Ball.h"
+#include "OptionsMenu.h"
 #include "Table.h"
 
 namespace Simulation
@@ -52,6 +53,8 @@ namespace Snooker
     void updateControl();
 
   private:
+    friend class SnookerControls;
+
     Uint8 m_graphicsLoop;
     Uint8 m_physicsLoop;
     Uint8 m_controlLoop;
@@ -61,6 +64,7 @@ namespace Snooker
 
     Engine::Common::Scene *m_scene;
     Engine::Common::Scene *m_ui;
+    OptionsMenu *m_menu;
 
     Table *m_table;
     Ball *m_balls[NUM_BALLS];

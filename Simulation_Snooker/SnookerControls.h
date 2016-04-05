@@ -12,6 +12,8 @@
 #include <Engine_Input/KeyboardController.h>
 #include <Engine_Input/MouseController.h>
 
+#include "SnookerSimulation.h"
+
 namespace Simulation
 {
 namespace Snooker
@@ -68,9 +70,16 @@ namespace Snooker
       m_game->removeEventHandler(m_mouse);
     }
 
+    virtual void setState(size_t state, bool active)
+    {
+      IControlScheme::setState(state, active);
+      static_cast<SnookerSimulation *>(m_game)->m_menu->updateTextFromControls();
+    }
+
   private:
     Engine::Input::KeyboardController *m_keyboard; //!< Keyboard used in scheme
     Engine::Input::MouseController *m_mouse;       //!< Mouse used in scheme
+    OptionsMenu *m_menu;
   };
 }
 }

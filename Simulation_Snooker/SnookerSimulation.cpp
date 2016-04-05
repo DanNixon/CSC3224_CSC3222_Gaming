@@ -125,6 +125,13 @@ namespace Snooker
 
     m_controls = new SnookerControls(this);
 
+    // Menu
+    m_menu = new OptionsMenu(this, m_fontMedium, 0.05f, m_controls);
+    m_menu->setMargin(Vector2(0.005f, 0.005f));
+    m_menu->layout();
+    m_menu->show();
+    addEventHandler(m_menu);
+
     m_profiler = new Profiler(this);
 
     return 0;
@@ -140,6 +147,7 @@ namespace Snooker
     {
       m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
+      m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
 
       swapBuffers();
     }
@@ -251,6 +259,7 @@ namespace Snooker
       m_physics.setRunning(false);
       placeBalls();
       m_physics.setRunning(!m_controls->state(S_PAUSE));
+      m_controls->setState(S_RESET, false);
     }
 
     // Mouse clicks (to take shots)

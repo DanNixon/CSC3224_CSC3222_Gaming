@@ -44,7 +44,15 @@ namespace Input
     void addController(IController *controller);
     void poll();
 
-    bool state(size_t s) const;
+    /**
+     * @brief Gets a binary state.
+     * @param s State ID
+     * @return Value of state
+     */
+    inline bool state(size_t s) const
+    {
+      return m_state[s];
+    }
 
     bool hasAnalog(size_t a) const;
     float analog(size_t a) const;
