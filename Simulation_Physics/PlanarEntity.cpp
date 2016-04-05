@@ -22,8 +22,8 @@ namespace Physics
   {
     facing();
 
-    // TODO: cases where plane is flat give a reduced box
-    m_originBox = BoundingBox<Vector2>();
+    m_originBox.world();
+    m_box.world();
   }
 
   PlanarEntity::~PlanarEntity()

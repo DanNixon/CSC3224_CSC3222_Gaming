@@ -64,6 +64,21 @@ namespace Graphics
     }
 
     /**
+     * @brief Resets the box to cover the entire world.
+     */
+    void world()
+    {
+      const float maxFloat = std::numeric_limits<float>::max();
+      const float minFloat = std::numeric_limits<float>::lowest();
+
+      for (size_t i = 0; i < T::Dimensions(); i++)
+      {
+        m_lowerLeft[i] = minFloat;
+        m_upperRight[i] = maxFloat;
+      }
+    }
+
+    /**
      * @brief Gets the position of the lower left vertex.
      * @return Lower left vertex
      */

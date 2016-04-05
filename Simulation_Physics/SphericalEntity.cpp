@@ -53,6 +53,7 @@ namespace Physics
   void SphericalEntity::setRadius(float radius)
   {
     m_radius2 = radius * radius;
+    m_originBox = BoundingBox<Vector2>(Vector2(-radius, -radius), Vector2(radius, radius));
   }
 
   /**

@@ -53,60 +53,43 @@ namespace Physics
    */
   void PhysicsUpdate::detectInterfaces(Entity::EntityPtrList entities)
   {
-    // Detected interfaces
+    // Sort entities along x-axis
+    std::sort(entities.begin(), entities.end(),
+              [](Entity *a, Entity *b) { return a->boundingBox().lowerLeft()[0] < b->boundingBox().lowerLeft()[0]; });
+
     std::vector<InterfaceDef> interfaces;
 
-    // Run sort and sweep along x-axis
-    std::sort(entities.begin(), entities.end(),
-              [](Entity *a, Entity *b) { return a->position()[0] < b->position()[0]; });
-
-    // Remove entities that cannot be interfacing
-    for (Entity::EntityPtrListIter it = entities.begin() + 1; it != entities.end() - 1;)
+    // Create a list of possible interfaces (broadphase)
+    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end(); ++it)
     {
-      // std::cout << it - entities.begin() << std::endl;
+      bool thisStationary = (*it)->stationary();
+      float thisBoxRight = (*it)->boundingBox().upperRight()[0];
 
-      BoundingBox<Vector2> thisBox = (*it)->boundingBox();
-      float thisLeft = thisBox.lowerLeft()[0];
-      float thisRight = thisBox.upperRight()[0];
-
-      float left = (*(it - 1))->boundingBox().upperRight()[0];
-      float right = (*(it + 1))->boundingBox().lowerLeft()[0];
-
-      // Check for projection intersection
-      if (left < thisLeft && thisRight < right)
+      for (auto iit = it + 1; iit != entities.end(); ++iit)
       {
-        // TODO
+        if (thisStationary && (*iit)->stationary())
+          continue;
 
-        // cannot intersect any entities
+        float testBoxLeft = (*iit)->boundingBox().lowerLeft()[0];
+
+        if (testBoxLeft < thisBoxRight)
+          interfaces.push_back(InterfaceDef(*it, *iit));
       }
-
-      ++it;
     }
 
-    // TODO
-
-    for (Entity::EntityPtrListIter oit = entities.begin(); oit != entities.end();)
+    // Filter the list of possible interfaces to certain interfaces (narrowphase)
+    for (auto it = interfaces.begin(); it != interfaces.end();)
     {
-      for (Entity::EntityPtrListIter iit = entities.begin(); iit != entities.end(); ++iit)
+      if (InterfaceDetection::Detect(*it))
       {
-        // Don't comapre the same entity
-        if (*oit == *iit)
-          continue;
-
-        // Don't compare two stationary entities
-        if ((*oit)->stationary() && (*iit)->stationary())
-          continue;
-
-        InterfaceDef interf(*oit, *iit);
-
-        // Check for interface
-        if (InterfaceDetection::Detect(interf))
-        {
-          interfaces.push_back(interf);
-        }
+        // Collision is valid
+        ++it;
       }
-
-      oit = entities.erase(oit);
+      else
+      {
+        // No collision, remove the entry
+        it = interfaces.erase(it);
+      }
     }
 
     // Remove interfaces that have been resolved and are no longer detected

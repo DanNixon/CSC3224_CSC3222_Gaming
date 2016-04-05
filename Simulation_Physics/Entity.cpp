@@ -63,7 +63,8 @@ namespace Physics
     {
       m_position += offset;
 
-      m_box += offset;
+      m_box = m_originBox;
+      m_box += m_position;
     }
   }
 
