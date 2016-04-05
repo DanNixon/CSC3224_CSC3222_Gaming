@@ -42,16 +42,13 @@ namespace Physics
     {
       SpherePlane(retVal, interf.m_normal, static_cast<const SphericalEntity *>(a),
                   static_cast<const PlanarEntity *>(b));
-      if (interf.swapped())
-        interf.m_normal.invert();
     }
 
     else if (dynamic_cast<const PlanarEntity *>(a) && dynamic_cast<const SphericalEntity *>(b))
     {
       SpherePlane(retVal, interf.m_normal, static_cast<const SphericalEntity *>(b),
                   static_cast<const PlanarEntity *>(a));
-      if (interf.swapped())
-        interf.m_normal.invert();
+      interf.m_normal.invert();
     }
 
     return retVal;
@@ -87,7 +84,7 @@ namespace Physics
     float d = -Vector2::dot(b->position(), b->normal());
     float v = Vector2::dot(b->normal(), a->position()) + d;
     result = (v < (a->radius() - a->impactDistance()));
-    normal = -b->normal();
+    normal = b->normal();
   }
 }
 }

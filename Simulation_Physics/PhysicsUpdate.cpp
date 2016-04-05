@@ -7,6 +7,7 @@
 
 #include <algorithm>
 
+#include <Engine_Graphics/BoundingBox.h>
 #include <Engine_Maths/Vector3.h>
 
 #include "Integration.h"
@@ -14,6 +15,7 @@
 #include "InterfaceResolution.h"
 
 using namespace Engine::Maths;
+using namespace Engine::Graphics;
 
 namespace Simulation
 {
@@ -51,7 +53,37 @@ namespace Physics
    */
   void PhysicsUpdate::detectInterfaces(Entity::EntityPtrList entities)
   {
-    // TODO: use sort and sweep along x axis
+    // Detected interfaces
+    std::vector<InterfaceDef> interfaces;
+
+    // Run sort and sweep along x-axis
+    std::sort(entities.begin(), entities.end(),
+              [](Entity *a, Entity *b) { return a->position()[0] < b->position()[0]; });
+
+    // Remove entities that cannot be interfacing
+    for (Entity::EntityPtrListIter it = entities.begin() + 1; it != entities.end() - 1;)
+    {
+      // std::cout << it - entities.begin() << std::endl;
+
+      BoundingBox<Vector2> thisBox = (*it)->boundingBox();
+      float thisLeft = thisBox.lowerLeft()[0];
+      float thisRight = thisBox.upperRight()[0];
+
+      float left = (*(it - 1))->boundingBox().upperRight()[0];
+      float right = (*(it + 1))->boundingBox().lowerLeft()[0];
+
+      // Check for projection intersection
+      if (left < thisLeft && thisRight < right)
+      {
+        // TODO
+
+        // cannot intersect any entities
+      }
+
+      ++it;
+    }
+
+    // TODO
 
     for (Entity::EntityPtrListIter oit = entities.begin(); oit != entities.end();)
     {
@@ -68,20 +100,37 @@ namespace Physics
         InterfaceDef interf(*oit, *iit);
 
         // Check for interface
-        bool detected = InterfaceDetection::Detect(interf);
-
-        auto it = std::find(m_interfaces.begin(), m_interfaces.end(), interf);
-
-        // Remove a resolved interface that is no longer detected
-        if (it != m_interfaces.end() && !(detected || !it->m_resolved))
-          m_interfaces.erase(it);
-
-        // Add a newly detected interface if it is not already detected
-        if (detected && it == m_interfaces.end())
-          m_interfaces.push_back(interf);
+        if (InterfaceDetection::Detect(interf))
+        {
+          interfaces.push_back(interf);
+        }
       }
 
       oit = entities.erase(oit);
+    }
+
+    // Remove interfaces that have been resolved and are no longer detected
+    for (auto it = m_interfaces.begin(); it != m_interfaces.end();)
+    {
+      // TODO: shouldn't need this check as all interfaces in this array should have already been resolved
+      if (it->resolved())
+      {
+        auto i = std::find(interfaces.begin(), interfaces.end(), *it);
+
+        if (i == interfaces.end())
+          it = m_interfaces.erase(it);
+        else
+          ++it;
+      }
+    }
+
+    // Add newly detected interfaces if it is not already detected
+    for (auto it = interfaces.begin(); it != interfaces.end(); ++it)
+    {
+      auto i = std::find(m_interfaces.begin(), m_interfaces.end(), *it);
+
+      if (i == m_interfaces.end())
+        m_interfaces.push_back(*it);
     }
   }
 

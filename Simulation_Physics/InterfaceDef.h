@@ -8,20 +8,10 @@ namespace Physics
   {
   public:
     InterfaceDef(Entity *e1, Entity *e2)
-        : m_resolved(false)
+        : m_e1(e1)
+        , m_e2(e2)
+        , m_resolved(false)
     {
-      if (e1 > e2)
-      {
-        m_swap = true;
-        m_e1 = e2;
-        m_e2 = e1;
-      }
-      else
-      {
-        m_swap = false;
-        m_e1 = e1;
-        m_e2 = e2;
-      }
     }
 
     virtual ~InterfaceDef()
@@ -43,11 +33,6 @@ namespace Physics
       return m_resolved;
     }
 
-    bool swapped() const
-    {
-      return m_swap;
-    }
-
     Engine::Maths::Vector2 normal() const
     {
       return m_normal;
@@ -55,7 +40,7 @@ namespace Physics
 
     bool operator==(const InterfaceDef &other) const
     {
-      return (m_e1 == other.m_e1) && (m_e2 == other.m_e2);
+      return ((m_e1 == other.m_e1) && (m_e2 == other.m_e2)) || ((m_e1 == other.m_e2) && (m_e2 == other.m_e1));
     }
 
   private:

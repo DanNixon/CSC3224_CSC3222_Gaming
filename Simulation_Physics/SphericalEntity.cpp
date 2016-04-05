@@ -6,6 +6,7 @@
 #include "SphericalEntity.h"
 
 using namespace Engine::Maths;
+using namespace Engine::Graphics;
 
 namespace Simulation
 {
@@ -20,6 +21,7 @@ namespace Physics
       , m_radius2(radius * radius)
       , m_impactDistance(impactDistance)
   {
+    m_originBox = BoundingBox<Vector2>(Vector2(-radius, -radius), Vector2(radius, radius));
   }
 
   SphericalEntity::~SphericalEntity()

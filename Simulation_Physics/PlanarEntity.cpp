@@ -8,6 +8,7 @@
 #include <Engine_Maths/VectorOperations.h>
 
 using namespace Engine::Maths;
+using namespace Engine::Graphics;
 
 namespace Simulation
 {
@@ -20,6 +21,9 @@ namespace Physics
       : Entity(pos, std::numeric_limits<float>::max(), true)
   {
     facing();
+
+    // TODO: cases where plane is flat give a reduced box
+    m_originBox = BoundingBox<Vector2>();
   }
 
   PlanarEntity::~PlanarEntity()
