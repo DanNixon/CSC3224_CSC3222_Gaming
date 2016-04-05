@@ -50,28 +50,30 @@ namespace Snooker
     m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
     // Balls
-    m_balls[0] = new Ball(Vector2(-1150.0f, 200.0f), -1);   // Cue ball
-    m_balls[1] = new Ball(Vector2(957.85f, 0.0f), 1);       // Red
-    m_balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);    // Red
-    m_balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);   // Red
-    m_balls[4] = new Ball(Vector2(1062.85f, 52.5f), 1);     // Red
-    m_balls[5] = new Ball(Vector2(1062.85f, 0.0f), 1);      // Red
-    m_balls[6] = new Ball(Vector2(1062.85f, -52.5f), 1);    // Red
-    m_balls[7] = new Ball(Vector2(1115.35f, 78.75f), 1);    // Red
-    m_balls[8] = new Ball(Vector2(1115.35f, 26.25f), 1);    // Red
-    m_balls[9] = new Ball(Vector2(1115.35f, -26.25f), 1);   // Red
-    m_balls[10] = new Ball(Vector2(1115.35f, -78.75f), 1);  // Red
-    m_balls[11] = new Ball(Vector2(1167.85f, 105.0f), 1);   // Red
-    m_balls[12] = new Ball(Vector2(1167.85f, 52.5f), 1);    // Red
-    m_balls[13] = new Ball(Vector2(1167.85f, 0.0f), 1);     // Red
-    m_balls[14] = new Ball(Vector2(1167.85f, -52.5f), 1);   // Red
-    m_balls[15] = new Ball(Vector2(1167.85f, -105.0f), 1);  // Red
-    m_balls[16] = new Ball(Vector2(-1047.75f, -291.1f), 2); // Yellow
-    m_balls[17] = new Ball(Vector2(-1047.75f, 291.1f), 3);  // Green
-    m_balls[18] = new Ball(Vector2(-1047.75f, 0.0f), 4);    // Brown
-    m_balls[19] = new Ball(Vector2(0.0f, 0.0f), 5);         // Blue
-    m_balls[20] = new Ball(Vector2(895.35f, 0.0f), 6);      // Pink
-    m_balls[21] = new Ball(Vector2(1466.85f, 0.0f), 7);     // Black
+    m_balls[0] = new Ball(Vector2(), -1); // Cue ball
+    m_balls[1] = new Ball(Vector2(), 1);  // Red
+    m_balls[2] = new Ball(Vector2(), 1);  // Red
+    m_balls[3] = new Ball(Vector2(), 1);  // Red
+    m_balls[4] = new Ball(Vector2(), 1);  // Red
+    m_balls[5] = new Ball(Vector2(), 1);  // Red
+    m_balls[6] = new Ball(Vector2(), 1);  // Red
+    m_balls[7] = new Ball(Vector2(), 1);  // Red
+    m_balls[8] = new Ball(Vector2(), 1);  // Red
+    m_balls[9] = new Ball(Vector2(), 1);  // Red
+    m_balls[10] = new Ball(Vector2(), 1); // Red
+    m_balls[11] = new Ball(Vector2(), 1); // Red
+    m_balls[12] = new Ball(Vector2(), 1); // Red
+    m_balls[13] = new Ball(Vector2(), 1); // Red
+    m_balls[14] = new Ball(Vector2(), 1); // Red
+    m_balls[15] = new Ball(Vector2(), 1); // Red
+    m_balls[16] = new Ball(Vector2(), 2); // Yellow
+    m_balls[17] = new Ball(Vector2(), 3); // Green
+    m_balls[18] = new Ball(Vector2(), 4); // Brown
+    m_balls[19] = new Ball(Vector2(), 5); // Blue
+    m_balls[20] = new Ball(Vector2(), 6); // Pink
+    m_balls[21] = new Ball(Vector2(), 7); // Black
+
+    placeBalls();
 
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
@@ -194,13 +196,64 @@ namespace Snooker
   }
 
   /**
+   * @brief Sets the intial position of the balls and resets velcoity and
+   *        acceleration to zero.
+   */
+  void SnookerSimulation::placeBalls()
+  {
+    // Initial positions
+    m_balls[0]->setPosition(Vector2(-1150.0f, 200.0f));    // Cue ball
+    m_balls[1]->setPosition(Vector2(957.85f, 0.0f));       // Red
+    m_balls[2]->setPosition(Vector2(1010.35f, 26.25f));    // Red
+    m_balls[3]->setPosition(Vector2(1010.35f, -26.25f));   // Red
+    m_balls[4]->setPosition(Vector2(1062.85f, 52.5f));     // Red
+    m_balls[5]->setPosition(Vector2(1062.85f, 0.0f));      // Red
+    m_balls[6]->setPosition(Vector2(1062.85f, -52.5f));    // Red
+    m_balls[7]->setPosition(Vector2(1115.35f, 78.75f));    // Red
+    m_balls[8]->setPosition(Vector2(1115.35f, 26.25f));    // Red
+    m_balls[9]->setPosition(Vector2(1115.35f, -26.25f));   // Red
+    m_balls[10]->setPosition(Vector2(1115.35f, -78.75f));  // Red
+    m_balls[11]->setPosition(Vector2(1167.85f, 105.0f));   // Red
+    m_balls[12]->setPosition(Vector2(1167.85f, 52.5f));    // Red
+    m_balls[13]->setPosition(Vector2(1167.85f, 0.0f));     // Red
+    m_balls[14]->setPosition(Vector2(1167.85f, -52.5f));   // Red
+    m_balls[15]->setPosition(Vector2(1167.85f, -105.0f));  // Red
+    m_balls[16]->setPosition(Vector2(-1047.75f, -291.1f)); // Yellow
+    m_balls[17]->setPosition(Vector2(-1047.75f, 291.1f));  // Green
+    m_balls[18]->setPosition(Vector2(-1047.75f, 0.0f));    // Brown
+    m_balls[19]->setPosition(Vector2(0.0f, 0.0f));         // Blue
+    m_balls[20]->setPosition(Vector2(895.35f, 0.0f));      // Pink
+    m_balls[21]->setPosition(Vector2(1466.85f, 0.0f));     // Black
+
+    // Reset acceleration and velocity to zero
+    for (size_t i = 0; i < NUM_BALLS; i++)
+    {
+      m_balls[i]->setVelocity(Vector2());
+      m_balls[i]->setAcceleration(Vector2());
+    }
+  }
+
+  /**
    * @brief Update the controls.
    */
   void SnookerSimulation::updateControl()
   {
+    // Profile displays
     m_profileGraphics->setActive(m_controls->state(S_PROFILE_DISPLAY));
     m_profilePhysics->setActive(m_controls->state(S_PROFILE_DISPLAY));
 
+    // Pause
+    m_physics.setRunning(!m_controls->state(S_PAUSE));
+
+    // Reset
+    if (m_controls->state(S_RESET))
+    {
+      m_physics.setRunning(false);
+      placeBalls();
+      m_physics.setRunning(!m_controls->state(S_PAUSE));
+    }
+
+    // Mouse clicks (to take shots)
     if (m_mouseStartPosition == nullptr)
     {
       if (m_controls->state(S_TAKE_SHOT))

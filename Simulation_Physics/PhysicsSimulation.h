@@ -25,6 +25,24 @@ namespace Physics
     virtual ~PhysicsSimulation();
 
     /**
+     * @brief Pauses or resumes the simulation.
+     * @param run If the simulation should be running
+     */
+    void setRunning(bool run)
+    {
+      m_run = run;
+    }
+
+    /**
+     * @param Checks if the simulation is running.
+     * @return True if the simualtion is running
+     */
+    bool running() const
+    {
+      return m_run;
+    }
+
+    /**
      * @brief Adds a new entity to the simulation.
      * @param ent New entity to add
      */
@@ -57,9 +75,12 @@ namespace Physics
      */
     inline void update(float dtMilliSec)
     {
-      updatePositions(dtMilliSec);
-      detectInterfaces();
-      resolveInterfaces();
+      if (m_run)
+      {
+        updatePositions(dtMilliSec);
+        detectInterfaces();
+        resolveInterfaces();
+      }
     }
 
   private:
@@ -68,6 +89,7 @@ namespace Physics
     void resolveInterfaces();
 
   private:
+    bool m_run;
     Entity::EntityPtrList m_entities;
     std::vector<InterfaceDef> m_interfaces;
   };

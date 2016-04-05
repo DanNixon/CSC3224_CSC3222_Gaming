@@ -47,6 +47,8 @@ namespace Snooker
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
+  private:
+    void placeBalls();
     void updateControl();
 
   private:
