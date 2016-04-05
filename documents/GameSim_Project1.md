@@ -18,5 +18,5 @@ Extra:
 - [ ] Mouse based shots
   - [x] Set ball acceleration using mouse
   - [ ] Require player to click the cue ball to start a shot
-- [ ] Sort and sweep broadphase interface checks
+- [x] Sort and sweep broadphase interface checks
 - [ ] Proper snooker rules and scoring
