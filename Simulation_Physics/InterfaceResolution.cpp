@@ -17,48 +17,30 @@ namespace Simulation
 namespace Physics
 {
   /**
-   * @brief Gets the interface normal between two interfacing entities.
-   * @param a First entity
-   * @param b Second entity
-   * @return Normal
-   */
-  Vector2 InterfaceResolution::InterfaceNormal(Entity &a, Entity &b)
-  {
-    Vector2 n;
-
-    if (dynamic_cast<const PlanarEntity *>(&a))
-      n = -(dynamic_cast<const PlanarEntity *>(&a)->normal());
-    else if (dynamic_cast<const PlanarEntity *>(&b))
-      n = dynamic_cast<const PlanarEntity *>(&b)->normal();
-    else
-      n = VectorOperations::GetNormalised(a.position() - b.position());
-
-    return n;
-  }
-
-  /**
    * @brief Resolves an interface using the impulse method.
-   * @param a First entity
-   * @param b Second entity
+   * @param interf Interface definition
    * @param epsilon Elasticity coefficient
    */
-  void InterfaceResolution::Impulse(Entity &a, Entity &b, float epsilon)
+  void InterfaceResolution::Impulse(InterfaceDef &interf, float epsilon)
   {
-    Vector2 vAB = a.velocity() + b.velocity();
-    Vector2 vN = InterfaceNormal(a, b);
+    Entity *a = interf.m_e1;
+    Entity *b = interf.m_e2;
 
-    Vector2 aa = vN * (a.inverseMass() + b.inverseMass());
+    Vector2 vAB = a->velocity() + b->velocity();
+    Vector2 vN = interf.m_normal;
+
+    Vector2 aa = vN * (a->inverseMass() + b->inverseMass());
 
     float num = -(1 + epsilon) * Vector2::dot(vAB, vN);
     float denom = Vector2::dot(vN, aa);
 
     float j = abs(num / denom);
 
-    Vector2 vAf = a.velocity() + (vN * j * a.inverseMass());
-    Vector2 vBf = b.velocity() - (vN * j * b.inverseMass());
+    Vector2 vAf = a->velocity() + (vN * j * a->inverseMass());
+    Vector2 vBf = b->velocity() - (vN * j * b->inverseMass());
 
-    a.setVelocity(vAf);
-    b.setVelocity(vBf);
+    a->setVelocity(vAf);
+    b->setVelocity(vBf);
   }
 }
 }

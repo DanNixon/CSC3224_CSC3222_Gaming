@@ -43,7 +43,12 @@ namespace Physics
   void Entity::setPosition(const Vector2 &pos)
   {
     if (!m_stationary)
+    {
       m_position = pos;
+
+      m_box = m_originBox;
+      m_box += pos;
+    }
   }
 
   /**
@@ -55,7 +60,12 @@ namespace Physics
   void Entity::shiftPosition(const Vector2 &offset)
   {
     if (!m_stationary)
+    {
       m_position += offset;
+
+      m_box = m_originBox;
+      m_box += m_position;
+    }
   }
 
   /**

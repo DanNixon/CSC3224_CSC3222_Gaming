@@ -95,8 +95,8 @@ namespace Input
     }
     else
     {
-      x = (float) e.x;
-      y = (float) e.y;
+      x = (float)e.x;
+      y = (float)e.y;
     }
 
     if (m_xMapping)

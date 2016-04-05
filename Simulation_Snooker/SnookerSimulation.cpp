@@ -46,11 +46,11 @@ namespace Snooker
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
     // Table
-    m_table = new Table(m_entities);
+    m_table = new Table(m_physics.entities());
     m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
     // Balls
-    m_balls[0] = new Ball(Vector2(-1150.0f, 0.0f), -1);     // Cue ball
+    m_balls[0] = new Ball(Vector2(-1150.0f, 200.0f), -1);   // Cue ball
     m_balls[1] = new Ball(Vector2(957.85f, 0.0f), 1);       // Red
     m_balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);    // Red
     m_balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);   // Red
@@ -78,7 +78,7 @@ namespace Snooker
       if (m_balls[i] != nullptr)
       {
         m_table->addChild(m_balls[i]);
-        m_entities.push_back(m_balls[i]);
+        m_physics.addEntity(m_balls[i]);
       }
     }
 
@@ -144,14 +144,14 @@ namespace Snooker
     // Handle physics
     else if (id == m_physicsLoop)
     {
-      m_physics.update(m_entities, dtMilliSec);
+      m_physics.update(dtMilliSec);
 
       // Check for potted balls
       auto inters = m_physics.interfaces();
       for (auto it = inters.begin(); it != inters.end(); ++it)
       {
-        Entity *a = it->first.first;
-        Entity *b = it->first.second;
+        Entity *a = it->entityA();
+        Entity *b = it->entityB();
 
         if (dynamic_cast<Pocket *>(a))
           std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;

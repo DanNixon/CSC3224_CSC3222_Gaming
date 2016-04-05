@@ -22,7 +22,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="InterfaceDetection.cpp" />
     <ClCompile Include="InterfaceResolution.cpp" />
-    <ClCompile Include="PhysicsUpdate.cpp" />
+    <ClCompile Include="PhysicsSimulation.cpp" />
     <ClCompile Include="PlanarEntity.cpp" />
     <ClCompile Include="SphericalEntity.cpp" />
     <ClCompile Include="SUVAT.cpp" />
@@ -31,9 +31,10 @@
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Integration.h" />
+    <ClInclude Include="InterfaceDef.h" />
     <ClInclude Include="InterfaceDetection.h" />
     <ClInclude Include="InterfaceResolution.h" />
-    <ClInclude Include="PhysicsUpdate.h" />
+    <ClInclude Include="PhysicsSimulation.h" />
     <ClInclude Include="PlanarEntity.h" />
     <ClInclude Include="SphericalEntity.h" />
     <ClInclude Include="SUVAT.h" />

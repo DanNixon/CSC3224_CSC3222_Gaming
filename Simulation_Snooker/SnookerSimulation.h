@@ -17,7 +17,7 @@
 #include <Engine_Input/IControlScheme.h>
 
 #include <Simulation_Physics/Entity.h>
-#include <Simulation_Physics/PhysicsUpdate.h>
+#include <Simulation_Physics/PhysicsSimulation.h>
 
 #include "Ball.h"
 #include "Table.h"
@@ -63,8 +63,7 @@ namespace Snooker
     Table *m_table;
     Ball *m_balls[NUM_BALLS];
 
-    Simulation::Physics::Entity::EntityPtrList m_entities;
-    Simulation::Physics::PhysicsUpdate m_physics;
+    Simulation::Physics::PhysicsSimulation m_physics;
 
     TTF_Font *m_fontLarge;
     TTF_Font *m_fontMedium;

@@ -44,11 +44,13 @@ namespace Snooker
   {
   }
 
-  // TODO: remove this (was only needed when this has a renderable mesh
   void Pocket::setPosition(const Engine::Maths::Vector2 &pos)
   {
     SphericalEntity::setPosition(pos);
     setModelMatrix(Matrix4::Translation(Vector3(pos.x(), pos.y(), 0.0f)));
+
+    m_box = m_originBox;
+    m_box += pos;
   }
 }
 }
