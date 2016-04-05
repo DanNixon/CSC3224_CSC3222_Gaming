@@ -20,4 +20,4 @@ Extra:
   - [ ] Require player to click the cue ball to start a shot
 - [x] Sort and sweep broadphase interface checks
 - [ ] Proper snooker rules and scoring
-- [ ] Menu interface
+- [x] Menu interface
