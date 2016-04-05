@@ -3,7 +3,7 @@
  * @author Dan Nixon
  */
 
-#include "PhysicsUpdate.h"
+#include "PhysicsSimulation.h"
 
 #include <algorithm>
 
@@ -21,15 +21,22 @@ namespace Simulation
 {
 namespace Physics
 {
+  PhysicsSimulation::PhysicsSimulation()
+  {
+  }
+
+  PhysicsSimulation::~PhysicsSimulation()
+  {
+  }
+
   /**
    * @brief Updates the positions of entities according to their velocity and
    *        acceleration.
-   * @param entities List of entities to update
    * @param dtMilliSec Time step in milliseconds
    */
-  void PhysicsUpdate::UpdatePositions(Entity::EntityPtrList entities, float dtMilliSec)
+  void PhysicsSimulation::updatePositions(float dtMilliSec)
   {
-    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end(); ++it)
+    for (Entity::EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
     {
       if ((*it)->m_stationary)
         continue;
@@ -49,23 +56,22 @@ namespace Physics
 
   /**
    * @brief Detects interfaces between entities.
-   * @param entities List of entities to update
    */
-  void PhysicsUpdate::detectInterfaces(Entity::EntityPtrList entities)
+  void PhysicsSimulation::detectInterfaces()
   {
     // Sort entities along x-axis
-    std::sort(entities.begin(), entities.end(),
+    std::sort(m_entities.begin(), m_entities.end(),
               [](Entity *a, Entity *b) { return a->boundingBox().lowerLeft()[0] < b->boundingBox().lowerLeft()[0]; });
 
     std::vector<InterfaceDef> interfaces;
 
     // Create a list of possible interfaces (broadphase)
-    for (Entity::EntityPtrListIter it = entities.begin(); it != entities.end(); ++it)
+    for (Entity::EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
     {
       bool thisStationary = (*it)->stationary();
       float thisBoxRight = (*it)->boundingBox().upperRight()[0];
 
-      for (auto iit = it + 1; iit != entities.end(); ++iit)
+      for (auto iit = it + 1; iit != m_entities.end(); ++iit)
       {
         if (thisStationary && (*iit)->stationary())
           continue;
@@ -121,7 +127,7 @@ namespace Physics
    * @brief Resolves detected interfaces.
    * @param entities List of entities to update
    */
-  void PhysicsUpdate::resolveInterfaces()
+  void PhysicsSimulation::resolveInterfaces()
   {
     for (auto it = m_interfaces.begin(); it != m_interfaces.end(); ++it)
     {

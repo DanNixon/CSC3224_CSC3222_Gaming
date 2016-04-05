@@ -46,7 +46,7 @@ namespace Snooker
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
     // Table
-    m_table = new Table(m_entities);
+    m_table = new Table(m_physics.entities());
     m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
     // Balls
@@ -78,7 +78,7 @@ namespace Snooker
       if (m_balls[i] != nullptr)
       {
         m_table->addChild(m_balls[i]);
-        m_entities.push_back(m_balls[i]);
+        m_physics.addEntity(m_balls[i]);
       }
     }
 
@@ -144,7 +144,7 @@ namespace Snooker
     // Handle physics
     else if (id == m_physicsLoop)
     {
-      m_physics.update(m_entities, dtMilliSec);
+      m_physics.update(dtMilliSec);
 
       // Check for potted balls
       auto inters = m_physics.interfaces();

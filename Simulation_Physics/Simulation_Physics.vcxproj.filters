@@ -6,9 +6,9 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="SphericalEntity.cpp" />
     <ClCompile Include="PlanarEntity.cpp" />
-    <ClCompile Include="PhysicsUpdate.cpp" />
     <ClCompile Include="InterfaceDetection.cpp" />
     <ClCompile Include="InterfaceResolution.cpp" />
+    <ClCompile Include="PhysicsSimulation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
@@ -17,9 +17,9 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="SphericalEntity.h" />
     <ClInclude Include="PlanarEntity.h" />
-    <ClInclude Include="PhysicsUpdate.h" />
     <ClInclude Include="InterfaceDetection.h" />
     <ClInclude Include="InterfaceResolution.h" />
     <ClInclude Include="InterfaceDef.h" />
+    <ClInclude Include="PhysicsSimulation.h" />
   </ItemGroup>
 </Project>

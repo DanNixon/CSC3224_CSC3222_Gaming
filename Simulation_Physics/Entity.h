@@ -123,7 +123,7 @@ namespace Physics
     void multiplyDragCoeff();
 
   protected:
-    friend class PhysicsUpdate;
+    friend class PhysicsSimulation;
 
     const bool m_stationary;      //!< Flag indicating this entity is stationary
     const float m_dragCoeff;      //!< Velocity coefficient due to simple drag

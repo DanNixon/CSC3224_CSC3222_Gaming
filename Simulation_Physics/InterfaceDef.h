@@ -44,7 +44,7 @@ namespace Physics
     }
 
   private:
-    friend class PhysicsUpdate;
+    friend class PhysicsSimulation;
     friend class InterfaceDetection;
     friend class InterfaceResolution;
 
