@@ -88,6 +88,11 @@ namespace Input
     m_analogDeadbands[2] = deadbandLimit;
   }
 
+  /**
+   * @brief Sets the range of valid values for analog states.
+   * @param minValue Minimum analog value
+   * @param maxValue Maximum analog value
+   */
   void IControlScheme::setAnalogLimits(float minValue, float maxValue)
   {
     m_analogLimits[0] = minValue;

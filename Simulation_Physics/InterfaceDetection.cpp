@@ -19,8 +19,7 @@ namespace Physics
 {
   /**
    * @brief Tests for interface between two entities.
-   * @param a First entity
-   * @param b Second entity
+   * @param interf Reference to the interface definition to be tested
    * @return True if entities interface
    *
    * Will also return false if no interface test between the two entities is

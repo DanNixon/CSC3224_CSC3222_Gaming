@@ -70,6 +70,9 @@ namespace Snooker
       m_game->removeEventHandler(m_mouse);
     }
 
+    /**
+     * @copydoc IControlScheme::setState
+     */
     virtual void setState(size_t state, bool active)
     {
       IControlScheme::setState(state, active);

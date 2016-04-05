@@ -50,11 +50,21 @@ namespace Physics
       return m_stationary;
     }
 
+    /**
+     * @brief Gets the origin centred bounding box.
+     * @return Origin centred bounding box
+     * @see Entity::boundingBox()
+     */
     Engine::Graphics::BoundingBox<Engine::Maths::Vector2> originBoundingBox() const
     {
       return m_originBox;
     }
 
+    /**
+     * @brief Gets the position centred bounding box.
+     * @return Position centred bounding box
+     * @see Entity::originBoundingBox()
+     */
     Engine::Graphics::BoundingBox<Engine::Maths::Vector2> boundingBox() const
     {
       return m_box;
@@ -130,9 +140,10 @@ namespace Physics
     const float m_velocityFloor2; //!< Velcoity magnitude squared at which
                                   // velocity is set to zero
 
-    float m_inverseMass; //!< 1/mass
-    Engine::Graphics::BoundingBox<Engine::Maths::Vector2> m_originBox;
-    Engine::Graphics::BoundingBox<Engine::Maths::Vector2> m_box;
+    float m_inverseMass;                                               //!< 1/mass
+    Engine::Graphics::BoundingBox<Engine::Maths::Vector2> m_originBox; //!< Bounding box centred about the origin
+    Engine::Graphics::BoundingBox<Engine::Maths::Vector2>
+        m_box;                             //!< Bounding box centred about the position of the entity
     Engine::Maths::Vector2 m_position;     //!< Position of Entity
     Engine::Maths::Vector2 m_velocity;     //!< Velocity in current timestep
     Engine::Maths::Vector2 m_acceleration; //!< Acceleration in current timestep

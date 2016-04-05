@@ -34,7 +34,7 @@ namespace Physics
     }
 
     /**
-     * @param Checks if the simulation is running.
+     * @brief Checks if the simulation is running.
      * @return True if the simualtion is running
      */
     bool running() const

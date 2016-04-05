@@ -68,6 +68,10 @@ namespace Common
       return m_saveOnExit;
     }
 
+    /**
+     * @brief Gets the full path to the configuration file.
+     * @return Config file path
+     */
     inline std::string configFilePath() const
     {
       return m_gameDirectory + m_configFilename;
