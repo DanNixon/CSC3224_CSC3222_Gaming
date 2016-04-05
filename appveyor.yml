@@ -21,8 +21,8 @@ build:
 
 test_script:
 - ps: >-
-    .\RunTest -TestName Engine_Graphics_Test
-
     .\RunTest -TestName Engine_Maths_Test
 
     .\RunTest -TestName Engine_IO_Test
+
+    .\RunTest -TestName Engine_Utility_Test

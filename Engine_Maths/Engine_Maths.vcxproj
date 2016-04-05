@@ -161,6 +161,7 @@
     <ClCompile Include="Quaternion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="math_common.h" />
     <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Matrix4.h" />

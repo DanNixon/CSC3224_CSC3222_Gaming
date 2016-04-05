@@ -6,7 +6,6 @@
 #include "SphericalEntity.h"
 
 using namespace Engine::Maths;
-using namespace Engine::Graphics;
 
 namespace Simulation
 {

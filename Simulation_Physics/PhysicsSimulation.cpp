@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-#include <Engine_Graphics/BoundingBox.h>
+#include <Engine_Maths/BoundingBox.h>
 #include <Engine_Maths/Vector3.h>
 
 #include "Integration.h"
@@ -15,7 +15,6 @@
 #include "InterfaceResolution.h"
 
 using namespace Engine::Maths;
-using namespace Engine::Graphics;
 
 namespace Simulation
 {

@@ -8,7 +8,6 @@
 #include <Engine_Maths/VectorOperations.h>
 
 using namespace Engine::Maths;
-using namespace Engine::Graphics;
 
 namespace Simulation
 {

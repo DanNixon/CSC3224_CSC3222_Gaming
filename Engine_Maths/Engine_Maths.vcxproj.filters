@@ -14,5 +14,6 @@
     <ClInclude Include="Vector4.h" />
     <ClInclude Include="math_common.h" />
     <ClInclude Include="VectorOperations.h" />
+    <ClInclude Include="BoundingBox.h" />
   </ItemGroup>
 </Project>

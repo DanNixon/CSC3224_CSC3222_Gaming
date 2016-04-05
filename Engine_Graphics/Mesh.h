@@ -16,11 +16,11 @@
 
 #include <Engine_Common/IMemoryManaged.h>
 
+#include <Engine_Maths/BoundingBox.h>
 #include <Engine_Maths/Vector2.h>
 #include <Engine_Maths/Vector3.h>
 #include <Engine_Maths/Vector4.h>
 
-#include "BoundingBox.h"
 #include "Colour.h"
 
 using std::ifstream;
@@ -72,7 +72,7 @@ namespace Graphics
      * @brief Gets the upper and lower bounds of the vertices of the mesh.
      * @return Bounding box
      */
-    BoundingBox<Engine::Maths::Vector3> boundingBox() const
+    Engine::Maths::BoundingBox3 boundingBox() const
     {
       return m_boundingBox;
     }
@@ -113,7 +113,7 @@ namespace Graphics
     Engine::Maths::Vector3 *m_tangents;      //!< Pointer to vertex tangents data
     size_t *m_indices;                       //!< Pointer to vertex indices
 
-    BoundingBox<Engine::Maths::Vector3>
+    Engine::Maths::BoundingBox3
         m_boundingBox; //!< Bounding box of all vertices (must be set on population of vertex array)
 
     Colour m_ambientColour;    //!< Colour of scattered ambient light

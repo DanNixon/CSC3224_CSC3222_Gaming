@@ -3,14 +3,17 @@
  * @author Dan Nixon
  */
 
-#ifndef _ENGINE_GRAPHICS_BOUNDINGBOX_H_
-#define _ENGINE_GRAPHICS_BOUNDINGBOX_H_
+#ifndef _ENGINE_MATHS_BOUNDINGBOX_H_
+#define _ENGINE_MATHS_BOUNDINGBOX_H_
 
 #include <algorithm>
 
+#include "Vector2.h"
+#include "Vector3.h"
+
 namespace Engine
 {
-namespace Graphics
+namespace Maths
 {
   /**
    * @class BoundingBox
@@ -215,6 +218,9 @@ namespace Graphics
     T m_lowerLeft;  //!< Position of the lower left vertex
     T m_upperRight; //!< Position of the upper right vertex
   };
+
+  typedef BoundingBox<Vector2> BoundingBox2;
+  typedef BoundingBox<Vector3> BoundingBox3;
 }
 }
 

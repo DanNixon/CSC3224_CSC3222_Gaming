@@ -5,7 +5,7 @@
 
 #include <CppUnitTest.h>
 
-#include <Engine_Graphics/BoundingBox.h>
+#include <Engine_Maths/BoundingBox.h>
 #include <Engine_Maths/Vector2.h>
 #include <Engine_Maths/Vector3.h>
 
@@ -15,7 +15,7 @@ using namespace Engine::Maths;
 // clang-format off
 namespace Engine
 {
-namespace Graphics
+namespace Maths
 {
 namespace Test
 {
@@ -25,7 +25,7 @@ TEST_CLASS(BoundingBoxTest)
 public:
   TEST_METHOD(BoundingBox_Init)
   {
-    BoundingBox<Vector3> b(Vector3(-1.0f, -2.0f, -3.0f), Vector3(1.0f, 2.0f, 3.0f));
+    BoundingBox3 b(Vector3(-1.0f, -2.0f, -3.0f), Vector3(1.0f, 2.0f, 3.0f));
 
     Assert::AreEqual(-1.0f, b.lowerLeft().x());
     Assert::AreEqual(-2.0f, b.lowerLeft().y());
@@ -37,16 +37,16 @@ public:
 
   TEST_METHOD(BoundingBox_LongestBoundDistance)
   {
-    BoundingBox<Vector2> b1(Vector2(-10.0f, -2.5f), Vector2(5.0f, 7.5f));
+    BoundingBox2 b1(Vector2(-10.0f, -2.5f), Vector2(5.0f, 7.5f));
     Assert::IsTrue(b1.longestBoundDistance() == Vector2(10.0f, 7.5f));
 
-    BoundingBox<Vector2> b2(Vector2(-5.0f, -7.5f), Vector2(10.0f, 2.5f));
+    BoundingBox2 b2(Vector2(-5.0f, -7.5f), Vector2(10.0f, 2.5f));
     Assert::IsTrue(b2.longestBoundDistance() == Vector2(10.0f, 7.5f));
   }
 
   TEST_METHOD(BoundingBox_Size)
   {
-    BoundingBox<Vector3> b(Vector3(-1.0f, -2.0f, -3.0f), Vector3(1.0f, 2.0f, 3.0f));
+    BoundingBox3 b(Vector3(-1.0f, -2.0f, -3.0f), Vector3(1.0f, 2.0f, 3.0f));
     Vector3 d = b.size();
 
     Assert::AreEqual(2.0f, d.x());
@@ -56,7 +56,7 @@ public:
 
   TEST_METHOD(BoundingBox_PointInside)
   {
-    BoundingBox<Vector3> b(Vector3(-1.0f, -2.0f, -3.0f), Vector3(1.0f, 2.0f, 3.0f));
+    BoundingBox3 b(Vector3(-1.0f, -2.0f, -3.0f), Vector3(1.0f, 2.0f, 3.0f));
 
     Assert::IsTrue(b.pointInside(Vector3(0.0f, 0.0f, 0.0f)));
 
@@ -81,7 +81,7 @@ public:
 
   TEST_METHOD(BoundingBox_ResizeByPoint)
   {
-    BoundingBox<Vector2> b;
+    BoundingBox2 b;
 
     b.resizeByPoint(Vector2(-0.5f, -1.0f));
     b.resizeByPoint(Vector2(-0.1f, -0.5f));
@@ -99,21 +99,21 @@ public:
 
   TEST_METHOD(BoundingBox_ResizeByBoundingBox)
   {
-    BoundingBox<Vector2> b;
+    BoundingBox2 b;
 
-    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(-10.0f, -8.0f), Vector2(-2.0f, -1.0f)));
+    b.resizeByBoundingBox(BoundingBox2(Vector2(-10.0f, -8.0f), Vector2(-2.0f, -1.0f)));
     Assert::IsTrue(Vector2(-10.0f, -8.0f) == b.lowerLeft());
     Assert::IsTrue(Vector2(-2.0f, -1.0f) == b.upperRight());
 
-    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(1.0f, 2.5f), Vector2(9.0f, 12.0f)));
+    b.resizeByBoundingBox(BoundingBox2(Vector2(1.0f, 2.5f), Vector2(9.0f, 12.0f)));
     Assert::IsTrue(Vector2(-10.0f, -8.0f) == b.lowerLeft());
     Assert::IsTrue(Vector2(9.0f, 12.0f) == b.upperRight());
 
-    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(5.0f, 3.5f), Vector2(6.0f, 37.0f)));
+    b.resizeByBoundingBox(BoundingBox2(Vector2(5.0f, 3.5f), Vector2(6.0f, 37.0f)));
     Assert::IsTrue(Vector2(-10.0f, -8.0f) == b.lowerLeft());
     Assert::IsTrue(Vector2(9.0f, 37.0f) == b.upperRight());
 
-    b.resizeByBoundingBox(BoundingBox<Vector2>(Vector2(-30.0f, 0.5f), Vector2(1.0f, 1.0f)));
+    b.resizeByBoundingBox(BoundingBox2(Vector2(-30.0f, 0.5f), Vector2(1.0f, 1.0f)));
     Assert::IsTrue(Vector2(-30.0f, -8.0f) == b.lowerLeft());
     Assert::IsTrue(Vector2(9.0f, 37.0f) == b.upperRight());
   }

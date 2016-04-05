@@ -169,6 +169,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoundingBoxTest.cpp" />
     <ClCompile Include="Matrix3Test.cpp" />
     <ClCompile Include="Matrix4Test.cpp" />
     <ClCompile Include="QuaternionTest.cpp" />

@@ -8,5 +8,6 @@
     <ClCompile Include="Vector3Test.cpp" />
     <ClCompile Include="Vector4Test.cpp" />
     <ClCompile Include="VectorOperationsTest.cpp" />
+    <ClCompile Include="BoundingBoxTest.cpp" />
   </ItemGroup>
 </Project>

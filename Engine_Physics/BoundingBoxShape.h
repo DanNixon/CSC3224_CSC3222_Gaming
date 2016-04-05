@@ -9,7 +9,7 @@
 #include <btBulletDynamicsCommon.h>
 
 #include <Engine_Common/SceneObject.h>
-#include <Engine_Graphics/BoundingBox.h>
+#include <Engine_Maths/BoundingBox.h>
 
 namespace Engine
 {
@@ -31,7 +31,7 @@ namespace Physics
                                       size_t maxDepth = std::numeric_limits<size_t>::max(), size_t level = 0);
 
   private:
-    Engine::Graphics::BoundingBox<Engine::Maths::Vector3> m_box;
+    Engine::Maths::BoundingBox3 m_box;
   };
 }
 }
