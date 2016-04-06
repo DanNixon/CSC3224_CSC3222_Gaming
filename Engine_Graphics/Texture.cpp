@@ -75,8 +75,8 @@ namespace Graphics
 
     // Rasterise each line
     std::vector<SDL_Surface *> textSurfaces;
-    float totalHeight = 0.0f;
-    float maxWidth = 0.0f;
+    int totalHeight = 0;
+    int maxWidth = 0;
 
     for (auto it = subStrings.begin(); it != subStrings.end(); ++it)
     {
@@ -90,8 +90,8 @@ namespace Graphics
         pallate = TTF_RenderText_Blended(font, it->c_str(), fgColour.sdlColour());
       }
 
-      totalHeight += (float)pallate->h;
-      maxWidth = std::max(maxWidth, (float)pallate->w);
+      totalHeight += pallate->h;
+      maxWidth = std::max(maxWidth, pallate->w);
 
       textSurfaces.push_back(pallate);
     }
@@ -116,7 +116,7 @@ namespace Graphics
     int currentHeight = 0;
     for (auto it = textSurfaces.begin(); it != textSurfaces.end(); ++it)
     {
-      int i = it - textSurfaces.begin();
+      int i = (int)(it - textSurfaces.begin());
 
       // Destinaion box
       SDL_Rect destRect;
