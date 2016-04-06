@@ -38,17 +38,26 @@ namespace Snooker
 
     // Set initial position
     setPosition(pos);
+
+    // Invisible by default
+    setActive(false);
   }
 
   Pocket::~Pocket()
   {
   }
 
+  /**
+   * @copydoc SphericalEntity::setPosition
+   */
   void Pocket::setPosition(const Engine::Maths::Vector2 &pos)
   {
     SphericalEntity::setPosition(pos);
+
+    // Graphical mesh position
     setModelMatrix(Matrix4::Translation(Vector3(pos.x(), pos.y(), 0.0f)));
 
+    // Bounding box position
     m_box = m_originBox;
     m_box += pos;
   }
