@@ -43,8 +43,8 @@ namespace Graphics
     virtual ~Texture();
 
     bool load(const std::string &filename);
-    void text(const std::string &text, TTF_Font *font, const Colour &fgColour = Colour(),
-              TextMode mode = TextMode::BLENDED, const Colour &bgColour = Colour(0.0f, 0.0f, 0.0f, 1.0f));
+    size_t text(const std::string &text, TTF_Font *font, const Colour &fgColour = Colour(),
+                TextMode mode = TextMode::BLENDED, const Colour &bgColour = Colour(0.0f, 0.0f, 0.0f, 1.0f));
 
     bool valid() const;
     void use(GLuint shaderProgram, int idx) const;

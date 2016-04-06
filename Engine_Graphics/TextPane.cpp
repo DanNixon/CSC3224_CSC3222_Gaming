@@ -79,10 +79,10 @@ namespace Graphics
    */
   void TextPane::redraw()
   {
-    m_texture->text(m_text, m_font, m_fgColour, m_mode, m_bgColour);
+    size_t numLines = m_texture->text(m_text, m_font, m_fgColour, m_mode, m_bgColour);
 
     Vector2 dim = m_texture->dimensions();
-    float ratio = m_height / dim.y();
+    float ratio = (m_height * numLines) / dim.y();
     dim = dim * ratio;
 
     static_cast<RectangleMesh *>(m_mesh)->setDimensions(dim);

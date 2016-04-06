@@ -114,6 +114,11 @@ namespace Snooker
     m_shotAimLine->setActive(false);
     m_balls[0]->addChild(m_shotAimLine);
 
+    // TODO: test
+    TextPane *p = new TextPane("aaa", 0.1f, m_uiShader, m_fontLarge);
+    p->setText("hello\nworld\n1");
+    m_ui->root()->addChild(p);
+
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
     m_physicsLoop = addTimedLoop(8.33f, "physics");

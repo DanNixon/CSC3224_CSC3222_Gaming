@@ -25,7 +25,7 @@
   - [x] Render alpha meshes in correct order
   - [x] Load textures in asset loading
   - [ ] Fix texture/normal loading
-  - [ ] Multi line text dialog box
+  - [x] Multi line text
 - [x] `Engine_Input`
   - [x] Keyboard
   - [x] Mouse
