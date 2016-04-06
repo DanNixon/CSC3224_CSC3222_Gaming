@@ -74,8 +74,7 @@ namespace Snooker
     TTF_Font *m_fontLarge;
     TTF_Font *m_fontMedium;
     Engine::Graphics::ShaderProgram *m_uiShader;
-    Engine::Graphics::TextPane *m_profileGraphics;
-    Engine::Graphics::TextPane *m_profilePhysics;
+    Engine::Graphics::TextPane *m_profileText;
 
     Engine::Maths::Vector2 *m_mouseStartPosition;
     Engine::Graphics::RenderableObject *m_shotAimLine;

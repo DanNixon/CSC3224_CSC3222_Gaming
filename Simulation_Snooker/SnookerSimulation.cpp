@@ -98,26 +98,15 @@ namespace Snooker
     m_uiShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
     m_uiShader->link();
 
-    m_profileGraphics = new TextPane("graphics_profile", 0.05f, m_uiShader, m_fontMedium);
-    m_profileGraphics->setActive(false);
-    m_profileGraphics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
-    m_profileGraphics->setText("Graphics: ");
-    m_ui->root()->addChild(m_profileGraphics);
-
-    m_profilePhysics = new TextPane("physics_profile", 0.05f, m_uiShader, m_fontMedium);
-    m_profilePhysics->setActive(false);
-    m_profilePhysics->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.75f, 0.0f)));
-    m_profilePhysics->setText("Physics: ");
-    m_ui->root()->addChild(m_profilePhysics);
+    m_profileText = new TextPane("profile_info", 0.05f, m_uiShader, m_fontMedium);
+    m_profileText->setActive(false);
+    m_profileText->setModelMatrix(Matrix4::Translation(Vector3(-0.5f, 0.8f, 0.0f)));
+    m_profileText->setText("Graphics: -\nPhysics: -");
+    m_ui->root()->addChild(m_profileText);
 
     m_shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
     m_shotAimLine->setActive(false);
     m_balls[0]->addChild(m_shotAimLine);
-
-    // TODO: test
-    TextPane *p = new TextPane("aaa", 0.1f, m_uiShader, m_fontLarge);
-    p->setText("hello\nworld\n1");
-    m_ui->root()->addChild(p);
 
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
@@ -186,17 +175,14 @@ namespace Snooker
 
       if (m_controls->state(S_PROFILE_DISPLAY))
       {
-        std::stringstream graphStr;
-        graphStr.precision(3);
-        graphStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
-                 << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)";
-        m_profileGraphics->setText(graphStr.str());
+        std::stringstream profileStr;
+        profileStr.precision(3);
+        profileStr << "Graphics: " << m_profiler->frameRate(m_graphicsLoop) << " FPS"
+                   << " (" << m_profiler->averageDuration(m_graphicsLoop) << "ms)" << '\n'
+                   << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
+                   << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
 
-        std::stringstream physStr;
-        physStr.precision(3);
-        physStr << "Physics: " << m_profiler->frameRate(m_physicsLoop) << " FPS"
-                << " (" << m_profiler->averageDuration(m_physicsLoop) << "ms)";
-        m_profilePhysics->setText(physStr.str());
+        m_profileText->setText(profileStr.str());
       }
     }
   }
@@ -251,9 +237,8 @@ namespace Snooker
    */
   void SnookerSimulation::updateControl()
   {
-    // Profile displays
-    m_profileGraphics->setActive(m_controls->state(S_PROFILE_DISPLAY));
-    m_profilePhysics->setActive(m_controls->state(S_PROFILE_DISPLAY));
+    // Profile display
+    m_profileText->setActive(m_controls->state(S_PROFILE_DISPLAY));
 
     // Pause
     m_physics.setRunning(!m_controls->state(S_PAUSE));
