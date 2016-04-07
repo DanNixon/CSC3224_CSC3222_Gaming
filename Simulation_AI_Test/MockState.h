@@ -16,9 +16,20 @@ namespace AI
 {
   namespace Test
   {
+    /**
+     * @class MockState
+     * @brief Mock state used for testing state machine.
+     * @author Dan Nixon
+     * @see MockStateMachine
+     */
     class MockState : public IState
     {
     public:
+      /**
+       * @copydoc IState::IState
+       * @param transferOn Value to transfer on
+       * @param transferTo State to transfer to
+       */
       MockState(const std::string &name, IState *parent, StateMachine *machine, int transferOn,
                 const std::string &transferTo)
           : IState(name, parent, machine)
@@ -27,6 +38,9 @@ namespace AI
       {
       }
 
+      /**
+       * @copydoc IState::testTransferCase
+       */
       IState *testTransferCase() const
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);

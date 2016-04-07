@@ -219,7 +219,16 @@ namespace Maths
     T m_upperRight; //!< Position of the upper right vertex
   };
 
+  /**
+   * @typedef BoundingBox2
+   * @brief Two dimensional BoundingBox.
+   */
   typedef BoundingBox<Vector2> BoundingBox2;
+
+  /**
+   * @typedef BoundingBox3
+   * @brief Three dimensional BoundingBox.
+   */
   typedef BoundingBox<Vector3> BoundingBox3;
 }
 }

@@ -18,8 +18,22 @@ namespace AI
 {
   class StateMachine;
 
+  /**
+   * @typedef IStatePtrList
+   * @brief List of pointers to IState instances.
+   */
   typedef std::vector<IState *> IStatePtrList;
+
+  /**
+   * @typedef IStatePtrListIter
+   * @brief Iterator over a list of pointers to IState instances.
+   */
   typedef IStatePtrList::iterator IStatePtrListIter;
+
+  /**
+   * @typedef IStatePtrListConstIter
+   * @brief Iterator over a const list of pointers to IState instances.
+   */
   typedef IStatePtrList::const_iterator IStatePtrListConstIter;
 
   /**
