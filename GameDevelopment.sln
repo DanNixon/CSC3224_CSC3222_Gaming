@@ -100,6 +100,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine_Utility_Test", "Engi
 		{5F82BF85-EDED-478A-B3C9-ED1975F90B6F} = {5F82BF85-EDED-478A-B3C9-ED1975F90B6F}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simulation_AI_Test", "Simulation_AI_Test\Simulation_AI_Test.vcxproj", "{992BF8AF-B00C-4535-B048-D826C8E56EA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -244,6 +246,14 @@ Global
 		{F0E88C11-1861-4C59-B1F1-193013989EC8}.Release|Win32.Build.0 = Release|Win32
 		{F0E88C11-1861-4C59-B1F1-193013989EC8}.Release|x64.ActiveCfg = Release|x64
 		{F0E88C11-1861-4C59-B1F1-193013989EC8}.Release|x64.Build.0 = Release|x64
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Debug|Win32.Build.0 = Debug|Win32
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Debug|x64.ActiveCfg = Debug|x64
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Debug|x64.Build.0 = Debug|x64
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Release|Win32.ActiveCfg = Release|Win32
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Release|Win32.Build.0 = Release|Win32
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Release|x64.ActiveCfg = Release|x64
+		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

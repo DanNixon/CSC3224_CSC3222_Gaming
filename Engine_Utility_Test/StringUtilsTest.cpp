@@ -1,6 +1,6 @@
 #include "CppUnitTest.h"
 
-#include "Engine_Utility/StringUtils.h"
+#include <Engine_Utility/StringUtils.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
