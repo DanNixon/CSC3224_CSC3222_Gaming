@@ -1,0 +1,18 @@
+[ROOT]
+|-sandbox
+|-game
+  |-idle
+  |-in_game
+    |-player1
+    | |-place_cue_ball
+    | |-take_shot
+    | |-shot_taken
+    |   |-foul
+    |   | |-no_ball_hit
+    |   | |-pot_cue_ball
+    |   | |-pot_incorrect_ball
+    |   |-legal
+    |     |-pot_red
+    |     |-pot_colour
+    |-player2
+      |-[as per player 1]
