@@ -25,7 +25,7 @@ namespace AI
     StateContainer();
     virtual ~StateContainer();
 
-    std::vector<State *> findState(const std::string &path, char delim);
+    std::vector<State *> findState(const std::string &path, char delim = '/');
 
     /**
      * @brief Checks if this node has child states.

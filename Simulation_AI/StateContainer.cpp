@@ -24,6 +24,7 @@ namespace AI
 
   StateContainer::~StateContainer()
   {
+    m_children.clear();
   }
 
   /**

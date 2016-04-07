@@ -29,11 +29,21 @@ namespace AI
 
     std::vector<State *> activeStateBranch();
 
+    /**
+     * @brief Gets the root state for the state machine.
+     * @return Root state
+     */
     State *rootState()
     {
       return &m_root;
     }
 
+    /**
+     * @brief Performs updates of the state machine by checking for transition
+     *        conditions then performing operations over all active states.
+     * @see StateMachine:transfer()
+     * @see StateMachine:operate()
+     */
     inline void update()
     {
       transfer();
@@ -44,7 +54,7 @@ namespace AI
     void operate();
 
   private:
-    State m_root;
+    State m_root; //!< Root state
   };
 }
 }

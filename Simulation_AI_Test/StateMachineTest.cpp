@@ -21,7 +21,7 @@ public:
     sm.value = 0;
   }
 
-  TEST_METHOD(StateMachine_activeChild)
+  TEST_METHOD(StateMachine_activation_activeStateBranch)
   {
     StateMachine m;
 
@@ -32,13 +32,22 @@ public:
     State * s2 = new MockState("state2", m.rootState(), 0, "");
     State * s21 = new MockState("state2.1", s2, 0, "");
 
+    // Test activation
     s12->setActivation(true);
-
     Assert::IsTrue(s1 == m.rootState()->activeChild());
     Assert::IsTrue(s12 == s1->activeChild());
     Assert::IsNull(s12->activeChild());
 
-    s12->setActivation(false);
+    // Test active branch
+    s121->setActivation(true);
+    std::vector<State *> branch = m.activeStateBranch();
+    Assert::AreEqual((size_t) 3, branch.size());
+    Assert::IsTrue(s1 == branch[0]);
+    Assert::IsTrue(s12 == branch[1]);
+    Assert::IsTrue(s121 == branch[2]);
+
+    // Test deactivation
+    s121->setActivation(false);
     Assert::IsNull(m.rootState()->activeChild());
     Assert::IsNull(s1->activeChild());
     Assert::IsNull(s12->activeChild());
