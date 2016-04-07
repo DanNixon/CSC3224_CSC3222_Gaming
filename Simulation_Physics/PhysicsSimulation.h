@@ -42,6 +42,8 @@ namespace Physics
       return m_run;
     }
 
+    bool atRest(float tol2 = 0.01f) const;
+
     /**
      * @brief Adds a new entity to the simulation.
      * @param ent New entity to add

@@ -154,6 +154,12 @@ namespace Snooker
       auto inters = m_physics.interfaces();
       for (auto it = inters.begin(); it != inters.end(); ++it)
       {
+        // TODO
+        if (it->contains(m_balls[0]))
+        {
+          std::cout << (*it) << std::endl;
+        }
+
         Entity *a = it->entityA();
         Entity *b = it->entityB();
 
@@ -184,6 +190,9 @@ namespace Snooker
 
         m_profileText->setText(profileStr.str());
       }
+
+      if (!m_physics.atRest())
+        std::cout << "in motion" << std::endl;
     }
   }
 

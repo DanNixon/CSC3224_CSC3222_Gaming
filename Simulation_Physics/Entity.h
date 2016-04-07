@@ -37,6 +37,8 @@ namespace Physics
      */
     typedef EntityPtrList::iterator EntityPtrListIter;
 
+    typedef EntityPtrList::const_iterator EntityPtrListConstIter;
+
     Entity(const Engine::Maths::Vector2 &pos, float mass, bool stationary = false, float dragCoeff = 1.0f,
            float velocityFloor = 0.0f);
     virtual ~Entity();
@@ -45,9 +47,23 @@ namespace Physics
      * @brief Checks if this Entity is fixed in position.
      * @return True if stationary
      */
-    bool stationary() const
+    inline bool stationary() const
     {
       return m_stationary;
+    }
+
+    /**
+     * @brief Checks if this entity is at rest.
+     * @param tol2 Velcoity magnitude squared at which the entity is
+     *             considered in motion
+     * @return True if the entity is below the specified tolerance.
+     */
+    inline bool atRest(float tol2 = 0.01f) const
+    {
+      if (m_stationary)
+        return true;
+      else
+        return m_velocity.length2() < tol2;
     }
 
     /**
@@ -55,7 +71,7 @@ namespace Physics
      * @return Origin centred bounding box
      * @see Entity::boundingBox()
      */
-    Engine::Maths::BoundingBox2 originBoundingBox() const
+    inline Engine::Maths::BoundingBox2 originBoundingBox() const
     {
       return m_originBox;
     }
@@ -65,7 +81,7 @@ namespace Physics
      * @return Position centred bounding box
      * @see Entity::originBoundingBox()
      */
-    Engine::Maths::BoundingBox2 boundingBox() const
+    inline Engine::Maths::BoundingBox2 boundingBox() const
     {
       return m_box;
     }

@@ -29,6 +29,23 @@ namespace Physics
   }
 
   /**
+   * @brief Checks if all entities in the simulation are at rest.
+   * @param tol2 Velcoity magnitude squared at which the entity is
+   *             considered in motion
+   * @return True if the entire simulation is at rest
+   */
+  bool PhysicsSimulation::atRest(float tol2) const
+  {
+    for (Entity::EntityPtrListConstIter it = m_entities.begin(); it != m_entities.end(); ++it)
+    {
+      if (!(*it)->atRest(tol2))
+        return false;
+    }
+
+    return true;
+  }
+
+  /**
    * @brief Updates the positions of entities according to their velocity and
    *        acceleration.
    * @param dtMilliSec Time step in milliseconds

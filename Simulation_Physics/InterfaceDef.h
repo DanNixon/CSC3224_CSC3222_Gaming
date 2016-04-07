@@ -38,7 +38,7 @@ namespace Physics
      * @brief Gets the first entity.
      * @return First entity
      */
-    Entity *entityA()
+    inline Entity *entityA()
     {
       return m_e1;
     }
@@ -47,7 +47,7 @@ namespace Physics
      * @brief Gets the second entity.
      * @return Second entity
      */
-    Entity *entityB()
+    inline Entity *entityB()
     {
       return m_e2;
     }
@@ -56,7 +56,7 @@ namespace Physics
      * @brief Retrieves the value of the resolution flag.
      * @return True if the interface has been resolved
      */
-    bool resolved() const
+    inline bool resolved() const
     {
       return m_resolved;
     }
@@ -65,9 +65,19 @@ namespace Physics
      * @brief Gets the interface normal.
      * @return Interface normal
      */
-    Engine::Maths::Vector2 normal() const
+    inline Engine::Maths::Vector2 normal() const
     {
       return m_normal;
+    }
+
+    /**
+     * @brief Tests to see if a given Entity participates in this interface.
+     * @param e Entity to test
+     * @return True if the given entity is part if this interface
+     */
+    inline bool contains(Entity *e) const
+    {
+      return (m_e1 == e) || (m_e2 == e);
     }
 
     /**
@@ -78,9 +88,21 @@ namespace Physics
      * Interface definitions are equal if they represent an interface between
      * the same two entities.
      */
-    bool operator==(const InterfaceDef &other) const
+    inline bool operator==(const InterfaceDef &other) const
     {
       return ((m_e1 == other.m_e1) && (m_e2 == other.m_e2)) || ((m_e1 == other.m_e2) && (m_e2 == other.m_e1));
+    }
+
+    /**
+     * @brief Outputs an interface definition to a stream.
+     * @param o Stream to output to
+     * @param interf Interface definition to output
+     * @return Reference to stream
+     */
+    inline friend std::ostream &operator<<(std::ostream &o, const InterfaceDef &interf)
+    {
+      o << "[" << *(interf.m_e1) << " - " << *(interf.m_e2) << "] (N=" << interf.m_normal << ")";
+      return o;
     }
 
   private:
