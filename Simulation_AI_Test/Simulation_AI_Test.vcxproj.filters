@@ -5,7 +5,7 @@
     <ClCompile Include="StateContainerTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FakeStateMachine.h" />
-    <ClInclude Include="FakeState.h" />
+    <ClInclude Include="MockState.h" />
+    <ClInclude Include="MockStateMachine.h" />
   </ItemGroup>
 </Project>

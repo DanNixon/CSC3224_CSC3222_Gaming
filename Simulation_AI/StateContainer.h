@@ -12,7 +12,7 @@ namespace Simulation
 {
 namespace AI
 {
-  class State;
+  class IState;
 
   /**
    * @class StateContainer
@@ -25,7 +25,7 @@ namespace AI
     StateContainer();
     virtual ~StateContainer();
 
-    std::vector<State *> findState(const std::string &path, char delim = '/');
+    std::vector<IState *> findState(const std::string &path, char delim = '/');
 
     /**
      * @brief Checks if this node has child states.
@@ -40,7 +40,7 @@ namespace AI
      * @brief Adds a child state.
      * @param child State to add
      */
-    inline void addChild(State *child)
+    inline void addChild(IState *child)
     {
       m_children.push_back(child);
     }
@@ -49,7 +49,7 @@ namespace AI
      * @brief Gets the active child state of this node.
      * @return Active child state
      */
-    inline State *activeChild() const
+    inline IState *activeChild() const
     {
       return m_active;
     }
@@ -59,17 +59,17 @@ namespace AI
      * @param state State to test
      * @return True if state is active
      */
-    inline bool isChildActive(const State *state) const
+    inline bool isChildActive(const IState *state) const
     {
       return m_active == state;
     }
 
   private:
-    bool findStateImpl(std::vector<std::string> &names, std::vector<State *> &branch);
+    bool findStateImpl(std::vector<std::string> &names, std::vector<IState *> &branch);
 
   protected:
-    State *m_active;                 //!< Active state
-    std::vector<State *> m_children; //!< Child states
+    IState *m_active;                 //!< Active state
+    std::vector<IState *> m_children; //!< Child states
   };
 }
 }

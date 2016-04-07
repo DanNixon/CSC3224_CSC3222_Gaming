@@ -1,6 +1,6 @@
 #include "CppUnitTest.h"
 
-#include <Simulation_AI/State.h>
+#include <Simulation_AI/IState.h>
 #include <Simulation_AI/StateContainer.h>
 
 #include <sstream>
@@ -22,19 +22,19 @@ public:
     StateContainer container;
     Assert::IsFalse(container.hasChildren());
 
-    container.addChild(new State("state1", nullptr, nullptr));
+    container.addChild(new IState("state1", nullptr, nullptr));
     Assert::IsTrue(container.hasChildren());
   }
 
   TEST_METHOD(StateContainer_activation)
   {
     StateContainer container;
-    State * s1 = new State("state1", nullptr, nullptr);
-    State * s11 = new State("state1.1", s1, nullptr);
-    State * s12 = new State("state1.2", s1, nullptr);
-    State * s121 = new State("state1.2.1", s12, nullptr);
-    State * s2 = new State("state2", nullptr, nullptr);
-    State * s21 = new State("state2.1", s2, nullptr);
+    IState * s1 = new IState("state1", nullptr, nullptr);
+    IState * s11 = new IState("state1.1", s1, nullptr);
+    IState * s12 = new IState("state1.2", s1, nullptr);
+    IState * s121 = new IState("state1.2.1", s12, nullptr);
+    IState * s2 = new IState("state2", nullptr, nullptr);
+    IState * s21 = new IState("state2.1", s2, nullptr);
     container.addChild(s1);
     container.addChild(s2);
 
@@ -53,16 +53,16 @@ public:
   TEST_METHOD(StateContainer_findState)
   {
     StateContainer container;
-    State * s1 = new State("state1", nullptr, nullptr);
-    State * s11 = new State("state1.1", s1, nullptr);
-    State * s12 = new State("state1.2", s1, nullptr);
-    State * s121 = new State("state1.2.1", s12, nullptr);
-    State * s2 = new State("state2", nullptr, nullptr);
-    State * s21 = new State("state2.1", s2, nullptr);
+    IState * s1 = new IState("state1", nullptr, nullptr);
+    IState * s11 = new IState("state1.1", s1, nullptr);
+    IState * s12 = new IState("state1.2", s1, nullptr);
+    IState * s121 = new IState("state1.2.1", s12, nullptr);
+    IState * s2 = new IState("state2", nullptr, nullptr);
+    IState * s21 = new IState("state2.1", s2, nullptr);
     container.addChild(s1);
     container.addChild(s2);
 
-    std::vector<State *> branch = container.findState("state1/state1.2/state1.2.1");
+    std::vector<IState *> branch = container.findState("state1/state1.2/state1.2.1");
 
     Assert::AreEqual((size_t) 3, branch.size());
     Assert::IsTrue(s1 == branch[0]);

@@ -10,7 +10,7 @@
 
 #include <vector>
 
-#include "State.h"
+#include "IState.h"
 
 namespace Simulation
 {
@@ -24,19 +24,19 @@ namespace AI
   class StateMachine
   {
   public:
-    static std::string BranchToString(const std::vector<State *> &branch, char delim = '/');
+    static std::string BranchToString(const std::vector<IState *> &branch, char delim = '/');
 
   public:
     StateMachine();
     virtual ~StateMachine();
 
-    std::vector<State *> activeStateBranch();
+    std::vector<IState *> activeStateBranch();
 
     /**
      * @brief Gets the root state for the state machine.
      * @return Root state
      */
-    State *rootState()
+    IState *rootState()
     {
       return &m_root;
     }
@@ -59,7 +59,7 @@ namespace AI
     void operate();
 
   private:
-    State m_root; //!< Root state
+    IState m_root; //!< Root state
   };
 }
 }

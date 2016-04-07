@@ -3,12 +3,12 @@
 * @author Dan Nixon
 */
 
-#ifndef _SIMULATION_AI_TEST_FAKESTATE_H_
-#define _SIMULATION_AI_TEST_FAKESTATE_H_
+#ifndef _SIMULATION_AI_TEST_MOCKSTATE_H_
+#define _SIMULATION_AI_TEST_MOCKSTATE_H_
 
-#include <Simulation_AI/State.h>
+#include <Simulation_AI/IState.h>
 
-#include "FakeStateMachine.h"
+#include "MockStateMachine.h"
 
 namespace Simulation
 {
@@ -16,18 +16,18 @@ namespace AI
 {
   namespace Test
   {
-    class MockState : public State
+    class MockState : public IState
     {
     public:
-      MockState(const std::string &name, State *parent, StateMachine *machine, int transferOn,
+      MockState(const std::string &name, IState *parent, StateMachine *machine, int transferOn,
                 const std::string &transferTo)
-          : State(name, parent, machine)
+          : IState(name, parent, machine)
           , m_transferOn(transferOn)
           , m_transferTo(transferTo)
       {
       }
 
-      State *testTransferCase() const
+      IState *testTransferCase() const
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
 

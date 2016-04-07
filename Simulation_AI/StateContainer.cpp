@@ -9,7 +9,7 @@
 
 #include <Engine_Utility/StringUtils.h>
 
-#include "State.h"
+#include "IState.h"
 
 using namespace Engine::Utility;
 
@@ -32,9 +32,9 @@ namespace AI
    * @name Path to state
    * @return State branch
    */
-  std::vector<State *> StateContainer::findState(const std::string &name, char delim)
+  std::vector<IState *> StateContainer::findState(const std::string &name, char delim)
   {
-    std::vector<State *> branch;
+    std::vector<IState *> branch;
     std::vector<std::string> names = StringUtils::Split(name, delim);
     std::reverse(names.begin(), names.end());
 
@@ -50,11 +50,11 @@ namespace AI
    * @param branch Reference to the vector containing branch states
    * @return True if search was succesfull
    */
-  bool StateContainer::findStateImpl(std::vector<std::string> &names, std::vector<State *> &branch)
+  bool StateContainer::findStateImpl(std::vector<std::string> &names, std::vector<IState *> &branch)
   {
     // Find child by name
     const std::string name(names.back());
-    auto it = std::find_if(m_children.begin(), m_children.end(), [name](State *i) { return i->name() == name; });
+    auto it = std::find_if(m_children.begin(), m_children.end(), [name](IState *i) { return i->name() == name; });
 
     // Fail if child not found
     if (it == m_children.end())

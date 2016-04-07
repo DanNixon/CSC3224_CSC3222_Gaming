@@ -23,8 +23,8 @@
     <ClCompile Include="StateMachineTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FakeState.h" />
-    <ClInclude Include="FakeStateMachine.h" />
+    <ClInclude Include="MockState.h" />
+    <ClInclude Include="MockStateMachine.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{992BF8AF-B00C-4535-B048-D826C8E56EA5}</ProjectGuid>

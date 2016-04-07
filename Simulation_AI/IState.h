@@ -3,8 +3,8 @@
  * @author Dan Nixon
  */
 
-#ifndef _SIMULATION_AI_STATE_H_
-#define _SIMULATION_AI_STATE_H_
+#ifndef _SIMULATION_AI_ISTATE_H_
+#define _SIMULATION_AI_ISTATE_H_
 
 #include "StateContainer.h"
 
@@ -19,19 +19,19 @@ namespace AI
   class StateMachine;
 
   /**
-   * @class State
-   * @brief Represents a state in a StateMachine.
+   * @class IState
+   * @brief Represents a state in a state machine.
    * @author Dan Nixon
    */
-  class State : public StateContainer
+  class IState : public StateContainer
   {
   public:
-    State(const std::string &name, State *parent, StateMachine *machine);
-    virtual ~State();
+    IState(const std::string &name, IState *parent, StateMachine *machine);
+    virtual ~IState();
 
     /**
-     * @brief Gets the name of this state.
-     * @return State name
+     * @brief Gets the name of this IState.
+     * @return IState name
      */
     inline std::string name() const
     {
@@ -39,27 +39,27 @@ namespace AI
     }
 
     /**
-     * @brief Checks if this state is active.
-     * @return True if this state is active
+     * @brief Checks if this IState is active.
+     * @return True if this IState is active
      */
     inline bool isActive() const
     {
       return m_parent->activeChild() == this;
     }
 
-    std::vector<State *> branch();
+    std::vector<IState *> branch();
 
     void setActivation(bool active);
 
     /**
      * @brief Outputs a state to a stream.
      * @param o Stream to output to
-     * @param s State to output
+     * @param s IState to output
      * @return Stream
      */
-    inline friend std::ostream &operator<<(std::ostream &o, const State &s)
+    inline friend std::ostream &operator<<(std::ostream &o, const IState &s)
     {
-      o << "State(" << std::string(s.m_name) << ")";
+      o << "IState(" << std::string(s.m_name) << ")";
       return o;
     }
 
@@ -67,11 +67,11 @@ namespace AI
     friend class StateMachine;
 
     /**
-     * @brief Test for transfer conditions to another state.
-     * @return The state to transfer to, nullptr if no transfer conditions are
+     * @brief Test for transfer conditions to another IState.
+     * @return The IState to transfer to, nullptr if no transfer conditions are
      *         met
      */
-    virtual State *testTransferCase() const
+    virtual IState *testTransferCase() const
     {
       return nullptr;
     }
@@ -100,7 +100,7 @@ namespace AI
   protected:
     const std::string m_name; //!< Name of this state
     StateMachine *m_machine;  //!< State machine that holds this state
-    State *m_parent;          //!< Parent state
+    IState *m_parent;         //!< Parent state
   };
 }
 }

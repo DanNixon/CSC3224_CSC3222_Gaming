@@ -17,7 +17,7 @@ namespace AI
    * @param delim Delimiter
    * @return Delimited names of states in branch
    */
-  std::string StateMachine::BranchToString(const std::vector<State *> &branch, char delim)
+  std::string StateMachine::BranchToString(const std::vector<IState *> &branch, char delim)
   {
     std::stringstream str;
     for (auto it = branch.begin(); it != branch.end(); ++it)
@@ -44,11 +44,11 @@ namespace AI
    * @brief Gets the active branch of the state tree.
    * @return Branch of active states
    */
-  std::vector<State *> StateMachine::activeStateBranch()
+  std::vector<IState *> StateMachine::activeStateBranch()
   {
-    std::vector<State *> branch;
+    std::vector<IState *> branch;
 
-    State *node = m_root.activeChild();
+    IState *node = m_root.activeChild();
     while (node != nullptr)
     {
       branch.push_back(node);
@@ -65,12 +65,12 @@ namespace AI
    */
   bool StateMachine::transfer()
   {
-    std::vector<State *> branch = activeStateBranch();
+    std::vector<IState *> branch = activeStateBranch();
     bool stateChange = false;
 
     for (auto it = branch.begin(); it != branch.end(); ++it)
     {
-      State *transferState = (*it)->testTransferCase();
+      IState *transferState = (*it)->testTransferCase();
       if (transferState != nullptr)
       {
         stateChange = true;
@@ -92,7 +92,7 @@ namespace AI
    */
   void StateMachine::operate()
   {
-    State *node = m_root.activeChild();
+    IState *node = m_root.activeChild();
     while (node != nullptr)
     {
       node->onOperate();

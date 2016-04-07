@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="State.cpp" />
+    <ClCompile Include="IState.cpp" />
     <ClCompile Include="StateContainer.cpp" />
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="State.h" />
+    <ClInclude Include="IState.h" />
     <ClInclude Include="StateContainer.h" />
     <ClInclude Include="StateMachine.h" />
   </ItemGroup>

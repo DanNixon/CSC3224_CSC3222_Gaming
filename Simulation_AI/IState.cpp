@@ -3,7 +3,7 @@
  * @author Dan Nixon
  */
 
-#include "State.h"
+#include "IState.h"
 
 namespace Simulation
 {
@@ -15,7 +15,7 @@ namespace AI
    * @param parent Parent state
    * @param machine The state machine to which this state belongs
    */
-  State::State(const std::string &name, State *parent, StateMachine *machine)
+  IState::IState(const std::string &name, IState *parent, StateMachine *machine)
       : m_name(name)
       , m_machine(machine)
       , m_parent(parent)
@@ -24,7 +24,7 @@ namespace AI
       parent->m_children.push_back(this);
   }
 
-  State::~State()
+  IState::~IState()
   {
   }
 
@@ -32,14 +32,14 @@ namespace AI
    * @brief Gets the branch of the state tree that leads to this node.
    * @return State tree branch
    */
-  std::vector<State *> State::branch()
+  std::vector<IState *> IState::branch()
   {
-    std::vector<State *> branch;
+    std::vector<IState *> branch;
 
-    State *node = this;
+    IState *node = this;
     while (node != nullptr)
     {
-      branch.push_back(dynamic_cast<State *>(node));
+      branch.push_back(dynamic_cast<IState *>(node));
       node = node->m_parent;
     }
 
@@ -52,12 +52,12 @@ namespace AI
    * @brief Sets the activation of this state.
    * @param active If this state is active or not
    */
-  void State::setActivation(bool active)
+  void IState::setActivation(bool active)
   {
     if (!active)
       onExit();
 
-    State *node = this;
+    IState *node = this;
     while (node != nullptr && node->m_parent != nullptr)
     {
       node->m_parent->m_active = active ? node : nullptr;
