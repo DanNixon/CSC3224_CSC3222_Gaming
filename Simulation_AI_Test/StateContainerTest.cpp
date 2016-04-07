@@ -1,8 +1,7 @@
 #include "CppUnitTest.h"
 
+#include <Simulation_AI/State.h>
 #include <Simulation_AI/StateContainer.h>
-
-#include "FakeState.h"
 
 #include <sstream>
 
@@ -23,19 +22,19 @@ public:
     StateContainer container;
     Assert::IsFalse(container.hasChildren());
 
-    container.addChild(new MockState("state1", nullptr, 0, ""));
+    container.addChild(new State("state1", nullptr, nullptr));
     Assert::IsTrue(container.hasChildren());
   }
 
   TEST_METHOD(StateContainer_activation)
   {
     StateContainer container;
-    State * s1 = new MockState("state1", nullptr, 0, "");
-    State * s11 =   new MockState("state1.1", s1, 0, "");
-    State * s12 =   new MockState("state1.2", s1, 0, "");
-    State * s121 =  new MockState("state1.2.1", s12, 0, "");
-    State * s2 = new MockState("state2", nullptr, 0, "");
-    State * s21 =   new MockState("state2.1", s2, 0, "");
+    State * s1 = new State("state1", nullptr, nullptr);
+    State * s11 = new State("state1.1", s1, nullptr);
+    State * s12 = new State("state1.2", s1, nullptr);
+    State * s121 = new State("state1.2.1", s12, nullptr);
+    State * s2 = new State("state2", nullptr, nullptr);
+    State * s21 = new State("state2.1", s2, nullptr);
     container.addChild(s1);
     container.addChild(s2);
 
@@ -54,12 +53,12 @@ public:
   TEST_METHOD(StateContainer_findState)
   {
     StateContainer container;
-    State * s1 = new MockState("state1", nullptr, 0, "");
-    State * s11 = new MockState("state1.1", s1, 0, "");
-    State * s12 = new MockState("state1.2", s1, 0, "");
-    State * s121 = new MockState("state1.2.1", s12, 0, "");
-    State * s2 = new MockState("state2", nullptr, 0, "");
-    State * s21 = new MockState("state2.1", s2, 0, "");
+    State * s1 = new State("state1", nullptr, nullptr);
+    State * s11 = new State("state1.1", s1, nullptr);
+    State * s12 = new State("state1.2", s1, nullptr);
+    State * s121 = new State("state1.2.1", s12, nullptr);
+    State * s2 = new State("state2", nullptr, nullptr);
+    State * s21 = new State("state2.1", s2, nullptr);
     container.addChild(s1);
     container.addChild(s2);
 

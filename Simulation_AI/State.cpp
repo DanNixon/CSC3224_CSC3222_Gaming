@@ -13,9 +13,11 @@ namespace AI
    * @brief Create a new state.
    * @param name Name of this state
    * @param parent Parent state
+   * @param machine The state machine to which this state belongs
    */
-  State::State(const std::string &name, State *parent)
+  State::State(const std::string &name, State *parent, StateMachine *machine)
       : m_name(name)
+      , m_machine(machine)
       , m_parent(parent)
   {
     if (parent)

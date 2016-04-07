@@ -20,12 +20,12 @@ public:
     MockStateMachine m;
     m.value = 0;
 
-    State * s1 = new MockState("state1", m.rootState(), 5, "state2/state2.1");
-    State * s11 = new MockState("state1.1", s1, 4, "state1/state1.2");
-    State * s12 = new MockState("state1.2", s1, 3, "state1/state1.2/state1.2.1");
-    State * s121 = new MockState("state1.2.1", s12, 2, "state2/state2.1");
-    State * s2 = new MockState("state2", m.rootState(), 6, "state1/state1.1");
-    State * s21 = new MockState("state2.1", s2, 1, "state2");
+    State * s1 = new MockState("state1", m.rootState(), &m, 5, "state2/state2.1");
+    State * s11 = new MockState("state1.1", s1, &m, 4, "state1/state1.2");
+    State * s12 = new MockState("state1.2", s1, &m, 3, "state1/state1.2/state1.2.1");
+    State * s121 = new MockState("state1.2.1", s12, &m, 2, "state2/state2.1");
+    State * s2 = new MockState("state2", m.rootState(), &m, 6, "state1/state1.1");
+    State * s21 = new MockState("state2.1", s2, &m, 1, "state2");
 
     // Default activated state
     s1->setActivation(true);
@@ -82,12 +82,12 @@ public:
   {
     StateMachine m;
 
-    State * s1 = new MockState("state1", m.rootState(), 0, "");
-    State * s11 = new MockState("state1.1", s1, 0, "");
-    State * s12 = new MockState("state1.2", s1, 0, "");
-    State * s121 = new MockState("state1.2.1", s12, 0, "");
-    State * s2 = new MockState("state2", m.rootState(), 0, "");
-    State * s21 = new MockState("state2.1", s2, 0, "");
+    State * s1 = new State("state1", m.rootState(), &m);
+    State * s11 = new State("state1.1", s1, &m);
+    State * s12 = new State("state1.2", s1, &m);
+    State * s121 = new State("state1.2.1", s12, &m);
+    State * s2 = new State("state2", m.rootState(), &m);
+    State * s21 = new State("state2.1", s2, &m);
 
     // Test activation
     s12->setActivation(true);
@@ -112,9 +112,9 @@ public:
 
   TEST_METHOD(StateMachine_BranchToString)
   {
-    State * s1 = new MockState("state1", nullptr, 0, "");
-    State * s12 = new MockState("state1.2", s1, 0, "");
-    State * s121 = new MockState("state1.2.1", s12, 0, "");
+    State * s1 = new State("state1", nullptr, nullptr);
+    State * s12 = new State("state1.2", s1, nullptr);
+    State * s121 = new State("state1.2.1", s12, nullptr);
 
     std::vector<State *> branch = { s1, s12, s121 };
     std::string branchStr = StateMachine::BranchToString(branch);

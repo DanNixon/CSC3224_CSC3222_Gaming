@@ -32,7 +32,7 @@ namespace AI
   }
 
   StateMachine::StateMachine()
-      : m_root("", nullptr)
+      : m_root("", nullptr, this)
   {
   }
 
@@ -65,8 +65,25 @@ namespace AI
    */
   bool StateMachine::transfer()
   {
-    // TODO
-    return false;
+    std::vector<State *> branch = activeStateBranch();
+    bool stateChange = false;
+
+    for (auto it = branch.begin(); it != branch.end(); ++it)
+    {
+      State *transferState = (*it)->testTransferCase();
+      if (transferState != nullptr)
+      {
+        stateChange = true;
+
+        // TODO: find a better way to do this (this causes issues with onEntry and onExit
+        branch.back()->setActivation(false);
+        transferState->setActivation(true);
+
+        break;
+      }
+    }
+
+    return stateChange;
   }
 
   /**

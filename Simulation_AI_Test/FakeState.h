@@ -19,8 +19,9 @@ namespace AI
     class MockState : public State
     {
     public:
-      MockState(const std::string &name, State *parent, int transferOn, const std::string &transferTo)
-          : State(name, parent)
+      MockState(const std::string &name, State *parent, StateMachine *machine, int transferOn,
+                const std::string &transferTo)
+          : State(name, parent, machine)
           , m_transferOn(transferOn)
           , m_transferTo(transferTo)
       {
@@ -28,10 +29,14 @@ namespace AI
 
       State *testTransferCase() const
       {
-        int v = dynamic_cast<MockStateMachine *>(m_machine)->value;
-        if (v == m_transferOn)
+        MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
+
+        int i = machine->value;
+
+        if (machine->value == m_transferOn)
         {
-          // TODO
+          auto branch = m_machine->rootState()->findState(m_transferTo);
+          return branch.back();
         }
 
         return nullptr;

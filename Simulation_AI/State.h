@@ -26,7 +26,7 @@ namespace AI
   class State : public StateContainer
   {
   public:
-    State(const std::string &name, State *parent);
+    State(const std::string &name, State *parent, StateMachine *machine);
     virtual ~State();
 
     /**
