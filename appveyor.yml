@@ -26,3 +26,5 @@ test_script:
     .\RunTest -TestName Engine_IO_Test
 
     .\RunTest -TestName Engine_Utility_Test
+
+    .\RunTest -TestName Simulation_AI_Test
