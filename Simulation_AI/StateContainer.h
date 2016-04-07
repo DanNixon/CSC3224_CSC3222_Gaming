@@ -25,6 +25,8 @@ namespace AI
     StateContainer();
     virtual ~StateContainer();
 
+    std::vector<State *> findState(const std::string &path, char delim);
+
     /**
      * @brief Checks if this node has child states.
      * @return True if child states exist
@@ -52,6 +54,9 @@ namespace AI
     {
       return m_active == state;
     }
+
+  private:
+    bool findStateImpl(std::vector<std::string> &names, std::vector<State *> &branch);
 
   protected:
     State *m_active;                 //!< Active state

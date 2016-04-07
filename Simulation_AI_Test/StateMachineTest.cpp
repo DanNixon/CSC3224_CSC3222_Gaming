@@ -1,6 +1,7 @@
 #include "CppUnitTest.h"
 
-#include <Simulation_AI/StateMachine.h>
+#include "FakeStateMachine.h"
+#include "FakeState.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,10 +15,10 @@ namespace Test
 TEST_CLASS(StateMachineTest)
 {
 public:
-  // TODO
-  TEST_METHOD(StateMachine_Test1)
+  TEST_METHOD(StateMachine_FullTest)
   {
-    Assert::Fail();
+    MockStateMachine sm;
+    sm.value = 0;
   }
 };
 }

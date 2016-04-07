@@ -3,4 +3,8 @@
   <ItemGroup>
     <ClCompile Include="StateMachineTest.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FakeStateMachine.h" />
+    <ClInclude Include="FakeState.h" />
+  </ItemGroup>
 </Project>

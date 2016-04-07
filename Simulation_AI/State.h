@@ -14,6 +14,8 @@ namespace Simulation
 {
 namespace AI
 {
+  class StateMachine;
+
   /**
    * @class State
    * @brief Represents a state in a StateMachine.
@@ -22,8 +24,17 @@ namespace AI
   class State : public StateContainer
   {
   public:
-    State(State *parent);
+    State(const std::string &name, State *parent);
     virtual ~State();
+
+    /**
+     * @brief Gets the name of this state.
+     * @return State name
+     */
+    inline std::string name() const
+    {
+      return m_name;
+    }
 
     /**
      * @brief Checks if this state is active.
@@ -34,9 +45,12 @@ namespace AI
       return m_parent->m_active == this;
     }
 
+    std::vector<State *> branch();
+
     /**
      * @brief Test for transfer conditions to another state.
-     * @return The state to transfer to, nullptr if no transfer conditions are met
+     * @return The state to transfer to, nullptr if no transfer conditions are
+     *         met
      */
     virtual State *testTransferCase() const = 0;
 
@@ -62,7 +76,9 @@ namespace AI
     }
 
   protected:
-    State *m_parent; //!< Parent state
+    const std::string m_name; //!< Name of this state
+    StateMachine *m_machine;  //!< State machine that holds this state
+    State *m_parent;          //!< Parent state
   };
 }
 }
