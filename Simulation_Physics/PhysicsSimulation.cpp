@@ -36,7 +36,7 @@ namespace Physics
    */
   bool PhysicsSimulation::atRest(float tol2) const
   {
-    for (Entity::EntityPtrListConstIter it = m_entities.begin(); it != m_entities.end(); ++it)
+    for (EntityPtrListConstIter it = m_entities.begin(); it != m_entities.end(); ++it)
     {
       if (!(*it)->atRest(tol2))
         return false;
@@ -52,7 +52,7 @@ namespace Physics
    */
   void PhysicsSimulation::updatePositions(float dtMilliSec)
   {
-    for (Entity::EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
+    for (EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
     {
       if ((*it)->m_stationary)
         continue;
@@ -82,7 +82,7 @@ namespace Physics
     std::vector<InterfaceDef> interfaces;
 
     // Create a list of possible interfaces (broadphase)
-    for (Entity::EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
+    for (EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
     {
       bool thisStationary = (*it)->stationary();
       float thisBoxRight = (*it)->boundingBox().upperRight()[0];

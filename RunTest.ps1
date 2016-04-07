@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Runs a unit test case.
+Runs a unit test case on Appveyor.
 .PARAMETER TestName
 Name of the test suite to run.
 .EXAMPLE

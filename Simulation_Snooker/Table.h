@@ -43,7 +43,7 @@ namespace Snooker
     static const Engine::Maths::Vector2 PLAY_AREA;
     static const Engine::Maths::Vector2 HALF_PLAY_AREA;
 
-    Table(Simulation::Physics::Entity::EntityPtrList &entityList);
+    Table(Simulation::Physics::EntityPtrList &entityList);
     virtual ~Table();
 
     /**
