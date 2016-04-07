@@ -24,13 +24,13 @@ namespace AI
   class StateMachine
   {
   public:
-    static std::string BranchToString(const std::vector<IState *> &branch, char delim = '/');
+    static std::string BranchToString(const IStatePtrList &branch, char delim = '/');
 
   public:
     StateMachine();
     virtual ~StateMachine();
 
-    std::vector<IState *> activeStateBranch();
+    IStatePtrList activeStateBranch();
 
     /**
      * @brief Gets the root state for the state machine.

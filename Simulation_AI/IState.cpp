@@ -32,9 +32,9 @@ namespace AI
    * @brief Gets the branch of the state tree that leads to this node.
    * @return State tree branch
    */
-  std::vector<IState *> IState::branch()
+  IStatePtrList IState::branch()
   {
-    std::vector<IState *> branch;
+    IStatePtrList branch;
 
     IState *node = this;
     while (node != nullptr)

@@ -25,20 +25,6 @@ namespace Physics
   class Entity
   {
   public:
-    /**
-     * @typedef EntityPtrList
-     * @brief List of pointers to Entity instances.
-     */
-    typedef std::vector<Entity *> EntityPtrList;
-
-    /**
-     * @typedef EntityPtrListIter
-     * @brief Iterator ofver a list of pointers to Entity instances.
-     */
-    typedef EntityPtrList::iterator EntityPtrListIter;
-
-    typedef EntityPtrList::const_iterator EntityPtrListConstIter;
-
     Entity(const Engine::Maths::Vector2 &pos, float mass, bool stationary = false, float dragCoeff = 1.0f,
            float velocityFloor = 0.0f);
     virtual ~Entity();
@@ -163,6 +149,24 @@ namespace Physics
     Engine::Maths::Vector2 m_velocity;       //!< Velocity in current timestep
     Engine::Maths::Vector2 m_acceleration;   //!< Acceleration in current timestep
   };
+
+  /**
+   * @typedef EntityPtrList
+   * @brief List of pointers to Entity instances.
+   */
+  typedef std::vector<Entity *> EntityPtrList;
+
+  /**
+   * @typedef EntityPtrListIter
+   * @brief Iterator over a list of pointers to Entity instances.
+   */
+  typedef EntityPtrList::iterator EntityPtrListIter;
+
+  /**
+   * @typedef EntityPtrListConstIter
+   * @brief Iterator over a const list of pointers to Entity instances.
+   */
+  typedef EntityPtrList::const_iterator EntityPtrListConstIter;
 }
 }
 

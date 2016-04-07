@@ -32,14 +32,12 @@ namespace AI
    * @name Path to state
    * @return State branch
    */
-  std::vector<IState *> StateContainer::findState(const std::string &name, char delim)
+  IStatePtrList StateContainer::findState(const std::string &name, char delim)
   {
-    std::vector<IState *> branch;
+    IStatePtrList branch;
     std::vector<std::string> names = StringUtils::Split(name, delim);
     std::reverse(names.begin(), names.end());
-
     findStateImpl(names, branch);
-
     return branch;
   }
 
@@ -50,7 +48,7 @@ namespace AI
    * @param branch Reference to the vector containing branch states
    * @return True if search was succesfull
    */
-  bool StateContainer::findStateImpl(std::vector<std::string> &names, std::vector<IState *> &branch)
+  bool StateContainer::findStateImpl(std::vector<std::string> &names, IStatePtrList &branch)
   {
     // Find child by name
     const std::string name(names.back());

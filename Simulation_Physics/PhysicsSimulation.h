@@ -57,7 +57,7 @@ namespace Physics
      * @brief Gets a list of all entities managed by this system.
      * @return Entities
      */
-    Entity::EntityPtrList &entities()
+    EntityPtrList &entities()
     {
       return m_entities;
     }
@@ -92,7 +92,7 @@ namespace Physics
 
   private:
     bool m_run;
-    Entity::EntityPtrList m_entities;
+    EntityPtrList m_entities;
     std::vector<InterfaceDef> m_interfaces;
   };
 }

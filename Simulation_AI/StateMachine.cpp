@@ -17,7 +17,7 @@ namespace AI
    * @param delim Delimiter
    * @return Delimited names of states in branch
    */
-  std::string StateMachine::BranchToString(const std::vector<IState *> &branch, char delim)
+  std::string StateMachine::BranchToString(const IStatePtrList &branch, char delim)
   {
     std::stringstream str;
     for (auto it = branch.begin(); it != branch.end(); ++it)
@@ -44,9 +44,9 @@ namespace AI
    * @brief Gets the active branch of the state tree.
    * @return Branch of active states
    */
-  std::vector<IState *> StateMachine::activeStateBranch()
+  IStatePtrList StateMachine::activeStateBranch()
   {
-    std::vector<IState *> branch;
+    IStatePtrList branch;
 
     IState *node = m_root.activeChild();
     while (node != nullptr)
@@ -65,7 +65,7 @@ namespace AI
    */
   bool StateMachine::transfer()
   {
-    std::vector<IState *> branch = activeStateBranch();
+    IStatePtrList branch = activeStateBranch();
     bool stateChange = false;
 
     for (auto it = branch.begin(); it != branch.end(); ++it)

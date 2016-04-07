@@ -6,6 +6,7 @@
 #ifndef _SIMULATION_AI_STATECONTAINER_H_
 #define _SIMULATION_AI_STATECONTAINER_H_
 
+#include <string>
 #include <vector>
 
 namespace Simulation

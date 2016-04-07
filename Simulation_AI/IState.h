@@ -18,6 +18,10 @@ namespace AI
 {
   class StateMachine;
 
+  typedef std::vector<IState *> IStatePtrList;
+  typedef IStatePtrList::iterator IStatePtrListIter;
+  typedef IStatePtrList::const_iterator IStatePtrListConstIter;
+
   /**
    * @class IState
    * @brief Represents a state in a state machine.
@@ -47,7 +51,7 @@ namespace AI
       return m_parent->activeChild() == this;
     }
 
-    std::vector<IState *> branch();
+    IStatePtrList branch();
 
     void setActivation(bool active);
 
