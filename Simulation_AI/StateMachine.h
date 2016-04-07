@@ -21,13 +21,18 @@ namespace AI
    * @brief Represents a state machine
    * @author Dan Nixon
    */
-  class StateMachine : public StateContainer
+  class StateMachine
   {
   public:
     StateMachine();
     virtual ~StateMachine();
 
     std::vector<State *> activeStateBranch();
+
+    State *rootState()
+    {
+      return &m_root;
+    }
 
     inline void update()
     {
@@ -37,6 +42,9 @@ namespace AI
 
     void transfer();
     void operate();
+
+  private:
+    State m_root;
   };
 }
 }

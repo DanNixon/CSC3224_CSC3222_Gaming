@@ -10,17 +10,17 @@
 
 namespace Simulation
 {
-  namespace AI
+namespace AI
+{
+  namespace Test
   {
-    namespace Test
+    class MockStateMachine : public StateMachine
     {
-      class MockStateMachine : public StateMachine
-      {
-      public:
-        int value;
-      };
-    }
+    public:
+      int value;
+    };
   }
+}
 }
 
 #endif

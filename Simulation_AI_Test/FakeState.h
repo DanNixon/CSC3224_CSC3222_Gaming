@@ -12,35 +12,37 @@
 
 namespace Simulation
 {
-  namespace AI
+namespace AI
+{
+  namespace Test
   {
-    namespace Test
+    class MockState : public State
     {
-      class MockState : public State
-      {
-      public:
-        MockState(const std::string &name, State *parent, int transferOn, const std::string &transferTo)
+    public:
+      MockState(const std::string &name, State *parent, int transferOn, const std::string &transferTo)
           : State(name, parent)
           , m_transferOn(transferOn)
           , m_transferTo(transferTo)
+      {
+      }
+
+      State *testTransferCase() const
+      {
+        int v = dynamic_cast<MockStateMachine *>(m_machine)->value;
+        if (v == m_transferOn)
         {
+          // TODO
         }
 
-        State * testTransferCase() const
-        {
-          int v = dynamic_cast<MockStateMachine *>(m_machine)->value;
-          if (v == m_transferOn)
-          {
-            // TODO
-          }
-        }
+        return nullptr;
+      }
 
-      private:
-        int m_transferOn;
-        std::string m_transferTo;
-      };
-    }
+    private:
+      int m_transferOn;
+      std::string m_transferTo;
+    };
   }
+}
 }
 
 #endif

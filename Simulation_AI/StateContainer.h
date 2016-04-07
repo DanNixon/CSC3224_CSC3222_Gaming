@@ -37,6 +37,15 @@ namespace AI
     }
 
     /**
+     * @brief Adds a child state.
+     * @param child State to add
+     */
+    inline void addChild(State *child)
+    {
+      m_children.push_back(child);
+    }
+
+    /**
      * @brief Gets the active child state of this node.
      * @return Active child state
      */

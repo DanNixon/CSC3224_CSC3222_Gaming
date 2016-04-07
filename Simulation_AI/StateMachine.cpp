@@ -10,6 +10,7 @@ namespace Simulation
 namespace AI
 {
   StateMachine::StateMachine()
+      : m_root("", nullptr)
   {
   }
 
@@ -25,7 +26,7 @@ namespace AI
   {
     std::vector<State *> branch;
 
-    State *node = activeChild();
+    State *node = m_root.activeChild();
     while (node != nullptr)
     {
       branch.push_back(node);
@@ -50,7 +51,7 @@ namespace AI
    */
   void StateMachine::operate()
   {
-    State *node = activeChild();
+    State *node = m_root.activeChild();
     while (node != nullptr)
     {
       node->onOperate();

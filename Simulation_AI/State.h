@@ -8,6 +8,8 @@
 
 #include "StateContainer.h"
 
+#include <iostream>
+#include <string>
 #include <vector>
 
 namespace Simulation
@@ -42,17 +44,37 @@ namespace AI
      */
     inline bool isActive() const
     {
-      return m_parent->m_active == this;
+      return m_parent->activeChild() == this;
     }
 
     std::vector<State *> branch();
+
+    void setActivation(bool active);
+
+    /**
+     * @brief Outputs a state to a stream.
+     * @param o Stream to output to
+     * @param s State to output
+     * @return Stream
+     */
+    inline friend std::ostream &operator<<(std::ostream &o, const State &s)
+    {
+      o << "State(" << std::string(s.m_name) << ")";
+      return o;
+    }
+
+  protected:
+    friend class StateMachine;
 
     /**
      * @brief Test for transfer conditions to another state.
      * @return The state to transfer to, nullptr if no transfer conditions are
      *         met
      */
-    virtual State *testTransferCase() const = 0;
+    virtual State *testTransferCase() const
+    {
+      return nullptr;
+    }
 
     /**
      * @brief Performs actions required when entering this state.
