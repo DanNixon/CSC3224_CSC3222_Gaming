@@ -3,9 +3,11 @@
   <ItemGroup>
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="StateContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StateContainer.h" />
   </ItemGroup>
 </Project>

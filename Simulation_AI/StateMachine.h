@@ -6,6 +6,8 @@
 #ifndef _SIMULATION_AI_STATEMACHINE_H_
 #define _SIMULATION_AI_STATEMACHINE_H_
 
+#include "StateContainer.h"
+
 #include <vector>
 
 #include "State.h"
@@ -19,14 +21,22 @@ namespace AI
    * @brief Represents a state machine
    * @author Dan Nixon
    */
-  class StateMachine
+  class StateMachine : public StateContainer
   {
   public:
     StateMachine();
     virtual ~StateMachine();
 
-  private:
-    std::vector<State *> m_states; //!< All first level states
+    std::vector<State *> activeStateBranch();
+
+    inline void update()
+    {
+      transfer();
+      operate();
+    }
+
+    void transfer();
+    void operate();
   };
 }
 }

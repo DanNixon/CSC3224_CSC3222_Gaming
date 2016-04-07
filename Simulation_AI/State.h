@@ -6,6 +6,8 @@
 #ifndef _SIMULATION_AI_STATE_H_
 #define _SIMULATION_AI_STATE_H_
 
+#include "StateContainer.h"
+
 #include <vector>
 
 namespace Simulation
@@ -17,26 +19,50 @@ namespace AI
    * @brief Represents a state in a StateMachine.
    * @author Dan Nixon
    */
-  class State
+  class State : public StateContainer
   {
   public:
     State(State *parent);
     virtual ~State();
 
     /**
-     * @brief Perform the operations that define the behaviour of this state.
+     * @brief Checks if this state is active.
+     * @return True if this state is active
      */
-    virtual void operate() = 0;
+    inline bool isActive() const
+    {
+      return m_parent->m_active == this;
+    }
 
     /**
      * @brief Test for transfer conditions to another state.
      * @return The state to transfer to, nullptr if no transfer conditions are met
      */
-    virtual State *transferCheck() const = 0;
+    virtual State *testTransferCase() const = 0;
+
+    /**
+     * @brief Performs actions required when entering this state.
+     */
+    virtual void onEntry()
+    {
+    }
+
+    /**
+     * @brief Performs actions required when leaving this state.
+     */
+    virtual void onExit()
+    {
+    }
+
+    /**
+     * @brief Perform the operations that define the behaviour of this state.
+     */
+    virtual void onOperate()
+    {
+    }
 
   protected:
-    State *m_parent;                 //!< Parent state
-    std::vector<State *> m_children; //!< Child states
+    State *m_parent; //!< Parent state
   };
 }
 }
