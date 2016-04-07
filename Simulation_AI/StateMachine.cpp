@@ -5,10 +5,32 @@
 
 #include "StateMachine.h"
 
+#include <sstream>
+
 namespace Simulation
 {
 namespace AI
 {
+  /**
+   * @brief Outputs a state branch as a string.
+   * @param branch State branch
+   * @param delim Delimiter
+   * @return Delimited names of states in branch
+   */
+  std::string StateMachine::BranchToString(const std::vector<State *> &branch, char delim)
+  {
+    std::stringstream str;
+    for (auto it = branch.begin(); it != branch.end(); ++it)
+    {
+      if (it != branch.begin())
+        str << delim;
+
+      str << (*it)->m_name;
+    }
+
+    return str.str();
+  }
+
   StateMachine::StateMachine()
       : m_root("", nullptr)
   {
@@ -39,10 +61,12 @@ namespace AI
   /**
    * @brief Performs transfer checks for each level of the active state branch
    *        and switches states if needed.
+   * @return True if a state change took place
    */
-  void StateMachine::transfer()
+  bool StateMachine::transfer()
   {
     // TODO
+    return false;
   }
 
   /**

@@ -24,6 +24,9 @@ namespace AI
   class StateMachine
   {
   public:
+    static std::string BranchToString(const std::vector<State *> &branch, char delim = '/');
+
+  public:
     StateMachine();
     virtual ~StateMachine();
 
@@ -41,16 +44,18 @@ namespace AI
     /**
      * @brief Performs updates of the state machine by checking for transition
      *        conditions then performing operations over all active states.
+     * @return True if a state change took place
      * @see StateMachine:transfer()
      * @see StateMachine:operate()
      */
-    inline void update()
+    inline bool update()
     {
-      transfer();
+      bool stateChange = transfer();
       operate();
+      return stateChange;
     }
 
-    void transfer();
+    bool transfer();
     void operate();
 
   private:
