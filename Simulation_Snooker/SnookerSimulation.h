@@ -21,8 +21,8 @@
 
 #include "Ball.h"
 #include "OptionsMenu.h"
-#include "Table.h"
 #include "SnookerStateMachine.h"
+#include "Table.h"
 
 namespace Simulation
 {

@@ -12,9 +12,21 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @class SnookerStateMachine
+   * @brief State machine for running a game of snooker on the simulator.
+   * @author Dan Nixon
+   */
   class SnookerStateMachine : public Simulation::AI::StateMachine
   {
-    // TOOD
+  public:
+    SnookerStateMachine();
+    virtual ~SnookerStateMachine();
+
+    void initStates();
+
+  private:
+    void addPlayerStates(Simulation::AI::IState *parent, int playerNumber);
   };
 }
 }

@@ -41,6 +41,9 @@ namespace Snooker
    */
   int SnookerSimulation::gameStartup()
   {
+    // Init state machine
+    m_fsm.initStates();
+
     // Load font for text display
     m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
