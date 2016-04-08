@@ -55,8 +55,8 @@ namespace AI
       return stateChange;
     }
 
-    bool transfer();
-    void operate();
+    virtual bool transfer();
+    virtual void operate();
 
   private:
     IState m_root; //!< Root state

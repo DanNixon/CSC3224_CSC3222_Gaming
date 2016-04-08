@@ -56,6 +56,33 @@ namespace AI
         return nullptr;
       }
 
+      /**
+       * @copydoc IState::onEntry
+       */
+      virtual void onEntry()
+      {
+        MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
+        machine->m_entryStack.push_back(this);
+      }
+
+      /**
+       * @copydoc IState::onExit
+       */
+      virtual void onExit()
+      {
+        MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
+        machine->m_exitStack.push_back(this);
+      }
+
+      /**
+       * @copydoc IState::onOperate
+       */
+      virtual void onOperate()
+      {
+        MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
+        machine->m_operatedStack.push_back(this);
+      }
+
     private:
       int m_transferOn;
       std::string m_transferTo;
