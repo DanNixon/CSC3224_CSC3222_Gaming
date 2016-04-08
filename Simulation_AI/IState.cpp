@@ -89,14 +89,16 @@ namespace AI
    */
   void IState::setActivation(bool active, IState *terminateAt)
   {
+    if (terminateAt == this)
+      return;
+
     if (!active)
       onExit();
 
-    IState *node = this;
-    while (node != terminateAt && node->m_parent != nullptr)
+    if (m_parent)
     {
-      node->m_parent->m_active = active ? node : nullptr;
-      node = node->m_parent;
+      m_parent->m_active = active ? this : nullptr;
+      m_parent->setActivation(active, terminateAt);
     }
 
     if (active)

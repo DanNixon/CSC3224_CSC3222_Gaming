@@ -66,6 +66,7 @@ namespace AI
   bool StateMachine::transfer()
   {
     IStatePtrList branch = activeStateBranch();
+    IState *oldState = branch.back();
     bool stateChange = false;
 
     for (auto it = branch.begin(); it != branch.end(); ++it)
@@ -75,9 +76,9 @@ namespace AI
       {
         stateChange = true;
 
-        // TODO: find a better way to do this (this causes issues with onEntry and onExit
-        branch.back()->setActivation(false);
-        transferState->setActivation(true);
+        IState *commonAncestor = IState::ClosestCommonAncestor(oldState, transferState);
+        oldState->setActivation(false, commonAncestor);
+        transferState->setActivation(true, commonAncestor);
 
         break;
       }
