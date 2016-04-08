@@ -27,9 +27,9 @@ namespace Snooker
 
     // Items
     m_pause = addNewItem(root, "pause", "Pause (P)");
-    m_profile = addNewItem(root, "show_profile_data", "Show profile data (F)");
-    m_mode = addNewItem(root, "mode", "Mode: Sandbox");
     addNewItem(root, "reset", "Reset (R)");
+    m_mode = addNewItem(root, "mode", "Mode: Sandbox");
+    m_profile = addNewItem(root, "show_profile_data", "Show profile data (F)");
     addNewItem(root, "exit", "Exit");
   }
 

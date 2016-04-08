@@ -184,7 +184,25 @@ namespace Snooker
         std::cout << "FSM state change: " << StateMachine::BranchToString(fsm.activeStateBranch()) << std::endl;
       }
 
-      updateControl();
+      // Profile display
+      m_profileText->setActive(controls->state(S_PROFILE_DISPLAY));
+
+      // Pause
+      physics.setRunning(!controls->state(S_PAUSE));
+
+      // Update control for state
+      if (!m_menu->isMouseOver())
+      {
+        if (fsm.rootState()->findState("sandbox").back()->isActive())
+          updateControlTakeShot();
+        else if (fsm.rootState()->findState("game").back()->isActive())
+        {
+          if (fsm.activeStateBranch().back()->name() == "place_cue_ball")
+            updateControlPlaceCueBall();
+          else if (fsm.activeStateBranch().back()->name() == "take_shot")
+            updateControlTakeShot();
+        }
+      }
     }
     // Output profiling data
     else if (id == m_profileLoop)
@@ -254,16 +272,10 @@ namespace Snooker
   }
 
   /**
-   * @brief Update the controls.
+   * @brief Update the controls for taking a shot.
    */
-  void SnookerSimulation::updateControl()
+  void SnookerSimulation::updateControlTakeShot()
   {
-    // Profile display
-    m_profileText->setActive(controls->state(S_PROFILE_DISPLAY));
-
-    // Pause
-    physics.setRunning(!controls->state(S_PAUSE));
-
     // Mouse clicks (to take shots)
     if (m_mouseStartPosition == nullptr)
     {
@@ -271,31 +283,6 @@ namespace Snooker
       {
         // Record starting position of mouse
         m_mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
-
-        // TODO
-        GLint viewport[4];
-        GLdouble modelview[16];
-        GLdouble projection[16];
-        GLfloat winX, winY, winZ;
-        GLdouble posX, posY, posZ;
-
-        m_scene->viewMatrix().toGLdoubleMtx(modelview);
-        m_scene->projectionMatrix().toGLdoubleMtx(projection);
-        glGetIntegerv(GL_VIEWPORT, viewport);
-
-        winX = m_mouseStartPosition->x();
-        winY = viewport[3] - m_mouseStartPosition->y();
-        glReadPixels(int(winX), int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
-
-        gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
-
-        Vector3 pos(posX, posY, posZ);
-
-        std::cout << "MOUSE DOWN" << std::endl
-                  << "screen: " << *m_mouseStartPosition << std::endl
-                  << "world: " << pos << "   " << winZ << std::endl
-                  << std::endl;
-
         static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(Vector3());
         m_shotAimLine->setActive(true);
       }
@@ -317,17 +304,49 @@ namespace Snooker
       if (!controls->state(S_TAKE_SHOT))
       {
         m_shotAimLine->setActive(false);
-
-        std::cout << "MOUSE UP" << std::endl << "delta mouse: " << deltaMouse << std::endl << std::endl;
-
         m_balls[0]->setAcceleration(deltaMouse);
-
         delete m_mouseStartPosition;
         m_mouseStartPosition = nullptr;
       }
       else
       {
         static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
+      }
+    }
+  }
+
+  /**
+   * @brief Update the controls for placing the cue ball.
+   */
+  void SnookerSimulation::updateControlPlaceCueBall()
+  {
+    // Mouse clicks (to take shots)
+    if (m_mouseStartPosition == nullptr)
+    {
+      if (controls->state(S_TAKE_SHOT))
+      {
+        // Record starting position of mouse
+        m_mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
+      }
+    }
+    else
+    {
+      Vector2 newMousePosition = Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
+      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+
+      // Clamp max acceleration to a sensible level
+      float maxShotMagnitude = 0.5f;
+      if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
+        deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
+
+      if (!controls->state(S_TAKE_SHOT))
+      {
+        delete m_mouseStartPosition;
+        m_mouseStartPosition = nullptr;
+      }
+      else
+      {
+        m_balls[0]->setPosition(newMousePosition * 2000.0f);
       }
     }
   }

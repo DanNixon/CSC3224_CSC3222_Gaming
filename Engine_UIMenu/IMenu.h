@@ -96,6 +96,15 @@ namespace UIMenu
     MenuItem *addNewItem(MenuItem *parent, const std::string &name, const std::string &text = std::string());
 
     /**
+     * @brief Checks if the mouse pointer is hovered over the menu.
+     * @return True if the mouse pointer is over the menu
+     */
+    inline bool isMouseOver() const
+    {
+      return m_currentMouseOver != nullptr;
+    }
+
+    /**
      * @brief Sets the layout of each MenuItem in the tree.
      */
     virtual void layout() = 0;

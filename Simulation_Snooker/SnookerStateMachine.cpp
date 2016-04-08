@@ -81,8 +81,10 @@ namespace Snooker
 
     // GAME MODE STATES
 
-    // Game states: idle and game in progress
+    // Idle game state
     new FunctionalState("idle", game, this);
+
+    // Running game state
     FunctionalState *running = new FunctionalState("running", game, this);
     // Reset simulation at start of game
     running->setOnOperate([sim](IState *, StateMachine *) {

@@ -52,7 +52,8 @@ namespace Snooker
     void gameShutdown();
 
   private:
-    void updateControl();
+    void updateControlTakeShot();
+    void updateControlPlaceCueBall();
 
   public:
     Simulation::Physics::PhysicsSimulation physics;
