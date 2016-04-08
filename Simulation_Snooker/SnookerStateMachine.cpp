@@ -7,6 +7,7 @@
 
 #include <Simulation_AI/FunctionalState.h>
 
+#include "SnookerControls.h"
 #include "SnookerSimulation.h"
 
 using namespace Simulation::AI;
@@ -15,8 +16,8 @@ namespace Simulation
 {
 namespace Snooker
 {
-  SnookerStateMachine::SnookerStateMachine(SnookerSimulation * simulation)
-    : m_simulation(simulation)
+  SnookerStateMachine::SnookerStateMachine(SnookerSimulation *simulation)
+      : m_simulation(simulation)
   {
   }
 
@@ -29,27 +30,66 @@ namespace Snooker
    */
   void SnookerStateMachine::initStates()
   {
-    SnookerSimulation * sim = m_simulation;
+    SnookerSimulation *sim = m_simulation;
 
-    // Root modes: game and sandbox
-    FunctionalState *sandbox = new FunctionalState("sandbox", rootState(), this);
-    sandbox->setOnEntry([sim](IState *, StateMachine *){
-      sim->physics.setRunning(false);
-      sim->placeBalls();
-      sim->physics.setRunning(true);
-    });
+    // ROOT STATES
 
     // Reset state (defaults back to sandbox)
     FunctionalState *reset = new FunctionalState("reset", rootState(), this);
-    reset->setTestTransferCase([](const IState * const, StateMachine *sm) -> IState * {
-      return sm->rootState()->findState("sandbox").back();
+    // Acivate state when reset control is triggered
+    reset->setTestTransferTo([sim](const IState *const, StateMachine *sm) -> bool {
+      bool change = sim->controls->state(S_RESET);
+      if (change)
+        sim->controls->setState(S_RESET, false);
+      return change;
+    });
+    // Go to sandbox mode on next update
+    reset->setTestTransferFrom(
+        [](const IState *const, StateMachine *sm) -> IState * { return sm->rootState()->findState("sandbox").back(); });
+    // Perform reset when operated
+    reset->setOnOperate([sim](IState *, StateMachine *) {
+      sim->physics.setRunning(false);
+      sim->placeBalls();
+      sim->physics.setRunning(!sim->controls->state(S_PAUSE));
     });
 
+    // Sandbox mode
+    FunctionalState *sandbox = new FunctionalState("sandbox", rootState(), this);
+    // Go to game mode when the mode is changed
+    sandbox->setTestTransferFrom([sim](const IState *const, StateMachine *sm) -> IState * {
+      if (sim->controls->state(S_MODE_CHANGE))
+      {
+        sim->controls->setState(S_MODE_CHANGE, false);
+        return sm->rootState()->findState("game").back();
+      }
+      return nullptr;
+    });
+
+    // Game mode
     FunctionalState *game = new FunctionalState("game", rootState(), this);
+    // Go to sandbox mode when the mode is changed
+    game->setTestTransferFrom([sim](const IState *const, StateMachine *sm) -> IState * {
+      if (sim->controls->state(S_MODE_CHANGE))
+      {
+        sim->controls->setState(S_MODE_CHANGE, false);
+        return sm->rootState()->findState("sandbox").back();
+      }
+      return nullptr;
+    });
+    // Activate running state then this state is entered
+    game->setOnEntry([](IState *s, StateMachine *sm) { s->findState("running").back()->setActivation(true, s); });
+
+    // GAME MODE STATES
 
     // Game states: idle and game in progress
     new FunctionalState("idle", game, this);
     FunctionalState *running = new FunctionalState("running", game, this);
+    // Reset simulation at start of game
+    running->setOnOperate([sim](IState *, StateMachine *) {
+      sim->physics.setRunning(false);
+      sim->placeBalls();
+      sim->physics.setRunning(!sim->controls->state(S_PAUSE));
+    });
 
     // Identical state trees for each player
     addPlayerStates(running, 0);

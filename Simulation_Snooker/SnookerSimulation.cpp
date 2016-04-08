@@ -21,6 +21,7 @@ using namespace Engine::Graphics;
 using namespace Engine::Maths;
 using namespace Engine::Input;
 using namespace Simulation::Physics;
+using namespace Simulation::AI;
 
 namespace Simulation
 {
@@ -121,10 +122,10 @@ namespace Snooker
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
-    m_controls = new SnookerControls(this);
+    controls = new SnookerControls(this);
 
     // Menu
-    m_menu = new OptionsMenu(this, m_fontMedium, 0.05f, m_controls);
+    m_menu = new OptionsMenu(this, m_fontMedium, 0.05f, this);
     m_menu->setMargin(Vector2(0.005f, 0.005f));
     m_menu->layout();
     m_menu->show();
@@ -176,7 +177,12 @@ namespace Snooker
     // Handle control
     else if (id == m_controlLoop)
     {
-      fsm.update();
+      // Update state machine
+      if (fsm.update())
+      {
+        m_menu->updateTextFromState();
+        std::cout << "FSM state change: " << StateMachine::BranchToString(fsm.activeStateBranch()) << std::endl;
+      }
 
       updateControl();
     }
@@ -185,7 +191,7 @@ namespace Snooker
     {
       m_profiler->computeStats(dtMilliSec);
 
-      if (m_controls->state(S_PROFILE_DISPLAY))
+      if (controls->state(S_PROFILE_DISPLAY))
       {
         std::stringstream profileStr;
         profileStr.precision(3);
@@ -253,27 +259,18 @@ namespace Snooker
   void SnookerSimulation::updateControl()
   {
     // Profile display
-    m_profileText->setActive(m_controls->state(S_PROFILE_DISPLAY));
+    m_profileText->setActive(controls->state(S_PROFILE_DISPLAY));
 
     // Pause
-    physics.setRunning(!m_controls->state(S_PAUSE));
-
-    // Reset
-    if (m_controls->state(S_RESET))
-    {
-      physics.setRunning(false);
-      placeBalls();
-      physics.setRunning(!m_controls->state(S_PAUSE));
-      m_controls->setState(S_RESET, false);
-    }
+    physics.setRunning(!controls->state(S_PAUSE));
 
     // Mouse clicks (to take shots)
     if (m_mouseStartPosition == nullptr)
     {
-      if (m_controls->state(S_TAKE_SHOT))
+      if (controls->state(S_TAKE_SHOT))
       {
         // Record starting position of mouse
-        m_mouseStartPosition = new Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
+        m_mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
 
         // TODO
         GLint viewport[4];
@@ -309,7 +306,7 @@ namespace Snooker
     }
     else
     {
-      Vector2 newMousePosition = Vector2(m_controls->analog(A_MOUSE_X), m_controls->analog(A_MOUSE_Y));
+      Vector2 newMousePosition = Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
       Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
 
       // Clamp max acceleration to a sensible level
@@ -317,7 +314,7 @@ namespace Snooker
       if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
         deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
 
-      if (!m_controls->state(S_TAKE_SHOT))
+      if (!controls->state(S_TAKE_SHOT))
       {
         m_shotAimLine->setActive(false);
 

@@ -56,6 +56,7 @@ namespace Snooker
 
   public:
     Simulation::Physics::PhysicsSimulation physics;
+    Engine::Input::IControlScheme *controls;
     SnookerStateMachine fsm;
 
   private:
@@ -65,8 +66,6 @@ namespace Snooker
     Uint8 m_physicsLoop;
     Uint8 m_controlLoop;
     Uint8 m_profileLoop;
-
-    Engine::Input::IControlScheme *m_controls;
 
     Engine::Common::Scene *m_scene;
     Engine::Common::Scene *m_ui;

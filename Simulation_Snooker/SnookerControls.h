@@ -31,7 +31,7 @@ namespace Snooker
     S_PROFILE_DISPLAY,
     S_PAUSE,
     S_RESET,
-    S_GAME
+    S_MODE_CHANGE
   };
 
   /**
@@ -77,7 +77,7 @@ namespace Snooker
     virtual void setState(size_t state, bool active)
     {
       IControlScheme::setState(state, active);
-      static_cast<SnookerSimulation *>(m_game)->m_menu->updateTextFromControls();
+      static_cast<SnookerSimulation *>(m_game)->m_menu->updateTextFromState();
     }
 
   private:

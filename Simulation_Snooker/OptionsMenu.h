@@ -14,6 +14,8 @@ namespace Simulation
 {
 namespace Snooker
 {
+  class SnookerSimulation;
+
   /**
    * @class OptionsMenu
    * @brief Menu used to display simulation options.
@@ -22,16 +24,16 @@ namespace Snooker
   class OptionsMenu : public Engine::UIMenu::TopBarMenu
   {
   public:
-    OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize, Engine::Input::IControlScheme *controls);
+    OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize, SnookerSimulation *simulation);
     virtual ~OptionsMenu();
 
-    void updateTextFromControls();
+    void updateTextFromState();
 
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
 
   private:
-    Engine::Input::IControlScheme *m_controls;
+    SnookerSimulation *m_simulation;
 
     Engine::UIMenu::MenuItem *m_pause;
     Engine::UIMenu::MenuItem *m_profile;

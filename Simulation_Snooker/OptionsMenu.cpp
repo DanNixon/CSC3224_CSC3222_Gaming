@@ -19,9 +19,9 @@ namespace Snooker
   /**
    * @copydoc TopBarMenu::TopBarMenu
    */
-  OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize, IControlScheme *controls)
+  OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize, SnookerSimulation *simulation)
       : TopBarMenu(game, font, textSize)
-      , m_controls(controls)
+      , m_simulation(simulation)
   {
     MenuItem *root = addNewItem(nullptr, "menu", "Menu");
 
@@ -48,30 +48,31 @@ namespace Snooker
     }
     else if (item == m_mode)
     {
-      m_controls->flipState(S_GAME);
+      m_simulation->controls->setState(S_MODE_CHANGE, true);
     }
     else if (item == m_pause)
     {
-      m_controls->flipState(S_PAUSE);
+      m_simulation->controls->flipState(S_PAUSE);
     }
     else if (item == m_profile)
     {
-      m_controls->flipState(S_PROFILE_DISPLAY);
+      m_simulation->controls->flipState(S_PROFILE_DISPLAY);
     }
     else if (item->name() == "reset")
     {
-      m_controls->setState(S_RESET, true);
+      m_simulation->controls->setState(S_RESET, true);
     }
   }
 
   /**
-   * @brief Updates the text shown on menu options to respect the control state.
+   * @brief Updates the text shown on menu options to respect the current state.
    */
-  void OptionsMenu::updateTextFromControls()
+  void OptionsMenu::updateTextFromState()
   {
-    m_pause->setText(m_controls->state(S_PAUSE) ? "Resume (P)" : "Pause (P)");
-    m_profile->setText(m_controls->state(S_PROFILE_DISPLAY) ? "Hide profile data (F)" : "Show profile data (F)");
-    m_mode->setText(m_controls->state(S_GAME) ? "Mode: Game" : "Mode: Sandbox");
+    m_pause->setText(m_simulation->controls->state(S_PAUSE) ? "Resume (P)" : "Pause (P)");
+    m_profile->setText(m_simulation->controls->state(S_PROFILE_DISPLAY) ? "Hide profile data (F)"
+                                                                        : "Show profile data (F)");
+    m_mode->setText(m_simulation->fsm.activeStateBranch()[0]->name() == "game" ? "Mode: Game" : "Mode: Sandbox");
   }
 }
 }
