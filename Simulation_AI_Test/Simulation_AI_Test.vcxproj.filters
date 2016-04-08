@@ -5,6 +5,7 @@
     <ClCompile Include="StateContainerTest.cpp" />
     <ClCompile Include="IStateTest.cpp" />
     <ClCompile Include="StateMachineUpdateTest.cpp" />
+    <ClCompile Include="StateMachineUpdateFunctionalTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockState.h" />

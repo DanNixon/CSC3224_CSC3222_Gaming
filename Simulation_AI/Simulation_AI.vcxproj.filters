@@ -9,5 +9,6 @@
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateContainer.h" />
     <ClInclude Include="IState.h" />
+    <ClInclude Include="FunctionalState.h" />
   </ItemGroup>
 </Project>

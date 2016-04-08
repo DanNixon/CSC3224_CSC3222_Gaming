@@ -22,6 +22,7 @@
     <ClCompile Include="IStateTest.cpp" />
     <ClCompile Include="StateContainerTest.cpp" />
     <ClCompile Include="StateMachineTest.cpp" />
+    <ClCompile Include="StateMachineUpdateFunctionalTest.cpp" />
     <ClCompile Include="StateMachineUpdateTest.cpp" />
   </ItemGroup>
   <ItemGroup>

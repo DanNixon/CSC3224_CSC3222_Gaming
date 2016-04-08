@@ -72,6 +72,7 @@ namespace AI
     for (auto it = branch.begin(); it != branch.end(); ++it)
     {
       IState *transferState = (*it)->testTransferCase();
+
       if (transferState != nullptr)
       {
         stateChange = true;

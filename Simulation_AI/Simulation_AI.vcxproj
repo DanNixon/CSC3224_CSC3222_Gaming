@@ -24,6 +24,7 @@
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FunctionalState.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="StateContainer.h" />
     <ClInclude Include="StateMachine.h" />
