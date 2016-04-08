@@ -22,6 +22,7 @@
 #include "Ball.h"
 #include "OptionsMenu.h"
 #include "Table.h"
+#include "SnookerStateMachine.h"
 
 namespace Simulation
 {
@@ -78,6 +79,8 @@ namespace Snooker
 
     Engine::Maths::Vector2 *m_mouseStartPosition;
     Engine::Graphics::RenderableObject *m_shotAimLine;
+
+    SnookerStateMachine m_fsm;
   };
 }
 }

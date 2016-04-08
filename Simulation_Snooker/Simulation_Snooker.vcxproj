@@ -96,7 +96,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32d.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Simulation_AI.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32d.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
@@ -124,7 +124,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32d.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Simulation_AI.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32d.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d  "$(SolutionDir)\ThirdParty\SDL2-2.0.4\lib\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
@@ -156,7 +156,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Simulation_AI.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Message>Copy DLLs to build directory</Message>
@@ -188,7 +188,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;assimp.lib;SOIL.lib;OpenAL32.lib;alut.lib;Simulation_Physics.lib;Simulation_AI.lib;Engine_Common.lib;Engine_Utility.lib;Engine_Maths.lib;Engine_Graphics.lib;Engine_Input.lib;Engine_IO.lib;Engine_UIMenu.lib;glew32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Message>Copy DLLs to build directory</Message>
@@ -213,6 +213,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="Pocket.cpp" />
     <ClCompile Include="SnookerSimulation.cpp" />
+    <ClCompile Include="SnookerStateMachine.cpp" />
     <ClCompile Include="Table.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +223,8 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClInclude Include="Pocket.h" />
     <ClInclude Include="SnookerControls.h" />
     <ClInclude Include="SnookerSimulation.h" />
+    <ClInclude Include="SnookerStateMachine.h" />
+    <ClInclude Include="SnookerStates.h" />
     <ClInclude Include="Table.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
