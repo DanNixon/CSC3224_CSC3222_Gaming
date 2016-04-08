@@ -1,18 +1,22 @@
 [ROOT]
+|-reset
 |-sandbox
 |-game
   |-idle
-  |-in_game
-    |-player1
+  |-running
+    |-player_1
     | |-place_cue_ball
-    | |-take_shot
-    | |-shot_taken
+    | |-take_shot (know target ball)
+    | |-wait_for_shot (wait for simulation to come to rest)
+    | |-after_shot
     |   |-foul
     |   | |-no_ball_hit
+    |   | |-hit_wrong_ball (the first ball hit is not a valid ball)
+    |   | |-pot_wrong_ball (a ball was potted that is not valid)
     |   | |-pot_cue_ball
-    |   | |-pot_incorrect_ball
     |   |-legal
-    |     |-pot_red
-    |     |-pot_colour
-    |-player2
+    |     |-pot_red (initially and after any colour has been potted)
+    |     |-pot_any_colour (after red has been potted)
+    |     |-pot_sequence_colour (when all reds have been potted)
+    |-player_2
       |-[as per player 1]

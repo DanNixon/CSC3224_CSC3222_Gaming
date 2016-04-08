@@ -126,8 +126,8 @@ namespace Snooker
 
     // States for a valid shot
     IState *potRed = new FunctionalState("pot_red", legalShot, this);
-    IState *potColour = new FunctionalState("pot_colour", legalShot, this);
-    IState *potBlack = new FunctionalState("pot_black", legalShot, this);
+    IState *potAnyColour = new FunctionalState("pot_any_colour", legalShot, this);
+    IState *potSequenceColour = new FunctionalState("pot_sequence_colour", legalShot, this);
   }
 }
 }
