@@ -65,6 +65,11 @@ namespace AI
       return m_active == state;
     }
 
+    inline std::vector<IState *> children()
+    {
+      return m_children;
+    }
+
   private:
     bool findStateImpl(std::vector<std::string> &names, std::vector<IState *> &branch);
 

@@ -69,9 +69,22 @@ namespace AI
     IState *oldState = branch.back();
     bool stateChange = false;
 
-    for (auto it = branch.begin(); it != branch.end(); ++it)
+    for (IStatePtrListIter brIt = branch.begin(); brIt != branch.end(); ++brIt)
     {
-      IState *transferState = (*it)->testTransferCase();
+      IState *transferState = (*brIt)->testTransferFrom();
+
+      if (transferState == nullptr)
+      {
+        IStatePtrList siblings = (*brIt)->parent()->children();
+        for (IStatePtrListIter sibIt = siblings.begin(); sibIt != siblings.end(); ++sibIt)
+        {
+          if ((*sibIt != *brIt) && (*sibIt)->testTransferTo())
+          {
+            transferState = *sibIt;
+            break;
+          }
+        }
+      }
 
       if (transferState != nullptr)
       {

@@ -39,9 +39,9 @@ namespace AI
       }
 
       /**
-       * @copydoc IState::testTransferCase
+       * @copydoc IState::testTransferFrom
        */
-      IState *testTransferCase() const
+      IState *testTransferFrom() const
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
 

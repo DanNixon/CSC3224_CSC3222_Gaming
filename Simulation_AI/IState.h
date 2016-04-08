@@ -97,13 +97,22 @@ namespace AI
     friend class StateMachine;
 
     /**
-     * @brief Test for transfer conditions to another IState.
+     * @brief Test for transfer conditions from this state to another.
      * @return The IState to transfer to, nullptr if no transfer conditions are
      *         met
      */
-    virtual IState *testTransferCase() const
+    virtual IState *testTransferFrom() const
     {
       return nullptr;
+    }
+
+    /**
+    * @brief Test for transfer conditions from a sibling state to this state.
+    * @return True if the transfer conditions are met.
+    */
+    virtual bool testTransferTo() const
+    {
+      return false;
     }
 
     /**

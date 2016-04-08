@@ -23,7 +23,8 @@ namespace AI
   class FunctionalState : public IState
   {
   public:
-    typedef std::function<IState *(const IState *const, StateMachine *)> TransferCaseFunc;
+    typedef std::function<IState *(const IState *const, StateMachine *)> TransferFromFunc;
+    typedef std::function<bool(const IState *const, StateMachine *)> TransferToFunc;
     typedef std::function<void(IState *, StateMachine *)> HandlerFunc;
 
   public:
@@ -33,7 +34,8 @@ namespace AI
     FunctionalState(const std::string &name, IState *parent, StateMachine *machine)
         : IState(name, parent, machine)
     {
-      m_testTransferCase = [](const IState *const, StateMachine *) { return nullptr; };
+      m_testTransferFrom = [](const IState *const, StateMachine *) { return nullptr; };
+      m_testTransferTo = [](const IState *const, StateMachine *) { return false; };
       m_onEntry = [](IState *, StateMachine *) {};
       m_onExit = [](IState *, StateMachine *) {};
       m_onOperate = [](IState *, StateMachine *) {};
@@ -43,9 +45,14 @@ namespace AI
     {
     }
 
-    void setTestTransferCase(TransferCaseFunc f)
+    void setTestTransferFrom(TransferFromFunc f)
     {
-      m_testTransferCase = f;
+      m_testTransferFrom = f;
+    }
+
+    void setTestTransferTo(TransferToFunc f)
+    {
+      m_testTransferTo = f;
     }
 
     void setOnEntry(HandlerFunc f)
@@ -64,9 +71,14 @@ namespace AI
     }
 
   protected:
-    virtual IState *testTransferCase() const
+    virtual IState *testTransferFrom() const
     {
-      return m_testTransferCase(this, m_machine);
+      return m_testTransferFrom(this, m_machine);
+    }
+
+    virtual bool testTransferTo() const
+    {
+      return m_testTransferTo(this, m_machine);
     }
 
     virtual void onEntry()
@@ -85,7 +97,8 @@ namespace AI
     }
 
   private:
-    TransferCaseFunc m_testTransferCase;
+    TransferFromFunc m_testTransferFrom;
+    TransferToFunc m_testTransferTo;
     HandlerFunc m_onEntry;
     HandlerFunc m_onExit;
     HandlerFunc m_onOperate;
