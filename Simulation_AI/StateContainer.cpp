@@ -24,7 +24,8 @@ namespace AI
 
   StateContainer::~StateContainer()
   {
-    m_children.clear();
+    for (IStatePtrListIter it = m_children.begin(); it != m_children.end(); ++it)
+      delete *it;
   }
 
   /**
