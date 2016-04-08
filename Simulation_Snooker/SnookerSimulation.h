@@ -44,14 +44,19 @@ namespace Snooker
     SnookerSimulation();
     ~SnookerSimulation();
 
+    void placeBalls();
+
   protected:
     int gameStartup();
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
   private:
-    void placeBalls();
     void updateControl();
+
+  public:
+    Simulation::Physics::PhysicsSimulation physics;
+    SnookerStateMachine fsm;
 
   private:
     friend class SnookerControls;
@@ -70,8 +75,6 @@ namespace Snooker
     Table *m_table;
     Ball *m_balls[NUM_BALLS];
 
-    Simulation::Physics::PhysicsSimulation m_physics;
-
     TTF_Font *m_fontLarge;
     TTF_Font *m_fontMedium;
     Engine::Graphics::ShaderProgram *m_uiShader;
@@ -79,8 +82,6 @@ namespace Snooker
 
     Engine::Maths::Vector2 *m_mouseStartPosition;
     Engine::Graphics::RenderableObject *m_shotAimLine;
-
-    SnookerStateMachine m_fsm;
   };
 }
 }

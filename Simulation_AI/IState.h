@@ -60,6 +60,15 @@ namespace AI
     }
 
     /**
+     * @brief Returns the parent state of this state.
+     * @return Parent state
+     */
+    inline IState *parent() const
+    {
+      return m_parent;
+    }
+
+    /**
      * @brief Checks if this IState is active.
      * @return True if this IState is active
      */

@@ -12,6 +12,8 @@ namespace Simulation
 {
 namespace Snooker
 {
+  class SnookerSimulation;
+
   /**
    * @class SnookerStateMachine
    * @brief State machine for running a game of snooker on the simulator.
@@ -20,13 +22,16 @@ namespace Snooker
   class SnookerStateMachine : public Simulation::AI::StateMachine
   {
   public:
-    SnookerStateMachine();
+    SnookerStateMachine(SnookerSimulation *simulation);
     virtual ~SnookerStateMachine();
 
     void initStates();
 
   private:
     void addPlayerStates(Simulation::AI::IState *parent, int playerNumber);
+
+  private:
+    SnookerSimulation *m_simulation;
   };
 }
 }

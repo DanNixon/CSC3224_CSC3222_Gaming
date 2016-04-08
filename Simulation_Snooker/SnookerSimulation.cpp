@@ -28,6 +28,7 @@ namespace Snooker
 {
   SnookerSimulation::SnookerSimulation()
       : Game("Snooker Loopy", std::make_pair(1024, 768))
+      , fsm(this)
       , m_mouseStartPosition(nullptr)
   {
   }
@@ -42,14 +43,14 @@ namespace Snooker
   int SnookerSimulation::gameStartup()
   {
     // Init state machine
-    m_fsm.initStates();
+    fsm.initStates();
 
     // Load font for text display
     m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
     // Table
-    m_table = new Table(m_physics.entities());
+    m_table = new Table(physics.entities());
     m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
     // Balls
@@ -83,7 +84,7 @@ namespace Snooker
       if (m_balls[i] != nullptr)
       {
         m_table->addChild(m_balls[i]);
-        m_physics.addEntity(m_balls[i]);
+        physics.addEntity(m_balls[i]);
       }
     }
 
@@ -151,10 +152,10 @@ namespace Snooker
     // Handle physics
     else if (id == m_physicsLoop)
     {
-      m_physics.update(dtMilliSec);
+      physics.update(dtMilliSec);
 
       // Check for potted balls
-      auto inters = m_physics.interfaces();
+      auto inters = physics.interfaces();
       for (auto it = inters.begin(); it != inters.end(); ++it)
       {
         // TODO
@@ -175,6 +176,8 @@ namespace Snooker
     // Handle control
     else if (id == m_controlLoop)
     {
+      fsm.update();
+
       updateControl();
     }
     // Output profiling data
@@ -194,7 +197,7 @@ namespace Snooker
         m_profileText->setText(profileStr.str());
       }
 
-      if (!m_physics.atRest())
+      if (!physics.atRest())
         std::cout << "in motion" << std::endl;
     }
   }
@@ -253,14 +256,14 @@ namespace Snooker
     m_profileText->setActive(m_controls->state(S_PROFILE_DISPLAY));
 
     // Pause
-    m_physics.setRunning(!m_controls->state(S_PAUSE));
+    physics.setRunning(!m_controls->state(S_PAUSE));
 
     // Reset
     if (m_controls->state(S_RESET))
     {
-      m_physics.setRunning(false);
+      physics.setRunning(false);
       placeBalls();
-      m_physics.setRunning(!m_controls->state(S_PAUSE));
+      physics.setRunning(!m_controls->state(S_PAUSE));
       m_controls->setState(S_RESET, false);
     }
 

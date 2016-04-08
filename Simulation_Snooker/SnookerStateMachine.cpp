@@ -7,13 +7,16 @@
 
 #include <Simulation_AI/FunctionalState.h>
 
+#include "SnookerSimulation.h"
+
 using namespace Simulation::AI;
 
 namespace Simulation
 {
 namespace Snooker
 {
-  SnookerStateMachine::SnookerStateMachine()
+  SnookerStateMachine::SnookerStateMachine(SnookerSimulation * simulation)
+    : m_simulation(simulation)
   {
   }
 
@@ -26,17 +29,34 @@ namespace Snooker
    */
   void SnookerStateMachine::initStates()
   {
+    SnookerSimulation * sim = m_simulation;
+
     // Root modes: game and sandbox
-    new FunctionalState("sandbox", rootState(), this);
-    IState *game = new FunctionalState("game", rootState(), this);
+    FunctionalState *sandbox = new FunctionalState("sandbox", rootState(), this);
+    sandbox->setOnEntry([sim](IState *, StateMachine *){
+      sim->physics.setRunning(false);
+      sim->placeBalls();
+      sim->physics.setRunning(true);
+    });
+
+    // Reset state (defaults back to sandbox)
+    FunctionalState *reset = new FunctionalState("reset", rootState(), this);
+    reset->setTestTransferCase([](const IState * const, StateMachine *sm) -> IState * {
+      return sm->rootState()->findState("sandbox").back();
+    });
+
+    FunctionalState *game = new FunctionalState("game", rootState(), this);
 
     // Game states: idle and game in progress
     new FunctionalState("idle", game, this);
-    IState *running = new FunctionalState("running", game, this);
+    FunctionalState *running = new FunctionalState("running", game, this);
 
     // Identical state trees for each player
     addPlayerStates(running, 0);
     addPlayerStates(running, 1);
+
+    // Set default state
+    rootState()->findState("sandbox").back()->setActivation(true);
   }
 
   /**

@@ -30,7 +30,8 @@ namespace Snooker
 
     S_PROFILE_DISPLAY,
     S_PAUSE,
-    S_RESET
+    S_RESET,
+    S_GAME
   };
 
   /**

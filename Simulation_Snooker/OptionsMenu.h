@@ -35,6 +35,7 @@ namespace Snooker
 
     Engine::UIMenu::MenuItem *m_pause;
     Engine::UIMenu::MenuItem *m_profile;
+    Engine::UIMenu::MenuItem *m_mode;
   };
 }
 }
