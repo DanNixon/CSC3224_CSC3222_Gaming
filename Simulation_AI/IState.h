@@ -44,6 +44,9 @@ namespace AI
   class IState : public StateContainer
   {
   public:
+    static IState *ClosestCommonAncestor(IState *a, IState *b);
+
+  public:
     IState(const std::string &name, IState *parent, StateMachine *machine);
     virtual ~IState();
 
@@ -65,9 +68,9 @@ namespace AI
       return m_parent->activeChild() == this;
     }
 
-    IStatePtrList branch();
+    IStatePtrList branch(bool reverse = false);
 
-    void setActivation(bool active);
+    void setActivation(bool active, IState *terminateAt = nullptr);
 
     /**
      * @brief Outputs a state to a stream.

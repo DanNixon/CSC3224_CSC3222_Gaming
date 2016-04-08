@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IStateTest.cpp" />
     <ClCompile Include="StateContainerTest.cpp" />
     <ClCompile Include="StateMachineTest.cpp" />
   </ItemGroup>
