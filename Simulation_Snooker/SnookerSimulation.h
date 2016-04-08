@@ -21,6 +21,7 @@
 
 #include "Ball.h"
 #include "OptionsMenu.h"
+#include "SNookerStates.h"
 #include "SnookerStateMachine.h"
 #include "Table.h"
 
@@ -52,8 +53,8 @@ namespace Snooker
     void gameShutdown();
 
   private:
-    void updateControlTakeShot();
-    void updateControlPlaceCueBall();
+    void updateControlTakeShot(CompletableActionState *state = nullptr);
+    void updateControlPlaceCueBall(CompletableActionState *state = nullptr);
 
   public:
     Simulation::Physics::PhysicsSimulation physics;

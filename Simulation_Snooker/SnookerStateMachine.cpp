@@ -5,10 +5,9 @@
 
 #include "SnookerStateMachine.h"
 
-#include <Simulation_AI/FunctionalState.h>
-
 #include "SnookerControls.h"
 #include "SnookerSimulation.h"
+#include "SnookerStates.h"
 
 using namespace Simulation::AI;
 
@@ -86,11 +85,14 @@ namespace Snooker
 
     // Running game state
     FunctionalState *running = new FunctionalState("running", game, this);
-    // Reset simulation at start of game
-    running->setOnOperate([sim](IState *, StateMachine *) {
+    // At start of game
+    running->setOnEntry([sim](IState *s, StateMachine *sm) {
+      // Reset the simulation
       sim->physics.setRunning(false);
       sim->placeBalls();
       sim->physics.setRunning(!sim->controls->state(S_PAUSE));
+      // Player 0 to pace the cue ball
+      sm->rootState()->findState("game/running/player_0/place_cue_ball").back()->setActivation(true, s);
     });
 
     // Identical state trees for each player
@@ -108,28 +110,60 @@ namespace Snooker
    */
   void SnookerStateMachine::addPlayerStates(IState *parent, int playerNumber)
   {
-    IState *player = new FunctionalState("player_" + std::to_string(playerNumber), parent, this);
+    SnookerSimulation *sim = m_simulation;
+    FunctionalState *player = new PlayerState(parent, this, playerNumber);
 
-    // Four general play states: place cue ball, take shot, wait for shot, after shot
-    IState *placeCueBall = new FunctionalState("place_cue_ball", player, this);
-    IState *takeShot = new FunctionalState("take_shot", player, this);
-    IState *waitForShot = new FunctionalState("wait_for_shot", player, this);
-    IState *afterShot = new FunctionalState("after_shot", player, this);
+    // FOUR GENERAL PLAY STATES: place cue ball, take shot, wait for shot, after shot
 
-    // After a shot was taken it is either a foul or legal
-    IState *foulShot = new FunctionalState("foul", afterShot, this);
-    IState *legalShot = new FunctionalState("legal", afterShot, this);
+    // Place cue ball state
+    FunctionalState *placeCueBall = new CompletableActionState("place_cue_ball", player, this);
+    // Move to take shot when ball is placed
+    placeCueBall->setTestTransferFrom([](const IState *const s, StateMachine *sm) -> IState * {
+      if (static_cast<const CompletableActionState *>(s)->completed())
+        return s->parent()->findState("take_shot").back();
+      else
+        return nullptr;
+    });
 
-    // States for a foul shot
-    IState *noBallHit = new FunctionalState("no_ball_hit", foulShot, this);
-    IState *hitWrongBall = new FunctionalState("hit_wrong_ball", foulShot, this);
-    IState *potWrongBall = new FunctionalState("pot_wrong_ball", foulShot, this);
-    IState *potCueBall = new FunctionalState("pot_cue_ball", foulShot, this);
+    // Take shot state
+    FunctionalState *takeShot = new CompletableActionState("take_shot", player, this);
+    // Move to wait for shot when shot is taken
+    takeShot->setTestTransferFrom([](const IState *const s, StateMachine *sm) -> IState * {
+      if (static_cast<const CompletableActionState *>(s)->completed())
+        return s->parent()->findState("wait_for_shot").back();
+      else
+        return nullptr;
+    });
 
-    // States for a valid shot
-    IState *potRed = new FunctionalState("pot_red", legalShot, this);
-    IState *potAnyColour = new FunctionalState("pot_any_colour", legalShot, this);
-    IState *potSequenceColour = new FunctionalState("pot_sequence_colour", legalShot, this);
+    // Wait for shot state
+    FunctionalState *waitForShot = new FunctionalState("wait_for_shot", player, this);
+    // Transfer to after shot when simulation is at rest
+    waitForShot->setTestTransferFrom([sim](const IState *const s, StateMachine *sm) -> IState * {
+      if (sim->physics.atRest())
+        return s->parent()->findState("after_shot").back();
+      else
+        return nullptr;
+    });
+
+    FunctionalState *afterShot = new FunctionalState("after_shot", player, this);
+
+    // AFTER SHOT STATES
+
+    FunctionalState *foulShot = new FunctionalState("foul", afterShot, this);
+    FunctionalState *legalShot = new FunctionalState("legal", afterShot, this);
+
+    // FOUL SHOT STATES
+
+    FunctionalState *noBallHit = new FunctionalState("no_ball_hit", foulShot, this);
+    FunctionalState *hitWrongBall = new FunctionalState("hit_wrong_ball", foulShot, this);
+    FunctionalState *potWrongBall = new FunctionalState("pot_wrong_ball", foulShot, this);
+    FunctionalState *potCueBall = new FunctionalState("pot_cue_ball", foulShot, this);
+
+    // VALID SHOT STATES
+
+    FunctionalState *potRed = new FunctionalState("pot_red", legalShot, this);
+    FunctionalState *potAnyColour = new FunctionalState("pot_any_colour", legalShot, this);
+    FunctionalState *potSequenceColour = new FunctionalState("pot_sequence_colour", legalShot, this);
   }
 }
 }

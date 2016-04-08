@@ -198,9 +198,9 @@ namespace Snooker
         else if (fsm.rootState()->findState("game").back()->isActive())
         {
           if (fsm.activeStateBranch().back()->name() == "place_cue_ball")
-            updateControlPlaceCueBall();
+            updateControlPlaceCueBall(static_cast<CompletableActionState *>(fsm.activeStateBranch().back()));
           else if (fsm.activeStateBranch().back()->name() == "take_shot")
-            updateControlTakeShot();
+            updateControlTakeShot(static_cast<CompletableActionState *>(fsm.activeStateBranch().back()));
         }
       }
     }
@@ -274,7 +274,7 @@ namespace Snooker
   /**
    * @brief Update the controls for taking a shot.
    */
-  void SnookerSimulation::updateControlTakeShot()
+  void SnookerSimulation::updateControlTakeShot(CompletableActionState *state)
   {
     // Mouse clicks (to take shots)
     if (m_mouseStartPosition == nullptr)
@@ -307,6 +307,9 @@ namespace Snooker
         m_balls[0]->setAcceleration(deltaMouse);
         delete m_mouseStartPosition;
         m_mouseStartPosition = nullptr;
+
+        if (state != nullptr)
+          state->markAsComplete();
       }
       else
       {
@@ -318,7 +321,7 @@ namespace Snooker
   /**
    * @brief Update the controls for placing the cue ball.
    */
-  void SnookerSimulation::updateControlPlaceCueBall()
+  void SnookerSimulation::updateControlPlaceCueBall(CompletableActionState *state)
   {
     // Mouse clicks (to take shots)
     if (m_mouseStartPosition == nullptr)
@@ -343,6 +346,9 @@ namespace Snooker
       {
         delete m_mouseStartPosition;
         m_mouseStartPosition = nullptr;
+
+        if (state != nullptr)
+          state->markAsComplete();
       }
       else
       {

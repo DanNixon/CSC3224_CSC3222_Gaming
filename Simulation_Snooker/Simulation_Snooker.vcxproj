@@ -224,6 +224,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClInclude Include="SnookerControls.h" />
     <ClInclude Include="SnookerSimulation.h" />
     <ClInclude Include="SnookerStateMachine.h" />
+    <ClInclude Include="SnookerStates.h" />
     <ClInclude Include="Table.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
