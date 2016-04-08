@@ -29,8 +29,8 @@ public:
 
     // Default activated state (1)
     s1->setActivation(true);
-    m.m_entryStack.clear();
-    m.m_exitStack.clear();
+    m.entryStack.clear();
+    m.exitStack.clear();
 
     testTransfer(m, 0, "state1");
 
@@ -113,18 +113,18 @@ public:
     // Validate state entry and exit stacks
     if (transferValue == 0)
     {
-      Assert::AreEqual((size_t)0, m.m_entryStack.size());
-      Assert::AreEqual((size_t)0, m.m_exitStack.size());
+      Assert::AreEqual((size_t)0, m.entryStack.size());
+      Assert::AreEqual((size_t)0, m.exitStack.size());
     }
     else
     {
-      Assert::IsTrue(expectedExitStack == m.m_exitStack);
-      Assert::IsTrue(expectedEntryStack == m.m_entryStack);
+      Assert::IsTrue(expectedExitStack == m.exitStack);
+      Assert::IsTrue(expectedEntryStack == m.entryStack);
     }
 
     // Reset state entry and exit stacks
-    m.m_entryStack.clear();
-    m.m_exitStack.clear();
+    m.entryStack.clear();
+    m.exitStack.clear();
   }
 
   /**
@@ -135,7 +135,10 @@ public:
   void testOperate(MockStateMachine &m, const IStatePtrList &expectedStack)
   {
     m.operate();
-    Assert::IsTrue(expectedStack == m.m_operatedStack);
+    Assert::IsTrue(expectedStack == m.operatedStack);
+
+    // Reset operation stack
+    m.operatedStack.clear();
   }
 };
 }

@@ -23,17 +23,10 @@ namespace AI
     class MockStateMachine : public StateMachine
     {
     public:
-      virtual void operate()
-      {
-        m_operatedStack.clear();
-        StateMachine::operate();
-      }
-
-    public:
-      int value;                     //!< Dummy value for triggering state transitions
-      IStatePtrList m_entryStack;    //!< States that have had onEntry() called
-      IStatePtrList m_exitStack;     //!< States that have had onExit() called
-      IStatePtrList m_operatedStack; //!< States that have had onOperate() called
+      int value;                   //!< Dummy value for triggering state transitions
+      IStatePtrList entryStack;    //!< States that have had onEntry() called
+      IStatePtrList exitStack;     //!< States that have had onExit() called
+      IStatePtrList operatedStack; //!< States that have had onOperate() called
     };
   }
 }

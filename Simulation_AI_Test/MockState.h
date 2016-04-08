@@ -62,7 +62,7 @@ namespace AI
       virtual void onEntry()
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
-        machine->m_entryStack.push_back(this);
+        machine->entryStack.push_back(this);
       }
 
       /**
@@ -71,7 +71,7 @@ namespace AI
       virtual void onExit()
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
-        machine->m_exitStack.push_back(this);
+        machine->exitStack.push_back(this);
       }
 
       /**
@@ -80,7 +80,7 @@ namespace AI
       virtual void onOperate()
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
-        machine->m_operatedStack.push_back(this);
+        machine->operatedStack.push_back(this);
       }
 
     private:

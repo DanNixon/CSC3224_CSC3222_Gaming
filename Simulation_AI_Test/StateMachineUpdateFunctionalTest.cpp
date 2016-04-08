@@ -23,7 +23,7 @@ public:
     MockStateMachine m;
     m.value = 0;
 
-    FunctionalState * s1 = new FunctionalState("state1", m.rootState(), &m);// , 5, "state2/state2.1");
+    FunctionalState * s1 = new FunctionalState("state1", m.rootState(), &m);
     addStackFunctions(s1, m);
     s1->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
       if (m.value == 5)
@@ -32,7 +32,7 @@ public:
         return nullptr;
     });
 
-    FunctionalState * s11 = new FunctionalState("state1.1", s1, &m);// , 4, "state1/state1.2");
+    FunctionalState * s11 = new FunctionalState("state1.1", s1, &m);
     addStackFunctions(s11, m);
     s11->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
       if (m.value == 4)
@@ -41,7 +41,7 @@ public:
         return nullptr;
     });
 
-    FunctionalState * s12 = new FunctionalState("state1.2", s1, &m);// , 3, "state1/state1.2/state1.2.1");
+    FunctionalState * s12 = new FunctionalState("state1.2", s1, &m);
     addStackFunctions(s12, m);
     s12->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
       if (m.value == 3)
@@ -50,7 +50,7 @@ public:
         return nullptr;
     });
 
-    FunctionalState * s121 = new FunctionalState("state1.2.1", s12, &m);// , 2, "state2/state2.1");
+    FunctionalState * s121 = new FunctionalState("state1.2.1", s12, &m);
     addStackFunctions(s121, m);
     s121->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
       if (m.value == 2)
@@ -59,7 +59,7 @@ public:
         return nullptr;
     });
 
-    FunctionalState * s2 = new FunctionalState("state2", m.rootState(), &m);// , 6, "state1/state1.1");
+    FunctionalState * s2 = new FunctionalState("state2", m.rootState(), &m);
     addStackFunctions(s2, m);
     s2->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
       if (m.value == 6)
@@ -68,7 +68,7 @@ public:
         return nullptr;
     });
 
-    FunctionalState * s21 = new FunctionalState("state2.1", s2, &m);// , 1, "state2");
+    FunctionalState * s21 = new FunctionalState("state2.1", s2, &m);
     addStackFunctions(s21, m);
     s21->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
       if (m.value == 1)
@@ -79,8 +79,8 @@ public:
 
     // Default activated state (1)
     s1->setActivation(true);
-    m.m_entryStack.clear();
-    m.m_exitStack.clear();
+    m.entryStack.clear();
+    m.exitStack.clear();
 
     testTransfer(m, 0, "state1");
 
@@ -142,6 +142,61 @@ public:
     testOperate(m, { s2, s21 });
   }
 
+  TEST_METHOD(StateMachine_update_forward_functional)
+  {
+    MockStateMachine m;
+    IStatePtrList &entry = m.entryStack;
+    m.value = 0;
+
+    FunctionalState * s1 = new FunctionalState("state1", m.rootState(), &m);
+    addStackFunctions(s1, m);
+    s1->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
+      if (m.value == 1)
+        return rm->rootState()->findState("state1/state1.1").back();
+      else
+        return nullptr;
+    });
+
+    FunctionalState * s11 = new FunctionalState("state1.1", s1, &m);
+    addStackFunctions(s11, m);
+    // Test auto activating a child state
+    s11->setOnEntry([&entry](IState * s, StateMachine *rm){
+      entry.push_back(s);
+      rm->rootState()->findState("state1/state1.1/state1.1.1").back()->setActivation(true, s);
+    });
+
+    FunctionalState * s111 = new FunctionalState("state1.1.1", s11, &m);
+    addStackFunctions(s111, m);
+
+    FunctionalState * s12 = new FunctionalState("state1.2", s1, &m);
+    addStackFunctions(s12, m);
+    s12->setTestTransferCase([&m](const IState * const s, StateMachine * rm) -> IState *{
+      if (m.value == 3)
+        return rm->rootState()->findState("state1").back();
+      else
+        return nullptr;
+    });
+
+    // Default activated state (1.2)
+    s12->setActivation(true);
+    m.entryStack.clear();
+    m.exitStack.clear();
+
+    testTransfer(m, 0, "state1/state1.2");
+
+    // Operate on 1.2
+    testOperate(m, { s1, s12 });
+
+    // Transfer from 1.2 to 1
+    testTransfer(m, 3, "state1", { s12 }, { });
+
+    // Operate on 1
+    testOperate(m, { s1 });
+
+    // Transfer from 1 to 1.1.1 (via 1.1 as forwarding state)
+    testTransfer(m, 1, "state1/state1.1/state1.1.1", { }, { s11, s111 });
+  }
+
   /**
    * @brief Performs transfer test.
    * @param m Reference to the state machine under test
@@ -163,18 +218,18 @@ public:
     // Validate state entry and exit stacks
     if (transferValue == 0)
     {
-      Assert::AreEqual((size_t)0, m.m_entryStack.size());
-      Assert::AreEqual((size_t)0, m.m_exitStack.size());
+      Assert::AreEqual((size_t)0, m.entryStack.size());
+      Assert::AreEqual((size_t)0, m.exitStack.size());
     }
     else
     {
-      Assert::IsTrue(expectedExitStack == m.m_exitStack);
-      Assert::IsTrue(expectedEntryStack == m.m_entryStack);
+      Assert::IsTrue(expectedExitStack == m.exitStack);
+      Assert::IsTrue(expectedEntryStack == m.entryStack);
     }
 
     // Reset state entry and exit stacks
-    m.m_entryStack.clear();
-    m.m_exitStack.clear();
+    m.entryStack.clear();
+    m.exitStack.clear();
   }
 
   /**
@@ -185,7 +240,10 @@ public:
   void testOperate(MockStateMachine &m, const IStatePtrList &expectedStack)
   {
     m.operate();
-    Assert::IsTrue(expectedStack == m.m_operatedStack);
+    Assert::IsTrue(expectedStack == m.operatedStack);
+
+    // Reset operation stack
+    m.operatedStack.clear();
   }
 
   /**
@@ -195,9 +253,9 @@ public:
    */
   void addStackFunctions(FunctionalState * state, MockStateMachine &m)
   {
-    IStatePtrList &entry = m.m_entryStack;
-    IStatePtrList &exit = m.m_exitStack;
-    IStatePtrList &operate = m.m_operatedStack;
+    IStatePtrList &entry = m.entryStack;
+    IStatePtrList &exit = m.exitStack;
+    IStatePtrList &operate = m.operatedStack;
 
     state->setOnEntry([&entry](IState * s, StateMachine *){ entry.push_back(s); });
     state->setOnExit([&exit](IState * s, StateMachine *){ exit.push_back(s); });
