@@ -144,14 +144,12 @@ namespace Snooker
     });
 
     // Take shot state
-    IState *takeShot = new TakeShotState(player, this, sim);
+    TakeShotState *takeShot = new TakeShotState(player, this, sim);
 
     // Wait for shot state
-    IState *waitForShot = new WaitForShotState(player, this, sim);
+    WaitForShotState *waitForShot = new WaitForShotState(player, this, sim);
 
-    // After shot state
     FunctionalState *afterShot = new FunctionalState("after_shot", player, this);
-    // TODO
 
     // AFTER SHOT STATES
 
@@ -164,13 +162,14 @@ namespace Snooker
 
     // FOUL SHOT STATES
 
-    FunctionalState *noBallHit = new FunctionalState("no_ball_hit", foulShot, this);
+    FunctionalState *noBallHit = new FunctionalState("hit_nothing", foulShot, this);
     FunctionalState *hitWrongBall = new FunctionalState("hit_wrong_ball", foulShot, this);
     FunctionalState *potWrongBall = new FunctionalState("pot_wrong_ball", foulShot, this);
-    FunctionalState *potCueBall = new FunctionalState("pot_cue_ball", foulShot, this);
+    FunctionalState *potCueBall = new FunctionalState("pot_cue_ball", potWrongBall, this);
 
     // LEGAL SHOT STATES
 
+    FunctionalState *potNothing = new FunctionalState("pot_nothing", legalShot, this);
     FunctionalState *potRed = new FunctionalState("pot_red", legalShot, this);
     FunctionalState *potAnyColour = new FunctionalState("pot_any_colour", legalShot, this);
     FunctionalState *potSequenceColour = new FunctionalState("pot_sequence_colour", legalShot, this);

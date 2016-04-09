@@ -28,8 +28,18 @@ namespace Snooker
 
     static std::pair<std::string, Engine::Graphics::Colour> Ball::Info(int points);
 
+  public:
     Ball(const Engine::Maths::Vector2 &pos, int points);
     virtual ~Ball();
+
+    /**
+     * @brief Gets the number of points this ball is worth.
+     * @return Point value.
+     */
+    inline int points() const
+    {
+      return m_points;
+    }
 
     Engine::Graphics::Colour colour(float alpha = 1.0f) const;
     bool isCueBall() const;

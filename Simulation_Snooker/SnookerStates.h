@@ -66,14 +66,57 @@ namespace Snooker
                      SnookerSimulation *simulation)
         : IState("wait_for_shot", parent, machine)
         , m_simulation(simulation)
+        , m_targetBallPoints(-1)
     {
+    }
+
+    inline void targetBallPoints(int points)
+    {
+      m_targetBallPoints = points;
+    }
+
+    inline int targetBallPoints() const
+    {
+      return m_targetBallPoints;
     }
 
   protected:
     virtual IState *testTransferFrom() const
     {
       if (m_simulation->physics.atRest())
-        return m_parent->findState("after_shot").back();
+      {
+        // No ball was touched
+        if (m_firstCueBallTouched == nullptr)
+          return m_parent->findState("after_shot/foul/hit_nothing").back();
+
+        // Hit incorrect ball
+        if (m_targetBallPoints == m_firstCueBallTouched->points() || (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
+          return m_parent->findState("after_shot/foul/hit_wrong_ball").back();
+
+        // Did not pot anything
+        if (m_potted.empty())
+          return m_parent->findState("after_shot/legal/pot_nothing").back();
+
+        // Cue ball was potted
+        if (std::find(m_potted.begin(), m_potted.end(), m_simulation->balls[0]) != m_potted.end())
+          return m_parent->findState("after_shot/foul/pot_wrong_ball/pot_cue_ball").back();
+
+        // A specific corect ball was potted
+        if (m_potted.size() == 1 && m_potted[0]->points() == m_targetBallPoints)
+        {
+          if (m_targetBallPoints == 1)
+            return m_parent->findState("after_shot/legal/pot_red").back();
+          else
+            return m_parent->findState("after_shot/legal/pot_sequence_colour").back();
+        }
+
+        // Any colour was potted
+        if (m_potted.size() == 1 && m_potted[0]->points() > 1 && m_targetBallPoints == 0)
+          return m_parent->findState("after_shot/legal/pot_any_colour").back();
+
+        // Wrong ball was potted
+        return m_parent->findState("after_shot/foul/pot_wrong_ball").back();
+      }
       else
         return nullptr;
     }
@@ -110,6 +153,7 @@ namespace Snooker
     SnookerSimulation *m_simulation;
     Ball *m_firstCueBallTouched;
     std::vector<Ball *> m_potted;
+    int m_targetBallPoints;
   };
 
   class TakeShotState : public Simulation::AI::CompletableActionState
@@ -118,23 +162,12 @@ namespace Snooker
     TakeShotState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine, SnookerSimulation *simulation)
         : CompletableActionState("take_shot", parent, machine)
         , m_simulation(simulation)
-        , m_targetBallPoints(-1)
     {
     }
 
     virtual ~TakeShotState()
     {
       resetMousePosition();
-    }
-
-    inline void targetBallPoints(int points)
-    {
-      m_targetBallPoints = points;
-    }
-
-    inline int targetBallPoints() const
-    {
-      return m_targetBallPoints;
     }
 
   protected:
@@ -210,8 +243,7 @@ namespace Snooker
 
   private:
     SnookerSimulation *m_simulation;
-    Engine::Maths::Vector2 *m_mouseStartPosition;
-    int m_targetBallPoints;
+    Engine::Maths::Vector2 *m_mouseStartPosition;    
   };
 }
 }

@@ -154,6 +154,16 @@ namespace Snooker
     else if (id == m_physicsLoop)
     {
       physics.update(dtMilliSec);
+
+      // Update state machine
+      if (fsm->activeStateBranch().back()->name() == "wait_for_shot")
+      {
+        if (fsm->update())
+        {
+          m_menu->updateTextFromState();
+          std::cout << "FSM state change: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
+        }
+      }
     }
     // Handle control
     else if (id == m_controlLoop)
@@ -195,6 +205,7 @@ namespace Snooker
    */
   void SnookerSimulation::gameShutdown()
   {
+    delete fsm;
   }
 
   /**
