@@ -44,7 +44,7 @@ namespace Physics
      *             considered in motion
      * @return True if the entity is below the specified tolerance.
      */
-    inline bool atRest(float tol2 = 0.01f) const
+    inline bool atRest(float tol2) const
     {
       if (m_stationary)
         return true;

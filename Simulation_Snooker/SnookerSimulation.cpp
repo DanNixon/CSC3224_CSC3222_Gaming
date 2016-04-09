@@ -30,7 +30,7 @@ namespace Snooker
   SnookerSimulation::SnookerSimulation()
       : Game("Snooker Loopy", std::make_pair(1024, 768))
       , fsm(this)
-      , m_mouseStartPosition(nullptr)
+      , mouseStartPosition(nullptr)
   {
   }
 
@@ -55,37 +55,37 @@ namespace Snooker
     m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
     // Balls
-    m_balls[0] = new Ball(Vector2(), -1); // Cue ball
-    m_balls[1] = new Ball(Vector2(), 1);  // Red
-    m_balls[2] = new Ball(Vector2(), 1);  // Red
-    m_balls[3] = new Ball(Vector2(), 1);  // Red
-    m_balls[4] = new Ball(Vector2(), 1);  // Red
-    m_balls[5] = new Ball(Vector2(), 1);  // Red
-    m_balls[6] = new Ball(Vector2(), 1);  // Red
-    m_balls[7] = new Ball(Vector2(), 1);  // Red
-    m_balls[8] = new Ball(Vector2(), 1);  // Red
-    m_balls[9] = new Ball(Vector2(), 1);  // Red
-    m_balls[10] = new Ball(Vector2(), 1); // Red
-    m_balls[11] = new Ball(Vector2(), 1); // Red
-    m_balls[12] = new Ball(Vector2(), 1); // Red
-    m_balls[13] = new Ball(Vector2(), 1); // Red
-    m_balls[14] = new Ball(Vector2(), 1); // Red
-    m_balls[15] = new Ball(Vector2(), 1); // Red
-    m_balls[16] = new Ball(Vector2(), 2); // Yellow
-    m_balls[17] = new Ball(Vector2(), 3); // Green
-    m_balls[18] = new Ball(Vector2(), 4); // Brown
-    m_balls[19] = new Ball(Vector2(), 5); // Blue
-    m_balls[20] = new Ball(Vector2(), 6); // Pink
-    m_balls[21] = new Ball(Vector2(), 7); // Black
+    balls[0] = new Ball(Vector2(), -1); // Cue ball
+    balls[1] = new Ball(Vector2(), 1);  // Red
+    balls[2] = new Ball(Vector2(), 1);  // Red
+    balls[3] = new Ball(Vector2(), 1);  // Red
+    balls[4] = new Ball(Vector2(), 1);  // Red
+    balls[5] = new Ball(Vector2(), 1);  // Red
+    balls[6] = new Ball(Vector2(), 1);  // Red
+    balls[7] = new Ball(Vector2(), 1);  // Red
+    balls[8] = new Ball(Vector2(), 1);  // Red
+    balls[9] = new Ball(Vector2(), 1);  // Red
+    balls[10] = new Ball(Vector2(), 1); // Red
+    balls[11] = new Ball(Vector2(), 1); // Red
+    balls[12] = new Ball(Vector2(), 1); // Red
+    balls[13] = new Ball(Vector2(), 1); // Red
+    balls[14] = new Ball(Vector2(), 1); // Red
+    balls[15] = new Ball(Vector2(), 1); // Red
+    balls[16] = new Ball(Vector2(), 2); // Yellow
+    balls[17] = new Ball(Vector2(), 3); // Green
+    balls[18] = new Ball(Vector2(), 4); // Brown
+    balls[19] = new Ball(Vector2(), 5); // Blue
+    balls[20] = new Ball(Vector2(), 6); // Pink
+    balls[21] = new Ball(Vector2(), 7); // Black
 
     placeBalls();
 
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
-      if (m_balls[i] != nullptr)
+      if (balls[i] != nullptr)
       {
-        m_table->addChild(m_balls[i]);
-        physics.addEntity(m_balls[i]);
+        m_table->addChild(balls[i]);
+        physics.addEntity(balls[i]);
       }
     }
 
@@ -111,7 +111,7 @@ namespace Snooker
 
     m_shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
     m_shotAimLine->setActive(false);
-    m_balls[0]->addChild(m_shotAimLine);
+    balls[0]->addChild(m_shotAimLine);
 
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
@@ -160,18 +160,18 @@ namespace Snooker
       for (auto it = inters.begin(); it != inters.end(); ++it)
       {
         // TODO
-        if (it->contains(m_balls[0]))
+        if (it->contains(balls[0]))
         {
-          std::cout << (*it) << std::endl;
+          // std::cout << (*it) << std::endl;
         }
 
         Entity *a = it->entityA();
         Entity *b = it->entityB();
 
-        if (dynamic_cast<Pocket *>(a))
-          std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
-        if (dynamic_cast<Pocket *>(b))
-          std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
+        // if (dynamic_cast<Pocket *>(a))
+        // std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
+        // if (dynamic_cast<Pocket *>(b))
+        // std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
       }
     }
     // Handle control
@@ -189,20 +189,6 @@ namespace Snooker
 
       // Pause
       physics.setRunning(!controls->state(S_PAUSE));
-
-      // Update control for state
-      if (!m_menu->isMouseOver())
-      {
-        if (fsm.rootState()->findState("sandbox").back()->isActive())
-          updateControlTakeShot();
-        else if (fsm.rootState()->findState("game").back()->isActive())
-        {
-          if (fsm.activeStateBranch().back()->name() == "place_cue_ball")
-            updateControlPlaceCueBall(static_cast<CompletableActionState *>(fsm.activeStateBranch().back()));
-          else if (fsm.activeStateBranch().back()->name() == "take_shot")
-            updateControlTakeShot(static_cast<CompletableActionState *>(fsm.activeStateBranch().back()));
-        }
-      }
     }
     // Output profiling data
     else if (id == m_profileLoop)
@@ -220,9 +206,6 @@ namespace Snooker
 
         m_profileText->setText(profileStr.str());
       }
-
-      if (!physics.atRest())
-        std::cout << "in motion" << std::endl;
     }
   }
 
@@ -240,34 +223,34 @@ namespace Snooker
   void SnookerSimulation::placeBalls()
   {
     // Initial positions
-    m_balls[0]->setPosition(Vector2(-1150.0f, 200.0f));    // Cue ball
-    m_balls[1]->setPosition(Vector2(957.85f, 0.0f));       // Red
-    m_balls[2]->setPosition(Vector2(1010.35f, 26.25f));    // Red
-    m_balls[3]->setPosition(Vector2(1010.35f, -26.25f));   // Red
-    m_balls[4]->setPosition(Vector2(1062.85f, 52.5f));     // Red
-    m_balls[5]->setPosition(Vector2(1062.85f, 0.0f));      // Red
-    m_balls[6]->setPosition(Vector2(1062.85f, -52.5f));    // Red
-    m_balls[7]->setPosition(Vector2(1115.35f, 78.75f));    // Red
-    m_balls[8]->setPosition(Vector2(1115.35f, 26.25f));    // Red
-    m_balls[9]->setPosition(Vector2(1115.35f, -26.25f));   // Red
-    m_balls[10]->setPosition(Vector2(1115.35f, -78.75f));  // Red
-    m_balls[11]->setPosition(Vector2(1167.85f, 105.0f));   // Red
-    m_balls[12]->setPosition(Vector2(1167.85f, 52.5f));    // Red
-    m_balls[13]->setPosition(Vector2(1167.85f, 0.0f));     // Red
-    m_balls[14]->setPosition(Vector2(1167.85f, -52.5f));   // Red
-    m_balls[15]->setPosition(Vector2(1167.85f, -105.0f));  // Red
-    m_balls[16]->setPosition(Vector2(-1047.75f, -291.1f)); // Yellow
-    m_balls[17]->setPosition(Vector2(-1047.75f, 291.1f));  // Green
-    m_balls[18]->setPosition(Vector2(-1047.75f, 0.0f));    // Brown
-    m_balls[19]->setPosition(Vector2(0.0f, 0.0f));         // Blue
-    m_balls[20]->setPosition(Vector2(895.35f, 0.0f));      // Pink
-    m_balls[21]->setPosition(Vector2(1466.85f, 0.0f));     // Black
+    balls[0]->setPosition(Vector2(-1150.0f, 200.0f));    // Cue ball
+    balls[1]->setPosition(Vector2(957.85f, 0.0f));       // Red
+    balls[2]->setPosition(Vector2(1010.35f, 26.25f));    // Red
+    balls[3]->setPosition(Vector2(1010.35f, -26.25f));   // Red
+    balls[4]->setPosition(Vector2(1062.85f, 52.5f));     // Red
+    balls[5]->setPosition(Vector2(1062.85f, 0.0f));      // Red
+    balls[6]->setPosition(Vector2(1062.85f, -52.5f));    // Red
+    balls[7]->setPosition(Vector2(1115.35f, 78.75f));    // Red
+    balls[8]->setPosition(Vector2(1115.35f, 26.25f));    // Red
+    balls[9]->setPosition(Vector2(1115.35f, -26.25f));   // Red
+    balls[10]->setPosition(Vector2(1115.35f, -78.75f));  // Red
+    balls[11]->setPosition(Vector2(1167.85f, 105.0f));   // Red
+    balls[12]->setPosition(Vector2(1167.85f, 52.5f));    // Red
+    balls[13]->setPosition(Vector2(1167.85f, 0.0f));     // Red
+    balls[14]->setPosition(Vector2(1167.85f, -52.5f));   // Red
+    balls[15]->setPosition(Vector2(1167.85f, -105.0f));  // Red
+    balls[16]->setPosition(Vector2(-1047.75f, -291.1f)); // Yellow
+    balls[17]->setPosition(Vector2(-1047.75f, 291.1f));  // Green
+    balls[18]->setPosition(Vector2(-1047.75f, 0.0f));    // Brown
+    balls[19]->setPosition(Vector2(0.0f, 0.0f));         // Blue
+    balls[20]->setPosition(Vector2(895.35f, 0.0f));      // Pink
+    balls[21]->setPosition(Vector2(1466.85f, 0.0f));     // Black
 
     // Reset acceleration and velocity to zero
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
-      m_balls[i]->setVelocity(Vector2());
-      m_balls[i]->setAcceleration(Vector2());
+      balls[i]->setVelocity(Vector2());
+      balls[i]->setAcceleration(Vector2());
     }
   }
 
@@ -277,24 +260,24 @@ namespace Snooker
   void SnookerSimulation::updateControlTakeShot(CompletableActionState *state)
   {
     // Mouse clicks (to take shots)
-    if (m_mouseStartPosition == nullptr)
+    if (mouseStartPosition == nullptr)
     {
       if (controls->state(S_TAKE_SHOT))
       {
         // Record starting position of mouse
-        m_mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
+        mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
         static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(Vector3());
         m_shotAimLine->setActive(true);
       }
       else
       {
-        m_balls[0]->setAcceleration(Vector2());
+        balls[0]->setAcceleration(Vector2());
       }
     }
     else
     {
       Vector2 newMousePosition = Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
-      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+      Vector2 deltaMouse = *mouseStartPosition - newMousePosition;
 
       // Clamp max acceleration to a sensible level
       float maxShotMagnitude = 0.5f;
@@ -304,9 +287,9 @@ namespace Snooker
       if (!controls->state(S_TAKE_SHOT))
       {
         m_shotAimLine->setActive(false);
-        m_balls[0]->setAcceleration(deltaMouse);
-        delete m_mouseStartPosition;
-        m_mouseStartPosition = nullptr;
+        balls[0]->setAcceleration(deltaMouse);
+        delete mouseStartPosition;
+        mouseStartPosition = nullptr;
 
         if (state != nullptr)
           state->markAsComplete();
@@ -324,18 +307,18 @@ namespace Snooker
   void SnookerSimulation::updateControlPlaceCueBall(CompletableActionState *state)
   {
     // Mouse clicks (to take shots)
-    if (m_mouseStartPosition == nullptr)
+    if (mouseStartPosition == nullptr)
     {
       if (controls->state(S_TAKE_SHOT))
       {
         // Record starting position of mouse
-        m_mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
+        mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
       }
     }
     else
     {
       Vector2 newMousePosition = Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
-      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+      Vector2 deltaMouse = *mouseStartPosition - newMousePosition;
 
       // Clamp max acceleration to a sensible level
       float maxShotMagnitude = 0.5f;
@@ -344,15 +327,15 @@ namespace Snooker
 
       if (!controls->state(S_TAKE_SHOT))
       {
-        delete m_mouseStartPosition;
-        m_mouseStartPosition = nullptr;
+        delete mouseStartPosition;
+        mouseStartPosition = nullptr;
 
         if (state != nullptr)
           state->markAsComplete();
       }
       else
       {
-        m_balls[0]->setPosition(newMousePosition * 2000.0f);
+        balls[0]->setPosition(newMousePosition * 2000.0f);
       }
     }
   }

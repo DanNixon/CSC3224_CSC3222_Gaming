@@ -62,6 +62,14 @@ namespace Snooker
     {
     }
 
+    virtual void onEntry()
+    {
+      FunctionalState::onEntry();
+
+      // Mark as not completed on state entry
+      m_completed = false;
+    }
+
     bool completed() const
     {
       return m_completed;

@@ -47,19 +47,20 @@ namespace Snooker
 
     void placeBalls();
 
+    void updateControlTakeShot(CompletableActionState *state = nullptr);
+    void updateControlPlaceCueBall(CompletableActionState *state = nullptr);
+
   protected:
     int gameStartup();
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
-  private:
-    void updateControlTakeShot(CompletableActionState *state = nullptr);
-    void updateControlPlaceCueBall(CompletableActionState *state = nullptr);
-
   public:
     Simulation::Physics::PhysicsSimulation physics;
     Engine::Input::IControlScheme *controls;
     SnookerStateMachine fsm;
+    Ball *balls[NUM_BALLS];
+    Engine::Maths::Vector2 *mouseStartPosition;
 
   private:
     friend class SnookerControls;
@@ -74,14 +75,12 @@ namespace Snooker
     OptionsMenu *m_menu;
 
     Table *m_table;
-    Ball *m_balls[NUM_BALLS];
 
     TTF_Font *m_fontLarge;
     TTF_Font *m_fontMedium;
     Engine::Graphics::ShaderProgram *m_uiShader;
     Engine::Graphics::TextPane *m_profileText;
 
-    Engine::Maths::Vector2 *m_mouseStartPosition;
     Engine::Graphics::RenderableObject *m_shotAimLine;
   };
 }

@@ -5,10 +5,13 @@
 
 #include "SnookerStateMachine.h"
 
+#include <Engine_Maths/Vector2.h>
+
 #include "SnookerControls.h"
 #include "SnookerSimulation.h"
 #include "SnookerStates.h"
 
+using namespace Engine::Maths;
 using namespace Simulation::AI;
 
 namespace Simulation
@@ -63,6 +66,8 @@ namespace Snooker
       }
       return nullptr;
     });
+    // Handle controls for taking shots
+    sandbox->setOnOperate([sim](IState *s, StateMachine *) { sim->updateControlTakeShot(nullptr); });
 
     // Game mode
     FunctionalState *game = new FunctionalState("game", rootState(), this);
@@ -124,6 +129,15 @@ namespace Snooker
       else
         return nullptr;
     });
+    // Reset recorded mouse start position
+    placeCueBall->setOnEntry([sim](IState *, StateMachine *) {
+      if (sim->mouseStartPosition)
+        delete sim->mouseStartPosition;
+      sim->mouseStartPosition = nullptr;
+    });
+    // Handle controls for placing cue ball
+    placeCueBall->setOnOperate(
+        [sim](IState *s, StateMachine *) { sim->updateControlPlaceCueBall(static_cast<CompletableActionState *>(s)); });
 
     // Take shot state
     FunctionalState *takeShot = new CompletableActionState("take_shot", player, this);
@@ -134,6 +148,17 @@ namespace Snooker
       else
         return nullptr;
     });
+    // Stop applying acceleration when shot is taken
+    takeShot->setOnExit([sim](IState *, StateMachine *) { sim->balls[0]->setAcceleration(Vector2()); });
+    // Reset recorded mouse start position
+    takeShot->setOnEntry([sim](IState *, StateMachine *) {
+      if (sim->mouseStartPosition)
+        delete sim->mouseStartPosition;
+      sim->mouseStartPosition = nullptr;
+    });
+    // Handle controls for taking a shot
+    takeShot->setOnOperate(
+        [sim](IState *s, StateMachine *) { sim->updateControlTakeShot(static_cast<CompletableActionState *>(s)); });
 
     // Wait for shot state
     FunctionalState *waitForShot = new FunctionalState("wait_for_shot", player, this);

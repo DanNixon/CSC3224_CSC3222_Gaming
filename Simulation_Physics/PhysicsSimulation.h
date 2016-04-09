@@ -42,7 +42,7 @@ namespace Physics
       return m_run;
     }
 
-    bool atRest(float tol2 = 0.01f) const;
+    bool atRest(float tol2 = 0.00001f) const;
 
     /**
      * @brief Adds a new entity to the simulation.
