@@ -125,6 +125,12 @@ namespace Snooker
     SnookerSimulation *sim = m_simulation;
     PlayerState *player = new PlayerState(parent, this, playerNumber);
 
+    player->setOnEntry([](IState *s, StateMachine *) {
+      // Aim for red in first turn
+      // TODO
+      dynamic_cast<WaitForShotState *>(s->findState("wait_for_shot").back())->setTargetBallPoints(1);
+    });
+
     // FOUR GENERAL PLAY STATES: place cue ball, take shot, wait for shot, after shot
 
     // Place cue ball state

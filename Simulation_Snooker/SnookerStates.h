@@ -70,7 +70,7 @@ namespace Snooker
     {
     }
 
-    inline void targetBallPoints(int points)
+    inline void setTargetBallPoints(int points)
     {
       m_targetBallPoints = points;
     }
@@ -85,22 +85,22 @@ namespace Snooker
     {
       if (m_simulation->physics.atRest())
       {
+        // Cue ball was potted
+        if (std::find(m_potted.begin(), m_potted.end(), m_simulation->balls[0]) != m_potted.end())
+          return m_parent->findState("after_shot/foul/pot_wrong_ball/pot_cue_ball").back();
+
         // No ball was touched
         if (m_firstCueBallTouched == nullptr)
           return m_parent->findState("after_shot/foul/hit_nothing").back();
 
         // Hit incorrect ball
-        if (m_targetBallPoints == m_firstCueBallTouched->points() ||
+        if (m_targetBallPoints != m_firstCueBallTouched->points() ||
             (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
           return m_parent->findState("after_shot/foul/hit_wrong_ball").back();
 
         // Did not pot anything
         if (m_potted.empty())
           return m_parent->findState("after_shot/legal/pot_nothing").back();
-
-        // Cue ball was potted
-        if (std::find(m_potted.begin(), m_potted.end(), m_simulation->balls[0]) != m_potted.end())
-          return m_parent->findState("after_shot/foul/pot_wrong_ball/pot_cue_ball").back();
 
         // A specific corect ball was potted
         if (m_potted.size() == 1 && m_potted[0]->points() == m_targetBallPoints)
