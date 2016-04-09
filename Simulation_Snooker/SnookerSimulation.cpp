@@ -161,7 +161,7 @@ namespace Snooker
         if (fsm->update())
         {
           m_menu->updateTextFromState();
-          std::cout << "FSM state change: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
+          std::cout << "STATE: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
         }
       }
     }
@@ -172,7 +172,7 @@ namespace Snooker
       if (fsm->update())
       {
         m_menu->updateTextFromState();
-        std::cout << "FSM state change: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
+        std::cout << "STATE: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
       }
 
       // Profile display

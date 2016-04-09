@@ -90,7 +90,8 @@ namespace Snooker
           return m_parent->findState("after_shot/foul/hit_nothing").back();
 
         // Hit incorrect ball
-        if (m_targetBallPoints == m_firstCueBallTouched->points() || (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
+        if (m_targetBallPoints == m_firstCueBallTouched->points() ||
+            (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
           return m_parent->findState("after_shot/foul/hit_wrong_ball").back();
 
         // Did not pot anything
@@ -181,12 +182,12 @@ namespace Snooker
 
     virtual void onExit()
     {
-      CompletableActionState::onExit();
       m_simulation->balls[0]->setAcceleration(Engine::Maths::Vector2());
     }
 
     virtual void onEntry()
     {
+      CompletableActionState::onEntry();
       resetMousePosition();
     }
 
@@ -243,7 +244,7 @@ namespace Snooker
 
   private:
     SnookerSimulation *m_simulation;
-    Engine::Maths::Vector2 *m_mouseStartPosition;    
+    Engine::Maths::Vector2 *m_mouseStartPosition;
   };
 }
 }
