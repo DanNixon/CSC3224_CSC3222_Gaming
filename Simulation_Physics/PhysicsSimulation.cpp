@@ -84,17 +84,24 @@ namespace Physics
     // Create a list of possible interfaces (broadphase)
     for (EntityPtrListIter it = m_entities.begin(); it != m_entities.end(); ++it)
     {
+      // Ignore entities with no collide
+      if (!(*it)->collides())
+        continue;
+
       bool thisStationary = (*it)->stationary();
       float thisBoxRight = (*it)->boundingBox().upperRight()[0];
 
       for (auto iit = it + 1; iit != m_entities.end(); ++iit)
       {
+        // Two stationary (fixed) entities can never collide
         if (thisStationary && (*iit)->stationary())
           continue;
 
         float testBoxLeft = (*iit)->boundingBox().lowerLeft()[0];
 
+        // Test for overlap between the x-axis values of the bounding boxes
         if (testBoxLeft < thisBoxRight)
+          // If intersections exists then these entities could have collided
           interfaces.push_back(InterfaceDef(*it, *iit));
       }
     }

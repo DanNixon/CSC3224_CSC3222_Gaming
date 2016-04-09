@@ -23,6 +23,7 @@ namespace Physics
    */
   Entity::Entity(const Vector2 &pos, float mass, bool stationary, float dragCoeff, float velocityFloor)
       : m_stationary(stationary)
+      , m_collides(true)
       , m_dragCoeff(dragCoeff)
       , m_velocityFloor2(velocityFloor * velocityFloor)
       , m_inverseMass(1.0f / mass)
@@ -86,6 +87,15 @@ namespace Physics
   void Entity::setAcceleration(const Vector2 &acc)
   {
     m_acceleration = acc;
+  }
+
+  /**
+   * @brief Immediately stops this entity moving.
+   */
+  void Entity::stopMotion()
+  {
+    m_acceleration.toZero();
+    m_velocity.toZero();
   }
 
   /**

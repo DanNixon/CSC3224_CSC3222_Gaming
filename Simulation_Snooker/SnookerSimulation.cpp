@@ -238,11 +238,16 @@ namespace Snooker
     balls[20]->setPosition(Vector2(895.35f, 0.0f));      // Pink
     balls[21]->setPosition(Vector2(1466.85f, 0.0f));     // Black
 
-    // Reset acceleration and velocity to zero
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
-      balls[i]->setVelocity(Vector2());
-      balls[i]->setAcceleration(Vector2());
+      // At rest
+      balls[i]->stopMotion();
+
+      // Visible
+      balls[i]->setActive(true);
+
+      // Can collide
+      balls[i]->setCollide(true);
     }
   }
 }

@@ -143,10 +143,26 @@ namespace Snooker
         Simulation::Physics::Entity *a = it->entityA();
         Simulation::Physics::Entity *b = it->entityB();
 
+        Ball *potted = nullptr;
         if (dynamic_cast<Pocket *>(a))
-          m_potted.push_back(dynamic_cast<Ball *>(b));
-        if (dynamic_cast<Pocket *>(b))
-          m_potted.push_back(dynamic_cast<Ball *>(a));
+          potted = dynamic_cast<Ball *>(b);
+        else if (dynamic_cast<Pocket *>(b))
+          potted = dynamic_cast<Ball *>(a);
+
+        if (potted)
+        {
+          // Record his ball as being potted
+          m_potted.push_back(potted);
+
+          // Stop the ball moving
+          potted->stopMotion();
+
+          // Set no collide
+          potted->setCollide(false);
+
+          // Make invisivle
+          potted->setActive(false);
+        }
       }
     }
 

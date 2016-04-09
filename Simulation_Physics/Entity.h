@@ -53,6 +53,24 @@ namespace Physics
     }
 
     /**
+     * @brief Checks if this entity can collide with others and vice-versa.
+     * @return True if this entity can collide with others
+     */
+    inline bool collides() const
+    {
+      return m_collides;
+    }
+
+    /**
+     * @brief Enables or disables collisions for this entity.
+     * @param collides True if this entity can collide with others
+     */
+    inline void setCollide(bool collides)
+    {
+      m_collides = collides;
+    }
+
+    /**
      * @brief Gets the origin centred bounding box.
      * @return Origin centred bounding box
      * @see Entity::boundingBox()
@@ -128,6 +146,8 @@ namespace Physics
 
     void setAcceleration(const Engine::Maths::Vector2 &acc);
 
+    void stopMotion();
+
     friend std::ostream &operator<<(std::ostream &o, const Entity &e);
 
   private:
@@ -137,11 +157,11 @@ namespace Physics
   protected:
     friend class PhysicsSimulation;
 
-    const bool m_stationary;      //!< Flag indicating this entity is stationary
-    const float m_dragCoeff;      //!< Velocity coefficient due to simple drag
-    const float m_velocityFloor2; //!< Velcoity magnitude squared at which
-                                  // velocity is set to zero
-
+    const bool m_stationary;                 //!< Flag indicating this entity is stationary
+    bool m_collides;                         //!< Flag indicating if this entity collides with others
+    const float m_dragCoeff;                 //!< Velocity coefficient due to simple drag
+    const float m_velocityFloor2;            //!< Velcoity magnitude squared at which
+                                             // velocity is set to zero
     float m_inverseMass;                     //!< 1/mass
     Engine::Maths::BoundingBox2 m_originBox; //!< Bounding box centred about the origin
     Engine::Maths::BoundingBox2 m_box;       //!< Bounding box centred about the position of the entity
