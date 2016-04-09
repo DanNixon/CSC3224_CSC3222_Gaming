@@ -72,7 +72,7 @@ namespace Snooker
     m_pause->setText(m_simulation->controls->state(S_PAUSE) ? "Resume (P)" : "Pause (P)");
     m_profile->setText(m_simulation->controls->state(S_PROFILE_DISPLAY) ? "Hide profile data (F)"
                                                                         : "Show profile data (F)");
-    m_mode->setText(m_simulation->fsm.activeStateBranch()[0]->name() == "game" ? "Mode: Game" : "Mode: Sandbox");
+    m_mode->setText(m_simulation->fsm->activeStateBranch()[0]->name() == "game" ? "Mode: Game" : "Mode: Sandbox");
   }
 }
 }

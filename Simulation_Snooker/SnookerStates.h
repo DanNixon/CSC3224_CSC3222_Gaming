@@ -8,9 +8,16 @@
 
 #include <string>
 
+#include <Engine_Graphics/LineMesh.h>
+#include <Engine_Maths/VectorOperations.h>
+
+#include <Simulation_AI/CompletableActionState.h>
 #include <Simulation_AI/FunctionalState.h>
 #include <Simulation_AI/IState.h>
 #include <Simulation_AI/StateMachine.h>
+
+#include "SnookerControls.h"
+#include "SnookerSimulation.h"
 
 namespace Simulation
 {
@@ -41,10 +48,10 @@ namespace Snooker
       m_score += points;
     }
 
-    IState *otherPlayer() const
+    PlayerState *otherPlayer() const
     {
       std::string name = "game/running/player_" + std::to_string((m_playerNumber + 1) % 2);
-      return m_machine->rootState()->findState(name).back();
+      return dynamic_cast<PlayerState *>(m_machine->rootState()->findState(name).back());
     }
 
   private:
@@ -52,36 +59,159 @@ namespace Snooker
     int m_score;        //!< Players score
   };
 
-  class CompletableActionState : public Simulation::AI::FunctionalState
+  class WaitForShotState : public Simulation::AI::IState
   {
   public:
-    CompletableActionState(const std::string &name, Simulation::AI::IState *parent,
-                           Simulation::AI::StateMachine *machine)
-        : FunctionalState(name, parent, machine)
-        , m_completed(false)
+    WaitForShotState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine,
+                     SnookerSimulation *simulation)
+        : IState("wait_for_shot", parent, machine)
+        , m_simulation(simulation)
     {
+    }
+
+  protected:
+    virtual IState *testTransferFrom() const
+    {
+      if (m_simulation->physics.atRest())
+        return m_parent->findState("after_shot").back();
+      else
+        return nullptr;
     }
 
     virtual void onEntry()
     {
-      FunctionalState::onEntry();
-
-      // Mark as not completed on state entry
-      m_completed = false;
+      m_firstCueBallTouched = nullptr;
+      m_potted.clear();
     }
 
-    bool completed() const
+    virtual void onOperate()
     {
-      return m_completed;
-    }
+      std::vector<Simulation::Physics::InterfaceDef> inters = m_simulation->physics.interfaces();
+      Ball *cueBall = m_simulation->balls[0];
 
-    void markAsComplete()
-    {
-      m_completed = true;
+      for (auto it = inters.begin(); it != inters.end(); ++it)
+      {
+        // Record the first ball the cue ball touches
+        if (m_firstCueBallTouched == nullptr && it->contains(cueBall))
+          m_firstCueBallTouched = dynamic_cast<Ball *>(it->otherNot(cueBall));
+
+        // Record potted balls
+        Simulation::Physics::Entity *a = it->entityA();
+        Simulation::Physics::Entity *b = it->entityB();
+
+        if (dynamic_cast<Pocket *>(a))
+          m_potted.push_back(dynamic_cast<Ball *>(b));
+        if (dynamic_cast<Pocket *>(b))
+          m_potted.push_back(dynamic_cast<Ball *>(a));
+      }
     }
 
   private:
-    bool m_completed; //!< Flag indicating completion
+    SnookerSimulation *m_simulation;
+    Ball *m_firstCueBallTouched;
+    std::vector<Ball *> m_potted;
+  };
+
+  class TakeShotState : public Simulation::AI::CompletableActionState
+  {
+  public:
+    TakeShotState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine, SnookerSimulation *simulation)
+        : CompletableActionState("take_shot", parent, machine)
+        , m_simulation(simulation)
+        , m_targetBallPoints(-1)
+    {
+    }
+
+    virtual ~TakeShotState()
+    {
+      resetMousePosition();
+    }
+
+    inline void targetBallPoints(int points)
+    {
+      m_targetBallPoints = points;
+    }
+
+    inline int targetBallPoints() const
+    {
+      return m_targetBallPoints;
+    }
+
+  protected:
+    virtual IState *testTransferFrom() const
+    {
+      if (m_completed)
+        return m_parent->findState("wait_for_shot").back();
+      else
+        return nullptr;
+    }
+
+    virtual void onExit()
+    {
+      CompletableActionState::onExit();
+      m_simulation->balls[0]->setAcceleration(Engine::Maths::Vector2());
+    }
+
+    virtual void onEntry()
+    {
+      resetMousePosition();
+    }
+
+    virtual void onOperate()
+    {
+      // Mouse clicks (to take shots)
+      if (m_mouseStartPosition == nullptr)
+      {
+        if (m_simulation->controls->state(S_TAKE_SHOT))
+        {
+          // Record starting position of mouse
+          m_mouseStartPosition = new Engine::Maths::Vector2(m_simulation->controls->analog(A_MOUSE_X),
+                                                            m_simulation->controls->analog(A_MOUSE_Y));
+          static_cast<Engine::Graphics::LineMesh *>(m_simulation->shotAimLine->mesh())->setTo(Engine::Maths::Vector3());
+          m_simulation->shotAimLine->setActive(true);
+        }
+        else
+        {
+          m_simulation->balls[0]->setAcceleration(Engine::Maths::Vector2());
+        }
+      }
+      else
+      {
+        Engine::Maths::Vector2 newMousePosition = Engine::Maths::Vector2(m_simulation->controls->analog(A_MOUSE_X),
+                                                                         m_simulation->controls->analog(A_MOUSE_Y));
+        Engine::Maths::Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+
+        // Clamp max acceleration to a sensible level
+        float maxShotMagnitude = 0.5f;
+        if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
+          deltaMouse = Engine::Maths::VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
+
+        if (!m_simulation->controls->state(S_TAKE_SHOT))
+        {
+          m_simulation->shotAimLine->setActive(false);
+          m_simulation->balls[0]->setAcceleration(deltaMouse);
+          resetMousePosition();
+          m_completed = true;
+        }
+        else
+        {
+          static_cast<Engine::Graphics::LineMesh *>(m_simulation->shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
+        }
+      }
+    }
+
+  private:
+    inline void resetMousePosition()
+    {
+      if (m_mouseStartPosition != nullptr)
+        delete m_mouseStartPosition;
+      m_mouseStartPosition = nullptr;
+    }
+
+  private:
+    SnookerSimulation *m_simulation;
+    Engine::Maths::Vector2 *m_mouseStartPosition;
+    int m_targetBallPoints;
   };
 }
 }

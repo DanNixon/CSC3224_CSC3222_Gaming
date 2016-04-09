@@ -15,6 +15,7 @@
 #include <Engine_Maths/VectorOperations.h>
 
 #include "SnookerControls.h"
+#include "SnookerStateMachine.h"
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -29,8 +30,7 @@ namespace Snooker
 {
   SnookerSimulation::SnookerSimulation()
       : Game("Snooker Loopy", std::make_pair(1024, 768))
-      , fsm(this)
-      , mouseStartPosition(nullptr)
+      , fsm(new SnookerStateMachine(this))
   {
   }
 
@@ -44,7 +44,7 @@ namespace Snooker
   int SnookerSimulation::gameStartup()
   {
     // Init state machine
-    fsm.initStates();
+    static_cast<SnookerStateMachine *>(fsm)->initStates();
 
     // Load font for text display
     m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
@@ -109,9 +109,9 @@ namespace Snooker
     m_profileText->setText("Graphics: -\nPhysics: -");
     m_ui->root()->addChild(m_profileText);
 
-    m_shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
-    m_shotAimLine->setActive(false);
-    balls[0]->addChild(m_shotAimLine);
+    shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
+    shotAimLine->setActive(false);
+    balls[0]->addChild(shotAimLine);
 
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
@@ -154,34 +154,15 @@ namespace Snooker
     else if (id == m_physicsLoop)
     {
       physics.update(dtMilliSec);
-
-      // Check for potted balls
-      auto inters = physics.interfaces();
-      for (auto it = inters.begin(); it != inters.end(); ++it)
-      {
-        // TODO
-        if (it->contains(balls[0]))
-        {
-          // std::cout << (*it) << std::endl;
-        }
-
-        Entity *a = it->entityA();
-        Entity *b = it->entityB();
-
-        // if (dynamic_cast<Pocket *>(a))
-        // std::cout << dynamic_cast<Ball *>(b)->name() << " potted." << std::endl;
-        // if (dynamic_cast<Pocket *>(b))
-        // std::cout << dynamic_cast<Ball *>(a)->name() << " potted." << std::endl;
-      }
     }
     // Handle control
     else if (id == m_controlLoop)
     {
       // Update state machine
-      if (fsm.update())
+      if (fsm->update())
       {
         m_menu->updateTextFromState();
-        std::cout << "FSM state change: " << StateMachine::BranchToString(fsm.activeStateBranch()) << std::endl;
+        std::cout << "FSM state change: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
       }
 
       // Profile display
@@ -251,92 +232,6 @@ namespace Snooker
     {
       balls[i]->setVelocity(Vector2());
       balls[i]->setAcceleration(Vector2());
-    }
-  }
-
-  /**
-   * @brief Update the controls for taking a shot.
-   */
-  void SnookerSimulation::updateControlTakeShot(CompletableActionState *state)
-  {
-    // Mouse clicks (to take shots)
-    if (mouseStartPosition == nullptr)
-    {
-      if (controls->state(S_TAKE_SHOT))
-      {
-        // Record starting position of mouse
-        mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
-        static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(Vector3());
-        m_shotAimLine->setActive(true);
-      }
-      else
-      {
-        balls[0]->setAcceleration(Vector2());
-      }
-    }
-    else
-    {
-      Vector2 newMousePosition = Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
-      Vector2 deltaMouse = *mouseStartPosition - newMousePosition;
-
-      // Clamp max acceleration to a sensible level
-      float maxShotMagnitude = 0.5f;
-      if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
-        deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
-
-      if (!controls->state(S_TAKE_SHOT))
-      {
-        m_shotAimLine->setActive(false);
-        balls[0]->setAcceleration(deltaMouse);
-        delete mouseStartPosition;
-        mouseStartPosition = nullptr;
-
-        if (state != nullptr)
-          state->markAsComplete();
-      }
-      else
-      {
-        static_cast<LineMesh *>(m_shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
-      }
-    }
-  }
-
-  /**
-   * @brief Update the controls for placing the cue ball.
-   */
-  void SnookerSimulation::updateControlPlaceCueBall(CompletableActionState *state)
-  {
-    // Mouse clicks (to take shots)
-    if (mouseStartPosition == nullptr)
-    {
-      if (controls->state(S_TAKE_SHOT))
-      {
-        // Record starting position of mouse
-        mouseStartPosition = new Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
-      }
-    }
-    else
-    {
-      Vector2 newMousePosition = Vector2(controls->analog(A_MOUSE_X), controls->analog(A_MOUSE_Y));
-      Vector2 deltaMouse = *mouseStartPosition - newMousePosition;
-
-      // Clamp max acceleration to a sensible level
-      float maxShotMagnitude = 0.5f;
-      if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
-        deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
-
-      if (!controls->state(S_TAKE_SHOT))
-      {
-        delete mouseStartPosition;
-        mouseStartPosition = nullptr;
-
-        if (state != nullptr)
-          state->markAsComplete();
-      }
-      else
-      {
-        balls[0]->setPosition(newMousePosition * 2000.0f);
-      }
     }
   }
 }

@@ -5,13 +5,19 @@
 
 #include "SnookerStateMachine.h"
 
+#include <Engine_Graphics/LineMesh.h>
 #include <Engine_Maths/Vector2.h>
+#include <Engine_Maths/VectorOperations.h>
+
+#include <Simulation_AI/CompletableActionState.h>
+#include <Simulation_AI/FunctionalState.h>
 
 #include "SnookerControls.h"
 #include "SnookerSimulation.h"
 #include "SnookerStates.h"
 
 using namespace Engine::Maths;
+using namespace Engine::Graphics;
 using namespace Simulation::AI;
 
 namespace Simulation
@@ -25,6 +31,7 @@ namespace Snooker
 
   SnookerStateMachine::~SnookerStateMachine()
   {
+    resetMouseStartPosition();
   }
 
   /**
@@ -67,7 +74,7 @@ namespace Snooker
       return nullptr;
     });
     // Handle controls for taking shots
-    sandbox->setOnOperate([sim](IState *s, StateMachine *) { sim->updateControlTakeShot(nullptr); });
+    sandbox->setOnOperate([this, sim](IState *s, StateMachine *) { this->updateControlTakeShot(nullptr); });
 
     // Game mode
     FunctionalState *game = new FunctionalState("game", rootState(), this);
@@ -116,7 +123,7 @@ namespace Snooker
   void SnookerStateMachine::addPlayerStates(IState *parent, int playerNumber)
   {
     SnookerSimulation *sim = m_simulation;
-    FunctionalState *player = new PlayerState(parent, this, playerNumber);
+    PlayerState *player = new PlayerState(parent, this, playerNumber);
 
     // FOUR GENERAL PLAY STATES: place cue ball, take shot, wait for shot, after shot
 
@@ -130,51 +137,29 @@ namespace Snooker
         return nullptr;
     });
     // Reset recorded mouse start position
-    placeCueBall->setOnEntry([sim](IState *, StateMachine *) {
-      if (sim->mouseStartPosition)
-        delete sim->mouseStartPosition;
-      sim->mouseStartPosition = nullptr;
-    });
+    placeCueBall->setOnEntry([this](IState *, StateMachine *) { this->resetMouseStartPosition(); });
     // Handle controls for placing cue ball
-    placeCueBall->setOnOperate(
-        [sim](IState *s, StateMachine *) { sim->updateControlPlaceCueBall(static_cast<CompletableActionState *>(s)); });
+    placeCueBall->setOnOperate([this, sim](IState *s, StateMachine *) {
+      this->updateControlPlaceCueBall(static_cast<CompletableActionState *>(s));
+    });
 
     // Take shot state
-    FunctionalState *takeShot = new CompletableActionState("take_shot", player, this);
-    // Move to wait for shot when shot is taken
-    takeShot->setTestTransferFrom([](const IState *const s, StateMachine *sm) -> IState * {
-      if (static_cast<const CompletableActionState *>(s)->completed())
-        return s->parent()->findState("wait_for_shot").back();
-      else
-        return nullptr;
-    });
-    // Stop applying acceleration when shot is taken
-    takeShot->setOnExit([sim](IState *, StateMachine *) { sim->balls[0]->setAcceleration(Vector2()); });
-    // Reset recorded mouse start position
-    takeShot->setOnEntry([sim](IState *, StateMachine *) {
-      if (sim->mouseStartPosition)
-        delete sim->mouseStartPosition;
-      sim->mouseStartPosition = nullptr;
-    });
-    // Handle controls for taking a shot
-    takeShot->setOnOperate(
-        [sim](IState *s, StateMachine *) { sim->updateControlTakeShot(static_cast<CompletableActionState *>(s)); });
+    IState *takeShot = new TakeShotState(player, this, sim);
 
     // Wait for shot state
-    FunctionalState *waitForShot = new FunctionalState("wait_for_shot", player, this);
-    // Transfer to after shot when simulation is at rest
-    waitForShot->setTestTransferFrom([sim](const IState *const s, StateMachine *sm) -> IState * {
-      if (sim->physics.atRest())
-        return s->parent()->findState("after_shot").back();
-      else
-        return nullptr;
-    });
+    IState *waitForShot = new WaitForShotState(player, this, sim);
 
+    // After shot state
     FunctionalState *afterShot = new FunctionalState("after_shot", player, this);
+    // TODO
 
     // AFTER SHOT STATES
 
+    // The shot was foul
     FunctionalState *foulShot = new FunctionalState("foul", afterShot, this);
+    // Foul shots gives opponent 4 points
+    foulShot->setOnEntry([player](IState *, StateMachine *) { player->otherPlayer()->addToScore(4); });
+
     FunctionalState *legalShot = new FunctionalState("legal", afterShot, this);
 
     // FOUL SHOT STATES
@@ -184,11 +169,99 @@ namespace Snooker
     FunctionalState *potWrongBall = new FunctionalState("pot_wrong_ball", foulShot, this);
     FunctionalState *potCueBall = new FunctionalState("pot_cue_ball", foulShot, this);
 
-    // VALID SHOT STATES
+    // LEGAL SHOT STATES
 
     FunctionalState *potRed = new FunctionalState("pot_red", legalShot, this);
     FunctionalState *potAnyColour = new FunctionalState("pot_any_colour", legalShot, this);
     FunctionalState *potSequenceColour = new FunctionalState("pot_sequence_colour", legalShot, this);
+  }
+
+  /**
+  * @brief Update the controls for taking a shot.
+  */
+  void SnookerStateMachine::updateControlTakeShot(CompletableActionState *state)
+  {
+    // Mouse clicks (to take shots)
+    if (m_mouseStartPosition == nullptr)
+    {
+      if (m_simulation->controls->state(S_TAKE_SHOT))
+      {
+        // Record starting position of mouse
+        m_mouseStartPosition =
+            new Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
+        static_cast<LineMesh *>(m_simulation->shotAimLine->mesh())->setTo(Vector3());
+        m_simulation->shotAimLine->setActive(true);
+      }
+      else
+      {
+        m_simulation->balls[0]->setAcceleration(Vector2());
+      }
+    }
+    else
+    {
+      Vector2 newMousePosition =
+          Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
+      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+
+      // Clamp max acceleration to a sensible level
+      float maxShotMagnitude = 0.5f;
+      if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
+        deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
+
+      if (!m_simulation->controls->state(S_TAKE_SHOT))
+      {
+        m_simulation->shotAimLine->setActive(false);
+        m_simulation->balls[0]->setAcceleration(deltaMouse);
+        resetMouseStartPosition();
+
+        if (state != nullptr)
+          state->markAsComplete();
+      }
+      else
+      {
+        static_cast<LineMesh *>(m_simulation->shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
+      }
+    }
+  }
+
+  /**
+  * @brief Update the controls for placing the cue ball.
+  */
+  void SnookerStateMachine::updateControlPlaceCueBall(CompletableActionState *state)
+  {
+    // Mouse clicks (to take shots)
+    if (m_mouseStartPosition == nullptr)
+    {
+      if (m_simulation->controls->state(S_TAKE_SHOT))
+      {
+        // Record starting position of mouse
+        m_mouseStartPosition =
+            new Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
+      }
+    }
+    else
+    {
+      Vector2 newMousePosition =
+          Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
+      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
+
+      // Clamp max acceleration to a sensible level
+      float maxShotMagnitude = 0.5f;
+      if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
+        deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
+
+      if (!m_simulation->controls->state(S_TAKE_SHOT))
+      {
+        resetMouseStartPosition();
+
+        if (state != nullptr)
+          state->markAsComplete();
+      }
+      else
+      {
+        m_simulation->balls[0]->setPosition(newMousePosition * 2000.0f);
+      }
+    }
   }
 }
 }

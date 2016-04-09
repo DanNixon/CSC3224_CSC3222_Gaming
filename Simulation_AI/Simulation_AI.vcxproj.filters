@@ -10,5 +10,6 @@
     <ClInclude Include="StateContainer.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="FunctionalState.h" />
+    <ClInclude Include="CompletableActionState.h" />
   </ItemGroup>
 </Project>

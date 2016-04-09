@@ -81,6 +81,21 @@ namespace Physics
     }
 
     /**
+     * @brief Returns the entity in the interface that is not a given entity.
+     * @param e One of the two entities in the interface
+     * @return The other entity in the interface, nullptr if e is not in this interface
+     */
+    inline Entity *otherNot(Entity *e)
+    {
+      if (m_e1 == e)
+        return m_e2;
+      else if (m_e2 == e)
+        return m_e1;
+      else
+        return nullptr;
+    }
+
+    /**
      * @brief Tests for equality between two interface definitions.
      * @param other Interface definition to compare to
      * @return True if definitions are equal

@@ -16,13 +16,12 @@
 #include <Engine_Graphics/TextPane.h>
 #include <Engine_Input/IControlScheme.h>
 
+#include <SImulation_AI/StateMachine.h>
 #include <Simulation_Physics/Entity.h>
 #include <Simulation_Physics/PhysicsSimulation.h>
 
 #include "Ball.h"
 #include "OptionsMenu.h"
-#include "SNookerStates.h"
-#include "SnookerStateMachine.h"
 #include "Table.h"
 
 namespace Simulation
@@ -47,9 +46,6 @@ namespace Snooker
 
     void placeBalls();
 
-    void updateControlTakeShot(CompletableActionState *state = nullptr);
-    void updateControlPlaceCueBall(CompletableActionState *state = nullptr);
-
   protected:
     int gameStartup();
     void gameLoop(Uint8 id, float dtMilliSec);
@@ -58,9 +54,10 @@ namespace Snooker
   public:
     Simulation::Physics::PhysicsSimulation physics;
     Engine::Input::IControlScheme *controls;
-    SnookerStateMachine fsm;
+    Simulation::AI::StateMachine *fsm;
+
     Ball *balls[NUM_BALLS];
-    Engine::Maths::Vector2 *mouseStartPosition;
+    Engine::Graphics::RenderableObject *shotAimLine;
 
   private:
     friend class SnookerControls;
@@ -80,8 +77,6 @@ namespace Snooker
     TTF_Font *m_fontMedium;
     Engine::Graphics::ShaderProgram *m_uiShader;
     Engine::Graphics::TextPane *m_profileText;
-
-    Engine::Graphics::RenderableObject *m_shotAimLine;
   };
 }
 }
