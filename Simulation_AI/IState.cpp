@@ -87,7 +87,7 @@ namespace AI
    * @param active If this state is active or not
    * @param terminateAt Ancestor at which to stop modifying activation
    */
-  void IState::setActivation(bool active, IState *terminateAt, IState * delta)
+  void IState::setActivation(bool active, IState *terminateAt, IState *delta)
   {
     if (terminateAt == this)
       return;

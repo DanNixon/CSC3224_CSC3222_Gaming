@@ -32,7 +32,7 @@ namespace AI
     }
 
   protected:
-    virtual void onEntry(IState * last)
+    virtual void onEntry(IState *last)
     {
       FunctionalState::onEntry(last);
 

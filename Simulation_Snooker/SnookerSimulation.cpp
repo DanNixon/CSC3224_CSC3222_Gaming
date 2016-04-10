@@ -217,54 +217,53 @@ namespace Snooker
   {
     // Initial positions
     if (b == SnookerBalls::ALL || b == SnookerBalls::CUE_BALL)
-      balls[0]->setPosition(Vector2(-1150.0f, 200.0f));    // Cue ball
+      balls[0]->setPosition(Vector2(-1150.0f, 200.0f)); // Cue ball
 
     if (b == SnookerBalls::ALL || b == SnookerBalls::RED)
     {
-      balls[1]->setPosition(Vector2(957.85f, 0.0f));       // Red
-      balls[2]->setPosition(Vector2(1010.35f, 26.25f));    // Red
-      balls[3]->setPosition(Vector2(1010.35f, -26.25f));   // Red
-      balls[4]->setPosition(Vector2(1062.85f, 52.5f));     // Red
-      balls[5]->setPosition(Vector2(1062.85f, 0.0f));      // Red
-      balls[6]->setPosition(Vector2(1062.85f, -52.5f));    // Red
-      balls[7]->setPosition(Vector2(1115.35f, 78.75f));    // Red
-      balls[8]->setPosition(Vector2(1115.35f, 26.25f));    // Red
-      balls[9]->setPosition(Vector2(1115.35f, -26.25f));   // Red
-      balls[10]->setPosition(Vector2(1115.35f, -78.75f));  // Red
-      balls[11]->setPosition(Vector2(1167.85f, 105.0f));   // Red
-      balls[12]->setPosition(Vector2(1167.85f, 52.5f));    // Red
-      balls[13]->setPosition(Vector2(1167.85f, 0.0f));     // Red
-      balls[14]->setPosition(Vector2(1167.85f, -52.5f));   // Red
-      balls[15]->setPosition(Vector2(1167.85f, -105.0f));  // Red
+      balls[1]->setPosition(Vector2(957.85f, 0.0f));      // Red
+      balls[2]->setPosition(Vector2(1010.35f, 26.25f));   // Red
+      balls[3]->setPosition(Vector2(1010.35f, -26.25f));  // Red
+      balls[4]->setPosition(Vector2(1062.85f, 52.5f));    // Red
+      balls[5]->setPosition(Vector2(1062.85f, 0.0f));     // Red
+      balls[6]->setPosition(Vector2(1062.85f, -52.5f));   // Red
+      balls[7]->setPosition(Vector2(1115.35f, 78.75f));   // Red
+      balls[8]->setPosition(Vector2(1115.35f, 26.25f));   // Red
+      balls[9]->setPosition(Vector2(1115.35f, -26.25f));  // Red
+      balls[10]->setPosition(Vector2(1115.35f, -78.75f)); // Red
+      balls[11]->setPosition(Vector2(1167.85f, 105.0f));  // Red
+      balls[12]->setPosition(Vector2(1167.85f, 52.5f));   // Red
+      balls[13]->setPosition(Vector2(1167.85f, 0.0f));    // Red
+      balls[14]->setPosition(Vector2(1167.85f, -52.5f));  // Red
+      balls[15]->setPosition(Vector2(1167.85f, -105.0f)); // Red
     }
 
     if (b == SnookerBalls::ALL || b == SnookerBalls::ALL_COLOURS || b == SnookerBalls::YELLOW)
       balls[16]->setPosition(Vector2(-1047.75f, -291.1f)); // Yellow
 
     if (b == SnookerBalls::ALL || b == SnookerBalls::ALL_COLOURS || b == SnookerBalls::GREEN)
-      balls[17]->setPosition(Vector2(-1047.75f, 291.1f));  // Green
+      balls[17]->setPosition(Vector2(-1047.75f, 291.1f)); // Green
 
     if (b == SnookerBalls::ALL || b == SnookerBalls::ALL_COLOURS || b == SnookerBalls::BROWN)
-      balls[18]->setPosition(Vector2(-1047.75f, 0.0f));    // Brown
+      balls[18]->setPosition(Vector2(-1047.75f, 0.0f)); // Brown
 
     if (b == SnookerBalls::ALL || b == SnookerBalls::ALL_COLOURS || b == SnookerBalls::BLUE)
 #ifdef _DEBUG
-      balls[19]->setPosition(Vector2(0.0f, 800.0f));         // Blue
+      balls[19]->setPosition(Vector2(0.0f, 800.0f)); // Blue
 #else
-      balls[19]->setPosition(Vector2(0.0f, 0.0f));         // Blue
+      balls[19]->setPosition(Vector2(0.0f, 0.0f)); // Blue
 #endif
 
-
     if (b == SnookerBalls::ALL || b == SnookerBalls::ALL_COLOURS || b == SnookerBalls::PINK)
-      balls[20]->setPosition(Vector2(895.35f, 0.0f));      // Pink
+      balls[20]->setPosition(Vector2(895.35f, 0.0f)); // Pink
 
     if (b == SnookerBalls::ALL || b == SnookerBalls::ALL_COLOURS || b == SnookerBalls::BLACK)
-      balls[21]->setPosition(Vector2(1466.85f, 0.0f));     // Black
+      balls[21]->setPosition(Vector2(1466.85f, 0.0f)); // Black
 
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
-      if (b == SnookerBalls::ALL || balls[i]->points() == static_cast<std::underlying_type<SnookerBalls>::type>(b)
-        || (b == SnookerBalls::ALL_COLOURS && balls[i]->points() > 1))
+      if (b == SnookerBalls::ALL || balls[i]->points() == static_cast<std::underlying_type<SnookerBalls>::type>(b) ||
+          (b == SnookerBalls::ALL_COLOURS && balls[i]->points() > 1))
       {
         // At rest
         balls[i]->stopMotion();

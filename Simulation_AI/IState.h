@@ -79,7 +79,7 @@ namespace AI
 
     IStatePtrList branch(bool reverse = false);
 
-    void setActivation(bool active, IState *terminateAt = nullptr, IState * delta = nullptr);
+    void setActivation(bool active, IState *terminateAt = nullptr, IState *delta = nullptr);
 
     /**
      * @brief Outputs a state to a stream.
@@ -119,7 +119,7 @@ namespace AI
      * @brief Performs actions required when entering this state.
      * @param last Last state to be active
      */
-    virtual void onEntry(IState * last)
+    virtual void onEntry(IState *last)
     {
     }
 

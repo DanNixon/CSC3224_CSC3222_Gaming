@@ -82,12 +82,12 @@ namespace AI
       return m_testTransferTo(this, m_machine);
     }
 
-    virtual void onEntry(IState * last)
+    virtual void onEntry(IState *last)
     {
       m_onEntry(this, m_machine, last);
     }
 
-    virtual void onExit(IState * next)
+    virtual void onExit(IState *next)
     {
       m_onExit(this, m_machine, next);
     }

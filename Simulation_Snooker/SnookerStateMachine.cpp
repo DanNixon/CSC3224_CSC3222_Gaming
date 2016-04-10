@@ -88,7 +88,8 @@ namespace Snooker
       return nullptr;
     });
     // Activate running state then this state is entered
-    game->setOnEntry([](IState *s, StateMachine *sm, IState *) { s->findState("running").back()->setActivation(true, s); });
+    game->setOnEntry(
+        [](IState *s, StateMachine *sm, IState *) { s->findState("running").back()->setActivation(true, s); });
 
     // GAME MODE STATES
 
@@ -98,7 +99,7 @@ namespace Snooker
     // Running game state
     FunctionalState *running = new FunctionalState("running", game, this);
     // At start of game
-    running->setOnEntry([running, sim](IState *s, StateMachine *sm, IState*) {
+    running->setOnEntry([running, sim](IState *s, StateMachine *sm, IState *) {
       // Reset the simulation
       sim->physics.setRunning(false);
       sim->placeBalls();
@@ -157,10 +158,8 @@ namespace Snooker
     // The shot was foul
     FunctionalState *foulShot = new FunctionalState("foul", afterShot, this);
     // Foul shots gives opponent 4 points
-    foulShot->setOnEntry([player](IState *, StateMachine *, IState*) { player->otherPlayer()->addToScore(4); });
-    foulShot->setTestTransferFrom([player](const IState * const, StateMachine*){
-      return player->otherPlayer();
-    });
+    foulShot->setOnEntry([player](IState *, StateMachine *, IState *) { player->otherPlayer()->addToScore(4); });
+    foulShot->setTestTransferFrom([player](const IState *const, StateMachine *) { return player->otherPlayer(); });
 
     FunctionalState *legalShot = new FunctionalState("legal", afterShot, this);
 
@@ -171,7 +170,7 @@ namespace Snooker
 
     FunctionalState *potWrongBall = new FunctionalState("pot_wrong_ball", foulShot, this);
     // Reset incorrectly potted balls
-    potWrongBall->setOnOperate([waitForShot, sim](IState *, StateMachine *){
+    potWrongBall->setOnOperate([waitForShot, sim](IState *, StateMachine *) {
       int targetPoints = waitForShot->targetBallPoints();
       for (auto it = waitForShot->potted().begin(); it != waitForShot->potted().end(); ++it)
       {

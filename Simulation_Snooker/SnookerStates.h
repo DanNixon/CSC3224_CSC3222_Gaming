@@ -55,7 +55,7 @@ namespace Snooker
     }
 
   protected:
-    virtual void onEntry(IState * last)
+    virtual void onEntry(IState *last)
     {
       if (last->name() == "pot_cue_ball" || last->name() == "running")
         findState("place_cue_ball").back()->setActivation(true, this, this);
@@ -127,14 +127,14 @@ namespace Snooker
         // Any colour was potted
         if (m_potted.size() == 1 && m_potted[0]->points() > 1 && m_targetBallPoints == 0)
           return m_parent->findState("after_shot/legal/pot_any_colour").back();
-        
+
         // Wrong ball was potted
         if (!m_potted.empty())
           return m_parent->findState("after_shot/foul/pot_wrong_ball").back();
 
         // Hit incorrect ball
         if (m_targetBallPoints != m_firstCueBallTouched->points() ||
-          (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
+            (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
           return m_parent->findState("after_shot/foul/hit_wrong_ball").back();
 
         // Did not pot anything
