@@ -241,9 +241,11 @@ namespace Snooker
         return;
 
       // If players last shot in turn was a red then now they hit any colour
-      // TODO
       if (shotState->lastPotted() != nullptr && shotState->lastPotted()->points() == 1)
+      {
         shotState->setTargetBallPoints(0);
+        return;
+      }
 
       // Players first shot in turn is either on red or the next colour in sequence if no reds are in play
       // i.e. whatever the lowest value ball in play is
