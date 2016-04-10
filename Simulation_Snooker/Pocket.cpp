@@ -20,7 +20,7 @@ namespace Snooker
   /**
    * @brief Radius of a Pocket in mm.
    */
-  const float Pocket::RADIUS = 60.0f; // 44.45f;
+  const float Pocket::RADIUS = 44.45f;
 
   /**
    * @copydoc SphericalEntity::SphericalEntity(const Vector2 &)

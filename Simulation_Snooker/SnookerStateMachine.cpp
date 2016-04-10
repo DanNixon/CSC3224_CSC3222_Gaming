@@ -58,7 +58,7 @@ namespace Snooker
     // Perform reset when operated
     reset->setOnOperate([sim](IState *, StateMachine *) {
       sim->physics.setRunning(false);
-      sim->placeBalls();
+      sim->resetBalls();
       sim->physics.setRunning(!sim->controls->state(S_PAUSE));
     });
 
@@ -102,7 +102,7 @@ namespace Snooker
     running->setOnEntry([running, sim](IState *s, StateMachine *sm, IState *) {
       // Reset the simulation
       sim->physics.setRunning(false);
-      sim->placeBalls();
+      sim->resetBalls();
       sim->physics.setRunning(!sim->controls->state(S_PAUSE));
       // Player 0 to go first
       sm->rootState()->findState("game/running/player_0").back()->setActivation(true, s, running);
@@ -153,13 +153,15 @@ namespace Snooker
 
     FunctionalState *afterShot = new FunctionalState("after_shot", player, this);
 
+    auto nextPlayersTurn = [player](const IState *const, StateMachine *) { return player->otherPlayer(); };
+
     // AFTER SHOT STATES
 
     // The shot was foul
     FunctionalState *foulShot = new FunctionalState("foul", afterShot, this);
     // Foul shots gives opponent 4 points
     foulShot->setOnEntry([player](IState *, StateMachine *, IState *) { player->otherPlayer()->addToScore(4); });
-    foulShot->setTestTransferFrom([player](const IState *const, StateMachine *) { return player->otherPlayer(); });
+    foulShot->setTestTransferFrom(nextPlayersTurn);
 
     FunctionalState *legalShot = new FunctionalState("legal", afterShot, this);
 
@@ -176,7 +178,7 @@ namespace Snooker
       {
         int ballPoints = (*it)->points();
         if (ballPoints == -1 || (targetPoints == 0 && ballPoints == 1) || (targetPoints != ballPoints))
-          sim->placeBalls(static_cast<SnookerBalls>(ballPoints));
+          sim->resetBalls(static_cast<SnookerBalls>(ballPoints));
       }
     });
 
@@ -184,10 +186,29 @@ namespace Snooker
 
     // LEGAL SHOT STATES
 
+    auto playerTakesNextShot = [player](const IState *const, StateMachine *sm) {
+      return player->findState("take_shot").back();
+    };
+
     FunctionalState *potNothing = new FunctionalState("pot_nothing", legalShot, this);
+    potNothing->setTestTransferFrom(nextPlayersTurn);
+
     FunctionalState *potRed = new FunctionalState("pot_red", legalShot, this);
+    potRed->setTestTransferFrom(playerTakesNextShot);
+
     FunctionalState *potAnyColour = new FunctionalState("pot_any_colour", legalShot, this);
+    potAnyColour->setTestTransferFrom(playerTakesNextShot);
+
     FunctionalState *potSequenceColour = new FunctionalState("pot_sequence_colour", legalShot, this);
+    potSequenceColour->setTestTransferFrom([sim, player](const IState *const, StateMachine *sm) -> IState * {
+      for (size_t i = 1; i < SnookerSimulation::NUM_BALLS; i++)
+      {
+        if (sim->balls[i]->collides())
+          return player->otherPlayer();
+      }
+
+      return sm->rootState()->findState("game/idle").back();
+    });
   }
 
   /**

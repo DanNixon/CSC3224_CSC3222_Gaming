@@ -58,7 +58,7 @@ namespace Snooker
     SnookerSimulation();
     ~SnookerSimulation();
 
-    void placeBalls(SnookerBalls b = SnookerBalls::ALL);
+    void resetBalls(SnookerBalls b = SnookerBalls::ALL);
 
   protected:
     int gameStartup();

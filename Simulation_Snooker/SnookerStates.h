@@ -183,8 +183,8 @@ namespace Snooker
           // Record his ball as being potted
           m_potted.push_back(potted);
 
-          // Stop the ball moving
-          potted->stopMotion();
+          // Reset to default position and stop motion
+          potted->reset(true);
 
           // Set no collide
           potted->setCollide(false);

@@ -66,6 +66,7 @@ namespace Snooker
       : SphericalEntity(pos, MASS, RADIUS, false, 0.99f, 0.005f)
       , RenderableObject(Info(points).first, Mesh::GenerateDisc2D(RADIUS), nullptr)
       , m_points(points)
+      , m_defaultPosition(pos)
   {
     ShaderProgram *sp = new ShaderProgram();
     sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
@@ -82,6 +83,24 @@ namespace Snooker
 
   Ball::~Ball()
   {
+  }
+
+  /**
+   * @brief Sets the default state for this ball.
+   * @param positionOnly Set to true to ignore visibility and no collide
+   *
+   * Default state is in default position, at rest, is visible and can collide with other entities.
+   */
+  void Ball::reset(bool positionOnly)
+  {
+    setPosition(m_defaultPosition);
+    stopMotion();
+
+    if (!positionOnly)
+    {
+      setActive(true);
+      setCollide(true);
+    }
   }
 
   /**

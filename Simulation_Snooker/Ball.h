@@ -41,6 +41,8 @@ namespace Snooker
       return m_points;
     }
 
+    void reset(bool positionOnly = false);
+
     Engine::Graphics::Colour colour(float alpha = 1.0f) const;
     bool isCueBall() const;
 
@@ -48,6 +50,7 @@ namespace Snooker
 
   private:
     int m_points; //!< Number of points potting this ball gets
+    Engine::Maths::Vector2 m_defaultPosition; //!< Default position of this ball on the table
   };
 }
 }
