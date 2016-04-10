@@ -73,6 +73,11 @@ namespace Snooker
     Ball *balls[NUM_BALLS];
     Engine::Graphics::RenderableObject *shotAimLine;
 
+    Engine::Graphics::TextPane *player1ScoreText;
+    Engine::Graphics::TextPane *player2ScoreText;
+    Engine::Graphics::TextPane *player1IndicatorText;
+    Engine::Graphics::TextPane *player2IndicatorText;
+
   private:
     friend class SnookerControls;
 

@@ -117,6 +117,66 @@ namespace Snooker
     m_profileText->setText("Graphics: -\nPhysics: -");
     m_ui->root()->addChild(m_profileText);
 
+    // Alignments
+    Alignment_bitset centreRight;
+    centreRight.set(Alignment::X_RIGHT);
+    centreRight.set(Alignment::Y_CENTRE);
+
+    Alignment_bitset centreLeft;
+    centreLeft.set(Alignment::X_LEFT);
+    centreLeft.set(Alignment::Y_CENTRE);
+
+    // Status line
+    TextPane *m_statusLine = new TextPane("status_line", 0.08f, m_uiShader, m_fontLarge);
+    m_statusLine->setModelMatrix(Matrix4::Translation(Vector3(-0.6f, -0.9f, 0.0f)));
+    m_statusLine->setAlignment(centreLeft);
+    m_statusLine->setText("Snooker Loopy!");
+    m_ui->root()->addChild(m_statusLine);
+
+    // Scores
+    SceneObject *scores = new SceneObject("scores");
+    scores->setModelMatrix(Matrix4::Translation(Vector3(-0.75f, -0.9f, 0.0f)));
+    m_ui->root()->addChild(scores);
+
+    // Player 1 score
+    TextPane *player1Text = new TextPane("player_1", 0.06f, m_uiShader, m_fontMedium);
+    player1Text->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.03f, 0.0f)));
+    player1Text->setAlignment(centreRight);
+    player1Text->setText("Player 1:");
+    scores->addChild(player1Text);
+
+    player1ScoreText = new TextPane("player_1_score", 0.06f, m_uiShader, m_fontMedium);
+    player1ScoreText->setModelMatrix(Matrix4::Translation(Vector3(0.01f, 0.0f, 0.0f)));
+    player1ScoreText->setAlignment(centreLeft);
+    player1ScoreText->setText("0");
+    player1Text->addChild(player1ScoreText);
+
+    player1IndicatorText = new TextPane("player_1_indicator", 0.06f, m_uiShader, m_fontMedium);
+    player1IndicatorText->setModelMatrix(Matrix4::Translation(Vector3(-0.18f, 0.0f, 0.0f)));
+    player1IndicatorText->setAlignment(centreRight);
+    player1IndicatorText->setText("=>");
+    player1Text->addChild(player1IndicatorText);
+
+    // Player 2 score
+    TextPane *player2Text = new TextPane("player_2", 0.06f, m_uiShader, m_fontMedium);
+    player2Text->setModelMatrix(Matrix4::Translation(Vector3(0.0f, -0.03f, 0.0f)));
+    player2Text->setAlignment(centreRight);
+    player2Text->setText("Player 2:");
+    scores->addChild(player2Text);
+
+    player2ScoreText = new TextPane("player_1_score", 0.06f, m_uiShader, m_fontMedium);
+    player2ScoreText->setModelMatrix(Matrix4::Translation(Vector3(0.01f, 0.0f, 0.0f)));
+    player2ScoreText->setAlignment(centreLeft);
+    player2ScoreText->setText("0");
+    player2Text->addChild(player2ScoreText);
+
+    player2IndicatorText = new TextPane("player_2_indicator", 0.06f, m_uiShader, m_fontMedium);
+    player2IndicatorText->setModelMatrix(Matrix4::Translation(Vector3(-0.18f, 0.0f, 0.0f)));
+    player2IndicatorText->setAlignment(centreRight);
+    player2IndicatorText->setText("=>");
+    player2Text->addChild(player2IndicatorText);
+
+    // Shot aim line
     shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
     shotAimLine->setActive(false);
     balls[0]->addChild(shotAimLine);

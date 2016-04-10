@@ -104,6 +104,9 @@ namespace Snooker
       sim->physics.setRunning(false);
       sim->resetBalls();
       sim->physics.setRunning(!sim->controls->state(S_PAUSE));
+      // Reset scoring
+      static_cast<PlayerState *>(s->findState("player_0").back())->reset();
+      static_cast<PlayerState *>(s->findState("player_1").back())->reset();
       // Player 0 to go first
       sm->rootState()->findState("game/running/player_0").back()->setActivation(true, s, running);
     });
@@ -125,7 +128,7 @@ namespace Snooker
   {
     SnookerSimulation *sim = m_simulation;
 
-    PlayerState *player = new PlayerState(parent, this, playerNumber);
+    PlayerState *player = new PlayerState(parent, this, playerNumber, m_simulation);
 
     // FOUR GENERAL PLAY STATES: place cue ball, take shot, wait for shot, after shot
 

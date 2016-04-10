@@ -26,10 +26,12 @@ namespace Snooker
   class PlayerState : public Simulation::AI::FunctionalState
   {
   public:
-    PlayerState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine, int playerNumber)
+    PlayerState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine, int playerNumber,
+                SnookerSimulation *simulation)
         : FunctionalState("player_" + std::to_string(playerNumber), parent, machine)
         , m_playerNumber(playerNumber)
         , m_score(0)
+        , m_simulation(simulation)
     {
     }
 
@@ -43,12 +45,23 @@ namespace Snooker
       return m_score;
     }
 
+    inline void reset()
+    {
+      m_score = 0;
+    }
+
     inline void addToScore(int points)
     {
       m_score += points;
+      updateScoreText();
+    }
 
-      // TODO: dev only
-      std::cout << "Player " << m_playerNumber << " score: " << m_score << std::endl;
+    void updateScoreText() const
+    {
+      if (m_playerNumber == 0)
+        m_simulation->player1ScoreText->setText(std::to_string(m_score));
+      else if (m_playerNumber == 1)
+        m_simulation->player2ScoreText->setText(std::to_string(m_score));
     }
 
     PlayerState *otherPlayer() const
@@ -60,6 +73,12 @@ namespace Snooker
   protected:
     virtual void onEntry(IState *last)
     {
+      updateScoreText();
+
+      // Update current player indicator
+      m_simulation->player1IndicatorText->setActive(m_playerNumber == 0);
+      m_simulation->player2IndicatorText->setActive(m_playerNumber == 1);
+
       if (last->name() == "pot_cue_ball" || last->name() == "running")
         findState("place_cue_ball").back()->setActivation(true, this, this);
       else
@@ -69,6 +88,7 @@ namespace Snooker
   private:
     int m_playerNumber; //!< Player number (0 or 1)
     int m_score;        //!< Players score
+    SnookerSimulation *m_simulation;
   };
 
   class WaitForShotState : public Simulation::AI::IState
