@@ -134,16 +134,17 @@ namespace Snooker
     m_ui->root()->addChild(m_statusLine);
 
     // Scores
-    SceneObject *scores = new SceneObject("scores");
-    scores->setModelMatrix(Matrix4::Translation(Vector3(-0.75f, -0.9f, 0.0f)));
-    m_ui->root()->addChild(scores);
+    scoreDisplay = new SceneObject("scores");
+    scoreDisplay->setModelMatrix(Matrix4::Translation(Vector3(-0.75f, -0.9f, 0.0f)));
+    scoreDisplay->setActive(false);
+    m_ui->root()->addChild(scoreDisplay);
 
     // Player 1 score
     TextPane *player1Text = new TextPane("player_1", 0.06f, m_uiShader, m_fontMedium);
     player1Text->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.03f, 0.0f)));
     player1Text->setAlignment(centreRight);
     player1Text->setText("Player 1:");
-    scores->addChild(player1Text);
+    scoreDisplay->addChild(player1Text);
 
     player1ScoreText = new TextPane("player_1_score", 0.06f, m_uiShader, m_fontMedium);
     player1ScoreText->setModelMatrix(Matrix4::Translation(Vector3(0.01f, 0.0f, 0.0f)));
@@ -155,6 +156,7 @@ namespace Snooker
     player1IndicatorText->setModelMatrix(Matrix4::Translation(Vector3(-0.18f, 0.0f, 0.0f)));
     player1IndicatorText->setAlignment(centreRight);
     player1IndicatorText->setText("=>");
+    player1IndicatorText->setActive(false);
     player1Text->addChild(player1IndicatorText);
 
     // Player 2 score
@@ -162,7 +164,7 @@ namespace Snooker
     player2Text->setModelMatrix(Matrix4::Translation(Vector3(0.0f, -0.03f, 0.0f)));
     player2Text->setAlignment(centreRight);
     player2Text->setText("Player 2:");
-    scores->addChild(player2Text);
+    scoreDisplay->addChild(player2Text);
 
     player2ScoreText = new TextPane("player_1_score", 0.06f, m_uiShader, m_fontMedium);
     player2ScoreText->setModelMatrix(Matrix4::Translation(Vector3(0.01f, 0.0f, 0.0f)));
@@ -174,6 +176,7 @@ namespace Snooker
     player2IndicatorText->setModelMatrix(Matrix4::Translation(Vector3(-0.18f, 0.0f, 0.0f)));
     player2IndicatorText->setAlignment(centreRight);
     player2IndicatorText->setText("=>");
+    player2IndicatorText->setActive(false);
     player2Text->addChild(player2IndicatorText);
 
     // Shot aim line
@@ -193,11 +196,11 @@ namespace Snooker
     controls = new SnookerControls(this);
 
     // Menu
-    m_menu = new OptionsMenu(this, m_fontMedium, 0.05f, this);
-    m_menu->setMargin(Vector2(0.005f, 0.005f));
-    m_menu->layout();
-    m_menu->show();
-    addEventHandler(m_menu);
+    menu = new OptionsMenu(this, m_fontMedium, 0.05f, this);
+    menu->setMargin(Vector2(0.005f, 0.005f));
+    menu->layout();
+    menu->show();
+    addEventHandler(menu);
 
     m_profiler = new Profiler(this);
 
@@ -214,7 +217,7 @@ namespace Snooker
     {
       m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
-      m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
+      menu->update(dtMilliSec, Subsystem::GRAPHICS);
 
       swapBuffers();
     }
@@ -228,7 +231,7 @@ namespace Snooker
       {
         if (fsm->update())
         {
-          m_menu->updateTextFromState();
+          menu->updateTextFromState();
           std::cout << "STATE: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
         }
       }
@@ -239,7 +242,7 @@ namespace Snooker
       // Update state machine
       if (fsm->update())
       {
-        m_menu->updateTextFromState();
+        menu->updateTextFromState();
         std::cout << "STATE: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
       }
 

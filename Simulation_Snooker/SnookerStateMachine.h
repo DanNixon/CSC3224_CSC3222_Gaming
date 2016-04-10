@@ -41,7 +41,6 @@ namespace Snooker
     }
 
     void updateControlTakeShot(Simulation::AI::CompletableActionState *state = nullptr);
-    void updateControlPlaceCueBall(Simulation::AI::CompletableActionState *state = nullptr);
 
   private:
     SnookerSimulation *m_simulation;

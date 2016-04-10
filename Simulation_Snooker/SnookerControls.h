@@ -77,7 +77,7 @@ namespace Snooker
     virtual void setState(size_t state, bool active)
     {
       IControlScheme::setState(state, active);
-      static_cast<SnookerSimulation *>(m_game)->m_menu->updateTextFromState();
+      static_cast<SnookerSimulation *>(m_game)->menu->updateTextFromState();
     }
 
   private:

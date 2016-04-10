@@ -69,10 +69,12 @@ namespace Snooker
     Simulation::Physics::PhysicsSimulation physics;
     Engine::Input::IControlScheme *controls;
     Simulation::AI::StateMachine *fsm;
+    OptionsMenu *menu;
 
     Ball *balls[NUM_BALLS];
     Engine::Graphics::RenderableObject *shotAimLine;
 
+    Engine::Common::SceneObject *scoreDisplay;
     Engine::Graphics::TextPane *player1ScoreText;
     Engine::Graphics::TextPane *player2ScoreText;
     Engine::Graphics::TextPane *player1IndicatorText;
@@ -88,7 +90,6 @@ namespace Snooker
 
     Engine::Common::Scene *m_scene;
     Engine::Common::Scene *m_ui;
-    OptionsMenu *m_menu;
 
     Table *m_table;
 
