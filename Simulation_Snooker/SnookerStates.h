@@ -46,6 +46,9 @@ namespace Snooker
     inline void addToScore(int points)
     {
       m_score += points;
+
+      // TODO: dev only
+      std::cout << "Player " << m_playerNumber << " score: " << m_score << std::endl;
     }
 
     PlayerState *otherPlayer() const

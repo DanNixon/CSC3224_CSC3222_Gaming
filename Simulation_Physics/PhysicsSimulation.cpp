@@ -157,7 +157,7 @@ namespace Physics
       // If the interface is yet to be resolved
       if (!it->m_resolved)
       {
-        InterfaceResolution::Impulse(*it, 0.5f);
+        InterfaceResolution::Impulse(*it, 0.8f);
 
         // Mark the interface as having been resolved
         it->m_resolved = true;
