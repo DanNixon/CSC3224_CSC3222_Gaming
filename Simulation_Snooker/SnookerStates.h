@@ -80,6 +80,14 @@ namespace Snooker
       return m_targetBallPoints;
     }
 
+    inline Ball *lastPotted()
+    {
+      if (m_potted.empty())
+        return nullptr;
+      else
+        return m_potted.back();
+    }
+
   protected:
     virtual IState *testTransferFrom() const
     {
@@ -205,6 +213,26 @@ namespace Snooker
     {
       CompletableActionState::onEntry();
       resetMousePosition();
+
+      WaitForShotState *shotState = dynamic_cast<WaitForShotState *>(m_parent->findState("wait_for_shot").back());
+      if (shotState == nullptr)
+        return;
+
+      // If players last shot in turn was a red then now they hit any colour
+      // TODO
+      if (shotState->lastPotted() != nullptr && shotState->lastPotted()->points() == 1)
+        shotState->setTargetBallPoints(0);
+
+      // Players first shot in turn is either on red or the next colour in sequence if no reds are in play
+      // i.e. whatever the lowest value ball in play is
+      for (size_t i = 1; i < SnookerSimulation::NUM_BALLS; i++)
+      {
+        if (m_simulation->balls[i]->collides() && shotState)
+        {
+          shotState->setTargetBallPoints(m_simulation->balls[i]->points());
+          return;
+        }
+      }
     }
 
     virtual void onOperate()
