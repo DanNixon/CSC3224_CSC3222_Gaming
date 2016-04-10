@@ -143,9 +143,11 @@ namespace Snooker
         // Did not pot anything
         if (m_potted.empty())
           return m_parent->findState("after_shot/legal/pot_nothing").back();
-      }
-      else
+
         return nullptr;
+      }
+
+      return nullptr;
     }
 
     virtual void onEntry(IState *last)
