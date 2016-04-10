@@ -160,7 +160,7 @@ public:
     FunctionalState * s11 = new FunctionalState("state1.1", s1, &m);
     addStackFunctions(s11, m);
     // Test auto activating a child state
-    s11->setOnEntry([&entry](IState * s, StateMachine *rm){
+    s11->setOnEntry([&entry](IState * s, StateMachine *rm, IState *){
       entry.push_back(s);
       rm->rootState()->findState("state1/state1.1/state1.1.1").back()->setActivation(true, s);
     });
@@ -317,8 +317,8 @@ public:
     IStatePtrList &exit = m.exitStack;
     IStatePtrList &operate = m.operatedStack;
 
-    state->setOnEntry([&entry](IState * s, StateMachine *){ entry.push_back(s); });
-    state->setOnExit([&exit](IState * s, StateMachine *){ exit.push_back(s); });
+    state->setOnEntry([&entry](IState * s, StateMachine *, IState *){ entry.push_back(s); });
+    state->setOnExit([&exit](IState * s, StateMachine *, IState *){ exit.push_back(s); });
     state->setOnOperate([&operate](IState * s, StateMachine *){ operate.push_back(s); });
   }
 };
