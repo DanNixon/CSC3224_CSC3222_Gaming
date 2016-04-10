@@ -59,7 +59,7 @@ namespace AI
       /**
        * @copydoc IState::onEntry
        */
-      virtual void onEntry()
+      virtual void onEntry(IState *last)
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
         machine->entryStack.push_back(this);
@@ -68,7 +68,7 @@ namespace AI
       /**
        * @copydoc IState::onExit
        */
-      virtual void onExit()
+      virtual void onExit(IState *next)
       {
         MockStateMachine *machine = dynamic_cast<MockStateMachine *>(m_machine);
         machine->exitStack.push_back(this);
