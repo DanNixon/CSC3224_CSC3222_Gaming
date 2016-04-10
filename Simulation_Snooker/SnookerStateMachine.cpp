@@ -14,7 +14,6 @@
 
 #include "SnookerControls.h"
 #include "SnookerSimulation.h"
-#include "SnookerStates.h"
 
 using namespace Engine::Maths;
 using namespace Engine::Graphics;

@@ -9,7 +9,10 @@
 #include <Simulation_AI/CompletableActionState.h>
 #include <Simulation_AI/StateMachine.h>
 
-#include "SnookerStates.h"
+#include "PlaceCueBallState.h"
+#include "PlayerState.h"
+#include "TakeShotState.h"
+#include "WaitForShotState.h"
 
 namespace Simulation
 {
