@@ -25,7 +25,8 @@ namespace AI
   public:
     typedef std::function<IState *(const IState *const, StateMachine *)> TransferFromFunc;
     typedef std::function<bool(const IState *const, StateMachine *)> TransferToFunc;
-    typedef std::function<void(IState *, StateMachine *)> HandlerFunc;
+    typedef std::function<void(IState *, StateMachine *, IState *)> OnTransferFunc;
+    typedef std::function<void(IState *, StateMachine *)> OnOperateFunc;
 
   public:
     /**
@@ -36,8 +37,8 @@ namespace AI
     {
       m_testTransferFrom = [](const IState *const, StateMachine *) { return nullptr; };
       m_testTransferTo = [](const IState *const, StateMachine *) { return false; };
-      m_onEntry = [](IState *, StateMachine *) {};
-      m_onExit = [](IState *, StateMachine *) {};
+      m_onEntry = [](IState *, StateMachine *, IState *) {};
+      m_onExit = [](IState *, StateMachine *, IState *) {};
       m_onOperate = [](IState *, StateMachine *) {};
     }
 
@@ -55,17 +56,17 @@ namespace AI
       m_testTransferTo = f;
     }
 
-    void setOnEntry(HandlerFunc f)
+    void setOnEntry(OnTransferFunc f)
     {
       m_onEntry = f;
     }
 
-    void setOnExit(HandlerFunc f)
+    void setOnExit(OnTransferFunc f)
     {
       m_onExit = f;
     }
 
-    void setOnOperate(HandlerFunc f)
+    void setOnOperate(OnOperateFunc f)
     {
       m_onOperate = f;
     }
@@ -81,14 +82,14 @@ namespace AI
       return m_testTransferTo(this, m_machine);
     }
 
-    virtual void onEntry()
+    virtual void onEntry(IState * last)
     {
-      m_onEntry(this, m_machine);
+      m_onEntry(this, m_machine, last);
     }
 
-    virtual void onExit()
+    virtual void onExit(IState * next)
     {
-      m_onExit(this, m_machine);
+      m_onExit(this, m_machine, next);
     }
 
     virtual void onOperate()
@@ -99,9 +100,9 @@ namespace AI
   private:
     TransferFromFunc m_testTransferFrom;
     TransferToFunc m_testTransferTo;
-    HandlerFunc m_onEntry;
-    HandlerFunc m_onExit;
-    HandlerFunc m_onOperate;
+    OnTransferFunc m_onEntry;
+    OnTransferFunc m_onExit;
+    OnOperateFunc m_onOperate;
   };
 }
 }

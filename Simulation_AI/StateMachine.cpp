@@ -91,8 +91,8 @@ namespace AI
         stateChange = true;
 
         IState *commonAncestor = IState::ClosestCommonAncestor(oldState, transferState);
-        oldState->setActivation(false, commonAncestor);
-        transferState->setActivation(true, commonAncestor);
+        oldState->setActivation(false, commonAncestor, transferState);
+        transferState->setActivation(true, commonAncestor, oldState);
 
         break;
       }

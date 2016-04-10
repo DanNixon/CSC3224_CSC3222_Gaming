@@ -32,9 +32,9 @@ namespace AI
     }
 
   protected:
-    virtual void onEntry()
+    virtual void onEntry(IState * last)
     {
-      FunctionalState::onEntry();
+      FunctionalState::onEntry(last);
 
       // Mark as not completed on state entry
       m_completed = false;

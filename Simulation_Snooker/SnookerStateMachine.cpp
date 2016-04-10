@@ -88,7 +88,7 @@ namespace Snooker
       return nullptr;
     });
     // Activate running state then this state is entered
-    game->setOnEntry([](IState *s, StateMachine *sm) { s->findState("running").back()->setActivation(true, s); });
+    game->setOnEntry([](IState *s, StateMachine *sm, IState *) { s->findState("running").back()->setActivation(true, s); });
 
     // GAME MODE STATES
 
@@ -98,13 +98,13 @@ namespace Snooker
     // Running game state
     FunctionalState *running = new FunctionalState("running", game, this);
     // At start of game
-    running->setOnEntry([sim](IState *s, StateMachine *sm) {
+    running->setOnEntry([running, sim](IState *s, StateMachine *sm, IState*) {
       // Reset the simulation
       sim->physics.setRunning(false);
       sim->placeBalls();
       sim->physics.setRunning(!sim->controls->state(S_PAUSE));
-      // Player 0 to pace the cue ball
-      sm->rootState()->findState("game/running/player_0/place_cue_ball").back()->setActivation(true, s);
+      // Player 0 to go first
+      sm->rootState()->findState("game/running/player_0").back()->setActivation(true, s, running);
     });
 
     // Identical state trees for each player
@@ -138,7 +138,7 @@ namespace Snooker
         return nullptr;
     });
     // Reset recorded mouse start position
-    placeCueBall->setOnEntry([this](IState *, StateMachine *) { this->resetMouseStartPosition(); });
+    placeCueBall->setOnEntry([this](IState *, StateMachine *, IState *) { this->resetMouseStartPosition(); });
     // Handle controls for placing cue ball
     placeCueBall->setOnOperate([this, sim](IState *s, StateMachine *) {
       this->updateControlPlaceCueBall(static_cast<CompletableActionState *>(s));
@@ -157,7 +157,10 @@ namespace Snooker
     // The shot was foul
     FunctionalState *foulShot = new FunctionalState("foul", afterShot, this);
     // Foul shots gives opponent 4 points
-    foulShot->setOnEntry([player](IState *, StateMachine *) { player->otherPlayer()->addToScore(4); });
+    foulShot->setOnEntry([player](IState *, StateMachine *, IState*) { player->otherPlayer()->addToScore(4); });
+    foulShot->setTestTransferFrom([player](const IState * const, StateMachine*){
+      return player->otherPlayer();
+    });
 
     FunctionalState *legalShot = new FunctionalState("legal", afterShot, this);
 
@@ -165,7 +168,19 @@ namespace Snooker
 
     FunctionalState *noBallHit = new FunctionalState("hit_nothing", foulShot, this);
     FunctionalState *hitWrongBall = new FunctionalState("hit_wrong_ball", foulShot, this);
+
     FunctionalState *potWrongBall = new FunctionalState("pot_wrong_ball", foulShot, this);
+    // Reset incorrectly potted balls
+    potWrongBall->setOnOperate([waitForShot, sim](IState *, StateMachine *){
+      int targetPoints = waitForShot->targetBallPoints();
+      for (auto it = waitForShot->potted().begin(); it != waitForShot->potted().end(); ++it)
+      {
+        int ballPoints = (*it)->points();
+        if (ballPoints == -1 || (targetPoints == 0 && ballPoints == 1) || (targetPoints != ballPoints))
+          sim->placeBalls(static_cast<SnookerBalls>(ballPoints));
+      }
+    });
+
     FunctionalState *potCueBall = new FunctionalState("pot_cue_ball", potWrongBall, this);
 
     // LEGAL SHOT STATES

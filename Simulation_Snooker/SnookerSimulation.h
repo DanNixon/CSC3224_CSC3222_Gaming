@@ -28,6 +28,20 @@ namespace Simulation
 {
 namespace Snooker
 {
+  enum class SnookerBalls
+  {
+    ALL = -2,
+    CUE_BALL = -1,
+    ALL_COLOURS = 0,
+    RED = 1,
+    YELLOW = 2,
+    GREEN = 3,
+    BROWN = 4,
+    BLUE = 5,
+    PINK = 6,
+    BLACK = 7
+  };
+
   /**
    * @class SnookerSimulation
    * @brief Game application for the snooker simulation.
@@ -44,7 +58,7 @@ namespace Snooker
     SnookerSimulation();
     ~SnookerSimulation();
 
-    void placeBalls();
+    void placeBalls(SnookerBalls b = SnookerBalls::ALL);
 
   protected:
     int gameStartup();

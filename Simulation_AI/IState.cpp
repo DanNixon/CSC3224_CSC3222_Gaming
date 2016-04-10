@@ -87,13 +87,13 @@ namespace AI
    * @param active If this state is active or not
    * @param terminateAt Ancestor at which to stop modifying activation
    */
-  void IState::setActivation(bool active, IState *terminateAt)
+  void IState::setActivation(bool active, IState *terminateAt, IState * delta)
   {
     if (terminateAt == this)
       return;
 
     if (!active)
-      onExit();
+      onExit(delta);
 
     if (m_parent)
     {
@@ -102,7 +102,7 @@ namespace AI
     }
 
     if (active)
-      onEntry();
+      onEntry(delta);
   }
 }
 }

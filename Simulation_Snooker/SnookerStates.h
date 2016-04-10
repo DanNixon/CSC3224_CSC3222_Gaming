@@ -54,6 +54,15 @@ namespace Snooker
       return dynamic_cast<PlayerState *>(m_machine->rootState()->findState(name).back());
     }
 
+  protected:
+    virtual void onEntry(IState * last)
+    {
+      if (last->name() == "pot_cue_ball" || last->name() == "running")
+        findState("place_cue_ball").back()->setActivation(true, this, this);
+      else
+        findState("take_shot").back()->setActivation(true, this, this);
+    }
+
   private:
     int m_playerNumber; //!< Player number (0 or 1)
     int m_score;        //!< Players score
@@ -88,6 +97,11 @@ namespace Snooker
         return m_potted.back();
     }
 
+    inline std::vector<Ball *> &potted()
+    {
+      return m_potted;
+    }
+
   protected:
     virtual IState *testTransferFrom() const
     {
@@ -101,16 +115,7 @@ namespace Snooker
         if (m_firstCueBallTouched == nullptr)
           return m_parent->findState("after_shot/foul/hit_nothing").back();
 
-        // Hit incorrect ball
-        if (m_targetBallPoints != m_firstCueBallTouched->points() ||
-            (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
-          return m_parent->findState("after_shot/foul/hit_wrong_ball").back();
-
-        // Did not pot anything
-        if (m_potted.empty())
-          return m_parent->findState("after_shot/legal/pot_nothing").back();
-
-        // A specific corect ball was potted
+        // A specific correct ball was potted
         if (m_potted.size() == 1 && m_potted[0]->points() == m_targetBallPoints)
         {
           if (m_targetBallPoints == 1)
@@ -122,16 +127,27 @@ namespace Snooker
         // Any colour was potted
         if (m_potted.size() == 1 && m_potted[0]->points() > 1 && m_targetBallPoints == 0)
           return m_parent->findState("after_shot/legal/pot_any_colour").back();
-
+        
         // Wrong ball was potted
-        return m_parent->findState("after_shot/foul/pot_wrong_ball").back();
+        if (!m_potted.empty())
+          return m_parent->findState("after_shot/foul/pot_wrong_ball").back();
+
+        // Hit incorrect ball
+        if (m_targetBallPoints != m_firstCueBallTouched->points() ||
+          (m_targetBallPoints == 0 && m_firstCueBallTouched->points() == 1))
+          return m_parent->findState("after_shot/foul/hit_wrong_ball").back();
+
+        // Did not pot anything
+        if (m_potted.empty())
+          return m_parent->findState("after_shot/legal/pot_nothing").back();
       }
       else
         return nullptr;
     }
 
-    virtual void onEntry()
+    virtual void onEntry(IState *last)
     {
+      (void)last;
       m_firstCueBallTouched = nullptr;
       m_potted.clear();
     }
@@ -157,7 +173,7 @@ namespace Snooker
         else if (dynamic_cast<Pocket *>(b))
           potted = dynamic_cast<Ball *>(a);
 
-        if (potted)
+        if (potted && (std::find(m_potted.begin(), m_potted.end(), potted) == m_potted.end()))
         {
           // Record his ball as being potted
           m_potted.push_back(potted);
@@ -204,14 +220,15 @@ namespace Snooker
         return nullptr;
     }
 
-    virtual void onExit()
+    virtual void onExit(IState *next)
     {
+      (void)next;
       m_simulation->balls[0]->setAcceleration(Engine::Maths::Vector2());
     }
 
-    virtual void onEntry()
+    virtual void onEntry(IState *last)
     {
-      CompletableActionState::onEntry();
+      CompletableActionState::onEntry(last);
       resetMousePosition();
 
       WaitForShotState *shotState = dynamic_cast<WaitForShotState *>(m_parent->findState("wait_for_shot").back());
