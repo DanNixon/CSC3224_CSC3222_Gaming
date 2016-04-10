@@ -88,13 +88,13 @@ namespace Snooker
     });
     game->setOnEntry([sim](IState *s, StateMachine *sm, IState *) {
       // Show the score display
-      sim->scoreDisplay->setActive(true);
+      sim->scoreDisplay->setActive(true, 10);
       // Activate running state then this state is entered
       s->findState("running").back()->setActivation(true, s);
     });
     game->setOnExit([sim](IState *s, StateMachine *sm, IState *) {
       // Hide the score display when leaving game mode
-      sim->scoreDisplay->setActive(false);
+      sim->scoreDisplay->setActive(false, 10);
     });
 
     // GAME MODE STATES

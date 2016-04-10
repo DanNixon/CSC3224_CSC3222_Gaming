@@ -136,7 +136,6 @@ namespace Snooker
     // Scores
     scoreDisplay = new SceneObject("scores");
     scoreDisplay->setModelMatrix(Matrix4::Translation(Vector3(-0.75f, -0.9f, 0.0f)));
-    scoreDisplay->setActive(false);
     m_ui->root()->addChild(scoreDisplay);
 
     // Player 1 score
@@ -156,7 +155,6 @@ namespace Snooker
     player1IndicatorText->setModelMatrix(Matrix4::Translation(Vector3(-0.18f, 0.0f, 0.0f)));
     player1IndicatorText->setAlignment(centreRight);
     player1IndicatorText->setText("=>");
-    player1IndicatorText->setActive(false);
     player1Text->addChild(player1IndicatorText);
 
     // Player 2 score
@@ -176,8 +174,9 @@ namespace Snooker
     player2IndicatorText->setModelMatrix(Matrix4::Translation(Vector3(-0.18f, 0.0f, 0.0f)));
     player2IndicatorText->setAlignment(centreRight);
     player2IndicatorText->setText("=>");
-    player2IndicatorText->setActive(false);
     player2Text->addChild(player2IndicatorText);
+
+    scoreDisplay->setActive(false, 10);
 
     // Shot aim line
     shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
