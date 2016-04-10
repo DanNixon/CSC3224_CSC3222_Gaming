@@ -57,33 +57,33 @@ namespace Snooker
     // Balls
     balls[0] = new Ball(Vector2(-1150.0f, 200.0f), -1); // Cue ball
 #ifdef _DEBUG
-    balls[1] = new Ball(Vector2(0.0f, -820.0f), 1);  // Red
+    balls[1] = new Ball(Vector2(0.0f, -820.0f), 1); // Red
 #else
-    balls[1] = new Ball(Vector2(957.85f, 0.0f), 1);  // Red
+    balls[1] = new Ball(Vector2(957.85f, 0.0f), 1); // Red
 #endif
-    balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);  // Red
-    balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);  // Red
-    balls[4] = new Ball(Vector2(1062.85f, 52.5f), 1);  // Red
-    balls[5] = new Ball(Vector2(1062.85f, 0.0f), 1);  // Red
-    balls[6] = new Ball(Vector2(1062.85f, -52.5f), 1);  // Red
-    balls[7] = new Ball(Vector2(1115.35f, 78.75f), 1);  // Red
-    balls[8] = new Ball(Vector2(1115.35f, 26.25f), 1);  // Red
-    balls[9] = new Ball(Vector2(1115.35f, -26.25f), 1);  // Red
-    balls[10] = new Ball(Vector2(1115.35f, -78.75f), 1); // Red
-    balls[11] = new Ball(Vector2(1167.85f, 105.0f), 1); // Red
-    balls[12] = new Ball(Vector2(1167.85f, 52.5f), 1); // Red
-    balls[13] = new Ball(Vector2(1167.85f, 0.0f), 1); // Red
-    balls[14] = new Ball(Vector2(1167.85f, -52.5f), 1); // Red
-    balls[15] = new Ball(Vector2(1167.85f, -105.0f), 1); // Red
+    balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);    // Red
+    balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);   // Red
+    balls[4] = new Ball(Vector2(1062.85f, 52.5f), 1);     // Red
+    balls[5] = new Ball(Vector2(1062.85f, 0.0f), 1);      // Red
+    balls[6] = new Ball(Vector2(1062.85f, -52.5f), 1);    // Red
+    balls[7] = new Ball(Vector2(1115.35f, 78.75f), 1);    // Red
+    balls[8] = new Ball(Vector2(1115.35f, 26.25f), 1);    // Red
+    balls[9] = new Ball(Vector2(1115.35f, -26.25f), 1);   // Red
+    balls[10] = new Ball(Vector2(1115.35f, -78.75f), 1);  // Red
+    balls[11] = new Ball(Vector2(1167.85f, 105.0f), 1);   // Red
+    balls[12] = new Ball(Vector2(1167.85f, 52.5f), 1);    // Red
+    balls[13] = new Ball(Vector2(1167.85f, 0.0f), 1);     // Red
+    balls[14] = new Ball(Vector2(1167.85f, -52.5f), 1);   // Red
+    balls[15] = new Ball(Vector2(1167.85f, -105.0f), 1);  // Red
     balls[16] = new Ball(Vector2(-1047.75f, -291.1f), 2); // Yellow
-    balls[17] = new Ball(Vector2(-1047.75f, 291.1f), 3); // Green
-    balls[18] = new Ball(Vector2(-1047.75f, 0.0f), 4); // Brown
+    balls[17] = new Ball(Vector2(-1047.75f, 291.1f), 3);  // Green
+    balls[18] = new Ball(Vector2(-1047.75f, 0.0f), 4);    // Brown
 #ifdef _DEBUG
     balls[19] = new Ball(Vector2(0.0f, 820.0f), 5); // Blue
 #else
     balls[19] = new Ball(Vector2(0.0f, 0.0f), 5); // Blue
 #endif
-    balls[20] = new Ball(Vector2(895.35f, 0.0f), 6); // Pink
+    balls[20] = new Ball(Vector2(895.35f, 0.0f), 6);  // Pink
     balls[21] = new Ball(Vector2(1466.85f, 0.0f), 7); // Black
 
     resetBalls();

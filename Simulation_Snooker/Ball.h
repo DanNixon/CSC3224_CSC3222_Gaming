@@ -49,7 +49,7 @@ namespace Snooker
     virtual void setPosition(const Engine::Maths::Vector2 &pos);
 
   private:
-    int m_points; //!< Number of points potting this ball gets
+    int m_points;                             //!< Number of points potting this ball gets
     Engine::Maths::Vector2 m_defaultPosition; //!< Default position of this ball on the table
   };
 }
