@@ -10,11 +10,11 @@ Essential:
 - [x] Interface detection
 - [x] Interface resolution
 - [x] Pocket detection
-- [ ] D-zone detection
 - [x] Display profiling data on screen
 
 Extra:
 
+- [ ] D-zone detection
 - [ ] Mouse based shots
   - [x] Set ball acceleration using mouse
   - [ ] Require player to click the cue ball to start a shot
