@@ -65,6 +65,10 @@ namespace AI
       return m_active == state;
     }
 
+    /**
+     * @brief Gets a reference to the vector containing child states.
+     * @return Reference to children vector
+     */
     inline std::vector<IState *> children()
     {
       return m_children;
