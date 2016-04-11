@@ -63,6 +63,8 @@ namespace Snooker
 
       game->addEventHandler(m_keyboard);
       game->addEventHandler(m_mouse);
+
+      m_menu = static_cast<SnookerSimulation *>(game)->menu;
     }
 
     virtual ~SnookerControls()
@@ -77,7 +79,7 @@ namespace Snooker
     virtual void setState(size_t state, bool active)
     {
       IControlScheme::setState(state, active);
-      static_cast<SnookerSimulation *>(m_game)->menu->updateTextFromState();
+      m_menu->updateTextFromState();
     }
 
   private:

@@ -92,22 +92,20 @@ namespace Snooker
     void initBalls();
 
   private:
-    friend class SnookerControls;
+    Uint8 m_graphicsLoop; //!< Graphics update loop ID
+    Uint8 m_physicsLoop;  //!< Physics update loop ID
+    Uint8 m_controlLoop;  //!< Control update loop ID
+    Uint8 m_profileLoop;  //!< Profile update loop ID
 
-    Uint8 m_graphicsLoop;
-    Uint8 m_physicsLoop;
-    Uint8 m_controlLoop;
-    Uint8 m_profileLoop;
+    Engine::Common::Scene *m_scene; //!< Scene containing snooker table, etc
+    Engine::Common::Scene *m_ui;    //!< Scene containing UI components
 
-    Engine::Common::Scene *m_scene;
-    Engine::Common::Scene *m_ui;
+    Table *m_table; //!< Snooker table
 
-    Table *m_table;
-
-    TTF_Font *m_fontLarge;
-    TTF_Font *m_fontMedium;
-    Engine::Graphics::ShaderProgram *m_uiShader;
-    Engine::Graphics::TextPane *m_profileText;
+    TTF_Font *m_fontLarge;                       //!< Large font
+    TTF_Font *m_fontMedium;                      //!< Medium font
+    Engine::Graphics::ShaderProgram *m_uiShader; //!< Shader program used for UI components
+    Engine::Graphics::TextPane *m_profileText;   //!< Profile text display
   };
 }
 }
