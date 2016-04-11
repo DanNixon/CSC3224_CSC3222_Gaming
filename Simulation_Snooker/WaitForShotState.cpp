@@ -65,8 +65,11 @@ namespace Snooker
   void WaitForShotState::onEntry(IState *last)
   {
     (void)last;
+
     m_firstCueBallTouched = nullptr;
     m_potted.clear();
+
+    m_simulation->statusLine->setText("...");
   }
 
   void WaitForShotState::onOperate()

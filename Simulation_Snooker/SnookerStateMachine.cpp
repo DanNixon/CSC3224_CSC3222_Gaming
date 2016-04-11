@@ -89,7 +89,8 @@ namespace Snooker
     // GAME MODE STATES
 
     // Idle game state
-    new FunctionalState("idle", game, this);
+    FunctionalState *idle = new FunctionalState("idle", game, this);
+    idle->setOnEntry([sim](IState *, StateMachine *, IState *) { sim->statusLine->setText("Game Over"); });
 
     // Running game state
     FunctionalState *running = new FunctionalState("running", game, this);

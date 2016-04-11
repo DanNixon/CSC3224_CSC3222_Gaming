@@ -30,6 +30,7 @@ namespace Snooker
 
   protected:
     virtual IState *testTransferFrom() const;
+    virtual void onEntry(IState *last);
     virtual void onOperate();
 
   private:

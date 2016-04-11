@@ -30,15 +30,10 @@ namespace Snooker
       return nullptr;
   }
 
-  void TakeShotState::onExit(IState *next)
-  {
-    (void)next;
-    m_simulation->balls[0]->setAcceleration(Engine::Maths::Vector2());
-  }
-
   void TakeShotState::onEntry(IState *last)
   {
     CompletableActionState::onEntry(last);
+
     resetMouseStartPosition();
 
     WaitForShotState *shotState = dynamic_cast<WaitForShotState *>(m_parent->findState("wait_for_shot").back());
@@ -49,6 +44,7 @@ namespace Snooker
     if (shotState->lastPotted() != nullptr && shotState->lastPotted()->points() == 1)
     {
       shotState->setTargetBallPoints(0);
+      m_simulation->statusLine->setText("Pot any colour");
       return;
     }
 
@@ -58,10 +54,18 @@ namespace Snooker
     {
       if (m_simulation->balls[i]->collides() && shotState)
       {
-        shotState->setTargetBallPoints(m_simulation->balls[i]->points());
+        int points = m_simulation->balls[i]->points();
+        shotState->setTargetBallPoints(points);
+        m_simulation->statusLine->setText("Pot " + Ball::Info(points).first);
         return;
       }
     }
+  }
+
+  void TakeShotState::onExit(IState *next)
+  {
+    (void)next;
+    m_simulation->balls[0]->setAcceleration(Engine::Maths::Vector2());
   }
 
   void TakeShotState::onOperate()

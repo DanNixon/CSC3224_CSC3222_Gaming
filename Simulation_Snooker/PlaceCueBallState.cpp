@@ -35,6 +35,8 @@ namespace Snooker
   {
     // Reset recorded mouse start position
     resetMouseStartPosition();
+
+    m_simulation->statusLine->setText("Position cue ball");
   }
 
   void PlaceCueBallState::onOperate()

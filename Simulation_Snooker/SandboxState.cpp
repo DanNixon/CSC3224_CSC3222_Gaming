@@ -34,6 +34,11 @@ namespace Snooker
     return nullptr;
   }
 
+  void SandboxState::onEntry(IState *last)
+  {
+    m_simulation->statusLine->setText("Sandbox");
+  }
+
   void SandboxState::onOperate()
   {
     if (m_simulation->menu->isMouseOver())

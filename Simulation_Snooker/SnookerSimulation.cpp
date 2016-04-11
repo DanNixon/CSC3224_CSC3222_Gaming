@@ -43,9 +43,6 @@ namespace Snooker
    */
   int SnookerSimulation::gameStartup()
   {
-    // Init state machine
-    static_cast<SnookerStateMachine *>(fsm)->initStates();
-
     // Load font for text display
     m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
@@ -127,11 +124,11 @@ namespace Snooker
     centreLeft.set(Alignment::Y_CENTRE);
 
     // Status line
-    TextPane *m_statusLine = new TextPane("status_line", 0.08f, m_uiShader, m_fontLarge);
-    m_statusLine->setModelMatrix(Matrix4::Translation(Vector3(-0.6f, -0.9f, 0.0f)));
-    m_statusLine->setAlignment(centreLeft);
-    m_statusLine->setText("Snooker Loopy!");
-    m_ui->root()->addChild(m_statusLine);
+    statusLine = new TextPane("status_line", 0.06f, m_uiShader, m_fontLarge);
+    statusLine->setModelMatrix(Matrix4::Translation(Vector3(-0.6f, -0.9f, 0.0f)));
+    statusLine->setAlignment(centreLeft);
+    statusLine->setText("Snooker Loopy!");
+    m_ui->root()->addChild(statusLine);
 
     // Scores
     scoreDisplay = new SceneObject("scores");
@@ -182,6 +179,9 @@ namespace Snooker
     shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);
     shotAimLine->setActive(false);
     balls[0]->addChild(shotAimLine);
+
+    // Init state machine
+    static_cast<SnookerStateMachine *>(fsm)->initStates();
 
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
