@@ -51,48 +51,7 @@ namespace Snooker
     m_table = new Table(physics.entities());
     m_table->setModelMatrix(Matrix4::Translation(Vector3(0.0, 0.0, -3600.0)));
 
-    // Balls
-    balls[0] = new Ball(Vector2(-1150.0f, 200.0f), -1); // Cue ball
-#ifdef _DEBUG
-    balls[1] = new Ball(Vector2(0.0f, -820.0f), 1); // Red
-#else
-    balls[1] = new Ball(Vector2(957.85f, 0.0f), 1); // Red
-#endif
-    balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);    // Red
-    balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);   // Red
-    balls[4] = new Ball(Vector2(1062.85f, 52.5f), 1);     // Red
-    balls[5] = new Ball(Vector2(1062.85f, 0.0f), 1);      // Red
-    balls[6] = new Ball(Vector2(1062.85f, -52.5f), 1);    // Red
-    balls[7] = new Ball(Vector2(1115.35f, 78.75f), 1);    // Red
-    balls[8] = new Ball(Vector2(1115.35f, 26.25f), 1);    // Red
-    balls[9] = new Ball(Vector2(1115.35f, -26.25f), 1);   // Red
-    balls[10] = new Ball(Vector2(1115.35f, -78.75f), 1);  // Red
-    balls[11] = new Ball(Vector2(1167.85f, 105.0f), 1);   // Red
-    balls[12] = new Ball(Vector2(1167.85f, 52.5f), 1);    // Red
-    balls[13] = new Ball(Vector2(1167.85f, 0.0f), 1);     // Red
-    balls[14] = new Ball(Vector2(1167.85f, -52.5f), 1);   // Red
-    balls[15] = new Ball(Vector2(1167.85f, -105.0f), 1);  // Red
-    balls[16] = new Ball(Vector2(-1047.75f, -291.1f), 2); // Yellow
-    balls[17] = new Ball(Vector2(-1047.75f, 291.1f), 3);  // Green
-    balls[18] = new Ball(Vector2(-1047.75f, 0.0f), 4);    // Brown
-#ifdef _DEBUG
-    balls[19] = new Ball(Vector2(0.0f, 820.0f), 5); // Blue
-#else
-    balls[19] = new Ball(Vector2(0.0f, 0.0f), 5); // Blue
-#endif
-    balls[20] = new Ball(Vector2(895.35f, 0.0f), 6);  // Pink
-    balls[21] = new Ball(Vector2(1466.85f, 0.0f), 7); // Black
-
-    resetBalls();
-
-    for (size_t i = 0; i < NUM_BALLS; i++)
-    {
-      if (balls[i] != nullptr)
-      {
-        m_table->addChild(balls[i]);
-        physics.addEntity(balls[i]);
-      }
-    }
+    initBalls();
 
     // Scene
     Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10));
@@ -289,15 +248,94 @@ namespace Snooker
   /**
    * @brief Resets balls to their initial state.
    * @param b Balls to be reset
+   *
+   * When the _DEBUG macro is defined (default for a debug build in VS) only a
+   * subset of balls will be enabled.
    */
   void SnookerSimulation::resetBalls(SnookerBalls b)
   {
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
-      if (b == SnookerBalls::ALL || balls[i]->points() == static_cast<std::underlying_type<SnookerBalls>::type>(b) ||
-          (b == SnookerBalls::ALL_COLOURS && balls[i]->points() > 1))
+      if (balls[i] != nullptr &&
+          (b == SnookerBalls::ALL || balls[i]->points() == static_cast<std::underlying_type<SnookerBalls>::type>(b) ||
+           (b == SnookerBalls::ALL_COLOURS && balls[i]->points() > 1)))
       {
         balls[i]->reset();
+      }
+    }
+  }
+
+  /**
+   * @brief Creates balls and adds them to the simulation.
+   */
+  void SnookerSimulation::initBalls()
+  {
+    // Cue ball
+    balls[0] = new Ball(Vector2(-1150.0f, 200.0f), -1);
+
+// Red
+#ifdef _DEBUG
+    balls[1] = new Ball(Vector2(0.0f, -820.0f), 1);
+#else
+    balls[1] = new Ball(Vector2(957.85f, 0.0f), 1);
+#endif
+
+#ifndef _DEBUG
+    // Reds
+    balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);
+    balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);
+    balls[4] = new Ball(Vector2(1062.85f, 52.5f), 1);
+    balls[5] = new Ball(Vector2(1062.85f, 0.0f), 1);
+    balls[6] = new Ball(Vector2(1062.85f, -52.5f), 1);
+    balls[7] = new Ball(Vector2(1115.35f, 78.75f), 1);
+    balls[8] = new Ball(Vector2(1115.35f, 26.25f), 1);
+    balls[9] = new Ball(Vector2(1115.35f, -26.25f), 1);
+    balls[10] = new Ball(Vector2(1115.35f, -78.75f), 1);
+    balls[11] = new Ball(Vector2(1167.85f, 105.0f), 1);
+    balls[12] = new Ball(Vector2(1167.85f, 52.5f), 1);
+    balls[13] = new Ball(Vector2(1167.85f, 0.0f), 1);
+    balls[14] = new Ball(Vector2(1167.85f, -52.5f), 1);
+    balls[15] = new Ball(Vector2(1167.85f, -105.0f), 1);
+#endif
+
+// Yellow
+#ifndef _DEBUG
+    balls[16] = new Ball(Vector2(-1047.75f, -291.1f), 2);
+#else
+    balls[16] = new Ball(Vector2(0.0f, 820.0f), 2);
+#endif
+
+#ifndef _DEBUG
+    // Green
+    balls[17] = new Ball(Vector2(-1047.75f, 291.1f), 3);
+
+    // Brown
+    balls[18] = new Ball(Vector2(-1047.75f, 0.0f), 4);
+
+    // Blue
+    balls[19] = new Ball(Vector2(0.0f, 0.0f), 5);
+
+    // Pink
+    balls[20] = new Ball(Vector2(895.35f, 0.0f), 6);
+#endif
+
+// Black
+#ifndef _DEBUG
+    balls[21] = new Ball(Vector2(1466.85f, 0.0f), 7);
+#else
+    balls[21] = new Ball(Vector2(1740.0f, -840.0f), 7);
+#endif
+
+    // Set default states
+    resetBalls();
+
+    // Add valid balls to simulation
+    for (size_t i = 0; i < NUM_BALLS; i++)
+    {
+      if (balls[i] != nullptr)
+      {
+        m_table->addChild(balls[i]);
+        physics.addEntity(balls[i]);
       }
     }
   }

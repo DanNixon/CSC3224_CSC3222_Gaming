@@ -70,8 +70,6 @@ namespace Snooker
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
-    // TODO: tidy
-
   public:
     Simulation::Physics::PhysicsSimulation physics; //!< Physical simulation
     Engine::Input::IControlScheme *controls;        //!< Control scheme
@@ -89,6 +87,9 @@ namespace Snooker
     Engine::Graphics::TextPane *player2ScoreText;     //!< Text showing score for player 2
     Engine::Graphics::TextPane *player1IndicatorText; //!< Turn indicator for player 1
     Engine::Graphics::TextPane *player2IndicatorText; //!< Turn indicator for player 2
+
+  private:
+    void initBalls();
 
   private:
     friend class SnookerControls;

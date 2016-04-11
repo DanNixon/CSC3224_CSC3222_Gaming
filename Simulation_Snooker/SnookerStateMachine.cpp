@@ -217,7 +217,7 @@ namespace Snooker
     potSequenceColour->setTestTransferFrom([sim, player](const IState *const, StateMachine *sm) -> IState * {
       for (size_t i = 1; i < SnookerSimulation::NUM_BALLS; i++)
       {
-        if (sim->balls[i]->collides())
+        if (sim->balls[i] != nullptr && sim->balls[i]->collides())
           return player->otherPlayer();
       }
 

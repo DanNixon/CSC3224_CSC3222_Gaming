@@ -64,7 +64,7 @@ namespace Snooker
     // i.e. whatever the lowest value ball in play is
     for (size_t i = 1; i < SnookerSimulation::NUM_BALLS; i++)
     {
-      if (m_simulation->balls[i]->collides() && shotState)
+      if (m_simulation->balls[i] != nullptr && m_simulation->balls[i]->collides() && shotState)
       {
         int points = m_simulation->balls[i]->points();
         shotState->setTargetBallPoints(points);
