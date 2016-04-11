@@ -7,11 +7,18 @@
 
 #include "Node.h"
 
+#include "Edge.h"
+
 namespace Simulation
 {
 namespace PathFinding
 {
-  Node::Node()
+  /**
+   * @brief Creates a new node.
+   * @param id String ID
+   */
+  Node::Node(const std::string &id)
+      : m_id(id)
   {
   }
 
