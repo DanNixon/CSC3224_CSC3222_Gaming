@@ -19,6 +19,9 @@
 #include "SnookerControls.h"
 #include "SnookerStateMachine.h"
 
+// Uncomment to run with correct layout when building in Debug mode
+// #undef _DEBUG
+
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -282,8 +285,14 @@ namespace Snooker
 #endif
 
 #ifndef _DEBUG
-    // Reds
+    // Red
     balls[2] = new Ball(Vector2(1010.35f, 26.25f), 1);
+#else
+    balls[2] = new Ball(Vector2(-1740.0f, -840.0f), 1);
+#endif
+
+#ifndef _DEBUG
+    // Reds
     balls[3] = new Ball(Vector2(1010.35f, -26.25f), 1);
     balls[4] = new Ball(Vector2(1062.85f, 52.5f), 1);
     balls[5] = new Ball(Vector2(1062.85f, 0.0f), 1);
@@ -315,9 +324,13 @@ namespace Snooker
 
     // Blue
     balls[19] = new Ball(Vector2(0.0f, 0.0f), 5);
+#endif
 
+#ifndef _DEBUG
     // Pink
     balls[20] = new Ball(Vector2(895.35f, 0.0f), 6);
+#else
+    balls[20] = new Ball(Vector2(1704.0f, 840.0f), 6);
 #endif
 
 #ifndef _DEBUG

@@ -54,8 +54,20 @@ namespace Snooker
     if (shotState == nullptr)
       return;
 
+    // Find the lowest value ball currently in play
+    int lowestBallInPlay = -1;
+    for (size_t i = 1; i < SnookerSimulation::NUM_BALLS; i++)
+    {
+      if (m_simulation->balls[i] != nullptr && m_simulation->balls[i]->collides())
+      {
+        lowestBallInPlay = m_simulation->balls[i]->points();
+        break;
+      }
+    }
+
     // If players last shot in turn was a red then now they hit any colour
-    if (shotState->lastPotted() != nullptr && shotState->lastPotted()->points() == 1)
+    // assuming there are still reds in play
+    if (shotState->lastPotted() != nullptr && shotState->lastPotted()->points() == 1 && lowestBallInPlay == 1)
     {
       shotState->setTargetBallPoints(0);
       m_simulation->statusLine->setText("Pot any colour");
@@ -64,16 +76,8 @@ namespace Snooker
 
     // Players first shot in turn is either on red or the next colour in sequence if no reds are in play
     // i.e. whatever the lowest value ball in play is
-    for (size_t i = 1; i < SnookerSimulation::NUM_BALLS; i++)
-    {
-      if (m_simulation->balls[i] != nullptr && m_simulation->balls[i]->collides() && shotState)
-      {
-        int points = m_simulation->balls[i]->points();
-        shotState->setTargetBallPoints(points);
-        m_simulation->statusLine->setText("Pot " + Ball::Info(points).first);
-        return;
-      }
-    }
+    shotState->setTargetBallPoints(lowestBallInPlay);
+    m_simulation->statusLine->setText("Pot " + Ball::Info(lowestBallInPlay).first);
   }
 
   /**
