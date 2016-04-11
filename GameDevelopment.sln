@@ -109,6 +109,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simulation_AI_Test", "Simul
 		{698AB558-D09D-4E92-B0BD-727E0C99387E} = {698AB558-D09D-4E92-B0BD-727E0C99387E}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simulation_PathFinding", "Simulation_PathFinding\Simulation_PathFinding.vcxproj", "{3888A1A5-54B3-4D46-942F-D66670421D7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -261,6 +263,14 @@ Global
 		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Release|Win32.Build.0 = Release|Win32
 		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Release|x64.ActiveCfg = Release|x64
 		{992BF8AF-B00C-4535-B048-D826C8E56EA5}.Release|x64.Build.0 = Release|x64
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Debug|Win32.Build.0 = Debug|Win32
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Debug|x64.ActiveCfg = Debug|x64
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Debug|x64.Build.0 = Debug|x64
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Release|Win32.ActiveCfg = Release|Win32
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Release|Win32.Build.0 = Release|Win32
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Release|x64.ActiveCfg = Release|x64
+		{3888A1A5-54B3-4D46-942F-D66670421D7B}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
