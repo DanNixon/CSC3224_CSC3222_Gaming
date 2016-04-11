@@ -24,6 +24,10 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @copydoc StateMachine::StateMachine
+   * @param simulation Simulation acted upon
+   */
   SnookerStateMachine::SnookerStateMachine(SnookerSimulation *simulation)
       : m_simulation(simulation)
   {

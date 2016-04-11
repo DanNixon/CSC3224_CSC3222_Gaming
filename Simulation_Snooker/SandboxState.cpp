@@ -24,6 +24,9 @@ namespace Snooker
     resetMouseStartPosition();
   }
 
+  /**
+   * @copydoc IState::testTransferFrom
+   */
   IState *SandboxState::testTransferFrom() const
   {
     if (m_simulation->controls->state(S_MODE_CHANGE))
@@ -34,11 +37,17 @@ namespace Snooker
     return nullptr;
   }
 
+  /**
+   * @copydoc IState::onEntry
+   */
   void SandboxState::onEntry(IState *last)
   {
     m_simulation->statusLine->setText("Sandbox");
   }
 
+  /**
+   * @copydoc IState::onOperate
+   */
   void SandboxState::onOperate()
   {
     if (m_simulation->menu->isMouseOver())

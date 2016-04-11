@@ -28,6 +28,11 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @enum SnookerBalls
+   * @brief Enumeration of snooker balls, underlaying type denotes number of
+   *        points.
+   */
   enum class SnookerBalls
   {
     ALL = -2,
@@ -65,22 +70,24 @@ namespace Snooker
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
+  //TODO: tidy
+
   public:
-    Simulation::Physics::PhysicsSimulation physics;
-    Engine::Input::IControlScheme *controls;
-    Simulation::AI::StateMachine *fsm;
-    OptionsMenu *menu;
+    Simulation::Physics::PhysicsSimulation physics; //!< Physical simulation
+    Engine::Input::IControlScheme *controls;        //!< Control scheme
+    Simulation::AI::StateMachine *fsm;              //!< State machine
+    OptionsMenu *menu;                              //!< Option menu
 
-    Ball *balls[NUM_BALLS];
-    Engine::Graphics::RenderableObject *shotAimLine;
+    Ball *balls[NUM_BALLS];                          //!< Array of balls in simulation
+    Engine::Graphics::RenderableObject *shotAimLine; //!< Line used to show shot acceleration vector
 
-    Engine::Graphics::TextPane *statusLine;
+    Engine::Graphics::TextPane *statusLine; //!< Textual status line
 
-    Engine::Common::SceneObject *scoreDisplay;
-    Engine::Graphics::TextPane *player1ScoreText;
-    Engine::Graphics::TextPane *player2ScoreText;
-    Engine::Graphics::TextPane *player1IndicatorText;
-    Engine::Graphics::TextPane *player2IndicatorText;
+    Engine::Common::SceneObject *scoreDisplay;        //!< Parent node of all score related text
+    Engine::Graphics::TextPane *player1ScoreText;     //!< Text showing score for player 1
+    Engine::Graphics::TextPane *player2ScoreText;     //!< Text showing score for player 2
+    Engine::Graphics::TextPane *player1IndicatorText; //!< Turn indicator for player 1
+    Engine::Graphics::TextPane *player2IndicatorText; //!< Turn indicator for player 2
 
   private:
     friend class SnookerControls;

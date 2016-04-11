@@ -11,6 +11,12 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @brief Creates a new take shot state.
+   * @param parent Parent state
+   * @param machine The state machine to which this state belongs
+   * @param simulation The simulation this state acts upon
+   */
   TakeShotState::TakeShotState(IState *parent, StateMachine *machine, SnookerSimulation *simulation)
       : CompletableActionState("take_shot", parent, machine)
       , m_simulation(simulation)
@@ -22,6 +28,9 @@ namespace Snooker
     resetMouseStartPosition();
   }
 
+  /**
+   * @copydoc CompletableActionState::testTransferFrom
+   */
   IState *TakeShotState::testTransferFrom() const
   {
     if (m_completed)
@@ -30,6 +39,9 @@ namespace Snooker
       return nullptr;
   }
 
+  /**
+   * @copydoc CompletableActionState::onEntry
+   */
   void TakeShotState::onEntry(IState *last)
   {
     CompletableActionState::onEntry(last);
@@ -62,12 +74,21 @@ namespace Snooker
     }
   }
 
+  /**
+   * @copydoc CompletableActionState::onExit
+   *
+   * Remove acceleration from ball, ensures acceleration is only applied for
+   * one physics update.
+   */
   void TakeShotState::onExit(IState *next)
   {
     (void)next;
     m_simulation->balls[0]->setAcceleration(Engine::Maths::Vector2());
   }
 
+  /**
+   * @copydoc CompletableActionState::onOperate
+   */
   void TakeShotState::onOperate()
   {
     if (m_simulation->menu->isMouseOver())

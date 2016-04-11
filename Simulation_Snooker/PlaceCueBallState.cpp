@@ -11,6 +11,12 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @brief Creates a new place cue ball state.
+   * @param parent Parent state
+   * @param machine The state machine to which this state belongs
+   * @param simulation The simulation this state acts upon
+   */
   PlaceCueBallState::PlaceCueBallState(IState *parent, StateMachine *machine, SnookerSimulation *simulation)
       : CompletableActionState("place_cue_ball", parent, machine)
       , m_simulation(simulation)

@@ -11,6 +11,12 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @brief Creates a new wait for shot state.
+   * @param parent Parent state
+   * @param machine The state machine to which this state belongs
+   * @param simulation The simulation this state acts upon
+   */
   WaitForShotState::WaitForShotState(IState *parent, StateMachine *machine, SnookerSimulation *simulation)
       : IState("wait_for_shot", parent, machine)
       , m_simulation(simulation)
@@ -18,6 +24,9 @@ namespace Snooker
   {
   }
 
+  /**
+   * @copydoc IState::testTransferFrom
+   */
   IState *WaitForShotState::testTransferFrom() const
   {
     if (m_simulation->physics.atRest())
@@ -62,6 +71,9 @@ namespace Snooker
     return nullptr;
   }
 
+  /**
+   * @copydoc IState::onEntry
+   */
   void WaitForShotState::onEntry(IState *last)
   {
     (void)last;
@@ -72,6 +84,9 @@ namespace Snooker
     m_simulation->statusLine->setText("...");
   }
 
+  /**
+   * @copydoc IState::onOperate
+   */
   void WaitForShotState::onOperate()
   {
     std::vector<Simulation::Physics::InterfaceDef> inters = m_simulation->physics.interfaces();

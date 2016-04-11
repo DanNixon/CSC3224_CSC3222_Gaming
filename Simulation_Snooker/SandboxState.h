@@ -22,6 +22,11 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @class SandboxState
+   * @brief State used for running the demo simulation.
+   * @author Dan Nixon
+   */
   class SandboxState : public Simulation::AI::IState
   {
   public:
@@ -34,6 +39,9 @@ namespace Snooker
     virtual void onOperate();
 
   private:
+    /**
+     * @brief Resets the recorded initial mouse position.
+     */
     inline void resetMouseStartPosition()
     {
       if (m_mouseStartPosition != nullptr)
@@ -42,8 +50,8 @@ namespace Snooker
     }
 
   private:
-    SnookerSimulation *m_simulation;
-    Engine::Maths::Vector2 *m_mouseStartPosition;
+    SnookerSimulation *m_simulation;              //!< Simulaion state is acting on
+    Engine::Maths::Vector2 *m_mouseStartPosition; //!< Position of mouse pointer at start of click and drag
   };
 }
 }
