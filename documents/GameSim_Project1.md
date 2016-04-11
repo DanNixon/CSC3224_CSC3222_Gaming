@@ -14,12 +14,12 @@ Essential:
 
 Extra:
 
-- [ ] D-zone detection
-- [ ] Mouse based shots
+- [ ] *D-zone detection*
+- [x] Mouse based shots
   - [x] Set ball acceleration using mouse
-  - [ ] Require player to click the cue ball to start a shot
+  - [ ] *Require player to click the cue ball to start a shot*
 - [x] Sort and sweep broadphase interface checks
-- [ ] Proper snooker rules and scoring
+- [x] Proper snooker rules and scoring
   - [x] State machine framework
-  - [ ] Snooker state machine
+  - [x] Snooker state machine
 - [x] Menu interface
