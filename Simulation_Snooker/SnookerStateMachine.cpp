@@ -12,6 +12,7 @@
 #include <Simulation_AI/CompletableActionState.h>
 #include <Simulation_AI/FunctionalState.h>
 
+#include "SandboxState.h"
 #include "SnookerControls.h"
 #include "SnookerSimulation.h"
 
@@ -30,7 +31,6 @@ namespace Snooker
 
   SnookerStateMachine::~SnookerStateMachine()
   {
-    resetMouseStartPosition();
   }
 
   /**
@@ -62,18 +62,7 @@ namespace Snooker
     });
 
     // Sandbox mode
-    FunctionalState *sandbox = new FunctionalState("sandbox", rootState(), this);
-    // Go to game mode when the mode is changed
-    sandbox->setTestTransferFrom([sim](const IState *const, StateMachine *sm) -> IState * {
-      if (sim->controls->state(S_MODE_CHANGE))
-      {
-        sim->controls->setState(S_MODE_CHANGE, false);
-        return sm->rootState()->findState("game").back();
-      }
-      return nullptr;
-    });
-    // Handle controls for taking shots
-    sandbox->setOnOperate([this, sim](IState *s, StateMachine *) { this->updateControlTakeShot(nullptr); });
+    IState *sandbox = new SandboxState(rootState(), this, m_simulation);
 
     // Game mode
     FunctionalState *game = new FunctionalState("game", rootState(), this);
@@ -205,57 +194,6 @@ namespace Snooker
 
       return sm->rootState()->findState("game/idle").back();
     });
-  }
-
-  /**
-   * @brief Update the controls for taking a shot.
-   */
-  void SnookerStateMachine::updateControlTakeShot(CompletableActionState *state)
-  {
-    if (m_simulation->menu->isMouseOver())
-      return;
-
-    // Mouse clicks (to take shots)
-    if (m_mouseStartPosition == nullptr)
-    {
-      if (m_simulation->controls->state(S_TAKE_SHOT))
-      {
-        // Record starting position of mouse
-        m_mouseStartPosition =
-            new Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
-        static_cast<LineMesh *>(m_simulation->shotAimLine->mesh())->setTo(Vector3());
-        m_simulation->shotAimLine->setActive(true);
-      }
-      else
-      {
-        m_simulation->balls[0]->setAcceleration(Vector2());
-      }
-    }
-    else
-    {
-      Vector2 newMousePosition =
-          Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
-      Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
-
-      // Clamp max acceleration to a sensible level
-      float maxShotMagnitude = 0.5f;
-      if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
-        deltaMouse = VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
-
-      if (!m_simulation->controls->state(S_TAKE_SHOT))
-      {
-        m_simulation->shotAimLine->setActive(false);
-        m_simulation->balls[0]->setAcceleration(deltaMouse);
-        resetMouseStartPosition();
-
-        if (state != nullptr)
-          state->markAsComplete();
-      }
-      else
-      {
-        static_cast<LineMesh *>(m_simulation->shotAimLine->mesh())->setTo(deltaMouse * 1000.0f);
-      }
-    }
   }
 }
 }

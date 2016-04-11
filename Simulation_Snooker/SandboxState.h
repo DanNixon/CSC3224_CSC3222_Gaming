@@ -3,15 +3,15 @@
  * @author Dan Nixon
  */
 
-#ifndef _SIMULATION_SNOOKER_TAKESHOTSTATE_H_
-#define _SIMULATION_SNOOKER_TAKESHOTSTATE_H_
+#ifndef _SIMULATION_SNOOKER_SANDBOXSTATE_H_
+#define _SIMULATION_SNOOKER_SANDBOXSTATE_H_
 
 #include <string>
 
 #include <Engine_Graphics/LineMesh.h>
 #include <Engine_Maths/VectorOperations.h>
 
-#include <Simulation_AI/CompletableActionState.h>
+#include <Simulation_AI/IState.h>
 #include <Simulation_AI/StateMachine.h>
 
 #include "SnookerControls.h"
@@ -22,16 +22,14 @@ namespace Simulation
 {
 namespace Snooker
 {
-  class TakeShotState : public Simulation::AI::CompletableActionState
+  class SandboxState : public Simulation::AI::IState
   {
   public:
-    TakeShotState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine, SnookerSimulation *simulation);
-    virtual ~TakeShotState();
+    SandboxState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine, SnookerSimulation *simulation);
+    virtual ~SandboxState();
 
   protected:
     virtual IState *testTransferFrom() const;
-    virtual void onExit(IState *next);
-    virtual void onEntry(IState *last);
     virtual void onOperate();
 
   private:

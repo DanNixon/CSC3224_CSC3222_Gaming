@@ -214,6 +214,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClCompile Include="PlaceCueBallState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="Pocket.cpp" />
+    <ClCompile Include="SandboxState.cpp" />
     <ClCompile Include="SnookerSimulation.cpp" />
     <ClCompile Include="SnookerStateMachine.cpp" />
     <ClCompile Include="Table.cpp" />
@@ -227,6 +228,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClInclude Include="PlaceCueBallState.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="Pocket.h" />
+    <ClInclude Include="SandboxState.h" />
     <ClInclude Include="SnookerControls.h" />
     <ClInclude Include="SnookerSimulation.h" />
     <ClInclude Include="SnookerStateMachine.h" />
