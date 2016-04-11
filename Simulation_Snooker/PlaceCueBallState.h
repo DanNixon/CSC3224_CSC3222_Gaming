@@ -1,6 +1,8 @@
 /**
  * @file
- * @author Dan Nixon
+ * @author Dan Nixon (120263697)
+ *
+ * For CSC3222 Project 1.
  */
 
 #ifndef _SIMULATION_SNOOKER_PLACECUEBALLSTATE_H_
