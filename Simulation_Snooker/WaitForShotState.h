@@ -27,7 +27,7 @@ namespace Snooker
   {
   public:
     WaitForShotState::WaitForShotState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine,
-                                       SnookerSimulation *simulation);
+                                       SnookerSimulation *simulation, const std::string &name = "wait_for_shot");
 
     /**
      * @brief Sets the number of points the target ball is worth.
@@ -78,7 +78,7 @@ namespace Snooker
     virtual void onEntry(Simulation::AI::IState *last);
     virtual void onOperate();
 
-  private:
+  protected:
     SnookerSimulation *m_simulation; //!< Simulaion state is acting on
     int m_targetBallPoints;          //!< Points the target ball is worth (0 for any colour)
     Ball *m_firstCueBallTouched;     //!< Pointer to the first ball touched by the cue ball

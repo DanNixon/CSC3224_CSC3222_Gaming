@@ -27,7 +27,7 @@ namespace Snooker
    * @brief State used for running the demo simulation.
    * @author Dan Nixon
    */
-  class SandboxState : public Simulation::AI::IState
+  class SandboxState : public WaitForShotState
   {
   public:
     SandboxState(Simulation::AI::IState *parent, Simulation::AI::StateMachine *machine, SnookerSimulation *simulation);
@@ -50,7 +50,6 @@ namespace Snooker
     }
 
   private:
-    SnookerSimulation *m_simulation;              //!< Simulaion state is acting on
     Engine::Maths::Vector2 *m_mouseStartPosition; //!< Position of mouse pointer at start of click and drag
   };
 }

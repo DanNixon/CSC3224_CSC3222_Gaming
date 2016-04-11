@@ -14,8 +14,7 @@ namespace Simulation
 namespace Snooker
 {
   SandboxState::SandboxState(IState *parent, StateMachine *machine, SnookerSimulation *simulation)
-      : IState("sandbox", parent, machine)
-      , m_simulation(simulation)
+      : WaitForShotState(parent, machine, simulation, "sandbox")
   {
   }
 
@@ -25,7 +24,7 @@ namespace Snooker
   }
 
   /**
-   * @copydoc IState::testTransferFrom
+   * @copydoc WaitForShotState::testTransferFrom
    */
   IState *SandboxState::testTransferFrom() const
   {
@@ -38,7 +37,7 @@ namespace Snooker
   }
 
   /**
-   * @copydoc IState::onEntry
+   * @copydoc WaitForShotState::onEntry
    */
   void SandboxState::onEntry(IState *last)
   {
@@ -46,10 +45,12 @@ namespace Snooker
   }
 
   /**
-   * @copydoc IState::onOperate
+   * @copydoc WaitForShotState::onOperate
    */
   void SandboxState::onOperate()
   {
+    WaitForShotState::onOperate();
+
     if (m_simulation->menu->isMouseOver())
       return;
 

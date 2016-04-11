@@ -226,7 +226,8 @@ namespace Snooker
       physics.update(dtMilliSec);
 
       // Update state machine
-      if (fsm->activeStateBranch().back()->name() == "wait_for_shot")
+      const std::string &fsmLeaf = fsm->activeStateBranch().back()->name();
+      if (fsmLeaf == "wait_for_shot" || fsmLeaf == "sandbox")
       {
         if (fsm->update())
         {
@@ -239,7 +240,7 @@ namespace Snooker
     else if (id == m_controlLoop)
     {
       // Update state machine
-      if (fsm->update())
+      if (fsm->activeStateBranch().back()->name() != "sandbox" && fsm->update())
       {
         menu->updateTextFromState();
         std::cout << "STATE: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;

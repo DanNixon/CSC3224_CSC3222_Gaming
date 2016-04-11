@@ -16,9 +16,11 @@ namespace Snooker
    * @param parent Parent state
    * @param machine The state machine to which this state belongs
    * @param simulation The simulation this state acts upon
+   @param name Name of the state
    */
-  WaitForShotState::WaitForShotState(IState *parent, StateMachine *machine, SnookerSimulation *simulation)
-      : IState("wait_for_shot", parent, machine)
+  WaitForShotState::WaitForShotState(IState *parent, StateMachine *machine, SnookerSimulation *simulation,
+                                     const std::string &name)
+      : IState(name, parent, machine)
       , m_simulation(simulation)
       , m_targetBallPoints(-1)
   {
