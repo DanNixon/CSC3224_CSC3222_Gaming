@@ -1,6 +1,8 @@
 /**
  * @file
- * @author Dan Nixon
+ * @author Dan Nixon (120263697)
+ *
+ * For CSC3224 Project 1.
  */
 
 #ifndef _ENGINE_UTILITY_DISTRIBUTIONS_H_

@@ -3,6 +3,8 @@
  * @brief Some random variables and functions, for lack of a better place to
  *        put them.
  * @author Rich Davison
+ *
+ * For CSC3224 Project 1.
  */
 
 #ifndef _ENGINE_MATHS_MATHCOMMON_H_

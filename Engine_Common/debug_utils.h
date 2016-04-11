@@ -1,8 +1,10 @@
 /**
  * @file
- * @author Dan Nixon
+ * @author Dan Nixon (120263697)
  * @brief Adds the C runtime library for memory leak detection.
  * @see https://msdn.microsoft.com/en-us/library/x98tx3cf.aspx
+ *
+ * For CSC3224 Project 1.
  */
 
 #ifdef _DEBUG

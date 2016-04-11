@@ -1,6 +1,8 @@
 /**
  * @file
- * @author Rich Davison, Dan Nixon
+ * @author Rich Davison, Dan Nixon (120263697)
+ *
+ * For CSC3224 Project 1.
  */
 
 #ifndef _ENGINE_MATHS_MATRIX3_H_

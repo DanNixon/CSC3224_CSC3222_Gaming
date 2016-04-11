@@ -1,6 +1,8 @@
 /**
  * @file
- * @author Rich Davison, Dan Nixon
+ * @author Rich Davison, Dan Nixon (120263697)
+ *
+ * For CSC3224 Project 1.
  */
 
 #include "Matrix4.h"

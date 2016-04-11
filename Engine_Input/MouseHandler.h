@@ -1,7 +1,9 @@
 /**
-* @file
-* @author Dan Nixon
-*/
+ * @file
+ * @author Dan Nixon (120263697)
+ *
+ * For CSC3224 Project 1.
+ */
 
 #ifndef _ENGINE_INPUT_MOUSEHANDLER_H_
 #define _ENGINE_INPUT_MOUSEHANDLER_H_
