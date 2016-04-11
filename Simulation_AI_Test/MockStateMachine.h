@@ -23,6 +23,16 @@ namespace AI
     class MockStateMachine : public StateMachine
     {
     public:
+      /**
+       * @copydoc StateMachine::operate
+       */
+      virtual void operate()
+      {
+        operatedStack.clear();
+        StateMachine::operate();
+      }
+
+    public:
       int value;                   //!< Dummy value for triggering state transitions
       IStatePtrList entryStack;    //!< States that have had onEntry() called
       IStatePtrList exitStack;     //!< States that have had onExit() called
