@@ -23,6 +23,9 @@ namespace AI
     class MockStateMachine : public StateMachine
     {
     public:
+      /**
+       * @copydoc StateMachine::operate
+       */
       virtual void operate()
       {
         m_operatedStack.clear();
