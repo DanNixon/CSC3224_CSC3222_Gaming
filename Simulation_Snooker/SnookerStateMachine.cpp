@@ -88,6 +88,7 @@ namespace Snooker
     game->setOnExit([sim](IState *s, StateMachine *sm, IState *) {
       // Hide the score display when leaving game mode
       sim->scoreDisplay->setActive(false, 10);
+      sim->foulLine->setActive(false, 10);
     });
 
     // GAME MODE STATES
@@ -149,8 +150,12 @@ namespace Snooker
 
     // The shot was foul
     FunctionalState *foulShot = new FunctionalState("foul", afterShot, this);
-    // Foul shots gives opponent 4 points
-    foulShot->setOnEntry([player](IState *, StateMachine *, IState *) { player->otherPlayer()->addToScore(4); });
+    foulShot->setOnEntry([sim, player](IState *, StateMachine *, IState *) {
+      // Foul shots gives opponent 4 points
+      player->otherPlayer()->addToScore(4);
+      // Show the fould status line
+      sim->foulLine->setActive(true);
+    });
     foulShot->setTestTransferFrom(nextPlayersTurn);
 
     FunctionalState *legalShot = new FunctionalState("legal", afterShot, this);
@@ -158,9 +163,15 @@ namespace Snooker
     // FOUL SHOT STATES
 
     FunctionalState *noBallHit = new FunctionalState("hit_nothing", foulShot, this);
+    noBallHit->setOnEntry([sim](IState *, StateMachine *, IState *) { sim->foulLine->setText("Foul: no ball hit"); });
+
     FunctionalState *hitWrongBall = new FunctionalState("hit_wrong_ball", foulShot, this);
+    hitWrongBall->setOnEntry(
+        [sim](IState *, StateMachine *, IState *) { sim->foulLine->setText("Foul: incorrect ball hit"); });
 
     FunctionalState *potWrongBall = new FunctionalState("pot_wrong_ball", foulShot, this);
+    potWrongBall->setOnEntry(
+        [sim](IState *, StateMachine *, IState *) { sim->foulLine->setText("Foul: incorrect ball potted"); });
     // Reset incorrectly potted balls
     potWrongBall->setOnOperate([waitForShot, sim](IState *, StateMachine *) {
       int targetPoints = waitForShot->targetBallPoints();
@@ -173,6 +184,8 @@ namespace Snooker
     });
 
     FunctionalState *potCueBall = new FunctionalState("pot_cue_ball", potWrongBall, this);
+    potCueBall->setOnEntry(
+        [sim](IState *, StateMachine *, IState *) { sim->foulLine->setText("Foul: cue ball potted"); });
 
     // LEGAL SHOT STATES
 
@@ -185,11 +198,22 @@ namespace Snooker
 
     FunctionalState *potRed = new FunctionalState("pot_red", legalShot, this);
     potRed->setTestTransferFrom(playerTakesNextShot);
+    // One point for potting a red
+    potRed->setOnEntry([player](IState *, StateMachine *, IState *) { player->addToScore(1); });
+
+    // Some points for potting a colour
+    auto pointsForColour = [player, waitForShot](IState *, StateMachine *, IState *) {
+      Ball *b = waitForShot->lastPotted();
+      if (b != nullptr)
+        player->addToScore(b->points());
+    };
 
     FunctionalState *potAnyColour = new FunctionalState("pot_any_colour", legalShot, this);
     potAnyColour->setTestTransferFrom(playerTakesNextShot);
+    potAnyColour->setOnEntry(pointsForColour);
 
     FunctionalState *potSequenceColour = new FunctionalState("pot_sequence_colour", legalShot, this);
+    potSequenceColour->setOnEntry(pointsForColour);
     potSequenceColour->setTestTransferFrom([sim, player](const IState *const, StateMachine *sm) -> IState * {
       for (size_t i = 1; i < SnookerSimulation::NUM_BALLS; i++)
       {

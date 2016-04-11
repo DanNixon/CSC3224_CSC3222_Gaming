@@ -80,10 +80,13 @@ namespace Snooker
   {
     (void)last;
 
+    // Reset state
     m_firstCueBallTouched = nullptr;
     m_potted.clear();
 
+    // Reset status lines
     m_simulation->statusLine->setText("...");
+    m_simulation->foulLine->setActive(false);
   }
 
   /**

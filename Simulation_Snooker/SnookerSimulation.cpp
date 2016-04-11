@@ -130,6 +130,13 @@ namespace Snooker
     statusLine->setText("Snooker Loopy!");
     m_ui->root()->addChild(statusLine);
 
+    // Foul status line
+    foulLine = new TextPane("status_line", 0.05f, m_uiShader, m_fontLarge);
+    foulLine->setModelMatrix(Matrix4::Translation(Vector3(0.0f, -0.90f, 0.0f)));
+    foulLine->setAlignment(centreLeft);
+    foulLine->setActive(false);
+    m_ui->root()->addChild(foulLine);
+
     // Scores
     scoreDisplay = new SceneObject("scores");
     scoreDisplay->setModelMatrix(Matrix4::Translation(Vector3(-0.75f, -0.9f, 0.0f)));

@@ -82,6 +82,7 @@ namespace Snooker
     Engine::Graphics::RenderableObject *shotAimLine; //!< Line used to show shot acceleration vector
 
     Engine::Graphics::TextPane *statusLine; //!< Textual status line
+    Engine::Graphics::TextPane *foulLine;   //!< Textual status line displaying fouls
 
     Engine::Common::SceneObject *scoreDisplay;        //!< Parent node of all score related text
     Engine::Graphics::TextPane *player1ScoreText;     //!< Text showing score for player 1
