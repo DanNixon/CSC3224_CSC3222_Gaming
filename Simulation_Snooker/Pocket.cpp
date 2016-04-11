@@ -19,8 +19,13 @@ namespace Snooker
 {
   /**
    * @brief Radius of a Pocket in mm.
+   *
+   * Radius is the correct pocket size minus half ball radius to give the
+   * correct collision sphere size such that at the point of interface between
+   * a ball and pocket the centre of the ball is just over the graphical edge
+   * of the procet.
    */
-  const float Pocket::RADIUS = 60.0f;
+  const float Pocket::RADIUS = 44.45f - (Ball::RADIUS / 2.0f);
 
   /**
    * @copydoc SphericalEntity::SphericalEntity(const Vector2 &)

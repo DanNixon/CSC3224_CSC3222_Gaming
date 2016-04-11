@@ -68,6 +68,7 @@ namespace Snooker
       , m_points(points)
       , m_defaultPosition(pos)
   {
+    // Load shaders
     ShaderProgram *sp = new ShaderProgram();
     sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
     sp->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
@@ -132,6 +133,8 @@ namespace Snooker
   void Ball::setPosition(const Engine::Maths::Vector2 &pos)
   {
     SphericalEntity::setPosition(pos);
+
+    // Set graphical position
     setModelMatrix(Matrix4::Translation(Vector3(pos.x(), pos.y(), 0.0f)));
   }
 }

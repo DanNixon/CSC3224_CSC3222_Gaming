@@ -44,28 +44,38 @@ namespace Snooker
   Table::Table(EntityPtrList &entityList)
       : RenderableObject("table", new RectangleMesh(DIMENSIONS), nullptr)
   {
+    // Load the shaders
     ShaderProgram *sp = new ShaderProgram();
     sp->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
     sp->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
     sp->link();
     setShader(sp);
 
+    // Load the table texture
     Texture *tex = new Texture("tabletopTex");
     tex->load("../resources/6x12_snooker_table.png");
     setTexture(tex);
 
+    // Add cushion collision shapes
     m_cushions[0] = new Cushion(Vector2(-HALF_PLAY_AREA.x(), 0.0f));
     m_cushions[1] = new Cushion(Vector2(HALF_PLAY_AREA.x(), 0.0f));
     m_cushions[2] = new Cushion(Vector2(0.0f, -HALF_PLAY_AREA.y()));
     m_cushions[3] = new Cushion(Vector2(0.0f, HALF_PLAY_AREA.y()));
 
-    m_pockets[0] = new Pocket(Vector2(-HALF_PLAY_AREA.x(), HALF_PLAY_AREA.y()));
-    m_pockets[1] = new Pocket(Vector2(0.0f, HALF_PLAY_AREA.y()));
-    m_pockets[2] = new Pocket(Vector2(HALF_PLAY_AREA.x(), HALF_PLAY_AREA.y()));
-    m_pockets[3] = new Pocket(Vector2(-HALF_PLAY_AREA.x(), -HALF_PLAY_AREA.y()));
-    m_pockets[4] = new Pocket(Vector2(0.0f, -HALF_PLAY_AREA.y()));
-    m_pockets[5] = new Pocket(Vector2(HALF_PLAY_AREA.x(), -HALF_PLAY_AREA.y()));
+    // Because of the design of the table texture the corner pocket collision
+    // spheres must be moved into the table more to ensure a ball can actually
+    // collide with them.
+    float cornerCorrection = 20.0f;
 
+    // Add pocket collision shapes
+    m_pockets[0] = new Pocket(Vector2(-HALF_PLAY_AREA.x() + cornerCorrection, HALF_PLAY_AREA.y() - cornerCorrection));
+    m_pockets[1] = new Pocket(Vector2(0.0f, HALF_PLAY_AREA.y()));
+    m_pockets[2] = new Pocket(Vector2(HALF_PLAY_AREA.x() - cornerCorrection, HALF_PLAY_AREA.y() - cornerCorrection));
+    m_pockets[3] = new Pocket(Vector2(-HALF_PLAY_AREA.x() + cornerCorrection, -HALF_PLAY_AREA.y() + cornerCorrection));
+    m_pockets[4] = new Pocket(Vector2(0.0f, -HALF_PLAY_AREA.y()));
+    m_pockets[5] = new Pocket(Vector2(HALF_PLAY_AREA.x() - cornerCorrection, -HALF_PLAY_AREA.y() + cornerCorrection));
+
+    // Add both cushions and pockets as children of the table
     size_t i;
 
     for (i = 0; i < NUM_POCKETS; i++)
@@ -80,6 +90,7 @@ namespace Snooker
 
   Table::~Table()
   {
+    // Cushions are not memory managed by the framework
     for (size_t i = 0; i < 4; i++)
       delete m_cushions[i];
   }

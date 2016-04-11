@@ -191,26 +191,19 @@ namespace Snooker
     {
       physics.update(dtMilliSec);
 
-      // Update state machine
+      // Update state machine if on the wait_for_pocket or sandbox states
       const std::string &fsmLeaf = fsm->activeStateBranch().back()->name();
       if (fsmLeaf == "wait_for_shot" || fsmLeaf == "sandbox")
-      {
-        if (fsm->update())
-        {
-          menu->updateTextFromState();
-          std::cout << "STATE: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
-        }
-      }
+        fsm->update();
     }
     // Handle control
     else if (id == m_controlLoop)
     {
-      // Update state machine
+      // Update state machine unless on the sandbox sttae (updating is done in
+      // physics loop and must not be done simultaneously)
       if (fsm->activeStateBranch().back()->name() != "sandbox" && fsm->update())
-      {
+        // The manu text may need updated
         menu->updateTextFromState();
-        std::cout << "STATE: " << StateMachine::BranchToString(fsm->activeStateBranch()) << std::endl;
-      }
 
       // Profile display
       m_profileText->setActive(controls->state(S_PROFILE_DISPLAY));
@@ -223,6 +216,7 @@ namespace Snooker
     {
       m_profiler->computeStats(dtMilliSec);
 
+      // If profile data is shown
       if (controls->state(S_PROFILE_DISPLAY))
       {
         std::stringstream profileStr;
@@ -243,6 +237,8 @@ namespace Snooker
   void SnookerSimulation::gameShutdown()
   {
     delete fsm;
+    TTF_CloseFont(m_fontLarge);
+    TTF_CloseFont(m_fontMedium);
   }
 
   /**
@@ -256,6 +252,7 @@ namespace Snooker
   {
     for (size_t i = 0; i < NUM_BALLS; i++)
     {
+      // If ball is valid and is selected by the b parameter
       if (balls[i] != nullptr &&
           (b == SnookerBalls::ALL || balls[i]->points() == static_cast<std::underlying_type<SnookerBalls>::type>(b) ||
            (b == SnookerBalls::ALL_COLOURS && balls[i]->points() > 1)))
@@ -273,11 +270,11 @@ namespace Snooker
     // Cue ball
     balls[0] = new Ball(Vector2(-1150.0f, 200.0f), -1);
 
-// Red
-#ifdef _DEBUG
-    balls[1] = new Ball(Vector2(0.0f, -820.0f), 1);
-#else
+#ifndef _DEBUG
+    // Red
     balls[1] = new Ball(Vector2(957.85f, 0.0f), 1);
+#else
+    balls[1] = new Ball(Vector2(0.0f, -820.0f), 1);
 #endif
 
 #ifndef _DEBUG
@@ -298,8 +295,8 @@ namespace Snooker
     balls[15] = new Ball(Vector2(1167.85f, -105.0f), 1);
 #endif
 
-// Yellow
 #ifndef _DEBUG
+    // Yellow
     balls[16] = new Ball(Vector2(-1047.75f, -291.1f), 2);
 #else
     balls[16] = new Ball(Vector2(0.0f, 820.0f), 2);
@@ -319,8 +316,8 @@ namespace Snooker
     balls[20] = new Ball(Vector2(895.35f, 0.0f), 6);
 #endif
 
-// Black
 #ifndef _DEBUG
+    // Black
     balls[21] = new Ball(Vector2(1466.85f, 0.0f), 7);
 #else
     balls[21] = new Ball(Vector2(1740.0f, -840.0f), 7);
