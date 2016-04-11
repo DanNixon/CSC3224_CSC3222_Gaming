@@ -6,6 +6,7 @@
 #include "PlaceCueBallState.h"
 
 using namespace Simulation::AI;
+using namespace Engine::Maths;
 
 namespace Simulation
 {
@@ -20,12 +21,12 @@ namespace Snooker
   PlaceCueBallState::PlaceCueBallState(IState *parent, StateMachine *machine, SnookerSimulation *simulation)
       : CompletableActionState("place_cue_ball", parent, machine)
       , m_simulation(simulation)
+      , m_placeStarted(false)
   {
   }
 
   PlaceCueBallState::~PlaceCueBallState()
   {
-    resetMouseStartPosition();
   }
 
   /**
@@ -44,47 +45,42 @@ namespace Snooker
   /**
    * @copydoc CompletableActionState::onEntry
    *
-   * Resets recorded initial mouse poition and sets status line.
+   * Sets the satus line accordingly.
    */
   void PlaceCueBallState::onEntry(IState *last)
   {
-    resetMouseStartPosition();
+    CompletableActionState::onEntry(last);
+
+    m_placeStarted = false;
     m_simulation->statusLine->setText("Position cue ball");
   }
 
   /**
    * @copydoc CompletableActionState::onOperate
+   *
+   * Handles controls for updating the position of the cue ball.
    */
   void PlaceCueBallState::onOperate()
   {
+    // Do nothing if the mouse is hovered over the menu.
     if (m_simulation->menu->isMouseOver())
       return;
 
-    // TODO: tidy this, initial position should not be needed
+    if (!m_placeStarted && m_simulation->controls->state(S_TAKE_SHOT))
+      m_placeStarted = true;
 
-    // Handle controls for placing cue ball
-    if (m_mouseStartPosition == nullptr)
+    if (m_placeStarted)
     {
-      if (m_simulation->controls->state(S_TAKE_SHOT))
-      {
-        // Record starting position of mouse
-        m_mouseStartPosition = new Engine::Maths::Vector2(m_simulation->controls->analog(A_MOUSE_X),
-                                                          m_simulation->controls->analog(A_MOUSE_Y));
-      }
-    }
-    else
-    {
-      Engine::Maths::Vector2 newMousePosition =
-          Engine::Maths::Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
-
       if (!m_simulation->controls->state(S_TAKE_SHOT))
       {
-        resetMouseStartPosition();
+        // If mouse button is not pressed positioning is done
         m_completed = true;
       }
       else
       {
-        m_simulation->balls[0]->setPosition(newMousePosition * 2000.0f);
+        // Update the position while the mouse button is held down
+        Vector2 pos = Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
+        m_simulation->balls[0]->setPosition(pos * 2000.0f);
       }
     }
   }

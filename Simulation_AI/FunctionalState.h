@@ -59,23 +59,11 @@ namespace AI
     FunctionalState(const std::string &name, IState *parent, StateMachine *machine)
         : IState(name, parent, machine)
     {
-      m_testTransferFrom = [](const IState *const, StateMachine *)
-      {
-        return nullptr;
-      };
-      m_testTransferTo = [](const IState *const, StateMachine *)
-      {
-        return false;
-      };
-      m_onEntry = [](IState *, StateMachine *, IState *)
-      {
-      };
-      m_onExit = [](IState *, StateMachine *, IState *)
-      {
-      };
-      m_onOperate = [](IState *, StateMachine *)
-      {
-      };
+      m_testTransferFrom = [](const IState *const, StateMachine *) { return nullptr; };
+      m_testTransferTo = [](const IState *const, StateMachine *) { return false; };
+      m_onEntry = [](IState *, StateMachine *, IState *) {};
+      m_onExit = [](IState *, StateMachine *, IState *) {};
+      m_onOperate = [](IState *, StateMachine *) {};
     }
 
     virtual ~FunctionalState()

@@ -70,7 +70,7 @@ namespace Snooker
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
-  //TODO: tidy
+    // TODO: tidy
 
   public:
     Simulation::Physics::PhysicsSimulation physics; //!< Physical simulation

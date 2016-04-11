@@ -40,19 +40,8 @@ namespace Snooker
     virtual void onOperate();
 
   private:
-    /**
-     * @brief Resets the recorded initial mouse position.
-     */
-    inline void resetMouseStartPosition()
-    {
-      if (m_mouseStartPosition != nullptr)
-        delete m_mouseStartPosition;
-      m_mouseStartPosition = nullptr;
-    }
-
-  private:
-    SnookerSimulation *m_simulation;              //!< Simulaion state is acting on
-    Engine::Maths::Vector2 *m_mouseStartPosition; //!< Position of mouse pointer at start of click and drag
+    SnookerSimulation *m_simulation; //!< Simulaion state is acting on
+    bool m_placeStarted;             //!< Flag indicating that positioning of the cue ball has started
   };
 }
 }
