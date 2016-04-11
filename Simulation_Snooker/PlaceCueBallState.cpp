@@ -22,27 +22,39 @@ namespace Snooker
     resetMouseStartPosition();
   }
 
+  /**
+   * @copydoc CompletableActionState::testTransferFrom
+   *
+   * Moves to take shot state when the cue ball has been placed.
+   */
   IState *PlaceCueBallState::testTransferFrom() const
   {
-    // Move to take shot when ball is placed
     if (m_completed)
       return m_parent->findState("take_shot").back();
     else
       return nullptr;
   }
 
+  /**
+   * @copydoc CompletableActionState::onEntry
+   *
+   * Resets recorded initial mouse poition and sets status line.
+   */
   void PlaceCueBallState::onEntry(IState *last)
   {
-    // Reset recorded mouse start position
     resetMouseStartPosition();
-
     m_simulation->statusLine->setText("Position cue ball");
   }
 
+  /**
+   * @copydoc CompletableActionState::onOperate
+   */
   void PlaceCueBallState::onOperate()
   {
     if (m_simulation->menu->isMouseOver())
       return;
+
+    // TODO: tidy this, initial position should not be needed
 
     // Handle controls for placing cue ball
     if (m_mouseStartPosition == nullptr)
@@ -58,12 +70,6 @@ namespace Snooker
     {
       Engine::Maths::Vector2 newMousePosition =
           Engine::Maths::Vector2(m_simulation->controls->analog(A_MOUSE_X), m_simulation->controls->analog(A_MOUSE_Y));
-      Engine::Maths::Vector2 deltaMouse = *m_mouseStartPosition - newMousePosition;
-
-      // Clamp max acceleration to a sensible level
-      float maxShotMagnitude = 0.5f;
-      if (deltaMouse.length2() > (maxShotMagnitude * maxShotMagnitude))
-        deltaMouse = Engine::Maths::VectorOperations::GetNormalised(deltaMouse) * maxShotMagnitude;
 
       if (!m_simulation->controls->state(S_TAKE_SHOT))
       {

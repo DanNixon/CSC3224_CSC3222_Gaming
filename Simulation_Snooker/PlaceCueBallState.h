@@ -22,6 +22,11 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @class PlaceCueBallState
+   * @brief State used during placement of the cue ball.
+   * @author Dn Nixon
+   */
   class PlaceCueBallState : public Simulation::AI::CompletableActionState
   {
   public:
@@ -35,6 +40,9 @@ namespace Snooker
     virtual void onOperate();
 
   private:
+    /**
+     * @brief Resets the recorded initial mouse position.
+     */
     inline void resetMouseStartPosition()
     {
       if (m_mouseStartPosition != nullptr)
@@ -43,8 +51,8 @@ namespace Snooker
     }
 
   private:
-    SnookerSimulation *m_simulation;
-    Engine::Maths::Vector2 *m_mouseStartPosition;
+    SnookerSimulation *m_simulation;              //!< Simulaion state is acting on
+    Engine::Maths::Vector2 *m_mouseStartPosition; //!< Position of mouse pointer at start of click and drag
   };
 }
 }

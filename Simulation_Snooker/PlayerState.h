@@ -14,6 +14,12 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @class PlayerState
+   * @brief State representing the turn of a player in the game branch of the
+   *        snooker state machine.
+   * @author Dan Nixon
+   */
   class PlayerState : public Simulation::AI::FunctionalState
   {
   public:

@@ -11,6 +11,13 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @brief Creates a new player state
+   * @param parent Parent state
+   * @param machine State machine
+   * @param playerNumber Player number (either 0 or 1)
+   * @param simulation Snooker simulation
+   */
   PlayerState::PlayerState(IState *parent, StateMachine *machine, int playerNumber, SnookerSimulation *simulation)
       : FunctionalState("player_" + std::to_string(playerNumber), parent, machine)
       , m_playerNumber(playerNumber)
@@ -19,6 +26,10 @@ namespace Snooker
   {
   }
 
+  /**
+   * @brief Updates the score display on the simulation with this players
+   *        score.
+   */
   void PlayerState::updateScoreText() const
   {
     if (m_playerNumber == 0)
@@ -27,6 +38,24 @@ namespace Snooker
       m_simulation->player2ScoreText->setText(std::to_string(m_score));
   }
 
+  /**
+   * @brief Gets a pointer to the other player in the game branch.
+   * @return Pointer to other player
+   */
+  PlayerState *PlayerState::otherPlayer()
+  {
+    if (m_otherPlayer == nullptr)
+    {
+      std::string name = "game/running/player_" + std::to_string((m_playerNumber + 1) % 2);
+      m_otherPlayer = dynamic_cast<PlayerState *>(m_machine->rootState()->findState(name).back());
+    }
+
+    return m_otherPlayer;
+  }
+
+  /**
+   * @copydoc FunctionalState::onEntry
+   */
   void PlayerState::onEntry(IState *last)
   {
     updateScoreText();
@@ -39,17 +68,6 @@ namespace Snooker
       findState("place_cue_ball").back()->setActivation(true, this, this);
     else
       findState("take_shot").back()->setActivation(true, this, this);
-  }
-
-  PlayerState *PlayerState::otherPlayer()
-  {
-    if (m_otherPlayer == nullptr)
-    {
-      std::string name = "game/running/player_" + std::to_string((m_playerNumber + 1) % 2);
-      m_otherPlayer = dynamic_cast<PlayerState *>(m_machine->rootState()->findState(name).back());
-    }
-
-    return m_otherPlayer;
   }
 }
 }
