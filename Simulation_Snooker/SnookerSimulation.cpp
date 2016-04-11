@@ -160,14 +160,14 @@ namespace Snooker
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
-    controls = new SnookerControls(this);
-
     // Menu
-    menu = new OptionsMenu(this, m_fontMedium, 0.05f, this);
+    menu = new OptionsMenu(this, m_fontMedium, 0.05f);
     menu->setMargin(Vector2(0.005f, 0.005f));
     menu->layout();
     menu->show();
     addEventHandler(menu);
+
+    controls = new SnookerControls(this);
 
     m_profiler = new Profiler(this);
 
@@ -195,8 +195,10 @@ namespace Snooker
 
       // Update state machine if on the wait_for_pocket or sandbox states
       const std::string &fsmLeaf = fsm->activeStateBranch().back()->name();
-      if (fsmLeaf == "wait_for_shot" || fsmLeaf == "sandbox")
-        fsm->update();
+      if ((fsmLeaf == "wait_for_shot" || fsmLeaf == "sandbox") && fsm->update())
+        // The manu text may need updated (since this happens after the physics
+        // update it should not affect the simulation)
+        menu->updateTextFromState();
     }
     // Handle control
     else if (id == m_controlLoop)

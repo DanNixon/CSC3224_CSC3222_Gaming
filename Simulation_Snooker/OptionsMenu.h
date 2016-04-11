@@ -26,7 +26,7 @@ namespace Snooker
   class OptionsMenu : public Engine::UIMenu::TopBarMenu
   {
   public:
-    OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize, SnookerSimulation *simulation);
+    OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize);
     virtual ~OptionsMenu();
 
     void updateTextFromState();

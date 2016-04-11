@@ -21,9 +21,9 @@ namespace Snooker
   /**
    * @copydoc TopBarMenu::TopBarMenu
    */
-  OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize, SnookerSimulation *simulation)
+  OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize)
       : TopBarMenu(game, font, textSize)
-      , m_simulation(simulation)
+      , m_simulation(static_cast<SnookerSimulation *>(game))
   {
     MenuItem *root = addNewItem(nullptr, "menu", "Menu");
 
