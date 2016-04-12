@@ -8,6 +8,13 @@
 #include "Shader.h"
 #include "Mesh.h"
 
+#include <Engine_Logging/Logger.h>
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
+
 namespace Engine
 {
 namespace Graphics
@@ -82,7 +89,7 @@ namespace Graphics
     {
       char errorMsg[2048];
       glGetInfoLogARB(m_shaderObject, sizeof(errorMsg), nullptr, errorMsg);
-      std::cerr << "Shader failed to compile (from file: " << filename << "): " << errorMsg << std::endl;
+      g_log.error("Shader failed to compile (from file: " + filename + "): " + errorMsg);
     }
 
     return success;

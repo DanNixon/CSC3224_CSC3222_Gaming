@@ -77,7 +77,7 @@ namespace Logging
      * @brief Logs a message at CRITICAL level.
      * @param msg Log message
      */
-    void ciritical(const std::string &msg)
+    void critical(const std::string &msg)
     {
       LoggingService::Instance().log(LogLevel::CRITICAL, m_name, msg);
     }

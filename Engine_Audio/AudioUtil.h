@@ -8,11 +8,17 @@
 #ifndef _ENGINE_AUDIO_UTIL_H_
 #define _ENGINE_AUDIO_UTIL_H_
 
-#include <iostream>
 #include <string>
 
 #include <al.h>
 #include <alc.h>
+
+#include <Engine_Logging/Logger.h>
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
 
 namespace Engine
 {
@@ -39,7 +45,7 @@ namespace Audio
       bool hasError = (error != AL_NO_ERROR);
 
       if (hasError)
-        std::cerr << "AL error " << error << " (" << msg << ")" << std::endl;
+        g_log.error("AL error " + std::to_string(error) + ": " + msg);
 
       return !hasError;
     }

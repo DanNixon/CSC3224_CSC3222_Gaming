@@ -11,6 +11,7 @@
 #include <assimp/cimport.h>
 #include <assimp/postprocess.h>
 
+#include <Engine_Logging/Logger.h>
 #include <Engine_Utility/StringUtils.h>
 
 #include "Mesh.h"
@@ -18,6 +19,11 @@
 
 using namespace Engine::Common;
 using namespace Engine::Utility;
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
 
 namespace Engine
 {
@@ -84,7 +90,7 @@ namespace Graphics
 
           if (!m_textures[i]->valid())
           {
-            std::cerr << "Failed to load testure \"" << filename << "\", for material " << material << std::endl;
+            g_log.error("Failed to load texture \"" + filename + "\"");
             m_textures[i] = nullptr;
           }
         }

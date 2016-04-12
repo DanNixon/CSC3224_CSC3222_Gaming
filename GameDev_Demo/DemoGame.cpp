@@ -18,6 +18,7 @@
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_IO/KVNode.h>
+#include <Engine_Logging/Logger.h>
 #include <Engine_Maths/Quaternion.h>
 #include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/ConvexHullShape.h>
@@ -36,6 +37,11 @@ using namespace Engine::Audio;
 using namespace Engine::UIMenu;
 using namespace Engine::Physics;
 using namespace Engine::IO;
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
 
 namespace GameDev
 {
@@ -65,7 +71,7 @@ namespace Demo
     // TODO: display dismissible on screen scontrols
     if (isFirstRun())
     {
-      std::cout << "This is the first time the game has been launched." << std::endl;
+      g_log.info("This is the first time the game has been launched.");
     }
 
     glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
@@ -190,18 +196,18 @@ namespace Demo
     // Input
     if (JoystickHandler::NumJoysticks() == 0)
     {
-      std::cout << "Using mouse and keyboard" << std::endl;
+      g_log.info("Using mouse and keyboard");
       m_simControls = new KMSimulatorControls(this);
       m_simControls->setAnalogDeadbands(0.05f);
     }
     else
     {
-      std::cout << "Using joystick and keyboard" << std::endl;
+      g_log.info("Using joystick and keyboard");
       m_simControls = new KJSSimulatorControls(this);
       m_simControls->setAnalogDeadbands(0.05f);
       if (!static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(0))
       {
-        std::cerr << "Could not open joystick" << std::endl;
+        g_log.error("Could not open joystick");
         return 50;
       }
     }
@@ -293,7 +299,7 @@ namespace Demo
     else if (id == m_profileLoop)
     {
       m_profiler->computeStats(dtMilliSec);
-      std::cout << "Performance statistics:" << std::endl << *m_profiler << std::endl;
+      g_log.info("Performance statistics:\n" + m_profiler->outputAsString());
     }
   }
 

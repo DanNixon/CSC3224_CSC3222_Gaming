@@ -6,7 +6,8 @@
  */
 
 #include "Profiler.h"
-#include <iostream>
+
+#include <sstream>
 
 namespace Engine
 {
@@ -68,6 +69,7 @@ namespace Common
   /**
    * @brief Outputs friendly formatted performance statistics to a stream.
    * @param o Stream
+   * @see Profiler::outputAsString
    */
   void Profiler::outputToStream(std::ostream &o) const
   {
@@ -97,6 +99,18 @@ namespace Common
     }
 
     o.precision(p);
+  }
+
+  /**
+   * @brief Returns profiling data as a string.
+   * @return Profile data as string
+   * @see Profiler::outputToStream
+   */
+  std::string Profiler::outputAsString() const
+  {
+    std::stringstream str;
+    str << *this;
+    return str.str();
   }
 }
 }

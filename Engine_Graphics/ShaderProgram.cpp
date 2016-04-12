@@ -7,8 +7,15 @@
 
 #include "ShaderProgram.h"
 
+#include <Engine_Logging/Logger.h>
+
 #include "Mesh.h"
 #include "Shader.h"
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
 
 namespace Engine
 {
@@ -68,7 +75,7 @@ namespace Graphics
   {
     if (m_valid)
     {
-      std::cerr << "Not all shaders are compiled, cannot link shader program" << std::endl;
+      g_log.error("Not all shaders are compiled, cannot link shader program");
       return false;
     }
 
@@ -96,10 +103,9 @@ namespace Graphics
 
     if (status == GL_FALSE)
     {
-      std::cout << "Linking failed! Error log as follows:" << std::endl;
       char error[2048];
       glGetProgramInfoLog(m_program, sizeof(error), nullptr, error);
-      std::cout << error << std::endl;
+      g_log.error("Linking failed! Error log: " + std::string(error));
       return false;
     }
 
@@ -109,7 +115,7 @@ namespace Graphics
     {
       char errorMsg[2048];
       glGetInfoLogARB(m_program, sizeof(errorMsg), nullptr, errorMsg);
-      std::cerr << "Shader program failed to link: " << errorMsg << std::endl;
+      g_log.error("Shader program failed to link: " + std::string(errorMsg));
     }
 
     return m_valid;
