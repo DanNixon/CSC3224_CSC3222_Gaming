@@ -37,6 +37,24 @@ namespace PathFinding
     }
 
     /**
+     * @brief Gets the first node.
+     * @return First node
+     */
+    inline Node * nodeA()
+    {
+      return m_nodeA;
+    }
+
+    /**
+     * @brief Gets the second node.
+     * @return Second node
+     */
+    inline Node * nodeB()
+    {
+      return m_nodeB;
+    }
+
+    /**
      * @brief Tests if this edge is traversable.
      * @return True if this edge can be traversed
      */
@@ -51,7 +69,7 @@ namespace PathFinding
      */
     inline float staticCost() const
     {
-      return Engine::Maths::VectorOperations::Distance2(m_nodeA->position(), m_nodeA->position());
+      return Engine::Maths::VectorOperations::Distance2(m_nodeA->position(), m_nodeB->position());
     }
 
     /**
