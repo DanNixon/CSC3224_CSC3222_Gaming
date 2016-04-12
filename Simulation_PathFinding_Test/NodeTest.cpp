@@ -23,9 +23,17 @@ namespace Test
 TEST_CLASS(NodeTest)
 {
 public:
-  TEST_METHOD(Node_TODO)
+  TEST_METHOD(Node_Test)
   {
     Assert::Fail();
+  }
+
+  TEST_METHOD(Node_StreamOutput)
+  {
+    Node n();
+    std::stringstream stream;
+    stream << n;
+    Assert::AreEqual(std::string("[5,2,4.5,8.9]"), stream.str());
   }
 };
 }

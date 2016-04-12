@@ -72,8 +72,10 @@ namespace PathFinding
       return staticCost() * m_weight;
     }
 
-    bool setTraversable(bool traversable);
+    void setTraversable(bool traversable);
     void setWeight(float weight);
+
+    friend std::ostream &operator<<(std::ostream &stream, const Edge &e);
 
   private:
     std::string m_id; //!< String ID of the edge

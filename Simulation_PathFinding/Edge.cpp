@@ -7,6 +7,8 @@
 
 #include "Edge.h"
 
+#include <string>
+
 namespace Simulation
 {
 namespace PathFinding
@@ -41,7 +43,7 @@ namespace PathFinding
    * @brief Sets if this edge can be traversed.
    * @param traversable True if this edge can be traversed
    */
-  bool Edge::setTraversable(bool traversable)
+  void Edge::setTraversable(bool traversable)
   {
     m_traversable = traversable;
   }
@@ -53,6 +55,18 @@ namespace PathFinding
   void Edge::setWeight(float weight)
   {
     m_weight = weight;
+  }
+
+  /**
+   * @brief Outputs an Edge to a stream.
+   * @param stream Stream to output to
+   * @param e Edge to output
+   * @return Reference to stream
+   */
+  std::ostream &operator<<(std::ostream &stream, const Edge &e)
+  {
+    stream << "Edge(id=" << e.m_id << ",a=" << *(e.m_nodeA) << ",b=" << *(e.m_nodeB) << ")";
+    return stream;
   }
 }
 }

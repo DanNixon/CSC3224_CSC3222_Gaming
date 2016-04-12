@@ -26,7 +26,7 @@ namespace PathFinding
   class Node
   {
   public:
-    Node(const std::string &id, const Engine::Maths::Vector3 &position);
+    Node(const std::string &id, const Engine::Maths::Vector3 &position = Engine::Maths::Vector3());
     virtual ~Node();
 
     /**
@@ -46,6 +46,8 @@ namespace PathFinding
     {
       return m_position;
     }
+
+    friend std::ostream &operator<<(std::ostream &stream, const Node &n);
 
   private:
     friend class Edge;
