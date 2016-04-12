@@ -7,6 +7,7 @@
 
 #include "GraphLoader.h"
 
+#include <string>
 #include <fstream>
 
 namespace Simulation
@@ -33,13 +34,34 @@ namespace PathFinding
    * @brief Loads a graph from an input stream.
    * @param nodes Reference to vector of nodes
    * @param edges Reference to vector of edges
-   * @param stream STream to load data from
+   * @param stream Stream to load data from
    * @return True if load was successful
    */
   bool GraphLoader::LoadGraph(std::vector<Node *> &nodes, std::vector<Edge *> &edges, std::istream &stream)
   {
-    // TODO
-    return false;
+    bool retVal = false;
+
+    std::string line;
+
+    while (line.find("BEGIN") != std::string::npos)
+    {
+      // Check if this line is a node hdeader
+      if (line.find("NODES") != std::string::npos)
+      {
+        if (!LoadNodes(nodes, stream))
+          retVal = false;
+      }
+      // Check if thisline is an edge header
+      else if (line.find("EDGES") != std::string::npos)
+      {
+        if (!LoadEdges(edges, stream))
+          retVal = false;
+      }
+      
+      std::getline(stream, line);
+    }
+
+    return retVal;
   }
 
   /**

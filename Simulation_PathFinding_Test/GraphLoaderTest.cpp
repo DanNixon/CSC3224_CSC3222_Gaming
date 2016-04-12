@@ -26,7 +26,7 @@ public:
     std::vector<Node *> nodes;
     std::vector<Edge *> edges;
 
-    Assert::IsTrue(GraphLoader::LoadGraph(nodes, edges, "../resources/TODO.dat"));
+    Assert::IsTrue(GraphLoader::LoadGraph(nodes, edges, "../resources/buckminsterfullerene.dat"));
   }
 };
 }
