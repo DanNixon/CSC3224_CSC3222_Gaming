@@ -33,6 +33,7 @@
   - [x] Mapping control structure
 - [x] `Engine_IO`
   - [x] INI
+- [x] `Engine_Logging`
 - [ ] `Engine_Physics`
   - [x] World/simulation representation
   - [x] Body representation
