@@ -19,6 +19,7 @@ namespace AI
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(StateMachineTest)
 {
 public:
@@ -66,6 +67,7 @@ public:
     Assert::AreEqual(std::string("state1/state1.2/state1.2.1"), branchStr);
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }

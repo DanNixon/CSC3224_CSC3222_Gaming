@@ -21,6 +21,7 @@ namespace AI
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(StateContainerTest)
 {
 public:
@@ -77,6 +78,7 @@ public:
     Assert::IsTrue(s121 == branch[2]);
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }

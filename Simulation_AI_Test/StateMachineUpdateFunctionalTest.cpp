@@ -22,6 +22,7 @@ namespace AI
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(StateMachineUpdateFunctionalTest)
 {
 public:
@@ -102,7 +103,7 @@ public:
 
     // Transfer from 2.1 to 2
     testTransfer(m, 1, "state2", { s21 }, { });
-    
+
     // Operate on 2
     testOperate(m, { s2 });
 
@@ -114,31 +115,31 @@ public:
 
     // Transfer from 2 to 1.1
     testTransfer(m, 6, "state1/state1.1", { s2 }, { s1, s11 });
-    
+
     // Operate on 1.1
     testOperate(m, { s1, s11 });
 
     // Transfer from 1.1 to 1.2
     testTransfer(m, 4, "state1/state1.2", { s11 }, { s12 });
-    
+
     // Operate on 1.2
     testOperate(m, { s1, s12 });
 
     // No transfer from 1.2
     testTransfer(m, 0, "state1/state1.2");
-    
+
     // Operate on 1.2
     testOperate(m, { s1, s12 });
 
     // Transfer from 1.2 to 1.2.1
     testTransfer(m, 3, "state1/state1.2/state1.2.1", { }, { s121 });
-    
+
     // Operate on 1.2.1
     testOperate(m, { s1, s12, s121 });
 
     // No transfer from 1.2.1
     testTransfer(m, 0, "state1/state1.2/state1.2.1");
-    
+
     // Operate on 1.2.1
     testOperate(m, { s1, s12, s121 });
 
@@ -329,6 +330,7 @@ public:
     state->setOnOperate([&operate](IState * s, StateMachine *){ operate.push_back(s); });
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }

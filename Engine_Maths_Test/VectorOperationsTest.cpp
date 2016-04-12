@@ -21,9 +21,10 @@ namespace Maths
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(VectorOperationsTest)
 {
-public:		
+public:
   TEST_METHOD(VectorOperations_Vector2_normalise)
   {
     Vector2 v(5.0f, 3.0f);
@@ -111,6 +112,7 @@ public:
     Assert::AreEqual(-0.32f, p.y(), 0.001f);
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }
