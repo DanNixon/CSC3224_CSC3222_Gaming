@@ -26,7 +26,7 @@ namespace PathFinding
   class Node
   {
   public:
-    Node(const std::string &id, const Engine::Maths::Vector3 & position);
+    Node(const std::string &id, const Engine::Maths::Vector3 &position);
     virtual ~Node();
 
     /**
