@@ -61,23 +61,45 @@ namespace Common
   /**
    * @brief Loads the game configuration from the config .ini file.
    */
-  void ConfigurableGame::loadConfig()
+  bool ConfigurableGame::loadConfig()
   {
+    // Open file
     std::ifstream file;
     file.open(configFilePath());
+
+    // Check if the file is open
+    if ((file.rdstate() & std::ifstream::failbit) != 0)
+      return false;
+
+    // Load data
     load(file);
+
+    // Close file
     file.close();
+
+    return true;
   }
 
   /**
-  * @brief Saves the game configuration to the config .ini file.
-  */
-  void ConfigurableGame::saveConfig()
+   * @brief Saves the game configuration to the config .ini file.
+   */
+  bool ConfigurableGame::saveConfig()
   {
+    // Open file
     std::ofstream file;
     file.open(configFilePath());
+
+    // Check if the file is open
+    if ((file.rdstate() & std::ofstream::failbit) != 0)
+      return false;
+
+    // Save data
     save(file);
+
+    // Close file
     file.close();
+
+    return true;
   }
 
   /**

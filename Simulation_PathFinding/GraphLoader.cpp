@@ -23,10 +23,20 @@ namespace PathFinding
    */
   bool GraphLoader::LoadGraph(std::vector<Node *> &nodes, std::vector<Edge *> &edges, const std::string &filepath)
   {
+    // Open file
     std::ifstream file;
     file.open(filepath);
+
+    // Check if the file is open
+    if ((file.rdstate() & std::ifstream::failbit) != 0)
+      return false;
+
+    // Load graph from stream
     bool result = LoadGraph(nodes, edges, file);
+
+    // Close file
     file.close();
+
     return result;
   }
 
@@ -39,7 +49,7 @@ namespace PathFinding
    */
   bool GraphLoader::LoadGraph(std::vector<Node *> &nodes, std::vector<Edge *> &edges, std::istream &stream)
   {
-    bool retVal = false;
+    bool retVal = true;
 
     std::string line;
 
