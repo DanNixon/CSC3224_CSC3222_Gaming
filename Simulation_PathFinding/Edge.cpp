@@ -36,5 +36,23 @@ namespace PathFinding
   Edge::~Edge()
   {
   }
+
+  /**
+   * @brief Sets if this edge can be traversed.
+   * @param traversable True if this edge can be traversed
+   */
+  bool Edge::setTraversable(bool traversable)
+  {
+    m_traversable = traversable;
+  }
+
+  /**
+   * @brief Sets the traversal weighting of this edge.
+   * @param weight Edge weight
+   */
+  void Edge::setWeight(float weight)
+  {
+    m_weight = weight;
+  }
 }
 }

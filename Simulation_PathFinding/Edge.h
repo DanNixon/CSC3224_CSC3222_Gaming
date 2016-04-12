@@ -10,6 +10,8 @@
 
 #include "Node.h"
 
+#include <Engine_Maths/VectorOperations.h>
+
 namespace Simulation
 {
 namespace PathFinding
@@ -44,13 +46,34 @@ namespace PathFinding
     }
 
     /**
-     * @brief Gets the cost of traversing this edge.
+     * @brief Gets the static cost of traversing this edge.
+     * @return Static cost
+     */
+    inline float staticCost() const
+    {
+      return Engine::Maths::VectorOperations::Distance2(m_nodeA->position(), m_nodeA->position());
+    }
+
+    /**
+     * @brief Gets the weight coefficient of traversing this edge.
      * @return Edge weight
      */
     inline float weight() const
     {
       return m_weight;
     }
+
+    /**
+     * @brief Gets the weighted cost of traversing this edge.
+     * @return Weighted cost
+     */
+    inline float cost() const
+    {
+      return staticCost() * m_weight;
+    }
+
+    bool setTraversable(bool traversable);
+    void setWeight(float weight);
 
   private:
     std::string m_id; //!< String ID of the edge
@@ -59,7 +82,7 @@ namespace PathFinding
 
   protected:
     bool m_traversable; //!< Flag indicating if this edge can be traversed
-    float m_weight;     //!< Cost of traversing this edge
+    float m_weight;     //!< Weight coefficient of traversing this edge
   };
 }
 }

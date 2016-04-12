@@ -9,6 +9,8 @@
 
 #include "Edge.h"
 
+using namespace Engine::Maths;
+
 namespace Simulation
 {
 namespace PathFinding
@@ -17,8 +19,9 @@ namespace PathFinding
    * @brief Creates a new node.
    * @param id String ID
    */
-  Node::Node(const std::string &id)
+  Node::Node(const std::string &id, const Vector3 &position)
       : m_id(id)
+      , m_position(position)
   {
   }
 
