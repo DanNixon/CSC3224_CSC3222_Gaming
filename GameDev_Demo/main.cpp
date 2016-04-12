@@ -7,11 +7,13 @@
 
 #include "DemoGame.h"
 
+using namespace GameDev::Demo;
+
 /**
  * @brief Entry point of engine demo.
  */
 int main(int argc, char *args[])
 {
-  GameDev::Demo::DemoGame g;
+  DemoGame g;
   return g.run();
 }

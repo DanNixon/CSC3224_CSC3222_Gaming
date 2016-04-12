@@ -40,7 +40,7 @@ namespace PathFinding
      * @brief Gets the first node.
      * @return First node
      */
-    inline Node * nodeA()
+    inline Node *nodeA()
     {
       return m_nodeA;
     }
@@ -49,7 +49,7 @@ namespace PathFinding
      * @brief Gets the second node.
      * @return Second node
      */
-    inline Node * nodeB()
+    inline Node *nodeB()
     {
       return m_nodeB;
     }

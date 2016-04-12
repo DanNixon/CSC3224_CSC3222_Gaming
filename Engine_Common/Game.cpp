@@ -17,10 +17,21 @@
 #include <alut.h>
 // clang-formmat on
 
+#include <Engine_Logging/Logger.h>
+#include <Engine_Logging/LoggingService.h>
+#include <Engine_Logging/ConsoleOutputChannel.h>
+
 #include "MemoryManager.h"
 #include "Profiler.h"
 
 #include "debug_utils.h"
+
+using namespace Engine::Logging;
+
+namespace
+{
+  Logger g_log(__FILE__);
+}
 
 namespace Engine
 {
@@ -37,6 +48,11 @@ namespace Common
       , m_windowHeight(resolution.second)
       , m_profiler(nullptr)
   {
+    // Default logging configuration
+    ConsoleOutputChannel * console = new ConsoleOutputChannel();
+    console->setLevel(LogLevel::INFO);
+    LoggingService::Instance().addOutput(console);
+
     for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       m_loops[i] = nullptr;
 
@@ -65,6 +81,8 @@ namespace Common
   int Game::run()
   {
     int status = init();
+
+    g_log.info("Game run");
 
     if (status != 0)
       return status;
@@ -232,6 +250,8 @@ namespace Common
 
   int Game::init()
   {
+    g_log.info("Game inti");
+
     int result = 0;
 
     /* Initialize SDL */
@@ -312,6 +332,7 @@ namespace Common
     TTF_Quit();
     alutExit();
     SDL_Quit();
+    LoggingService::Instance().shutdown();
   }
 
   Uint8 Game::addTimedLoop(float interval, const std::string &name)
