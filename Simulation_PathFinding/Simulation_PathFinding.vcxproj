@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="GraphLoader.cpp" />
     <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h" />
     <ClInclude Include="Edge.h" />
+    <ClInclude Include="GraphLoader.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

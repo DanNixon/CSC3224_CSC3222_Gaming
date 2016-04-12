@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EdgeTest.cpp" />
+    <ClCompile Include="GraphLoaderTest.cpp" />
     <ClCompile Include="NodeTest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
