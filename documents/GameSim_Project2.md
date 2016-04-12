@@ -4,4 +4,11 @@
 
 Essential:
 
-- TODO
+- [ ] Generate edges for `buckminsterfullerene.dat` data file
+- [ ] Node/egde structure
+- [ ] Graph loading form file
+- [ ] A* implementation
+
+Extra:
+
+- [ ] Graphical representation

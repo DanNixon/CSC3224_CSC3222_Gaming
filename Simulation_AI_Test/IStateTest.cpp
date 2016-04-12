@@ -21,6 +21,7 @@ namespace AI
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(IStateTest)
 {
 public:
@@ -65,6 +66,7 @@ public:
     Assert::IsTrue(nullptr == IState::ClosestCommonAncestor(s22, s1));
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }

@@ -18,6 +18,7 @@ namespace Utility
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(StringUtilsTest)
 {
 public:
@@ -82,6 +83,7 @@ public:
     Assert::AreEqual(std::string("txt"), s);
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }
