@@ -8,6 +8,7 @@
 #include "Node.h"
 
 #include <string>
+#include <vector>
 
 #include "Edge.h"
 
@@ -28,6 +29,16 @@ namespace PathFinding
   {
   }
 
+  /**
+   * Copy constructor.
+   * @param n Other node
+   */
+  Node::Node(const Node &n)
+      : m_id(n.m_id)
+      , m_position(n.m_position)
+  {
+  }
+
   Node::~Node()
   {
   }
@@ -40,7 +51,39 @@ namespace PathFinding
    */
   std::ostream &operator<<(std::ostream &stream, const Node &n)
   {
-    stream << "Node(id=" << n.m_id << ", position=" << n.m_position << ")";
+    stream << n.m_id << ":" << n.m_position;
+    return stream;
+  }
+
+  /**
+   * @brief Parses node data from a stream.
+   * @param stream Stream to parse from
+   * @param n Node to set
+   * @return Reference to stream
+   */
+  std::istream &operator>>(std::istream &stream, Node &n)
+  {
+    const int len = 100;
+
+    // Allow colons to be a delimiter
+    const auto classic = std::ctype<char>::classic_table();
+    std::vector<std::ctype<char>::mask> delims(classic, classic + std::ctype<char>::table_size);
+    delims[':'] = std::ctype_base::space;
+
+    // Set new delimiter configuration
+    stream.imbue(std::locale(stream.getloc(), new std::ctype<char>(delims.data())));
+
+    std::string id;
+    Vector3 position;
+
+    stream >> id;
+    stream >> position;
+
+    // Reset delimiter configuration
+    stream.imbue(std::locale(stream.getloc(), new std::ctype<char>));
+
+    n = Node(id, position);
+
     return stream;
   }
 }

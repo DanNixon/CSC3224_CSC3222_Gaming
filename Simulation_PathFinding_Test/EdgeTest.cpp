@@ -73,8 +73,10 @@ public:
   {
     Node n1("n1");
     Node n2("n2");
-    Edge e(&n1, &n2);
-    Assert::AreEqual(std::string("n1-n2"), e.id());
+    Edge e(&n1, &n2, "ed");
+    std::stringstream stream;
+    stream << e;
+    Assert::AreEqual(std::string("ed:n1,n2"), stream.str());
   }
 };
 }

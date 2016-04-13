@@ -47,7 +47,7 @@ public:
     Node n("n1", Vector3(1.0f, 2.0f, 3.0f));
     std::stringstream stream;
     stream << n;
-    Assert::AreEqual(std::string("Node(id=n1, position=[1,2,3])"), stream.str());
+    Assert::AreEqual(std::string("n1:[1,2,3]"), stream.str());
   }
 };
 }

@@ -16,7 +16,7 @@ namespace Logging
   {
 #ifdef _DEBUG
     // Add default debug output when built in Debug configuration
-    IOutputChannel * debugOut = new VSDebugOutputChannel();
+    IOutputChannel *debugOut = new VSDebugOutputChannel();
     debugOut->setLevel(LogLevel::TRACE);
     addOutput(debugOut);
 #endif

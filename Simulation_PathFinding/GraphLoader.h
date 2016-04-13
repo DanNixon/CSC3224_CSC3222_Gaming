@@ -10,8 +10,8 @@
 
 #include <vector>
 
-#include "Node.h"
 #include "Edge.h"
+#include "Node.h"
 
 namespace Simulation
 {
@@ -29,7 +29,7 @@ namespace PathFinding
     static bool LoadGraph(std::vector<Node *> &nodes, std::vector<Edge *> &edges, std::istream &stream);
 
     static bool LoadNodes(std::vector<Node *> &nodes, std::istream &stream);
-    static bool LoadEdges(std::vector<Edge *> &edges, std::istream &stream);
+    static bool LoadEdges(std::vector<Node *> &nodes, std::vector<Edge *> &edges, std::istream &stream);
   };
 }
 }
