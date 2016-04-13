@@ -7,7 +7,7 @@
 
 #include "Game.h"
 
-#include <iostream>
+#include <sstream>
 
 // clang-format off
 #include <gl/glew.h>
@@ -17,10 +17,21 @@
 #include <alut.h>
 // clang-formmat on
 
+#include <Engine_Logging/Logger.h>
+#include <Engine_Logging/LoggingService.h>
+#include <Engine_Logging/ConsoleOutputChannel.h>
+
 #include "MemoryManager.h"
 #include "Profiler.h"
 
 #include "debug_utils.h"
+
+using namespace Engine::Logging;
+
+namespace
+{
+  Logger g_log(__FILE__);
+}
 
 namespace Engine
 {
@@ -37,6 +48,11 @@ namespace Common
       , m_windowHeight(resolution.second)
       , m_profiler(nullptr)
   {
+    // Default logging configuration
+    ConsoleOutputChannel * console = new ConsoleOutputChannel();
+    console->setLevel(LogLevel::INFO);
+    LoggingService::Instance().addOutput(console);
+
     for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       m_loops[i] = nullptr;
 
@@ -65,6 +81,8 @@ namespace Common
   int Game::run()
   {
     int status = init();
+
+    g_log.info("Game run");
 
     if (status != 0)
       return status;
@@ -232,27 +250,27 @@ namespace Common
 
   int Game::init()
   {
+    g_log.info("Game init");
+
     int result = 0;
 
     /* Initialize SDL */
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) < 0)
     {
-      std::cerr << "SDL failed to initialize! SDL Error: " << SDL_GetError()
-                << std::endl;
+      g_log.critical("SDL failed to initialize! SDL Error: " + std::string(SDL_GetError()));
       result = 1;
     }
     else
     {
       if (TTF_Init() < 0)
       {
-        std::cerr << "TTF extension failed to initialize! Error: " << TTF_GetError() << std::endl;
+        g_log.critical("TTF extension failed to initialize! Error: " + std::string(TTF_GetError()));
         result = 10;
       }
 
       if (!alutInitWithoutContext(0, nullptr))
       {
-        std::cerr << "ALUT failed to initialize! Error: " <<
-          alutGetErrorString(alutGetError()) << std::endl;
+        g_log.critical("ALUT failed to initialize! Error: " + std::string(alutGetErrorString(alutGetError())));
         result = 11;
       }
 
@@ -270,8 +288,7 @@ namespace Common
 
       if (m_window == nullptr)
       {
-        std::cerr << "Window could not be created! SDL Error: "
-                  << SDL_GetError() << std::endl;
+        g_log.critical("Window could not be created! SDL Error: " + std::string(SDL_GetError()));
         result = 2;
       }
       else
@@ -280,8 +297,7 @@ namespace Common
         m_context = SDL_GL_CreateContext(m_window);
         if (m_context == nullptr)
         {
-          std::cerr << "OpenGL context could not be created! SDL Error: "
-                    << SDL_GetError() << std::endl;
+          g_log.critical("OpenGL context could not be created! SDL Error: " + std::string(SDL_GetError()));
           result = 3;
         }
         else
@@ -291,8 +307,9 @@ namespace Common
           GLenum glewError = glewInit();
           if (glewError != GLEW_OK)
           {
-            std::cerr << "Error initializing GLEW: "
-                      << glewGetErrorString(glewError) << std::endl;
+            std::stringstream str;
+            str << glewGetErrorString(glewError);
+            g_log.critical("Error initializing GLEW: " + str.str());
             result = 4;
           }
         }
@@ -312,6 +329,7 @@ namespace Common
     TTF_Quit();
     alutExit();
     SDL_Quit();
+    LoggingService::Instance().shutdown();
   }
 
   Uint8 Game::addTimedLoop(float interval, const std::string &name)

@@ -9,13 +9,18 @@
 
 #include <Shlobj.h>
 #include <fstream>
-#include <iostream>
 
 #include <Engine_IO/DiskUtils.h>
+#include <Engine_Logging/Logger.h>
 #include <Engine_Utility/StringUtils.h>
 
 using namespace Engine::Utility;
 using namespace Engine::IO;
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
 
 namespace Engine
 {
@@ -42,7 +47,7 @@ namespace Common
     }
     else
     {
-      std::cerr << "Failed to get config file location" << std::endl;
+      g_log.error("Failed to get config file location");
     }
 
     // Create the game directory if it does not exist
@@ -50,7 +55,7 @@ namespace Common
     {
       m_firstRun = true;
       if (!DiskUtils::MakeDirectories(m_gameDirectory))
-        std::cerr << "Failed to create game save directory" << std::endl;
+        g_log.error("Failed to create game save directory");
     }
   }
 

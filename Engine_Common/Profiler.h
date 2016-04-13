@@ -52,6 +52,7 @@ namespace Common
     float averageDuration(int idx) const;
 
     void outputToStream(std::ostream &o) const;
+    std::string outputAsString() const;
 
     /**
      * @brief Outputs friendly formatted performance statistics to a stream.

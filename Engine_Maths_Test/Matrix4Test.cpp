@@ -99,8 +99,6 @@ public:
     m.setRow(2, Vector4(8.0f, 9.0f, 10.0f, 11.0f));
     m.setRow(3, Vector4(12.0f, 13.0f, 14.0f, 15.0f));
 
-    std::cout << m;
-
     Vector3 v = m.leftVector();
 
     Assert::AreEqual(0.0f, v.x());

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameDev_Demo", "GameDev_Demo\GameDev_Demo.vcxproj", "{4F6104E8-AC92-4DED-AB32-7BD100B04761}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -11,6 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameDev_Demo", "GameDev_Dem
 		{ED213797-22E5-4B35-903F-E18511D137DA} = {ED213797-22E5-4B35-903F-E18511D137DA}
 		{FC01AF98-DB79-4D0F-A15D-701E111D0A16} = {FC01AF98-DB79-4D0F-A15D-701E111D0A16}
 		{4677AB9E-0A72-472B-A41B-196920CBBC79} = {4677AB9E-0A72-472B-A41B-196920CBBC79}
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF} = {D96B8AA3-168E-47C4-B676-866BA74EF9DF}
 		{56842BDD-E5B4-4286-BE60-9F5BDECA7D78} = {56842BDD-E5B4-4286-BE60-9F5BDECA7D78}
 	EndProjectSection
 EndProject
@@ -118,6 +119,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simulation_PathFinding_Test
 	ProjectSection(ProjectDependencies) = postProject
 		{3888A1A5-54B3-4D46-942F-D66670421D7B} = {3888A1A5-54B3-4D46-942F-D66670421D7B}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine_Logging", "Engine_Logging\Engine_Logging.vcxproj", "{D96B8AA3-168E-47C4-B676-866BA74EF9DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -287,6 +290,14 @@ Global
 		{159E00FC-A41B-45A3-865C-9D8AD1009911}.Release|Win32.Build.0 = Release|Win32
 		{159E00FC-A41B-45A3-865C-9D8AD1009911}.Release|x64.ActiveCfg = Release|x64
 		{159E00FC-A41B-45A3-865C-9D8AD1009911}.Release|x64.Build.0 = Release|x64
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Debug|Win32.Build.0 = Debug|Win32
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Debug|x64.ActiveCfg = Debug|x64
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Debug|x64.Build.0 = Debug|x64
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Release|Win32.ActiveCfg = Release|Win32
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Release|Win32.Build.0 = Release|Win32
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Release|x64.ActiveCfg = Release|x64
+		{D96B8AA3-168E-47C4-B676-866BA74EF9DF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
