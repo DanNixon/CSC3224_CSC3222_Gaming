@@ -5,55 +5,57 @@
  * For CSC3224 Project 1.
  */
 
-#ifndef _ENGINE_LOGGING_IOUTPUTCHANNEL_H_
-#define _ENGINE_LOGGING_IOUTPUTCHANNEL_H_
+#ifndef _ENGINE_LOGGING_FILEOUTPUTCHANNEL_H_
+#define _ENGINE_LOGGING_FILEOUTPUTCHANNEL_H_
 
-#include <string>
-
-#include "LogLevel.h"
+#include "IOutputChannel.h"
 
 namespace Engine
 {
 namespace Logging
 {
   /**
-   * @class IOutputChannel
-   * @brief Interface for output channels for log messages.
+   * @class FileOutputChannel
+   * @brief Output channel for saving logs to a file.
    * @author Dan Nixon
    */
-  class IOutputChannel
+  class FileOutputChannel : public IOutputChannel
   {
   public:
-    IOutputChannel()
+    FileOutputChannel()
     {
     }
 
-    virtual ~IOutputChannel()
+    virtual ~FileOutputChannel()
     {
     }
 
     /**
-     * @brief Opens the logging channel.
-     * @return True if the channel was successfully opened.
+     * @copydoc IOutputChannel::open
      */
     virtual bool open()
     {
+      // TODO
     }
 
     /**
-     * @brief Closes the logging channel.
-     * @return True if the channel was successfully closed.
+     * @copydoc IOutputChannel::close
      */
     virtual bool close()
     {
+      // TODO
     }
 
     /**
-     * @brief Sends a message to the logging channel.
-     * @param level Verbosity level
-     * @message Log message
+     * @copydoc IOutputChannel::sendMessage
      */
-    virtual void sendMessage(LogLevel level, const std::string &message) = 0;
+    virtual void sendMessage(LogLevel level, const std::string &message)
+    {
+      if (level >= m_level)
+      {
+        // TODO
+      }
+    }
   };
 }
 }

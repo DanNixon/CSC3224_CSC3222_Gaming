@@ -65,7 +65,7 @@ namespace PathFinding
    */
   std::ostream &operator<<(std::ostream &stream, const Edge &e)
   {
-    stream << "Edge(id=" << e.m_id << ",a=" << e.m_nodeA->id() << ",b=" << e.m_nodeB->id() << ")";
+    stream << e.m_id << ":" << e.m_nodeA->id() << "," << e.m_nodeB->id();
     return stream;
   }
 }

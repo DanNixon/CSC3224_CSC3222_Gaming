@@ -3,5 +3,6 @@
   <ItemGroup>
     <ClCompile Include="NodeTest.cpp" />
     <ClCompile Include="EdgeTest.cpp" />
+    <ClCompile Include="GraphLoaderTest.cpp" />
   </ItemGroup>
 </Project>

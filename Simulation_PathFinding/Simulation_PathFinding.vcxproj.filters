@@ -4,10 +4,12 @@
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="GraphLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Edge.h" />
+    <ClInclude Include="GraphLoader.h" />
   </ItemGroup>
 </Project>

@@ -30,8 +30,8 @@ namespace Common
     ConfigurableGame(const std::string &name, std::pair<int, int> resolution);
     virtual ~ConfigurableGame();
 
-    void loadConfig();
-    void saveConfig();
+    bool loadConfig();
+    bool saveConfig();
 
     /**
      * @brief Checks f this was the first time the game was launched based on

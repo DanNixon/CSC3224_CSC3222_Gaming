@@ -5,8 +5,8 @@
 Essential:
 
 - [ ] Generate edges for `buckminsterfullerene.dat` data file
-- [ ] Node/egde structure
-- [ ] Graph loading form file
+- [x] Node/egde structure
+- [x] Graph loading form file
 - [ ] A* implementation
 
 Extra:

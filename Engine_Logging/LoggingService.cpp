@@ -6,6 +6,7 @@
  */
 
 #include "LoggingService.h"
+#include "VSDebugOutputChannel.h"
 
 namespace Engine
 {
@@ -13,6 +14,12 @@ namespace Logging
 {
   LoggingService::LoggingService()
   {
+#ifdef _DEBUG
+    // Add default debug output when built in Debug configuration
+    IOutputChannel *debugOut = new VSDebugOutputChannel();
+    debugOut->setLevel(LogLevel::TRACE);
+    addOutput(debugOut);
+#endif
   }
 
   LoggingService::~LoggingService()
