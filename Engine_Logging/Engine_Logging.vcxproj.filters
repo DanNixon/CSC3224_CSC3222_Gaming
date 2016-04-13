@@ -10,5 +10,6 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="ConsoleOutputChannel.h" />
     <ClInclude Include="FileOutputChannel.h" />
+    <ClInclude Include="VSDebugOutputChannel.h" />
   </ItemGroup>
 </Project>

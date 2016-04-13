@@ -5,30 +5,30 @@
  * For CSC3224 Project 1.
  */
 
-#ifndef _ENGINE_LOGGING_CONSOLEOUTOUTCHANNEL_H_
-#define _ENGINE_LOGGING_CONSOLEOUTPUTCHANNEL_H_
+#ifndef _ENGINE_LOGGING_VSDEBUGOUTOUTCHANNEL_H_
+#define _ENGINE_LOGGING_VSDEBUGOUTOUTCHANNEL_H_
 
 #include "IOutputChannel.h"
 
-#include <iostream>
+#include <Windows.h>
 
 namespace Engine
 {
 namespace Logging
 {
   /**
-   * @class ConsoleOutputChannel
-   * @brief Log output channel for printing to stdout.
+   * @class VSDebugOutputChannel
+   * @brief Log output channel for printing to Visual Studio debug window.
    * @author Dan Nixon
    */
-  class ConsoleOutputChannel : public IOutputChannel
+  class VSDebugOutputChannel : public IOutputChannel
   {
   public:
-    ConsoleOutputChannel()
+    VSDebugOutputChannel()
     {
     }
 
-    virtual ~ConsoleOutputChannel()
+    virtual ~VSDebugOutputChannel()
     {
     }
 
@@ -38,7 +38,7 @@ namespace Logging
     virtual void sendMessage(LogLevel level, const std::string &message)
     {
       if (level >= m_level)
-        std::cout << message << std::endl;
+        OutputDebugString(message.c_str());
     }
   };
 }

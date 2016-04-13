@@ -28,6 +28,7 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LoggingService.h" />
     <ClInclude Include="LogLevel.h" />
+    <ClInclude Include="VSDebugOutputChannel.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D96B8AA3-168E-47C4-B676-866BA74EF9DF}</ProjectGuid>

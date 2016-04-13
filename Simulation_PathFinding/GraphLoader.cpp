@@ -10,6 +10,13 @@
 #include <string>
 #include <fstream>
 
+#include <Engine_Logging/Logger.h>
+
+namespace
+{
+  Engine::Logging::Logger g_log(__FILE__);
+}
+
 namespace Simulation
 {
 namespace PathFinding
@@ -23,13 +30,18 @@ namespace PathFinding
    */
   bool GraphLoader::LoadGraph(std::vector<Node *> &nodes, std::vector<Edge *> &edges, const std::string &filepath)
   {
+    g_log.trace("Loading graph from file: " + filepath);
+
     // Open file
     std::ifstream file;
     file.open(filepath);
 
     // Check if the file is open
     if ((file.rdstate() & std::ifstream::failbit) != 0)
+    {
+      g_log.warn("Cannot open file");
       return false;
+    }
 
     // Load graph from stream
     bool result = LoadGraph(nodes, edges, file);
@@ -58,12 +70,14 @@ namespace PathFinding
       // Check if this line is a node hdeader
       if (line.find("NODES") != std::string::npos)
       {
+        g_log.debug("Found start of node block");
         if (!LoadNodes(nodes, stream))
           retVal = false;
       }
       // Check if thisline is an edge header
       else if (line.find("EDGES") != std::string::npos)
       {
+        g_log.debug("Found start of edge block");
         if (!LoadEdges(edges, stream))
           retVal = false;
       }
