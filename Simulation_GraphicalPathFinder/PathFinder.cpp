@@ -13,6 +13,7 @@
 #include <Engine_Graphics/LineMesh.h>
 #include <Engine_Graphics/RenderableObject.h>
 #include <Engine_Graphics/Shaders.h>
+#include <Engine_Graphics/SphericalMesh.h>
 #include <Engine_Logging/Logger.h>
 #include <Simulation_PathFinding/GraphLoader.h>
 
@@ -51,7 +52,7 @@ namespace GraphicalPathFinder
     m_colShader->link();
 
     // Scene
-    Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, -50), Vector3(0, 0, 0));
+    Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, -20), Vector3(0, 0, 0));
     Matrix4 proj = Matrix4::Perspective(1, 100, 1.33f, 45.0f);
     m_scene = new Scene(new SceneObject("root"), view, proj);
 
@@ -65,7 +66,10 @@ namespace GraphicalPathFinder
     // Add graphical nodes
     for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
     {
-      // TODO
+      SphericalMesh *mesh = new SphericalMesh(0.1f);
+      RenderableObject *obj = new RenderableObject((*it)->id(), mesh, m_colShader);
+      obj->setModelMatrix(Matrix4::Translation((*it)->position()));
+      m_scene->root()->addChild(obj);
     }
 
     // Add graphical edges
