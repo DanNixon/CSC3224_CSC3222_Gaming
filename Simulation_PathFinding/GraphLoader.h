@@ -28,6 +28,7 @@ namespace PathFinding
     static bool LoadGraph(std::vector<Node *> &nodes, std::vector<Edge *> &edges, const std::string &filepath);
     static bool LoadGraph(std::vector<Node *> &nodes, std::vector<Edge *> &edges, std::istream &stream);
 
+  private:
     static bool LoadNodes(std::vector<Node *> &nodes, std::istream &stream);
     static bool LoadEdges(std::vector<Node *> &nodes, std::vector<Edge *> &edges, std::istream &stream);
   };

@@ -49,7 +49,7 @@ public:
     // Test load
     Assert::IsTrue(GraphLoader::LoadGraph(nodes, edges, "../../../../resources/buckminsterfullerene.dat"));
     Assert::AreEqual((size_t)60, nodes.size());
-    Assert::AreEqual((size_t)1, edges.size()); //TODO
+    Assert::AreEqual((size_t)1, edges.size());
 
     // Test nodes
     
@@ -73,7 +73,7 @@ public:
 
     // Test edges
     
-    // TODO
+    // TODO: update when edges are added to data file
 
     // E0:21,22
     Assert::AreEqual(std::string("E0"), edges[0]->id());

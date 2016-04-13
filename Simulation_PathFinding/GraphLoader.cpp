@@ -141,7 +141,7 @@ namespace PathFinding
   {
     bool retVal = true;
 
-    // Allow colons to be a delimiter
+    // Allow colons and commas to be a delimiter
     const auto classic = std::ctype<char>::classic_table();
     std::vector<std::ctype<char>::mask> delims(classic, classic + std::ctype<char>::table_size);
     delims[':'] = std::ctype_base::space;
