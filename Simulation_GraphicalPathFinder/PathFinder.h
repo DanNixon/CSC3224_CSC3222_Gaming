@@ -10,7 +10,13 @@
 
 #include <Engine_Common/Game.h>
 
+#include <vector>
+
 #include <Engine_Common/Scene.h>
+#include <Engine_Graphics/ShaderProgram.h>
+
+#include <Simulation_PathFinding/Edge.h>
+#include <Simulation_PathFinding/Node.h>
 
 namespace Simulation
 {
@@ -35,7 +41,11 @@ namespace GraphicalPathFinder
   private:
     Uint8 m_graphicsLoop; //!< Graphics update loop ID
 
+    Engine::Graphics::ShaderProgram *m_colShader;
     Engine::Common::Scene *m_scene; //!< Scene containing path representation
+
+    std::vector<Simulation::PathFinding::Node *> m_nodes;
+    std::vector<Simulation::PathFinding::Edge *> m_edges;
   };
 }
 }
