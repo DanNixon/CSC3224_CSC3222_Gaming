@@ -10,8 +10,6 @@
 
 #include "IOutputChannel.h"
 
-#include <Windows.h>
-
 namespace Engine
 {
 namespace Logging
@@ -24,22 +22,10 @@ namespace Logging
   class VSDebugOutputChannel : public IOutputChannel
   {
   public:
-    VSDebugOutputChannel()
-    {
-    }
+    VSDebugOutputChannel();
+    virtual ~VSDebugOutputChannel();
 
-    virtual ~VSDebugOutputChannel()
-    {
-    }
-
-    /**
-     * @copydoc IOutputChannel::sendMessage
-     */
-    virtual void sendMessage(LogLevel level, const std::string &message)
-    {
-      if (level >= m_level)
-        OutputDebugString((message + '\n').c_str());
-    }
+    virtual void sendMessage(LogLevel level, const std::string &message);
   };
 }
 }

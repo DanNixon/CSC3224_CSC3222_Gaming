@@ -2,6 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="LoggingService.cpp" />
+    <ClCompile Include="FileOutputChannel.cpp" />
+    <ClCompile Include="ConsoleOutputChannel.cpp" />
+    <ClCompile Include="VSDebugOutputChannel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoggingService.h" />

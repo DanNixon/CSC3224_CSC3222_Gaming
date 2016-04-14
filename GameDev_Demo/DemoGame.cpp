@@ -18,6 +18,7 @@
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_IO/KVNode.h>
+#include <Engine_Logging/FileOutputChannel.h>
 #include <Engine_Logging/Logger.h>
 #include <Engine_Maths/Quaternion.h>
 #include <Engine_Physics/BoundingBoxShape.h>
@@ -37,10 +38,11 @@ using namespace Engine::Audio;
 using namespace Engine::UIMenu;
 using namespace Engine::Physics;
 using namespace Engine::IO;
+using namespace Engine::Logging;
 
 namespace
 {
-Engine::Logging::Logger g_log(__FILE__);
+Logger g_log(__FILE__);
 }
 
 namespace GameDev
@@ -64,9 +66,12 @@ namespace Demo
    */
   int DemoGame::gameStartup()
   {
-    int retVal = 0;
+    int retVal = ConfigurableGame::gameStartup();
 
-    retVal = ConfigurableGame::gameStartup();
+    // Open file logger
+    FileOutputChannel *fileLog = new FileOutputChannel(gameSaveDirectory() + "DemoGameLog.log");
+    fileLog->open();
+    LoggingService::Instance().addOutput(fileLog);
 
     // TODO: display dismissible on screen scontrols
     if (isFirstRun())

@@ -10,8 +10,6 @@
 
 #include "IOutputChannel.h"
 
-#include <iostream>
-
 namespace Engine
 {
 namespace Logging
@@ -24,22 +22,10 @@ namespace Logging
   class ConsoleOutputChannel : public IOutputChannel
   {
   public:
-    ConsoleOutputChannel()
-    {
-    }
+    ConsoleOutputChannel();
+    virtual ~ConsoleOutputChannel();
 
-    virtual ~ConsoleOutputChannel()
-    {
-    }
-
-    /**
-     * @copydoc IOutputChannel::sendMessage
-     */
-    virtual void sendMessage(LogLevel level, const std::string &message)
-    {
-      if (level >= m_level)
-        std::cout << message << std::endl;
-    }
+    virtual void sendMessage(LogLevel level, const std::string &message);
   };
 }
 }

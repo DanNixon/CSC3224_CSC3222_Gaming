@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleOutputChannel.cpp" />
+    <ClCompile Include="FileOutputChannel.cpp" />
     <ClCompile Include="LoggingService.cpp" />
+    <ClCompile Include="VSDebugOutputChannel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleOutputChannel.h" />

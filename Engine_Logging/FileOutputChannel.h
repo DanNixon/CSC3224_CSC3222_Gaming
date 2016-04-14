@@ -10,6 +10,8 @@
 
 #include "IOutputChannel.h"
 
+#include <fstream>
+
 namespace Engine
 {
 namespace Logging
@@ -22,40 +24,16 @@ namespace Logging
   class FileOutputChannel : public IOutputChannel
   {
   public:
-    FileOutputChannel()
-    {
-    }
+    FileOutputChannel(const std::string &filename);
+    virtual ~FileOutputChannel();
 
-    virtual ~FileOutputChannel()
-    {
-    }
+    virtual bool open();
+    virtual bool close();
+    virtual void sendMessage(LogLevel level, const std::string &message);
 
-    /**
-     * @copydoc IOutputChannel::open
-     */
-    virtual bool open()
-    {
-      // TODO
-    }
-
-    /**
-     * @copydoc IOutputChannel::close
-     */
-    virtual bool close()
-    {
-      // TODO
-    }
-
-    /**
-     * @copydoc IOutputChannel::sendMessage
-     */
-    virtual void sendMessage(LogLevel level, const std::string &message)
-    {
-      if (level >= m_level)
-      {
-        // TODO
-      }
-    }
+  private:
+    const std::string m_filename; //!< Log filename
+    std::ofstream m_stream;       //!< Output file stream
   };
 }
 }
