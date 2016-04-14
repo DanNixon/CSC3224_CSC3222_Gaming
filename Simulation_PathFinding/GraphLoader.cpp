@@ -178,7 +178,17 @@ namespace PathFinding
         if ((nodeA != nodes.end()) && (nodeB != nodes.end()))
         {
           Edge *e = new Edge(*nodeA, *nodeB, id);
-          edges.push_back(e);
+
+          // Ignore if edge is a duplicate
+          if (std::find_if(edges.begin(), edges.end(), [&e](Edge * e1){ return *e == *e1; }) == edges.end())
+          {
+            edges.push_back(e);
+          }
+          else
+          {
+            g_log.warn("Duplicate edge found");
+            delete e;
+          }
         }
         else
         {

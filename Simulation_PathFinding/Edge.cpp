@@ -57,6 +57,16 @@ namespace PathFinding
     m_weight = weight;
   }
 
+  bool Edge::operator==(const Edge &other) const
+  {
+    return (m_nodeA == other.m_nodeA && m_nodeB == other.m_nodeB) || (m_nodeA == other.m_nodeB && m_nodeB == other.m_nodeA);
+  }
+
+  bool Edge::operator!=(const Edge &other) const
+  {
+	  return !this->operator==(other);
+  }
+
   /**
    * @brief Outputs an Edge to a stream.
    * @param stream Stream to output to

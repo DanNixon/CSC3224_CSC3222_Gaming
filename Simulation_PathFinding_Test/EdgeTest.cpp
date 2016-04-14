@@ -69,6 +69,28 @@ public:
     Assert::AreEqual(625.0f, e.cost());
   }
 
+  TEST_METHOD(Edge_Equality)
+  {
+    Node n1("n1");
+    Node n2("n2");
+    Node n3("n3");
+
+    Edge e1(&n1, &n2);
+    Edge e2(&n1, &n2);
+    Edge e3(&n2, &n1);
+    Edge e4(&n1, &n3);
+
+    Assert::IsTrue(e1 == e2);
+    Assert::IsTrue(e1 == e3);
+    Assert::IsTrue(e2 == e3);
+    Assert::IsFalse(e1 != e2);
+    Assert::IsFalse(e1 != e3);
+    Assert::IsFalse(e2 != e3);
+
+    Assert::IsFalse(e1 == e4);
+    Assert::IsTrue(e1 != e4);
+  }
+
   TEST_METHOD(Edge_StreamOutput)
   {
     Node n1("n1");

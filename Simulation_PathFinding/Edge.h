@@ -93,6 +93,9 @@ namespace PathFinding
     void setTraversable(bool traversable);
     void setWeight(float weight);
 
+    bool operator==(const Edge &other) const;
+    bool operator!=(const Edge &other) const;
+
     friend std::ostream &operator<<(std::ostream &stream, const Edge &e);
 
   private:
