@@ -18,6 +18,8 @@
 #include <Simulation_PathFinding/Edge.h>
 #include <Simulation_PathFinding/Node.h>
 
+#include "Controls.h"
+
 namespace Simulation
 {
 namespace GraphicalPathFinder
@@ -43,6 +45,7 @@ namespace GraphicalPathFinder
 
     Engine::Graphics::ShaderProgram *m_colShader;
     Engine::Common::Scene *m_scene; //!< Scene containing path representation
+    Controls *m_controls;
 
     std::vector<Simulation::PathFinding::Node *> m_nodes;
     std::vector<Simulation::PathFinding::Edge *> m_edges;

@@ -15,6 +15,8 @@
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_Graphics/SphericalMesh.h>
 #include <Engine_Logging/Logger.h>
+#include <Engine_Maths/Quaternion.h>
+
 #include <Simulation_PathFinding/GraphLoader.h>
 
 using namespace Engine::Common;
@@ -45,6 +47,9 @@ namespace GraphicalPathFinder
    */
   int PathFinder::gameStartup()
   {
+    // Controls
+    m_controls = new Controls(this);
+
     // Shaders
     m_colShader = new ShaderProgram();
     m_colShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
@@ -67,6 +72,10 @@ namespace GraphicalPathFinder
     for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
     {
       SphericalMesh *mesh = new SphericalMesh(0.1f);
+
+      float n = std::stof((*it)->id()) / 65.0f;
+      mesh->setStaticColour(Colour(n, 0.0f, 0.0f, 1.0f));
+
       RenderableObject *obj = new RenderableObject((*it)->id(), mesh, m_colShader);
       obj->setModelMatrix(Matrix4::Translation((*it)->position()));
       m_scene->root()->addChild(obj);
@@ -85,6 +94,7 @@ namespace GraphicalPathFinder
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     return 0;
   }
@@ -94,9 +104,15 @@ namespace GraphicalPathFinder
    */
   void PathFinder::gameLoop(Uint8 id, float dtMilliSec)
   {
-    // Handle graphics
     if (id == m_graphicsLoop)
     {
+      // Update graph rotation
+      float yaw = m_controls->analog(A_MOUSE_X) * 90.0f;
+      float pitch = m_controls->analog(A_MOUSE_Y) * 90.0f;
+      Quaternion rotQuat(yaw, pitch, 0.0f);
+      m_scene->root()->setModelMatrix(rotQuat.rotationMatrix());
+
+      // Update graphics
       m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
       swapBuffers();
     }
