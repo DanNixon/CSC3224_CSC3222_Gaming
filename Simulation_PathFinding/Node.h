@@ -32,7 +32,7 @@ namespace PathFinding
 
     /**
      * @brief Gets the ID of the node.
-     * @retrun String ID
+     * @return String ID
      */
     inline std::string id() const
     {

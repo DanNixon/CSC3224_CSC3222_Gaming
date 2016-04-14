@@ -88,6 +88,8 @@ namespace AI
    * @brief Sets the activation of this state and its ancestors.
    * @param active If this state is active or not
    * @param terminateAt Ancestor at which to stop modifying activation
+   * @param delta The change of state (last state if active=true, next state if
+   *              active=false)
    */
   void IState::setActivation(bool active, IState *terminateAt, IState *delta)
   {

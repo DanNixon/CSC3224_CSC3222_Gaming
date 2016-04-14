@@ -16,6 +16,11 @@ namespace Engine
 {
 namespace Logging
 {
+  /**
+   * @class Logger
+   * @brief Class responsible for sending log messages to the LoggingService.
+   * @author Dan Nixon
+   */
   class Logger
   {
   public:

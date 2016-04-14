@@ -21,6 +21,7 @@ namespace PathFinding
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(NodeTest)
 {
 public:
@@ -50,6 +51,7 @@ public:
     Assert::AreEqual(std::string("n1:[1,2,3]"), stream.str());
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }

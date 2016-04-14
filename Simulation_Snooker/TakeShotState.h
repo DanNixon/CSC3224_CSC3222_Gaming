@@ -26,7 +26,7 @@ namespace Snooker
 {
   /**
    * @class TakeShotState
-   * @brief STate used for taking a shot in a game.
+   * @brief State used for taking a shot in a game.
    * @author Dan Nixon
    */
   class TakeShotState : public Simulation::AI::CompletableActionState

@@ -22,6 +22,7 @@ namespace PathFinding
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(EdgeTest)
 {
 public:
@@ -60,7 +61,7 @@ public:
     Assert::AreEqual(0.1f, e.weight());
     Assert::AreEqual(125.0f, e.staticCost());
     Assert::AreEqual(12.5f, e.cost());
-  
+
     e.setWeight(5.0f);
 
     // With weight = 5
@@ -79,6 +80,7 @@ public:
     Assert::AreEqual(std::string("ed:n1,n2"), stream.str());
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }

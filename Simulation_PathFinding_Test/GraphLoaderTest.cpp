@@ -27,6 +27,7 @@ namespace PathFinding
 {
 namespace Test
 {
+#ifndef DOXYGEN_SKIP
 TEST_CLASS(GraphLoaderTest)
 {
 public:
@@ -52,7 +53,7 @@ public:
     Assert::AreEqual((size_t)1, edges.size());
 
     // Test nodes
-    
+
     // 0:[0,1,4.85410196625]
     Assert::AreEqual(std::string("0"), nodes[0]->id());
     Assert::AreEqual(0.0f, nodes[0]->position()[0], FP_ACC);
@@ -72,7 +73,7 @@ public:
     Assert::AreEqual(-3.61803398875f, nodes[59]->position()[2], FP_ACC);
 
     // Test edges
-    
+
     // TODO: update when edges are added to data file
 
     // E0:21,22
@@ -81,6 +82,7 @@ public:
     Assert::IsTrue(nodes[22] == edges[0]->nodeB());
   }
 };
+#endif /* DOXYGEN_SKIP */
 }
 }
 }

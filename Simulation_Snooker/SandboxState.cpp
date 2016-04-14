@@ -15,6 +15,12 @@ namespace Simulation
 {
 namespace Snooker
 {
+  /**
+   * @brief Create a new sandbox state.
+   * @param parent Parent state
+   * @param machine The state machine to which this state belongs
+   * @param simulation The simulation this state acts upon
+   */
   SandboxState::SandboxState(IState *parent, StateMachine *machine, SnookerSimulation *simulation)
       : WaitForShotState(parent, machine, simulation, "sandbox")
   {

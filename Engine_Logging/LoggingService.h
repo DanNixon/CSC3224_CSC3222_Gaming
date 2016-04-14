@@ -37,10 +37,24 @@ namespace Logging
       return instance;
     }
 
-    // No copy and move operators
+    /**
+     * @brief No copy constructor
+     */
     LoggingService(LoggingService const &) = delete;
+
+    /**
+     * @brief No move constructor
+     */
     LoggingService(LoggingService &&) = delete;
+
+    /**
+     * @brief No assign copy constructor
+     */
     LoggingService &operator=(LoggingService const &) = delete;
+
+    /**
+     * @brief No assign move constructor
+     */
     LoggingService &operator=(LoggingService &&) = delete;
 
     void shutdown();

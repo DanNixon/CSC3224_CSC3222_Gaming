@@ -77,7 +77,7 @@ namespace Logging
     /**
      * @brief Sends a message to the logging channel.
      * @param level Verbosity level
-     * @message Log message
+     * @param message Log message
      */
     virtual void sendMessage(LogLevel level, const std::string &message) = 0;
 

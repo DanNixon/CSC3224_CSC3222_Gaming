@@ -29,7 +29,7 @@ namespace PathFinding
 
     /**
      * @brief Gets the ID of the arc.
-     * @retrun String ID
+     * @return String ID
      */
     inline std::string id() const
     {
