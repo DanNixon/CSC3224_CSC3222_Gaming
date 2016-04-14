@@ -49,6 +49,8 @@ namespace GraphicalPathFinder
 
     std::vector<Simulation::PathFinding::Node *> m_nodes;
     std::vector<Simulation::PathFinding::Edge *> m_edges;
+
+    size_t m_i;
   };
 }
 }

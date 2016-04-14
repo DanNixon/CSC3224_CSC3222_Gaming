@@ -72,10 +72,6 @@ namespace GraphicalPathFinder
     for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
     {
       SphericalMesh *mesh = new SphericalMesh(0.1f);
-
-      float n = std::stof((*it)->id()) / 65.0f;
-      mesh->setStaticColour(Colour(n, 0.0f, 0.0f, 1.0f));
-
       RenderableObject *obj = new RenderableObject((*it)->id(), mesh, m_colShader);
       obj->setModelMatrix(Matrix4::Translation((*it)->position()));
       m_scene->root()->addChild(obj);
@@ -94,7 +90,6 @@ namespace GraphicalPathFinder
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     return 0;
   }
@@ -106,9 +101,28 @@ namespace GraphicalPathFinder
   {
     if (id == m_graphicsLoop)
     {
+      if (m_controls->state(S_PREV))
+      {
+        m_controls->setState(S_PREV, false);
+        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(m_nodes[m_i]->id()))->mesh()->setStaticColour(Colour());
+        m_i--;
+        std::string id = m_nodes[m_i]->id();
+        std::cout << id << std::endl;
+        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(id))->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 1.0f));
+      }
+      else if (m_controls->state(S_NEXT))
+      {
+        m_controls->setState(S_NEXT, false);
+        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(m_nodes[m_i]->id()))->mesh()->setStaticColour(Colour());
+        m_i++;
+        std::string id = m_nodes[m_i]->id();
+        std::cout << id << std::endl;
+        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(id))->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 1.0f));
+      }
+
       // Update graph rotation
-      float yaw = m_controls->analog(A_MOUSE_X) * 90.0f;
-      float pitch = m_controls->analog(A_MOUSE_Y) * 90.0f;
+      float yaw = m_controls->analog(A_MOUSE_X) * 180.0f;
+      float pitch = m_controls->analog(A_MOUSE_Y) * 180.0f;
       Quaternion rotQuat(yaw, pitch, 0.0f);
       m_scene->root()->setModelMatrix(rotQuat.rotationMatrix());
 
