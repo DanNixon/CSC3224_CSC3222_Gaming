@@ -13,6 +13,7 @@
     <ClCompile Include="GraphicalScene.cpp" />
     <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="HeightmapMesh.cpp" />
+    <ClCompile Include="SphericalMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
@@ -30,5 +31,6 @@
     <ClInclude Include="Alignment.h" />
     <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="HeightmapMesh.h" />
+    <ClInclude Include="SphericalMesh.h" />
   </ItemGroup>
 </Project>

@@ -48,6 +48,15 @@ namespace PathFinding
       return m_position;
     }
 
+    /**
+     * @brief Gets the number of connections from this node.
+     * @return Number of connections
+     */
+    inline size_t numConnections() const
+    {
+      return m_connections.size();
+    }
+
     friend std::ostream &operator<<(std::ostream &stream, const Node &n);
 
   private:

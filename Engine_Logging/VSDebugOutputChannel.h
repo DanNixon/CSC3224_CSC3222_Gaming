@@ -38,7 +38,7 @@ namespace Logging
     virtual void sendMessage(LogLevel level, const std::string &message)
     {
       if (level >= m_level)
-        OutputDebugString(message.c_str());
+        OutputDebugString((message + '\n').c_str());
     }
   };
 }

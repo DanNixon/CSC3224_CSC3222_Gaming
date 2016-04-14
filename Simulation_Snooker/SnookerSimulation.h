@@ -18,7 +18,7 @@
 #include <Engine_Graphics/TextPane.h>
 #include <Engine_Input/IControlScheme.h>
 
-#include <SImulation_AI/StateMachine.h>
+#include <Simulation_AI/StateMachine.h>
 #include <Simulation_Physics/Entity.h>
 #include <Simulation_Physics/PhysicsSimulation.h>
 
