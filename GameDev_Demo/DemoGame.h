@@ -23,6 +23,8 @@
 #include <Engine_Physics/PhysicalSystem.h>
 #include <Engine_UIMenu/IMenu.h>
 
+#include "Aircraft.h"
+
 namespace GameDev
 {
 namespace Demo
