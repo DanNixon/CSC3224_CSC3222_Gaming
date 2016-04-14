@@ -4,6 +4,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DemoGame.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
+    <ClCompile Include="Aircraft.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoGame.h" />
@@ -11,5 +12,6 @@
     <ClInclude Include="controls.h" />
     <ClInclude Include="KJSSimulatorControls.h" />
     <ClInclude Include="OptionsMenu.h" />
+    <ClInclude Include="Aircraft.h" />
   </ItemGroup>
 </Project>

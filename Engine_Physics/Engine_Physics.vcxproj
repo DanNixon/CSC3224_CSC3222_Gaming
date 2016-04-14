@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="BoundingBoxShape.h" />
     <ClInclude Include="ConvexHullShape.h" />
+    <ClInclude Include="Heightmap.h" />
     <ClInclude Include="PhysicalSystem.h" />
     <ClInclude Include="StaticPlaneRigidBody.h" />
     <ClInclude Include="RigidBody.h" />
@@ -30,6 +31,7 @@
   <ItemGroup>
     <ClCompile Include="BoundingBoxShape.cpp" />
     <ClCompile Include="ConvexHullShape.cpp" />
+    <ClCompile Include="Heightmap.cpp" />
     <ClCompile Include="PhysicalSystem.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SceneObjectMotionState.cpp" />
