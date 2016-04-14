@@ -49,7 +49,7 @@ public:
     // Test load
     Assert::IsTrue(GraphLoader::LoadGraph(nodes, edges, "../../../../resources/buckminsterfullerene.dat"));
     Assert::AreEqual((size_t)60, nodes.size());
-    Assert::AreEqual((size_t)1, edges.size());
+    Assert::AreEqual((size_t)90, edges.size());
 
     // Test nodes
     
