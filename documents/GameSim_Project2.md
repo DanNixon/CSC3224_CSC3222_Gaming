@@ -14,6 +14,6 @@ Extra:
 
 - [ ] Graphical representation
   - [x] Show graph in 3D
-	- [ ] COlour start and target nodes
-	- [ ] Colour nodes in open and closed lists
-	- [ ] Colour best path
+  - [ ] Colour start and target nodes
+  - [ ] Colour nodes in open and closed lists
+  - [ ] Colour best path
