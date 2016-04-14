@@ -57,14 +57,29 @@ namespace PathFinding
     m_weight = weight;
   }
 
+  /**
+   * @brief Tests for equality between this edge and another.
+   * @param other Other edge
+   * @return True if both edges exist between the same two nodes
+   *
+   * Order of nodes is ignored.
+   */
   bool Edge::operator==(const Edge &other) const
   {
-    return (m_nodeA == other.m_nodeA && m_nodeB == other.m_nodeB) || (m_nodeA == other.m_nodeB && m_nodeB == other.m_nodeA);
+    return (m_nodeA == other.m_nodeA && m_nodeB == other.m_nodeB) ||
+           (m_nodeA == other.m_nodeB && m_nodeB == other.m_nodeA);
   }
 
+  /**
+   * @brief Tests for inequality between this edge and another.
+   * @param other Other edge
+   * @return True if both edges exist between two different nodes
+   *
+   * Order of nodes is ignored.
+   */
   bool Edge::operator!=(const Edge &other) const
   {
-	  return !this->operator==(other);
+    return !this->operator==(other);
   }
 
   /**

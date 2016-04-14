@@ -42,15 +42,16 @@ namespace GraphicalPathFinder
 
   private:
     Uint8 m_graphicsLoop; //!< Graphics update loop ID
+    Uint8 m_controlLoop;  //!< Control update loop ID
 
-    Engine::Graphics::ShaderProgram *m_colShader;
-    Engine::Common::Scene *m_scene; //!< Scene containing path representation
-    Controls *m_controls;
+    Engine::Graphics::ShaderProgram *m_colShader; //!< Shader based on fragment colour
+    Engine::Common::Scene *m_scene;               //!< Scene containing path representation
+    Controls *m_controls;                         //!< Control scheme
 
     std::vector<Simulation::PathFinding::Node *> m_nodes;
     std::vector<Simulation::PathFinding::Edge *> m_edges;
 
-    size_t m_i;
+    int m_currentNodeIndex;
   };
 }
 }

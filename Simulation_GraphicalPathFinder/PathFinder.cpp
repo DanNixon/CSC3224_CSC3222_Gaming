@@ -34,7 +34,7 @@ namespace Simulation
 namespace GraphicalPathFinder
 {
   PathFinder::PathFinder()
-      : Game("Graphical Path Finder", std::make_pair(1024, 768))
+      : Game("Graphical Path Finder", std::make_pair(640, 480))
   {
   }
 
@@ -57,7 +57,7 @@ namespace GraphicalPathFinder
     m_colShader->link();
 
     // Scene
-    Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, -20), Vector3(0, 0, 0));
+    Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, -15), Vector3(0, 0, 0));
     Matrix4 proj = Matrix4::Perspective(1, 100, 1.33f, 45.0f);
     m_scene = new Scene(new SceneObject("root"), view, proj);
 
@@ -87,9 +87,12 @@ namespace GraphicalPathFinder
 
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
+    m_controlLoop = addTimedLoop(25.0f, "control");
 
+    // GL settings
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
+    glEnable(GL_DEPTH_TEST);
 
     return 0;
   }
@@ -99,25 +102,41 @@ namespace GraphicalPathFinder
    */
   void PathFinder::gameLoop(Uint8 id, float dtMilliSec)
   {
+    // Handle graphics
     if (id == m_graphicsLoop)
     {
-      if (m_controls->state(S_PREV))
+      m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
+      swapBuffers();
+    }
+    // Handle controls
+    else if (id == m_controlLoop)
+    {
+      // Handle node selection
+      bool prevNode = m_controls->state(S_PREV_NODE);
+      bool nextNode = m_controls->state(S_NEXT_NODE);
+
+      if (prevNode || nextNode)
       {
-        m_controls->setState(S_PREV, false);
-        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(m_nodes[m_i]->id()))->mesh()->setStaticColour(Colour());
-        m_i--;
-        std::string id = m_nodes[m_i]->id();
-        std::cout << id << std::endl;
-        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(id))->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 1.0f));
-      }
-      else if (m_controls->state(S_NEXT))
-      {
-        m_controls->setState(S_NEXT, false);
-        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(m_nodes[m_i]->id()))->mesh()->setStaticColour(Colour());
-        m_i++;
-        std::string id = m_nodes[m_i]->id();
-        std::cout << id << std::endl;
-        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(id))->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 1.0f));
+        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(m_nodes[m_currentNodeIndex]->id()))
+            ->mesh()
+            ->setStaticColour(Colour());
+
+        if (prevNode)
+        {
+          m_controls->setState(S_PREV_NODE, false);
+          m_currentNodeIndex = std::max(0, m_currentNodeIndex - 1);
+        }
+        else if (nextNode)
+        {
+          m_controls->setState(S_NEXT_NODE, false);
+          m_currentNodeIndex = std::min((int)m_nodes.size(), m_currentNodeIndex + 1);
+        }
+
+        std::string id = m_nodes[m_currentNodeIndex]->id();
+        g_log.info("Selected node: " + id);
+        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(id))
+            ->mesh()
+            ->setStaticColour(Colour(0.0f, 0.0f, 1.0f, 1.0f));
       }
 
       // Update graph rotation
@@ -125,10 +144,6 @@ namespace GraphicalPathFinder
       float pitch = m_controls->analog(A_MOUSE_Y) * 180.0f;
       Quaternion rotQuat(yaw, pitch, 0.0f);
       m_scene->root()->setModelMatrix(rotQuat.rotationMatrix());
-
-      // Update graphics
-      m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
-      swapBuffers();
     }
   }
 

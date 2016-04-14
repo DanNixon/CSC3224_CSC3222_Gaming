@@ -32,8 +32,8 @@ namespace Graphics
     m_textureCoords[1] = Vector2(0.0f, 1.0f);
 
     m_colours = new Colour[m_numVertices];
-    m_colours[0] = Colour(1.0f, 0.0f, 0.0f, 1.0f);
-    m_colours[1] = Colour(1.0f, 0.0f, 0.0f, 1.0f);
+    m_colours[0] = Colour();
+    m_colours[1] = Colour();
 
     updateMesh(from, to);
   }
