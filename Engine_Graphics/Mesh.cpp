@@ -87,37 +87,6 @@ namespace Graphics
   }
 
   /**
-   * @brief Generates normals for each vertex.
-   * @return True if normals were generated
-   *
-   * Requires that faces are triangles.
-   */
-  bool Mesh::generateNormals()
-  {
-    if (m_type != GL_TRIANGLES)
-      return false;
-
-    if (!m_normals)
-      m_normals = new Vector3[m_numVertices];
-
-    for (unsigned int i = 0; i < m_numVertices; i += 3)
-    {
-      Vector3 &a = m_vertices[i];
-      Vector3 &b = m_vertices[i + 1];
-      Vector3 &c = m_vertices[i + 2];
-
-      Vector3 normal = Vector3::cross(b - a, c - a);
-      VectorOperations::Normalise(normal);
-
-      m_normals[i] = normal;
-      m_normals[i + 1] = normal;
-      m_normals[i + 2] = normal;
-    }
-
-    return true;
-  }
-
-  /**
    * @brief Buffers all VBO data into graphics memory.
    *
    * Required before drawing.
@@ -171,6 +140,37 @@ namespace Graphics
     }
 
     glBindVertexArray(0);
+  }
+
+  /**
+   * @brief Generates normals for each vertex.
+   * @return True if normals were generated
+   *
+   * Requires that faces are triangles.
+   */
+  bool Mesh::generateNormals()
+  {
+    if (m_type != GL_TRIANGLES)
+      return false;
+
+    if (!m_normals)
+      m_normals = new Vector3[m_numVertices];
+
+    for (unsigned int i = 0; i < m_numVertices; i += 3)
+    {
+      Vector3 &a = m_vertices[i];
+      Vector3 &b = m_vertices[i + 1];
+      Vector3 &c = m_vertices[i + 2];
+
+      Vector3 normal = Vector3::cross(b - a, c - a);
+      VectorOperations::Normalise(normal);
+
+      m_normals[i] = normal;
+      m_normals[i + 1] = normal;
+      m_normals[i + 2] = normal;
+    }
+
+    return true;
   }
 
   /**

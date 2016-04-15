@@ -97,9 +97,10 @@ namespace Graphics
       return m_vertices;
     }
 
+    void bufferData();
+
   protected:
     bool generateNormals();
-    void bufferData();
 
     GLuint m_type;                     //!< Type of primitives used in mesh
     GLuint m_arrayObject;              //!< OGL array object for this mesh

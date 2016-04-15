@@ -159,9 +159,11 @@ namespace Demo
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
 
-    HeightmapMesh *hm = new HeightmapMesh(4, 4, 50.0f, 50.0f);
+    HeightmapMesh *hm = new HeightmapMesh(100, 100, 1000.0f, 1000.0f);
+    hm->setHeight(50, 40, 10, true);
+
     RenderableObject *ground = new RenderableObject("ground", hm, m_uiShader);
-    ground->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -100.0f)));
+    ground->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
     // ground->mesh()->setStaticColour(Colour(0.8f, 0.6f, 0.5f));
 
     SceneObjectMotionState *groundMotionState =
