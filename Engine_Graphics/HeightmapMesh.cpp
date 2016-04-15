@@ -17,6 +17,10 @@ namespace Graphics
 {
   /**
    * @brief Creates a new heightmap mesh.
+   * @param widthSteps Number of vertices in the height map grid in the X axis
+   * @param depthSteps Number of vertices in the height map grid in the Z axis
+   * @param width Length of the height map in the X axis
+   * @param depth Length of the height map in the Z axis
    *
    * Index generation was adapted from here:
    * http://www.chadvernon.com/blog/resources/directx9/terrain-generation-with-a-heightmap
@@ -111,15 +115,29 @@ namespace Graphics
   {
   }
 
-  void HeightmapMesh::setHeight(size_t x, size_t y, float height, bool buffer)
+  /**
+   * @brief Sets the height of a given vertex in the height map.
+   * @param row Row index
+   * @param col Column index
+   * @param height New height
+   * @param buffer Set to true to output VBOs
+   */
+  void HeightmapMesh::setHeight(size_t row, size_t col, float height, bool buffer)
   {
-    vertexPosition(x, y)[1] = height;
+    vertexPosition(row, col)[1] = height;
 
     // Update buffers
     if (buffer)
       bufferData();
   }
 
+  /**
+   * @brief Sets the height of each vertex in the height map.
+   * @param height Pointer to array of height data (must be equal in length to
+   *               vertex array)
+   *
+   * Buffers are updated.
+   */
   void HeightmapMesh::setHeight(float *height)
   {
     // Update y coordinates
@@ -130,9 +148,16 @@ namespace Graphics
     bufferData();
   }
 
-  Engine::Maths::Vector3 &HeightmapMesh::vertexPosition(size_t x, size_t y)
+  /**
+   * @brief Returns a reference to the position vector of a given vertex in
+   *        the height map.
+   * @param row Row index
+   * @param col Column index
+   * @return Reference to vertex position
+   */
+  Engine::Maths::Vector3 &HeightmapMesh::vertexPosition(size_t row, size_t col)
   {
-    size_t idx = (x * m_depthSteps) + y;
+    size_t idx = (col * m_depthSteps) + row;
     return m_vertices[idx];
   }
 }

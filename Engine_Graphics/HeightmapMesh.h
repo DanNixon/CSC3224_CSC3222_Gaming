@@ -16,23 +16,23 @@ namespace Graphics
 {
   /**
    * @class HeightmapMesh
-   * @brief TODO
+   * @brief Mesh for drawing a height map plane.
    * @author Dan Nixon
    */
   class HeightmapMesh : public Mesh
   {
   public:
-    HeightmapMesh(size_t dimX, size_t dimY, float sizeX, float sizeY);
+    HeightmapMesh(size_t widthSteps, size_t depthSteps, float width, float depth);
     virtual ~HeightmapMesh();
 
-    void setHeight(size_t x, size_t y, float height, bool buffer = false);
+    void setHeight(size_t row, size_t col, float height, bool buffer = false);
     void setHeight(float *height);
 
-    Engine::Maths::Vector3 &vertexPosition(size_t x, size_t y);
+    Engine::Maths::Vector3 &vertexPosition(size_t row, size_t col);
 
   private:
-    size_t m_widthSteps;
-    size_t m_depthSteps;
+    size_t m_widthSteps; //!< Number of vertices along X axis
+    size_t m_depthSteps; //!< Number of vertices along Z axis
   };
 }
 }
