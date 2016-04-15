@@ -13,8 +13,8 @@
 #include <Engine_Common/MemoryManager.h>
 #include <Engine_Common/Profiler.h>
 #include <Engine_Graphics/GraphicalScene.h>
+#include <Engine_Graphics/HeightmapMesh.h>
 #include <Engine_Graphics/ModelLoader.h>
-#include <Engine_Graphics/PlaneMesh.h>
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_IO/KVNode.h>
@@ -159,8 +159,11 @@ namespace Demo
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
 
-    RenderableObject *ground = new RenderableObject("ground", new PlaneMesh('y', 1000.0f), m_uiShader);
-    ground->mesh()->setStaticColour(Colour(0.8f, 0.6f, 0.5f));
+    HeightmapMesh *hm = new HeightmapMesh(4, 4, 50.0f, 50.0f);
+    RenderableObject *ground = new RenderableObject("ground", hm, m_uiShader);
+    ground->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -100.0f)));
+    // ground->mesh()->setStaticColour(Colour(0.8f, 0.6f, 0.5f));
+
     SceneObjectMotionState *groundMotionState =
         new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
     RigidBody *groundBody =

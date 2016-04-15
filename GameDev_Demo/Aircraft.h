@@ -23,7 +23,7 @@ namespace Demo
    * @class Aircraft
    * @brief Class containing all information about an aircraft.
    * @author Dan Nixon
-   * 
+   *
    * TODO
    */
   class Aircraft : public Engine::Common::SceneObject
@@ -89,21 +89,21 @@ namespace Demo
     float m_altitudeFeet; //!< Altitude in feet relative to Y=0
     float m_batteryVolts; //!< Battery voltage
 
-    Engine::Common::SceneObject * m_subTreeAircraft;          //!< Scene sub tree containing main aircraft
-    Engine::Common::SceneObject * m_subTreeMainRotor;         //!< Scene sub tree containing static main rotor
-    Engine::Common::SceneObject * m_subTreeTailRotor;         //!< Scene sub tree containing static tail rotor
-    Engine::Common::SceneObject * m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
-    Engine::Common::SceneObject * m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
+    Engine::Common::SceneObject *m_subTreeAircraft;          //!< Scene sub tree containing main aircraft
+    Engine::Common::SceneObject *m_subTreeMainRotor;         //!< Scene sub tree containing static main rotor
+    Engine::Common::SceneObject *m_subTreeTailRotor;         //!< Scene sub tree containing static tail rotor
+    Engine::Common::SceneObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
+    Engine::Common::SceneObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    Engine::Physics::BoundingBoxShape * m_colShapeBody; //!< Collision shape for main body
-    Engine::Physics::BoundingBoxShape * m_colShapeTail; //!< Collision shape for tail/boom
-    btCylinderShape * m_colShapeMainRotor;              //!< Collision shape for main rotor
-    btCylinderShape * m_colShapeTailRotor;              //!< Collision shape for tail rotor
+    Engine::Physics::BoundingBoxShape *m_colShapeBody; //!< Collision shape for main body
+    Engine::Physics::BoundingBoxShape *m_colShapeTail; //!< Collision shape for tail/boom
+    btCylinderShape *m_colShapeMainRotor;              //!< Collision shape for main rotor
+    btCylinderShape *m_colShapeTailRotor;              //!< Collision shape for tail rotor
 
-    Engine::Audio::Source * m_soundEngine;    //!< Background sound caused by motor/mehanics
-    Engine::Audio::Source * m_soundMainRotor; //!< Air sound caused by pitching the main rotor
-    Engine::Audio::Source * m_soundTailRotor; //!< Air sound caused by running tail rotor
-    Engine::Audio::Source * m_soundCrash;     //!< Sound of the aircraft colliding with something
+    Engine::Audio::Source *m_soundEngine;    //!< Background sound caused by motor/mehanics
+    Engine::Audio::Source *m_soundMainRotor; //!< Air sound caused by pitching the main rotor
+    Engine::Audio::Source *m_soundTailRotor; //!< Air sound caused by running tail rotor
+    Engine::Audio::Source *m_soundCrash;     //!< Sound of the aircraft colliding with something
   };
 }
 }

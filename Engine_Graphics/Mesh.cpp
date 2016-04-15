@@ -166,7 +166,6 @@ namespace Graphics
       glGenBuffers(1, &m_bufferObject[NORMAL_BUFFER]);
       glBindBuffer(GL_ARRAY_BUFFER, m_bufferObject[NORMAL_BUFFER]);
       glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Vector3), m_normals, GL_STATIC_DRAW);
-
       glVertexAttribPointer(NORMAL_BUFFER, 3, GL_FLOAT, GL_FALSE, 0, 0);
       glEnableVertexAttribArray(NORMAL_BUFFER);
     }

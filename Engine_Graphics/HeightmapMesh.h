@@ -22,8 +22,12 @@ namespace Graphics
   class HeightmapMesh : public Mesh
   {
   public:
-    HeightmapMesh();
+    HeightmapMesh(unsigned long dimX, unsigned long dimY, float sizeX, float sizeY);
     virtual ~HeightmapMesh();
+
+  private:
+    unsigned long m_widthSteps;
+    unsigned long m_depthSteps;
   };
 }
 }

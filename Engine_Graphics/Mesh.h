@@ -113,7 +113,7 @@ namespace Graphics
     Engine::Maths::Vector2 *m_textureCoords; //!< Pointer to vertex texture coordinate data
     Engine::Maths::Vector3 *m_normals;       //!< Pointer to vertex normals data
     Engine::Maths::Vector3 *m_tangents;      //!< Pointer to vertex tangents data
-    size_t *m_indices;                       //!< Pointer to vertex indices
+    GLuint *m_indices;                       //!< Pointer to vertex indices
 
     Engine::Maths::BoundingBox3
         m_boundingBox; //!< Bounding box of all vertices (must be set on population of vertex array)
