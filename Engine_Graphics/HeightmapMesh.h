@@ -22,17 +22,17 @@ namespace Graphics
   class HeightmapMesh : public Mesh
   {
   public:
-    HeightmapMesh(unsigned long dimX, unsigned long dimY, float sizeX, float sizeY);
+    HeightmapMesh(size_t dimX, size_t dimY, float sizeX, float sizeY);
     virtual ~HeightmapMesh();
 
-    void setHeight(unsigned int x, unsigned int y, float height, bool buffer = false);
+    void setHeight(size_t x, size_t y, float height, bool buffer = false);
     void setHeight(float *height);
 
-    Engine::Maths::Vector3 &vertexPosition(unsigned int x, unsigned int y);
+    Engine::Maths::Vector3 &vertexPosition(size_t x, size_t y);
 
   private:
-    unsigned long m_widthSteps;
-    unsigned long m_depthSteps;
+    size_t m_widthSteps;
+    size_t m_depthSteps;
   };
 }
 }

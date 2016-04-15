@@ -51,12 +51,12 @@ namespace Maths
      * @param row Row index
      * @return Row as Vector4
      */
-    Vector4 row(unsigned int row)
+    Vector4 row(size_t row)
     {
       Vector4 out;
       if (row <= 3)
       {
-        int start = row;
+        size_t start = row;
 
         out.m_x = m_values[start];
         out.m_y = m_values[start += 4];
@@ -71,11 +71,11 @@ namespace Maths
      * @param row Row index
      * @param val Values
      */
-    void setRow(unsigned int row, const Vector4 &val)
+    void setRow(size_t row, const Vector4 &val)
     {
       if (row <= 3)
       {
-        int start = row;
+        size_t start = row;
 
         m_values[start] = val.m_x;
         m_values[start += 4] = val.m_y;
@@ -90,7 +90,7 @@ namespace Maths
      * @param column Column index
      * @return Column as Vector4
      */
-    Vector4 column(unsigned int column)
+    Vector4 column(size_t column)
     {
       Vector4 out;
 
@@ -107,7 +107,7 @@ namespace Maths
      * @param column Column index
      * @param val Values
      */
-    void setColumn(unsigned int column, const Vector4 &val)
+    void setColumn(size_t column, const Vector4 &val)
     {
       if (column <= 3)
       {
@@ -137,12 +137,12 @@ namespace Maths
       Matrix4 out;
       // Students! You should be able to think up a really easy way of speeding
       // this up...
-      for (unsigned int r = 0; r < 4; ++r)
+      for (size_t r = 0; r < 4; ++r)
       {
-        for (unsigned int c = 0; c < 4; ++c)
+        for (size_t c = 0; c < 4; ++c)
         {
           out.m_values[c + (r * 4)] = 0.0f;
-          for (unsigned int i = 0; i < 4; ++i)
+          for (size_t i = 0; i < 4; ++i)
           {
             out.m_values[c + (r * 4)] += m_values[c + (i * 4)] * a.m_values[(r * 4) + i];
           }

@@ -45,12 +45,6 @@ namespace Maths
   {
     return deg * PI / 180.0f;
   };
-
-  /**
-   * @typedef uint
-   * @brief Unsigned integer
-   */
-  typedef unsigned int uint;
 }
 }
 

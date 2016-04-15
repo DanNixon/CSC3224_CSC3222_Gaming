@@ -83,7 +83,7 @@ namespace Graphics
      * @brief Returns the number of vertices that make up this mesh.
      * @return Vertex count
      */
-    unsigned long numVertices() const
+    size_t numVertices() const
     {
       return m_numVertices;
     }
@@ -106,8 +106,9 @@ namespace Graphics
     GLuint m_arrayObject;              //!< OGL array object for this mesh
     GLuint m_bufferObject[MAX_BUFFER]; //!< OGL buffer objects for each buffer
                                        //!  used in this mesh
-    unsigned long m_numVertices;       //!< Number of vertices for the mesh
-    unsigned long m_numIndices;        //!< Number of indices for the mesh
+
+    size_t m_numVertices; //!< Number of vertices for the mesh
+    size_t m_numIndices;  //!< Number of indices for the mesh
 
     Engine::Maths::Vector3 *m_vertices;      //!< Pointer to vertex position data
     Colour *m_colours;                       //!< Pointer to vertex colour data

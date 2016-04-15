@@ -38,7 +38,7 @@ namespace Physics
     if (rendeable && rendeable->mesh())
     {
       Vector3 *v = rendeable->mesh()->vertices();
-      for (unsigned long i = 0; i < rendeable->mesh()->numVertices(); i++)
+      for (size_t i = 0; i < rendeable->mesh()->numVertices(); i++)
       {
         addPoint(btVector3(v->x(), v->y(), v->z()));
         v++;

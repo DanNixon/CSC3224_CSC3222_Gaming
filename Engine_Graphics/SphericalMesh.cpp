@@ -26,7 +26,7 @@ namespace Graphics
       , m_deltaPhi(static_cast<float>((M_PI * 2.0f) / resolution))
   {
     m_type = GL_TRIANGLE_STRIP;
-    m_numVertices = static_cast<unsigned long>(m_resolution) * static_cast<unsigned long>(m_resolution) * 2;
+    m_numVertices = static_cast<size_t>(m_resolution) * static_cast<size_t>(m_resolution) * 2;
 
     m_vertices = new Vector3[m_numVertices];
     m_colours = new Colour[m_numVertices];
