@@ -9,6 +9,7 @@
     <ClInclude Include="ConvexHullShape.h" />
     <ClInclude Include="BoundingBoxShape.h" />
     <ClInclude Include="Heightmap.h" />
+    <ClInclude Include="DebugDrawEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneObjectMotionState.cpp" />
@@ -17,5 +18,6 @@
     <ClCompile Include="ConvexHullShape.cpp" />
     <ClCompile Include="BoundingBoxShape.cpp" />
     <ClCompile Include="Heightmap.cpp" />
+    <ClCompile Include="DebugDrawEngine.cpp" />
   </ItemGroup>
 </Project>

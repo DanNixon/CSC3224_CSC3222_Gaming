@@ -71,6 +71,11 @@ namespace Physics
 
     void update(float msec);
 
+    btDynamicsWorld *world()
+    {
+      return m_world;
+    }
+
   private:
     bool m_runSimulation;   //!< Flag indicating if the simulation should be running
     float m_targetTimeStep; //!< Target time between simulation updates (ms)

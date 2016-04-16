@@ -17,13 +17,15 @@
 #include <Engine_Graphics/ModelLoader.h>
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
+#include <Engine_Graphics/SphericalMesh.h>
 #include <Engine_IO/KVNode.h>
 #include <Engine_Logging/FileOutputChannel.h>
 #include <Engine_Logging/Logger.h>
 #include <Engine_Maths/Quaternion.h>
 #include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/ConvexHullShape.h>
-#include <Engine_Physics/StaticPlaneRigidBody.h>
+#include <Engine_Physics/DebugDrawEngine.h>
+#include <Engine_Physics/Heightmap.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -158,6 +160,9 @@ namespace Demo
 
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
+    DebugDrawEngine *dd = new DebugDrawEngine();
+    dd->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+    m_physicalSystem->world()->setDebugDrawer(dd);
 
     HeightmapMesh *hm = new HeightmapMesh(100, 100, 1000.0f, 1000.0f);
     hm->setHeight(50, 40, 10, true);
@@ -174,10 +179,10 @@ namespace Demo
     m_s->root()->addChild(ground);
 
     SceneObjectMotionState *modelMotionState =
-        new SceneObjectMotionState(m_model, Vector3(0.0f, 0.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
+        new SceneObjectMotionState(m_model, Vector3(0.0f, 50.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
     BoundingBoxShape *modelShape = new BoundingBoxShape();
     modelShape->updateDimensionFromSceneTree(m_model);
-    m_modelBody = new RigidBody(modelMotionState, 500000.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
+    m_modelBody = new RigidBody(modelMotionState, 100.0f, btVector3(1.0f, 1.0f, 1.0f), modelShape);
     m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
     m_physicalSystem->addBody(m_modelBody);
 
@@ -267,6 +272,8 @@ namespace Demo
 
       // Graphics update
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
+      m_physicalSystem->world()->debugDrawWorld();
+
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
 

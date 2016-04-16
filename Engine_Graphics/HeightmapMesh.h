@@ -25,6 +25,34 @@ namespace Graphics
     HeightmapMesh(size_t widthSteps, size_t depthSteps, float width, float depth);
     virtual ~HeightmapMesh();
 
+    /**
+     * @brief Gets the number of vertices in the X axis.
+     * @return Width vertex count
+     */
+    size_t widthSteps() const
+    {
+      return m_widthSteps;
+    }
+
+    /**
+     * @brief Gets the number of vertices in the Z axis.
+     * @return Depth vertex count
+     */
+    size_t depthSteps() const
+    {
+      return m_depthSteps;
+    }
+
+    float deltaRow() const
+    {
+      return m_deltaRow;
+    }
+
+    float deltaCol() const
+    {
+      return m_deltaCol;
+    }
+
     void setHeight(size_t row, size_t col, float height, bool buffer = false);
     void setHeight(float *height);
 
@@ -33,6 +61,8 @@ namespace Graphics
   private:
     size_t m_widthSteps; //!< Number of vertices along X axis
     size_t m_depthSteps; //!< Number of vertices along Z axis
+    float m_deltaRow;
+    float m_deltaCol;
   };
 }
 }

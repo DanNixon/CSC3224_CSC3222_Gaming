@@ -10,7 +10,9 @@
 
 #include <btBulletCollisionCommon.h>
 
+#include <Engine_Common/IMemoryManaged.h>
 #include <Engine_Common/SceneObject.h>
+#include <Engine_Graphics/HeightmapMesh.h>
 
 namespace Engine
 {
@@ -21,7 +23,7 @@ namespace Physics
    * @brief TODO
    * @author Dan Nixon
    */
-  class Heightmap
+  class Heightmap : Engine::Common::IMemoryManaged
   {
   public:
     Heightmap();
@@ -31,6 +33,8 @@ namespace Physics
     {
       return m_shape;
     }
+
+    void populate(Engine::Graphics::HeightmapMesh *heightmap);
 
   private:
     btHeightfieldTerrainShape *m_shape;

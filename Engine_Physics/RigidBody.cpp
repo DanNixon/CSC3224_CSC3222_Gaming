@@ -26,10 +26,12 @@ namespace Physics
       , m_system(nullptr)
   {
     btVector3 localInertia(inertia);
-    m_shape->calculateLocalInertia(mass, localInertia);
 
-    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(mass, state, m_shape, localInertia);
-    m_body = new btRigidBody(groundRigidBodyCI);
+    if (mass > 0.0f)
+      m_shape->calculateLocalInertia(mass, localInertia);
+
+    btRigidBody::btRigidBodyConstructionInfo bodyCI(mass, state, m_shape, localInertia);
+    m_body = new btRigidBody(bodyCI);
   }
 
   RigidBody::~RigidBody()

@@ -32,7 +32,8 @@ namespace Graphics
     // Invert for coordinate system
     depth = -depth;
 
-    m_type = GL_TRIANGLE_STRIP;
+    // m_type = GL_TRIANGLE_STRIP;
+    m_type = GL_LINE_STRIP;
 
     m_numVertices = m_widthSteps * m_depthSteps;
     m_vertices = new Vector3[m_numVertices];
@@ -46,8 +47,8 @@ namespace Graphics
     Vector3 halfSize(width / 2.0f, 0.0f, depth / 2.0f);
 
     // Space between each adjacent vertex in each axis
-    const float deltaCol = width / (float)(m_widthSteps - 1);
-    const float deltaRow = depth / (float)(m_depthSteps - 1);
+    m_deltaCol = width / (float)(m_widthSteps - 1);
+    m_deltaRow = depth / (float)(m_depthSteps - 1);
 
     // Generate vertices
     size_t idx = 0;
@@ -56,8 +57,8 @@ namespace Graphics
       for (size_t row = 0; row < m_depthSteps; row++)
       {
         // Positional coordinates
-        float x = (float)col * deltaCol;
-        float z = (float)row * deltaRow;
+        float x = (float)col * m_deltaCol;
+        float z = (float)row * m_deltaRow;
 
         // Texture coordinates
         float u = (float)col / (float)m_widthSteps;
