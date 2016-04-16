@@ -64,9 +64,9 @@ namespace Graphics
     glBindVertexArray(m_arrayObject);
 
     if (m_bufferObject[INDEX_BUFFER])
-      glDrawElements(m_type, m_numIndices, GL_UNSIGNED_INT, 0);
+      glDrawElements(m_type, (GLsizei) m_numIndices, GL_UNSIGNED_INT, 0);
     else
-      glDrawArrays(m_type, 0, m_numVertices);
+      glDrawArrays(m_type, 0, (GLsizei) m_numVertices);
 
     glBindVertexArray(0);
   }
