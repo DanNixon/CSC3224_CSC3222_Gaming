@@ -121,6 +121,8 @@ namespace Demo
     originSphere->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
     m_s->root()->addChild(originSphere);
 
+    Aircraft *a = new Aircraft("Gaui_X7");
+
     const std::string modelName("Gaui_X7");
     std::stringstream modelObjStr;
     modelObjStr << "../resources/models/" << modelName << "/" << modelName << ".obj";
@@ -173,7 +175,6 @@ namespace Demo
 
     RenderableObject *ground = new RenderableObject("ground", hm, m_uiShader);
     ground->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
-    // ground->mesh()->setStaticColour(Colour(0.8f, 0.6f, 0.5f));
 
     SceneObjectMotionState *groundMotionState =
         new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());

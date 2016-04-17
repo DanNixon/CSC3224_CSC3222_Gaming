@@ -19,6 +19,21 @@ namespace GameDev
 {
 namespace Demo
 {
+  enum class AircraftModel : size_t
+  {
+    BODY,
+    MAIN_ROTOR_SPIN,
+    TAIL_ROTOR_SPIN
+  };
+
+  enum class AircraftSound : size_t
+  {
+    ENGINE_IDLE,
+    MAIN_ROTOR,
+    TAIL_ROTOR,
+    CRASH
+  };
+
   /**
    * @class Aircraft
    * @brief Class containing all information about an aircraft.
@@ -32,14 +47,8 @@ namespace Demo
     Aircraft(const std::string &name);
     virtual ~Aircraft();
 
-    /**
-     * @brief Gets the name of the aircraft.
-     * @return Aircraft name
-     */
-    inline std::string name() const
-    {
-      return m_name;
-    }
+    std::string modelFilename(AircraftModel model) const;
+    std::string audioFilename(AircraftSound sound) const;
 
     /**
      * @brief Gets the mass of the aircraft in g.
@@ -95,15 +104,9 @@ namespace Demo
     Engine::Common::SceneObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
     Engine::Common::SceneObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    Engine::Physics::BoundingBoxShape *m_colShapeBody; //!< Collision shape for main body
-    Engine::Physics::BoundingBoxShape *m_colShapeTail; //!< Collision shape for tail/boom
-    btCylinderShape *m_colShapeMainRotor;              //!< Collision shape for main rotor
-    btCylinderShape *m_colShapeTailRotor;              //!< Collision shape for tail rotor
+    btCompoundShape *m_collisionShape;
 
-    Engine::Audio::Source *m_soundEngine;    //!< Background sound caused by motor/mehanics
-    Engine::Audio::Source *m_soundMainRotor; //!< Air sound caused by pitching the main rotor
-    Engine::Audio::Source *m_soundTailRotor; //!< Air sound caused by running tail rotor
-    Engine::Audio::Source *m_soundCrash;     //!< Sound of the aircraft colliding with something
+    Engine::Audio::Source *m_sounds[4];
   };
 }
 }
