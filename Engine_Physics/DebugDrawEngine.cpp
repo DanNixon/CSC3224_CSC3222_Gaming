@@ -26,7 +26,7 @@ namespace Engine
 {
 namespace Physics
 {
-  DebugDrawEngine::DebugDrawEngine(Engine::Graphics::ShaderProgram * shader)
+  DebugDrawEngine::DebugDrawEngine(Engine::Graphics::ShaderProgram *shader)
       : RenderableObject("debug_draw_engine", nullptr, shader)
       , m_debugMode(0)
   {
@@ -38,7 +38,8 @@ namespace Physics
 
   void DebugDrawEngine::drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color)
   {
-    LineMesh * m = new LineMesh(Vector3(from.getX(), from.getY(), from.getZ()), Vector3(to.getX(), to.getY(), to.getZ()));
+    LineMesh *m =
+        new LineMesh(Vector3(from.getX(), from.getY(), from.getZ()), Vector3(to.getX(), to.getY(), to.getZ()));
     m->setStaticColour(Colour(color.getX(), color.getY(), color.getZ(), 1.0f));
     m_meshes.push_back(m);
   }

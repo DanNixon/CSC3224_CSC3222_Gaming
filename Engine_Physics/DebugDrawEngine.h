@@ -27,7 +27,7 @@ namespace Physics
   class DebugDrawEngine : public btIDebugDraw, public Engine::Graphics::RenderableObject
   {
   public:
-    DebugDrawEngine(Engine::Graphics::ShaderProgram * shader);
+    DebugDrawEngine(Engine::Graphics::ShaderProgram *shader);
     virtual ~DebugDrawEngine();
 
     virtual void drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color);

@@ -117,7 +117,7 @@ namespace Demo
                              Matrix4::BuildViewMatrix(Vector3(-200, 200, 0), Vector3(0, 0, -initialModelDistance)),
                              m_losPMatrix);
 
-    RenderableObject * originSphere = new RenderableObject("origin", new SphericalMesh(5.0f), m_sp);
+    RenderableObject *originSphere = new RenderableObject("origin", new SphericalMesh(5.0f), m_sp);
     originSphere->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
     m_s->root()->addChild(originSphere);
 

@@ -18,7 +18,7 @@ namespace Engine
 namespace Physics
 {
   BoundingBoxShape::BoundingBoxShape()
-      : btBoxShape(btVector3(1,1,1))
+      : btBoxShape(btVector3(1, 1, 1))
   {
   }
 

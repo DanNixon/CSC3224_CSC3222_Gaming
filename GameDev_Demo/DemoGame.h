@@ -20,9 +20,9 @@
 #include <Engine_Graphics/RenderableObject.h>
 #include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Input/IControlScheme.h>
+#include <Engine_Physics/DebugDrawEngine.h>
 #include <Engine_Physics/PhysicalSystem.h>
 #include <Engine_UIMenu/IMenu.h>
-#include <Engine_Physics/DebugDrawEngine.h>
 
 #include "Aircraft.h"
 
