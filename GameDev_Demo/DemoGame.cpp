@@ -145,7 +145,7 @@ namespace Demo
     // Audio
     m_audioContext = new Context();
     m_audioContext->open();
-    m_audioListener = new Listener("test_audio_listener");
+    m_audioListener = new Listener("audio_listener");
     m_s->root()->addChild(m_audioListener);
 
     // Model
@@ -153,7 +153,7 @@ namespace Demo
     m_s->root()->addChild(a);
     a->loadShaders();
     a->loadMeshes();
-    a->loadAudio(m_audioListener);
+    std::cout << a->loadAudio(m_audioListener) << std::endl;
 
     // World origin (TODO: dev only)
     RenderableObject *originSphere = new RenderableObject("origin", new SphericalMesh(5.0f), a->shaderProgram());

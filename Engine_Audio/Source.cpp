@@ -109,7 +109,7 @@ namespace Audio
       m_listener->use();
 
       // Set position
-      Vector4 position = m_worldTransform.positionVector();
+      Vector4 position; // = m_worldTransform.positionVector(); TODO
       alSource3f(m_sourceID, AL_POSITION, position.x(), position.y(), position.z());
       AudioUtil::CheckALError("source position");
 
