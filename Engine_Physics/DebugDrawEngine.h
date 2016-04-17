@@ -10,19 +10,25 @@
 
 #include <btBulletDynamicsCommon.h>
 
+#include <Engine_Graphics/RenderableObject.h>
+
 namespace Engine
 {
 namespace Physics
 {
   /**
    * @class DebugDrawEngine
-   * @brief
+   * @brief Drawing engine for debug drawing Bullet features.
    * @author Dan Nixon
+   *
+   * Currently use of this causes continuous memory allocation despite the
+   * fact the old meshes are released after drawing.
    */
-  class DebugDrawEngine : public btIDebugDraw
+  class DebugDrawEngine : public btIDebugDraw, public Engine::Graphics::RenderableObject
   {
   public:
-    DebugDrawEngine();
+    DebugDrawEngine(Engine::Graphics::ShaderProgram * shader);
+    virtual ~DebugDrawEngine();
 
     virtual void drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color);
     virtual void drawContactPoint(const btVector3 &PointOnB, const btVector3 &normalOnB, btScalar distance,
@@ -41,8 +47,12 @@ namespace Physics
       return m_debugMode;
     }
 
+  protected:
+    virtual void draw(GLuint program);
+
   private:
     int m_debugMode;
+    std::vector<Engine::Graphics::Mesh *> m_meshes;
   };
 }
 }

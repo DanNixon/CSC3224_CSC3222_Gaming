@@ -24,8 +24,7 @@
 #include <Engine_Maths/Quaternion.h>
 #include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/ConvexHullShape.h>
-#include <Engine_Physics/DebugDrawEngine.h>
-#include <Engine_Physics/Heightmap.h>
+#include <Engine_Physics/StaticPlaneRigidBody.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -115,8 +114,12 @@ namespace Demo
     m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
     m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
     m_s = new GraphicalScene(new SceneObject("root"),
-                             Matrix4::BuildViewMatrix(Vector3(0, 50, 0), Vector3(0, 0, -initialModelDistance)),
+                             Matrix4::BuildViewMatrix(Vector3(-200, 200, 0), Vector3(0, 0, -initialModelDistance)),
                              m_losPMatrix);
+
+    RenderableObject * originSphere = new RenderableObject("origin", new SphericalMesh(5.0f), m_sp);
+    originSphere->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
+    m_s->root()->addChild(originSphere);
 
     const std::string modelName("Gaui_X7");
     std::stringstream modelObjStr;
@@ -160,9 +163,10 @@ namespace Demo
 
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
-    DebugDrawEngine *dd = new DebugDrawEngine();
-    dd->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+    dd = new DebugDrawEngine(m_sp);
+    dd->setDebugMode(btIDebugDraw::DBG_DrawAabb || btIDebugDraw::DBG_DrawWireframe);
     m_physicalSystem->world()->setDebugDrawer(dd);
+    m_s->root()->addChild(dd);
 
     HeightmapMesh *hm = new HeightmapMesh(100, 100, 1000.0f, 1000.0f);
     hm->setHeight(50, 40, 10, true);
@@ -178,11 +182,11 @@ namespace Demo
     m_physicalSystem->addBody(groundBody);
     m_s->root()->addChild(ground);
 
-    SceneObjectMotionState *modelMotionState =
-        new SceneObjectMotionState(m_model, Vector3(0.0f, 50.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
     BoundingBoxShape *modelShape = new BoundingBoxShape();
     modelShape->updateDimensionFromSceneTree(m_model);
-    m_modelBody = new RigidBody(modelMotionState, 100.0f, btVector3(1.0f, 1.0f, 1.0f), modelShape);
+    SceneObjectMotionState *modelMotionState =
+        new SceneObjectMotionState(m_model, Vector3(0.0f, 50.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
+    m_modelBody = new RigidBody(modelMotionState, 1000000.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
     m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
     m_physicalSystem->addBody(m_modelBody);
 
@@ -271,8 +275,8 @@ namespace Demo
       // m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
 
       // Graphics update
-      m_s->update(dtMilliSec, Subsystem::GRAPHICS);
       m_physicalSystem->world()->debugDrawWorld();
+      m_s->update(dtMilliSec, Subsystem::GRAPHICS);
 
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);

@@ -22,6 +22,7 @@
 #include <Engine_Input/IControlScheme.h>
 #include <Engine_Physics/PhysicalSystem.h>
 #include <Engine_UIMenu/IMenu.h>
+#include <Engine_Physics/DebugDrawEngine.h>
 
 #include "Aircraft.h"
 
@@ -79,6 +80,8 @@ namespace Demo
 
     Engine::Physics::PhysicalSystem *m_physicalSystem;
     Engine::Physics::RigidBody *m_modelBody;
+
+    Engine::Physics::DebugDrawEngine *dd;
   };
 }
 }

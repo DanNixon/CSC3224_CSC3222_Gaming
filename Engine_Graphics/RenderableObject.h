@@ -112,8 +112,10 @@ namespace Graphics
     void render();
 
   protected:
+    virtual void draw(GLuint program);
     virtual void addToScene(Engine::Common::Scene *scene);
 
+  protected:
     GraphicalScene *m_graphicalScene; //!< Graphical scene object is part of
     bool m_transparent;               //!< Flag indicating transparency of this object
     Mesh *m_mesh;                     //!< Mesh represented by this object

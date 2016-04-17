@@ -44,7 +44,7 @@ namespace Graphics
    */
   void RenderableObject::update(float msec, Subsystem sys)
   {
-    if (sys == Subsystem::GRAPHICS && m_active && m_mesh && m_shaderProgram)
+    if (sys == Subsystem::GRAPHICS && m_active && m_shaderProgram)
     {
       if (m_transparent && m_graphicalScene)
         m_graphicalScene->m_transparent.push_back(this);
@@ -75,9 +75,18 @@ namespace Graphics
     if (m_texture != nullptr)
       m_texture->use(program, 0);
 
-    m_mesh->draw(program);
+    draw(program);
 
     glBindTexture(GL_TEXTURE_2D, 0);
+  }
+
+  /**
+   * @brief Draws the mesh.
+   * @param program GLshader program to use
+   */
+  void RenderableObject::draw(GLuint program)
+  {
+    m_mesh->draw(program);
   }
 
   /**

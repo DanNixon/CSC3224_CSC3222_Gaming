@@ -9,7 +9,13 @@
 
 #include <GL/glew.h>
 
+#include <Engine_Common/MemoryManager.h>
+#include <Engine_Graphics/LineMesh.h>
 #include <Engine_Logging/Logger.h>
+
+using namespace Engine::Common;
+using namespace Engine::Graphics;
+using namespace Engine::Maths;
 
 namespace
 {
@@ -20,22 +26,21 @@ namespace Engine
 {
 namespace Physics
 {
-  DebugDrawEngine::DebugDrawEngine()
-      : m_debugMode(0)
+  DebugDrawEngine::DebugDrawEngine(Engine::Graphics::ShaderProgram * shader)
+      : RenderableObject("debug_draw_engine", nullptr, shader)
+      , m_debugMode(0)
+  {
+  }
+
+  DebugDrawEngine::~DebugDrawEngine()
   {
   }
 
   void DebugDrawEngine::drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color)
   {
-    glLineWidth(2.5);
-    glColor3f(color.getX(), color.getY(), color.getZ());
-
-    glBegin(GL_LINES);
-
-    glVertex3f(from.getX(), from.getY(), from.getZ());
-    glVertex3f(to.getX(), to.getY(), to.getZ());
-
-    glEnd();
+    LineMesh * m = new LineMesh(Vector3(from.getX(), from.getY(), from.getZ()), Vector3(to.getX(), to.getY(), to.getZ()));
+    m->setStaticColour(Colour(color.getX(), color.getY(), color.getZ(), 1.0f));
+    m_meshes.push_back(m);
   }
 
   void DebugDrawEngine::drawContactPoint(const btVector3 &pointOnB, const btVector3 &normalOnB, btScalar distance,
@@ -50,6 +55,20 @@ namespace Physics
   void DebugDrawEngine::reportErrorWarning(const char *warningString)
   {
     g_log.warn(std::string(warningString));
+  }
+
+  /**
+   * @copydoc RenderableObject::draw
+   */
+  void DebugDrawEngine::draw(GLuint program)
+  {
+    for (auto it = m_meshes.begin(); it != m_meshes.end(); ++it)
+    {
+      (*it)->draw(program);
+      MemoryManager::Instance().release(*it);
+    }
+
+    m_meshes.clear();
   }
 }
 }
