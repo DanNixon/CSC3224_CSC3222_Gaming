@@ -102,36 +102,6 @@ namespace Demo
     m_menu->hide();
     addEventHandler(m_menu);
 
-    // Shaders
-    m_sp = new ShaderProgram();
-    m_sp->addShader(new VertexShader("../resources/shader/vert_lighting.glsl"));
-    m_sp->addShader(new FragmentShader("../resources/shader/frag_lighting.glsl"));
-    m_sp->link();
-
-    float initialModelDistance = 250.0f;
-
-    // Scene
-    m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
-    m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-    m_s = new GraphicalScene(new SceneObject("root"),
-                             Matrix4::BuildViewMatrix(Vector3(-200, 200, 0), Vector3(0, 0, -initialModelDistance)),
-                             m_losPMatrix);
-
-    RenderableObject *originSphere = new RenderableObject("origin", new SphericalMesh(5.0f), m_sp);
-    originSphere->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
-    m_s->root()->addChild(originSphere);
-
-    Aircraft *a = new Aircraft("Gaui_X7");
-
-    const std::string modelName("Gaui_X7");
-    std::stringstream modelObjStr;
-    modelObjStr << "../resources/models/" << modelName << "/" << modelName << ".obj";
-
-    // Model
-    ModelLoader l;
-    m_model = l.load(modelObjStr.str(), m_sp);
-    m_s->root()->addChild(m_model);
-
     // UI
     m_uiShader = new ShaderProgram();
     m_uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
@@ -163,50 +133,53 @@ namespace Demo
     m_rightStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
     rightStickArea->addChild(m_rightStick);
 
+    float initialModelDistance = 250.0f;
+
+    // Scene
+    m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
+    m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
+    m_s = new GraphicalScene(new SceneObject("root"),
+                             Matrix4::BuildViewMatrix(Vector3(-200, 200, 0), Vector3(0, 0, -initialModelDistance)),
+                             m_losPMatrix);
+
+    // Audio
+    m_audioContext = new Context();
+    m_audioContext->open();
+    m_audioListener = new Listener("test_audio_listener");
+    m_s->root()->addChild(m_audioListener);
+
+    // Model
+    Aircraft *a = new Aircraft("Gaui_X7");
+    m_s->root()->addChild(a);
+    a->loadShaders();
+    a->loadMeshes();
+    a->loadAudio(m_audioListener);
+
+    // World origin (TODO: dev only)
+    RenderableObject *originSphere = new RenderableObject("origin", new SphericalMesh(5.0f), a->shaderProgram());
+    originSphere->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
+    m_s->root()->addChild(originSphere);
+
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
-    dd = new DebugDrawEngine(m_sp);
+    dd = new DebugDrawEngine(a->shaderProgram());
     dd->setDebugMode(btIDebugDraw::DBG_DrawAabb || btIDebugDraw::DBG_DrawWireframe);
     m_physicalSystem->world()->setDebugDrawer(dd);
     m_s->root()->addChild(dd);
 
+    a->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
+
+    // Ground
     HeightmapMesh *hm = new HeightmapMesh(100, 100, 1000.0f, 1000.0f);
     hm->setHeight(50, 40, 10, true);
-
     RenderableObject *ground = new RenderableObject("ground", hm, m_uiShader);
     ground->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
-
     SceneObjectMotionState *groundMotionState =
         new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
     RigidBody *groundBody =
         new StaticPlaneRigidBody(groundMotionState, 0, btVector3(0.0f, 0.0f, 0.0f), btVector3(0.0f, 1.0f, 0.0f));
     m_physicalSystem->addBody(groundBody);
     m_s->root()->addChild(ground);
-
-    BoundingBoxShape *modelShape = new BoundingBoxShape();
-    modelShape->updateDimensionFromSceneTree(m_model);
-    SceneObjectMotionState *modelMotionState =
-        new SceneObjectMotionState(m_model, Vector3(0.0f, 50.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
-    m_modelBody = new RigidBody(modelMotionState, 1000000.0f, btVector3(0.0f, 0.0f, 0.0f), modelShape);
-    m_modelBody->body()->setActivationState(DISABLE_DEACTIVATION);
-    m_physicalSystem->addBody(m_modelBody);
-
-    // Audio
-    m_audioContext = new Context();
-    m_audioContext->open();
-
-    m_audioListener = new Listener("test_audio_listener");
-    m_s->root()->addChild(m_audioListener);
-
-    m_audioSource1 = new WAVSource("test_audio_source_1", m_audioListener);
-    static_cast<WAVSource *>(m_audioSource1)->load("../resources/models/Gaui_R5/Gaui_R5.wav");
-    m_audioSource1->setLooping(true);
-    m_s->root()->addChild(m_audioSource1);
-
-    m_audioSource2 = new WAVSource("test_audio_source_2", m_audioListener);
-    static_cast<WAVSource *>(m_audioSource2)->load("../resources/models/Gaui_R5/blade.wav");
-    m_audioSource2->setLooping(true);
-    m_s->root()->addChild(m_audioSource2);
 
     // GL
     glEnable(GL_DEPTH_TEST);
@@ -241,7 +214,7 @@ namespace Demo
     // Profiling
     m_profiler = new Profiler(this);
 
-    m_audioSource1->play();
+    a->audioSource(AircraftSound::ENGINE_IDLE)->play();
 
     return retVal;
   }
@@ -259,12 +232,6 @@ namespace Demo
         m_menu->visible() ? m_menu->hide() : m_menu->show();
         m_simControls->setState(S_OPENMENU, false);
       }
-
-      // Blade sound when throttle is high
-      if (abs(m_simControls->analog(A_THROT)) > 0.2 && !m_audioSource2->isPlaying())
-        m_audioSource2->play();
-      else if (abs(m_simControls->analog(A_THROT)) < 0.2 && m_audioSource2->isPlaying())
-        m_audioSource2->stop();
 
       // Stick indicators
       m_leftStick->setModelMatrix(
@@ -297,18 +264,18 @@ namespace Demo
       float throt = m_simControls->analog(A_THROT) * throtRate;
 
       // Orientation
-      btTransform t = m_modelBody->body()->getWorldTransform();
-      btQuaternion angularOffset;
-      angularOffset.setEuler(yaw, roll, pitch);
-      btQuaternion angle = t.getRotation() * angularOffset;
-      t.setRotation(angle);
+      // btTransform t = m_modelBody->body()->getWorldTransform();
+      // btQuaternion angularOffset;
+      // angularOffset.setEuler(yaw, roll, pitch);
+      // btQuaternion angle = t.getRotation() * angularOffset;
+      // t.setRotation(angle);
 
       // Thrust
-      btVector3 rotorThrust(0.0f, throt, 0.0f);
+      // btVector3 rotorThrust(0.0f, throt, 0.0f);
       // TODO: rotate thrust vector
 
-      m_modelBody->body()->setWorldTransform(t);
-      m_modelBody->body()->applyCentralForce(rotorThrust);
+      // m_modelBody->body()->setWorldTransform(t);
+      // m_modelBody->body()->applyCentralForce(rotorThrust);
 
       // Physics update
       m_physicalSystem->update(dtMilliSec);

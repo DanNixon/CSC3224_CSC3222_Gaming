@@ -10,23 +10,22 @@
 
 #include <Engine_Common/SceneObject.h>
 
-#include <btBulletDynamicsCommon.h>
-
 #include <Engine_Audio/Source.h>
-#include <Engine_Physics/BoundingBoxShape.h>
+#include <Engine_Graphics/ShaderProgram.h>
+#include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
 {
 namespace Demo
 {
-  enum class AircraftModel : size_t
+  enum AircraftModel : size_t
   {
     BODY,
     MAIN_ROTOR_SPIN,
     TAIL_ROTOR_SPIN
   };
 
-  enum class AircraftSound : size_t
+  enum AircraftSound : size_t
   {
     ENGINE_IDLE,
     MAIN_ROTOR,
@@ -38,17 +37,31 @@ namespace Demo
    * @class Aircraft
    * @brief Class containing all information about an aircraft.
    * @author Dan Nixon
-   *
-   * TODO
    */
   class Aircraft : public Engine::Common::SceneObject
   {
   public:
-    Aircraft(const std::string &name);
+    Aircraft(const std::string &name, const std::string &resourceRoot = "../resources/");
     virtual ~Aircraft();
 
     std::string modelFilename(AircraftModel model) const;
     std::string audioFilename(AircraftSound sound) const;
+
+    bool loadShaders();
+    bool loadMeshes();
+    bool initPhysics(Engine::Physics::PhysicalSystem *system, const Engine::Maths::Vector3 &initialPosition,
+                     const Engine::Maths::Quaternion &initialRotation);
+    bool loadAudio(Engine::Audio::Listener *listener);
+
+    inline Engine::Graphics::ShaderProgram *shaderProgram()
+    {
+      return m_shaders;
+    }
+
+    inline Engine::Audio::Source *audioSource(AircraftSound sound)
+    {
+      return m_sounds[sound];
+    }
 
     /**
      * @brief Gets the mass of the aircraft in g.
@@ -88,7 +101,7 @@ namespace Demo
     }
 
   protected:
-    std::string m_name; //!< Name of the aircraft
+    std::string m_resourceRoot;
 
     float m_mass;                       //!< Mass in g
     float m_mainRotorThrust;            //!< Maximum main rotor lifting force
@@ -98,13 +111,15 @@ namespace Demo
     float m_altitudeFeet; //!< Altitude in feet relative to Y=0
     float m_batteryVolts; //!< Battery voltage
 
+    Engine::Graphics::ShaderProgram *m_shaders;
+
     Engine::Common::SceneObject *m_subTreeAircraft;          //!< Scene sub tree containing main aircraft
     Engine::Common::SceneObject *m_subTreeMainRotor;         //!< Scene sub tree containing static main rotor
     Engine::Common::SceneObject *m_subTreeTailRotor;         //!< Scene sub tree containing static tail rotor
     Engine::Common::SceneObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
     Engine::Common::SceneObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    btCompoundShape *m_collisionShape;
+    Engine::Physics::RigidBody *m_physicalBody;
 
     Engine::Audio::Source *m_sounds[4];
   };

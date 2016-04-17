@@ -57,7 +57,6 @@ namespace Demo
 
     TTF_Font *m_font;
 
-    Engine::Graphics::ShaderProgram *m_sp;
     Engine::Graphics::ShaderProgram *m_uiShader;
 
     Engine::Graphics::RenderableObject *m_leftStick;
@@ -71,15 +70,10 @@ namespace Demo
 
     Engine::Audio::Context *m_audioContext;
     Engine::Audio::Listener *m_audioListener;
-    Engine::Audio::Source *m_audioSource1;
-    Engine::Audio::Source *m_audioSource2;
-
-    Engine::Common::SceneObject *m_model;
 
     Engine::Input::IControlScheme *m_simControls;
 
     Engine::Physics::PhysicalSystem *m_physicalSystem;
-    Engine::Physics::RigidBody *m_modelBody;
 
     Engine::Physics::DebugDrawEngine *dd;
   };
