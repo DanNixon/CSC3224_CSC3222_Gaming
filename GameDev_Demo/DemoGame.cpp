@@ -235,7 +235,6 @@ namespace Demo
       // Graphics update
       m_physicalSystem->world()->debugDrawWorld();
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
-
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
 

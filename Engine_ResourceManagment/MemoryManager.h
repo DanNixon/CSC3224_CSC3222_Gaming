@@ -34,6 +34,26 @@ namespace ResourceManagment
       return instance;
     }
 
+    /**
+     * @brief No copy constructor
+     */
+    MemoryManager(MemoryManager const &) = delete;
+
+    /**
+     * @brief No move constructor
+     */
+    MemoryManager(MemoryManager &&) = delete;
+
+    /**
+     * @brief No assign copy constructor
+     */
+    MemoryManager &operator=(MemoryManager const &) = delete;
+
+    /**
+     * @brief No assign move constructor
+     */
+    MemoryManager &operator=(MemoryManager &&) = delete;
+
     static bool CompareItems(IMemoryManaged *a, IMemoryManaged *b);
 
     void recordAllocation(IMemoryManaged *item);
@@ -47,14 +67,6 @@ namespace ResourceManagment
 
   private:
     MemoryManager()
-    {
-    }
-
-    MemoryManager(const MemoryManager &)
-    {
-    }
-
-    void operator=(const MemoryManager &)
     {
     }
   };

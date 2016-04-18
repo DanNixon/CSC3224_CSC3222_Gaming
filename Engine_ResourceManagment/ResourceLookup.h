@@ -24,6 +24,7 @@ namespace ResourceManagment
   public:
     /**
      * @brief Gets an instance of the lookup.
+     * @return Instance of this type of lookup
      */
     static ResourceLookup<T> &Instance()
     {
@@ -31,11 +32,41 @@ namespace ResourceManagment
       return instance;
     }
 
+    /**
+     * @brief No copy constructor
+     */
+    ResourceLookup(ResourceLookup const &) = delete;
+
+    /**
+     * @brief No move constructor
+     */
+    ResourceLookup(ResourceLookup &&) = delete;
+
+    /**
+     * @brief No assign copy constructor
+     */
+    ResourceLookup &operator=(ResourceLookup const &) = delete;
+
+    /**
+     * @brief No assign move constructor
+     */
+    ResourceLookup &operator=(ResourceLookup &&) = delete;
+
+    /**
+     * @brief Records a new entry in the lookup.
+     * @param name String identifier
+     * @param item Pointer to resource
+     */
     void add(const std::string &name, T *item)
     {
       m_items[name] = item;
     }
 
+    /**
+     * @brief Gets a pointer to a resource given its identifier.
+     * @param String identifier
+     * @returns Pointer to the resource
+     */
     T *get(const std::string &name)
     {
       return m_items[name];
@@ -46,14 +77,6 @@ namespace ResourceManagment
 
   private:
     ResourceLookup()
-    {
-    }
-
-    ResourceLookup(const ResourceLookup &)
-    {
-    }
-
-    void operator=(const ResourceLookup &)
     {
     }
   };

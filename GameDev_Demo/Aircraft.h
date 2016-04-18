@@ -51,6 +51,11 @@ namespace Demo
                      const Engine::Maths::Quaternion &initialRotation);
     bool loadAudio(Engine::Audio::Listener *listener);
 
+    /**
+     * @brief Gets the source of a given type of sound.
+     * @param sound Sound type
+     * @return Pointer to the sound source
+     */
     inline Engine::Audio::Source *audioSource(AircraftSound sound)
     {
       return m_sounds[sound];
@@ -94,7 +99,7 @@ namespace Demo
     }
 
   protected:
-    std::string m_resourceRoot;
+    std::string m_resourceRoot; //!< Path to the root of the resources directory
 
     float m_mass;                       //!< Mass in g
     float m_mainRotorThrust;            //!< Maximum main rotor lifting force
@@ -110,9 +115,9 @@ namespace Demo
     Engine::Common::SceneObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
     Engine::Common::SceneObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    Engine::Physics::RigidBody *m_physicalBody;
+    Engine::Physics::RigidBody *m_physicalBody; //!< Phsyical body of the aircraft
 
-    Engine::Audio::Source *m_sounds[4];
+    Engine::Audio::Source *m_sounds[4]; //!< Pointers to each type of sound emitted from the aircraft
   };
 }
 }
