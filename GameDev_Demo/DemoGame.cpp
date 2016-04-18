@@ -127,7 +127,7 @@ namespace Demo
     m_s->root()->addChild(m_audioListener);
 
     // Physics
-    m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
+    m_physicalSystem = new PhysicalSystem(8.33f, 83.33f); // At best 120Hz, at worst 12Hz
     m_physicsDebugDraw = new DebugDrawEngine(ShaderProgramLookup::Instance().get("aircraft_shader"));
     m_physicsDebugDraw->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
     m_physicalSystem->world()->setDebugDrawer(m_physicsDebugDraw);
@@ -140,6 +140,8 @@ namespace Demo
     m_aircraft->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance),
                             Quaternion(90.0f, 0.0f, 0.0f));
     m_s->root()->addChild(m_aircraft);
+    m_aircraft->setThrust(5000.0f);
+    m_aircraft->setAxisRates(Vector3(0.25f, 0.25f, 0.25f));
 
     // Ground
     HeightmapMesh *hm = new HeightmapMesh(100, 100, 1000.0f, 1000.0f);
@@ -230,20 +232,6 @@ namespace Demo
 
       m_aircraft->setEngineSpeed(engine);
       m_aircraft->setControls(throttle, pitch, roll, yaw);
-
-      // Orientation
-      // btTransform t = m_modelBody->body()->getWorldTransform();
-      // btQuaternion angularOffset;
-      // angularOffset.setEuler(yaw, roll, pitch);
-      // btQuaternion angle = t.getRotation() * angularOffset;
-      // t.setRotation(angle);
-
-      // Thrust
-      // btVector3 rotorThrust(0.0f, throt, 0.0f);
-      // TODO: rotate thrust vector
-
-      // m_modelBody->body()->setWorldTransform(t);
-      // m_modelBody->body()->applyCentralForce(rotorThrust);
 
       // Physics update
       m_physicalSystem->update(dtMilliSec);

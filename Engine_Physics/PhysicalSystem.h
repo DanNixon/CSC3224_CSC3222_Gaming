@@ -26,7 +26,7 @@ namespace Physics
   class PhysicalSystem : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
-    PhysicalSystem(float targetTimeStep, float maxPossibleTimeStep);
+    PhysicalSystem(float targetTimeStep, float maxPossibleTimeStep, float worldScale = 100.0f);
     virtual ~PhysicalSystem();
 
     /**
@@ -71,15 +71,21 @@ namespace Physics
 
     void update(float msec);
 
-    btDynamicsWorld *world()
+    inline btDynamicsWorld *world()
     {
       return m_world;
+    }
+
+    inline float scale() const
+    {
+      return m_worldScale;
     }
 
   private:
     bool m_runSimulation;   //!< Flag indicating if the simulation should be running
     float m_targetTimeStep; //!< Target time between simulation updates (ms)
     int m_maxSubSteps;      //!< Maximum sub steps for simulation update
+    float m_worldScale;
     btBroadphaseInterface *m_broadphase;
     btDefaultCollisionConfiguration *m_collisionConfig;
     btCollisionDispatcher *m_collisionDispatcher;

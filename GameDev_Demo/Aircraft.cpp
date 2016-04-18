@@ -36,7 +36,7 @@ namespace Demo
   Aircraft::Aircraft(const std::string &name, const std::string &resourceRoot)
       : SceneObject(name)
       , m_resourceRoot(resourceRoot)
-      , m_mass(100.0f)
+      , m_mass(1.0f)
       , m_mainRotorThrust(1.0f)
       , m_axisRates(1.0f, 1.0f, 1.0f)
       , m_rssi(0)
@@ -216,9 +216,23 @@ namespace Demo
    */
   void Aircraft::setControls(float throttle, float pitch, float roll, float yaw)
   {
-    Vector3 thrust(0.0f, m_mainRotorThrust * m_engineSpeed * throttle, 0.0f);
+    // Adjust rotation by rates and engine (rotor) speed
+    Vector3 axisVector(pitch, roll, yaw);
+    axisVector = axisVector * m_axisRates * m_engineSpeed;
 
-    // TODO
+    // Orientation
+    btTransform trans = m_physicalBody->body()->getWorldTransform();
+    btQuaternion angularOffset;
+    angularOffset.setEuler(axisVector.z(), axisVector.y(), axisVector.x());
+    btQuaternion angle = trans.getRotation() * angularOffset;
+    trans.setRotation(angle);
+
+    // Thrust
+    btVector3 thrust(0.0f, m_mainRotorThrust * m_engineSpeed * throttle, 0.0f);
+    // TODO: rotate thrust vector
+
+    m_physicalBody->body()->setWorldTransform(trans);
+    m_physicalBody->body()->applyCentralForce(thrust);
   }
 }
 }

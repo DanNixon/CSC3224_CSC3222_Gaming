@@ -61,6 +61,16 @@ namespace Demo
       return m_sounds[sound];
     }
 
+    inline void setThrust(float thrust)
+    {
+      m_mainRotorThrust = thrust;
+    }
+
+    inline void setAxisRates(const Engine::Maths::Vector3 &rates)
+    {
+      m_axisRates = rates;
+    }
+
     /**
      * @brief Gets the mass of the aircraft in g.
      * @return Aircraft mass

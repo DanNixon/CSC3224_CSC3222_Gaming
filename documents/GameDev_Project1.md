@@ -50,3 +50,12 @@
   - [x] More random distributions
   - [x] Filesystem string utilities
   - [x] General string utilities
+
+## Physics Notes
+
+- World is scaled by 100
+- Lenght in cm
+- Time in seconds
+- Force in Newtons
+- Mass in kg
+	
