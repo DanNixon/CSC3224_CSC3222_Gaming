@@ -5,12 +5,12 @@
  * For CSC3224 Project 1.
  */
 
-#ifndef _ENGINE_COMMON_IMEMORYMANAGED_H_
-#define _ENGINE_COMMON_IMEMORYMANAGED_H_
+#ifndef _ENGINE_RESOURCEMANAGMENT_IMEMORYMANAGED_H_
+#define _ENGINE_RESOURCEMANAGMENT_IMEMORYMANAGED_H_
 
 namespace Engine
 {
-namespace Common
+namespace ResourceManagment
 {
   /**
    * @class IMemoryManaged

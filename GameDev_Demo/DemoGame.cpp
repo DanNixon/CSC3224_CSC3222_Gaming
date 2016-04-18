@@ -10,7 +10,6 @@
 #include <sstream>
 
 #include <Engine_Audio/WAVSource.h>
-#include <Engine_ResourceManagment/MemoryManager.h>
 #include <Engine_Common/Profiler.h>
 #include <Engine_Graphics/GraphicalScene.h>
 #include <Engine_Graphics/HeightmapMesh.h>
@@ -25,6 +24,7 @@
 #include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/ConvexHullShape.h>
 #include <Engine_Physics/StaticPlaneRigidBody.h>
+#include <Engine_ResourceManagment/MemoryManager.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -103,7 +103,7 @@ namespace Demo
     addEventHandler(m_menu);
 
     // UI
-    ShaderProgram * uiShader = new ShaderProgram();
+    ShaderProgram *uiShader = new ShaderProgram();
     uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
     uiShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
     uiShader->link();
@@ -112,24 +112,26 @@ namespace Demo
     m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
                               Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
-    RenderableObject *leftStickArea =
-      new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), ShaderProgramLookup::Instance().get("ui_shader"));
+    RenderableObject *leftStickArea = new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)),
+                                                           ShaderProgramLookup::Instance().get("ui_shader"));
     leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
     leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
     m_ui->root()->addChild(leftStickArea);
 
-    m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f), ShaderProgramLookup::Instance().get("ui_shader"), nullptr, true);
+    m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f),
+                                       ShaderProgramLookup::Instance().get("ui_shader"), nullptr, true);
     m_leftStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
     m_leftStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
     leftStickArea->addChild(m_leftStick);
 
-    RenderableObject *rightStickArea =
-      new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)), ShaderProgramLookup::Instance().get("ui_shader"));
+    RenderableObject *rightStickArea = new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)),
+                                                            ShaderProgramLookup::Instance().get("ui_shader"));
     rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
     rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
     m_ui->root()->addChild(rightStickArea);
 
-    m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f), ShaderProgramLookup::Instance().get("ui_shader"), nullptr, true);
+    m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f),
+                                        ShaderProgramLookup::Instance().get("ui_shader"), nullptr, true);
     m_rightStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
     m_rightStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
     rightStickArea->addChild(m_rightStick);

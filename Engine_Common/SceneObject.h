@@ -24,7 +24,7 @@ namespace Common
    * @class SceneObject
    * @brief Represents an item in a Scene.
    */
-  class SceneObject : public IMemoryManaged
+  class SceneObject : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     /**

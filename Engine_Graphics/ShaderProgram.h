@@ -24,7 +24,7 @@ namespace Graphics
    * @brief Encapsulation for a GL shader program.
    * @author Dan Nixon
    */
-  class ShaderProgram : public Engine::Common::IMemoryManaged
+  class ShaderProgram : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     /**
@@ -75,7 +75,7 @@ namespace Graphics
     bool m_valid;                   //!< Flag indicating validity of program
   };
 
-  typedef Engine::Common::ResourceLookup<ShaderProgram> ShaderProgramLookup;
+  typedef Engine::ResourceManagment::ResourceLookup<ShaderProgram> ShaderProgramLookup;
 }
 }
 

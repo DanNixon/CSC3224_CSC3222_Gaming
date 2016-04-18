@@ -14,9 +14,9 @@
 #include <SDL_ttf.h>
 #include <SOIL/SOIL.h>
 
-#include <Engine_ResourceManagment/IMemoryManaged.h>
 #include <Engine_Maths/Vector2.h>
 #include <Engine_Maths/Vector4.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 
 #include "Colour.h"
 
@@ -38,7 +38,7 @@ namespace Graphics
    * @brief Encapsulates a GL texture and image loading.
    * @author Dan Nixon
    */
-  class Texture : public Engine::Common::IMemoryManaged
+  class Texture : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     Texture(const std::string &name = "tex");

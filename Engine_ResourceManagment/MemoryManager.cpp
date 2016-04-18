@@ -13,7 +13,7 @@
 
 namespace Engine
 {
-namespace Common
+namespace ResourceManagment
 {
   /**
    * @brief Compare the release order of two managed items.

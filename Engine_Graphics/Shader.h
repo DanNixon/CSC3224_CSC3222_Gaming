@@ -25,7 +25,7 @@ namespace Graphics
    * @brief Encapsulation for a single OpenGL shader.
    * @author Dan Nixon
    */
-  class Shader : public Engine::Common::IMemoryManaged
+  class Shader : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     Shader(std::string filename, GLuint stage);

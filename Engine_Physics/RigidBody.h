@@ -25,7 +25,7 @@ namespace Physics
    * @brief Represents a rigid body in a physics simulation.
    * @author Dan Nixon
    */
-  class RigidBody : public Engine::Common::IMemoryManaged
+  class RigidBody : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     RigidBody(btMotionState *state, float mass, const btVector3 &inertia, btCollisionShape *shape);

@@ -31,7 +31,7 @@ namespace Input
    *        analog and binary states.
    * @author Dan Nixon
    */
-  class IControlScheme : public Engine::Common::IMemoryManaged
+  class IControlScheme : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     /**

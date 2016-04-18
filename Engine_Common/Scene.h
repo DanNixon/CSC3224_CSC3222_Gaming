@@ -23,7 +23,7 @@ namespace Common
    * @class Scene
    * @brief Represents a 3D scene.
    */
-  class Scene : public IMemoryManaged
+  class Scene : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     Scene(SceneObject *root, Engine::Maths::Matrix4 view = Engine::Maths::Matrix4(),

@@ -170,7 +170,7 @@ namespace Common
     this->gameShutdown();
 
     // Free ALL the memory
-    MemoryManager::Instance().releaseAll();
+    Engine::ResourceManagment::MemoryManager::Instance().releaseAll();
 
     return status;
   }

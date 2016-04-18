@@ -10,9 +10,9 @@
 
 #include <btBulletCollisionCommon.h>
 
-#include <Engine_ResourceManagment/IMemoryManaged.h>
 #include <Engine_Common/SceneObject.h>
 #include <Engine_Graphics/HeightmapMesh.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 
 namespace Engine
 {
@@ -23,7 +23,7 @@ namespace Physics
    * @brief TODO
    * @author Dan Nixon
    */
-  class Heightmap : Engine::Common::IMemoryManaged
+  class Heightmap : Engine::ResourceManagment::IMemoryManaged
   {
   public:
     Heightmap();

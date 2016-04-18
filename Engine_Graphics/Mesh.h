@@ -55,7 +55,7 @@ namespace Graphics
    *
    * Modified from the nclgl library.
    */
-  class Mesh : public Engine::Common::IMemoryManaged
+  class Mesh : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     static Mesh *GenerateDisc2D(float radius, int resolution = 64);

@@ -23,7 +23,7 @@ namespace Physics
    * @brief Used to manage a simulated physical system.
    * @author Dan Nixon
    */
-  class PhysicalSystem : public Engine::Common::IMemoryManaged
+  class PhysicalSystem : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     PhysicalSystem(float targetTimeStep, float maxPossibleTimeStep);

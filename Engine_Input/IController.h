@@ -20,7 +20,7 @@ namespace Input
    * @brief Interface for a control device.
    * @author Dan Nixon
    */
-  class IController : public Engine::Common::IMemoryManaged
+  class IController : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     /**

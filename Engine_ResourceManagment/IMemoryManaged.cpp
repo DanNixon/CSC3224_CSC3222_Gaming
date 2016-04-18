@@ -11,7 +11,7 @@
 
 namespace Engine
 {
-namespace Common
+namespace ResourceManagment
 {
   IMemoryManaged::IMemoryManaged()
   {

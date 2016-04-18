@@ -5,22 +5,21 @@
  * For CSC3224 Project 1.
  */
 
-#ifndef _ENGINE_COMMON_RESOURCELOOKUP_H_
-#define _ENGINE_COMMON_RESOURCELOOKUP_H_
+#ifndef _ENGINE_RESOURCEMANAGMENT_RESOURCELOOKUP_H_
+#define _ENGINE_RESOURCEMANAGMENT_RESOURCELOOKUP_H_
 
 #include <map>
 
 namespace Engine
 {
-namespace Common
+namespace ResourceManagment
 {
   /**
    * @class ResourceLookup
    * @brief TODO
    * @author Dan Nixon
    */
-  template <typename T>
-  class ResourceLookup
+  template <typename T> class ResourceLookup
   {
   public:
     static ResourceLookup<T> &Instance()
@@ -29,12 +28,12 @@ namespace Common
       return instance;
     }
 
-    void add(const std::string &name, T* item)
+    void add(const std::string &name, T *item)
     {
       m_items[name] = item;
     }
 
-    T* get(const std::string &name)
+    T *get(const std::string &name)
     {
       return m_items[name];
     }

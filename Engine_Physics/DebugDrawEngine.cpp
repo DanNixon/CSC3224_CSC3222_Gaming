@@ -9,9 +9,9 @@
 
 #include <GL/glew.h>
 
-#include <Engine_ResourceManagment/MemoryManager.h>
 #include <Engine_Graphics/LineMesh.h>
 #include <Engine_Logging/Logger.h>
+#include <Engine_ResourceManagment/MemoryManager.h>
 
 using namespace Engine::Common;
 using namespace Engine::Graphics;
@@ -66,7 +66,7 @@ namespace Physics
     for (auto it = m_meshes.begin(); it != m_meshes.end(); ++it)
     {
       (*it)->draw(program);
-      MemoryManager::Instance().release(*it);
+      Engine::ResourceManagment::MemoryManager::Instance().release(*it);
     }
 
     m_meshes.clear();

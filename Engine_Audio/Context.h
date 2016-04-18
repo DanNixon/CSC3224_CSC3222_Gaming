@@ -23,7 +23,7 @@ namespace Audio
    * @brief Manages an AL context for playing audio.
    * @author Dan Nixon
    */
-  class Context : public Engine::Common::IMemoryManaged
+  class Context : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     Context();
