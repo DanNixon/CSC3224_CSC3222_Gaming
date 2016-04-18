@@ -12,7 +12,7 @@
 #include <map>
 
 #include <Engine_Common/Game.h>
-#include <Engine_Common/IMemoryManaged.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 
 namespace Engine
 {

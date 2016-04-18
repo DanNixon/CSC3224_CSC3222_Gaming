@@ -10,7 +10,7 @@
 
 #include <btBulletCollisionCommon.h>
 
-#include <Engine_Common/IMemoryManaged.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 #include <Engine_Common/SceneObject.h>
 #include <Engine_Graphics/HeightmapMesh.h>
 

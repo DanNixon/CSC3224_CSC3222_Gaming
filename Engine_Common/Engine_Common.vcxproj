@@ -158,8 +158,6 @@
   <ItemGroup>
     <ClCompile Include="ConfigurableGame.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="IMemoryManaged.cpp" />
-    <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneObject.cpp" />
@@ -169,10 +167,7 @@
     <ClInclude Include="debug_utils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />
-    <ClInclude Include="IMemoryManaged.h" />
-    <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Profiler.h" />
-    <ClInclude Include="ResourceLookup.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Subsystem.h" />

@@ -12,7 +12,7 @@
 
 #include <alc.h>
 
-#include <Engine_Common/IMemoryManaged.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 
 namespace Engine
 {

@@ -20,8 +20,8 @@
 #include <Engine_Logging/Logger.h>
 #include <Engine_Logging/LoggingService.h>
 #include <Engine_Logging/ConsoleOutputChannel.h>
+#include <Engine_ResourceManagment/MemoryManager.h>
 
-#include "MemoryManager.h"
 #include "Profiler.h"
 
 #include "debug_utils.h"

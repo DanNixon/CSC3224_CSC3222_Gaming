@@ -9,8 +9,8 @@
 #define _ENGINE_COMMON_SCENE_H_
 
 #include <Engine_Maths/Matrix4.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 
-#include "IMemoryManaged.h"
 #include "Subsystem.h"
 
 namespace Engine

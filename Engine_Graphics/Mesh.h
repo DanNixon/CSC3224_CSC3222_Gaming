@@ -16,7 +16,7 @@
 #include <SDL/SDL_opengl.h>
 #include <assimp/scene.h>
 
-#include <Engine_Common/IMemoryManaged.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 
 #include <Engine_Maths/BoundingBox.h>
 #include <Engine_Maths/Vector2.h>

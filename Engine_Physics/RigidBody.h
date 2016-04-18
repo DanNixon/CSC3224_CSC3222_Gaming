@@ -10,7 +10,7 @@
 
 #include <btBulletDynamicsCommon.h>
 
-#include <Engine_Common/IMemoryManaged.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 
 #include "SceneObjectMotionState.h"
 

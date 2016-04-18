@@ -9,7 +9,7 @@
 
 #include <GL/glew.h>
 
-#include <Engine_Common/MemoryManager.h>
+#include <Engine_ResourceManagment/MemoryManager.h>
 #include <Engine_Graphics/LineMesh.h>
 #include <Engine_Logging/Logger.h>
 

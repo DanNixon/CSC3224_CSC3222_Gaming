@@ -14,7 +14,7 @@
 #include <SDL_ttf.h>
 #include <SOIL/SOIL.h>
 
-#include <Engine_Common/IMemoryManaged.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
 #include <Engine_Maths/Vector2.h>
 #include <Engine_Maths/Vector4.h>
 

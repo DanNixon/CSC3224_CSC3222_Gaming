@@ -10,7 +10,7 @@
 #include <sstream>
 
 #include <Engine_Audio/WAVSource.h>
-#include <Engine_Common/MemoryManager.h>
+#include <Engine_ResourceManagment/MemoryManager.h>
 #include <Engine_Common/Profiler.h>
 #include <Engine_Graphics/GraphicalScene.h>
 #include <Engine_Graphics/HeightmapMesh.h>

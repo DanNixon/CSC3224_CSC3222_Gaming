@@ -10,8 +10,8 @@
 
 #include <GL/glew.h>
 
-#include <Engine_Common/IMemoryManaged.h>
-#include <Engine_Common/ResourceLookup.h>
+#include <Engine_ResourceManagment/IMemoryManaged.h>
+#include <Engine_ResourceManagment/ResourceLookup.h>
 
 namespace Engine
 {
