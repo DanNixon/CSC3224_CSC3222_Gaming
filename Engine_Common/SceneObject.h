@@ -39,7 +39,7 @@ namespace Common
      */
     typedef SceneObjectList::const_iterator SceneObjectListIter;
 
-    SceneObject(const std::string &name, SceneObject * parent = nullptr);
+    SceneObject(const std::string &name, SceneObject *parent = nullptr);
     ~SceneObject();
 
     /**

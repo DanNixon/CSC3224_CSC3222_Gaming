@@ -24,14 +24,14 @@ namespace Demo
   class StickIndicator : public Engine::Common::SceneObject
   {
   public:
-    StickIndicator(const std::string &name, Engine::Common::SceneObject * parent);
+    StickIndicator(const std::string &name, Engine::Common::SceneObject *parent);
     virtual ~StickIndicator();
 
     void setStickPosition(float horizontal, float vertical);
 
   private:
-    Engine::Graphics::RenderableObject * m_area;
-    Engine::Graphics::RenderableObject * m_indicator;
+    Engine::Graphics::RenderableObject *m_area;
+    Engine::Graphics::RenderableObject *m_indicator;
   };
 }
 }

@@ -58,8 +58,8 @@ namespace Demo
 
     TTF_Font *m_font;
 
-    StickIndicator * m_leftStickIndicator;
-    StickIndicator * m_rightStickIndicator;
+    StickIndicator *m_leftStickIndicator;
+    StickIndicator *m_rightStickIndicator;
 
     Engine::Maths::Matrix4 m_losPMatrix; //!< Perspective matrix for line of sight flying
     Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
