@@ -211,9 +211,6 @@ namespace Demo
       // Look at aircraft
       // m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
 
-      // TODO
-      m_aircraft->setEngineSpeed(m_simControls->analog(A_THROT));
-
       // Graphics update
       m_physicalSystem->world()->debugDrawWorld();
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
@@ -225,14 +222,14 @@ namespace Demo
     else if (id == m_physicsLoop)
     {
       // Model controls
-      float yawRate = 0.1f;
-      float prRate = 0.1f;
-      float throtRate = 100000000.0f;
+      float engine = m_simControls->analog(A_ENGINE);
+      float roll = m_simControls->analog(A_ROLL);
+      float pitch = -m_simControls->analog(A_PITCH);
+      float yaw = -m_simControls->analog(A_YAW);
+      float throttle = m_simControls->analog(A_THROT);
 
-      float roll = m_simControls->analog(A_ROLL) * prRate;
-      float pitch = -m_simControls->analog(A_PITCH) * prRate;
-      float yaw = -m_simControls->analog(A_YAW) * yawRate;
-      float throt = m_simControls->analog(A_THROT) * throtRate;
+      m_aircraft->setEngineSpeed(engine);
+      m_aircraft->setControls(throttle, pitch, roll, yaw);
 
       // Orientation
       // btTransform t = m_modelBody->body()->getWorldTransform();

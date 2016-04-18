@@ -40,6 +40,7 @@ namespace Demo
       m_joystick->setAxisMapping(0, A_ROLL);
       m_joystick->setAxisMapping(2, A_THROT);
       m_joystick->setAxisMapping(3, A_YAW);
+      m_joystick->setAxisMapping(4, A_ENGINE);
       m_joystick->setButtonMapping(0, S_FPV);
 
       addController(m_joystick);

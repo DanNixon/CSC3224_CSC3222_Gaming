@@ -40,6 +40,9 @@ namespace Demo
       m_keyboard->setMapping(SDLK_s, S_DECTHROT);
       m_keyboard->setMapping(SDLK_a, S_YAWCCW);
       m_keyboard->setMapping(SDLK_d, S_YAWCW);
+      m_keyboard->setMapping(SDLK_1, S_ENGINEOFF);
+      m_keyboard->setMapping(SDLK_2, S_ENGINE1);
+      m_keyboard->setMapping(SDLK_3, S_ENGINE2);
 
       m_mouse->setXMapping(A_ROLL);
       m_mouse->setYMapping(A_PITCH);
@@ -71,11 +74,25 @@ namespace Demo
         if (active)
           setAnalog(A_THROT, analog(A_THROT) - 0.1f);
         break;
+
       case S_YAWCCW:
         setAnalog(A_YAW, active ? -0.5f : 0.0f);
         break;
       case S_YAWCW:
         setAnalog(A_YAW, active ? 0.5f : 0.0f);
+        break;
+
+      case S_ENGINEOFF:
+        if (active)
+          setAnalog(A_ENGINE, 0.0f);
+        break;
+      case S_ENGINE1:
+        if (active)
+          setAnalog(A_ENGINE, 0.75f);
+        break;
+      case S_ENGINE2:
+        if (active)
+          setAnalog(A_ENGINE, 1.0f);
         break;
       }
     }

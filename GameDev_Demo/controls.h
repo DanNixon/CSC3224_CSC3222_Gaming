@@ -23,10 +23,14 @@ namespace Demo
     A_ROLL,
     A_YAW,
     A_THROT,
+    A_ENGINE,
     S_INCTHROT,
     S_DECTHROT,
     S_YAWCW,
     S_YAWCCW,
+    S_ENGINEOFF,
+    S_ENGINE1,
+    S_ENGINE2,
     S_FPV,
     S_OPENMENU
   };
