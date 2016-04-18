@@ -74,12 +74,25 @@ public:
 
     // Test edges
 
-    // TODO: update when edges are added to data file
-
-    // E0:21,22
+    // E0:0,2
     Assert::AreEqual(std::string("E0"), edges[0]->id());
-    Assert::IsTrue(nodes[21] == edges[0]->nodeA());
-    Assert::IsTrue(nodes[22] == edges[0]->nodeB());
+    Assert::IsTrue(nodes[0] == edges[0]->nodeA());
+    Assert::IsTrue(nodes[2] == edges[0]->nodeB());
+
+    // E29:35,3
+    Assert::AreEqual(std::string("E29"), edges[29]->id());
+    Assert::IsTrue(nodes[35] == edges[29]->nodeA());
+    Assert::IsTrue(nodes[3] == edges[29]->nodeB());
+
+    // E59:46,47
+    Assert::AreEqual(std::string("E59"), edges[59]->id());
+    Assert::IsTrue(nodes[46] == edges[59]->nodeA());
+    Assert::IsTrue(nodes[47] == edges[59]->nodeB());
+
+    // E89:53,55
+    Assert::AreEqual(std::string("E89"), edges[89]->id());
+    Assert::IsTrue(nodes[53] == edges[89]->nodeA());
+    Assert::IsTrue(nodes[55] == edges[89]->nodeB());
   }
 };
 #endif /* DOXYGEN_SKIP */
