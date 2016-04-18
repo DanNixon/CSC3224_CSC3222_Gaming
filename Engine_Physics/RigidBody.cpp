@@ -43,5 +43,29 @@ namespace Physics
     delete m_body;
     delete m_shape;
   }
+
+  void RigidBody::applyRotation(const Engine::Maths::Quaternion &quat)
+  {
+    btTransform transform = m_body->getWorldTransform();
+    btQuaternion angularOffset(quat.i(), quat.j(), quat.k(), quat.w());
+    btQuaternion newRotation = transform.getRotation() * angularOffset;
+    transform.setRotation(newRotation);
+    m_body->setWorldTransform(transform);
+  }
+
+  btVector3 RigidBody::upVector() const
+  {
+    return m_body->getWorldTransform().getBasis().getColumn(1);
+  }
+
+  btVector3 RigidBody::facingVector() const
+  {
+    return m_body->getWorldTransform().getBasis().getColumn(0);
+  }
+
+  btVector3 RigidBody::leftVector() const
+  {
+    return -m_body->getWorldTransform().getBasis().getColumn(2);
+  }
 }
 }

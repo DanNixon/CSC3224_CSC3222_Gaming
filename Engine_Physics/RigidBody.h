@@ -57,6 +57,12 @@ namespace Physics
       return m_body;
     }
 
+    void applyRotation(const Engine::Maths::Quaternion &quat);
+
+    btVector3 upVector() const;
+    btVector3 facingVector() const;
+    btVector3 leftVector() const;
+
   protected:
     friend class PhysicalSystem;
 

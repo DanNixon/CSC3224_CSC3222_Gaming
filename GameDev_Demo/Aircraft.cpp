@@ -36,7 +36,7 @@ namespace Demo
   Aircraft::Aircraft(const std::string &name, const std::string &resourceRoot)
       : SceneObject(name)
       , m_resourceRoot(resourceRoot)
-      , m_mass(1.0f)
+      , m_mass(0.6f)
       , m_mainRotorThrust(1.0f)
       , m_axisRates(1.0f, 1.0f, 1.0f)
       , m_rssi(0)
@@ -194,7 +194,10 @@ namespace Demo
    */
   void Aircraft::setEngineSpeed(float speed)
   {
-    bool engineOn = speed > 0.01f;
+    // Clamp to interval [0,1]
+    m_engineSpeed = std::max(std::min(speed, 1.0f), 0.0f);
+
+    bool engineOn = m_engineSpeed > 0.01f;
 
     // Update engine idle sound
     if (engineOn)
@@ -202,15 +205,13 @@ namespace Demo
       if (!m_sounds[AircraftSound::ENGINE_IDLE]->isPlaying())
         m_sounds[AircraftSound::ENGINE_IDLE]->play();
 
-      m_sounds[AircraftSound::ENGINE_IDLE]->setGain(5.0f * (speed * 75.0f));
-      m_sounds[AircraftSound::ENGINE_IDLE]->setPitch(0.8f + (speed * 0.2f));
+      m_sounds[AircraftSound::ENGINE_IDLE]->setGain(5.0f * (m_engineSpeed * 75.0f));
+      m_sounds[AircraftSound::ENGINE_IDLE]->setPitch(0.8f + (m_engineSpeed * 0.2f));
     }
     else
     {
       m_sounds[AircraftSound::ENGINE_IDLE]->stop();
     }
-
-    m_engineSpeed = speed;
   }
 
   /**
@@ -232,18 +233,11 @@ namespace Demo
     Vector3 axisVector(pitch, roll, yaw);
     axisVector = axisVector * m_axisRates * m_engineSpeed;
 
-    // Orientation
-    btTransform trans = m_physicalBody->body()->getWorldTransform();
-    btQuaternion angularOffset;
-    angularOffset.setEuler(axisVector.z(), axisVector.y(), axisVector.x());
-    btQuaternion angle = trans.getRotation() * angularOffset;
-    trans.setRotation(angle);
+    // Rotation
+    m_physicalBody->applyRotation(Quaternion(axisVector.z(), axisVector.y(), axisVector.x()));
 
     // Thrust
-    btVector3 thrust(0.0f, m_mainRotorThrust * m_engineSpeed * throttle, 0.0f);
-    // TODO: rotate thrust vector
-
-    m_physicalBody->body()->setWorldTransform(trans);
+    btVector3 thrust = m_physicalBody->upVector() * m_mainRotorThrust * m_engineSpeed * throttle;
     m_physicalBody->body()->applyCentralForce(thrust);
   }
 }

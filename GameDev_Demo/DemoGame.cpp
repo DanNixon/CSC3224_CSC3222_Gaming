@@ -139,10 +139,10 @@ namespace Demo
     m_aircraft->loadMeshes();
     m_aircraft->loadAudio(m_audioListener);
     m_aircraft->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance),
-                            Quaternion(135.0f, 0.0f, 0.0f));
+                            Quaternion(90.0f, 0.0f, 0.0f));
     m_s->root()->addChild(m_aircraft);
-    m_aircraft->setThrust(5000.0f);
-    m_aircraft->setAxisRates(Vector3(0.25f, 0.25f, 0.25f));
+    m_aircraft->setThrust(3000.0f);
+    m_aircraft->setAxisRates(Vector3(5.0f, 5.0f, 5.0f));
 
     // Ground
     HeightmapMesh *hm = new HeightmapMesh(1000, 1000, 100000.0f, 100000.0f); // 1 km^2
@@ -212,7 +212,8 @@ namespace Demo
       m_rightStickIndicator->setStickPosition(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH));
 
       // Look at aircraft
-      // m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
+      m_s->setViewMatrix(
+          Matrix4::BuildViewMatrix(Vector3(0.0f, 250.0f, 0.0f), m_aircraft->modelMatrix().positionVector()));
 
       // Graphics update
       m_physicalSystem->world()->debugDrawWorld();
