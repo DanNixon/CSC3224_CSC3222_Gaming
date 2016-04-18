@@ -19,13 +19,15 @@ namespace Common
    * @brief Creates a new, empty scene object.
    * @param name Name of the object
    */
-  SceneObject::SceneObject(const std::string &name)
+  SceneObject::SceneObject(const std::string &name, SceneObject * parent)
       : m_name(name)
       , m_active(true)
       , m_modelMatrix(Matrix4())
       , m_worldTransform(Matrix4())
       , m_parent(nullptr)
   {
+    if (parent != nullptr)
+      parent->addChild(this);
   }
 
   SceneObject::~SceneObject()

@@ -23,6 +23,7 @@
     <ClCompile Include="DemoGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
+    <ClCompile Include="StickIndicator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="KJSSimulatorControls.h" />
     <ClInclude Include="KMSimulatorControls.h" />
     <ClInclude Include="OptionsMenu.h" />
+    <ClInclude Include="StickIndicator.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4F6104E8-AC92-4DED-AB32-7BD100B04761}</ProjectGuid>

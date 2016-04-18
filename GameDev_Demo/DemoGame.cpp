@@ -119,29 +119,11 @@ namespace Demo
     m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
                               Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
-    RenderableObject *leftStickArea = new RenderableObject("left_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)),
-                                                           ShaderProgramLookup::Instance().get("ui_shader"));
-    leftStickArea->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
-    leftStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
-    m_ui->root()->addChild(leftStickArea);
+    m_leftStickIndicator = new StickIndicator("left_stick", m_ui->root());
+    m_leftStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
 
-    m_leftStick = new RenderableObject("left_stick", Mesh::GenerateDisc2D(0.2f),
-                                       ShaderProgramLookup::Instance().get("ui_shader"), nullptr, true);
-    m_leftStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
-    m_leftStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
-    leftStickArea->addChild(m_leftStick);
-
-    RenderableObject *rightStickArea = new RenderableObject("right_stick_area", new RectangleMesh(Vector2(2.0f, 2.0f)),
-                                                            ShaderProgramLookup::Instance().get("ui_shader"));
-    rightStickArea->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
-    rightStickArea->mesh()->setStaticColour(Colour(0.5f, 0.5, 0.5f, 0.5f));
-    m_ui->root()->addChild(rightStickArea);
-
-    m_rightStick = new RenderableObject("right_stick", Mesh::GenerateDisc2D(0.2f),
-                                        ShaderProgramLookup::Instance().get("ui_shader"), nullptr, true);
-    m_rightStick->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -0.1f)));
-    m_rightStick->mesh()->setStaticColour(Colour(1.0f, 0.0f, 0.0f, 0.8f));
-    rightStickArea->addChild(m_rightStick);
+    m_rightStickIndicator = new StickIndicator("right_stick", m_ui->root());
+    m_rightStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
 
     float initialModelDistance = 250.0f;
 
@@ -244,10 +226,8 @@ namespace Demo
       }
 
       // Stick indicators
-      m_leftStick->setModelMatrix(
-          Matrix4::Translation(Vector3(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT), -0.1f)));
-      m_rightStick->setModelMatrix(
-          Matrix4::Translation(Vector3(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH), -0.1f)));
+      m_leftStickIndicator->setStickPosition(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT));
+      m_rightStickIndicator->setStickPosition(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH));
 
       // Look at aircraft
       // m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
