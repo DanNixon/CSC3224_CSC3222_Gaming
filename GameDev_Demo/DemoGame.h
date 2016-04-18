@@ -63,6 +63,7 @@ namespace Demo
     Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
     Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
     Engine::Common::Scene *m_ui;         //!< Scene containing UI
+
     OptionsMenu *m_menu;
 
     Engine::Audio::Context *m_audioContext;
@@ -71,8 +72,9 @@ namespace Demo
     Engine::Input::IControlScheme *m_simControls;
 
     Engine::Physics::PhysicalSystem *m_physicalSystem;
+    Engine::Physics::DebugDrawEngine *m_physicsDebugDraw;
 
-    Engine::Physics::DebugDrawEngine *dd;
+    Aircraft *m_aircraft;
   };
 }
 }

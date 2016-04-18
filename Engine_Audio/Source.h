@@ -32,6 +32,8 @@ namespace Audio
     virtual bool valid() const;
 
     bool setLooping(bool loop);
+    bool setGain(float gain);
+    bool setPitch(float pitch);
 
     bool play();
     bool stop();

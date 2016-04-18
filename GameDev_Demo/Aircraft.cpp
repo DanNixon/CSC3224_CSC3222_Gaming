@@ -172,5 +172,53 @@ namespace Demo
 
     return result;
   }
+
+  /**
+   * @brief Sets the aircraft engine speed.
+   * @param speed Speed in interval [0.0,1.0]
+   * @see Aircraft::setControls()
+   *
+   * This would be equivalent of the throttle on a helicopter.
+   */
+  void Aircraft::setEngineSpeed(float speed)
+  {
+    bool engineOn = speed > 0.01f;
+
+    // Update engine idle sound
+    if (engineOn)
+    {
+      if (!m_sounds[AircraftSound::ENGINE_IDLE]->isPlaying())
+        m_sounds[AircraftSound::ENGINE_IDLE]->play();
+
+      m_sounds[AircraftSound::ENGINE_IDLE]->setGain(5.0f * (speed * 75.0f));
+      m_sounds[AircraftSound::ENGINE_IDLE]->setPitch(0.8f + (speed * 0.2f));
+    }
+    else
+    {
+      m_sounds[AircraftSound::ENGINE_IDLE]->stop();
+    }
+
+    m_engineSpeed = speed;
+  }
+
+  /**
+   * @brief Sets the control surfaces of the aircraft.
+   * @param throttle Throttle position
+   * @param pitch Pitch rate
+   * @param roll Roll rate
+   * @param yaw Yaw rate
+   * @see Aircraft::setEngineSpeed()
+   *
+   * All controls are in interval [-1,1].
+   *
+   * For a helicopter throttle is equivalent to the collective pitch, pitch
+   * and roll are the cyclic and yaw is tail rotor.
+   */
+  void Aircraft::setControls(float throttle, float pitch, float roll, float yaw)
+  {
+    Vector3 thrust(0.0f, m_mainRotorThrust * m_engineSpeed * throttle, 0.0f);
+
+    // TODO
+  }
 }
 }

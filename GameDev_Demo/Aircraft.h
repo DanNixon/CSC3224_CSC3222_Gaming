@@ -98,13 +98,17 @@ namespace Demo
       return m_batteryVolts;
     }
 
+    void setEngineSpeed(float speed);
+    void setControls(float throttle, float pitch, float roll, float yaw);
+
   protected:
     std::string m_resourceRoot; //!< Path to the root of the resources directory
 
     float m_mass;                       //!< Mass in g
-    float m_mainRotorThrust;            //!< Maximum main rotor lifting force
+    float m_mainRotorThrust;            //!< Main rotor lifting force at maximum RPM and maximum throttle
     Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis
 
+    float m_engineSpeed;  //!< Engine/motor speed (factor of max RPM)
     int m_rssi;           //!< RSSI in dB
     float m_altitudeFeet; //!< Altitude in feet relative to Y=0
     float m_batteryVolts; //!< Battery voltage

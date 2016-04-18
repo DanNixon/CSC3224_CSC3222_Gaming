@@ -33,7 +33,7 @@ namespace Audio
     alSourcei(m_sourceID, AL_BUFFER, m_buffer);
 
     alSourcef(m_sourceID, AL_PITCH, 1);
-    alSourcef(m_sourceID, AL_GAIN, 50);
+    alSourcef(m_sourceID, AL_GAIN, 1);
 
     setLooping(false);
   }
@@ -64,6 +64,28 @@ namespace Audio
   {
     alSourcei(m_sourceID, AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
     return AudioUtil::CheckALError("set source looping");
+  }
+
+  /**
+   * @brief Sets the audio gain of the source.
+   * @param gain Gain
+   * @return True if property was set
+   */
+  bool Source::setGain(float gain)
+  {
+    alSourcef(m_sourceID, AL_GAIN, gain);
+    return AudioUtil::CheckALError("set source gain");
+  }
+
+  /**
+   * @brief Sets the audio pitch of the source.
+   * @param pitch Pitch
+   * @return True if property was set
+   */
+  bool Source::setPitch(float pitch)
+  {
+    alSourcef(m_sourceID, AL_PITCH, pitch);
+    return AudioUtil::CheckALError("set source pitch");
   }
 
   /**

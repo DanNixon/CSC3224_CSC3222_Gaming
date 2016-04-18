@@ -106,10 +106,8 @@ namespace Demo
     // UI
     m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
                               Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
-
     m_leftStickIndicator = new StickIndicator("left_stick", m_ui->root());
     m_leftStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
-
     m_rightStickIndicator = new StickIndicator("right_stick", m_ui->root());
     m_rightStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
 
@@ -128,26 +126,20 @@ namespace Demo
     m_audioListener = new Listener("audio_listener");
     m_s->root()->addChild(m_audioListener);
 
-    // Model
-    Aircraft *a = new Aircraft("Gaui_X7");
-    m_s->root()->addChild(a);
-    a->loadMeshes();
-    std::cout << a->loadAudio(m_audioListener) << std::endl;
-
-    // World origin (TODO: dev only)
-    RenderableObject *originSphere =
-        new RenderableObject("origin", new SphericalMesh(5.0f), ShaderProgramLookup::Instance().get("aircraft_shader"));
-    originSphere->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
-    m_s->root()->addChild(originSphere);
-
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
-    dd = new DebugDrawEngine(ShaderProgramLookup::Instance().get("aircraft_shader"));
-    dd->setDebugMode(btIDebugDraw::DBG_DrawAabb || btIDebugDraw::DBG_DrawWireframe);
-    m_physicalSystem->world()->setDebugDrawer(dd);
-    m_s->root()->addChild(dd);
+    m_physicsDebugDraw = new DebugDrawEngine(ShaderProgramLookup::Instance().get("aircraft_shader"));
+    m_physicsDebugDraw->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+    m_physicalSystem->world()->setDebugDrawer(m_physicsDebugDraw);
+    m_s->root()->addChild(m_physicsDebugDraw);
 
-    a->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance), Quaternion(90.0f, 0.0f, 0.0f));
+    // Model
+    m_aircraft = new Aircraft("Gaui_X7");
+    m_aircraft->loadMeshes();
+    m_aircraft->loadAudio(m_audioListener);
+    m_aircraft->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance),
+                            Quaternion(90.0f, 0.0f, 0.0f));
+    m_s->root()->addChild(m_aircraft);
 
     // Ground
     HeightmapMesh *hm = new HeightmapMesh(100, 100, 1000.0f, 1000.0f);
@@ -195,8 +187,6 @@ namespace Demo
     // Profiling
     m_profiler = new Profiler(this);
 
-    a->audioSource(AircraftSound::ENGINE_IDLE)->play();
-
     return retVal;
   }
 
@@ -220,6 +210,9 @@ namespace Demo
 
       // Look at aircraft
       // m_s->setViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 50, 0), m_model->modelMatrix().positionVector()));
+
+      // TODO
+      m_aircraft->setEngineSpeed(m_simControls->analog(A_THROT));
 
       // Graphics update
       m_physicalSystem->world()->debugDrawWorld();
