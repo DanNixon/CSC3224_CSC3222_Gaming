@@ -11,6 +11,7 @@
     <ClInclude Include="debug_utils.h" />
     <ClInclude Include="Subsystem.h" />
     <ClInclude Include="ConfigurableGame.h" />
+    <ClInclude Include="ResourceLookup.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp" />

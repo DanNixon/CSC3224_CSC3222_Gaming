@@ -11,6 +11,7 @@
 #include <GL/glew.h>
 
 #include <Engine_Common/IMemoryManaged.h>
+#include <Engine_Common/ResourceLookup.h>
 
 namespace Engine
 {
@@ -73,6 +74,8 @@ namespace Graphics
     Shader *m_shaders[NUM_SHADERS]; //!< Array of Shaders in program
     bool m_valid;                   //!< Flag indicating validity of program
   };
+
+  typedef Engine::Common::ResourceLookup<ShaderProgram> ShaderProgramLookup;
 }
 }
 

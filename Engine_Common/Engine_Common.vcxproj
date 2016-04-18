@@ -172,6 +172,7 @@
     <ClInclude Include="IMemoryManaged.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Profiler.h" />
+    <ClInclude Include="ResourceLookup.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Subsystem.h" />

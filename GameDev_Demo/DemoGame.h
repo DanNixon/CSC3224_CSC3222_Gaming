@@ -57,8 +57,6 @@ namespace Demo
 
     TTF_Font *m_font;
 
-    Engine::Graphics::ShaderProgram *m_uiShader;
-
     Engine::Graphics::RenderableObject *m_leftStick;
     Engine::Graphics::RenderableObject *m_rightStick;
 
