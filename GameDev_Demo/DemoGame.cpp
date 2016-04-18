@@ -116,9 +116,10 @@ namespace Demo
 
     m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
     m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-    m_s = new GraphicalScene(new SceneObject("root"),
-                             Matrix4::BuildViewMatrix(Vector3(-50, 10, 0), Vector3(0, 0, -initialModelDistance)),
-                             m_losPMatrix);
+    m_s = new GraphicalScene(
+        new SceneObject("root"),
+        Matrix4::BuildViewMatrix(Vector3(0.0f, 250.0f, 0.0f), Vector3(0.0f, 0.0f, -initialModelDistance)),
+        m_losPMatrix);
 
     // Audio
     m_audioContext = new Context();
@@ -138,13 +139,13 @@ namespace Demo
     m_aircraft->loadMeshes();
     m_aircraft->loadAudio(m_audioListener);
     m_aircraft->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance),
-                            Quaternion(90.0f, 0.0f, 0.0f));
+                            Quaternion(135.0f, 0.0f, 0.0f));
     m_s->root()->addChild(m_aircraft);
     m_aircraft->setThrust(5000.0f);
     m_aircraft->setAxisRates(Vector3(0.25f, 0.25f, 0.25f));
 
     // Ground
-    HeightmapMesh *hm = new HeightmapMesh(100, 100, 1000.0f, 1000.0f);
+    HeightmapMesh *hm = new HeightmapMesh(1000, 1000, 100000.0f, 100000.0f); // 1 km^2
     hm->setHeight(50, 40, 10, true);
     RenderableObject *ground = new RenderableObject("ground", hm, ShaderProgramLookup::Instance().get("ui_shader"));
     ground->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));

@@ -109,6 +109,7 @@ namespace Demo
     m_subTreeAircraft =
         bodyLoader.load(modelFilename(AircraftModel::BODY), ShaderProgramLookup::Instance().get("aircraft_shader"));
     addChild(m_subTreeAircraft);
+    m_subTreeAircraft->setModelMatrix(Matrix4::Scale(Vector3(2.0f, 2.0f, 2.0f)));
 
     // ModelLoader mainRotorLoader;
     // m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN), m_shaders);
@@ -128,16 +129,27 @@ namespace Demo
     // Collision shape
     btCompoundShape *shape = new btCompoundShape();
 
-    // TODO
+    // Main body bounding box
     BoundingBoxShape *bodyBBox = new BoundingBoxShape();
+    // TODO
     bodyBBox->updateDimensionFromSceneTree(m_subTreeAircraft);
-    // shape->addChildShape(btTransform(), bodyBBox);
+    bodyBBox->setLocalScaling(btVector3(2.0f, 2.0f, 2.0f));
+    shape->addChildShape(btTransform(btQuaternion(0.0f, 0.0f, 0.0f)), bodyBBox);
+
+    // Tail/boom bounding box
+    // TODO
+
+    // Main rotor cylinder
+    // TODO
+
+    // Tail rotor cylinder
+    // TODO
 
     // Motion
     SceneObjectMotionState *motion = new SceneObjectMotionState(this, initialPosition, initialRotation);
 
     // Body
-    m_physicalBody = new RigidBody(motion, m_mass, btVector3(0.0f, 0.0f, 0.0f), bodyBBox);
+    m_physicalBody = new RigidBody(motion, m_mass, btVector3(0.0f, 0.0f, 0.0f), shape);
     m_physicalBody->body()->setActivationState(DISABLE_DEACTIVATION);
 
     // Add to system
