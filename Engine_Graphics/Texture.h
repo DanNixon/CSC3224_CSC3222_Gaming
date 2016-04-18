@@ -17,6 +17,7 @@
 #include <Engine_Maths/Vector2.h>
 #include <Engine_Maths/Vector4.h>
 #include <Engine_ResourceManagment/IMemoryManaged.h>
+#include <Engine_ResourceManagment/ResourceLookup.h>
 
 #include "Colour.h"
 
@@ -24,6 +25,8 @@ namespace Engine
 {
 namespace Graphics
 {
+  typedef Engine::ResourceManagment::ResourceLookup<TTF_Font *> TTFFontLookup;
+
   /**
    * @brief Defines the modes that can be used to render text.
    */

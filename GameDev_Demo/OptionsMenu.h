@@ -23,11 +23,24 @@ namespace Demo
   class OptionsMenu : public Engine::UIMenu::TopBarMenu
   {
   public:
+    typedef std::vector<std::pair<std::string, std::string>> NameValueList;
+
+  public:
     OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize = 0.08f);
     virtual ~OptionsMenu();
 
+    void populateAircraftMenu(const NameValueList &items);
+    void populateTerrainMenu(const NameValueList &items);
+
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
+
+  private:
+    void populateMenu(Engine::UIMenu::MenuItem *parent, const NameValueList &items);
+
+  private:
+    Engine::UIMenu::MenuItem *m_aircraftMenu;
+    Engine::UIMenu::MenuItem *m_terrainMenu;
   };
 }
 }

@@ -75,7 +75,7 @@ namespace Graphics
     bool m_valid;                   //!< Flag indicating validity of program
   };
 
-  typedef Engine::ResourceManagment::ResourceLookup<ShaderProgram> ShaderProgramLookup;
+  typedef Engine::ResourceManagment::ResourceLookup<ShaderProgram *> ShaderProgramLookup;
 }
 }
 

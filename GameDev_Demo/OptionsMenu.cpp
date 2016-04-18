@@ -22,10 +22,25 @@ namespace Demo
   OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize)
       : TopBarMenu(game, font, textSize)
   {
+    addNewItem(nullptr, "exit", "Exit");
+    addNewItem(nullptr, "pause", "Pause");
+
+    m_aircraftMenu = addNewItem(nullptr, "aircraft", "Aircraft");
+    m_terrainMenu = addNewItem(nullptr, "terrain", "Terrain");
   }
 
   OptionsMenu::~OptionsMenu()
   {
+  }
+
+  void OptionsMenu::populateAircraftMenu(const NameValueList &items)
+  {
+    populateMenu(m_aircraftMenu, items);
+  }
+
+  void OptionsMenu::populateTerrainMenu(const NameValueList &items)
+  {
+    populateMenu(m_terrainMenu, items);
   }
 
   /**
@@ -56,6 +71,12 @@ namespace Demo
     }
 
     // TODO
+  }
+
+  void OptionsMenu::populateMenu(Engine::UIMenu::MenuItem *parent, const NameValueList &items)
+  {
+    for (auto it = items.begin(); it != items.end(); ++it)
+      addNewItem(parent, it->second, it->first);
   }
 }
 }

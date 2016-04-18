@@ -16,7 +16,7 @@ namespace ResourceManagment
 {
   /**
    * @class ResourceLookup
-   * @brief Singleton to hold a map of identifier string to pointer to an object.
+   * @brief Singleton to hold a map of identifier string to object.
    * @author Dan Nixon
    */
   template <typename T> class ResourceLookup
@@ -55,25 +55,35 @@ namespace ResourceManagment
     /**
      * @brief Records a new entry in the lookup.
      * @param name String identifier
-     * @param item Pointer to resource
+     * @param item Resource
      */
-    void add(const std::string &name, T *item)
+    void add(const std::string &name, T item)
     {
       m_items[name] = item;
     }
 
     /**
-     * @brief Gets a pointer to a resource given its identifier.
+     * @brief Gets a resource given its identifier.
      * @param String identifier
-     * @returns Pointer to the resource
+     * @returns Resource
      */
-    T *get(const std::string &name)
+    T get(const std::string &name)
+    {
+      return m_items[name];
+    }
+
+    /**
+     * @brief Gets a reference to a resource given its identifier.
+     * @param String identifier
+     * @returns Reference to resource
+     */
+    T &reference(const std::string &name)
     {
       return m_items[name];
     }
 
   private:
-    std::map<std::string, T *> m_items; //!< Wrapped map
+    std::map<std::string, T> m_items; //!< Wrapped map
 
   private:
     ResourceLookup()

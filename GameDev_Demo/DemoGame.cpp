@@ -28,7 +28,6 @@
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
-#include "OptionsMenu.h"
 #include "control.h"
 
 using namespace Engine::Common;
@@ -80,29 +79,10 @@ namespace Demo
       g_log.info("This is the first time the game has been launched.");
     }
 
-    glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
+    // Load fonts
+    TTFFontLookup::Instance().add("main_font", TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20));
 
-    // Menu
-    m_font = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
-    m_menu = new OptionsMenu(this, m_font);
-
-    m_menu->addNewItem(nullptr, "exit", "Exit");
-    m_menu->addNewItem(nullptr, "pause", "Pause");
-
-    MenuItem *aircraft = m_menu->addNewItem(nullptr, "aircraft", "Aircraft");
-    m_menu->addNewItem(aircraft, "Gaui X5");
-    m_menu->addNewItem(aircraft, "Logo 600");
-
-    MenuItem *terrain = m_menu->addNewItem(nullptr, "terrain", "Terrain");
-    m_menu->addNewItem(terrain, "Flat");
-    m_menu->addNewItem(terrain, "Tall Peaks");
-    m_menu->addNewItem(terrain, "Forest");
-
-    m_menu->layout();
-    m_menu->hide();
-    addEventHandler(m_menu);
-
-    // Shaders
+    // Load shaders
     ShaderProgram *aircraftShader = new ShaderProgram();
     aircraftShader->addShader(new VertexShader("../resources/shader/vert_lighting.glsl"));
     aircraftShader->addShader(new FragmentShader("../resources/shader/frag_lighting.glsl"));
@@ -115,6 +95,14 @@ namespace Demo
     uiShader->link();
     ShaderProgramLookup::Instance().add("ui_shader", uiShader);
 
+    // Menu
+    m_menu = new OptionsMenu(this, TTFFontLookup::Instance().get("main_font"));
+    m_menu->populateAircraftMenu({{"Gaui X5", "gaui_x5"}, {"Logo 600", "logo_600"}});
+    m_menu->populateTerrainMenu({{"Flat", "flat"}, {"Tall Peaks", "peaks"}, {"Forest", "forest"}});
+    m_menu->layout();
+    m_menu->hide();
+    addEventHandler(m_menu);
+
     // UI
     m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
                               Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
@@ -125,9 +113,9 @@ namespace Demo
     m_rightStickIndicator = new StickIndicator("right_stick", m_ui->root());
     m_rightStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
 
+    // Scene
     float initialModelDistance = 250.0f;
 
-    // Scene
     m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
     m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
     m_s = new GraphicalScene(new SceneObject("root"),
@@ -173,10 +161,11 @@ namespace Demo
     m_physicalSystem->addBody(groundBody);
     m_s->root()->addChild(ground);
 
-    // GL
+    // GL setup
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
 
     // Input
     if (JoystickHandler::NumJoysticks() == 0)

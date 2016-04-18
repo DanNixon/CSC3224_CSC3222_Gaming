@@ -22,9 +22,9 @@
 #include <Engine_Input/IControlScheme.h>
 #include <Engine_Physics/DebugDrawEngine.h>
 #include <Engine_Physics/PhysicalSystem.h>
-#include <Engine_UIMenu/IMenu.h>
 
 #include "Aircraft.h"
+#include "OptionsMenu.h"
 #include "StickIndicator.h"
 
 namespace GameDev
@@ -56,8 +56,6 @@ namespace Demo
     Uint8 m_audioLoop;
     Uint8 m_profileLoop;
 
-    TTF_Font *m_font;
-
     StickIndicator *m_leftStickIndicator;
     StickIndicator *m_rightStickIndicator;
 
@@ -65,7 +63,7 @@ namespace Demo
     Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
     Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
     Engine::Common::Scene *m_ui;         //!< Scene containing UI
-    Engine::UIMenu::IMenu *m_menu;
+    OptionsMenu *m_menu;
 
     Engine::Audio::Context *m_audioContext;
     Engine::Audio::Listener *m_audioListener;
