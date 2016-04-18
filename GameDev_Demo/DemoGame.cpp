@@ -102,13 +102,20 @@ namespace Demo
     m_menu->hide();
     addEventHandler(m_menu);
 
-    // UI
+    // Shaders
+    ShaderProgram *aircraftShader = new ShaderProgram();
+    aircraftShader->addShader(new VertexShader("../resources/shader/vert_lighting.glsl"));
+    aircraftShader->addShader(new FragmentShader("../resources/shader/frag_lighting.glsl"));
+    aircraftShader->link();
+    ShaderProgramLookup::Instance().add("aircraft_shader", aircraftShader);
+
     ShaderProgram *uiShader = new ShaderProgram();
     uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
     uiShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
     uiShader->link();
     ShaderProgramLookup::Instance().add("ui_shader", uiShader);
 
+    // UI
     m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
                               Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
 
@@ -142,7 +149,7 @@ namespace Demo
     m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
     m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
     m_s = new GraphicalScene(new SceneObject("root"),
-                             Matrix4::BuildViewMatrix(Vector3(-200, 200, 0), Vector3(0, 0, -initialModelDistance)),
+                             Matrix4::BuildViewMatrix(Vector3(-50, 10, 0), Vector3(0, 0, -initialModelDistance)),
                              m_losPMatrix);
 
     // Audio
@@ -154,18 +161,18 @@ namespace Demo
     // Model
     Aircraft *a = new Aircraft("Gaui_X7");
     m_s->root()->addChild(a);
-    a->loadShaders();
     a->loadMeshes();
     std::cout << a->loadAudio(m_audioListener) << std::endl;
 
     // World origin (TODO: dev only)
-    RenderableObject *originSphere = new RenderableObject("origin", new SphericalMesh(5.0f), a->shaderProgram());
+    RenderableObject *originSphere =
+        new RenderableObject("origin", new SphericalMesh(5.0f), ShaderProgramLookup::Instance().get("aircraft_shader"));
     originSphere->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
     m_s->root()->addChild(originSphere);
 
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 16.66f); // At best 120Hz, at worst 60Hz
-    dd = new DebugDrawEngine(a->shaderProgram());
+    dd = new DebugDrawEngine(ShaderProgramLookup::Instance().get("aircraft_shader"));
     dd->setDebugMode(btIDebugDraw::DBG_DrawAabb || btIDebugDraw::DBG_DrawWireframe);
     m_physicalSystem->world()->setDebugDrawer(dd);
     m_s->root()->addChild(dd);

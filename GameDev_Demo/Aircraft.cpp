@@ -11,7 +11,7 @@
 
 #include <Engine_Audio/WAVSource.h>
 #include <Engine_Graphics/ModelLoader.h>
-#include <Engine_Graphics/Shaders.h>
+#include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Logging/Logger.h>
 #include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/SceneObjectMotionState.h>
@@ -101,21 +101,13 @@ namespace Demo
     return str.str();
   }
 
-  bool Aircraft::loadShaders()
-  {
-    m_shaders = new ShaderProgram();
-    m_shaders->addShader(new VertexShader(m_resourceRoot + "shader/vert_lighting.glsl"));
-    m_shaders->addShader(new FragmentShader(m_resourceRoot + "shader/frag_lighting.glsl"));
-    bool result = m_shaders->link();
-    return result;
-  }
-
   bool Aircraft::loadMeshes()
   {
     bool result = true;
 
     ModelLoader bodyLoader;
-    m_subTreeAircraft = bodyLoader.load(modelFilename(AircraftModel::BODY), m_shaders);
+    m_subTreeAircraft =
+        bodyLoader.load(modelFilename(AircraftModel::BODY), ShaderProgramLookup::Instance().get("aircraft_shader"));
     addChild(m_subTreeAircraft);
 
     // ModelLoader mainRotorLoader;

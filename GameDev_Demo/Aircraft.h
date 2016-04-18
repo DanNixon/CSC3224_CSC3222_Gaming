@@ -11,7 +11,6 @@
 #include <Engine_Common/SceneObject.h>
 
 #include <Engine_Audio/Source.h>
-#include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
@@ -47,16 +46,10 @@ namespace Demo
     std::string modelFilename(AircraftModel model) const;
     std::string audioFilename(AircraftSound sound) const;
 
-    bool loadShaders();
     bool loadMeshes();
     bool initPhysics(Engine::Physics::PhysicalSystem *system, const Engine::Maths::Vector3 &initialPosition,
                      const Engine::Maths::Quaternion &initialRotation);
     bool loadAudio(Engine::Audio::Listener *listener);
-
-    inline Engine::Graphics::ShaderProgram *shaderProgram()
-    {
-      return m_shaders;
-    }
 
     inline Engine::Audio::Source *audioSource(AircraftSound sound)
     {
@@ -110,8 +103,6 @@ namespace Demo
     int m_rssi;           //!< RSSI in dB
     float m_altitudeFeet; //!< Altitude in feet relative to Y=0
     float m_batteryVolts; //!< Battery voltage
-
-    Engine::Graphics::ShaderProgram *m_shaders;
 
     Engine::Common::SceneObject *m_subTreeAircraft;          //!< Scene sub tree containing main aircraft
     Engine::Common::SceneObject *m_subTreeMainRotor;         //!< Scene sub tree containing static main rotor

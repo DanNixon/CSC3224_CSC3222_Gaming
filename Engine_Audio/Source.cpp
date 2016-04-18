@@ -33,7 +33,7 @@ namespace Audio
     alSourcei(m_sourceID, AL_BUFFER, m_buffer);
 
     alSourcef(m_sourceID, AL_PITCH, 1);
-    alSourcef(m_sourceID, AL_GAIN, 1);
+    alSourcef(m_sourceID, AL_GAIN, 50);
 
     setLooping(false);
   }
@@ -109,7 +109,7 @@ namespace Audio
       m_listener->use();
 
       // Set position
-      Vector4 position; // = m_worldTransform.positionVector(); TODO
+      Vector4 position = m_worldTransform.positionVector();
       alSource3f(m_sourceID, AL_POSITION, position.x(), position.y(), position.z());
       AudioUtil::CheckALError("source position");
 

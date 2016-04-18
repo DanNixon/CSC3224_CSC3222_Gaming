@@ -16,12 +16,15 @@ namespace ResourceManagment
 {
   /**
    * @class ResourceLookup
-   * @brief TODO
+   * @brief Singleton to hold a map of identifier string to pointer to an object.
    * @author Dan Nixon
    */
   template <typename T> class ResourceLookup
   {
   public:
+    /**
+     * @brief Gets an instance of the lookup.
+     */
     static ResourceLookup<T> &Instance()
     {
       static ResourceLookup<T> instance;
@@ -39,7 +42,7 @@ namespace ResourceManagment
     }
 
   private:
-    std::map<std::string, T *> m_items;
+    std::map<std::string, T *> m_items; //!< Wrapped map
 
   private:
     ResourceLookup()
