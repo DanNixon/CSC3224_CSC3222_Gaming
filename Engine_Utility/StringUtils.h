@@ -34,6 +34,8 @@ namespace Utility
     static std::string BasenameFromFilename(const std::string &filename);
     static std::string ExtFromFilename(const std::string &filename);
 
+    static bool ToBool(std::string str, bool defaultVal = false);
+
   private:
     static size_t FindSlash(const std::string &str);
   };

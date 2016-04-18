@@ -151,6 +151,33 @@ namespace Utility
   }
 
   /**
+   * @brief Coverts a string value to a boolean.
+   * @param str String value
+   * @param defaultValue If string could not be parsed this value is returned
+   * @return Parsed value, defaultValue if value could not be determined
+   */
+  bool StringUtils::ToBool(std::string str, bool defaultVal)
+  {
+    bool retVal = defaultVal;
+
+    // Make string lowercase
+    std::transform(str.begin(), str.end(), str.begin(), tolower);
+
+    // List of words that correspond to true or false
+    static const std::vector<std::string> trueStrs = {"1", "true", "yes", "on", "enable"};
+    static const std::vector<std::string> falseStrs = {"0", "false", "no", "off", "disable"};
+
+    // Test for a true value
+    if (std::find(trueStrs.begin(), trueStrs.end(), str) != trueStrs.end())
+      retVal = true;
+    // Test for a false value
+    else if (std::find(falseStrs.begin(), falseStrs.end(), str) != falseStrs.end())
+      retVal = false;
+
+    return retVal;
+  }
+
+  /**
    * @brief Searches a string for a directory delimiting slash.
    * @param str String to search in
    * @return Index of slash

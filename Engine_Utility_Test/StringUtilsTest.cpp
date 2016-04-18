@@ -82,6 +82,24 @@ public:
     std::string s = StringUtils::ExtFromFilename("thing.txt");
     Assert::AreEqual(std::string("txt"), s);
   }
+
+  TEST_METHOD(StringUtils_ToBool)
+  {
+    Assert::AreEqual(false, StringUtils::ToBool("", false));
+    Assert::AreEqual(true, StringUtils::ToBool("", true));
+    Assert::AreEqual(true, StringUtils::ToBool("1"));
+    Assert::AreEqual(false, StringUtils::ToBool("0"));
+    Assert::AreEqual(true, StringUtils::ToBool("True"));
+    Assert::AreEqual(false, StringUtils::ToBool("False"));
+    Assert::AreEqual(true, StringUtils::ToBool("true"));
+    Assert::AreEqual(false, StringUtils::ToBool("false"));
+    Assert::AreEqual(true, StringUtils::ToBool("yes"));
+    Assert::AreEqual(false, StringUtils::ToBool("no"));
+    Assert::AreEqual(true, StringUtils::ToBool("on"));
+    Assert::AreEqual(false, StringUtils::ToBool("off"));
+    Assert::AreEqual(true, StringUtils::ToBool("enable"));
+    Assert::AreEqual(false, StringUtils::ToBool("disable"));
+  }
 };
 #endif /* DOXYGEN_SKIP */
 }
