@@ -8,7 +8,7 @@
 #ifndef _GAMEDEV_DEMO_KMSIMULATORCONTROLS_H_
 #define _GAMEDEV_DEMO_KMSIMULATORCONTROLS_H_
 
-#include <Engine_Input/IControlScheme.h>
+#include "SimulatorControls.h"
 
 #include <Engine_Common/Game.h>
 
@@ -26,15 +26,14 @@ namespace Demo
    * @brief Control scheme for flight simulation using a keyboard and mouse.
    * @author Dan Nixon
    */
-  class KMSimulatorControls : public Engine::Input::IControlScheme
+  class KMSimulatorControls : public SimulatorControls
   {
   public:
     /**
      * @copydoc IControlScheme:IControlScheme
      */
     KMSimulatorControls(Engine::Common::Game *game)
-        : Engine::Input::IControlScheme(game)
-        , m_keyboard(new Engine::Input::KeyboardController(this))
+        : SimulatorControls(game)
         , m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
     {
       m_keyboard->setMapping(SDLK_w, S_INCTHROT);
@@ -42,23 +41,16 @@ namespace Demo
       m_keyboard->setMapping(SDLK_a, S_YAWCCW);
       m_keyboard->setMapping(SDLK_d, S_YAWCW);
 
-      m_keyboard->setMapping(SDLK_f, S_FPV, true);
-      m_keyboard->setMapping(SDLK_ESCAPE, S_OPENMENU, true);
-
       m_mouse->setXMapping(A_ROLL);
       m_mouse->setYMapping(A_PITCH);
       m_mouse->setButtonMapping(SDL_BUTTON_LEFT, S_FPV);
 
-      addController(m_keyboard);
       addController(m_mouse);
-
-      game->addEventHandler(m_keyboard);
       game->addEventHandler(m_mouse);
     }
 
     virtual ~KMSimulatorControls()
     {
-      m_game->removeEventHandler(m_keyboard);
       m_game->removeEventHandler(m_mouse);
     }
 
@@ -88,9 +80,8 @@ namespace Demo
       }
     }
 
-  private:
-    Engine::Input::KeyboardController *m_keyboard; //!< Keyboard used in scheme
-    Engine::Input::MouseController *m_mouse;       //!< Mouse used in scheme
+  protected:
+    Engine::Input::MouseController *m_mouse; //!< Mouse used in scheme
   };
 }
 }

@@ -32,6 +32,7 @@
     <ClInclude Include="KJSSimulatorControls.h" />
     <ClInclude Include="KMSimulatorControls.h" />
     <ClInclude Include="OptionsMenu.h" />
+    <ClInclude Include="SimulatorControls.h" />
     <ClInclude Include="StickIndicator.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -15,5 +15,6 @@
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="Aircraft.h" />
     <ClInclude Include="StickIndicator.h" />
+    <ClInclude Include="SimulatorControls.h" />
   </ItemGroup>
 </Project>
