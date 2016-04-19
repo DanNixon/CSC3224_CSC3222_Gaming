@@ -72,10 +72,13 @@ namespace Demo
    */
   void DemoGame::setCameraMode(const std::string &mode)
   {
+    // Update active camera
     bool fpv = mode == "fpv";
-
     m_aircraft->fpvCamera()->setActive(fpv);
     m_lineOfSightCamera->setActive(!fpv);
+
+    // Record setting
+    m_root.children()["camera"].keys()["mode"] = mode;
   }
 
   /**

@@ -79,6 +79,10 @@ namespace Demo
       system->setSimulationState(run);
       item->setText(run ? "Pause" : "Resume", true);
     }
+    else if (item->parent()->name() == "camera")
+    {
+      dynamic_cast<DemoGame *>(m_game)->setCameraMode(item->name());
+    }
     else if (item->parent()->name() == "aircraft")
     {
       std::string selectedAircraftName = item->name();
