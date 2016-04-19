@@ -5,7 +5,7 @@
  * For CSC3224 Project 1.
  */
 
-#ifdef _DEBUG
+#ifdef ENABLE_VLD
 #include <vld.h>
 #endif
 

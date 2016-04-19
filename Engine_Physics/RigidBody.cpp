@@ -44,15 +44,6 @@ namespace Physics
     delete m_shape;
   }
 
-  void RigidBody::applyRotation(const Engine::Maths::Quaternion &quat)
-  {
-    btTransform transform = m_body->getWorldTransform();
-    btQuaternion angularOffset(quat.i(), quat.j(), quat.k(), quat.w());
-    btQuaternion newRotation = transform.getRotation() * angularOffset;
-    transform.setRotation(newRotation);
-    m_body->setWorldTransform(transform);
-  }
-
   btVector3 RigidBody::upVector() const
   {
     return m_body->getWorldTransform().getBasis().getColumn(1);

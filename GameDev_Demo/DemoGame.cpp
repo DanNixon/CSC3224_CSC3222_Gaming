@@ -5,6 +5,8 @@
  * For CSC3224 Project 1.
  */
 
+//#define PHYSICS_DEBUG_DRAW
+
 #include "DemoGame.h"
 
 #include <sstream>
@@ -59,6 +61,14 @@ namespace Demo
 
   DemoGame::~DemoGame()
   {
+  }
+
+  void DemoGame::setCameraMode(const std::string &mode)
+  {
+    bool fpv = mode == "fpv";
+
+    m_aircraft->fpvCamera()->setActive(fpv);
+    m_lineOfSightCamera->setActive(!fpv);
   }
 
   /**
@@ -133,14 +143,7 @@ namespace Demo
     m_batteryVoltsIndicator->setAlarmLevels(10.5f, 9.9f);
 
     // Scene
-    float initialModelDistance = 250.0f;
-
-    m_losPMatrix = Matrix4::Perspective(1.0f, 1000000.0f, windowAspect(), 45.0f);
-    m_fpvPMatrix = Matrix4::Perspective(10.0f, 1000000.0f, windowAspect(), 110.0f);
-    m_s = new GraphicalScene(
-        new SceneObject("root"),
-        Matrix4::BuildViewMatrix(Vector3(0.0f, 250.0f, 0.0f), Vector3(0.0f, 0.0f, -initialModelDistance)),
-        m_losPMatrix);
+    m_s = new GraphicalScene(new SceneObject("root"));
 
     // Audio
     m_audioContext = new Context();
@@ -150,26 +153,42 @@ namespace Demo
 
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 83.33f); // At best 120Hz, at worst 12Hz
+#ifdef PHYSICS_DEBUG_DRAW
     m_physicsDebugDraw = new DebugDrawEngine(ShaderProgramLookup::Instance().get("aircraft_shader"));
     m_physicsDebugDraw->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
     m_physicalSystem->world()->setDebugDrawer(m_physicsDebugDraw);
     m_s->root()->addChild(m_physicsDebugDraw);
+#endif
 
-    // Model
+    // Aircraft
+    float aircraftRotation = std::stof(m_root.children()["aircraft"].keys()["default_rotation"]);
+    Vector3 aircraftPosition;
+    std::stringstream aircraftPositionStr(m_root.children()["aircraft"].keys()["default_position"]);
+    aircraftPositionStr >> aircraftPosition;
+
     m_aircraft = new Aircraft("Gaui_X7");
     m_aircraft->loadMeshes();
     m_aircraft->loadAudio(m_audioListener);
-    m_aircraft->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance),
-                            Quaternion(135.0f, 0.0f, 0.0f));
+    m_aircraft->initPhysics(m_physicalSystem, aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
+    m_aircraft->initCamera(this);
     m_s->root()->addChild(m_aircraft);
     m_aircraft->setThrust(3000.0f);
-    m_aircraft->setAxisRates(Vector3(10.0f, 10.0f, 15.0f));
+    m_aircraft->setAxisRates(Vector3(8.0f, 10.0f, 8.0f));
+
+    // Camera
+    m_lineOfSightCamera =
+        new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 50000.0f, windowAspect(), 30.0f));
+    m_lineOfSightCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 250.0f, 0.0f)));
+    m_lineOfSightCamera->lookAt(m_aircraft);
+    m_s->root()->addChild(m_lineOfSightCamera);
+
+    // Default camera mode
+    setCameraMode(m_root.children()["camera"].keys()["mode"]);
 
     // Ground
     HeightmapMesh *hm = new HeightmapMesh(1000, 1000, 100000.0f, 100000.0f); // 1 km^2
     hm->setHeight(50, 40, 10, true);
     RenderableObject *ground = new RenderableObject("ground", hm, ShaderProgramLookup::Instance().get("ui_shader"));
-    ground->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, -250.0f)));
     SceneObjectMotionState *groundMotionState =
         new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
     RigidBody *groundBody =
@@ -206,6 +225,7 @@ namespace Demo
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
     m_physicsLoop = addTimedLoop(8.33f, "physics");
     m_audioLoop = addTimedLoop(16.66f, "audio");
+    m_uiLoop = addTimedLoop(100.0f, "ui_updates");
     m_profileLoop = addTimedLoop(1000.0f, "profile");
 
     // Profiling
@@ -221,27 +241,10 @@ namespace Demo
   {
     if (id == m_graphicsLoop)
     {
-      // Show menu if required
-      if (m_simControls->state(S_OPENMENU))
-      {
-        m_menu->visible() ? m_menu->hide() : m_menu->show();
-        m_simControls->setState(S_OPENMENU, false);
-      }
-
-      // Stick indicators
-      m_leftStickIndicator->setStickPosition(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT));
-      m_rightStickIndicator->setStickPosition(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH));
-
-      // Telemetry indicators
-      m_rssiIndicator->setValue(m_aircraft->rssi());
-      m_batteryVoltsIndicator->setValue(m_aircraft->batteryVoltage(), 3);
-
-      // Look at aircraft
-      m_s->setViewMatrix(
-          Matrix4::BuildViewMatrix(Vector3(0.0f, 50.0f, 0.0f), m_aircraft->modelMatrix().positionVector()));
-
-      // Graphics update
+// Graphics update
+#ifdef PHYSICS_DEBUG_DRAW
       m_physicalSystem->world()->debugDrawWorld();
+#endif
       m_s->update(dtMilliSec, Subsystem::GRAPHICS);
       m_ui->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
@@ -268,6 +271,23 @@ namespace Demo
       // Audio update
       m_s->update(dtMilliSec, Subsystem::AUDIO);
     }
+    else if (id == m_uiLoop)
+    {
+      // Show menu if required
+      if (m_simControls->state(S_OPENMENU))
+      {
+        m_menu->visible() ? m_menu->hide() : m_menu->show();
+        m_simControls->setState(S_OPENMENU, false);
+      }
+
+      // Stick indicators
+      m_leftStickIndicator->setStickPosition(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT));
+      m_rightStickIndicator->setStickPosition(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH));
+
+      // Telemetry indicators (TODO: move to slower loop)
+      m_rssiIndicator->setValue((float)m_aircraft->rssi());
+      m_batteryVoltsIndicator->setValue(m_aircraft->batteryVoltage(), 3);
+    }
     else if (id == m_profileLoop)
     {
       m_profiler->computeStats(dtMilliSec);
@@ -292,11 +312,22 @@ namespace Demo
   {
     KVNode aircraft("aircraft");
     aircraft.keys()["selected"] = "Gaui X5";
+    aircraft.keys()["default_rotation"] = "135";
+    aircraft.keys()["default_position"] = "[0, 50, -250]";
     node.addChild(aircraft);
 
     KVNode terrain("terrain");
     terrain.keys()["default_model"] = "Flat";
     node.addChild(terrain);
+
+    KVNode camera("camera");
+    camera.keys()["mode"] = "los";
+    node.addChild(camera);
+
+    KVNode lineOfSight("line_of_sight");
+    lineOfSight.keys()["camera_height"] = "250";
+    lineOfSight.keys()["pilot_collision_radius"] = "100";
+    node.addChild(lineOfSight);
 
     KVNode hud("hud");
     hud.keys()["show_telemetry"] = "false";

@@ -22,6 +22,7 @@ namespace Graphics
   /**
    * @class RenderableObject
    * @brief Represents a renderable item in a Scene.
+   * @author Dan Nixon
    */
   class RenderableObject : public Engine::Common::SceneObject
   {

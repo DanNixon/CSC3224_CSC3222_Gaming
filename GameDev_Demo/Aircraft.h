@@ -11,6 +11,8 @@
 #include <Engine_Common/SceneObject.h>
 
 #include <Engine_Audio/Source.h>
+#include <Engine_Common/Game.h>
+#include <Engine_Graphics/Camera.h>
 #include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
@@ -50,6 +52,7 @@ namespace Demo
     bool initPhysics(Engine::Physics::PhysicalSystem *system, const Engine::Maths::Vector3 &initialPosition,
                      const Engine::Maths::Quaternion &initialRotation);
     bool loadAudio(Engine::Audio::Listener *listener);
+    void initCamera(Engine::Common::Game *game, float viewDepth = 1000.0f, float fieldOfVision = 45.0f);
 
     /**
      * @brief Gets the source of a given type of sound.
@@ -108,6 +111,15 @@ namespace Demo
       return m_batteryVolts;
     }
 
+    /**
+     * @brief Gets the first person view camera.
+     * @return Pointer to the FPV camera
+     */
+    inline Engine::Graphics::Camera *fpvCamera()
+    {
+      return m_fpvCamera;
+    }
+
     void setEngineSpeed(float speed);
     void setControls(float throttle, float pitch, float roll, float yaw);
 
@@ -116,9 +128,9 @@ namespace Demo
 
     float m_mass;                       //!< Mass in g
     float m_mainRotorThrust;            //!< Main rotor lifting force at maximum RPM and maximum throttle
-    Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis
+    Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis (roll, yaw, pitch)
+    float m_engineSpeed;                //!< Engine/motor speed (factor of max RPM)
 
-    float m_engineSpeed;  //!< Engine/motor speed (factor of max RPM)
     int m_rssi;           //!< RSSI in dB
     float m_altitudeFeet; //!< Altitude in feet relative to Y=0
     float m_batteryVolts; //!< Battery voltage
@@ -132,6 +144,8 @@ namespace Demo
     Engine::Physics::RigidBody *m_physicalBody; //!< Phsyical body of the aircraft
 
     Engine::Audio::Source *m_sounds[4]; //!< Pointers to each type of sound emitted from the aircraft
+
+    Engine::Graphics::Camera *m_fpvCamera; //!< First person view camera
   };
 }
 }

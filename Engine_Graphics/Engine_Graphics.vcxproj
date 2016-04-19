@@ -156,8 +156,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GraphicalScene.cpp" />
     <ClCompile Include="HeightmapMesh.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="LineMesh.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
@@ -172,9 +174,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alignment.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="GraphicalScene.h" />
     <ClInclude Include="HeightmapMesh.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="LineMesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />

@@ -205,6 +205,14 @@ namespace Demo
     return result;
   }
 
+  void Aircraft::initCamera(Game *game, float viewDepth, float fieldOfVision)
+  {
+    m_fpvCamera = new Camera("fpv_camera", Matrix4::Perspective(1.0f, viewDepth, game->windowAspect(), fieldOfVision));
+    m_fpvCamera->setActive(false);
+    m_fpvCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));
+    addChild(m_fpvCamera);
+  }
+
   /**
    * @brief Sets the aircraft engine speed.
    * @param speed Speed in interval [0.0,1.0]
@@ -255,11 +263,14 @@ namespace Demo
   void Aircraft::setControls(float throttle, float pitch, float roll, float yaw)
   {
     // Adjust rotation by rates and engine (rotor) speed
-    Vector3 axisVector(pitch, roll, yaw);
+    Vector3 axisVector(roll, yaw, pitch);
     axisVector = axisVector * m_axisRates * m_engineSpeed;
 
     // Rotation
-    m_physicalBody->applyRotation(Quaternion(axisVector.z(), axisVector.y(), axisVector.x()));
+    btTransform transform = m_physicalBody->body()->getWorldTransform();
+    Quaternion rotation = MathsConversions::FromBullet(transform.getRotation());
+    axisVector = rotation.rotateVector(axisVector);
+    m_physicalBody->body()->setAngularVelocity(MathsConversions::ToBullet(axisVector));
 
     // Thrust
     btVector3 thrust = m_physicalBody->upVector() * m_mainRotorThrust * m_engineSpeed * throttle;

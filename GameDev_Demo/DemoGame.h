@@ -17,6 +17,7 @@
 #include <Engine_Audio/Source.h>
 #include <Engine_Common/Scene.h>
 #include <Engine_Common/SceneObject.h>
+#include <Engine_Graphics/Camera.h>
 #include <Engine_Graphics/RenderableObject.h>
 #include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Input/IControlScheme.h>
@@ -43,6 +44,8 @@ namespace Demo
     DemoGame();
     virtual ~DemoGame();
 
+    void setCameraMode(const std::string &mode);
+
   protected:
     virtual int gameStartup();
     virtual void gameLoop(Uint8 id, float dtMilliSec);
@@ -55,6 +58,7 @@ namespace Demo
     Uint8 m_graphicsLoop;
     Uint8 m_physicsLoop;
     Uint8 m_audioLoop;
+    Uint8 m_uiLoop;
     Uint8 m_profileLoop;
 
     StickIndicator *m_leftStickIndicator;
@@ -62,10 +66,9 @@ namespace Demo
     TelemetryValueIndicator *m_rssiIndicator;
     TelemetryValueIndicator *m_batteryVoltsIndicator;
 
-    Engine::Maths::Matrix4 m_losPMatrix; //!< Perspective matrix for line of sight flying
-    Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
-    Engine::Common::Scene *m_s;          //!< Scene containing world (terrain and models)
-    Engine::Common::Scene *m_ui;         //!< Scene containing UI
+    Engine::Graphics::Camera *m_lineOfSightCamera;
+    Engine::Common::Scene *m_s;  //!< Scene containing world (terrain and models)
+    Engine::Common::Scene *m_ui; //!< Scene containing UI
 
     OptionsMenu *m_menu;
 

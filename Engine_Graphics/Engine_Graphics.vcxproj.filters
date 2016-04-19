@@ -14,6 +14,8 @@
     <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="HeightmapMesh.cpp" />
     <ClCompile Include="SphericalMesh.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Light.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
@@ -32,5 +34,7 @@
     <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="HeightmapMesh.h" />
     <ClInclude Include="SphericalMesh.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Light.h" />
   </ItemGroup>
 </Project>
