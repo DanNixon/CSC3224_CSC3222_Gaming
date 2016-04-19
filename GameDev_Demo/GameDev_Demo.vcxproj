@@ -24,6 +24,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="StickIndicator.cpp" />
+    <ClCompile Include="TelemetryValueIndicator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="SimulatorControls.h" />
     <ClInclude Include="StickIndicator.h" />
+    <ClInclude Include="TelemetryValueIndicator.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4F6104E8-AC92-4DED-AB32-7BD100B04761}</ProjectGuid>

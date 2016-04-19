@@ -30,7 +30,7 @@ namespace Demo
     void setStickPosition(float horizontal, float vertical);
 
   private:
-    Engine::Graphics::RenderableObject *m_area;
+    Engine::Graphics::RenderableObject *m_background;
     Engine::Graphics::RenderableObject *m_indicator;
   };
 }

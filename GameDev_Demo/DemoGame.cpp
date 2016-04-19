@@ -95,6 +95,13 @@ namespace Demo
     uiShader->link();
     ShaderProgramLookup::Instance().add("ui_shader", uiShader);
 
+    ShaderProgram *menuShader = new ShaderProgram();
+    menuShader = new ShaderProgram();
+    menuShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+    menuShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
+    menuShader->link();
+    ShaderProgramLookup::Instance().add("menu_shader", menuShader);
+
     // Menu
     m_menu = new OptionsMenu(this, TTFFontLookup::Instance().get("main_font"));
     m_menu->populateAircraftMenu({{"Gaui X5", "gaui_x5"}, {"Logo 600", "logo_600"}});
@@ -106,10 +113,24 @@ namespace Demo
     // UI
     m_ui = new GraphicalScene(new SceneObject("root"), Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -1)),
                               Matrix4::Orthographic(0.0f, -1.0f, 10.0f, -10.0f, 10.0f, -10.0f));
+
+    // UI: stick position indicators
     m_leftStickIndicator = new StickIndicator("left_stick", m_ui->root());
     m_leftStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(-8.5f, -8.5f, 0.9f)));
     m_rightStickIndicator = new StickIndicator("right_stick", m_ui->root());
     m_rightStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
+
+    // UI: RSSI telemetry indicator
+    m_rssiIndicator = new TelemetryValueIndicator("rssi", m_ui->root(), "RSSI");
+    m_rssiIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, 0.0f, 0.9f)));
+    // m_rssiIndicator->setAlarmLevels(std::stof(m_root.child("on_screen_telemetry").get("rssi_low")),
+    //                                std::stof(m_root.child("on_screen_telemetry").get("rssi_critical")));
+
+    // UI: Battery voltage telemetry indicator
+    m_batteryVoltsIndicator = new TelemetryValueIndicator("battery_volts", m_ui->root(), "VOLTS");
+    m_batteryVoltsIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -2.5f, 0.9f)));
+    // TODO: take battery limits from aircraft data
+    m_batteryVoltsIndicator->setAlarmLevels(10.5f, 9.9f);
 
     // Scene
     float initialModelDistance = 250.0f;
@@ -211,6 +232,10 @@ namespace Demo
       m_leftStickIndicator->setStickPosition(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT));
       m_rightStickIndicator->setStickPosition(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH));
 
+      // Telemetry indicators
+      m_rssiIndicator->setValue(m_aircraft->rssi());
+      m_batteryVoltsIndicator->setValue(m_aircraft->batteryVoltage(), 3);
+
       // Look at aircraft
       m_s->setViewMatrix(
           Matrix4::BuildViewMatrix(Vector3(0.0f, 50.0f, 0.0f), m_aircraft->modelMatrix().positionVector()));
@@ -274,6 +299,12 @@ namespace Demo
     KVNode terrain("terrain");
     terrain.set("default_model", "Flat");
     root.addChild(terrain);
+
+    KVNode onScreenTelemetry("on_screen_telemetry");
+    onScreenTelemetry.set("show", "true");
+    onScreenTelemetry.set("rssi_warning", "55");
+    onScreenTelemetry.set("rssi_critical", "40");
+    root.addChild(onScreenTelemetry);
 
     KVNode telemetry("telemetry");
     telemetry.set("enable", "false");

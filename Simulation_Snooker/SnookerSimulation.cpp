@@ -48,6 +48,14 @@ namespace Snooker
    */
   int SnookerSimulation::gameStartup()
   {
+    // Load shader for menu
+    ShaderProgram *menuShader = new ShaderProgram();
+    menuShader = new ShaderProgram();
+    menuShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+    menuShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
+    menuShader->link();
+    ShaderProgramLookup::Instance().add("menu_shader", menuShader);
+
     // Load font for text display
     m_fontLarge = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 45);
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);

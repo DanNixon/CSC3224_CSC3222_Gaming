@@ -33,11 +33,7 @@ namespace UIMenu
       , m_font(font)
       , m_textHeight(textHeight)
   {
-    // Create shaders
-    m_shaderProg = new ShaderProgram();
-    m_shaderProg->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
-    m_shaderProg->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
-    m_shaderProg->link();
+    m_shaderProg = ShaderProgramLookup::Instance().get("menu_shader");
 
     // Defualt colours
     m_itemColours[MenuItemState::NORMAL] = Colour(1.0f, 1.0f, 1.0f, 1.0f);

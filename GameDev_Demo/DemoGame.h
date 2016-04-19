@@ -26,6 +26,7 @@
 #include "Aircraft.h"
 #include "OptionsMenu.h"
 #include "StickIndicator.h"
+#include "TelemetryValueIndicator.h"
 
 namespace GameDev
 {
@@ -58,6 +59,8 @@ namespace Demo
 
     StickIndicator *m_leftStickIndicator;
     StickIndicator *m_rightStickIndicator;
+    TelemetryValueIndicator *m_rssiIndicator;
+    TelemetryValueIndicator *m_batteryVoltsIndicator;
 
     Engine::Maths::Matrix4 m_losPMatrix; //!< Perspective matrix for line of sight flying
     Engine::Maths::Matrix4 m_fpvPMatrix; //!< Perspective matrix for first person view flying
