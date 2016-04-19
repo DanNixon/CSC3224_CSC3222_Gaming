@@ -70,14 +70,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)ThirdParty\vld\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <OutDir>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\SDL2-2.0.4\include;$(SolutionDir)ThirdParty\glew-1.13.0\include;$(SolutionDir)ThirdParty\SDL2_ttf-2.0.14\include;$(SolutionDir)ThirdParty\freealut\include;$(SolutionDir)ThirdParty\OpenALSoft-1.17.2\include;$(SolutionDir)ThirdParty\vld\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>
     </LibraryPath>
     <OutDir>$(SolutionDir)bin\Engine_Lib\$(Platform)\$(Configuration)\</OutDir>
@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConfigurableGame.h" />
-    <ClInclude Include="debug_utils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="Profiler.h" />

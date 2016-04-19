@@ -6,7 +6,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="Profiler.h" />
-    <ClInclude Include="debug_utils.h" />
     <ClInclude Include="Subsystem.h" />
     <ClInclude Include="ConfigurableGame.h" />
   </ItemGroup>

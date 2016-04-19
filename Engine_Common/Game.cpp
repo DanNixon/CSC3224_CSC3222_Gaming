@@ -5,6 +5,10 @@
  * For CSC3224 Project 1.
  */
 
+#ifdef _DEBUG
+#include <vld.h>
+#endif
+
 #include "Game.h"
 
 #include <sstream>
@@ -23,8 +27,6 @@
 #include <Engine_ResourceManagment/MemoryManager.h>
 
 #include "Profiler.h"
-
-#include "debug_utils.h"
 
 using namespace Engine::Logging;
 
@@ -57,10 +59,6 @@ namespace Common
       m_loops[i] = nullptr;
 
     QueryPerformanceFrequency(&m_freq);
-
-#ifdef _DEBUG
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-#endif
   }
 
   Game::~Game()
