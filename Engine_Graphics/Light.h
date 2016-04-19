@@ -17,6 +17,7 @@ namespace Graphics
   /**
    * @class Light
    * @brief Represents a light source in a Scene.
+   * @author Dan Nixon
    */
   class Light : public Engine::Common::SceneObject
   {

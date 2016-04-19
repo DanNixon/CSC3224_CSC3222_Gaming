@@ -3,13 +3,11 @@
 ## To Do
 
 - [x] Engine structure outline
-- [ ] `Engine_Audio`
+- [x] `Engine_Audio`
   - [x] Context
   - [x] Listener
   - [x] Source
   - [x] Switch to OpenAL Soft
-  - [ ] Investigate what physical simulations OpenAL does
-  - [ ] Test with moving sources
 - [x] `Engine_Common`
   - [x] Move setup code into engine
   - [x] Managed memory
@@ -18,13 +16,12 @@
   - [x] Profiling
   - [x] Make `SceneObject::update()` generic for different types of updates
   - [x] Game that holds a configuration
-- [ ] `Engine_Graphics`
+- [x] `Engine_Graphics`
   - [x] Asset import
   - [x] Texture encapsulation
   - [x] Text rendering
   - [x] Render alpha meshes in correct order
   - [x] Load textures in asset loading
-  - [ ] Fix texture/normal loading
   - [x] Multi line text
 - [x] `Engine_Input`
   - [x] Keyboard
@@ -37,7 +34,7 @@
 - [ ] `Engine_Physics`
   - [x] World/simulation representation
   - [x] Body representation
-  - [ ] Aircraft motion
+  - [x] Aircraft motion
   - [x] Convex hull collision shape
   - [x] Bounding box collision shape
   - [ ] Heightmap terrain abstraction

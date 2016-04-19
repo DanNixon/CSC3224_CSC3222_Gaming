@@ -31,11 +31,12 @@ namespace Graphics
    */
   void Light::update(float msec, Subsystem sys)
   {
+    SceneObject::update(msec, sys);
+
     if (sys == Subsystem::GRAPHICS && m_active)
     {
+      // TODO
     }
-
-    SceneObject::update(msec, sys);
   }
 }
 }
