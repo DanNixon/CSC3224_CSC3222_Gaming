@@ -39,6 +39,13 @@ namespace Physics
     if (m_system != nullptr)
       m_system->removeBody(this);
 
+    btCompoundShape *compoundShape = dynamic_cast<btCompoundShape *>(m_shape);
+    if (compoundShape)
+    {
+      for (int i = 0; i < compoundShape->getNumChildShapes(); i++)
+        delete compoundShape->getChildShape(i);
+    }
+
     delete m_body->getMotionState();
     delete m_body;
     delete m_shape;

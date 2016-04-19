@@ -35,6 +35,7 @@ namespace Graphics
 
   ModelLoader::~ModelLoader()
   {
+    delete[] m_textures;
   }
 
   /**
