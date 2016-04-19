@@ -71,11 +71,19 @@ namespace Physics
 
     void update(float msec);
 
+    /**
+     * @brief Gets the Bullet physics world.
+     * @return Pointer to world
+     */
     inline btDynamicsWorld *world()
     {
       return m_world;
     }
 
+    /**
+     * @brief Gets the world scaling factor.
+     * @return World scale
+     */
     inline float scale() const
     {
       return m_worldScale;
@@ -85,7 +93,7 @@ namespace Physics
     bool m_runSimulation;   //!< Flag indicating if the simulation should be running
     float m_targetTimeStep; //!< Target time between simulation updates (ms)
     int m_maxSubSteps;      //!< Maximum sub steps for simulation update
-    float m_worldScale;
+    float m_worldScale;     //!< World scaling factor
     btBroadphaseInterface *m_broadphase;
     btDefaultCollisionConfiguration *m_collisionConfig;
     btCollisionDispatcher *m_collisionDispatcher;

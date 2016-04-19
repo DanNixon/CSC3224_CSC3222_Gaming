@@ -17,6 +17,10 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @brief Creates a new light
+   * @param name Name of light
+   */
   Light::Light(const std::string &name)
       : SceneObject(name)
   {

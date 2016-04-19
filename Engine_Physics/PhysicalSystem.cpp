@@ -14,7 +14,10 @@ namespace Physics
   /**
    * @brief Create a new simulated physical system.
    * @param targetTimeStep Target time in milliseconds between physics updates
-   * @param maxPossibleTimeStep The longest time in milliseconds between physics updates
+   * @param maxPossibleTimeStep The longest time in milliseconds between
+   *                            physics updates
+   * @param worldScale World scaling factor (default = 100, i.e. a coordinate
+   *                   system in cm rather than m)
    */
   PhysicalSystem::PhysicalSystem(float targetTimeStep, float maxPossibleTimeStep, float worldScale)
       : m_runSimulation(true)

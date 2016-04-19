@@ -26,7 +26,7 @@ namespace Graphics
     virtual ~SphericalMesh();
 
     /**
-     * @bief Gets the radius of the sphere.
+     * @brief Gets the radius of the sphere.
      * @return Radius
      */
     inline float radius() const

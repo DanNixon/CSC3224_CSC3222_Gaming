@@ -62,7 +62,7 @@ namespace Demo
     }
 
   protected:
-    Engine::Input::JoystickController *m_joystick;
+    Engine::Input::JoystickController *m_joystick; //!< Joystick input
   };
 }
 }

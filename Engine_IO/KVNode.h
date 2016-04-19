@@ -138,6 +138,18 @@ namespace IO
 
     /** @} */
 
+    /**
+     * @brief Updates this node frm another.
+     * @param other Node to update from
+     *
+     * Existing keys in this node are unmodified.
+     *
+     * Any child nodes and keys in other that are not in this are added to
+     * this.
+     *
+     * Useful for ensuring a minimum configuration is present without modifying
+     * customised settings.
+     */
     void updateFromOther(KVNode &other)
     {
       // Update any keys that are in the second node but not this one
@@ -150,7 +162,7 @@ namespace IO
       // For all children of the other node
       for (auto it = other.children().begin(); it != other.children().end(); ++it)
       {
-        // If the child also exists in this node then updtae it
+        // If the child also exists in this node then update it
         if (hasChild(it->first))
           m_children[it->first].updateFromOther(it->second);
         // Otherwise add it as a new child

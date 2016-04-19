@@ -19,6 +19,7 @@ namespace Common
   /**
    * @brief Creates a new, empty scene object.
    * @param name Name of the object
+   * @param parent Parent object
    */
   SceneObject::SceneObject(const std::string &name, SceneObject *parent)
       : m_name(name)

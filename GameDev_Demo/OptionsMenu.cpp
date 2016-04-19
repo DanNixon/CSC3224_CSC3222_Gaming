@@ -33,11 +33,19 @@ namespace Demo
   {
   }
 
+  /**
+   * @brief Populates the aircraft list.
+   * @param items List of aircraft
+   */
   void OptionsMenu::populateAircraftMenu(const NameValueList &items)
   {
     populateMenu(m_aircraftMenu, items);
   }
 
+  /**
+   * @brief Populates the terrain list.
+   * @param items List of terrains
+   */
   void OptionsMenu::populateTerrainMenu(const NameValueList &items)
   {
     populateMenu(m_terrainMenu, items);
@@ -70,10 +78,13 @@ namespace Demo
       dynamic_cast<ConfigurableGame *>(m_game)->root().children()["terrain"].keys()["default_model"] =
           selectedAircraftName;
     }
-
-    // TODO
   }
 
+  /**
+   * @brief Adds a set of new items to a given list node.
+   * @param parent Parent menu item
+   * @param items List of new items
+   */
   void OptionsMenu::populateMenu(Engine::UIMenu::MenuItem *parent, const NameValueList &items)
   {
     for (auto it = items.begin(); it != items.end(); ++it)

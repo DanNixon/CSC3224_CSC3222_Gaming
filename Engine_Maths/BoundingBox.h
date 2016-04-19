@@ -186,12 +186,6 @@ namespace Maths
       return m_lowerLeft + ((m_upperRight - m_lowerLeft) * 0.5f);
     }
 
-    inline void rotate(const Engine::Maths::Quaternion &quat)
-    {
-      quat.rotateVector(m_lowerLeft);
-      quat.rotateVector(m_upperRight);
-    }
-
     /**
      * @brief Positively offsets the position of the bounding box.
      * @param vector Positional offset

@@ -43,11 +43,19 @@ namespace Graphics
       return m_depthSteps;
     }
 
+    /**
+     * @brief Distance between adjacent nodes of the heightmap in the Z axis.
+     * @return Row spacing
+     */
     float deltaRow() const
     {
       return m_deltaRow;
     }
 
+    /**
+     * @brief Distance between adjacent nodes of the heightmap in the X axis.
+     * @return Column spacing
+     */
     float deltaCol() const
     {
       return m_deltaCol;
@@ -61,8 +69,8 @@ namespace Graphics
   private:
     size_t m_widthSteps; //!< Number of vertices along X axis
     size_t m_depthSteps; //!< Number of vertices along Z axis
-    float m_deltaRow;
-    float m_deltaCol;
+    float m_deltaRow;    //!< Row spacing
+    float m_deltaCol;    //!< Column spacing
   };
 }
 }

@@ -98,7 +98,7 @@ namespace Demo
     }
 
   protected:
-    Engine::Input::MouseController *m_mouse; //!< Mouse used in scheme
+    Engine::Input::MouseController *m_mouse; //!< Mouse input
   };
 }
 }

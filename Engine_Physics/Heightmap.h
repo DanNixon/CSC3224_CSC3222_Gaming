@@ -20,7 +20,7 @@ namespace Physics
 {
   /**
    * @class Heightmap
-   * @brief TODO
+   * @brief Wrapper around a btHeightfieldTerrainShape for a HeightmapMesh.
    * @author Dan Nixon
    */
   class Heightmap : Engine::ResourceManagment::IMemoryManaged
@@ -29,6 +29,10 @@ namespace Physics
     Heightmap();
     virtual ~Heightmap();
 
+    /**
+     * @brief Gets the collision shape.
+     * @return Pointer to collision shape
+     */
     btHeightfieldTerrainShape *shape()
     {
       return m_shape;
@@ -37,7 +41,7 @@ namespace Physics
     void populate(Engine::Graphics::HeightmapMesh *heightmap);
 
   private:
-    btHeightfieldTerrainShape *m_shape;
+    btHeightfieldTerrainShape *m_shape; //!< Collision shape
   };
 }
 }

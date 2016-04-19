@@ -13,6 +13,9 @@ namespace Engine
 {
 namespace Physics
 {
+  /**
+   * @brief Creates a new heightmap shape.
+   */
   Heightmap::Heightmap()
       : m_shape(nullptr)
   {
@@ -22,6 +25,11 @@ namespace Physics
   {
   }
 
+  /**
+   * @brief Creates a new heightmap collision shape based on HeightmapMesh
+   *        data.
+   * @param heightmap HeightmapMesh to populate from.
+   */
   void Heightmap::populate(HeightmapMesh *heightmap)
   {
     size_t widthSteps = heightmap->widthSteps();
