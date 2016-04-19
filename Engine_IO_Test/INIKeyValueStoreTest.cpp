@@ -47,13 +47,13 @@ public:
 
     // Test root node values
     Assert::IsTrue(root.hasKey("aaa"));
-    Assert::AreEqual(std::string("yes"), root.get("aaa"));
+    Assert::AreEqual(std::string("yes"), root.keys()["aaa"]);
     Assert::IsFalse(root.hasKey("zzz"));
 
     // Test root node children
     Assert::IsTrue(root.hasChild("group one"));
 
-    KVNode child1 = root.child("group one");
+    KVNode child1 = root.children()["group one"];
 
     // Test child node name and size
     Assert::AreEqual(std::string("group one"), child1.name());
@@ -62,9 +62,9 @@ public:
 
     // Test child node values
     Assert::IsTrue(child1.hasKey("ccc"));
-    Assert::AreEqual(std::string("true"), child1.get("ccc"));
+    Assert::AreEqual(std::string("true"), child1.keys()["ccc"]);
     Assert::IsTrue(child1.hasKey("a b c"));
-    Assert::AreEqual(std::string("maybe"), child1.get("a b c"));
+    Assert::AreEqual(std::string("maybe"), child1.keys()["a b c"]);
   }
 
   TEST_METHOD(INIKeyValueStore_BuildINIFromStream)
@@ -73,17 +73,17 @@ public:
     INIKeyValueStore store;
 
     KVNode & root = store.root();
-    root.set("hello", "1234567");
-    root.set("test45", "99");
+    root.keys()["hello"] = "1234567";
+    root.keys()["test45"] = "99";
 
     KVNode child1("options area_1");
-    child1.set("big world", "true");
-    child1.set("really_big_world", "false");
+    child1.keys()["big world"] = "true";
+    child1.keys()["really_big_world"] = "false";
     root.addChild(child1);
 
     KVNode child2("options area_2");
-    child2.set("detail", "good");
-    child2.set("speed", "good enough");
+    child2.keys()["detail"] = "good";
+    child2.keys()["speed"] = "good enough";
     root.addChild(child2);
 
     // Output

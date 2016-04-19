@@ -78,7 +78,7 @@ namespace IO
         std::string value = line.substr(eqPos + 1);
         value.erase(value.find_last_not_of(" \n\r\t") + 1);
 
-        node.set(key, value);
+        node.keys()[key] = value;
       }
     }
   }

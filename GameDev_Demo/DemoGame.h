@@ -47,7 +47,7 @@ namespace Demo
     virtual int gameStartup();
     virtual void gameLoop(Uint8 id, float dtMilliSec);
     virtual void gameShutdown();
-    virtual void setDefaultConfigOptions();
+    virtual void defaultConfigOptions(Engine::IO::KVNode &node);
 
   private:
     friend class OptionsMenu;

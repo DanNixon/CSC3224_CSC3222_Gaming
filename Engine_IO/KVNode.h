@@ -10,6 +10,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 namespace Engine
 {
@@ -74,24 +75,9 @@ namespace IO
       return (m_keys.find(key) != m_keys.end());
     }
 
-    /**
-     * @brief Gets the value of a key.
-     * @param key Key to retrieve
-     * @return Value
-     */
-    std::string get(const std::string &key)
+    std::map<std::string, std::string> &keys()
     {
-      return m_keys[key];
-    }
-
-    /**
-     * @brief Sets the value of a key.
-     * @param key Key to set
-     * @param value Value
-     */
-    void set(const std::string &key, const std::string &value)
-    {
-      m_keys[key] = value;
+      return m_keys;
     }
 
     /**
@@ -130,20 +116,11 @@ namespace IO
       return (m_children.find(name) != m_children.end());
     }
 
-    /**
-     * @brief Gets a child node with a given name.
-     * @param name Name of child not to retrieve
-     * @return Child node
-     */
-    KVNode &child(const std::string &name)
+    std::map<std::string, KVNode> &children()
     {
-      return m_children[name];
+      return m_children;
     }
 
-    /**
-     * @brief Adds a child node to this node..
-     * @param node Child node to add
-     */
     void addChild(KVNode node)
     {
       m_children[node.name()] = node;
@@ -160,6 +137,27 @@ namespace IO
     }
 
     /** @} */
+
+    void updateFromOther(KVNode &other)
+    {
+      // Update any keys that are in the second node but not this one
+      for (auto it = other.keys().begin(); it != other.keys().end(); ++it)
+      {
+        if (!hasKey(it->first))
+          m_keys[it->first] = it->second;
+      }
+
+      // For all children of the other node
+      for (auto it = other.children().begin(); it != other.children().end(); ++it)
+      {
+        // If the child also exists in this node then updtae it
+        if (hasChild(it->first))
+          m_children[it->first].updateFromOther(it->second);
+        // Otherwise add it as a new child
+        else
+          addChild(it->second);
+      }
+    }
 
   private:
     friend class INIKeyValueStore;

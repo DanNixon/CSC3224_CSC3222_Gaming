@@ -123,8 +123,8 @@ namespace Demo
     // UI: RSSI telemetry indicator
     m_rssiIndicator = new TelemetryValueIndicator("rssi", m_ui->root(), "RSSI");
     m_rssiIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, 0.0f, 0.9f)));
-    // m_rssiIndicator->setAlarmLevels(std::stof(m_root.child("on_screen_telemetry").get("rssi_low")),
-    //                                std::stof(m_root.child("on_screen_telemetry").get("rssi_critical")));
+    m_rssiIndicator->setAlarmLevels(std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_low"]),
+                                    std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_critical"]));
 
     // UI: Battery voltage telemetry indicator
     m_batteryVoltsIndicator = new TelemetryValueIndicator("battery_volts", m_ui->root(), "VOLTS");
@@ -286,32 +286,35 @@ namespace Demo
   }
 
   /**
-   * @copydoc ConfigurableGame::setDefaultConfigOptions
+   * @copydoc ConfigurableGame::defaultConfigOptions
    */
-  void DemoGame::setDefaultConfigOptions()
+  void DemoGame::defaultConfigOptions(KVNode &node)
   {
-    KVNode &root = this->root();
-
     KVNode aircraft("aircraft");
-    aircraft.set("selected", "Gaui X5");
-    root.addChild(aircraft);
+    aircraft.keys()["selected"] = "Gaui X5";
+    node.addChild(aircraft);
 
     KVNode terrain("terrain");
-    terrain.set("default_model", "Flat");
-    root.addChild(terrain);
+    terrain.keys()["default_model"] = "Flat";
+    node.addChild(terrain);
+
+    KVNode hud("hud");
+    hud.keys()["show_telemetry"] = "false";
+    hud.keys()["show_sticks"] = "false";
+    node.addChild(hud);
 
     KVNode onScreenTelemetry("on_screen_telemetry");
-    onScreenTelemetry.set("show", "true");
-    onScreenTelemetry.set("rssi_warning", "55");
-    onScreenTelemetry.set("rssi_critical", "40");
-    root.addChild(onScreenTelemetry);
+    onScreenTelemetry.keys()["show"] = "true";
+    onScreenTelemetry.keys()["rssi_low"] = "55";
+    onScreenTelemetry.keys()["rssi_critical"] = "40";
+    node.addChild(onScreenTelemetry);
 
     KVNode telemetry("telemetry");
-    telemetry.set("enable", "false");
-    telemetry.set("protocol", "frsky_sport_uart_bridge");
-    telemetry.set("port", "COM1");
-    telemetry.set("baud", "115200");
-    root.addChild(telemetry);
+    telemetry.keys()["enable"] = "false";
+    telemetry.keys()["protocol"] = "frsky_sport_uart_bridge";
+    telemetry.keys()["port"] = "COM1";
+    telemetry.keys()["baud"] = "115200";
+    node.addChild(telemetry);
   }
 }
 }

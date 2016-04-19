@@ -42,7 +42,7 @@ namespace IO
      * @brief Gets the root node of the data store.
      * @return Root node
      */
-    KVNode &root()
+    inline KVNode &root()
     {
       return m_root;
     }

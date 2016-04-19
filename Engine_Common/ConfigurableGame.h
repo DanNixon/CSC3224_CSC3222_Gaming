@@ -82,8 +82,9 @@ namespace Common
   protected:
     /**
      * @brief Sets the default configuration options.
+     * @param node Node to add default options to
      */
-    virtual void setDefaultConfigOptions()
+    virtual void defaultConfigOptions(Engine::IO::KVNode &node)
     {
     }
 

@@ -116,8 +116,6 @@ namespace Common
     {
       // Create the configuration file (with default options) if it does not exist
       m_firstRun = true;
-      setDefaultConfigOptions();
-      saveConfig();
     }
     else
     {
@@ -125,6 +123,12 @@ namespace Common
       m_firstRun = false;
       loadConfig();
     }
+
+    // Update the default configurations
+    KVNode defaultRoot;
+    defaultConfigOptions(defaultRoot);
+    m_root.updateFromOther(defaultRoot);
+    saveConfig();
 
     return 0;
   }

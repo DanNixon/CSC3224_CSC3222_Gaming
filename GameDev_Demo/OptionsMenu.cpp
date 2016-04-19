@@ -62,12 +62,13 @@ namespace Demo
     else if (item->parent()->name() == "aircraft")
     {
       std::string selectedAircraftName = item->name();
-      dynamic_cast<ConfigurableGame *>(m_game)->root().child("aircraft").set("selected", selectedAircraftName);
+      dynamic_cast<ConfigurableGame *>(m_game)->root().children()["aircraft"].keys()["selected"] = selectedAircraftName;
     }
     else if (item->parent()->name() == "terrain")
     {
       std::string selectedAircraftName = item->name();
-      dynamic_cast<ConfigurableGame *>(m_game)->root().child("terrain").set("default_model", selectedAircraftName);
+      dynamic_cast<ConfigurableGame *>(m_game)->root().children()["terrain"].keys()["default_model"] =
+          selectedAircraftName;
     }
 
     // TODO
