@@ -158,7 +158,7 @@ namespace Maths
    * @param bottom Bottom plane position
    * @return Orthographic matrix
    *
-  http://www.opengl.org/sdk/docs/man/xhtml/glOrtho.xml
+   * http://www.opengl.org/sdk/docs/man/xhtml/glOrtho.xml
    */
   Matrix4 Matrix4::Orthographic(float zNear, float zFar, float right, float left, float top, float bottom)
   {
@@ -262,6 +262,22 @@ namespace Maths
     m.m_values[0] = scale.m_x;
     m.m_values[5] = scale.m_y;
     m.m_values[10] = scale.m_z;
+
+    return m;
+  }
+
+  /**
+  * @brief Creates a scaling matrix with uniform scaling in each axis.
+  * @param scale Uniform scaling factor
+  * @return Scaling matrix
+  */
+  Matrix4 Matrix4::Scale(float scale)
+  {
+    Matrix4 m;
+
+    m.m_values[0] = scale;
+    m.m_values[5] = scale;
+    m.m_values[10] = scale;
 
     return m;
   }

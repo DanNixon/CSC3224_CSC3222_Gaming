@@ -105,19 +105,33 @@ namespace Demo
   {
     bool result = true;
 
+    // TODO: seemingly magic numbers here vary depending on the aircraft model
+    //       and will be loaded from a file in the finished game.
+
+    // Main model
     ModelLoader bodyLoader;
     m_subTreeAircraft =
         bodyLoader.load(modelFilename(AircraftModel::BODY), ShaderProgramLookup::Instance().get("aircraft_shader"));
+    m_subTreeAircraft->setModelMatrix(Matrix4::Scale(2.0f));
     addChild(m_subTreeAircraft);
-    m_subTreeAircraft->setModelMatrix(Matrix4::Scale(Vector3(2.0f, 2.0f, 2.0f)));
 
-    // ModelLoader mainRotorLoader;
-    // m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN), m_shaders);
-    // addChild(m_subTreeSpinningMainRotor);
+    // Spinning main rotor
+    ModelLoader mainRotorLoader;
+    m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN),
+                                                      ShaderProgramLookup::Instance().get("aircraft_shader"));
+    m_subTreeSpinningMainRotor->setModelMatrix(Matrix4::Scale(2.0f));
+    m_subTreeSpinningMainRotor->setActive(false, std::numeric_limits<size_t>::max());
+    addChild(m_subTreeSpinningMainRotor);
 
-    // ModelLoader tailRotorLoader;
-    // m_subTreeSpinningTailRotor = tailRotorLoader.load(modelFilename(AircraftModel::TAIL_ROTOR_SPIN), m_shaders);
-    // addChild(m_subTreeSpinningTailRotor);
+    // Spinning tail rotor
+    ModelLoader tailRotorLoader;
+    m_subTreeSpinningTailRotor = tailRotorLoader.load(modelFilename(AircraftModel::TAIL_ROTOR_SPIN),
+                                                      ShaderProgramLookup::Instance().get("aircraft_shader"));
+    m_subTreeSpinningTailRotor->setModelMatrix(Matrix4::Translation(Vector3(-74.0f, 0.0f, 1.5f)) *
+                                               Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
+                                               Matrix4::Scale(0.4f));
+    m_subTreeSpinningTailRotor->setActive(false, std::numeric_limits<size_t>::max());
+    addChild(m_subTreeSpinningTailRotor);
 
     return result;
   }
@@ -130,14 +144,12 @@ namespace Demo
     btCompoundShape *shape = new btCompoundShape();
 
     // Main body bounding box
-    BoundingBoxShape *bodyBBox = new BoundingBoxShape();
-    // TODO
-    bodyBBox->updateDimensionFromSceneTree(m_subTreeAircraft);
-    bodyBBox->setLocalScaling(btVector3(2.0f, 2.0f, 2.0f));
-    shape->addChildShape(btTransform(btQuaternion(0.0f, 0.0f, 0.0f)), bodyBBox);
+    btBoxShape *bodyBox = new btBoxShape(btVector3(20.0f, 10.0f, 10.0f));
+    shape->addChildShape(btTransform(btQuaternion(0.0f, 0.0f, 0.0f), btVector3(5.0f, -5.0f, 0.0f)), bodyBox);
 
     // Tail/boom bounding box
-    // TODO
+    btBoxShape *tailBox = new btBoxShape(btVector3(40.0f, 5.0f, 5.0f));
+    shape->addChildShape(btTransform(btQuaternion(0.0f, 0.0f, 0.0f), btVector3(-40.0f, 0.0f, 0.0f)), tailBox);
 
     // Main rotor cylinder
     // TODO
@@ -198,6 +210,11 @@ namespace Demo
     m_engineSpeed = std::max(std::min(speed, 1.0f), 0.0f);
 
     bool engineOn = m_engineSpeed > 0.01f;
+
+    // Update fast rotating rotor meshes
+    bool aboveRotorPOVSpeed = speed >= 0.2f;
+    m_subTreeSpinningMainRotor->setActive(aboveRotorPOVSpeed, std::numeric_limits<size_t>::max());
+    m_subTreeSpinningTailRotor->setActive(aboveRotorPOVSpeed, std::numeric_limits<size_t>::max());
 
     // Update engine idle sound
     if (engineOn)

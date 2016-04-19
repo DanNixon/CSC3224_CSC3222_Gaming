@@ -32,6 +32,7 @@ namespace Maths
   public:
     static Matrix4 Rotation(float degrees, const Vector3 &axis);
     static Matrix4 Scale(const Vector3 &scale);
+    static Matrix4 Scale(float scale);
     static Matrix4 Translation(const Vector3 &translation);
 
     static Matrix4 Perspective(float zNear, float zfar, float aspect, float fov);

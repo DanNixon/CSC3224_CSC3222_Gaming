@@ -213,7 +213,7 @@ namespace Demo
 
       // Look at aircraft
       m_s->setViewMatrix(
-          Matrix4::BuildViewMatrix(Vector3(0.0f, 250.0f, 0.0f), m_aircraft->modelMatrix().positionVector()));
+          Matrix4::BuildViewMatrix(Vector3(0.0f, 50.0f, 0.0f), m_aircraft->modelMatrix().positionVector()));
 
       // Graphics update
       m_physicalSystem->world()->debugDrawWorld();

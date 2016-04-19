@@ -56,7 +56,6 @@ namespace Graphics
 
     SceneObject *obj = new SceneObject(filename);
     std::string directory = StringUtils::DirectoryFromPath(filename);
-    ;
 
     loadTextures(scene, directory);
     loadRecursive(obj, scene, scene->mRootNode, sp);
@@ -109,6 +108,7 @@ namespace Graphics
                                   ShaderProgram *sp)
   {
     const aiMatrix4x4 transform = node->mTransformation;
+    std::string nodeName(node->mName.C_Str());
 
     // Meshes in this node
     for (size_t i = 0; i < node->mNumMeshes; i++)
@@ -122,14 +122,15 @@ namespace Graphics
       const struct aiMaterial *mat = scene->mMaterials[matIdx];
 
       Mesh *mesh = Mesh::LoadMesh(m, mat);
-      RenderableObject *obj = new RenderableObject("obj", mesh, sp, m_textures[matIdx]);
+      std::string objName = nodeName + "_" + std::to_string(i);
+      RenderableObject *obj = new RenderableObject(objName, mesh, sp, m_textures[matIdx]);
       sn->addChild(obj);
     }
 
     // Children in this node
     for (size_t i = 0; i < node->mNumChildren; i++)
     {
-      SceneObject *child = new SceneObject("child");
+      SceneObject *child = new SceneObject("child_" + std::to_string(i));
       loadRecursive(child, scene, node->mChildren[i], sp);
       sn->addChild(child);
     }

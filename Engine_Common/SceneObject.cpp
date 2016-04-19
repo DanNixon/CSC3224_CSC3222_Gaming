@@ -8,6 +8,7 @@
 #include "SceneObject.h"
 
 #include <algorithm>
+#include <string>
 
 using namespace Engine::Maths;
 
@@ -78,6 +79,26 @@ namespace Common
     if (it != m_children.end())
       return *it;
     return nullptr;
+  }
+
+  /**
+   * @brief Outputs the tree structure as a string.
+   * @param stream Stream to output to
+   * @param maxDepth Maximum recrusion depth
+   * @param level CUrrent level (do not set manually)
+   */
+  void SceneObject::printTree(std::ostream &stream, size_t maxDepth, size_t level)
+  {
+    for (size_t i = 0; i < level; i++)
+      stream << ' ';
+
+    stream << m_name << std::endl;
+
+    if (level < maxDepth)
+    {
+      for (SceneObjectListIter it = m_children.begin(); it != m_children.end(); ++it)
+        (*it)->printTree(stream, maxDepth, level + 1);
+    }
   }
 
   /**
