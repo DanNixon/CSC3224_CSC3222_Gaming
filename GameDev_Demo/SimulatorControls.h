@@ -49,7 +49,7 @@ namespace Demo
     }
 
   protected:
-    Engine::Input::KeyboardController *m_keyboard;
+    Engine::Input::KeyboardController *m_keyboard; //!< Keyboard input
   };
 }
 }

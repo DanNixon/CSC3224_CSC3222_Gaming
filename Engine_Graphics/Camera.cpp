@@ -14,6 +14,12 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @brief Creates a new camera.
+   * @param name Name of the camera
+   * @param projection Projection matrix (default identity)
+   * @param up Up vector (default Y axis)
+   */
   Camera::Camera(const std::string &name, const Matrix4 &projection, const Vector3 &up)
       : SceneObject(name)
       , m_up(up)

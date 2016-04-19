@@ -24,25 +24,44 @@ namespace Graphics
   public:
     Camera(const std::string &name, const Engine::Maths::Matrix4 &projection = Engine::Maths::Matrix4(),
            const Engine::Maths::Vector3 &up = Engine::Maths::Vector3(0.0f, 1.0f, 0.0f));
-    ~Camera();
+    virtual ~Camera();
 
     virtual void update(float msec, Engine::Common::Subsystem sys);
 
+    /**
+     * @brief Sets the object that the camera is looking at.
+     * @param object Object to look at
+     */
     inline void lookAt(Engine::Common::SceneObject *object)
     {
       m_lookAt = object;
     }
 
+    /**
+     * @brief Point the camera in a given sirection.
+     * @param direction DIrection to look in
+     *
+     * Only takes affect when lookAt() is either not claled or was last called
+     * with nullptr as the parameter.
+     */
     inline void look(Engine::Maths::Vector3 direction)
     {
       m_lookDirection = direction;
     }
 
+    /**
+     * @brief Sets the projection matrix.
+     * @param projection Projection matrix
+     */
     inline void setProjectionMatrix(const Engine::Maths::Matrix4 &projection)
     {
       m_projection = projection;
     }
 
+    /**
+     * @brief Gets the projection matrix.
+     * @return Projection matrix
+     */
     inline Engine::Maths::Matrix4 projectionMatrix() const
     {
       return m_projection;
@@ -51,10 +70,10 @@ namespace Graphics
     Engine::Maths::Matrix4 viewMatrix() const;
 
   protected:
-    Engine::Maths::Vector3 m_up;
-    Engine::Maths::Matrix4 m_projection;
-    Engine::Maths::Vector3 m_lookDirection;
-    Engine::Common::SceneObject *m_lookAt;
+    Engine::Maths::Vector3 m_up; //!< Up vector
+    Engine::Maths::Matrix4 m_projection; //!< Projection matrix
+    Engine::Maths::Vector3 m_lookDirection; //!< Direction to look in
+    Engine::Common::SceneObject *m_lookAt; //!< Object to look at
   };
 }
 }

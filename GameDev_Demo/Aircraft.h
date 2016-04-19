@@ -19,6 +19,11 @@ namespace GameDev
 {
 namespace Demo
 {
+  /**
+   * @enum AircraftModel
+   * @brief Used to identify models for an aircraft.
+   * @author Dan Nixon
+   */
   enum AircraftModel : size_t
   {
     BODY,
@@ -26,6 +31,11 @@ namespace Demo
     TAIL_ROTOR_SPIN
   };
 
+  /**
+   * @enum AircraftSound
+   * @brief Used to identify a sound made by an aircraft.
+   * @author Dan Nixon
+   */
   enum AircraftSound : size_t
   {
     ENGINE_IDLE,
@@ -48,8 +58,8 @@ namespace Demo
     std::string modelFilename(AircraftModel model) const;
     std::string audioFilename(AircraftSound sound) const;
 
-    bool loadMeshes();
-    bool initPhysics(Engine::Physics::PhysicalSystem *system, const Engine::Maths::Vector3 &initialPosition,
+    void loadMeshes();
+    void initPhysics(Engine::Physics::PhysicalSystem *system, const Engine::Maths::Vector3 &initialPosition,
                      const Engine::Maths::Quaternion &initialRotation);
     bool loadAudio(Engine::Audio::Listener *listener);
     void initCamera(Engine::Common::Game *game, float viewDepth = 1000.0f, float fieldOfVision = 45.0f);
@@ -64,11 +74,21 @@ namespace Demo
       return m_sounds[sound];
     }
 
+    /**
+     * @brief Sets the maximum main rotor thrust.
+     * @param thrust Main rotor thrust
+     */
     inline void setThrust(float thrust)
     {
       m_mainRotorThrust = thrust;
     }
 
+    /**
+     * @brief Sets the axis rates.
+     * @param rates Axis rates
+     *
+     * Rates are in order [roll, yaw, pitch].
+     */
     inline void setAxisRates(const Engine::Maths::Vector3 &rates)
     {
       m_axisRates = rates;

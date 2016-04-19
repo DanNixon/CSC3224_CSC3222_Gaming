@@ -64,7 +64,7 @@ namespace ResourceManagment
 
     /**
      * @brief Gets a resource given its identifier.
-     * @param String identifier
+     * @param name String identifier
      * @returns Resource
      */
     T get(const std::string &name)
@@ -74,7 +74,7 @@ namespace ResourceManagment
 
     /**
      * @brief Gets a reference to a resource given its identifier.
-     * @param String identifier
+     * @param name String identifier
      * @returns Reference to resource
      */
     T &reference(const std::string &name)

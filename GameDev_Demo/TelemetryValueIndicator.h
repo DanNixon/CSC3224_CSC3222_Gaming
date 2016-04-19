@@ -17,6 +17,11 @@ namespace GameDev
 {
 namespace Demo
 {
+  /**
+   * @enum AlarmType
+   * @brief Defines the alarm state for a telemetry value.
+   * @author Dan Nixon
+   */
   enum AlarmType : size_t
   {
     NORMAL,
@@ -26,7 +31,7 @@ namespace Demo
 
   /**
    * @class TelemetryValueIndicator
-   * @brief TODO
+   * @brief Indicator for a telemetry value with alarm states.
    * @author Dan Nixon
    */
   class TelemetryValueIndicator : public Engine::Common::SceneObject
@@ -37,6 +42,11 @@ namespace Demo
 
     void setValue(float value, size_t precision = 2);
 
+    /**
+     * @brief Sets the values at which alarms are triggered.
+     * @param low Low alarm level
+     * @param critical Critical alarm level
+     */
     inline void setAlarmLevels(float low, float critical)
     {
       m_low = low;
@@ -47,17 +57,17 @@ namespace Demo
     void setAlarmState(AlarmType alarm);
 
   private:
-    Engine::Graphics::Colour m_colours[3];
+    Engine::Graphics::Colour m_colours[3]; //!< Colour for each alarm state
 
-    float m_low;
-    float m_critical;
+    float m_low;      //!< Low alarm level
+    float m_critical; //!< Critical alarm level
 
-    AlarmType m_state;
+    AlarmType m_state; //!< Current state
 
-    Engine::Graphics::RenderableObject *m_background;
-    Engine::Graphics::TextPane *m_nameText;
-    Engine::Graphics::TextPane *m_valueText;
-    Engine::Graphics::TextPane *m_alarmText;
+    Engine::Graphics::RenderableObject *m_background; //!< Background rectangle
+    Engine::Graphics::TextPane *m_nameText;           //!< Name text pane
+    Engine::Graphics::TextPane *m_valueText;          //!< Value text pane
+    Engine::Graphics::TextPane *m_alarmText;          //!< Alarm message text pane
   };
 }
 }

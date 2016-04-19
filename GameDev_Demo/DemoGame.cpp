@@ -63,6 +63,13 @@ namespace Demo
   {
   }
 
+  /**
+   * @brief Sets the camera mode.
+   * @param mode Mode string
+   *
+   * Expected mode strings are either "fpv" for first person view or "los" for
+   * line of sight.
+   */
   void DemoGame::setCameraMode(const std::string &mode)
   {
     bool fpv = mode == "fpv";

@@ -26,6 +26,10 @@ namespace Engine
 {
 namespace Physics
 {
+  /**
+   * @brief Creates a new debug draw engine.
+   * @param shader Shader to use for rendering
+   */
   DebugDrawEngine::DebugDrawEngine(Engine::Graphics::ShaderProgram *shader)
       : RenderableObject("debug_draw_engine", nullptr, shader)
       , m_debugMode(0)
@@ -36,6 +40,12 @@ namespace Physics
   {
   }
 
+  /**
+   * @brief Draws a line.
+   * @param from Start position
+   * @param to End position
+   * @param color Colour
+   */
   void DebugDrawEngine::drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color)
   {
     LineMesh *m =
@@ -44,15 +54,32 @@ namespace Physics
     m_meshes.push_back(m);
   }
 
+  /**
+   * @brief Not implemented.
+   * @param pointOnB
+   * @param normalOnB
+   * @param distance
+   * @param lifeTime
+   * @param color
+   */
   void DebugDrawEngine::drawContactPoint(const btVector3 &pointOnB, const btVector3 &normalOnB, btScalar distance,
                                          int lifeTime, const btVector3 &color)
   {
   }
 
+  /**
+   * @brief Not implemented.
+   * @param location
+   * @param textString
+   */
   void DebugDrawEngine::draw3dText(const btVector3 &location, const char *textString)
   {
   }
 
+  /**
+   * @brief Outputs a warning string to the logger.
+   * @param warningString Message
+   */
   void DebugDrawEngine::reportErrorWarning(const char *warningString)
   {
     g_log.warn(std::string(warningString));

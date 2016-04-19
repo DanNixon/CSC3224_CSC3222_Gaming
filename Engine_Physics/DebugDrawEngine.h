@@ -37,11 +37,19 @@ namespace Physics
 
     virtual void reportErrorWarning(const char *warningString);
 
+    /**
+     * @brief Sets the debug mode.
+     * @param debugMode Debug mode
+     */
     virtual void setDebugMode(int debugMode)
     {
       m_debugMode = debugMode;
     }
 
+    /**
+     * @brief Gets the debug mode.
+     * @return Debug mode
+     */
     virtual int getDebugMode() const
     {
       return m_debugMode;
@@ -51,8 +59,8 @@ namespace Physics
     virtual void draw(GLuint program);
 
   private:
-    int m_debugMode;
-    std::vector<Engine::Graphics::Mesh *> m_meshes;
+    int m_debugMode;                                //!< Debug mode
+    std::vector<Engine::Graphics::Mesh *> m_meshes; //!< Vector of meshes
   };
 }
 }

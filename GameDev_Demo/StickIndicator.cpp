@@ -23,6 +23,11 @@ namespace GameDev
 {
 namespace Demo
 {
+  /**
+   * @brief Creates a new stick indicator.
+   * @param name Name of the indicator
+   * @param parent Parent scene object
+   */
   StickIndicator::StickIndicator(const std::string &name, SceneObject *parent)
       : SceneObject(name, parent)
   {
@@ -44,6 +49,13 @@ namespace Demo
   {
   }
 
+  /**
+   * @brief Sets the positions of the stick indicator.
+   * @param horizontal Horizontal stick position
+   * @param vertical Vertical stick position
+   *
+   * Both positions are in interval [-1,1].
+   */
   void StickIndicator::setStickPosition(float horizontal, float vertical)
   {
     m_indicator->setModelMatrix(Matrix4::Translation(Vector3(horizontal, vertical, -0.1f)));

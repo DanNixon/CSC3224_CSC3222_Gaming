@@ -18,7 +18,7 @@ namespace Demo
 {
   /**
    * @class StickIndicator
-   * @brief TODO
+   * @brief Display for stick position.
    * @author Dan Nixon
    */
   class StickIndicator : public Engine::Common::SceneObject
@@ -30,8 +30,8 @@ namespace Demo
     void setStickPosition(float horizontal, float vertical);
 
   private:
-    Engine::Graphics::RenderableObject *m_background;
-    Engine::Graphics::RenderableObject *m_indicator;
+    Engine::Graphics::RenderableObject *m_background; //!< Background rectangle
+    Engine::Graphics::RenderableObject *m_indicator; //!< Indicator circle
   };
 }
 }

@@ -25,6 +25,10 @@ namespace Engine
 {
 namespace Graphics
 {
+  /**
+   * @typedef TTFFontLookup
+   * @brief TTF font resource lookup.
+   */
   typedef Engine::ResourceManagment::ResourceLookup<TTF_Font *> TTFFontLookup;
 
   /**

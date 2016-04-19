@@ -153,7 +153,7 @@ namespace Utility
   /**
    * @brief Coverts a string value to a boolean.
    * @param str String value
-   * @param defaultValue If string could not be parsed this value is returned
+   * @param defaultVal If string could not be parsed this value is returned
    * @return Parsed value, defaultValue if value could not be determined
    */
   bool StringUtils::ToBool(std::string str, bool defaultVal)

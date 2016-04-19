@@ -19,6 +19,12 @@ namespace GameDev
 {
 namespace Demo
 {
+  /**
+   * @brief Creates a new telemetry value indicator.
+   * @param name Name of the value
+   * @param parent Parent SceneObject
+   * @param valueName Displayed name of the value
+   */
   TelemetryValueIndicator::TelemetryValueIndicator(const std::string &name, SceneObject *parent,
                                                    const std::string &valueName)
       : SceneObject(name, parent)
@@ -66,6 +72,11 @@ namespace Demo
   {
   }
 
+  /**
+   * @brief Sets the value.
+   * @param value Value
+   * @param precision Display precision
+   */
   void TelemetryValueIndicator::setValue(float value, size_t precision)
   {
     // Update value display
@@ -91,6 +102,10 @@ namespace Demo
     }
   }
 
+  /**
+   * @brief Updates the alarm state.
+   * @param alarm Alarm state
+   */
   void TelemetryValueIndicator::setAlarmState(AlarmType alarm)
   {
     // Update background colour

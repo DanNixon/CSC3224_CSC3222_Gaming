@@ -34,6 +34,11 @@ namespace GameDev
 {
 namespace Demo
 {
+  /**
+   * @brief Creates a new aircraft.
+   * @param name Name of the aircraft (must match directory in model directory)
+   * @param resourceRoot Root of the resources directory
+   */
   Aircraft::Aircraft(const std::string &name, const std::string &resourceRoot)
       : SceneObject(name)
       , m_resourceRoot(resourceRoot)
@@ -53,6 +58,11 @@ namespace Demo
   {
   }
 
+  /**
+   * @brief Gets the filename of a model.
+   * @param model Model type
+   * @return File path
+   */
   std::string Aircraft::modelFilename(AircraftModel model) const
   {
     std::stringstream str;
@@ -76,6 +86,11 @@ namespace Demo
     return str.str();
   }
 
+  /**
+   * @brief Gets the filename of a sound file.
+   * @param sound Sound type
+   * @return File path
+   */
   std::string Aircraft::audioFilename(AircraftSound sound) const
   {
     std::stringstream str;
@@ -102,10 +117,11 @@ namespace Demo
     return str.str();
   }
 
-  bool Aircraft::loadMeshes()
+  /**
+   * @brief Loads all meshes unsed by the aircraft.
+   */
+  void Aircraft::loadMeshes()
   {
-    bool result = true;
-
     // TODO: seemingly magic numbers here vary depending on the aircraft model
     //       and will be loaded from a file in the finished game.
 
@@ -133,14 +149,16 @@ namespace Demo
                                                Matrix4::Scale(0.4f));
     m_subTreeSpinningTailRotor->setActive(false, std::numeric_limits<size_t>::max());
     addChild(m_subTreeSpinningTailRotor);
-
-    return result;
   }
 
-  bool Aircraft::initPhysics(PhysicalSystem *system, const Vector3 &initialPosition, const Quaternion &initialRotation)
+  /**
+   * @brief Configures physics objects.
+   * @param system Physical system in use
+   * @param initialPosition Initial position of the aircraft
+   * @param initialRotation Initial orientation of the aircraft
+   */
+  void Aircraft::initPhysics(PhysicalSystem *system, const Vector3 &initialPosition, const Quaternion &initialRotation)
   {
-    bool result = true;
-
     // Collision shape
     btCompoundShape *shape = new btCompoundShape();
 
@@ -174,10 +192,13 @@ namespace Demo
 
     // Add to system
     system->addBody(m_physicalBody);
-
-    return result;
   }
 
+  /**
+   * @brief Loads audio files.
+   * @param listener Audio listener in use
+   * @return True if files were laoded successfully
+   */
   bool Aircraft::loadAudio(Listener *listener)
   {
     bool result = true;
@@ -205,6 +226,12 @@ namespace Demo
     return result;
   }
 
+  /**
+   * @brief Configures the first person view camera.
+   * @param game Game in use
+   * @param viewDepth View depth
+   * @param fieldOfVision Field of view angle in degrees
+   */
   void Aircraft::initCamera(Game *game, float viewDepth, float fieldOfVision)
   {
     m_fpvCamera = new Camera("fpv_camera", Matrix4::Perspective(1.0f, viewDepth, game->windowAspect(), fieldOfVision));

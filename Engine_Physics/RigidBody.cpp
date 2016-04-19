@@ -51,16 +51,28 @@ namespace Physics
     delete m_shape;
   }
 
+  /**
+   * @brief Extracts the up vector from this matrix.
+   * @return Up direction vector
+   */
   btVector3 RigidBody::upVector() const
   {
     return m_body->getWorldTransform().getBasis().getColumn(1);
   }
 
+  /**
+   * @brief Extracts the facing vector from this matrix.
+   * @return Face direction vector
+   */
   btVector3 RigidBody::facingVector() const
   {
     return m_body->getWorldTransform().getBasis().getColumn(0);
   }
 
+  /**
+   * @brief Extracts the left vector from this matrix.
+   * @return Left direction vector
+   */
   btVector3 RigidBody::leftVector() const
   {
     return -m_body->getWorldTransform().getBasis().getColumn(2);
