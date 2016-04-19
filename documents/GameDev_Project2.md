@@ -7,22 +7,17 @@ RC flight simulator with parametric/randomly generated finite terrains.
 Essential:
 
 - [ ] Parametric terrain (height map) generator
-- [ ] Controllable 3D helicopter
+- [x] Controllable 3D helicopter
 - [ ] Collision detection with terrain
-- [ ] Basic wind
 - [ ] Switchable between LOS and FPV views
-- [ ] Both mouse + keyboard and joystick controls
+- [x] Both mouse + keyboard and joystick controls
 
 Extra:
 
-- [ ] Proper Doppler corrected audio
 - [ ] Terrain object generation (trees, buildings, fences, runway, etc.)
-- [ ] Weather
+- [ ] Weather (wind)
 - [ ] Telemetry to TX
-- [ ] Training modes (hover in box, linear flight, circle, etc.)
 - [ ] 3rd person (behind aircraft) view
-- [ ] Multirotors
-- [ ] Fixed wings
 
 ## Terrain generator
 
@@ -44,20 +39,16 @@ Objects:
 Menu:
 
 - Exit
-- Simulation
-  - Pause
-  - Reset
-  - Speed?
+- Pause
+- Reset
+- Camera
+  - Line of Sight
+  - First Person View
+- UI
+  - Show/Hide Telemetry
+  - Show/Hide Sticks
 - Aircraft
   - (list all models in `models` directory)
 - Terrain
   - (list all terrain generator presets)
 - Help (show some help/control listing of some sort)
-
-Config file:
-
-- Terrain generator
-  - (presets)
-- Telemetry
-  - Protocol
-  - COM port

@@ -10,7 +10,6 @@
   - [x] Switch to OpenAL Soft
 - [x] `Engine_Common`
   - [x] Move setup code into engine
-  - [x] Managed memory
   - [x] Loop timing
   - [x] Clean startup routine
   - [x] Profiling
@@ -23,6 +22,7 @@
   - [x] Render alpha meshes in correct order
   - [x] Load textures in asset loading
   - [x] Multi line text
+  - [ ] Light abstraction
 - [x] `Engine_Input`
   - [x] Keyboard
   - [x] Mouse
@@ -38,6 +38,8 @@
   - [x] Convex hull collision shape
   - [x] Bounding box collision shape
   - [ ] Heightmap terrain abstraction
+- [x] `Engine_ResourceManagment`
+  - [x] Managed memory cleanup
 - [x] `Engine_UIMenu`
   - [x] Menu structure definition
   - [x] Top bar menu
@@ -55,4 +57,3 @@
 - Time in seconds
 - Force in Newtons
 - Mass in kg
-	
