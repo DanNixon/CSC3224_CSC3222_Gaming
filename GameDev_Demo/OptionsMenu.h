@@ -30,7 +30,7 @@ namespace Demo
     typedef std::vector<std::pair<std::string, std::string>> NameValueList;
 
   public:
-    OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize = 0.08f);
+    OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize);
     virtual ~OptionsMenu();
 
     void populateAircraftMenu(const NameValueList &items);

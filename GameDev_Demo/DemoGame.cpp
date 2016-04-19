@@ -120,7 +120,8 @@ namespace Demo
     ShaderProgramLookup::Instance().add("menu_shader", menuShader);
 
     // Menu
-    m_menu = new OptionsMenu(this, TTFFontLookup::Instance().get("main_font"));
+    m_menu = new OptionsMenu(this, TTFFontLookup::Instance().get("main_font"), 0.05f);
+    m_menu->setMargin(Vector2(0.005f, 0.005f));
     m_menu->populateAircraftMenu({{"Gaui X5", "gaui_x5"}, {"Logo 600", "logo_600"}});
     m_menu->populateTerrainMenu({{"Flat", "flat"}, {"Tall Peaks", "peaks"}, {"Forest", "forest"}});
     m_menu->layout();

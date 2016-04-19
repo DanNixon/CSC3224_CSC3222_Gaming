@@ -10,6 +10,7 @@
 #include "DemoGame.h"
 
 using namespace Engine::Common;
+using namespace Engine::Maths;
 using namespace Engine::UIMenu;
 
 namespace GameDev
@@ -22,8 +23,19 @@ namespace Demo
   OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize)
       : TopBarMenu(game, font, textSize)
   {
+    setMargin(Vector2());
+
     addNewItem(nullptr, "exit", "Exit");
     addNewItem(nullptr, "pause", "Pause");
+    addNewItem(nullptr, "reset", "Reset");
+
+    MenuItem *cameraMenu = addNewItem(nullptr, "camera", "Camera");
+    addNewItem(cameraMenu, "los", "Line of Sight");
+    addNewItem(cameraMenu, "fpv", "First Person View");
+
+    MenuItem *uiMenu = addNewItem(nullptr, "ui", "UI");
+    addNewItem(uiMenu, "telemetry", "Show Telemetry");
+    addNewItem(uiMenu, "sticks", "Show Sticks");
 
     m_aircraftMenu = addNewItem(nullptr, "aircraft", "Aircraft");
     m_terrainMenu = addNewItem(nullptr, "terrain", "Terrain");

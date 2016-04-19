@@ -31,7 +31,7 @@ namespace Demo
 
   private:
     Engine::Graphics::RenderableObject *m_background; //!< Background rectangle
-    Engine::Graphics::RenderableObject *m_indicator; //!< Indicator circle
+    Engine::Graphics::RenderableObject *m_indicator;  //!< Indicator circle
   };
 }
 }
