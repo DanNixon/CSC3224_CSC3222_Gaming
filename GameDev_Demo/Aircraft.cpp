@@ -13,7 +13,8 @@
 #include <Engine_Graphics/ModelLoader.h>
 #include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Logging/Logger.h>
-#include <Engine_Physics/BoundingBoxShape.h>
+#include <Engine_Physics/BoundingCylinderShape.h>
+#include <Engine_Physics/MathsConversions.h>
 #include <Engine_Physics/SceneObjectMotionState.h>
 #include <Engine_Utility/StringUtils.h>
 
@@ -152,10 +153,17 @@ namespace Demo
     shape->addChildShape(btTransform(btQuaternion(0.0f, 0.0f, 0.0f), btVector3(-40.0f, 0.0f, 0.0f)), tailBox);
 
     // Main rotor cylinder
-    // TODO
+    BoundingCylinderShape *mainRotorCylinder = new BoundingCylinderShape();
+    mainRotorCylinder->updateDimensionFromSceneTree(m_subTreeSpinningMainRotor);
+    shape->addChildShape(
+        btTransform(btQuaternion(0.0f, 0.0f, 0.0f), MathsConversions::ToBullet(mainRotorCylinder->origin())),
+        mainRotorCylinder);
 
     // Tail rotor cylinder
-    // TODO
+    BoundingCylinderShape *tailRotorCylinder = new BoundingCylinderShape();
+    tailRotorCylinder->updateDimensionFromSceneTree(m_subTreeSpinningTailRotor);
+    shape->addChildShape(MathsConversions::ToBullet(Quaternion(0.0f, 90.0f, 0.0f), Vector3(-74.0f, 0.0f, 1.5f)),
+                         tailRotorCylinder);
 
     // Motion
     SceneObjectMotionState *motion = new SceneObjectMotionState(this, initialPosition, initialRotation);

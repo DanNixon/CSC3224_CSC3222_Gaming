@@ -53,7 +53,7 @@ namespace Demo
    * @brief Creates a new demonstration game instance.
    */
   DemoGame::DemoGame()
-      : ConfigurableGame("Engine Demo", std::make_pair(640, 480))
+      : ConfigurableGame("Engine Demo", std::make_pair(1024, 768))
   {
   }
 
@@ -139,10 +139,10 @@ namespace Demo
     m_aircraft->loadMeshes();
     m_aircraft->loadAudio(m_audioListener);
     m_aircraft->initPhysics(m_physicalSystem, Vector3(0.0f, 50.0f, -initialModelDistance),
-                            Quaternion(90.0f, 0.0f, 0.0f));
+                            Quaternion(135.0f, 0.0f, 0.0f));
     m_s->root()->addChild(m_aircraft);
     m_aircraft->setThrust(3000.0f);
-    m_aircraft->setAxisRates(Vector3(5.0f, 5.0f, 5.0f));
+    m_aircraft->setAxisRates(Vector3(10.0f, 10.0f, 15.0f));
 
     // Ground
     HeightmapMesh *hm = new HeightmapMesh(1000, 1000, 100000.0f, 100000.0f); // 1 km^2

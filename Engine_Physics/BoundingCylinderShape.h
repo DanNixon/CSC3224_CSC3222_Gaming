@@ -5,8 +5,8 @@
  * For CSC3224 Project 1.
  */
 
-#ifndef _ENGINE_PHYSICS_BOUNDINGBOXSHAPE_H_
-#define _ENGINE_PHYSICS_BOUNDINGBOXSHAPE_H_
+#ifndef _ENGINE_PHYSICS_BOUNDINGCYLINDERSHAPE_H_
+#define _ENGINE_PHYSICS_BOUNDINGCYLINDERSHAPE_H_
 
 #include <btBulletDynamicsCommon.h>
 
@@ -18,16 +18,15 @@ namespace Engine
 namespace Physics
 {
   /**
-   * @class BoundingBoxShape
-   * @brief A wrapper around Bullet's btBoxShape that builds the bounding box
-   *        from a SceneNode tree.
+   * @class BoundingCylinderShape
+   * @brief TODO
    * @author Dan Nixon
    */
-  class BoundingBoxShape : public btBoxShape
+  class BoundingCylinderShape : public btCylinderShape
   {
   public:
-    BoundingBoxShape();
-    virtual ~BoundingBoxShape();
+    BoundingCylinderShape();
+    virtual ~BoundingCylinderShape();
 
     void updateDimensionFromSceneTree(Engine::Common::SceneObject *object,
                                       size_t maxDepth = std::numeric_limits<size_t>::max(), size_t level = 0);

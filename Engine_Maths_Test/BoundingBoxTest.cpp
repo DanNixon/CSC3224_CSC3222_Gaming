@@ -119,6 +119,15 @@ public:
     Assert::IsTrue(Vector2(-30.0f, -8.0f) == b.lowerLeft());
     Assert::IsTrue(Vector2(9.0f, 37.0f) == b.upperRight());
   }
+
+  TEST_METHOD(BoundingBox_Origin)
+  {
+    BoundingBox2 b1(Vector2(-1.0f, -0.5f), Vector2(1.0f, 0.5f));
+    Assert::IsTrue(Vector2(0.0f, 0.0f) == b1.origin());
+
+    BoundingBox2 b2(Vector2(2.5f, 1.0f), Vector2(7.5f, 9.0f));
+    Assert::IsTrue(Vector2(5.0f, 5.0f) == b2.origin());
+  }
 };
 #endif /* DOXYGEN_SKIP */
 }

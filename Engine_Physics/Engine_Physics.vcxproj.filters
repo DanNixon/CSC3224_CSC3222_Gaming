@@ -10,6 +10,8 @@
     <ClInclude Include="BoundingBoxShape.h" />
     <ClInclude Include="Heightmap.h" />
     <ClInclude Include="DebugDrawEngine.h" />
+    <ClInclude Include="BoundingCylinderShape.h" />
+    <ClInclude Include="MathsConversions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneObjectMotionState.cpp" />
@@ -19,5 +21,6 @@
     <ClCompile Include="BoundingBoxShape.cpp" />
     <ClCompile Include="Heightmap.cpp" />
     <ClCompile Include="DebugDrawEngine.cpp" />
+    <ClCompile Include="BoundingCylinderShape.cpp" />
   </ItemGroup>
 </Project>

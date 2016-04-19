@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundingBoxShape.h" />
+    <ClInclude Include="BoundingCylinderShape.h" />
     <ClInclude Include="ConvexHullShape.h" />
     <ClInclude Include="DebugDrawEngine.h" />
     <ClInclude Include="Heightmap.h" />
+    <ClInclude Include="MathsConversions.h" />
     <ClInclude Include="PhysicalSystem.h" />
     <ClInclude Include="StaticPlaneRigidBody.h" />
     <ClInclude Include="RigidBody.h" />
@@ -31,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoundingBoxShape.cpp" />
+    <ClCompile Include="BoundingCylinderShape.cpp" />
     <ClCompile Include="ConvexHullShape.cpp" />
     <ClCompile Include="DebugDrawEngine.cpp" />
     <ClCompile Include="Heightmap.cpp" />

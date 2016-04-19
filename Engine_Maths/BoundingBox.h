@@ -10,6 +10,7 @@
 
 #include <algorithm>
 
+#include "Quaternion.h"
 #include "Vector2.h"
 #include "Vector3.h"
 
@@ -174,6 +175,21 @@ namespace Maths
         if (box.m_upperRight[i] > m_upperRight[i])
           m_upperRight[i] = box.m_upperRight[i];
       }
+    }
+
+    /**
+     * @brief Gets the coordinates of the centre of the box.
+     * @return Origin coordinates
+     */
+    inline T origin() const
+    {
+      return m_lowerLeft + ((m_upperRight - m_lowerLeft) * 0.5f);
+    }
+
+    inline void rotate(const Engine::Maths::Quaternion &quat)
+    {
+      quat.rotateVector(m_lowerLeft);
+      quat.rotateVector(m_upperRight);
     }
 
     /**

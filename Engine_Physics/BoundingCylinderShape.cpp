@@ -5,7 +5,7 @@
  * For CSC3224 Project 1.
  */
 
-#include "BoundingBoxShape.h"
+#include "BoundingCylinderShape.h"
 
 #include <Engine_Graphics/RenderableObject.h>
 
@@ -19,12 +19,12 @@ namespace Engine
 {
 namespace Physics
 {
-  BoundingBoxShape::BoundingBoxShape()
-      : btBoxShape(btVector3(1, 1, 1))
+  BoundingCylinderShape::BoundingCylinderShape()
+      : btCylinderShape(btVector3(1, 1, 1))
   {
   }
 
-  BoundingBoxShape::~BoundingBoxShape()
+  BoundingCylinderShape::~BoundingCylinderShape()
   {
   }
 
@@ -35,7 +35,7 @@ namespace Physics
    * @param maxDepth Maximum recursion depth (defaults to full tree)
    * @param level Current recursion level (do not set manually)
    */
-  void BoundingBoxShape::updateDimensionFromSceneTree(SceneObject *object, size_t maxDepth, size_t level)
+  void BoundingCylinderShape::updateDimensionFromSceneTree(SceneObject *object, size_t maxDepth, size_t level)
   {
     RenderableObject *rendeable = dynamic_cast<RenderableObject *>(object);
     if (rendeable && rendeable->mesh())
