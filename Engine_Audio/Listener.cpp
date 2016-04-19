@@ -44,11 +44,6 @@ namespace Audio
     alListener3f(AL_POSITION, position.x(), position.y(), position.z());
     AudioUtil::CheckALError("listener position");
 
-    // Set velocity
-    // TODO: set this when physics engine is implemented
-    alListener3f(AL_VELOCITY, 0.0f, 0.0f, 0.0f);
-    AudioUtil::CheckALError("listener velocity");
-
     // Set orientation
     Vector3 facing = m_worldTransform.facingVector();
     VectorOperations::Normalise(facing);

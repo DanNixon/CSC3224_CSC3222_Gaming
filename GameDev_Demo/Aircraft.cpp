@@ -238,7 +238,7 @@ namespace Demo
       if (!m_sounds[AircraftSound::ENGINE_IDLE]->isPlaying())
         m_sounds[AircraftSound::ENGINE_IDLE]->play();
 
-      m_sounds[AircraftSound::ENGINE_IDLE]->setGain(5.0f * (m_engineSpeed * 75.0f));
+      m_sounds[AircraftSound::ENGINE_IDLE]->setGain(2.0f * (m_engineSpeed * 10.0f));
       m_sounds[AircraftSound::ENGINE_IDLE]->setPitch(0.8f + (m_engineSpeed * 0.2f));
     }
     else

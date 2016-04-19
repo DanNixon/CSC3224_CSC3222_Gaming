@@ -134,11 +134,6 @@ namespace Audio
       Vector4 position = m_worldTransform.positionVector();
       alSource3f(m_sourceID, AL_POSITION, position.x(), position.y(), position.z());
       AudioUtil::CheckALError("source position");
-
-      // Set velocity
-      // TODO: set this when physics engine is implemented
-      alSource3f(m_sourceID, AL_VELOCITY, 0.0f, 0.0f, 0.0f);
-      AudioUtil::CheckALError("source velocity");
     }
   }
 }
