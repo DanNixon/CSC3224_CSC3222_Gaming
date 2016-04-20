@@ -31,14 +31,7 @@ namespace Graphics
                      bool transparent = false);
     ~RenderableObject();
 
-    /**
-     * @brief Sets the transparency of this object.
-     * @param transparent Transparency
-     */
-    void setTransparent(bool transparent)
-    {
-      m_transparent = transparent;
-    }
+    void setTransparent(bool transparent, size_t recursionLevels = 0, size_t depth = 0);
 
     /**
      * @brief Gets the transparency of this object.

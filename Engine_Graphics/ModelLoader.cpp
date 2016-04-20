@@ -15,7 +15,6 @@
 #include <Engine_Utility/StringUtils.h>
 
 #include "Mesh.h"
-#include "RenderableObject.h"
 
 using namespace Engine::Common;
 using namespace Engine::Utility;
@@ -39,12 +38,12 @@ namespace Graphics
   }
 
   /**
-   * @brief Load a 3D model into a tree of SceneObject.
+   * @brief Load a 3D model into a tree of RenderableObject.
    * @param filename File to load
    * @param sp Shader to assign to new RenderableObject
-   * @return SceneObject tree
+   * @return RenderableObject tree
    */
-  SceneObject *ModelLoader::load(const std::string &filename, ShaderProgram *sp)
+  RenderableObject *ModelLoader::load(const std::string &filename, ShaderProgram *sp)
   {
     Assimp::Importer i;
     const struct aiScene *scene =
@@ -55,7 +54,7 @@ namespace Graphics
     if (scene == nullptr)
       return nullptr;
 
-    SceneObject *obj = new SceneObject(filename);
+    RenderableObject *obj = new RenderableObject(filename);
     std::string directory = StringUtils::DirectoryFromPath(filename);
 
     loadTextures(scene, directory);
@@ -100,12 +99,12 @@ namespace Graphics
 
   /**
    * @brief Load a node of the scene tree.
-   * @param sn SceneObject node
+   * @param sn RenderableObject node
    * @param scene Assimp scene
    * @param node Assimp scene node
    * @param sp Shader to assign to new RenderableObject
    */
-  void ModelLoader::loadRecursive(SceneObject *sn, const struct aiScene *scene, const struct aiNode *node,
+  void ModelLoader::loadRecursive(RenderableObject *sn, const struct aiScene *scene, const struct aiNode *node,
                                   ShaderProgram *sp)
   {
     const aiMatrix4x4 transform = node->mTransformation;
@@ -131,7 +130,7 @@ namespace Graphics
     // Children in this node
     for (size_t i = 0; i < node->mNumChildren; i++)
     {
-      SceneObject *child = new SceneObject("child_" + std::to_string(i));
+      RenderableObject *child = new RenderableObject("child_" + std::to_string(i));
       loadRecursive(child, scene, node->mChildren[i], sp);
       sn->addChild(child);
     }

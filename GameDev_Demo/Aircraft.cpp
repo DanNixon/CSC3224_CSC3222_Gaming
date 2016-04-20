@@ -3,6 +3,9 @@
  * @author Dan Nixon (120263697)
  *
  * For CSC3224 Project 1.
+ *
+ * Note: seemingly magic numbers here vary depending on the aircraft model and
+ * will be loaded from a file in the finished game.
  */
 
 #include "Aircraft.h"
@@ -123,9 +126,6 @@ namespace Demo
    */
   void Aircraft::loadMeshes()
   {
-    // TODO: seemingly magic numbers here vary depending on the aircraft model
-    //       and will be loaded from a file in the finished game.
-
     // Main model
     ModelLoader bodyLoader;
     m_subTreeAircraft =
@@ -139,6 +139,7 @@ namespace Demo
                                                       ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
     m_subTreeSpinningMainRotor->setModelMatrix(Matrix4::Scale(2.0f));
     m_subTreeSpinningMainRotor->setActive(false);
+    m_subTreeSpinningMainRotor->setTransparent(true, std::numeric_limits<size_t>::max());
     addChild(m_subTreeSpinningMainRotor);
 
     // Spinning tail rotor
@@ -149,6 +150,7 @@ namespace Demo
                                                Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
                                                Matrix4::Scale(0.4f));
     m_subTreeSpinningTailRotor->setActive(false);
+    m_subTreeSpinningTailRotor->setTransparent(true, std::numeric_limits<size_t>::max());
     addChild(m_subTreeSpinningTailRotor);
   }
 

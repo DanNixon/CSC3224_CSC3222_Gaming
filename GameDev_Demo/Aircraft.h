@@ -13,6 +13,7 @@
 #include <Engine_Audio/Source.h>
 #include <Engine_Common/Game.h>
 #include <Engine_Graphics/Camera.h>
+#include <Engine_Graphics/RenderableObject.h>
 #include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
@@ -159,11 +160,11 @@ namespace Demo
     float m_altitudeFeet; //!< Altitude in feet relative to Y=0
     float m_batteryVolts; //!< Battery voltage
 
-    Engine::Common::SceneObject *m_subTreeAircraft;          //!< Scene sub tree containing main aircraft
-    Engine::Common::SceneObject *m_subTreeMainRotor;         //!< Scene sub tree containing static main rotor
-    Engine::Common::SceneObject *m_subTreeTailRotor;         //!< Scene sub tree containing static tail rotor
-    Engine::Common::SceneObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
-    Engine::Common::SceneObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
+    Engine::Graphics::RenderableObject *m_subTreeAircraft;          //!< Scene sub tree containing main aircraft
+    Engine::Graphics::RenderableObject *m_subTreeMainRotor;         //!< Scene sub tree containing static main rotor
+    Engine::Graphics::RenderableObject *m_subTreeTailRotor;         //!< Scene sub tree containing static tail rotor
+    Engine::Graphics::RenderableObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
+    Engine::Graphics::RenderableObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
     Engine::Physics::RigidBody *m_physicalBody; //!< Phsyical body of the aircraft
 

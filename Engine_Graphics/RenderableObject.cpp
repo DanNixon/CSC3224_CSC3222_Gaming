@@ -40,6 +40,25 @@ namespace Graphics
   }
 
   /**
+  * @brief Sets the transparency of this object.
+  * @param transparent Transparency
+  */
+  void RenderableObject::setTransparent(bool transparent, size_t recursionLevels, size_t depth)
+  {
+    m_transparent = transparent;
+
+    if (depth < recursionLevels)
+    {
+      for (SceneObjectListIter it = m_children.begin(); it != m_children.end(); ++it)
+      {
+        RenderableObject *obj = dynamic_cast<RenderableObject *>(*it);
+        if (obj != nullptr)
+          obj->setTransparent(transparent, recursionLevels, depth + 1);
+      }
+    }
+  }
+
+  /**
    * @copydoc SceneObject::update()
    */
   void RenderableObject::update(float msec, Subsystem sys)
