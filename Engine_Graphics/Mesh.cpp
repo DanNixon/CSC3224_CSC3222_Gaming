@@ -1,6 +1,6 @@
 /**
  * @file
- * @author Dan Nixon (120263697)
+ * @author Rich Davison, Dan Nixon (120263697)
  *
  * For CSC3224 Project 1.
  */
@@ -71,6 +71,8 @@ namespace Graphics
     glBindVertexArray(0);
   }
 
+  // CSC3224 NCODE Dan Nixon 120263697
+
   /**
    * @brief Sets all vertix colours in the mesh to a solid colour.
    * @param col Colour to set
@@ -85,6 +87,8 @@ namespace Graphics
 
     bufferData();
   }
+
+  // CSC3224 NCODE BLOCK ENDS
 
   /**
    * @brief Buffers all VBO data into graphics memory.
@@ -172,6 +176,8 @@ namespace Graphics
 
     return true;
   }
+
+  // CSC3224 NCODE Dan Nixon 120263697
 
   /**
    * @brief Generates a 2D filled circle/disc.
@@ -341,5 +347,7 @@ namespace Graphics
 
     return m;
   }
+
+  // CSC3224 NCODE BLOCK ENDS
 }
 }

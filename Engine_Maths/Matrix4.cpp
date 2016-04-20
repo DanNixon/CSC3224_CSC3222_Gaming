@@ -96,6 +96,8 @@ namespace Maths
     m_values[10] = scaling.m_z;
   }
 
+  // CSC3224 NCODE Dan Nixon 120263697
+
   /**
    * @brief Extracts the left vector from this matrix.
    * @return Left direction vector
@@ -122,6 +124,8 @@ namespace Maths
   {
     return Vector3(m_values[2], m_values[6], m_values[10]);
   }
+
+  // CSC3224 NCODE BLOCK ENDS
 
   /**
    * @brief Creates a perspective matrix,
@@ -266,11 +270,13 @@ namespace Maths
     return m;
   }
 
+  // CSC3224 NCODE Dan Nixon 120263697
+
   /**
-  * @brief Creates a scaling matrix with uniform scaling in each axis.
-  * @param scale Uniform scaling factor
-  * @return Scaling matrix
-  */
+   * @brief Creates a scaling matrix with uniform scaling in each axis.
+   * @param scale Uniform scaling factor
+   * @return Scaling matrix
+   */
   Matrix4 Matrix4::Scale(float scale)
   {
     Matrix4 m;
@@ -281,6 +287,8 @@ namespace Maths
 
     return m;
   }
+
+  // CSC3224 NCODE BLOCK ENDS
 
   /**
    * @brief Creates a translation matrix.

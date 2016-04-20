@@ -35,6 +35,8 @@ namespace Maths
     void toZero();
     void toIdentity();
 
+    // CSC3224 NCODE Dan Nixon 120263697
+
     /**
      * @brief Gets a Vector3 containing the values of a given row of the matrix.
      * @param row Row index
@@ -97,6 +99,8 @@ namespace Maths
       if (column < 3)
         memcpy(&m_values[3 * column], &val, sizeof(Vector3));
     }
+
+    // CSC3224 NCODE BLOCK ENDS
 
     /**
      * @brief Gets a Vector3 containing the values of the diagonal values in the

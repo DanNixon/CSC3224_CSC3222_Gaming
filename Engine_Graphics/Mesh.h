@@ -68,6 +68,8 @@ namespace Graphics
 
     virtual void draw(GLuint program);
 
+    // CSC3224 NCODE Dan Nixon 120263697
+
     void setStaticColour(const Colour &col);
 
     /**
@@ -97,6 +99,8 @@ namespace Graphics
       return m_vertices;
     }
 
+    // CSC3224 NCODE BLOCK ENDS
+
     void bufferData();
 
   protected:
@@ -117,6 +121,8 @@ namespace Graphics
     Engine::Maths::Vector3 *m_tangents;      //!< Pointer to vertex tangents data
     GLuint *m_indices;                       //!< Pointer to vertex indices
 
+    // CSC3224 NCODE Dan Nixon 120263697
+
     Engine::Maths::BoundingBox3
         m_boundingBox; //!< Bounding box of all vertices (must be set on population of vertex array)
 
@@ -125,6 +131,8 @@ namespace Graphics
     Colour m_specularColour;   //!< Colour of specular reflected light
     float m_shininess;         //!< Shininess of the material (specular exponent)
     float m_shininessStrength; //!< Coefficient of specular lighting contribution
+
+    // CSC3224 NCODE BLOCK ENDS
   };
 }
 }

@@ -32,7 +32,9 @@ namespace Maths
   public:
     static Matrix4 Rotation(float degrees, const Vector3 &axis);
     static Matrix4 Scale(const Vector3 &scale);
+    // CSC3224 NCODE Dan Nixon 120263697
     static Matrix4 Scale(float scale);
+    // CSC3224 NCODE BLOCK ENDS
     static Matrix4 Translation(const Vector3 &translation);
 
     static Matrix4 Perspective(float zNear, float zfar, float aspect, float fov);
@@ -46,6 +48,8 @@ namespace Maths
 
     void toZero();
     void toIdentity();
+
+    // CSC3224 NCODE Dan Nixon 120263697
 
     /**
      * @brief Gets a Vector4 containing the values of a given row of the matrix.
@@ -116,15 +120,21 @@ namespace Maths
       }
     }
 
+    // CSC3224 NCODE BLOCK ENDS
+
     Vector3 positionVector() const;
     void setPositionVector(const Vector3 &position);
 
     Vector3 scalingVector() const;
     void setScalingVector(const Vector3 &scaling);
 
+    // CSC3224 NCODE Dan Nixon 120263697
+
     Vector3 leftVector() const;
     Vector3 upVector() const;
     Vector3 facingVector() const;
+
+    // CSC3224 NCODE BLOCK ENDS
 
     /**
      * @brief Multiplies this matrix by another matrix.
@@ -176,6 +186,8 @@ namespace Maths
       return vec;
     };
 
+    // CSC3224 NCODE Dan Nixon 120263697
+
     /**
      * @brief Outputs this matrix as a column-major GLdouble matrix.
      * @param m [out] Pointer to output matrix
@@ -185,6 +197,8 @@ namespace Maths
       for (int i = 0; i < 16; i++)
         m[i] = m_values[i];
     }
+
+    // CSC3224 NCODE BLOCK ENDS
 
     /**
      * @brief Multiplies this matrix with a Vector4.
