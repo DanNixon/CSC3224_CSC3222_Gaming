@@ -51,7 +51,7 @@ namespace Common
       return m_name;
     }
 
-    void setActive(bool active, size_t recursionLevels = 0, size_t currentLevel = 0);
+    void setActive(bool active, size_t recursionLevels = std::numeric_limits<size_t>::max(), size_t currentLevel = 0);
 
     /**
      * @brief Gets the active state of this object.

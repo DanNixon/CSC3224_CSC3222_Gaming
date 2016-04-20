@@ -152,7 +152,7 @@ namespace Snooker
     player2IndicatorText->setText("=>");
     player2Text->addChild(player2IndicatorText);
 
-    scoreDisplay->setActive(false, 10);
+    scoreDisplay->setActive(false);
 
     // Shot aim line
     shotAimLine = new RenderableObject("aim_line", new LineMesh(Vector3(), Vector3()), m_uiShader);

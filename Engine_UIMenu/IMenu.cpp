@@ -77,7 +77,7 @@ namespace UIMenu
    */
   void IMenu::show()
   {
-    m_root->setActive(true, std::numeric_limits<size_t>::max());
+    m_root->setActive(true);
 
     // Enable mouse event handling
     enable();
@@ -91,7 +91,7 @@ namespace UIMenu
     // Disable mouse event handling
     disable();
 
-    m_root->setActive(false, std::numeric_limits<size_t>::max());
+    m_root->setActive(false);
   }
 
   /**
@@ -172,7 +172,7 @@ namespace UIMenu
           obj->setState(MenuItemState::NORMAL);
           bool v = obj->active();
           obj->setActive(false, 1);
-          obj->setActive(v);
+          obj->setActive(v, 0);
         }
       }
     }

@@ -137,7 +137,7 @@ namespace Demo
     m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN),
                                                       ShaderProgramLookup::Instance().get("aircraft_shader"));
     m_subTreeSpinningMainRotor->setModelMatrix(Matrix4::Scale(2.0f));
-    m_subTreeSpinningMainRotor->setActive(false, std::numeric_limits<size_t>::max());
+    m_subTreeSpinningMainRotor->setActive(false);
     addChild(m_subTreeSpinningMainRotor);
 
     // Spinning tail rotor
@@ -147,7 +147,7 @@ namespace Demo
     m_subTreeSpinningTailRotor->setModelMatrix(Matrix4::Translation(Vector3(-74.0f, 0.0f, 1.5f)) *
                                                Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
                                                Matrix4::Scale(0.4f));
-    m_subTreeSpinningTailRotor->setActive(false, std::numeric_limits<size_t>::max());
+    m_subTreeSpinningTailRotor->setActive(false);
     addChild(m_subTreeSpinningTailRotor);
   }
 
@@ -256,8 +256,8 @@ namespace Demo
 
     // Update fast rotating rotor meshes
     bool aboveRotorPOVSpeed = speed >= 0.2f;
-    m_subTreeSpinningMainRotor->setActive(aboveRotorPOVSpeed, std::numeric_limits<size_t>::max());
-    m_subTreeSpinningTailRotor->setActive(aboveRotorPOVSpeed, std::numeric_limits<size_t>::max());
+    m_subTreeSpinningMainRotor->setActive(aboveRotorPOVSpeed);
+    m_subTreeSpinningTailRotor->setActive(aboveRotorPOVSpeed);
 
     // Update engine idle sound
     if (engineOn)

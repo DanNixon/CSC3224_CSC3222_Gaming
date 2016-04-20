@@ -89,8 +89,8 @@ namespace Demo
    */
   void DemoGame::setTelemetryVisible(bool visible)
   {
-    m_rssiIndicator->setActive(visible, std::numeric_limits<size_t>::max());
-    m_batteryVoltsIndicator->setActive(visible, std::numeric_limits<size_t>::max());
+    m_rssiIndicator->setActive(visible);
+    m_batteryVoltsIndicator->setActive(visible);
     m_root.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
   }
 
@@ -100,8 +100,8 @@ namespace Demo
    */
   void DemoGame::setSticksVisible(bool visible)
   {
-    m_leftStickIndicator->setActive(visible, std::numeric_limits<size_t>::max());
-    m_rightStickIndicator->setActive(visible, std::numeric_limits<size_t>::max());
+    m_leftStickIndicator->setActive(visible);
+    m_rightStickIndicator->setActive(visible);
     m_root.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
   }
 
