@@ -117,7 +117,7 @@ namespace GraphicalPathFinder
 
       if (prevNode || nextNode)
       {
-        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(m_nodes[m_currentNodeIndex]->id()))
+        dynamic_cast<RenderableObject *>(m_scene->root()->find(m_nodes[m_currentNodeIndex]->id()))
             ->mesh()
             ->setStaticColour(Colour());
 
@@ -134,7 +134,7 @@ namespace GraphicalPathFinder
 
         std::string id = m_nodes[m_currentNodeIndex]->id();
         g_log.info("Selected node: " + id);
-        dynamic_cast<RenderableObject *>(m_scene->root()->findChild(id))
+        dynamic_cast<RenderableObject *>(m_scene->root()->find(id))
             ->mesh()
             ->setStaticColour(Colour(0.0f, 0.0f, 1.0f, 1.0f));
       }

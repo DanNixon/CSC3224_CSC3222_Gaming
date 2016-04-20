@@ -131,7 +131,7 @@ namespace Common
 
     virtual void update(float msec, Subsystem sys);
 
-    SceneObject *findChild(const std::string &name);
+    SceneObject *find(const std::string &name, size_t maxDepth = std::numeric_limits<size_t>::max(), size_t level = 0);
     void printTree(std::ostream &stream, size_t maxDepth = std::numeric_limits<size_t>::max(), size_t level = 0);
 
   protected:

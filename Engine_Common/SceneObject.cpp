@@ -70,23 +70,40 @@ namespace Common
   }
 
   /**
-   * @brief Finds a child item.
+   * @brief Finds an item in the scene tree.
    * @param name Name of the item
+   * @param maxDepth Maximum recrusion depth
+   * @param level Current level (do not set manually)
    * @return Pointer to the item, nullptr if not found
    */
-  SceneObject *SceneObject::findChild(const std::string &name)
+  SceneObject *SceneObject::find(const std::string &name, size_t maxDepth, size_t level)
   {
-    auto it = std::find_if(m_children.begin(), m_children.end(), [name](SceneObject *o) { return o->name() == name; });
-    if (it != m_children.end())
-      return *it;
-    return nullptr;
+    // Check if this is the object
+    if (m_name == name)
+      return this;
+
+    SceneObject *retVal = nullptr;
+
+    // Search children
+    if (level < maxDepth)
+    {
+      for (SceneObjectListIter it = m_children.begin(); it != m_children.end(); ++it)
+      {
+        retVal = (*it)->find(name, maxDepth, level + 1);
+
+        if (retVal != nullptr)
+          break;
+      }
+    }
+
+    return retVal;
   }
 
   /**
    * @brief Outputs the tree structure as a string.
    * @param stream Stream to output to
    * @param maxDepth Maximum recrusion depth
-   * @param level CUrrent level (do not set manually)
+   * @param level Current level (do not set manually)
    */
   void SceneObject::printTree(std::ostream &stream, size_t maxDepth, size_t level)
   {

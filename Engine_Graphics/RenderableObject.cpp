@@ -97,8 +97,11 @@ namespace Graphics
       m_texture->use(program, 0);
 
     // Update lights
-    for (auto it = m_graphicalScene->lights().begin(); it != m_graphicalScene->lights().end(); ++it)
-      (*it)->use(program);
+    if (m_graphicalScene != nullptr)
+    {
+      for (auto it = m_graphicalScene->lights().begin(); it != m_graphicalScene->lights().end(); ++it)
+        (*it)->use(program);
+    }
 
     draw(program);
 

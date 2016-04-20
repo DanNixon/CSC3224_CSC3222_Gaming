@@ -133,6 +133,16 @@ namespace Demo
     m_subTreeAircraft->setModelMatrix(Matrix4::Scale(2.0f));
     addChild(m_subTreeAircraft);
 
+    // Static main rotor
+    m_subTreeMainRotor = dynamic_cast<RenderableObject *>(m_subTreeAircraft->find("g Mainrotor_0"));
+    if (m_subTreeMainRotor == nullptr)
+      g_log.error("Could not find main rotor mesh");
+
+    // Static tail rotor
+    m_subTreeTailRotor = dynamic_cast<RenderableObject *>(m_subTreeAircraft->find("g Tailrotor_0"));
+    if (m_subTreeTailRotor == nullptr)
+      g_log.error("Could not find tail rotor mesh");
+
     // Spinning main rotor
     ModelLoader mainRotorLoader;
     m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN),
@@ -264,6 +274,8 @@ namespace Demo
     bool aboveRotorPOVSpeed = speed >= 0.2f;
     m_subTreeSpinningMainRotor->setActive(aboveRotorPOVSpeed);
     m_subTreeSpinningTailRotor->setActive(aboveRotorPOVSpeed);
+    m_subTreeMainRotor->setActive(!aboveRotorPOVSpeed);
+    m_subTreeTailRotor->setActive(!aboveRotorPOVSpeed);
 
     // Update engine idle sound
     if (engineOn)
