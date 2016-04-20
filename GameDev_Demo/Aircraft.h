@@ -143,6 +143,9 @@ namespace Demo
     void setEngineSpeed(float speed);
     void setControls(float throttle, float pitch, float roll, float yaw);
 
+    void reset();
+    void activateFailsafe();
+
   protected:
     std::string m_resourceRoot; //!< Path to the root of the resources directory
 
@@ -151,6 +154,7 @@ namespace Demo
     Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis (roll, yaw, pitch)
     float m_engineSpeed;                //!< Engine/motor speed (factor of max RPM)
 
+    bool m_failsafe;      //!< Flag indicating a failsafe condition
     int m_rssi;           //!< RSSI in dB
     float m_altitudeFeet; //!< Altitude in feet relative to Y=0
     float m_batteryVolts; //!< Battery voltage

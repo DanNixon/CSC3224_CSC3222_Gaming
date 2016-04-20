@@ -127,11 +127,11 @@ namespace Demo
     TTFFontLookup::Instance().add("main_font", TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20));
 
     // Load shaders
-    ShaderProgram *aircraftShader = new ShaderProgram();
-    aircraftShader->addShader(new VertexShader("../resources/shader/vert_lighting.glsl"));
-    aircraftShader->addShader(new FragmentShader("../resources/shader/frag_lighting.glsl"));
-    aircraftShader->link();
-    ShaderProgramLookup::Instance().add("aircraft_shader", aircraftShader);
+    ShaderProgram *aircraftShaderLit = new ShaderProgram();
+    aircraftShaderLit->addShader(new VertexShader("../resources/shader/vert_lighting.glsl"));
+    aircraftShaderLit->addShader(new FragmentShader("../resources/shader/frag_lighting.glsl"));
+    aircraftShaderLit->link();
+    ShaderProgramLookup::Instance().add("aircraft_shader_lit", aircraftShaderLit);
 
     ShaderProgram *uiShader = new ShaderProgram();
     uiShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
@@ -145,6 +145,7 @@ namespace Demo
     menuShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
     menuShader->link();
     ShaderProgramLookup::Instance().add("menu_shader", menuShader);
+    ShaderProgramLookup::Instance().add("aircraft_shader_tex", menuShader);
 
     // Menu
     m_menu = new OptionsMenu(this, TTFFontLookup::Instance().get("main_font"), 0.05f);

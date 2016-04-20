@@ -45,6 +45,7 @@ namespace Demo
       , m_mass(0.6f)
       , m_mainRotorThrust(1.0f)
       , m_axisRates(1.0f, 1.0f, 1.0f)
+      , m_failsafe(false)
       , m_rssi(0)
       , m_altitudeFeet(0.0f)
       , m_batteryVolts(12.6f)
@@ -128,14 +129,14 @@ namespace Demo
     // Main model
     ModelLoader bodyLoader;
     m_subTreeAircraft =
-        bodyLoader.load(modelFilename(AircraftModel::BODY), ShaderProgramLookup::Instance().get("aircraft_shader"));
+        bodyLoader.load(modelFilename(AircraftModel::BODY), ShaderProgramLookup::Instance().get("aircraft_shader_lit"));
     m_subTreeAircraft->setModelMatrix(Matrix4::Scale(2.0f));
     addChild(m_subTreeAircraft);
 
     // Spinning main rotor
     ModelLoader mainRotorLoader;
     m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN),
-                                                      ShaderProgramLookup::Instance().get("aircraft_shader"));
+                                                      ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
     m_subTreeSpinningMainRotor->setModelMatrix(Matrix4::Scale(2.0f));
     m_subTreeSpinningMainRotor->setActive(false);
     addChild(m_subTreeSpinningMainRotor);
@@ -143,7 +144,7 @@ namespace Demo
     // Spinning tail rotor
     ModelLoader tailRotorLoader;
     m_subTreeSpinningTailRotor = tailRotorLoader.load(modelFilename(AircraftModel::TAIL_ROTOR_SPIN),
-                                                      ShaderProgramLookup::Instance().get("aircraft_shader"));
+                                                      ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
     m_subTreeSpinningTailRotor->setModelMatrix(Matrix4::Translation(Vector3(-74.0f, 0.0f, 1.5f)) *
                                                Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
                                                Matrix4::Scale(0.4f));
@@ -250,7 +251,10 @@ namespace Demo
   void Aircraft::setEngineSpeed(float speed)
   {
     // Clamp to interval [0,1]
-    m_engineSpeed = std::max(std::min(speed, 1.0f), 0.0f);
+    if (m_failsafe)
+      m_engineSpeed = 0.0f;
+    else
+      m_engineSpeed = std::max(std::min(speed, 1.0f), 0.0f);
 
     bool engineOn = m_engineSpeed > 0.01f;
 
@@ -289,6 +293,9 @@ namespace Demo
    */
   void Aircraft::setControls(float throttle, float pitch, float roll, float yaw)
   {
+    if (m_failsafe)
+      return;
+
     // Adjust rotation by rates and engine (rotor) speed
     Vector3 axisVector(roll, yaw, pitch);
     axisVector = axisVector * m_axisRates * m_engineSpeed;
@@ -302,6 +309,34 @@ namespace Demo
     // Thrust
     btVector3 thrust = m_physicalBody->upVector() * m_mainRotorThrust * m_engineSpeed * throttle;
     m_physicalBody->body()->applyCentralForce(thrust);
+  }
+
+  /**
+   * @brief Resets the aircraft to the default state.
+   */
+  void Aircraft::reset()
+  {
+    // Reset failsafe flag
+    m_failsafe = false;
+
+    // Reset controls
+    setEngineSpeed(0.0f);
+    setControls(0.0f, 0.0f, 0.0f, 0.0f);
+
+    // Set initial orientation and position
+    // TODO
+  }
+
+  /**
+   * @brief Triggers the failsafe state.
+   *
+   * Calls to setEngineSpeed() and setControls() are ignored and the aircraft
+   * behaves as though it has lost power.
+   */
+  void Aircraft::activateFailsafe()
+  {
+    m_failsafe = true;
+    setEngineSpeed(0.0f);
   }
 }
 }
