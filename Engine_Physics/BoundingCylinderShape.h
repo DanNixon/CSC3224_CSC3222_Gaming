@@ -19,7 +19,8 @@ namespace Physics
 {
   /**
    * @class BoundingCylinderShape
-   * @brief TODO
+   * @brief A wrapper around Bullet's btCylinderShape that builds the cylinder
+   *        from a SceneNode tree.
    * @author Dan Nixon
    */
   class BoundingCylinderShape : public btCylinderShape

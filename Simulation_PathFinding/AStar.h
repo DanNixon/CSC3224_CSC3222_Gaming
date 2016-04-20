@@ -28,6 +28,10 @@ namespace PathFinding
   class AStar
   {
   public:
+    /**
+     * @typedef NodePriorityQueue
+     * @brief Priority queue type for open and closed lists.
+     */
     typedef std::priority_queue<QueueableNode, std::vector<QueueableNode>, std::greater<QueueableNode>>
         NodePriorityQueue;
 
