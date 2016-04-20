@@ -11,12 +11,13 @@
 #include <vector>
 
 #include <Engine_Maths/Vector3.h>
+#include <Engine_Maths/VectorOperations.h>
 
 namespace Simulation
 {
 namespace PathFinding
 {
-  class Arc;
+  class Edge;
 
   /**
    * @class Node
@@ -55,6 +56,29 @@ namespace PathFinding
     inline size_t numConnections() const
     {
       return m_connections.size();
+    }
+
+    /**
+     * @brief Gets an edge connecting this node to another.
+     * @param i Index of edge to retrieve
+     * @return Pointer to edge
+     */
+    inline Edge *edge(size_t i)
+    {
+      return m_connections[i];
+    }
+
+    /**
+     * @brief Gets the heuristic cost of traversing the path between this node
+     *        and another.
+     * @param other Other node
+     * @return Heuristic cost
+     *
+     * Uses the square of the distance between nodes.
+     */
+    inline float h(const Node &other) const
+    {
+      return Engine::Maths::VectorOperations::Distance2(m_position, other.m_position);
     }
 
     friend std::ostream &operator<<(std::ostream &stream, const Node &n);

@@ -11,5 +11,6 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="GraphLoader.h" />
+    <ClInclude Include="QueueableNode.h" />
   </ItemGroup>
 </Project>

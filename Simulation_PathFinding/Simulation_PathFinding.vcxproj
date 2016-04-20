@@ -29,6 +29,7 @@
     <ClInclude Include="Edge.h" />
     <ClInclude Include="GraphLoader.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="QueueableNode.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3888A1A5-54B3-4D46-942F-D66670421D7B}</ProjectGuid>
