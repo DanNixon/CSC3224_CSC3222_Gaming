@@ -45,6 +45,8 @@ namespace Demo
     virtual ~DemoGame();
 
     void setCameraMode(const std::string &mode);
+    void setTelemetryVisible(bool visible);
+    void setSticksVisible(bool visible);
 
   protected:
     virtual int gameStartup();

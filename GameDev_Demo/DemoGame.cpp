@@ -82,6 +82,26 @@ namespace Demo
   }
 
   /**
+   * @brief Sets the visibility of the telemetry indicators.
+   * @param visible Visibility
+   */
+  void DemoGame::setTelemetryVisible(bool visible)
+  {
+    m_rssiIndicator->setActive(visible);
+    m_batteryVoltsIndicator->setActive(visible);
+  }
+
+  /**
+   * @brief Sets the visibility of the stick position indicators.
+   * @param visible Visibility
+   */
+  void DemoGame::setSticksVisible(bool visible)
+  {
+    m_leftStickIndicator->setActive(visible);
+    m_rightStickIndicator->setActive(visible);
+  }
+
+  /**
    * @copydoc Game::gameStartup
    */
   int DemoGame::gameStartup()
