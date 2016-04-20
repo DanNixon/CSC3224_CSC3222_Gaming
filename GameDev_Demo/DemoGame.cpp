@@ -15,6 +15,7 @@
 #include <Engine_Common/Profiler.h>
 #include <Engine_Graphics/GraphicalScene.h>
 #include <Engine_Graphics/HeightmapMesh.h>
+#include <Engine_Graphics/Light.h>
 #include <Engine_Graphics/ModelLoader.h>
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
@@ -184,6 +185,12 @@ namespace Demo
 
     // Scene
     m_s = new GraphicalScene(new SceneObject("root"));
+
+    // Light
+    Light *sun = new Light("sun", 20000.0f);
+    sun->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 1000.0f, 0.0f)));
+    m_s->root()->addChild(sun);
+    m_s->lights().push_back(sun);
 
     // Audio
     m_audioContext = new Context();

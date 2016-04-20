@@ -69,8 +69,8 @@ namespace Demo
     TelemetryValueIndicator *m_batteryVoltsIndicator;
 
     Engine::Graphics::Camera *m_lineOfSightCamera;
-    Engine::Common::Scene *m_s;  //!< Scene containing world (terrain and models)
-    Engine::Common::Scene *m_ui; //!< Scene containing UI
+    Engine::Graphics::GraphicalScene *m_s; //!< Scene containing world (terrain and models)
+    Engine::Common::Scene *m_ui;           //!< Scene containing UI
 
     OptionsMenu *m_menu;
 

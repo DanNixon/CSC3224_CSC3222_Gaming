@@ -11,6 +11,10 @@ uniform float ambientStrength;
 uniform float shininess;
 uniform float shininessStrength;
 
+uniform vec3 light_sun_position;
+uniform float light_sun_radius;
+uniform float light_sun_intensity;
+
 in Vertex
 {
   vec2 texCoord;
@@ -23,15 +27,12 @@ out vec4 fragCol;
 
 void main(void)
 {
-	vec3 lightPos = vec3(0, 10000, 0);
-	float lightRadius = 20000.0;
-
-  vec3 incident = normalize(lightPos - IN.worldPos);
+  vec3 incident = normalize(light_sun_position - IN.worldPos);
   vec3 viewDir = normalize(cameraPos - IN.worldPos);
   vec3 halfDir = normalize(incident + viewDir);
 
-  float dist = length(lightPos - IN.worldPos);
-  float atten = 1.0 - clamp(dist / lightRadius, 0.0 , 1.0);
+  float dist = length(light_sun_position - IN.worldPos);
+  float atten = 1.0 - clamp(dist / light_sun_radius, 0.0 , 1.0);
   float lambert = max(0.0, dot(incident, IN.normal));
 
   float rFactor = max(0.0, dot(halfDir, IN.normal));
@@ -41,7 +42,7 @@ void main(void)
 
   vec4 ambient = vec4(texCol.rgb, 1.0) * ambientColour * ambientStrength;
   vec4 diffuse = vec4(texCol.rgb, 1.0) * diffuseColour * lambert * atten;
-  vec4 specular = specularColour * sFactor * atten;
+  vec4 specular = specularColour * sFactor * atten * light_sun_intensity;
 	
 	fragCol = vec4(ambient.rgb + diffuse.rgb + specular.rgb, texCol.a);
 }

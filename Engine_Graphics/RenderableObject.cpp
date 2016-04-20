@@ -42,6 +42,8 @@ namespace Graphics
   /**
   * @brief Sets the transparency of this object.
   * @param transparent Transparency
+  * @param recursionLevels Maximum depth to traverse down the tree
+  * @param depth Current recursion depth (do not set)
   */
   void RenderableObject::setTransparent(bool transparent, size_t recursionLevels, size_t depth)
   {
@@ -93,6 +95,10 @@ namespace Graphics
 
     if (m_texture != nullptr)
       m_texture->use(program, 0);
+
+    // Update lights
+    for (auto it = m_graphicalScene->lights().begin(); it != m_graphicalScene->lights().end(); ++it)
+      (*it)->use(program);
 
     draw(program);
 
