@@ -15,6 +15,8 @@ namespace GameDev
 {
 namespace Demo
 {
+  class DemoGame;
+
   /**
    * @class OptionsMenu
    * @brief Menu used to display simulation options.
@@ -36,6 +38,8 @@ namespace Demo
     void populateAircraftMenu(const NameValueList &items);
     void populateTerrainMenu(const NameValueList &items);
 
+    void updateOptionNames();
+
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
 
@@ -43,8 +47,12 @@ namespace Demo
     void populateMenu(Engine::UIMenu::MenuItem *parent, const NameValueList &items);
 
   private:
+    DemoGame *m_simulatorGame; //!< Game this menu is used in
+
     Engine::UIMenu::MenuItem *m_aircraftMenu; //!< Aircraft submenu node
     Engine::UIMenu::MenuItem *m_terrainMenu;  //!< Terrain submenu node
+    Engine::UIMenu::MenuItem *m_telemetryOption;
+    Engine::UIMenu::MenuItem *m_sticksOption;
   };
 }
 }

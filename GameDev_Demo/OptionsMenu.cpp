@@ -7,11 +7,14 @@
 
 #include "OptionsMenu.h"
 
+#include <Engine_Utility/StringUtils.h>
+
 #include "DemoGame.h"
 
 using namespace Engine::Common;
 using namespace Engine::Maths;
 using namespace Engine::UIMenu;
+using namespace Engine::Utility;
 
 namespace GameDev
 {
@@ -22,6 +25,7 @@ namespace Demo
    */
   OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize)
       : TopBarMenu(game, font, textSize)
+      , m_simulatorGame(dynamic_cast<DemoGame *>(m_game))
   {
     setMargin(Vector2());
 
@@ -33,12 +37,15 @@ namespace Demo
     addNewItem(cameraMenu, "los", "Line of Sight");
     addNewItem(cameraMenu, "fpv", "First Person View");
 
-    MenuItem *uiMenu = addNewItem(nullptr, "ui", "UI");
-    addNewItem(uiMenu, "telemetry", "Show Telemetry");
-    addNewItem(uiMenu, "sticks", "Show Sticks");
+    MenuItem *uiMenu = addNewItem(nullptr, "ui", "HUD");
+    m_telemetryOption = addNewItem(uiMenu, "telemetry", "Telemetry");
+    m_sticksOption = addNewItem(uiMenu, "sticks", "Sticks");
 
     m_aircraftMenu = addNewItem(nullptr, "aircraft", "Aircraft");
     m_terrainMenu = addNewItem(nullptr, "terrain", "Terrain");
+
+    // Update initial names
+    updateOptionNames();
   }
 
   OptionsMenu::~OptionsMenu()
@@ -64,6 +71,18 @@ namespace Demo
   }
 
   /**
+   * @brief Sets the names of certain menu options based on the state of the game.
+   */
+  void OptionsMenu::updateOptionNames()
+  {
+    bool showTelem = StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_telemetry"]);
+    bool showSticks = StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_sticks"]);
+
+    m_telemetryOption->setText(showTelem ? "Hide Telemetry" : "Show Telemetry");
+    m_sticksOption->setText(showSticks ? "Hide Sticks" : "Show Sticks");
+  }
+
+  /**
    * @copydoc IMenu::handleMenuOptionSelection
    */
   void OptionsMenu::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
@@ -74,7 +93,7 @@ namespace Demo
     }
     else if (item->name() == "pause")
     {
-      auto system = static_cast<DemoGame *>(m_game)->m_physicalSystem;
+      auto system = m_simulatorGame->m_physicalSystem;
       bool run = !system->simulationRunning();
       system->setSimulationState(run);
       item->setText(run ? "Pause" : "Resume", true);
@@ -83,16 +102,27 @@ namespace Demo
     {
       dynamic_cast<DemoGame *>(m_game)->setCameraMode(item->name());
     }
+    else if (item->name() == "telemetry")
+    {
+      bool state = !StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_telemetry"]);
+      m_simulatorGame->setTelemetryVisible(state);
+      updateOptionNames();
+    }
+    else if (item->name() == "sticks")
+    {
+      bool state = !StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_sticks"]);
+      m_simulatorGame->setSticksVisible(state);
+      updateOptionNames();
+    }
     else if (item->parent()->name() == "aircraft")
     {
       std::string selectedAircraftName = item->name();
-      dynamic_cast<ConfigurableGame *>(m_game)->root().children()["aircraft"].keys()["selected"] = selectedAircraftName;
+      m_simulatorGame->root().children()["aircraft"].keys()["selected"] = selectedAircraftName;
     }
     else if (item->parent()->name() == "terrain")
     {
       std::string selectedAircraftName = item->name();
-      dynamic_cast<ConfigurableGame *>(m_game)->root().children()["terrain"].keys()["default_model"] =
-          selectedAircraftName;
+      m_simulatorGame->root().children()["terrain"].keys()["default_model"] = selectedAircraftName;
     }
   }
 

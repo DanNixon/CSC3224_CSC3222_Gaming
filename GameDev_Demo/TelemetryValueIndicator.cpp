@@ -119,11 +119,11 @@ namespace Demo
     switch (alarm)
     {
     case AlarmType::LOW:
-      m_alarmText->setActive(true);
+      m_alarmText->setActive(true && m_active);
       m_alarmText->setText("LOW");
       break;
     case AlarmType::CRITICAL:
-      m_alarmText->setActive(true);
+      m_alarmText->setActive(true && m_active);
       m_alarmText->setText("CRITICAL");
       break;
     default:

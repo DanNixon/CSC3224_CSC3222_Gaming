@@ -27,6 +27,7 @@
 #include <Engine_Physics/ConvexHullShape.h>
 #include <Engine_Physics/StaticPlaneRigidBody.h>
 #include <Engine_ResourceManagment/MemoryManager.h>
+#include <Engine_Utility/StringUtils.h>
 
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
@@ -41,6 +42,7 @@ using namespace Engine::UIMenu;
 using namespace Engine::Physics;
 using namespace Engine::IO;
 using namespace Engine::Logging;
+using namespace Engine::Utility;
 
 namespace
 {
@@ -87,8 +89,9 @@ namespace Demo
    */
   void DemoGame::setTelemetryVisible(bool visible)
   {
-    m_rssiIndicator->setActive(visible);
-    m_batteryVoltsIndicator->setActive(visible);
+    m_rssiIndicator->setActive(visible, std::numeric_limits<size_t>::max());
+    m_batteryVoltsIndicator->setActive(visible, std::numeric_limits<size_t>::max());
+    m_root.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
   }
 
   /**
@@ -97,8 +100,9 @@ namespace Demo
    */
   void DemoGame::setSticksVisible(bool visible)
   {
-    m_leftStickIndicator->setActive(visible);
-    m_rightStickIndicator->setActive(visible);
+    m_leftStickIndicator->setActive(visible, std::numeric_limits<size_t>::max());
+    m_rightStickIndicator->setActive(visible, std::numeric_limits<size_t>::max());
+    m_root.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
   }
 
   /**
@@ -172,6 +176,10 @@ namespace Demo
     m_batteryVoltsIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -2.5f, 0.9f)));
     // TODO: take battery limits from aircraft data
     m_batteryVoltsIndicator->setAlarmLevels(10.5f, 9.9f);
+
+    // UI: set default state
+    setTelemetryVisible(StringUtils::ToBool(m_root.children()["hud"].keys()["show_telemetry"]));
+    setSticksVisible(StringUtils::ToBool(m_root.children()["hud"].keys()["show_sticks"]));
 
     // Scene
     m_s = new GraphicalScene(new SceneObject("root"));
@@ -366,7 +374,6 @@ namespace Demo
     node.addChild(hud);
 
     KVNode onScreenTelemetry("on_screen_telemetry");
-    onScreenTelemetry.keys()["show"] = "true";
     onScreenTelemetry.keys()["rssi_low"] = "55";
     onScreenTelemetry.keys()["rssi_critical"] = "40";
     node.addChild(onScreenTelemetry);
