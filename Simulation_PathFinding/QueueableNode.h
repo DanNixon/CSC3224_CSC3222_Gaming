@@ -31,13 +31,12 @@ namespace PathFinding
     /**
      * @brief Creates a new wrapper.
      * @param n Wrapped node
-     * @param f F value
-     * @param p Parent node in path
      */
-    QueueableNode(Node *n, float f = std::numeric_limits<float>::max(), Node *p = nullptr)
+    QueueableNode(Node *n)
         : node(n)
-        , parent(p)
-        , fValue(f)
+        , parent(nullptr)
+        , fScore(std::numeric_limits<float>::max())
+        , gScore(std::numeric_limits<float>::max())
     {
     }
 
@@ -53,7 +52,7 @@ namespace PathFinding
      */
     bool operator>(const QueueableNode &other) const
     {
-      return this->fValue > other.fValue;
+      return this->fScore > other.fScore;
     }
 
     /**
@@ -64,7 +63,7 @@ namespace PathFinding
      */
     bool operator>=(const QueueableNode &other) const
     {
-      return this->fValue >= other.fValue;
+      return this->fScore >= other.fScore;
     }
 
     /**
@@ -74,7 +73,7 @@ namespace PathFinding
      */
     bool operator<(const QueueableNode &other) const
     {
-      return this->fValue < other.fValue;
+      return this->fScore < other.fScore;
     }
 
     /**
@@ -85,13 +84,14 @@ namespace PathFinding
      */
     bool operator<=(const QueueableNode &other) const
     {
-      return this->fValue <= other.fValue;
+      return this->fScore <= other.fScore;
     }
 
   public:
     Node *node;   //!< Wrapped Node
     Node *parent; //!< Parent Node in path
-    float fValue; //!< F value of wrapped node
+    float fScore; //!< F score of wrapped node
+    float gScore; //!< G score of wrapped node
   };
 }
 }

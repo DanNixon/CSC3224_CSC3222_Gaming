@@ -8,13 +8,12 @@
 #ifndef _SIMULATION_PATHFINDING_ASTAR_H_
 #define _SIMULATION_PATHFINDING_ASTAR_H_
 
-#include <functional>
 #include <map>
-#include <queue>
 #include <vector>
 
 #include "Node.h"
 #include "QueueableNode.h"
+#include "NodePriorityQueue.h"
 
 namespace Simulation
 {
@@ -28,15 +27,7 @@ namespace PathFinding
   class AStar
   {
   public:
-    /**
-     * @typedef NodePriorityQueue
-     * @brief Priority queue type for open and closed lists.
-     */
-    typedef std::priority_queue<QueueableNode, std::vector<QueueableNode>, std::greater<QueueableNode>>
-        NodePriorityQueue;
-
-  public:
-    AStar();
+    AStar(const std::vector<Node *> &nodes);
     virtual ~AStar();
 
     void reset();
@@ -55,7 +46,7 @@ namespace PathFinding
      * @brief Gets the closed list.
      * @return Closed list
      */
-    NodePriorityQueue closedList() const
+    std::vector<QueueableNode> closedList() const
     {
       return m_closedList;
     }
@@ -70,10 +61,10 @@ namespace PathFinding
     }
 
   private:
-    std::map<Node *, float> m_gValues; //!< Cache of calculated g values
+    std::map<Node *, QueueableNode *> m_nodeData;
 
-    NodePriorityQueue m_openList;   //!< Open list
-    NodePriorityQueue m_closedList; //!< Closed list
+    NodePriorityQueue m_openList;            //!< Open list
+    std::vector<QueueableNode> m_closedList; //!< Closed list
 
     std::vector<Node *> m_path; //!< Computed path
   };

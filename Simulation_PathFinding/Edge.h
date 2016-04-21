@@ -54,6 +54,8 @@ namespace PathFinding
       return m_nodeB;
     }
 
+    Node * otherNode(Node * node);
+
     /**
      * @brief Tests if this edge is traversable.
      * @return True if this edge can be traversed

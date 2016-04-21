@@ -40,6 +40,24 @@ namespace PathFinding
   }
 
   /**
+   * @brief Gets the node an the edge that is not a given node.
+   * @param node A node on the edge
+   * @return Pointer to the other node on the edge, nullptr if node is not on
+   *         this edge
+   */
+  Node * Edge::otherNode(Node * node)
+  {
+    Node * retVal = nullptr;
+
+    if (node == m_nodeA)
+      retVal = m_nodeB;
+    else if (node == m_nodeB)
+      retVal = m_nodeA;
+
+    return retVal;
+  }
+
+  /**
    * @brief Sets if this edge can be traversed.
    * @param traversable True if this edge can be traversed
    */
