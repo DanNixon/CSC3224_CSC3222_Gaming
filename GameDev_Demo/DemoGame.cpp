@@ -331,7 +331,7 @@ namespace Demo
       m_leftStickIndicator->setStickPosition(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT));
       m_rightStickIndicator->setStickPosition(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH));
 
-      // Telemetry indicators (TODO: move to slower loop)
+      // Telemetry indicators
       m_rssiIndicator->setValue((float)m_aircraft->rssi());
       m_batteryVoltsIndicator->setValue(m_aircraft->batteryVoltage(), 3);
     }
