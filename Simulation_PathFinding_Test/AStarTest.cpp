@@ -8,6 +8,9 @@
 #include "CppUnitTest.h"
 
 #include <Simulation_PathFinding/Node.h>
+#include <Simulation_PathFinding/Edge.h>
+#include <Simulation_PathFinding/GraphLoader.h>
+#include <Simulation_PathFinding/AStar.h>
 
 #include <sstream>
 
@@ -25,8 +28,28 @@ namespace Test
 TEST_CLASS(AStarTest)
 {
 public:
+  TEST_METHOD(AStarTest_LoadTestGraph)
+  {
+    std::vector<Node *> nodes;
+    std::vector<Edge *> edges;
+
+    // Test load
+    Assert::IsTrue(GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat"));
+
+    // Assert node/edge count
+    Assert::AreEqual((size_t)9, nodes.size());
+    Assert::AreEqual((size_t)12, edges.size());
+  }
+
   TEST_METHOD(AStarTest_TODO)
   {
+    // Load test graph
+    std::vector<Node *> nodes;
+    std::vector<Edge *> edges;
+    GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
+
+    AStar pathFinder(nodes);
+
     // TODO
   }
 };
