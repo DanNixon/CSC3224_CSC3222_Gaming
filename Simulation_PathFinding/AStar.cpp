@@ -67,54 +67,67 @@ namespace PathFinding
     bool success = false;
     while (!m_openList.empty())
     {
-     // QueueableNode p = m_openList.top();
+      QueueableNode * p = m_openList.top();
 
-     // // Check if this is the ned node
-     // if (p.node == end)
-     // {
-     //   success = true;
-     //   break;
-     // }
+      // Check if this is the ned node
+      if (p->node == end)
+      {
+        success = true;
+        break;
+      }
 
-     // // Move this node to the closed list
-     // m_openList.pop();
-     // m_closedList.push_back(p);
+      // Move this node to the closed list
+      m_openList.pop();
+      m_closedList.push_back(p);
 
-	    //// For each node connected to the next node
-	    //for (size_t i = 0; i < p.node->numConnections(); i++)
-	    //{
-     //   Edge * pq = p.node->edge(i);
-     //   QueueableNode q(pq->otherNode(p.node));
-     //   q.parent = p.node;
+      // For each node connected to the next node
+      for (size_t i = 0; i < p->node->numConnections(); i++)
+      {
+        Edge * pq = p->node->edge(i);
+        QueueableNode * q = m_nodeData[pq->otherNode(p->node)];
 
-     //   // Calculate scores
-     //   float gScore = m_gValues[p.node] + pq->cost();
-     //   q.fValue = gScore + q.node->h(*end);
+        // Calculate new scores
+        float gScore = p->gScore + pq->cost();
+        float fScore = gScore + q->node->h(*end);
+   
+        // Search for this node on open and closed lists
+        auto closedIt = std::find(m_closedList.begin(), m_closedList.end(), q);
+        auto openIt = m_openList.find(q);
 
-     //   // This path is no better
-     //   if (m_gValues.find(q.node) != m_gValues.end() && m_gValues[q.node] < gScore)
-     //     continue;
-     //   
-     //   auto closedIt = std::find_if(m_closedList.begin(), m_closedList.end(), [&q](QueueableNode & n){ return n.node == q.node; });
-     //   auto openIt = m_openList.findNode(q.node);
-
-     //   if (closedIt != m_closedList.end())
-     //     closedIt->parent = p.node;
-     //   else if (openIt != m_openList.end())
-     //     openIt->parent = p.node;
-     //   else
-     //     m_openList.push(q);
-  	  //}
+        if (closedIt != m_closedList.end() || openIt != m_openList.end())
+        {
+          // Check if this path is more efficient that the previous best
+          if (q->gScore > gScore)
+          {
+            q->parent = p;
+            q->gScore = gScore;
+            q->fScore = fScore;
+          }
+        }
+        else
+        {
+          // Add this path to the open list if it has yet to be considered
+          q->parent = p;
+          q->gScore = gScore;
+          q->fScore = fScore;
+          m_openList.push(q);
+        }
+      }
     }
 
     // If successful then reconstruct the best path
     if (success)
     {
-      //QueueableNode * n = m_closedList.back();
-      //while (n.parent != nullptr)
-      //{
-      //  // TODO
-      //}
+      // Add nodes to path
+      QueueableNode * n = m_closedList.back();
+      while (n)
+      {
+        m_path.push_back(n->node);
+        n = n->parent;
+      }
+
+      // Reverse path to be ordered start to end
+      std::reverse(m_path.begin(), m_path.end());
     }
 
     return success;

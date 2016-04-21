@@ -88,10 +88,10 @@ namespace PathFinding
     }
 
   public:
-    Node *node;   //!< Wrapped Node
-    Node *parent; //!< Parent Node in path
-    float fScore; //!< F score of wrapped node
-    float gScore; //!< G score of wrapped node
+    Node *node;            //!< Wrapped Node
+    QueueableNode *parent; //!< Parent Node in path
+    float fScore;          //!< F score of wrapped node
+    float gScore;          //!< G score of wrapped node
   };
 }
 }

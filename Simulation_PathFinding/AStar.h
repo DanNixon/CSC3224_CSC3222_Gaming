@@ -46,7 +46,7 @@ namespace PathFinding
      * @brief Gets the closed list.
      * @return Closed list
      */
-    std::vector<QueueableNode> closedList() const
+    std::vector<QueueableNode *> closedList() const
     {
       return m_closedList;
     }
@@ -63,8 +63,8 @@ namespace PathFinding
   private:
     std::map<Node *, QueueableNode *> m_nodeData;
 
-    NodePriorityQueue m_openList;            //!< Open list
-    std::vector<QueueableNode> m_closedList; //!< Closed list
+    NodePriorityQueue m_openList;              //!< Open list
+    std::vector<QueueableNode *> m_closedList; //!< Closed list
 
     std::vector<Node *> m_path; //!< Computed path
   };

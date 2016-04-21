@@ -33,11 +33,19 @@ namespace PathFinding
   public:
     typedef NodePriorityQueueSuperType::container_type::iterator iterator;
 
+    /**
+     * @brief Gets an iterator to the start of the container.
+     * @return Start iterator
+     */
     iterator begin()
     {
       return this->c.begin();
     }
 
+    /**
+     * @brief Gets an iterator to the end of the container.
+     * @return End iterator
+     */
     iterator end()
     {
       return this->c.end();
@@ -48,7 +56,7 @@ namespace PathFinding
      * @param node Node to search for
      * @return Iterator at which the node was found, end if not found
      */
-    iterator findNode(Node * node)
+    iterator find(QueueableNode * node)
     {
       auto first = this->c.begin();
       auto last = this->c.end();
@@ -56,7 +64,7 @@ namespace PathFinding
       // Iterate through storage
       while (first != last)
       {
-        if ((*first)->node == node)
+        if (*first == node)
           return first;
 
         ++first;
