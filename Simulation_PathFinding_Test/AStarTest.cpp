@@ -38,10 +38,10 @@ public:
 
     // Assert node/edge count
     Assert::AreEqual((size_t)9, nodes.size());
-    Assert::AreEqual((size_t)12, edges.size());
+    Assert::AreEqual((size_t)20, edges.size());
   }
 
-  TEST_METHOD(AStarTest_TODO)
+  TEST_METHOD(AStarTest_StartAndEndNodeIdentical)
   {
     // Load test graph
     std::vector<Node *> nodes;
@@ -50,7 +50,11 @@ public:
 
     AStar pathFinder(nodes);
 
-    // TODO
+    Assert::IsTrue(pathFinder.findPath(nodes[3], nodes[3]));
+
+    std::vector<Node *> &path = pathFinder.path();
+    Assert::AreEqual((size_t)1, path.size());
+    Assert::IsTrue(nodes[3] == path[0]);
   }
 };
 #endif /* DOXYGEN_SKIP */

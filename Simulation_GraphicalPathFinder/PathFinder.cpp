@@ -62,7 +62,10 @@ namespace GraphicalPathFinder
     m_scene = new Scene(new SceneObject("root"), view, proj);
 
     // Load graph
-    if (!GraphLoader::LoadGraph(m_nodes, m_edges, "../resources/buckminsterfullerene.dat"))
+    const std::string graphDataFile("../resources/buckminsterfullerene.dat");
+    // const std::string graphDataFile("../resources/test_graph.dat");
+
+    if (!GraphLoader::LoadGraph(m_nodes, m_edges, graphDataFile))
     {
       g_log.critical("Could not load graph data file");
       return 1;

@@ -69,16 +69,16 @@ namespace PathFinding
     {
       QueueableNode * p = m_openList.top();
 
+      // Move this node to the closed list
+      m_openList.pop();
+      m_closedList.push_back(p);
+
       // Check if this is the ned node
       if (p->node == end)
       {
         success = true;
         break;
       }
-
-      // Move this node to the closed list
-      m_openList.pop();
-      m_closedList.push_back(p);
 
       // For each node connected to the next node
       for (size_t i = 0; i < p->node->numConnections(); i++)
