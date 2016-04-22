@@ -35,7 +35,7 @@ Engine::Logging::Logger g_log(__FILE__);
 
 namespace GameDev
 {
-  namespace FlightSim
+namespace FlightSim
 {
   /**
    * @brief Creates a new aircraft.

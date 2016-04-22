@@ -10,7 +10,7 @@
 
 namespace GameDev
 {
-  namespace FlightSim
+namespace FlightSim
 {
   /**
    * @enum Controls

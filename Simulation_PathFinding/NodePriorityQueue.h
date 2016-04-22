@@ -21,7 +21,8 @@ namespace PathFinding
    * @typedef NodePriorityQueueSuperType
    * @brief Underlaying queue type used for NodePriorityQueue.
    */
-  typedef std::priority_queue<QueueableNode *, std::vector<QueueableNode *>, std::greater<QueueableNode *>> NodePriorityQueueSuperType;
+  typedef std::priority_queue<QueueableNode *, std::vector<QueueableNode *>, std::greater<QueueableNode *>>
+      NodePriorityQueueSuperType;
 
   /**
    * @class NodePriorityQueue
@@ -56,7 +57,7 @@ namespace PathFinding
      * @param node Node to search for
      * @return Iterator at which the node was found, end if not found
      */
-    iterator find(QueueableNode * node)
+    iterator find(QueueableNode *node)
     {
       auto first = this->c.begin();
       auto last = this->c.end();

@@ -12,8 +12,8 @@
 #include <vector>
 
 #include "Node.h"
-#include "QueueableNode.h"
 #include "NodePriorityQueue.h"
+#include "QueueableNode.h"
 
 namespace Simulation
 {

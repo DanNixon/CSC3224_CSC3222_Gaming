@@ -17,7 +17,7 @@ using namespace Engine::Maths;
 
 namespace GameDev
 {
-  namespace FlightSim
+namespace FlightSim
 {
   /**
    * @brief Creates a new telemetry value indicator.

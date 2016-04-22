@@ -7,10 +7,10 @@
 
 #include "CppUnitTest.h"
 
-#include <Simulation_PathFinding/Node.h>
+#include <Simulation_PathFinding/AStar.h>
 #include <Simulation_PathFinding/Edge.h>
 #include <Simulation_PathFinding/GraphLoader.h>
-#include <Simulation_PathFinding/AStar.h>
+#include <Simulation_PathFinding/Node.h>
 
 #include <sstream>
 

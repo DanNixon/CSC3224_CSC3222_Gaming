@@ -67,7 +67,7 @@ namespace PathFinding
     bool success = false;
     while (!m_openList.empty())
     {
-      QueueableNode * p = m_openList.top();
+      QueueableNode *p = m_openList.top();
 
       // Move this node to the closed list
       m_openList.pop();
@@ -83,13 +83,13 @@ namespace PathFinding
       // For each node connected to the next node
       for (size_t i = 0; i < p->node->numConnections(); i++)
       {
-        Edge * pq = p->node->edge(i);
-        QueueableNode * q = m_nodeData[pq->otherNode(p->node)];
+        Edge *pq = p->node->edge(i);
+        QueueableNode *q = m_nodeData[pq->otherNode(p->node)];
 
         // Calculate new scores
         float gScore = p->gScore + pq->cost();
         float fScore = gScore + q->node->h(*end);
-   
+
         // Search for this node on open and closed lists
         auto closedIt = std::find(m_closedList.begin(), m_closedList.end(), q);
         auto openIt = m_openList.find(q);
@@ -119,7 +119,7 @@ namespace PathFinding
     if (success)
     {
       // Add nodes to path
-      QueueableNode * n = m_closedList.back();
+      QueueableNode *n = m_closedList.back();
       while (n)
       {
         m_path.push_back(n->node);

@@ -52,17 +52,17 @@ Logger g_log(__FILE__);
 
 namespace GameDev
 {
-  namespace FlightSim
+namespace FlightSim
 {
   /**
    * @brief Creates a new demonstration game instance.
    */
-    FlightSimGame::FlightSimGame()
+  FlightSimGame::FlightSimGame()
       : ConfigurableGame("Engine Demo", std::make_pair(1024, 768))
   {
   }
 
-    FlightSimGame::~FlightSimGame()
+  FlightSimGame::~FlightSimGame()
   {
   }
 
@@ -73,7 +73,7 @@ namespace GameDev
    * Expected mode strings are either "fpv" for first person view or "los" for
    * line of sight.
    */
-    void FlightSimGame::setCameraMode(const std::string &mode)
+  void FlightSimGame::setCameraMode(const std::string &mode)
   {
     // Update active camera
     bool fpv = mode == "fpv";
@@ -88,7 +88,7 @@ namespace GameDev
    * @brief Sets the visibility of the telemetry indicators.
    * @param visible Visibility
    */
-    void FlightSimGame::setTelemetryVisible(bool visible)
+  void FlightSimGame::setTelemetryVisible(bool visible)
   {
     m_rssiIndicator->setActive(visible);
     m_batteryVoltsIndicator->setActive(visible);
@@ -99,7 +99,7 @@ namespace GameDev
    * @brief Sets the visibility of the stick position indicators.
    * @param visible Visibility
    */
-    void FlightSimGame::setSticksVisible(bool visible)
+  void FlightSimGame::setSticksVisible(bool visible)
   {
     m_leftStickIndicator->setActive(visible);
     m_rightStickIndicator->setActive(visible);
@@ -109,7 +109,7 @@ namespace GameDev
   /**
    * @copydoc Game::gameStartup
    */
-    int FlightSimGame::gameStartup()
+  int FlightSimGame::gameStartup()
   {
     int retVal = ConfigurableGame::gameStartup();
 

@@ -45,9 +45,9 @@ namespace PathFinding
    * @return Pointer to the other node on the edge, nullptr if node is not on
    *         this edge
    */
-  Node * Edge::otherNode(Node * node)
+  Node *Edge::otherNode(Node *node)
   {
-    Node * retVal = nullptr;
+    Node *retVal = nullptr;
 
     if (node == m_nodeA)
       retVal = m_nodeB;

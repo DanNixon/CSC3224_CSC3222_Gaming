@@ -18,7 +18,7 @@ using namespace Engine::Utility;
 
 namespace GameDev
 {
-  namespace FlightSim
+namespace FlightSim
 {
   /**
    * @copydoc TopBarMenu::TopBarMenu

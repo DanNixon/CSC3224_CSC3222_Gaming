@@ -13,5 +13,6 @@
 int main(int argc, char *args[])
 {
   GameDev::FlightSim::FlightSimGame g;
-  return g.run();;
+  return g.run();
+  ;
 }

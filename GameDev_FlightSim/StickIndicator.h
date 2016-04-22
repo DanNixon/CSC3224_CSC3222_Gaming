@@ -14,7 +14,7 @@
 
 namespace GameDev
 {
-  namespace FlightSim
+namespace FlightSim
 {
   /**
    * @class StickIndicator
