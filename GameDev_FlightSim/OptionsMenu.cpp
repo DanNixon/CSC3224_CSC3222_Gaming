@@ -2,7 +2,7 @@
  * @file
  * @author Dan Nixon (120263697)
  *
- * For CSC3224 Project 1.
+ * For CSC3224 Project 2.
  */
 
 #include "OptionsMenu.h"

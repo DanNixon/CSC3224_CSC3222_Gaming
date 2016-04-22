@@ -2,10 +2,7 @@
  * @file
  * @author Dan Nixon (120263697)
  *
- * For CSC3224 Project 1.
- *
- * Note: seemingly magic numbers here vary depending on the aircraft model and
- * will be loaded from a file in the finished game.
+ * For CSC3224 Project 2.
  */
 
 #include "Aircraft.h"

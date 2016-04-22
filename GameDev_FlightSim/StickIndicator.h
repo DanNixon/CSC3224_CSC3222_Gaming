@@ -2,11 +2,11 @@
  * @file
  * @author Dan Nixon (120263697)
  *
- * For CSC3224 Project 1.
+ * For CSC3224 Project 2.
  */
 
-#ifndef _GAMEDEV_DEMO_STICKINDICATOR_H_
-#define _GAMEDEV_DEMO_STICKINDICATOR_H_
+#ifndef _GAMEDEV_FLIGHTSIM_STICKINDICATOR_H_
+#define _GAMEDEV_FLIGHTSIM_STICKINDICATOR_H_
 
 #include <Engine_Common/SceneObject.h>
 
