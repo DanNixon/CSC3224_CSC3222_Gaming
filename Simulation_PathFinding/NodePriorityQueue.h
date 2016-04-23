@@ -11,7 +11,7 @@
 #include <functional>
 #include <queue>
 
-#include "Node.h"
+#include "QueueableNode.h"
 
 namespace Simulation
 {
