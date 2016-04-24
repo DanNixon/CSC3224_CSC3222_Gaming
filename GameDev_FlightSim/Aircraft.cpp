@@ -169,6 +169,10 @@ namespace FlightSim
    */
   void Aircraft::initPhysics(PhysicalSystem *system, const Vector3 &initialPosition, const Quaternion &initialRotation)
   {
+    // Record initial state
+    m_initialRotation = initialRotation;
+    m_initialPosition = initialPosition;
+
     // Collision shape
     btCompoundShape *shape = new btCompoundShape();
 
@@ -335,7 +339,8 @@ namespace FlightSim
     setControls(0.0f, 0.0f, 0.0f, 0.0f);
 
     // Set initial orientation and position
-    // TODO
+    m_physicalBody->body()->clearForces();
+    m_physicalBody->body()->setCenterOfMassTransform(MathsConversions::ToBullet(m_initialRotation, m_initialPosition));
   }
 
   /**

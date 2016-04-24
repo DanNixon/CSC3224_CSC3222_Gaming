@@ -98,6 +98,10 @@ namespace FlightSim
       system->setSimulationState(run);
       item->setText(run ? "Pause" : "Resume", true);
     }
+    else if (item->name() == "reset")
+    {
+      m_simulatorGame->m_aircraft->reset();
+    }
     else if (item->parent()->name() == "camera")
     {
       m_simulatorGame->setCameraMode(item->name());

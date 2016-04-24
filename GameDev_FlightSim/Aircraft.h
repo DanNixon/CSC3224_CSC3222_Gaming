@@ -167,6 +167,8 @@ namespace FlightSim
     Engine::Graphics::RenderableObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
     Engine::Physics::RigidBody *m_physicalBody; //!< Phsyical body of the aircraft
+    Engine::Maths::Quaternion m_initialRotation;
+    Engine::Maths::Vector3 m_initialPosition;
 
     Engine::Audio::Source *m_sounds[4]; //!< Pointers to each type of sound emitted from the aircraft
 
