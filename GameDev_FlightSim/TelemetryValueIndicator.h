@@ -18,7 +18,6 @@ namespace GameDev
 namespace FlightSim
 {
   /**
-   * @enum AlarmType
    * @brief Defines the alarm state for a telemetry value.
    * @author Dan Nixon
    */

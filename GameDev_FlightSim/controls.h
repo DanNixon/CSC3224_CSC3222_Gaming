@@ -5,15 +5,14 @@
  * For CSC3224 Project 2.
  */
 
-#ifndef _GAMEDEV_DEMO_CONTROLS_H_
-#define _GAMEDEV_DEMO_CONTROLS_H_
+#ifndef _GAMEDEV_FLIGHTSIM_CONTROLS_H_
+#define _GAMEDEV_FLIGHTSIM_CONTROLS_H_
 
 namespace GameDev
 {
 namespace FlightSim
 {
   /**
-   * @enum Controls
    * @brief Enumeration of all control states required in the demo.
    * @author Dan Nixon
    */

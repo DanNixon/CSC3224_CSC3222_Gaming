@@ -21,7 +21,6 @@ namespace GameDev
 namespace FlightSim
 {
   /**
-   * @enum AircraftModel
    * @brief Used to identify models for an aircraft.
    * @author Dan Nixon
    */
@@ -33,7 +32,6 @@ namespace FlightSim
   };
 
   /**
-   * @enum AircraftSound
    * @brief Used to identify a sound made by an aircraft.
    * @author Dan Nixon
    */
@@ -166,9 +164,9 @@ namespace FlightSim
     Engine::Graphics::RenderableObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
     Engine::Graphics::RenderableObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    Engine::Physics::RigidBody *m_physicalBody; //!< Phsyical body of the aircraft
-    Engine::Maths::Quaternion m_initialRotation;
-    Engine::Maths::Vector3 m_initialPosition;
+    Engine::Physics::RigidBody *m_physicalBody;  //!< Phsyical body of the aircraft
+    Engine::Maths::Quaternion m_initialRotation; //!< Initial orientation of the aircraft model
+    Engine::Maths::Vector3 m_initialPosition;    //!< Initial world position of the aircraft model
 
     Engine::Audio::Source *m_sounds[4]; //!< Pointers to each type of sound emitted from the aircraft
 
