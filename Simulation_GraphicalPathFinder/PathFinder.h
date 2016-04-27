@@ -13,8 +13,8 @@
 #include <map>
 
 #include <Engine_Common/Scene.h>
-#include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Graphics/RenderableObject.h>
+#include <Engine_Graphics/ShaderProgram.h>
 
 #include <Simulation_PathFinding/Edge.h>
 #include <Simulation_PathFinding/Node.h>
