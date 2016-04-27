@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AStarBuckyballTest.cpp" />
     <ClCompile Include="AStarTest.cpp" />
+    <ClCompile Include="AStarWeightedTest.cpp" />
     <ClCompile Include="EdgeTest.cpp" />
     <ClCompile Include="GraphLoaderTest.cpp" />
     <ClCompile Include="NodeTest.cpp" />

@@ -4,7 +4,9 @@
     <ClCompile Include="NodeTest.cpp" />
     <ClCompile Include="EdgeTest.cpp" />
     <ClCompile Include="GraphLoaderTest.cpp" />
-    <ClCompile Include="AStarTest.cpp" />
     <ClCompile Include="PriorityQueueTest.cpp" />
+    <ClCompile Include="AStarBuckyballTest.cpp" />
+    <ClCompile Include="AStarTest.cpp" />
+    <ClCompile Include="AStarWeightedTest.cpp" />
   </ItemGroup>
 </Project>
