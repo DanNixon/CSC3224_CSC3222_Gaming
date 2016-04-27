@@ -13,6 +13,6 @@
     <ClInclude Include="GraphLoader.h" />
     <ClInclude Include="QueueableNode.h" />
     <ClInclude Include="NodePriorityQueue.h" />
-    <ClInclude Include="less_ptr.h" />
+    <ClInclude Include="greater_ptr.h" />
   </ItemGroup>
 </Project>

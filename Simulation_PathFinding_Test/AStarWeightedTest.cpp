@@ -17,8 +17,6 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Engine::Maths;
 
-// TODO
-
 // clang-format off
 namespace Simulation
 {
@@ -37,6 +35,9 @@ public:
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
+    // Set weights
+    nodes[3]->edge(2)->setWeight(12.7f);
+
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[3], nodes[3]));
@@ -54,6 +55,10 @@ public:
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
+    // Set weights
+    edges[2]->setWeight(15.0f);
+    edges[15]->setWeight(6.0f);
+
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[3], nodes[5]));
@@ -62,7 +67,7 @@ public:
     std::vector<Node *> &path = pathFinder.path();
     Assert::AreEqual((size_t)3, path.size());
     Assert::IsTrue(nodes[3] == path[0]);
-    Assert::IsTrue(nodes[4] == path[1]);
+    Assert::IsTrue(nodes[7] == path[1]);
     Assert::IsTrue(nodes[5] == path[2]);
   }
   
@@ -73,6 +78,10 @@ public:
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
+    // Set weights
+    edges[2]->setWeight(15.0f);
+    edges[15]->setWeight(6.0f);
+
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[5], nodes[3]));
@@ -81,7 +90,7 @@ public:
     std::vector<Node *> &path = pathFinder.path();
     Assert::AreEqual((size_t)3, path.size());
     Assert::IsTrue(nodes[5] == path[0]);
-    Assert::IsTrue(nodes[4] == path[1]);
+    Assert::IsTrue(nodes[7] == path[1]);
     Assert::IsTrue(nodes[3] == path[2]);
   }
 
@@ -91,6 +100,10 @@ public:
     std::vector<Node *> nodes;
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
+
+    // Set weights
+    // TOOD
+    nodes[0]->edge(0)->setWeight(1.0f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -111,6 +124,10 @@ public:
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
+    // Set weights
+    // TOOD
+    nodes[0]->edge(0)->setWeight(1.0f);
+
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[1], nodes[6]));
@@ -129,6 +146,10 @@ public:
     std::vector<Node *> nodes;
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
+
+    // Set weights
+    // TOOD
+    nodes[0]->edge(0)->setWeight(1.0f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -149,6 +170,10 @@ public:
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
+    // Set weights
+    // TOOD
+    nodes[0]->edge(0)->setWeight(1.0f);
+
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[0], nodes[8]));
@@ -168,6 +193,10 @@ public:
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
+    // Set weights
+    // TOOD
+    nodes[0]->edge(0)->setWeight(1.0f);
+
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[7], nodes[4]));
@@ -185,6 +214,10 @@ public:
     std::vector<Node *> nodes;
     std::vector<Edge *> edges;
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
+
+    // Set weights
+    // TOOD
+    nodes[0]->edge(0)->setWeight(1.0f);
 
     // Run path finding
     AStar pathFinder(nodes);

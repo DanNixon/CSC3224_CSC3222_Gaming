@@ -73,7 +73,7 @@ namespace PathFinding
       m_openList.pop();
       m_closedList.push_back(p);
 
-      // Check if this is the ned node
+      // Check if this is the end node
       if (p->node == end)
       {
         success = true;
@@ -102,7 +102,7 @@ namespace PathFinding
             q->parent = p;
             q->gScore = gScore;
             q->fScore = fScore;
-            m_openList.updatePosition(q);
+            m_openList.update();
           }
         }
         else

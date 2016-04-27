@@ -8,56 +8,59 @@
 #ifndef _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 #define _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 
-#include <set>
+#include <algorithm>
 
 #include "QueueableNode.h"
-#include "less_ptr.h"
+#include "greater_ptr.h"
 
 namespace Simulation
 {
 namespace PathFinding
 {
   /**
-   * @typedef NodePriorityQueueSuperType
-   * @brief Underlaying queue type used for NodePriorityQueue.
-   */
-  typedef std::set<QueueableNode *, less_ptr<QueueableNode>> NodePriorityQueueSuperType;
-
-  /**
    * @class NodePriorityQueue
    * @brief Wrapper around a set that can emulate a priority queue.
    * @author Dan Nixon
    */
-  class NodePriorityQueue : public NodePriorityQueueSuperType
+  class NodePriorityQueue : public std::vector<QueueableNode *>
   {
   public:
-    void push(QueueableNode *item)
+    NodePriorityQueue() :
+      std::vector<QueueableNode *>(),
+      m_comp()
     {
-      this->insert(item);
+      std::make_heap(begin(), end(), m_comp);
     }
 
-    QueueableNode *top()
+    void push(QueueableNode * item)
     {
-      return *(this->begin());
+      push_back(item);
+      std::push_heap(begin(), end(), m_comp);
     }
 
-    QueueableNode *pop()
+    void pop()
     {
-      auto bIt = this->begin();
-      QueueableNode *node = *bIt;
-      erase(bIt);
-      return node;
+      std::pop_heap(begin(), end(), m_comp);
+      pop_back();
     }
 
-    void updatePosition(QueueableNode *node)
+    QueueableNode * top() const
     {
-      auto it = std::find(begin(), end(), node);
-      if (it != end())
-      {
-        erase(it);
-        insert(node);
-      }
+      return front();
     }
+
+    std::vector<QueueableNode *>::const_iterator find(QueueableNode * item) const
+    {
+      return std::find(cbegin(), cend(), item);
+    }
+
+    void update()
+    {
+      std::make_heap(begin(), end(), m_comp);
+    }
+
+  private:
+    greater_ptr<QueueableNode> m_comp;
   };
 }
 }

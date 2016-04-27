@@ -15,7 +15,7 @@
  * @brief Used to perform comparison between pointers to objects.
  * @see http://forums.codeguru.com/showthread.php?337599&p=1137606#post1137606
  */
-template <typename T> struct less_ptr : std::binary_function<bool, const T *, const T *>
+template <typename T> struct greater_ptr : std::binary_function<bool, const T *, const T *>
 {
   const bool operator()(const T *a, const T *b) const
   {
@@ -25,7 +25,7 @@ template <typename T> struct less_ptr : std::binary_function<bool, const T *, co
     else if (b == nullptr)
       return false;
     else
-      return (*a) < (*b);
+      return (*a) > (*b);
   }
 };
 
