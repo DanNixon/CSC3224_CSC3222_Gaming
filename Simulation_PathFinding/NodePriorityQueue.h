@@ -25,14 +25,14 @@ namespace PathFinding
   class NodePriorityQueue : public std::vector<QueueableNode *>
   {
   public:
-    NodePriorityQueue() :
-      std::vector<QueueableNode *>(),
-      m_comp()
+    NodePriorityQueue()
+        : std::vector<QueueableNode *>()
+        , m_comp()
     {
       std::make_heap(begin(), end(), m_comp);
     }
 
-    void push(QueueableNode * item)
+    void push(QueueableNode *item)
     {
       push_back(item);
       std::push_heap(begin(), end(), m_comp);
@@ -44,12 +44,12 @@ namespace PathFinding
       pop_back();
     }
 
-    QueueableNode * top() const
+    QueueableNode *top() const
     {
       return front();
     }
 
-    std::vector<QueueableNode *>::const_iterator find(QueueableNode * item) const
+    std::vector<QueueableNode *>::const_iterator find(QueueableNode *item) const
     {
       return std::find(cbegin(), cend(), item);
     }

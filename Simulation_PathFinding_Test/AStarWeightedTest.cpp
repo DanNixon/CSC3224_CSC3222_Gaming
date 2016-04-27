@@ -102,8 +102,10 @@ public:
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
     // Set weights
-    // TOOD
-    nodes[0]->edge(0)->setWeight(1.0f);
+    edges[7]->setWeight(10.0f);
+    edges[8]->setWeight(10.0f);
+    edges[14]->setWeight(10.0f);
+    edges[18]->setWeight(10.0f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -111,10 +113,11 @@ public:
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
-    Assert::AreEqual((size_t)3, path.size());
+    Assert::AreEqual((size_t)4, path.size());
     Assert::IsTrue(nodes[6] == path[0]);
-    Assert::IsTrue(nodes[3] == path[1]);
-    Assert::IsTrue(nodes[1] == path[2]);
+    Assert::IsTrue(nodes[7] == path[1]);
+    Assert::IsTrue(nodes[5] == path[2]);
+    Assert::IsTrue(nodes[1] == path[3]);
   }
   
   TEST_METHOD(AStarWeighted_TestPath_2_rev)
@@ -125,8 +128,10 @@ public:
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
     // Set weights
-    // TOOD
-    nodes[0]->edge(0)->setWeight(1.0f);
+    edges[7]->setWeight(10.0f);
+    edges[8]->setWeight(10.0f);
+    edges[14]->setWeight(10.0f);
+    edges[18]->setWeight(10.0f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -134,10 +139,11 @@ public:
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
-    Assert::AreEqual((size_t)3, path.size());
+    Assert::AreEqual((size_t)4, path.size());
     Assert::IsTrue(nodes[1] == path[0]);
-    Assert::IsTrue(nodes[4] == path[1]);
-    Assert::IsTrue(nodes[6] == path[2]);
+    Assert::IsTrue(nodes[5] == path[1]);
+    Assert::IsTrue(nodes[7] == path[2]);
+    Assert::IsTrue(nodes[6] == path[3]);
   }
 
   TEST_METHOD(AStarWeighted_TestPath_3_fwd)
@@ -148,8 +154,9 @@ public:
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
     // Set weights
-    // TOOD
-    nodes[0]->edge(0)->setWeight(1.0f);
+    edges[12]->setWeight(10.0f);
+    edges[16]->setWeight(10.0f);
+    edges[19]->setWeight(10.0f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -157,10 +164,11 @@ public:
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
-    Assert::AreEqual((size_t)3, path.size());
+    Assert::AreEqual((size_t)4, path.size());
     Assert::IsTrue(nodes[8] == path[0]);
-    Assert::IsTrue(nodes[4] == path[1]);
-    Assert::IsTrue(nodes[0] == path[2]);
+    Assert::IsTrue(nodes[5] == path[1]);
+    Assert::IsTrue(nodes[1] == path[2]);
+    Assert::IsTrue(nodes[0] == path[3]);
   }
   
   TEST_METHOD(AStarWeighted_TestPath_3_rev)
@@ -171,8 +179,9 @@ public:
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
     // Set weights
-    // TOOD
-    nodes[0]->edge(0)->setWeight(1.0f);
+    edges[12]->setWeight(10.0f);
+    edges[16]->setWeight(10.0f);
+    edges[19]->setWeight(10.0f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -180,10 +189,11 @@ public:
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
-    Assert::AreEqual((size_t)3, path.size());
+    Assert::AreEqual((size_t)4, path.size());
     Assert::IsTrue(nodes[0] == path[0]);
-    Assert::IsTrue(nodes[4] == path[1]);
-    Assert::IsTrue(nodes[8] == path[2]);
+    Assert::IsTrue(nodes[1] == path[1]);
+    Assert::IsTrue(nodes[5] == path[2]);
+    Assert::IsTrue(nodes[8] == path[3]);
   }
 
   TEST_METHOD(AStarWeighted_TestPath_4_fwd)
@@ -194,8 +204,9 @@ public:
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
     // Set weights
-    // TOOD
-    nodes[0]->edge(0)->setWeight(1.0f);
+    edges[9]->setWeight(10.0f);
+    edges[2]->setWeight(0.1f);
+    edges[7]->setWeight(0.1f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -203,9 +214,11 @@ public:
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
-    Assert::AreEqual((size_t)2, path.size());
+    Assert::AreEqual((size_t)4, path.size());
     Assert::IsTrue(nodes[7] == path[0]);
-    Assert::IsTrue(nodes[4] == path[1]);
+    Assert::IsTrue(nodes[6] == path[1]);
+    Assert::IsTrue(nodes[3] == path[2]);
+    Assert::IsTrue(nodes[4] == path[3]);
   }
   
   TEST_METHOD(AStarWeighted_TestPath_4_rev)
@@ -216,8 +229,9 @@ public:
     GraphLoader::LoadGraph(nodes, edges, "../../../../resources/test_graph.dat");
 
     // Set weights
-    // TOOD
-    nodes[0]->edge(0)->setWeight(1.0f);
+    edges[9]->setWeight(10.0f);
+    edges[2]->setWeight(0.1f);
+    edges[7]->setWeight(0.1f);
 
     // Run path finding
     AStar pathFinder(nodes);
@@ -225,9 +239,11 @@ public:
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
-    Assert::AreEqual((size_t)2, path.size());
+    Assert::AreEqual((size_t)4, path.size());
     Assert::IsTrue(nodes[4] == path[0]);
-    Assert::IsTrue(nodes[7] == path[1]);
+    Assert::IsTrue(nodes[3] == path[1]);
+    Assert::IsTrue(nodes[6] == path[2]);
+    Assert::IsTrue(nodes[7] == path[3]);
   }
 };
 #endif /* DOXYGEN_SKIP */
