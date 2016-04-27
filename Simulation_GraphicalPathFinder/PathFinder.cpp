@@ -65,27 +65,33 @@ namespace GraphicalPathFinder
     const std::string graphDataFile("../resources/buckminsterfullerene.dat");
     // const std::string graphDataFile("../resources/test_graph.dat");
 
-    if (!GraphLoader::LoadGraph(m_nodes, m_edges, graphDataFile))
+    std::vector<Node *> nodes;
+    std::vector<Edge *> edges;
+    if (!GraphLoader::LoadGraph(nodes, edges, graphDataFile))
     {
       g_log.critical("Could not load graph data file");
       return 1;
     }
 
-    // Add graphical nodes
-    for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
+    // Create graphical nodes
+    for (auto it = nodes.begin(); it != nodes.end(); ++it)
     {
       SphericalMesh *mesh = new SphericalMesh(0.1f);
       RenderableObject *obj = new RenderableObject((*it)->id(), mesh, m_colShader);
       obj->setModelMatrix(Matrix4::Translation((*it)->position()));
       m_scene->root()->addChild(obj);
+
+      m_nodes[*it] = obj;
     }
 
-    // Add graphical edges
-    for (auto it = m_edges.begin(); it != m_edges.end(); ++it)
+    // Create graphical edges
+    for (auto it = edges.begin(); it != edges.end(); ++it)
     {
       LineMesh *mesh = new LineMesh((*it)->nodeA()->position(), (*it)->nodeB()->position());
       RenderableObject *obj = new RenderableObject((*it)->id(), mesh, m_colShader);
       m_scene->root()->addChild(obj);
+
+      m_edges[*it] = obj;
     }
 
     // Timed loops
@@ -120,26 +126,7 @@ namespace GraphicalPathFinder
 
       if (prevNode || nextNode)
       {
-        dynamic_cast<RenderableObject *>(m_scene->root()->find(m_nodes[m_currentNodeIndex]->id()))
-            ->mesh()
-            ->setStaticColour(Colour());
-
-        if (prevNode)
-        {
-          m_controls->setState(S_PREV_NODE, false);
-          m_currentNodeIndex = std::max(0, m_currentNodeIndex - 1);
-        }
-        else if (nextNode)
-        {
-          m_controls->setState(S_NEXT_NODE, false);
-          m_currentNodeIndex = std::min((int)m_nodes.size(), m_currentNodeIndex + 1);
-        }
-
-        std::string id = m_nodes[m_currentNodeIndex]->id();
-        g_log.info("Selected node: " + id);
-        dynamic_cast<RenderableObject *>(m_scene->root()->find(id))
-            ->mesh()
-            ->setStaticColour(Colour(0.0f, 0.0f, 1.0f, 1.0f));
+        // TODO
       }
 
       // Update graph rotation
@@ -156,9 +143,9 @@ namespace GraphicalPathFinder
   void PathFinder::gameShutdown()
   {
     for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
-      delete *it;
+      delete it->first;
     for (auto it = m_edges.begin(); it != m_edges.end(); ++it)
-      delete *it;
+      delete it->first;
   }
 }
 }
