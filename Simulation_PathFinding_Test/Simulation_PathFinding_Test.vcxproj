@@ -19,10 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AStarBuckyballTest.cpp" />
     <ClCompile Include="AStarTest.cpp" />
+    <ClCompile Include="AStarWeightedTest.cpp" />
     <ClCompile Include="EdgeTest.cpp" />
     <ClCompile Include="GraphLoaderTest.cpp" />
     <ClCompile Include="NodeTest.cpp" />
+    <ClCompile Include="PriorityQueueTest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{159E00FC-A41B-45A3-865C-9D8AD1009911}</ProjectGuid>

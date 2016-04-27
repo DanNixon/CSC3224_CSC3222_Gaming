@@ -10,10 +10,11 @@
 
 #include <Engine_Common/Game.h>
 
-#include <vector>
+#include <map>
 
 #include <Engine_Common/Scene.h>
 #include <Engine_Graphics/ShaderProgram.h>
+#include <Engine_Graphics/RenderableObject.h>
 
 #include <Simulation_PathFinding/Edge.h>
 #include <Simulation_PathFinding/Node.h>
@@ -48,8 +49,8 @@ namespace GraphicalPathFinder
     Engine::Common::Scene *m_scene;               //!< Scene containing path representation
     Controls *m_controls;                         //!< Control scheme
 
-    std::vector<Simulation::PathFinding::Node *> m_nodes;
-    std::vector<Simulation::PathFinding::Edge *> m_edges;
+    std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> m_nodes;
+    std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> m_edges;
 
     int m_currentNodeIndex;
   };

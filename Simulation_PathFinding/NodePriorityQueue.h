@@ -8,71 +8,59 @@
 #ifndef _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 #define _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 
-#include <functional>
-#include <queue>
+#include <algorithm>
 
 #include "QueueableNode.h"
+#include "greater_ptr.h"
 
 namespace Simulation
 {
 namespace PathFinding
 {
   /**
-   * @typedef NodePriorityQueueSuperType
-   * @brief Underlaying queue type used for NodePriorityQueue.
-   */
-  typedef std::priority_queue<QueueableNode *, std::vector<QueueableNode *>, std::greater<QueueableNode *>>
-      NodePriorityQueueSuperType;
-
-  /**
    * @class NodePriorityQueue
-   * @brief Wrapper around a priority queue that can test for presence of a node.
+   * @brief Wrapper around a set that can emulate a priority queue.
    * @author Dan Nixon
    */
-  class NodePriorityQueue : public NodePriorityQueueSuperType
+  class NodePriorityQueue : public std::vector<QueueableNode *>
   {
   public:
-    typedef NodePriorityQueueSuperType::container_type::iterator iterator;
-
-    /**
-     * @brief Gets an iterator to the start of the container.
-     * @return Start iterator
-     */
-    iterator begin()
+    NodePriorityQueue()
+        : std::vector<QueueableNode *>()
+        , m_comp()
     {
-      return this->c.begin();
+      std::make_heap(begin(), end(), m_comp);
     }
 
-    /**
-     * @brief Gets an iterator to the end of the container.
-     * @return End iterator
-     */
-    iterator end()
+    void push(QueueableNode *item)
     {
-      return this->c.end();
+      push_back(item);
+      std::push_heap(begin(), end(), m_comp);
     }
 
-    /**
-     * @brief Searches for a given node in the queue.
-     * @param node Node to search for
-     * @return Iterator at which the node was found, end if not found
-     */
-    iterator find(QueueableNode *node)
+    void pop()
     {
-      auto first = this->c.begin();
-      auto last = this->c.end();
-
-      // Iterate through storage
-      while (first != last)
-      {
-        if (*first == node)
-          return first;
-
-        ++first;
-      }
-
-      return last;
+      std::pop_heap(begin(), end(), m_comp);
+      pop_back();
     }
+
+    QueueableNode *top() const
+    {
+      return front();
+    }
+
+    std::vector<QueueableNode *>::const_iterator find(QueueableNode *item) const
+    {
+      return std::find(cbegin(), cend(), item);
+    }
+
+    void update()
+    {
+      std::make_heap(begin(), end(), m_comp);
+    }
+
+  private:
+    greater_ptr<QueueableNode> m_comp;
   };
 }
 }

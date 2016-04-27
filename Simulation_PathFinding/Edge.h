@@ -71,7 +71,7 @@ namespace PathFinding
      */
     inline float staticCost() const
     {
-      return Engine::Maths::VectorOperations::Distance2(m_nodeA->position(), m_nodeB->position());
+      return Engine::Maths::VectorOperations::Distance(m_nodeA->position(), m_nodeB->position());
     }
 
     /**
