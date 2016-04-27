@@ -8,10 +8,10 @@
 #ifndef _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 #define _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 
-#include <queue>
+#include <set>
 
 #include "QueueableNode.h"
-#include "greater_ptr.h"
+#include "less_ptr.h"
 
 namespace Simulation
 {
@@ -21,8 +21,7 @@ namespace PathFinding
    * @typedef NodePriorityQueueSuperType
    * @brief Underlaying queue type used for NodePriorityQueue.
    */
-  typedef std::priority_queue<QueueableNode *, std::vector<QueueableNode *>, greater_ptr<QueueableNode>>
-      NodePriorityQueueSuperType;
+  typedef std::set<QueueableNode *, less_ptr<QueueableNode>> NodePriorityQueueSuperType;
 
   /**
    * @class NodePriorityQueue
@@ -32,46 +31,32 @@ namespace PathFinding
   class NodePriorityQueue : public NodePriorityQueueSuperType
   {
   public:
-    typedef NodePriorityQueueSuperType::container_type::iterator iterator;
-
-    /**
-     * @brief Gets an iterator to the start of the container.
-     * @return Start iterator
-     */
-    iterator begin()
+    void push(QueueableNode *item)
     {
-      return this->c.begin();
+      this->insert(item);
     }
 
-    /**
-     * @brief Gets an iterator to the end of the container.
-     * @return End iterator
-     */
-    iterator end()
+    QueueableNode *top()
     {
-      return this->c.end();
+      QueueableNode *node = *(this->begin());
+      return node;
     }
 
-    /**
-     * @brief Searches for a given node in the queue.
-     * @param node Node to search for
-     * @return Iterator at which the node was found, end if not found
-     */
-    iterator find(QueueableNode *node)
+    QueueableNode *pop()
     {
-      auto first = this->c.begin();
-      auto last = this->c.end();
+      QueueableNode *node = *(this->begin());
+      erase(this->begin());
+      return node;
+    }
 
-      // Iterate through storage
-      while (first != last)
+    void update(QueueableNode *node)
+    {
+      auto it = std::find(begin(), end(), node);
+      if (it != end())
       {
-        if (*first == node)
-          return first;
-
-        ++first;
+        erase(it);
+        insert(node);
       }
-
-      return last;
     }
   };
 }

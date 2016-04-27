@@ -37,10 +37,10 @@ public:
     qn1->fScore = 10;
     qn2->fScore = 5;
 
-    auto pred = greater_ptr<QueueableNode>();
+    auto pred = less_ptr<QueueableNode>();
 
-    Assert::IsTrue(pred(qn1, qn2));
-    Assert::IsFalse(pred(qn2, qn1));
+    Assert::IsFalse(pred(qn1, qn2));
+    Assert::IsTrue(pred(qn2, qn1));
   }
 
   TEST_METHOD(PriorityQueue_PriorityOrder)
@@ -89,6 +89,7 @@ public:
     q.push(qn3);
 
     qn3->fScore = 2.0f;
+    q.update(qn3);
 
     Assert::IsTrue(q.top() == qn3);
     q.pop();
