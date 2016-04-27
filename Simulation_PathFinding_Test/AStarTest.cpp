@@ -130,7 +130,7 @@ public:
     std::vector<Node *> &path = pathFinder.path();
     Assert::AreEqual((size_t)3, path.size());
     Assert::IsTrue(nodes[1] == path[0]);
-    Assert::IsTrue(nodes[3] == path[1]);
+    Assert::IsTrue(nodes[4] == path[1]);
     Assert::IsTrue(nodes[6] == path[2]);
   }
 

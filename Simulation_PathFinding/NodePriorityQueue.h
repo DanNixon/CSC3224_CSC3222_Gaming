@@ -25,7 +25,7 @@ namespace PathFinding
 
   /**
    * @class NodePriorityQueue
-   * @brief Wrapper around a priority queue that can test for presence of a node.
+   * @brief Wrapper around a set that can emulate a priority queue.
    * @author Dan Nixon
    */
   class NodePriorityQueue : public NodePriorityQueueSuperType
@@ -38,18 +38,18 @@ namespace PathFinding
 
     QueueableNode *top()
     {
-      QueueableNode *node = *(this->begin());
-      return node;
+      return *(this->begin());
     }
 
     QueueableNode *pop()
     {
-      QueueableNode *node = *(this->begin());
-      erase(this->begin());
+      auto bIt = this->begin();
+      QueueableNode *node = *bIt;
+      erase(bIt);
       return node;
     }
 
-    void update(QueueableNode *node)
+    void updatePosition(QueueableNode *node)
     {
       auto it = std::find(begin(), end(), node);
       if (it != end())

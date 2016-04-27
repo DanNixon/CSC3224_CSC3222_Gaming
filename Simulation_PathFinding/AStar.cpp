@@ -102,6 +102,7 @@ namespace PathFinding
             q->parent = p;
             q->gScore = gScore;
             q->fScore = fScore;
+            m_openList.updatePosition(q);
           }
         }
         else

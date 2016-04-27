@@ -89,7 +89,7 @@ public:
     q.push(qn3);
 
     qn3->fScore = 2.0f;
-    q.update(qn3);
+    q.updatePosition(qn3);
 
     Assert::IsTrue(q.top() == qn3);
     q.pop();

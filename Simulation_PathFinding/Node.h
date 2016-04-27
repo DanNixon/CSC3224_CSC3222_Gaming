@@ -74,11 +74,11 @@ namespace PathFinding
      * @param other Other node
      * @return Heuristic cost
      *
-     * Uses the square of the distance between nodes.
+     * Uses the distance between nodes.
      */
     inline float h(const Node &other) const
     {
-      return Engine::Maths::VectorOperations::Distance2(m_position, other.m_position);
+      return Engine::Maths::VectorOperations::Distance(m_position, other.m_position);
     }
 
     friend std::ostream &operator<<(std::ostream &stream, const Node &n);
