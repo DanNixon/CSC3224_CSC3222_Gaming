@@ -28,6 +28,7 @@
     <ClInclude Include="AStar.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="GraphLoader.h" />
+    <ClInclude Include="greater_ptr.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodePriorityQueue.h" />
     <ClInclude Include="QueueableNode.h" />

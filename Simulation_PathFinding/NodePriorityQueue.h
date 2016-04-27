@@ -8,10 +8,10 @@
 #ifndef _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 #define _SIMULATION_PATHFINDING_PRIORITYQUEUE_H_
 
-#include <functional>
 #include <queue>
 
 #include "QueueableNode.h"
+#include "greater_ptr.h"
 
 namespace Simulation
 {
@@ -21,7 +21,7 @@ namespace PathFinding
    * @typedef NodePriorityQueueSuperType
    * @brief Underlaying queue type used for NodePriorityQueue.
    */
-  typedef std::priority_queue<QueueableNode *, std::vector<QueueableNode *>, std::greater<QueueableNode *>>
+  typedef std::priority_queue<QueueableNode *, std::vector<QueueableNode *>, greater_ptr<QueueableNode>>
       NodePriorityQueueSuperType;
 
   /**
