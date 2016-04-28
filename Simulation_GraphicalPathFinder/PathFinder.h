@@ -11,6 +11,7 @@
 #include <Engine_Common/Game.h>
 
 #include <map>
+#include <vector>
 
 #include <Engine_Common/Scene.h>
 #include <Engine_Graphics/RenderableObject.h>
@@ -18,9 +19,11 @@
 
 #include <Simulation_PathFinding/Edge.h>
 #include <Simulation_PathFinding/Node.h>
+#include <Simulation_PathFinding/AStar.h>
 
 #include "Controls.h"
 #include "OptionsMenu.h"
+#include "ViewMode.h"
 
 namespace Simulation
 {
@@ -34,8 +37,19 @@ namespace GraphicalPathFinder
   class PathFinder : public Engine::Common::Game
   {
   public:
+    bool IsOnList(const std::vector<Simulation::PathFinding::QueueableNode *> & list, Simulation::PathFinding::Node * node);
+    bool IsOnList(const std::vector<Simulation::PathFinding::Node *> & list, Simulation::PathFinding::Node * node);
+
+  public:
     PathFinder();
     ~PathFinder();
+
+    ViewMode_bitset viewMode() const
+    {
+      return m_viewMode;
+    }
+
+    void setViewMode(ViewMode_bitset mode = ViewMode_bitset());
 
   protected:
     int gameStartup();
@@ -55,7 +69,9 @@ namespace GraphicalPathFinder
     std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> m_nodes;
     std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> m_edges;
 
-    int m_currentNodeIndex;
+    Simulation::PathFinding::AStar * m_finder;
+
+    ViewMode_bitset m_viewMode;
   };
 }
 }

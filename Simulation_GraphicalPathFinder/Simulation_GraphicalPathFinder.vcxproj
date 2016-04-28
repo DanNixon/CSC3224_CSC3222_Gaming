@@ -203,6 +203,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClInclude Include="Controls.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="PathFinder.h" />
+    <ClInclude Include="ViewMode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

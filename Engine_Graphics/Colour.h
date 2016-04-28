@@ -12,6 +12,7 @@
 #include <assimp/color4.h>
 
 #include <Engine_Maths/Vector4.h>
+#include <Engine_ResourceManagment/ResourceLookup.h>
 
 namespace Engine
 {
@@ -60,6 +61,12 @@ namespace Graphics
       return c;
     }
   };
+
+  /**
+   * @typedef ColourLookup
+   * @brief Colour resource lookup.
+   */
+  typedef Engine::ResourceManagment::ResourceLookup<Colour> ColourLookup;
 }
 }
 

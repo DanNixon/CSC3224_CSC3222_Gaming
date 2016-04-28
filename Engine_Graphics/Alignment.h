@@ -8,8 +8,6 @@
 #ifndef _ENGINE_GRAPHICS_ALIGNMENT_H_
 #define _ENGINE_GRAPHICS_ALIGNMENT_H_
 
-#include <SDL/SDL.h>
-
 #include <Engine_Utility/EnumClassBitset.h>
 
 namespace Engine

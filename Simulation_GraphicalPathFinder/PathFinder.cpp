@@ -33,6 +33,16 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
+  bool PathFinder::IsOnList(const std::vector<QueueableNode *> & list, Node * node)
+  {
+    return std::find_if(list.begin(), list.end(), [node](QueueableNode * n){ return n->node == node; }) != list.end();
+  }
+
+  bool PathFinder::IsOnList(const std::vector<Node *> & list, Node * node)
+  {
+    return std::find(list.begin(), list.end(), node) != list.end();
+  }
+
   PathFinder::PathFinder()
       : Game("Graphical Path Finder", std::make_pair(1024, 768))
   {
@@ -42,6 +52,51 @@ namespace GraphicalPathFinder
   {
   }
 
+  void PathFinder::setViewMode(ViewMode_bitset mode)
+  {
+    m_viewMode = mode;
+
+    const bool showWeights(m_viewMode.test(ViewMode::WEIGHTS));
+    const bool showOpenList(m_viewMode.test(ViewMode::OPEN_LIST));
+    const bool showClosedList(m_viewMode.test(ViewMode::CLOSED_LIST));
+    const bool showPath(m_viewMode.test(ViewMode::PATH));
+
+    // Process nodes
+    for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
+    {
+      Node * node = it->first;
+      Colour nodeColour = ColourLookup::Instance().get("node_default");
+
+      if (showOpenList && IsOnList(m_finder->openList(), node))
+        nodeColour = ColourLookup::Instance().get("node_open_list");
+
+      if (showClosedList && IsOnList(m_finder->closedList(), node))
+        nodeColour = ColourLookup::Instance().get("node_closed_list");
+
+      if (showPath && IsOnList(m_finder->path(), node))
+        nodeColour = ColourLookup::Instance().get("node_path");
+
+      it->second->mesh()->setStaticColour(nodeColour);
+    }
+
+    // Process edges
+    for (auto it = m_edges.begin(); it != m_edges.end(); ++it)
+    {
+      Edge * edge = it->first;
+      Colour edgeColour = ColourLookup::Instance().get("edge_default");
+
+      if (showWeights)
+      {
+        // TODO
+      }
+
+      if (showPath && IsOnList(m_finder->path(), edge->nodeA()) && IsOnList(m_finder->path(), edge->nodeB()))
+        edgeColour = ColourLookup::Instance().get("edge_path");
+
+      it->second->mesh()->setStaticColour(edgeColour);
+    }
+  }
+
   /**
    * @copydoc Game::gameStartup
    */
@@ -49,6 +104,17 @@ namespace GraphicalPathFinder
   {
     // Load fonts
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
+
+    // Set colours
+    ColourLookup::Instance().add("node_default", Colour(1.0f, 1.0f, 1.0f, 1.0f));
+    ColourLookup::Instance().add("node_open_list", Colour(0.0f, 1.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("node_closed_list", Colour(1.0f, 0.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("node_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));
+
+    ColourLookup::Instance().add("edge_default", Colour(1.0f, 1.0f, 1.0f, 1.0f));
+    ColourLookup::Instance().add("edge_open_list", Colour(0.0f, 1.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("edge_closed_list", Colour(1.0f, 0.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("edge_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));
 
     // Controls
     m_controls = new Controls(this);
@@ -110,6 +176,19 @@ namespace GraphicalPathFinder
 
       m_edges[*it] = obj;
     }
+
+    // Create path finder
+    m_finder = new AStar(nodes);
+
+    // TODO
+    m_finder->findPath(nodes[3], nodes[19]);
+    ViewMode_bitset v;
+    v.set(ViewMode::OPEN_LIST);
+    v.set(ViewMode::CLOSED_LIST);
+    v.set(ViewMode::PATH);
+
+    // Default view
+    setViewMode(v);
 
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
