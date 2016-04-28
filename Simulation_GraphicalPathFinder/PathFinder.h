@@ -43,10 +43,6 @@ namespace GraphicalPathFinder
     typedef std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> NodeMap;
     typedef std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> EdgeMap;
 
-    bool IsOnList(const std::vector<Simulation::PathFinding::QueueableNode *> &list,
-                  Simulation::PathFinding::Node *node);
-    bool IsOnList(const std::vector<Simulation::PathFinding::Node *> &list, Simulation::PathFinding::Node *node);
-
   public:
     PathFinder();
     ~PathFinder();

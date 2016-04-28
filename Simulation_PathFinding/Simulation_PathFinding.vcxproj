@@ -32,6 +32,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodePriorityQueue.h" />
     <ClInclude Include="QueueableNode.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3888A1A5-54B3-4D46-942F-D66670421D7B}</ProjectGuid>

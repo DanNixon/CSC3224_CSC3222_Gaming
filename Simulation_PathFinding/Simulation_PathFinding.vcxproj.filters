@@ -14,5 +14,6 @@
     <ClInclude Include="QueueableNode.h" />
     <ClInclude Include="NodePriorityQueue.h" />
     <ClInclude Include="greater_ptr.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
 </Project>

@@ -37,6 +37,7 @@ namespace GraphicalPathFinder
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
 
   private:
+    Engine::UIMenu::MenuItem *m_traversableButton;
     Engine::Graphics::TextPane *m_weightText;
     Engine::Graphics::TextPane *m_connectionText;
     Engine::Graphics::TextPane *m_costText;

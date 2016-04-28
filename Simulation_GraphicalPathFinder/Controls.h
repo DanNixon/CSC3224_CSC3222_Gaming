@@ -25,6 +25,7 @@ namespace GraphicalPathFinder
   {
     A_MOUSE_X,
     A_MOUSE_Y,
+    S_MOVABLE_GRAPH
   };
 
   /**
@@ -43,6 +44,8 @@ namespace GraphicalPathFinder
         , m_keyboard(new Engine::Input::KeyboardController(this))
         , m_mouse(new Engine::Input::MouseController(this, game->windowX(), game->windowY()))
     {
+      m_keyboard->setMapping(SDLK_SPACE, S_MOVABLE_GRAPH, true);
+
       m_mouse->setXMapping(A_MOUSE_X);
       m_mouse->setYMapping(A_MOUSE_Y);
 

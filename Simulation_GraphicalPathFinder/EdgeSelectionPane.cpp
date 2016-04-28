@@ -17,14 +17,14 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
-  const float EdgeSelectionPane::DELTA_WEIGHT = 0.01f;
+  const float EdgeSelectionPane::DELTA_WEIGHT = 0.1f;
 
   /**
    * @copydoc SelectionPane::SelectionPane
    */
   EdgeSelectionPane::EdgeSelectionPane(Game *game, TTF_Font *font, float textSize, PathFinder::EdgeMap::iterator begin,
                                        PathFinder::EdgeMap::iterator end)
-      : SelectionPane(game, font, textSize, Vector2(0.4f, 0.24f))
+      : SelectionPane(game, font, textSize, Vector2(0.4f, 0.3f))
       , m_edgesBegin(begin)
       , m_edgesEnd(end)
       , m_selectedEdgeIt(begin)
@@ -36,24 +36,29 @@ namespace GraphicalPathFinder
     m_connectionText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, offset)));
     m_connectionText->setText("a - b");
 
+    // Traversable
+    m_traversableButton = addNewItem(nullptr, "traversable", "Traversable");
+    m_traversableButton->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_CENTRE));
+    m_traversableButton->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 2.0f * offset)));
+
     // Decrease weight button
     MenuItem *decreaseWeight = addNewItem(nullptr, "decrease_weight", "-");
     decreaseWeight->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_LEFT));
-    decreaseWeight->setModelMatrix(Matrix4::Translation(Vector3(-0.19f, 2.0f * offset)));
+    decreaseWeight->setModelMatrix(Matrix4::Translation(Vector3(-0.19f, 3.0f * offset)));
 
     // Increase weight button
     MenuItem *increaseWeight = addNewItem(nullptr, "increase_weight", "+");
     increaseWeight->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_RIGHT));
-    increaseWeight->setModelMatrix(Matrix4::Translation(Vector3(0.19f, 2.0f * offset)));
+    increaseWeight->setModelMatrix(Matrix4::Translation(Vector3(0.19f, 3.0f * offset)));
 
     // Weight
     m_weightText = newTextPane("weight", GetAlignment(Alignment::Y_BOTTOM, Alignment::X_CENTRE));
-    m_weightText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 2.0f * offset)));
+    m_weightText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 3.0f * offset)));
     m_weightText->setText("w = 0.0");
 
     // Cost
     m_costText = newTextPane("cost", GetAlignment(Alignment::Y_BOTTOM, Alignment::X_CENTRE));
-    m_costText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, offset * 3.0f)));
+    m_costText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, offset * 4.0f)));
     m_costText->setText("cost = 0.0");
 
     // Set initial selected edge
@@ -80,6 +85,9 @@ namespace GraphicalPathFinder
 
     // Update name
     m_name->setText(edge->id());
+
+    // Update traversable
+    m_traversableButton->setText(edge->traversable() ? "Traversable" : "Non Traversable");
 
     // Update connection
     std::string connectionStr = edge->nodeA()->id() + " - " + edge->nodeB()->id();
@@ -133,6 +141,12 @@ namespace GraphicalPathFinder
     {
       // Decrease weight and update graphical display
       edge->setWeight(edge->weight() - DELTA_WEIGHT);
+      updateDisplay();
+    }
+    else if (item->name() == "traversable")
+    {
+      // Flip the traversable state
+      edge->setTraversable(!edge->traversable());
       updateDisplay();
     }
   }

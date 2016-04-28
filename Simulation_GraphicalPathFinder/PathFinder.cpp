@@ -17,6 +17,7 @@
 #include <Engine_Logging/Logger.h>
 #include <Engine_Maths/Quaternion.h>
 
+#include <Simulation_PathFInding/Utils.h>
 #include <Simulation_PathFinding/GraphLoader.h>
 
 #include "EdgeSelectionPane.h"
@@ -36,16 +37,6 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
-  bool PathFinder::IsOnList(const std::vector<QueueableNode *> &list, Node *node)
-  {
-    return std::find_if(list.begin(), list.end(), [node](QueueableNode *n) { return n->node == node; }) != list.end();
-  }
-
-  bool PathFinder::IsOnList(const std::vector<Node *> &list, Node *node)
-  {
-    return std::find(list.begin(), list.end(), node) != list.end();
-  }
-
   PathFinder::PathFinder()
       : Game("Graphical Path Finder", std::make_pair(1024, 768))
   {
@@ -70,13 +61,13 @@ namespace GraphicalPathFinder
       Node *node = it->first;
       Colour nodeColour = ColourLookup::Instance().get("node_default");
 
-      if (showOpenList && IsOnList(m_finder->openList(), node))
+      if (showOpenList && Utils::IsOnList(m_finder->openList(), node))
         nodeColour = ColourLookup::Instance().get("node_open_list");
 
-      if (showClosedList && IsOnList(m_finder->closedList(), node))
+      if (showClosedList && Utils::IsOnList(m_finder->closedList(), node))
         nodeColour = ColourLookup::Instance().get("node_closed_list");
 
-      if (showPath && IsOnList(m_finder->path(), node))
+      if (showPath && Utils::IsOnList(m_finder->path(), node))
         nodeColour = ColourLookup::Instance().get("node_path");
 
       if (node == m_startNode->first)
@@ -102,7 +93,7 @@ namespace GraphicalPathFinder
         // TODO
       }
 
-      if (showPath && IsOnList(m_finder->path(), edge->nodeA()) && IsOnList(m_finder->path(), edge->nodeB()))
+      if (showPath && Utils::IsOnPath(m_finder->path(), edge))
         edgeColour = ColourLookup::Instance().get("edge_path");
 
       if (edge == m_edgeSelection->selectedEdge()->first)
@@ -116,6 +107,7 @@ namespace GraphicalPathFinder
   {
     m_finder->reset();
     m_finder->findPath(m_startNode->first, m_endNode->first);
+    setViewMode(m_viewMode);
   }
 
   /**
@@ -261,10 +253,13 @@ namespace GraphicalPathFinder
     else if (id == m_controlLoop)
     {
       // Update graph rotation
-      float yaw = m_controls->analog(A_MOUSE_X) * 180.0f;
-      float pitch = m_controls->analog(A_MOUSE_Y) * 180.0f;
-      Quaternion rotQuat(yaw, pitch, 0.0f);
-      m_scene->root()->setModelMatrix(rotQuat.rotationMatrix());
+      if (m_controls->state(S_MOVABLE_GRAPH))
+      {
+        float yaw = m_controls->analog(A_MOUSE_X) * 180.0f;
+        float pitch = m_controls->analog(A_MOUSE_Y) * 180.0f;
+        Quaternion rotQuat(yaw, pitch, 0.0f);
+        m_scene->root()->setModelMatrix(rotQuat.rotationMatrix());
+      }
     }
   }
 

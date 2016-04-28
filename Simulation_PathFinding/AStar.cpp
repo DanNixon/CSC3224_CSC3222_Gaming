@@ -14,7 +14,7 @@ namespace Simulation
 namespace PathFinding
 {
   /**
-   * @brief CRetaes a new A* path planner.
+   * @brief Creates a new A* path planner.
    * @param nodes Vector of nodes in graph
    */
   AStar::AStar(const std::vector<Node *> &nodes)
