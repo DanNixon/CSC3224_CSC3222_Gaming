@@ -58,16 +58,16 @@ namespace GraphicalPathFinder
 
     void setViewMode(ViewMode_bitset mode = ViewMode_bitset());
 
+    void runPathFinding();
+
   protected:
     int gameStartup();
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
-  public:
-    NodeSelectionPane *nodeSelection;
-    EdgeSelectionPane *edgeSelection;
-
   private:
+    friend class OptionsMenu;
+
     Uint8 m_graphicsLoop; //!< Graphics update loop ID
     Uint8 m_controlLoop;  //!< Control update loop ID
 
@@ -77,10 +77,14 @@ namespace GraphicalPathFinder
     Controls *m_controls;                         //!< Control scheme
     OptionsMenu *m_menu;                          //!< Option menu
 
+    NodeSelectionPane *m_nodeSelection;
+    EdgeSelectionPane *m_edgeSelection;
+
     NodeMap m_nodes;
     EdgeMap m_edges;
-    NodeMap::iterator m_pickedNode;
-    EdgeMap::iterator m_pickedEdge;
+
+    NodeMap::iterator m_startNode;
+    NodeMap::iterator m_endNode;
 
     Simulation::PathFinding::AStar *m_finder;
 

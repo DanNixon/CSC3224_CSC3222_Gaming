@@ -28,6 +28,7 @@ namespace GraphicalPathFinder
   {
     // Root menu
     addNewItem(nullptr, "exit", "Exit");
+    addNewItem(nullptr, "reset", "Reset");
     m_viewMenu = addNewItem(nullptr, "view", "View");
     m_pickMenu = addNewItem(nullptr, "pick", "Pick");
     addNewItem(nullptr, "find_path", "Find Path");
@@ -60,6 +61,16 @@ namespace GraphicalPathFinder
     {
       m_game->exit();
     }
+    // Handle path finder state reset
+    // (not really an important option, here because it can be)
+    else if (selectedName == "reset")
+    {
+      // Reset path finder state
+      m_pathFinder->m_finder->reset();
+
+      // Refresh view to update colours
+      m_pathFinder->setViewMode(m_pathFinder->viewMode());
+    }
     // Handle view modes
     else if (item->parent() == m_viewMenu)
     {
@@ -90,13 +101,13 @@ namespace GraphicalPathFinder
       // Select correct menu
       if (selectedName == "nodes")
       {
-        selected = m_pathFinder->nodeSelection;
-        other = m_pathFinder->edgeSelection;
+        selected = m_pathFinder->m_nodeSelection;
+        other = m_pathFinder->m_edgeSelection;
       }
       else if (selectedName == "edges")
       {
-        selected = m_pathFinder->edgeSelection;
-        other = m_pathFinder->nodeSelection;
+        selected = m_pathFinder->m_edgeSelection;
+        other = m_pathFinder->m_nodeSelection;
       }
 
       // Update menu visiblity
@@ -109,7 +120,7 @@ namespace GraphicalPathFinder
     // Handle start path finding
     if (selectedName == "find_path")
     {
-      // TODO
+      m_pathFinder->runPathFinding();
     }
   }
 }

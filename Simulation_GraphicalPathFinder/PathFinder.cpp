@@ -79,6 +79,14 @@ namespace GraphicalPathFinder
       if (showPath && IsOnList(m_finder->path(), node))
         nodeColour = ColourLookup::Instance().get("node_path");
 
+      if (node == m_startNode->first)
+        nodeColour = ColourLookup::Instance().get("node_start");
+
+      if (node == m_endNode->first)
+        nodeColour = ColourLookup::Instance().get("node_end");
+
+      // TODO: if is selected
+
       it->second->mesh()->setStaticColour(nodeColour);
     }
 
@@ -96,8 +104,16 @@ namespace GraphicalPathFinder
       if (showPath && IsOnList(m_finder->path(), edge->nodeA()) && IsOnList(m_finder->path(), edge->nodeB()))
         edgeColour = ColourLookup::Instance().get("edge_path");
 
+      // TODO: if is selected
+
       it->second->mesh()->setStaticColour(edgeColour);
     }
+  }
+
+  void PathFinder::runPathFinding()
+  {
+    m_finder->reset();
+    m_finder->findPath(m_startNode->first, m_endNode->first);
   }
 
   /**
@@ -109,14 +125,22 @@ namespace GraphicalPathFinder
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
     // Set colours
-    ColourLookup::Instance().add("node_default", Colour(1.0f, 1.0f, 1.0f, 1.0f));
-    ColourLookup::Instance().add("node_open_list", Colour(0.0f, 1.0f, 0.0f, 1.0f));
-    ColourLookup::Instance().add("node_closed_list", Colour(1.0f, 0.0f, 0.0f, 1.0f));
-    ColourLookup::Instance().add("node_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));
+    ColourLookup::Instance().add("node_start", Colour(0.0f, 1.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("node_end", Colour(1.0f, 0.0f, 0.0f, 1.0f));
 
+    ColourLookup::Instance().add("node_selected", Colour(1.0f, 1.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("edge_selected", Colour(1.0f, 1.0f, 0.0f, 1.0f));
+
+    ColourLookup::Instance().add("node_default", Colour(1.0f, 1.0f, 1.0f, 1.0f));
     ColourLookup::Instance().add("edge_default", Colour(1.0f, 1.0f, 1.0f, 1.0f));
-    ColourLookup::Instance().add("edge_open_list", Colour(0.0f, 1.0f, 0.0f, 1.0f));
-    ColourLookup::Instance().add("edge_closed_list", Colour(1.0f, 0.0f, 0.0f, 1.0f));
+
+    ColourLookup::Instance().add("node_open_list", Colour(0.5f, 1.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("edge_open_list", Colour(0.5f, 1.0f, 0.0f, 1.0f));
+
+    ColourLookup::Instance().add("node_closed_list", Colour(1.0f, 0.5f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("edge_closed_list", Colour(1.0f, 0.5f, 0.0f, 1.0f));
+
+    ColourLookup::Instance().add("node_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));
     ColourLookup::Instance().add("edge_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));
 
     // Controls
@@ -149,18 +173,18 @@ namespace GraphicalPathFinder
     addEventHandler(m_menu);
 
     // Node selection menu
-    nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f);
-    nodeSelection->setPosition(Vector3(-0.75f, -0.95f));
-    nodeSelection->layout();
-    addEventHandler(nodeSelection);
-    nodeSelection->hide();
+    m_nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f);
+    m_nodeSelection->setPosition(Vector3(-0.75f, -0.95f));
+    m_nodeSelection->layout();
+    addEventHandler(m_nodeSelection);
+    m_nodeSelection->hide();
 
     // Edge selection menu
-    edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f);
-    edgeSelection->setPosition(Vector3(-0.75f, -0.95f));
-    edgeSelection->layout();
-    addEventHandler(edgeSelection);
-    edgeSelection->hide();
+    m_edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f);
+    m_edgeSelection->setPosition(Vector3(-0.75f, -0.95f));
+    m_edgeSelection->layout();
+    addEventHandler(m_edgeSelection);
+    m_edgeSelection->hide();
 
     // Load graph
     const std::string graphDataFile("../resources/buckminsterfullerene.dat");
@@ -185,7 +209,8 @@ namespace GraphicalPathFinder
       m_nodes[*it] = obj;
     }
 
-    m_pickedNode = m_nodes.begin();
+    m_startNode = m_nodes.begin();
+    m_endNode = ++(m_nodes.begin());
 
     // Create graphical edges
     for (auto it = edges.begin(); it != edges.end(); ++it)
@@ -196,8 +221,6 @@ namespace GraphicalPathFinder
 
       m_edges[*it] = obj;
     }
-
-    m_pickedEdge = m_edges.begin();
 
     // Create path finder
     m_finder = new AStar(nodes);
@@ -227,8 +250,8 @@ namespace GraphicalPathFinder
     {
       m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
-      nodeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
-      edgeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
+      m_nodeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
+      m_edgeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
 
       swapBuffers();
     }
