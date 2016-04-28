@@ -17,10 +17,16 @@
  */
 template <typename T> struct greater_ptr : std::binary_function<bool, const T *, const T *>
 {
+  /**
+   * @brief Checks if an item is greater than another.
+   * @param a Pointer to first item
+   * @param b Pointer to second item
+   * @return True if a > b
+   */
   const bool operator()(const T *a, const T *b) const
   {
     if (a == nullptr)
-      // if b is also 0, then they are equal, hence a is not < than b
+      // If b is also 0, then they are equal, hence a is not < than b
       return b != nullptr;
     else if (b == nullptr)
       return false;
