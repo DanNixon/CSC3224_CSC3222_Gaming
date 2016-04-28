@@ -21,6 +21,8 @@ namespace GraphicalPathFinder
   enum class ViewMode : size_t
   {
     WEIGHTS,
+    STATIC_COSTS,
+    COSTS,
     OPEN_LIST,
     CLOSED_LIST,
     PATH,

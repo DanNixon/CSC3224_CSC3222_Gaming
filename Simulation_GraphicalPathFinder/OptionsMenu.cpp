@@ -36,6 +36,8 @@ namespace GraphicalPathFinder
     // View menu
     addNewItem(m_viewMenu, "graph", "Simple Graph");
     addNewItem(m_viewMenu, "weights", "Weights");
+    addNewItem(m_viewMenu, "static_costs", "Static Costs");
+    addNewItem(m_viewMenu, "costs", "Weighted Costs");
     addNewItem(m_viewMenu, "open_list", "Open List");
     addNewItem(m_viewMenu, "closed_list", "Closed List");
     addNewItem(m_viewMenu, "path", "Path");
@@ -68,8 +70,8 @@ namespace GraphicalPathFinder
       // Reset path finder state
       m_pathFinder->m_finder->reset();
 
-      // Refresh view to update colours
-      m_pathFinder->setViewMode(m_pathFinder->viewMode());
+      // Reset view mode
+      m_pathFinder->setViewMode();
     }
     // Handle view modes
     else if (item->parent() == m_viewMenu)
@@ -83,6 +85,10 @@ namespace GraphicalPathFinder
       // Toggle features
       else if (selectedName == "weights")
         mode.flip(ViewMode::WEIGHTS);
+      else if (selectedName == "static_costs")
+        mode.flip(ViewMode::STATIC_COSTS);
+      else if (selectedName == "costs")
+        mode.flip(ViewMode::COSTS);
       else if (selectedName == "open_list")
         mode.flip(ViewMode::OPEN_LIST);
       else if (selectedName == "closed_list")

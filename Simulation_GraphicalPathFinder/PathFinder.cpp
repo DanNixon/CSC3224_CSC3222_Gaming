@@ -51,6 +51,8 @@ namespace GraphicalPathFinder
     m_viewMode = mode;
 
     const bool showWeights(m_viewMode.test(ViewMode::WEIGHTS));
+    const bool showStaticCosts(m_viewMode.test(ViewMode::STATIC_COSTS));
+    const bool showCosts(m_viewMode.test(ViewMode::COSTS));
     const bool showOpenList(m_viewMode.test(ViewMode::OPEN_LIST));
     const bool showClosedList(m_viewMode.test(ViewMode::CLOSED_LIST));
     const bool showPath(m_viewMode.test(ViewMode::PATH));
@@ -83,14 +85,47 @@ namespace GraphicalPathFinder
     }
 
     // Process edges
+    std::pair<float, float> limits = std::make_pair(std::numeric_limits<float>::max(), 0.0f);
+    if (showWeights || showStaticCosts || showCosts)
+    {
+      for (auto it = m_edges.begin(); it != m_edges.end(); ++it)
+      {
+        float v = 0.0f;
+        if (showWeights)
+          v = it->first->weight();
+        else if (showStaticCosts)
+          v = it->first->staticCost();
+        else if (showCosts)
+          v = it->first->cost();
+
+        if (v < limits.first)
+          limits.first = v;
+        else if (v > limits.second)
+          limits.second = v;
+      }
+    }
+
     for (auto it = m_edges.begin(); it != m_edges.end(); ++it)
     {
       Edge *edge = it->first;
       Colour edgeColour = ColourLookup::Instance().get("edge_default");
 
-      if (showWeights)
+      if (showWeights || showStaticCosts || showCosts)
       {
-        // TODO
+        edgeColour = Colour(1.0f, 1.0f, 1.0f);
+
+        float v = 0.0f;
+        if (showWeights)
+          v = it->first->weight();
+        else if (showStaticCosts)
+          v = it->first->staticCost();
+        else if (showCosts)
+          v = it->first->cost();
+
+        if (v < 1.0f)
+          edgeColour[1] -= v / limits.first;
+        else
+          edgeColour[0] -= v / limits.second;
       }
 
       if (showPath && Utils::IsOnPath(m_finder->path(), edge))
