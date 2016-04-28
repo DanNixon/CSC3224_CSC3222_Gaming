@@ -84,6 +84,11 @@ namespace PathFinding
       for (size_t i = 0; i < p->node->numConnections(); i++)
       {
         Edge *pq = p->node->edge(i);
+
+        // Skip an edge that cannot be traversed
+        if (!pq->traversable())
+          continue;
+
         QueueableNode *q = m_nodeData[pq->otherNode(p->node)];
 
         // Calculate new scores

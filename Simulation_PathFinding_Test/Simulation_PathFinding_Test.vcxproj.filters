@@ -8,5 +8,6 @@
     <ClCompile Include="AStarBuckyballTest.cpp" />
     <ClCompile Include="AStarTest.cpp" />
     <ClCompile Include="AStarWeightedTest.cpp" />
+    <ClCompile Include="AStarNonTraversableTest.cpp" />
   </ItemGroup>
 </Project>
