@@ -30,6 +30,7 @@ namespace Simulation
 namespace GraphicalPathFinder
 {
   class NodeSelectionPane;
+  class EdgeSelectionPane;
 
   /**
    * @class PathFinder
@@ -62,6 +63,10 @@ namespace GraphicalPathFinder
     void gameLoop(Uint8 id, float dtMilliSec);
     void gameShutdown();
 
+  public:
+    NodeSelectionPane *nodeSelection;
+    EdgeSelectionPane *edgeSelection;
+
   private:
     Uint8 m_graphicsLoop; //!< Graphics update loop ID
     Uint8 m_controlLoop;  //!< Control update loop ID
@@ -71,7 +76,6 @@ namespace GraphicalPathFinder
     Engine::Common::Scene *m_scene;               //!< Scene containing path representation
     Controls *m_controls;                         //!< Control scheme
     OptionsMenu *m_menu;                          //!< Option menu
-    NodeSelectionPane *m_nodeSelection;
 
     NodeMap m_nodes;
     EdgeMap m_edges;

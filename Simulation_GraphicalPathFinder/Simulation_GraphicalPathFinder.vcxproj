@@ -195,6 +195,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EdgeSelectionPane.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NodeSelectionPane.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
@@ -202,6 +203,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controls.h" />
+    <ClInclude Include="EdgeSelectionPane.h" />
     <ClInclude Include="NodeSelectionPane.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="PathFinder.h" />

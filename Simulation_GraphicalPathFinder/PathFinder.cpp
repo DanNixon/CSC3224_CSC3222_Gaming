@@ -19,6 +19,7 @@
 
 #include <Simulation_PathFinding/GraphLoader.h>
 
+#include "EdgeSelectionPane.h"
 #include "NodeSelectionPane.h"
 
 using namespace Engine::Common;
@@ -148,11 +149,18 @@ namespace GraphicalPathFinder
     addEventHandler(m_menu);
 
     // Node selection menu
-    m_nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f);
-    m_nodeSelection->setPosition(Vector3(-0.8f, -0.8f));
-    m_nodeSelection->layout();
-    m_nodeSelection->show();
-    addEventHandler(m_nodeSelection);
+    nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f);
+    nodeSelection->setPosition(Vector3(-0.8f, -0.8f));
+    nodeSelection->layout();
+    addEventHandler(nodeSelection);
+    nodeSelection->hide();
+
+    // Edge selection menu
+    edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f);
+    edgeSelection->setPosition(Vector3(-0.8f, -0.8f));
+    edgeSelection->layout();
+    addEventHandler(edgeSelection);
+    edgeSelection->hide();
 
     // Load graph
     const std::string graphDataFile("../resources/buckminsterfullerene.dat");
@@ -219,7 +227,8 @@ namespace GraphicalPathFinder
     {
       m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
-      m_nodeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
+      nodeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
+      edgeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
 
       swapBuffers();
     }

@@ -5,7 +5,7 @@
  * For CSC3222 Project 2.
  */
 
-#include "NodeSelectionPane.h"
+#include "EdgeSelectionPane.h"
 
 #include <Engine_Graphics/RectangleMesh.h>
 
@@ -23,7 +23,7 @@ namespace GraphicalPathFinder
   /**
   * @copydoc SoupMenu::SoupMenu
   */
-  NodeSelectionPane::NodeSelectionPane(Game *game, TTF_Font *font, float textSize)
+  EdgeSelectionPane::EdgeSelectionPane(Game *game, TTF_Font *font, float textSize)
       : SoupMenu(game, font, textSize)
       , m_pathFinder(static_cast<PathFinder *>(game))
       , m_margin(textSize / 10.0f)
@@ -46,43 +46,44 @@ namespace GraphicalPathFinder
     next->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_LEFT));
     next->setModelMatrix(Matrix4::Translation(Vector3(m_margin, 2.0f * textSize)));
 
-    MenuItem *pickStart = addNewItem(nullptr, "pick_start", "Pick Start");
-    pickStart->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_CENTRE));
-    pickStart->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.5f * textSize)));
+    // Connections
+    // TODO
 
-    MenuItem *pickEnd = addNewItem(nullptr, "pick_end", "Pick End");
-    pickEnd->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_CENTRE));
-    pickEnd->setModelMatrix(Matrix4::Translation(Vector3(0.0f, -0.75f * textSize)));
+    // Weight label
+    // TODO
+
+    // Weight
+    // TODO
 
     // Node name label
-    TextPane *nodeNameLabel = new TextPane("node_name_label", textSize,
+    TextPane *nodeNameLabel = new TextPane("edge_name_label", textSize,
                                            ShaderProgramLookup::Instance().get("menu_shader"), font, TextMode::SHADED);
     nodeNameLabel->setTextColour(Colour(0.0f, 0.0f, 0.0f));
     nodeNameLabel->setBackgroundColour(backgroundColour);
     nodeNameLabel->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_RIGHT));
     nodeNameLabel->setModelMatrix(Matrix4::Translation(Vector3(-m_margin, -2.0f * textSize)));
-    nodeNameLabel->setText("Node:");
+    nodeNameLabel->setText("Edge:");
     m_root->addChild(nodeNameLabel);
 
     // Node name
-    m_nodeName =
-        new TextPane("node_name", textSize, ShaderProgramLookup::Instance().get("menu_shader"), font, TextMode::SHADED);
-    m_nodeName->setTextColour(Colour(0.0f, 0.0f, 0.0f));
-    m_nodeName->setBackgroundColour(backgroundColour);
-    m_nodeName->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_LEFT));
-    m_nodeName->setModelMatrix(Matrix4::Translation(Vector3(m_margin, -2.0f * textSize)));
-    m_nodeName->setText("[node]");
-    m_root->addChild(m_nodeName);
+    m_edgeName =
+        new TextPane("edge_name", textSize, ShaderProgramLookup::Instance().get("menu_shader"), font, TextMode::SHADED);
+    m_edgeName->setTextColour(Colour(0.0f, 0.0f, 0.0f));
+    m_edgeName->setBackgroundColour(backgroundColour);
+    m_edgeName->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_LEFT));
+    m_edgeName->setModelMatrix(Matrix4::Translation(Vector3(m_margin, -2.0f * textSize)));
+    m_edgeName->setText("[edge]");
+    m_root->addChild(m_edgeName);
   }
 
-  NodeSelectionPane::~NodeSelectionPane()
+  EdgeSelectionPane::~EdgeSelectionPane()
   {
   }
 
   /**
-  * @copydoc IMenu::handleMenuOptionSelection
-  */
-  void NodeSelectionPane::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
+   * @copydoc IMenu::handleMenuOptionSelection
+   */
+  void EdgeSelectionPane::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
   {
     const std::string selectedName(item->name());
     // TODO

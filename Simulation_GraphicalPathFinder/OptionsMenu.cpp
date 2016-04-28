@@ -7,6 +7,8 @@
 
 #include "OptionsMenu.h"
 
+#include "EdgeSelectionPane.h"
+#include "NodeSelectionPane.h"
 #include "PathFinder.h"
 
 using namespace Engine::Common;
@@ -53,10 +55,12 @@ namespace GraphicalPathFinder
   {
     const std::string selectedName(item->name());
 
+    // Hnadle exit
     if (selectedName == "exit")
     {
       m_game->exit();
     }
+    // Handle view modes
     else if (item->parent() == m_viewMenu)
     {
       ViewMode_bitset mode = m_pathFinder->viewMode();
@@ -77,10 +81,32 @@ namespace GraphicalPathFinder
 
       m_pathFinder->setViewMode(mode);
     }
+    // Handle feature selection
     else if (item->parent() == m_pickMenu)
     {
-      // TODO
+      IMenu *selected = nullptr;
+      IMenu *other = nullptr;
+
+      // Select correct menu
+      if (selectedName == "nodes")
+      {
+        selected = m_pathFinder->nodeSelection;
+        other = m_pathFinder->edgeSelection;
+      }
+      else if (selectedName == "edges")
+      {
+        selected = m_pathFinder->edgeSelection;
+        other = m_pathFinder->nodeSelection;
+      }
+
+      // Update menu visiblity
+      other->hide();
+      if (selected->visible())
+        selected->hide();
+      else
+        selected->show();
     }
+    // Handle start path finding
     if (selectedName == "find_path")
     {
       // TODO
