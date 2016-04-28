@@ -107,6 +107,9 @@ namespace GraphicalPathFinder
   {
     m_finder->reset();
     m_finder->findPath(m_startNode->first, m_endNode->first);
+
+    // Update view (set the path to visible by default after running path finding)
+    m_viewMode.set(ViewMode::PATH);
     setViewMode(m_viewMode);
   }
 
