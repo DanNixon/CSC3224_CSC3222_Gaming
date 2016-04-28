@@ -20,6 +20,7 @@
 #include <Simulation_PathFinding/Node.h>
 
 #include "Controls.h"
+#include "OptionsMenu.h"
 
 namespace Simulation
 {
@@ -48,6 +49,8 @@ namespace GraphicalPathFinder
     Engine::Graphics::ShaderProgram *m_colShader; //!< Shader based on fragment colour
     Engine::Common::Scene *m_scene;               //!< Scene containing path representation
     Controls *m_controls;                         //!< Control scheme
+    OptionsMenu *m_menu;                          //!< Option menu
+    TTF_Font *m_fontMedium;
 
     std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> m_nodes;
     std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> m_edges;

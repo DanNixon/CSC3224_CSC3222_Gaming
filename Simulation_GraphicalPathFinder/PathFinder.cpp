@@ -34,7 +34,7 @@ namespace Simulation
 namespace GraphicalPathFinder
 {
   PathFinder::PathFinder()
-      : Game("Graphical Path Finder", std::make_pair(640, 480))
+      : Game("Graphical Path Finder", std::make_pair(1024, 768))
   {
   }
 
@@ -47,6 +47,9 @@ namespace GraphicalPathFinder
    */
   int PathFinder::gameStartup()
   {
+    // Load fonts
+    m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
+
     // Controls
     m_controls = new Controls(this);
 
@@ -56,10 +59,24 @@ namespace GraphicalPathFinder
     m_colShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
     m_colShader->link();
 
+    ShaderProgram *menuShader = new ShaderProgram();
+    menuShader = new ShaderProgram();
+    menuShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+    menuShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
+    menuShader->link();
+    ShaderProgramLookup::Instance().add("menu_shader", menuShader);
+
     // Scene
     Matrix4 view = Matrix4::BuildViewMatrix(Vector3(0, 0, -15), Vector3(0, 0, 0));
     Matrix4 proj = Matrix4::Perspective(1, 100, 1.33f, 45.0f);
     m_scene = new Scene(new SceneObject("root"), view, proj);
+
+    // Menu
+    m_menu = new OptionsMenu(this, m_fontMedium, 0.05f);
+    m_menu->setMargin(Vector2(0.005f, 0.005f));
+    m_menu->layout();
+    m_menu->show();
+    addEventHandler(m_menu);
 
     // Load graph
     const std::string graphDataFile("../resources/buckminsterfullerene.dat");
@@ -115,6 +132,8 @@ namespace GraphicalPathFinder
     if (id == m_graphicsLoop)
     {
       m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
+      m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
+
       swapBuffers();
     }
     // Handle controls
@@ -142,10 +161,14 @@ namespace GraphicalPathFinder
    */
   void PathFinder::gameShutdown()
   {
+    // Delete graph
     for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
       delete it->first;
     for (auto it = m_edges.begin(); it != m_edges.end(); ++it)
       delete it->first;
+
+    // Delete fonts
+    TTF_CloseFont(m_fontMedium);
   }
 }
 }
