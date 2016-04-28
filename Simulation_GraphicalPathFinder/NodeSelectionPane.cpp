@@ -41,7 +41,7 @@ namespace GraphicalPathFinder
     pickEnd->setModelMatrix(Matrix4::Translation(Vector3(m_margin, textSize + m_margin)));
 
     // Set initial selected node
-    m_name->setText(begin->first->id());
+    updateDisplay();
   }
 
   NodeSelectionPane::~NodeSelectionPane()
@@ -52,11 +52,16 @@ namespace GraphicalPathFinder
   {
     m_selectedNodeIt = it;
 
-    // Update name display
-    m_name->setText(it->first->id());
+    updateDisplay();
 
-    // Update graph display
+    // Update graph
     m_pathFinder->setViewMode(m_pathFinder->viewMode());
+  }
+
+  void NodeSelectionPane::updateDisplay()
+  {
+    // Update name
+    m_name->setText(m_selectedNodeIt->first->id());
   }
 
   /**

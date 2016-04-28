@@ -17,8 +17,21 @@ namespace GraphicalPathFinder
   class EdgeSelectionPane : public SelectionPane
   {
   public:
-    EdgeSelectionPane(Engine::Common::Game *game, TTF_Font *font, float textSize);
+    static const float DELTA_WEIGHT;
+
+  public:
+    EdgeSelectionPane(Engine::Common::Game *game, TTF_Font *font, float textSize, PathFinder::EdgeMap::iterator begin,
+                      PathFinder::EdgeMap::iterator end);
     virtual ~EdgeSelectionPane();
+
+    inline PathFinder::EdgeMap::iterator selectedEdge()
+    {
+      return m_selectedEdgeIt;
+    }
+
+    void selectEdge(PathFinder::EdgeMap::iterator it);
+
+    void updateDisplay();
 
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
@@ -27,6 +40,11 @@ namespace GraphicalPathFinder
     Engine::Graphics::TextPane *m_weightText;
     Engine::Graphics::TextPane *m_connectionText;
     Engine::Graphics::TextPane *m_costText;
+
+    PathFinder::EdgeMap::iterator m_edgesBegin;
+    PathFinder::EdgeMap::iterator m_edgesEnd;
+
+    PathFinder::EdgeMap::iterator m_selectedEdgeIt;
   };
 }
 }

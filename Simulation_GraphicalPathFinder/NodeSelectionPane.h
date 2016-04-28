@@ -28,6 +28,8 @@ namespace GraphicalPathFinder
 
     void selectNode(PathFinder::NodeMap::iterator it);
 
+    void updateDisplay();
+
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
 

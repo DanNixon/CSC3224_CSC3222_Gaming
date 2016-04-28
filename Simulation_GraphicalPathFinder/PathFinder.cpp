@@ -105,7 +105,8 @@ namespace GraphicalPathFinder
       if (showPath && IsOnList(m_finder->path(), edge->nodeA()) && IsOnList(m_finder->path(), edge->nodeB()))
         edgeColour = ColourLookup::Instance().get("edge_path");
 
-      // TODO: if is selected
+      if (edge == m_edgeSelection->selectedEdge()->first)
+        edgeColour = ColourLookup::Instance().get("node_selected");
 
       it->second->mesh()->setStaticColour(edgeColour);
     }
@@ -220,7 +221,7 @@ namespace GraphicalPathFinder
     m_nodeSelection->hide();
 
     // Edge selection menu
-    m_edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f);
+    m_edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f, m_edges.begin(), m_edges.end());
     m_edgeSelection->setPosition(Vector3(-0.75f, -0.95f));
     m_edgeSelection->layout();
     addEventHandler(m_edgeSelection);
