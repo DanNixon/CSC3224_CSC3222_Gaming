@@ -175,8 +175,8 @@ namespace GraphicalPathFinder
     addEventHandler(m_menu);
 
     // Load graph
-    const std::string graphDataFile("../resources/buckminsterfullerene.dat");
-    // const std::string graphDataFile("../resources/test_graph.dat");
+    // const std::string graphDataFile("../resources/buckminsterfullerene.dat");
+    const std::string graphDataFile("../resources/test_graph.dat");
 
     std::vector<Node *> nodes;
     std::vector<Edge *> edges;
@@ -260,15 +260,6 @@ namespace GraphicalPathFinder
     // Handle controls
     else if (id == m_controlLoop)
     {
-      // Handle node selection
-      bool prevNode = m_controls->state(S_PREV_NODE);
-      bool nextNode = m_controls->state(S_NEXT_NODE);
-
-      if (prevNode || nextNode)
-      {
-        // TODO
-      }
-
       // Update graph rotation
       float yaw = m_controls->analog(A_MOUSE_X) * 180.0f;
       float pitch = m_controls->analog(A_MOUSE_Y) * 180.0f;

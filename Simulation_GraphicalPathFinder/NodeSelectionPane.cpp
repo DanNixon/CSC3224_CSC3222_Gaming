@@ -71,28 +71,34 @@ namespace GraphicalPathFinder
   {
     if (item == m_previous)
     {
+      // Wrap to end of nodes
       if (m_selectedNodeIt == m_nodesBegin)
         m_selectedNodeIt = m_nodesEnd;
 
+      // Select previous node
       --m_selectedNodeIt;
 
       selectNode(m_selectedNodeIt);
     }
     else if (item == m_next)
     {
+      // Select next node
       ++m_selectedNodeIt;
 
+      // Wrap to start of nodes
       if (m_selectedNodeIt == m_nodesEnd)
-        m_selectedNodeIt == m_nodesBegin;
+        std::advance(m_selectedNodeIt, -std::distance(m_nodesBegin, m_selectedNodeIt));
 
       selectNode(m_selectedNodeIt);
     }
     else if (item->name() == "pick_start")
     {
+      // Pick start of path node
       m_pathFinder->setStartNode(m_selectedNodeIt);
     }
     else if (item->name() == "pick_end")
     {
+      // Pick end of path node
       m_pathFinder->setEndNode(m_selectedNodeIt);
     }
   }
