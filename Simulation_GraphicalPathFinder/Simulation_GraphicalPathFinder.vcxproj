@@ -200,6 +200,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClCompile Include="NodeSelectionPane.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="PathFinder.cpp" />
+    <ClCompile Include="SelectionPane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controls.h" />
@@ -207,6 +208,7 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
     <ClInclude Include="NodeSelectionPane.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="PathFinder.h" />
+    <ClInclude Include="SelectionPane.h" />
     <ClInclude Include="ViewMode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

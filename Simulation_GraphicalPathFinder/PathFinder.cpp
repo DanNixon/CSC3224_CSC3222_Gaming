@@ -150,14 +150,14 @@ namespace GraphicalPathFinder
 
     // Node selection menu
     nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f);
-    nodeSelection->setPosition(Vector3(-0.8f, -0.8f));
+    nodeSelection->setPosition(Vector3(-0.75f, -0.95f));
     nodeSelection->layout();
     addEventHandler(nodeSelection);
     nodeSelection->hide();
 
     // Edge selection menu
     edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f);
-    edgeSelection->setPosition(Vector3(-0.8f, -0.8f));
+    edgeSelection->setPosition(Vector3(-0.75f, -0.95f));
     edgeSelection->layout();
     addEventHandler(edgeSelection);
     edgeSelection->hide();

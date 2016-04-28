@@ -7,10 +7,6 @@
 
 #include "EdgeSelectionPane.h"
 
-#include <Engine_Graphics/RectangleMesh.h>
-
-#include "PathFinder.h"
-
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -21,59 +17,37 @@ namespace Simulation
 namespace GraphicalPathFinder
 {
   /**
-  * @copydoc SoupMenu::SoupMenu
-  */
+   * @copydoc SelectionPane::SelectionPane
+   */
   EdgeSelectionPane::EdgeSelectionPane(Game *game, TTF_Font *font, float textSize)
-      : SoupMenu(game, font, textSize)
-      , m_pathFinder(static_cast<PathFinder *>(game))
-      , m_margin(textSize / 10.0f)
+      : SelectionPane(game, font, textSize, Vector2(0.4f, 0.24f))
   {
-    Colour backgroundColour(0.5f, 0.5f, 0.5f);
-
-    // Background
-    RenderableObject *background = new RenderableObject("background", new RectangleMesh(Vector2(0.3f, 0.3f)),
-                                                        ShaderProgramLookup::Instance().get("col_shader"));
-    background->mesh()->setStaticColour(backgroundColour);
-    background->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, 0.5f)));
-    m_root->addChild(background);
-
-    // Buttons
-    MenuItem *previous = addNewItem(nullptr, "previous", "<<");
-    previous->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_RIGHT));
-    previous->setModelMatrix(Matrix4::Translation(Vector3(-m_margin, 2.0f * textSize)));
-
-    MenuItem *next = addNewItem(nullptr, "next", ">>");
-    next->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_LEFT));
-    next->setModelMatrix(Matrix4::Translation(Vector3(m_margin, 2.0f * textSize)));
+    const float offset(textSize + m_margin);
 
     // Connections
-    // TODO
+    m_connectionText = newTextPane("connection", GetAlignment(Alignment::Y_BOTTOM, Alignment::X_CENTRE));
+    m_connectionText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, offset)));
+    m_connectionText->setText("a - b");
 
-    // Weight label
-    // TODO
+    // Increase weight button
+    MenuItem *increaseWeight = addNewItem(nullptr, "increase_weight", "+");
+    increaseWeight->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_LEFT));
+    increaseWeight->setModelMatrix(Matrix4::Translation(Vector3(-0.19f, 2.0f * offset)));
+
+    // Decrease weight button
+    MenuItem *decreaseWeight = addNewItem(nullptr, "decrease_weight", "-");
+    decreaseWeight->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_RIGHT));
+    decreaseWeight->setModelMatrix(Matrix4::Translation(Vector3(0.19f, 2.0f * offset)));
 
     // Weight
-    // TODO
+    m_weightText = newTextPane("weight", GetAlignment(Alignment::Y_BOTTOM, Alignment::X_CENTRE));
+    m_weightText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 2.0f * offset)));
+    m_weightText->setText("w = 0.0");
 
-    // Node name label
-    TextPane *nodeNameLabel = new TextPane("edge_name_label", textSize,
-                                           ShaderProgramLookup::Instance().get("menu_shader"), font, TextMode::SHADED);
-    nodeNameLabel->setTextColour(Colour(0.0f, 0.0f, 0.0f));
-    nodeNameLabel->setBackgroundColour(backgroundColour);
-    nodeNameLabel->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_RIGHT));
-    nodeNameLabel->setModelMatrix(Matrix4::Translation(Vector3(-m_margin, -2.0f * textSize)));
-    nodeNameLabel->setText("Edge:");
-    m_root->addChild(nodeNameLabel);
-
-    // Node name
-    m_edgeName =
-        new TextPane("edge_name", textSize, ShaderProgramLookup::Instance().get("menu_shader"), font, TextMode::SHADED);
-    m_edgeName->setTextColour(Colour(0.0f, 0.0f, 0.0f));
-    m_edgeName->setBackgroundColour(backgroundColour);
-    m_edgeName->setAlignment(GetAlignment(Alignment::Y_CENTRE, Alignment::X_LEFT));
-    m_edgeName->setModelMatrix(Matrix4::Translation(Vector3(m_margin, -2.0f * textSize)));
-    m_edgeName->setText("[edge]");
-    m_root->addChild(m_edgeName);
+    // Cost
+    m_costText = newTextPane("cost", GetAlignment(Alignment::Y_BOTTOM, Alignment::X_CENTRE));
+    m_costText->setModelMatrix(Matrix4::Translation(Vector3(0.0f, offset * 3.0f)));
+    m_costText->setText("cost = 0.0");
   }
 
   EdgeSelectionPane::~EdgeSelectionPane()

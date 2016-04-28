@@ -8,18 +8,13 @@
 #ifndef _SIMULATION_GRAPHICALPATHFINDER_NODESELECTIONPANE_H_
 #define _SIMULATION_GRAPHICALPATHFINDER_NODESELECTIONPANE_H_
 
-#include <Engine_UIMenu/SoupMenu.h>
-
-#include <Engine_Common/Game.h>
-#include <Engine_Graphics/TextPane.h>
-
-#include "PathFinder.h"
+#include "SelectionPane.h"
 
 namespace Simulation
 {
 namespace GraphicalPathFinder
 {
-  class NodeSelectionPane : public Engine::UIMenu::SoupMenu
+  class NodeSelectionPane : public SelectionPane
   {
   public:
     NodeSelectionPane(Engine::Common::Game *game, TTF_Font *font, float textSize);
@@ -27,11 +22,6 @@ namespace GraphicalPathFinder
 
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
-
-  private:
-    float m_margin;
-    PathFinder *m_pathFinder;
-    Engine::Graphics::TextPane *m_nodeName;
   };
 }
 }
