@@ -31,9 +31,9 @@ namespace GraphicalPathFinder
     addNewItem(nullptr, "find_path", "Find Path");
 
     // View menu
-    addNewItem(m_viewMenu, "graph", "Graph");
+    addNewItem(m_viewMenu, "graph", "Simple Graph");
     addNewItem(m_viewMenu, "weights", "Weights");
-    addNewItem(m_viewMenu, "open_ist", "Open List");
+    addNewItem(m_viewMenu, "open_list", "Open List");
     addNewItem(m_viewMenu, "closed_list", "Closed List");
     addNewItem(m_viewMenu, "path", "Path");
 
@@ -51,12 +51,40 @@ namespace GraphicalPathFinder
    */
   void OptionsMenu::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
   {
-    if (item->name() == "exit")
+    const std::string selectedName(item->name());
+
+    if (selectedName == "exit")
     {
       m_game->exit();
     }
+    else if (item->parent() == m_viewMenu)
+    {
+      ViewMode_bitset mode = m_pathFinder->viewMode();
 
-    // TODO
+      // Reset view to showing graph only
+      if (selectedName == "graph")
+        mode = ViewMode_bitset();
+
+      // Toggle features
+      else if (selectedName == "weights")
+        mode.flip(ViewMode::WEIGHTS);
+      else if (selectedName == "open_list")
+        mode.flip(ViewMode::OPEN_LIST);
+      else if (selectedName == "closed_list")
+        mode.flip(ViewMode::CLOSED_LIST);
+      else if (selectedName == "path")
+        mode.flip(ViewMode::PATH);
+
+      m_pathFinder->setViewMode(mode);
+    }
+    else if (item->parent() == m_pickMenu)
+    {
+      // TODO
+    }
+    if (selectedName == "find_path")
+    {
+      // TODO
+    }
   }
 }
 }

@@ -33,12 +33,12 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
-  bool PathFinder::IsOnList(const std::vector<QueueableNode *> & list, Node * node)
+  bool PathFinder::IsOnList(const std::vector<QueueableNode *> &list, Node *node)
   {
-    return std::find_if(list.begin(), list.end(), [node](QueueableNode * n){ return n->node == node; }) != list.end();
+    return std::find_if(list.begin(), list.end(), [node](QueueableNode *n) { return n->node == node; }) != list.end();
   }
 
-  bool PathFinder::IsOnList(const std::vector<Node *> & list, Node * node)
+  bool PathFinder::IsOnList(const std::vector<Node *> &list, Node *node)
   {
     return std::find(list.begin(), list.end(), node) != list.end();
   }
@@ -64,7 +64,7 @@ namespace GraphicalPathFinder
     // Process nodes
     for (auto it = m_nodes.begin(); it != m_nodes.end(); ++it)
     {
-      Node * node = it->first;
+      Node *node = it->first;
       Colour nodeColour = ColourLookup::Instance().get("node_default");
 
       if (showOpenList && IsOnList(m_finder->openList(), node))
@@ -82,7 +82,7 @@ namespace GraphicalPathFinder
     // Process edges
     for (auto it = m_edges.begin(); it != m_edges.end(); ++it)
     {
-      Edge * edge = it->first;
+      Edge *edge = it->first;
       Colour edgeColour = ColourLookup::Instance().get("edge_default");
 
       if (showWeights)
@@ -182,13 +182,9 @@ namespace GraphicalPathFinder
 
     // TODO
     m_finder->findPath(nodes[3], nodes[19]);
-    ViewMode_bitset v;
-    v.set(ViewMode::OPEN_LIST);
-    v.set(ViewMode::CLOSED_LIST);
-    v.set(ViewMode::PATH);
 
     // Default view
-    setViewMode(v);
+    setViewMode();
 
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
