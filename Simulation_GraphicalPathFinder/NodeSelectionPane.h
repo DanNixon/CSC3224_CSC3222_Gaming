@@ -17,11 +17,25 @@ namespace GraphicalPathFinder
   class NodeSelectionPane : public SelectionPane
   {
   public:
-    NodeSelectionPane(Engine::Common::Game *game, TTF_Font *font, float textSize);
+    NodeSelectionPane(Engine::Common::Game *game, TTF_Font *font, float textSize, PathFinder::NodeMap::iterator begin,
+                      PathFinder::NodeMap::iterator end);
     virtual ~NodeSelectionPane();
+
+    inline PathFinder::NodeMap::iterator selectedNode()
+    {
+      return m_selectedNodeIt;
+    }
+
+    void selectNode(PathFinder::NodeMap::iterator it);
 
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
+
+  private:
+    PathFinder::NodeMap::iterator m_nodesBegin;
+    PathFinder::NodeMap::iterator m_nodesEnd;
+
+    PathFinder::NodeMap::iterator m_selectedNodeIt;
   };
 }
 }

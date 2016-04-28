@@ -9,8 +9,6 @@
 
 #include <Engine_Graphics/RectangleMesh.h>
 
-#include "PathFinder.h"
-
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -39,14 +37,14 @@ namespace GraphicalPathFinder
     m_root->addChild(background);
 
     // Previous button
-    MenuItem *previous = addNewItem(nullptr, "previous", "<<");
-    previous->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_LEFT));
-    previous->setModelMatrix(Matrix4::Translation(Vector3(-0.95f, 0.0f) * bgSize * 0.5f));
+    m_previous = addNewItem(nullptr, "previous", "<<");
+    m_previous->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_LEFT));
+    m_previous->setModelMatrix(Matrix4::Translation(Vector3(-0.95f, 0.0f) * bgSize * 0.5f));
 
     // Next button
-    MenuItem *next = addNewItem(nullptr, "next", ">>");
-    next->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_RIGHT));
-    next->setModelMatrix(Matrix4::Translation(Vector3(0.95f, 0.0f) * bgSize * 0.5f));
+    m_next = addNewItem(nullptr, "next", ">>");
+    m_next->setAlignment(GetAlignment(Alignment::Y_BOTTOM, Alignment::X_RIGHT));
+    m_next->setModelMatrix(Matrix4::Translation(Vector3(0.95f, 0.0f) * bgSize * 0.5f));
 
     // Name text
     m_name = newTextPane("name", GetAlignment(Alignment::Y_BOTTOM, Alignment::X_CENTRE));

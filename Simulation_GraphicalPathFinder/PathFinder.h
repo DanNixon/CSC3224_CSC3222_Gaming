@@ -58,6 +58,18 @@ namespace GraphicalPathFinder
 
     void setViewMode(ViewMode_bitset mode = ViewMode_bitset());
 
+    inline void setStartNode(NodeMap::iterator start)
+    {
+      m_startNode = start;
+      setViewMode(m_viewMode);
+    }
+
+    inline void setEndNode(NodeMap::iterator end)
+    {
+      m_endNode = end;
+      setViewMode(m_viewMode);
+    }
+
     void runPathFinding();
 
   protected:

@@ -85,7 +85,8 @@ namespace GraphicalPathFinder
       if (node == m_endNode->first)
         nodeColour = ColourLookup::Instance().get("node_end");
 
-      // TODO: if is selected
+      if (node == m_nodeSelection->selectedNode()->first)
+        nodeColour = ColourLookup::Instance().get("node_selected");
 
       it->second->mesh()->setStaticColour(nodeColour);
     }
@@ -172,20 +173,6 @@ namespace GraphicalPathFinder
     m_menu->show();
     addEventHandler(m_menu);
 
-    // Node selection menu
-    m_nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f);
-    m_nodeSelection->setPosition(Vector3(-0.75f, -0.95f));
-    m_nodeSelection->layout();
-    addEventHandler(m_nodeSelection);
-    m_nodeSelection->hide();
-
-    // Edge selection menu
-    m_edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f);
-    m_edgeSelection->setPosition(Vector3(-0.75f, -0.95f));
-    m_edgeSelection->layout();
-    addEventHandler(m_edgeSelection);
-    m_edgeSelection->hide();
-
     // Load graph
     const std::string graphDataFile("../resources/buckminsterfullerene.dat");
     // const std::string graphDataFile("../resources/test_graph.dat");
@@ -224,6 +211,20 @@ namespace GraphicalPathFinder
 
     // Create path finder
     m_finder = new AStar(nodes);
+
+    // Node selection menu
+    m_nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f, m_nodes.begin(), m_nodes.end());
+    m_nodeSelection->setPosition(Vector3(-0.75f, -0.95f));
+    m_nodeSelection->layout();
+    addEventHandler(m_nodeSelection);
+    m_nodeSelection->hide();
+
+    // Edge selection menu
+    m_edgeSelection = new EdgeSelectionPane(this, m_fontMedium, 0.05f);
+    m_edgeSelection->setPosition(Vector3(-0.75f, -0.95f));
+    m_edgeSelection->layout();
+    addEventHandler(m_edgeSelection);
+    m_edgeSelection->hide();
 
     // Default view
     setViewMode();

@@ -32,6 +32,9 @@ namespace GraphicalPathFinder
     float m_margin;
     Engine::Graphics::Colour m_backgroundColour;
 
+    Engine::UIMenu::MenuItem *m_previous;
+    Engine::UIMenu::MenuItem *m_next;
+
     PathFinder *m_pathFinder;
     Engine::Graphics::TextPane *m_name;
   };
