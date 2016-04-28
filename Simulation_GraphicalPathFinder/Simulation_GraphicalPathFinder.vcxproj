@@ -196,11 +196,13 @@ xcopy /y /d  "$(SolutionDir)\ThirdParty\freealut\lib\$(Platform)\$(Configuration
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NodeSelectionPane.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="PathFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controls.h" />
+    <ClInclude Include="NodeSelectionPane.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="PathFinder.h" />
     <ClInclude Include="ViewMode.h" />

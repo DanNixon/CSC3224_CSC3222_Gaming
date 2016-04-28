@@ -16,6 +16,7 @@
     <ClCompile Include="SphericalMesh.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Alignment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />

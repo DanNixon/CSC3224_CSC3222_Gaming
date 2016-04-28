@@ -8,9 +8,9 @@
 #ifndef _SIMULATION_GRAPHICALPATHFINDER_OPTIONSMENU_H_
 #define _SIMULATION_GRAPHICALPATHFINDER_OPTIONSMENU_H_
 
-#include <Engine_Common/Game.h>
-#include <Engine_Input/IControlScheme.h>
 #include <Engine_UIMenu/TopBarMenu.h>
+
+#include <Engine_Common/Game.h>
 
 namespace Simulation
 {

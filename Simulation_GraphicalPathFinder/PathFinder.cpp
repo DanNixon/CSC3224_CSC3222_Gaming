@@ -19,6 +19,8 @@
 
 #include <Simulation_PathFinding/GraphLoader.h>
 
+#include "NodeSelectionPane.h"
+
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
@@ -124,6 +126,7 @@ namespace GraphicalPathFinder
     m_colShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
     m_colShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
     m_colShader->link();
+    ShaderProgramLookup::Instance().add("col_shader", m_colShader);
 
     ShaderProgram *menuShader = new ShaderProgram();
     menuShader = new ShaderProgram();
@@ -143,6 +146,13 @@ namespace GraphicalPathFinder
     m_menu->layout();
     m_menu->show();
     addEventHandler(m_menu);
+
+    // Node selection menu
+    m_nodeSelection = new NodeSelectionPane(this, m_fontMedium, 0.05f);
+    m_nodeSelection->setPosition(Vector3(-0.8f, -0.8f));
+    m_nodeSelection->layout();
+    m_nodeSelection->show();
+    addEventHandler(m_nodeSelection);
 
     // Load graph
     const std::string graphDataFile("../resources/buckminsterfullerene.dat");
@@ -167,6 +177,8 @@ namespace GraphicalPathFinder
       m_nodes[*it] = obj;
     }
 
+    m_pickedNode = m_nodes.begin();
+
     // Create graphical edges
     for (auto it = edges.begin(); it != edges.end(); ++it)
     {
@@ -177,11 +189,10 @@ namespace GraphicalPathFinder
       m_edges[*it] = obj;
     }
 
+    m_pickedEdge = m_edges.begin();
+
     // Create path finder
     m_finder = new AStar(nodes);
-
-    // TODO
-    m_finder->findPath(nodes[3], nodes[19]);
 
     // Default view
     setViewMode();
@@ -208,6 +219,7 @@ namespace GraphicalPathFinder
     {
       m_scene->update(dtMilliSec, Subsystem::GRAPHICS);
       m_menu->update(dtMilliSec, Subsystem::GRAPHICS);
+      m_nodeSelection->update(dtMilliSec, Subsystem::GRAPHICS);
 
       swapBuffers();
     }

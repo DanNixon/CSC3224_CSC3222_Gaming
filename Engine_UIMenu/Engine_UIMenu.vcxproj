@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClInclude Include="IMenu.h" />
     <ClInclude Include="MenuItem.h" />
+    <ClInclude Include="SoupMenu.h" />
     <ClInclude Include="TopBarMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IMenu.cpp" />
     <ClCompile Include="MenuItem.cpp" />
+    <ClCompile Include="SoupMenu.cpp" />
     <ClCompile Include="TopBarMenu.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

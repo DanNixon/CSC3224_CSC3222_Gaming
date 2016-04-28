@@ -39,6 +39,8 @@ namespace Graphics
    * @brief Bitset used for defining alignment options.
    */
   typedef Engine::Utility::EnumClassBitset<Alignment> Alignment_bitset;
+
+  Alignment_bitset GetAlignment(Alignment a, Alignment b);
 }
 }
 

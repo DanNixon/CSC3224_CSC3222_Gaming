@@ -29,6 +29,8 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
+  class NodeSelectionPane;
+
   /**
    * @class PathFinder
    * @brief Game application for a graphical path finder.
@@ -37,6 +39,9 @@ namespace GraphicalPathFinder
   class PathFinder : public Engine::Common::Game
   {
   public:
+    typedef std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> NodeMap;
+    typedef std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> EdgeMap;
+
     bool IsOnList(const std::vector<Simulation::PathFinding::QueueableNode *> &list,
                   Simulation::PathFinding::Node *node);
     bool IsOnList(const std::vector<Simulation::PathFinding::Node *> &list, Simulation::PathFinding::Node *node);
@@ -61,14 +66,17 @@ namespace GraphicalPathFinder
     Uint8 m_graphicsLoop; //!< Graphics update loop ID
     Uint8 m_controlLoop;  //!< Control update loop ID
 
+    TTF_Font *m_fontMedium;
     Engine::Graphics::ShaderProgram *m_colShader; //!< Shader based on fragment colour
     Engine::Common::Scene *m_scene;               //!< Scene containing path representation
     Controls *m_controls;                         //!< Control scheme
     OptionsMenu *m_menu;                          //!< Option menu
-    TTF_Font *m_fontMedium;
+    NodeSelectionPane *m_nodeSelection;
 
-    std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> m_nodes;
-    std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> m_edges;
+    NodeMap m_nodes;
+    EdgeMap m_edges;
+    NodeMap::iterator m_pickedNode;
+    EdgeMap::iterator m_pickedEdge;
 
     Simulation::PathFinding::AStar *m_finder;
 

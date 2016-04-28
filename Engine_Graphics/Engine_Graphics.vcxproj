@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Alignment.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GraphicalScene.cpp" />
     <ClCompile Include="HeightmapMesh.cpp" />

@@ -4,10 +4,12 @@
     <ClInclude Include="IMenu.h" />
     <ClInclude Include="MenuItem.h" />
     <ClInclude Include="TopBarMenu.h" />
+    <ClInclude Include="SoupMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IMenu.cpp" />
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="TopBarMenu.cpp" />
+    <ClCompile Include="SoupMenu.cpp" />
   </ItemGroup>
 </Project>

@@ -148,7 +148,10 @@ namespace UIMenu
 
     for (SceneObject::SceneObjectListIter it = node->children().begin(); it != node->children().end(); ++it)
     {
-      MenuItem *obj = static_cast<MenuItem *>(*it);
+      MenuItem *obj = dynamic_cast<MenuItem *>(*it);
+      if (obj == nullptr)
+        continue;
+
       Mesh *m = obj->mesh();
       if (obj->state() != MenuItemState::DISABLED)
       {
