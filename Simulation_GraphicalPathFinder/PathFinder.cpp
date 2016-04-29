@@ -205,8 +205,7 @@ namespace GraphicalPathFinder
     addEventHandler(m_menu);
 
     // Load graph
-    // const std::string graphDataFile("../resources/buckminsterfullerene.dat");
-    const std::string graphDataFile("../resources/test_graph.dat");
+    const std::string graphDataFile("../resources/buckminsterfullerene.dat");
 
     std::vector<Node *> nodes;
     std::vector<Edge *> edges;
