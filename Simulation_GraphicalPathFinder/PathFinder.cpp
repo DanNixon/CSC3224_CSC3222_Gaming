@@ -176,23 +176,19 @@ namespace GraphicalPathFinder
     m_fontMedium = TTF_OpenFont("../resources/open-sans/OpenSans-Regular.ttf", 20);
 
     // Set colours
-    ColourLookup::Instance().add("node_start", Colour(0.0f, 1.0f, 0.0f, 1.0f));
-    ColourLookup::Instance().add("node_end", Colour(1.0f, 0.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("node_start", Colour(0.0f, 1.0f, 0.0f, 1.0f)); // Green
+    ColourLookup::Instance().add("node_end", Colour(1.0f, 0.0f, 0.0f, 1.0f));   // Red
 
-    ColourLookup::Instance().add("node_selected", Colour(1.0f, 1.0f, 0.0f, 1.0f));
-    ColourLookup::Instance().add("edge_selected", Colour(1.0f, 1.0f, 0.0f, 1.0f));
+    ColourLookup::Instance().add("node_selected", Colour(1.0f, 1.0f, 0.0f, 1.0f)); // Yellow
+    ColourLookup::Instance().add("edge_selected", Colour(1.0f, 1.0f, 0.0f, 1.0f)); // Yellow
 
-    ColourLookup::Instance().add("node_default", Colour(1.0f, 1.0f, 1.0f, 1.0f));
-    ColourLookup::Instance().add("edge_default", Colour(1.0f, 1.0f, 1.0f, 1.0f));
+    ColourLookup::Instance().add("node_default", Colour(1.0f, 1.0f, 1.0f, 1.0f)); // White
+    ColourLookup::Instance().add("edge_default", Colour(1.0f, 1.0f, 1.0f, 1.0f)); // White
 
-    ColourLookup::Instance().add("node_open_list", Colour(0.5f, 1.0f, 0.0f, 1.0f));
-    ColourLookup::Instance().add("edge_open_list", Colour(0.5f, 1.0f, 0.0f, 1.0f));
-
-    ColourLookup::Instance().add("node_closed_list", Colour(1.0f, 0.5f, 0.0f, 1.0f));
-    ColourLookup::Instance().add("edge_closed_list", Colour(1.0f, 0.5f, 0.0f, 1.0f));
-
-    ColourLookup::Instance().add("node_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));
-    ColourLookup::Instance().add("edge_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));
+    ColourLookup::Instance().add("node_open_list", Colour(1.0f, 0.2f, 0.5f, 1.0f));   // Pink
+    ColourLookup::Instance().add("node_closed_list", Colour(1.0f, 0.5f, 0.0f, 1.0f)); // Orange
+    ColourLookup::Instance().add("node_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));        // Blue
+    ColourLookup::Instance().add("edge_path", Colour(0.0f, 0.0f, 1.0f, 1.0f));        // Blue
 
     // Controls
     m_controls = new Controls(this);
