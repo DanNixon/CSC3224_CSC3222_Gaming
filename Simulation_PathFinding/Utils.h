@@ -9,6 +9,7 @@
 #define _SIMULATION_PATHFINDING_UTILS_H_
 
 #include <algorithm>
+#include <sstream>
 #include <vector>
 
 #include "Edge.h"
@@ -26,6 +27,27 @@ namespace PathFinding
   class Utils
   {
   public:
+    /**
+     * @brief Creates a string representation of a path.
+     * @param path Path to convert
+     * @return String denoting path
+     */
+    static std::string PathToString(const std::vector<Node *> &path)
+    {
+      std::stringstream pathStr;
+
+      for (auto it = path.begin(); it != path.end(); ++it)
+      {
+        // Add a comma for all but the first node
+        if (it != path.begin())
+          pathStr << ",";
+
+        pathStr << (*it)->id();
+      }
+
+      return pathStr.str();
+    }
+
     /**
      * @brief Checks if a QueueableNode is on a given list.
      * @param list List to check

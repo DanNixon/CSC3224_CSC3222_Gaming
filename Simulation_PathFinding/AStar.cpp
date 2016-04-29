@@ -7,7 +7,15 @@
 
 #include "AStar.h"
 
+#include <Engine_Logging/Logger.h>
+
 #include "Edge.h"
+#include "Utils.h"
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
 
 namespace Simulation
 {
@@ -46,6 +54,8 @@ namespace PathFinding
       it->second->fScore = std::numeric_limits<float>::max();
       it->second->gScore = std::numeric_limits<float>::max();
     }
+
+    g_log.debug("A* path finder reset");
   }
 
   /**
@@ -72,6 +82,8 @@ namespace PathFinding
       // Move this node to the closed list
       m_openList.pop();
       m_closedList.push_back(p);
+
+      g_log.debug("Node " + p->node->id() + " added to closed list with f score: " + std::to_string(p->fScore));
 
       // Check if this is the end node
       if (p->node == end)
@@ -108,6 +120,8 @@ namespace PathFinding
             q->gScore = gScore;
             q->fScore = fScore;
             m_openList.update();
+
+            g_log.debug("Node " + q->node->id() + " updated with lower g score: " + std::to_string(gScore));
           }
         }
         else
@@ -117,6 +131,8 @@ namespace PathFinding
           q->gScore = gScore;
           q->fScore = fScore;
           m_openList.push(q);
+
+          g_log.debug("Node " + q->node->id() + " added to open list with g score: " + std::to_string(gScore));
         }
       }
     }
@@ -134,6 +150,12 @@ namespace PathFinding
 
       // Reverse path to be ordered start to end
       std::reverse(m_path.begin(), m_path.end());
+
+      g_log.info("Found path: " + Utils::PathToString(m_path));
+    }
+    else
+    {
+      g_log.warn("No valid path found");
     }
 
     return success;
