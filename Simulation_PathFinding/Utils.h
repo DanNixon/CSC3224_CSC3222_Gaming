@@ -38,9 +38,9 @@ namespace PathFinding
 
       for (auto it = path.begin(); it != path.end(); ++it)
       {
-        // Add a comma for all but the first node
+        // Add an arrow for all but the first node
         if (it != path.begin())
-          pathStr << ",";
+          pathStr << "->";
 
         pathStr << (*it)->id();
       }
