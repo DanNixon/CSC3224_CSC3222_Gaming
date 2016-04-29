@@ -7,13 +7,13 @@ Essential:
 - [x] Generate edges for `buckminsterfullerene.dat` data file
 - [x] Node/egde structure
 - [x] Graph loading form file
-- [ ] A* implementation
-  - [ ] Priority queue wrapper
+- [x] A* implementation
+  - [x] Priority queue wrapper
 
 Extra:
 
-- [ ] Graphical representation
+- [x] Graphical representation
   - [x] Show graph in 3D
-  - [ ] Colour start and target nodes
-  - [ ] Colour nodes in open and closed lists
-  - [ ] Colour best path
+  - [x] Colour start and target nodes
+  - [x] Colour nodes in open and closed lists
+  - [x] Colour best path
