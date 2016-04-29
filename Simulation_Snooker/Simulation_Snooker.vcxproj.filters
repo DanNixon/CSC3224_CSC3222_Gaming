@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="SnookerSimulation.cpp" />
+    <ClCompile Include="TakeShotState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitForShotState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="SnookerStateMachine.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="SandboxState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaceCueBallState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Pocket.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Cushion.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsMenu.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SnookerSimulation.h" />
+    <ClInclude Include="WaitForShotState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="TakeShotState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="SnookerStateMachine.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="SandboxState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaceCueBallState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Pocket.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Cushion.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SnookerControls.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsMenu.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="State">
+      <UniqueIdentifier>{5043ce8e-cdab-4ef1-928b-1e6a9b10a0de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{bbe177e4-ab23-4661-80e8-57b07791e971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls">
+      <UniqueIdentifier>{aa547c7a-b844-41e2-965d-e40a0f58fd89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

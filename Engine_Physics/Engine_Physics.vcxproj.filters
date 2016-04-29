@@ -3,24 +3,56 @@
   <ItemGroup>
     <ClInclude Include="SceneObjectMotionState.h" />
     <ClInclude Include="PhysicalSystem.h" />
-    <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="SphericalRigidBody.h" />
-    <ClInclude Include="StaticPlaneRigidBody.h" />
-    <ClInclude Include="ConvexHullShape.h" />
-    <ClInclude Include="BoundingBoxShape.h" />
-    <ClInclude Include="Heightmap.h" />
     <ClInclude Include="DebugDrawEngine.h" />
-    <ClInclude Include="BoundingCylinderShape.h" />
     <ClInclude Include="MathsConversions.h" />
+    <ClInclude Include="BoundingBoxShape.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingCylinderShape.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvexHullShape.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SphericalRigidBody.h">
+      <Filter>Bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticPlaneRigidBody.h">
+      <Filter>Bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="Heightmap.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneObjectMotionState.cpp" />
     <ClCompile Include="PhysicalSystem.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="ConvexHullShape.cpp" />
-    <ClCompile Include="BoundingBoxShape.cpp" />
-    <ClCompile Include="Heightmap.cpp" />
     <ClCompile Include="DebugDrawEngine.cpp" />
-    <ClCompile Include="BoundingCylinderShape.cpp" />
+    <ClCompile Include="BoundingBoxShape.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingCylinderShape.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvexHullShape.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="Heightmap.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Shapes">
+      <UniqueIdentifier>{c5b0e12d-c0be-4aae-9aff-2b67ebb8b57a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bodies">
+      <UniqueIdentifier>{1ac64b11-11c0-4142-a806-c97d7aead7f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

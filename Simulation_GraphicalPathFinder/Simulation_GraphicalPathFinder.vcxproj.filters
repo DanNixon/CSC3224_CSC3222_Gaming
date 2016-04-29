@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PathFinder.cpp" />
+    <ClCompile Include="NodeSelectionPane.cpp">
+      <Filter>Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="EdgeSelectionPane.cpp">
+      <Filter>Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionPane.cpp">
+      <Filter>Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsMenu.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PathFinder.h" />
+    <ClInclude Include="ViewMode.h" />
+    <ClInclude Include="NodeSelectionPane.h">
+      <Filter>Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="EdgeSelectionPane.h">
+      <Filter>Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionPane.h">
+      <Filter>Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsMenu.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Graphical">
+      <UniqueIdentifier>{2f323241-4aca-466e-9e58-9e011323e281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls">
+      <UniqueIdentifier>{a26183f1-ba3d-4250-b8f7-6c79a1d0bfe4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
