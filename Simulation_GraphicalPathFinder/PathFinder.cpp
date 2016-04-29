@@ -245,7 +245,7 @@ namespace GraphicalPathFinder
       obj->setModelMatrix(Matrix4::Translation((*it)->position()));
       m_scene->root()->addChild(obj);
 
-      m_nodes[*it] = obj;
+      m_nodes.push_back(std::make_pair(*it, obj));
     }
 
     m_startNode = m_nodes.begin();
@@ -258,7 +258,7 @@ namespace GraphicalPathFinder
       RenderableObject *obj = new RenderableObject((*it)->id(), mesh, colShader);
       m_scene->root()->addChild(obj);
 
-      m_edges[*it] = obj;
+      m_edges.push_back(std::make_pair(*it, obj));
     }
 
     // Create path finder

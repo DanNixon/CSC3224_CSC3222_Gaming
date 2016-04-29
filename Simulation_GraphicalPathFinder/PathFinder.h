@@ -45,14 +45,14 @@ namespace GraphicalPathFinder
      * @brief Container for path finding Node and a graphical representation of
      *        it.
      */
-    typedef std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> NodeMap;
+    typedef std::vector<std::pair<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *>> NodeMap;
 
     /**
      * @typedef EdgeMap
      * @brief Container for path finding Edge and a graphical representation of
      *        it.
      */
-    typedef std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> EdgeMap;
+    typedef std::vector<std::pair<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *>> EdgeMap;
 
   public:
     PathFinder();
