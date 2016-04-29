@@ -12,6 +12,7 @@
 #include <Engine_Common/SceneObject.h>
 #include <Engine_Graphics/LineMesh.h>
 #include <Engine_Graphics/RenderableObject.h>
+#include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_Graphics/SphericalMesh.h>
 #include <Engine_Logging/Logger.h>
@@ -182,11 +183,11 @@ namespace GraphicalPathFinder
     m_controls = new Controls(this);
 
     // Shaders
-    m_colShader = new ShaderProgram();
-    m_colShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
-    m_colShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
-    m_colShader->link();
-    ShaderProgramLookup::Instance().add("col_shader", m_colShader);
+    ShaderProgram *colShader = new ShaderProgram();
+    colShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
+    colShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
+    colShader->link();
+    ShaderProgramLookup::Instance().add("col_shader", colShader);
 
     ShaderProgram *menuShader = new ShaderProgram();
     menuShader = new ShaderProgram();
@@ -222,7 +223,7 @@ namespace GraphicalPathFinder
     for (auto it = nodes.begin(); it != nodes.end(); ++it)
     {
       SphericalMesh *mesh = new SphericalMesh(0.1f);
-      RenderableObject *obj = new RenderableObject((*it)->id(), mesh, m_colShader);
+      RenderableObject *obj = new RenderableObject((*it)->id(), mesh, colShader);
       obj->setModelMatrix(Matrix4::Translation((*it)->position()));
       m_scene->root()->addChild(obj);
 
@@ -236,7 +237,7 @@ namespace GraphicalPathFinder
     for (auto it = edges.begin(); it != edges.end(); ++it)
     {
       LineMesh *mesh = new LineMesh((*it)->nodeA()->position(), (*it)->nodeB()->position());
-      RenderableObject *obj = new RenderableObject((*it)->id(), mesh, m_colShader);
+      RenderableObject *obj = new RenderableObject((*it)->id(), mesh, colShader);
       m_scene->root()->addChild(obj);
 
       m_edges[*it] = obj;

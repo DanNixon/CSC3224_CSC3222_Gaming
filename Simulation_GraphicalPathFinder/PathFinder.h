@@ -15,7 +15,6 @@
 
 #include <Engine_Common/Scene.h>
 #include <Engine_Graphics/RenderableObject.h>
-#include <Engine_Graphics/ShaderProgram.h>
 
 #include <Simulation_PathFinding/AStar.h>
 #include <Simulation_PathFinding/Edge.h>
@@ -79,11 +78,10 @@ namespace GraphicalPathFinder
     Uint8 m_graphicsLoop; //!< Graphics update loop ID
     Uint8 m_controlLoop;  //!< Control update loop ID
 
-    TTF_Font *m_fontMedium;
-    Engine::Graphics::ShaderProgram *m_colShader; //!< Shader based on fragment colour
-    Engine::Common::Scene *m_scene;               //!< Scene containing path representation
-    Controls *m_controls;                         //!< Control scheme
-    OptionsMenu *m_menu;                          //!< Option menu
+    TTF_Font *m_fontMedium;         //!< UI font
+    Engine::Common::Scene *m_scene; //!< Scene containing path representation
+    Controls *m_controls;           //!< Control scheme
+    OptionsMenu *m_menu;            //!< Option menu
 
     NodeSelectionPane *m_nodeSelection;
     EdgeSelectionPane *m_edgeSelection;
