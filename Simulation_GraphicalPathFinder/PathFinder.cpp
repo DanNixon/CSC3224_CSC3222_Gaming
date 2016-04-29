@@ -76,6 +76,10 @@ namespace GraphicalPathFinder
       Node *node = it->first;
       Colour nodeColour = ColourLookup::Instance().get("node_default");
 
+      const bool isStart(node == m_startNode->first);
+      const bool isEnd(node == m_endNode->first);
+      const bool isSelected(node == m_nodeSelection->selectedNode()->first);
+
       if (showOpenList && Utils::IsOnList(m_finder->openList(), node))
         nodeColour = ColourLookup::Instance().get("node_open_list");
 
@@ -85,16 +89,26 @@ namespace GraphicalPathFinder
       if (showPath && Utils::IsOnList(m_finder->path(), node))
         nodeColour = ColourLookup::Instance().get("node_path");
 
-      if (node == m_startNode->first)
+      if (isStart)
         nodeColour = ColourLookup::Instance().get("node_start");
 
-      if (node == m_endNode->first)
+      if (isEnd)
         nodeColour = ColourLookup::Instance().get("node_end");
 
-      if (node == m_nodeSelection->selectedNode()->first)
+      if (isSelected)
         nodeColour = ColourLookup::Instance().get("node_selected");
 
       it->second->mesh()->setStaticColour(nodeColour);
+
+      // Check this node has traversable connections, set to invisible if all
+      // edges are not traversable, unless it is the start, end or selected node
+      bool visible = isStart || isEnd || isSelected;
+      for (size_t i = 0; i < node->numConnections(); i++)
+      {
+        if (node->edge(i)->traversable())
+          visible = true;
+      }
+      it->second->setActive(visible);
     }
 
     // Process edges
@@ -123,6 +137,8 @@ namespace GraphicalPathFinder
       Edge *edge = it->first;
       Colour edgeColour = ColourLookup::Instance().get("edge_default");
 
+      const bool isSelected(edge == m_edgeSelection->selectedEdge()->first);
+
       if (showWeights || showStaticCosts || showCosts)
       {
         edgeColour = Colour(1.0f, 1.0f, 1.0f);
@@ -144,10 +160,14 @@ namespace GraphicalPathFinder
       if (showPath && Utils::IsOnPath(m_finder->path(), edge))
         edgeColour = ColourLookup::Instance().get("edge_path");
 
-      if (edge == m_edgeSelection->selectedEdge()->first)
+      if (isSelected)
         edgeColour = ColourLookup::Instance().get("node_selected");
 
       it->second->mesh()->setStaticColour(edgeColour);
+
+      // Set this edge to invisible if it is not traversable, unless it is
+      // selected
+      it->second->setActive(edge->traversable() || isSelected);
     }
 
     // Update the menu options
