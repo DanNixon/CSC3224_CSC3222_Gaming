@@ -151,7 +151,7 @@ namespace PathFinding
       // Reverse path to be ordered start to end
       std::reverse(m_path.begin(), m_path.end());
 
-      g_log.info("Found path: " + Utils::PathToString(m_path));
+      g_log.info("Found path: " + Utils::PathToString(m_path) + " (cost=" + std::to_string(pathCost()) + ")");
     }
     else
     {

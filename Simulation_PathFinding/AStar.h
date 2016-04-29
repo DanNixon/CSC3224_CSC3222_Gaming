@@ -37,7 +37,7 @@ namespace PathFinding
      * @brief Gets the open list.
      * @return Open list
      */
-    NodePriorityQueue openList() const
+    inline NodePriorityQueue openList() const
     {
       return m_openList;
     }
@@ -46,7 +46,7 @@ namespace PathFinding
      * @brief Gets the closed list.
      * @return Closed list
      */
-    std::vector<QueueableNode *> closedList() const
+    inline std::vector<QueueableNode *> closedList() const
     {
       return m_closedList;
     }
@@ -55,9 +55,18 @@ namespace PathFinding
      * @brief Gets the computed path.
      * @return Path
      */
-    std::vector<Node *> path() const
+    inline std::vector<Node *> path() const
     {
       return m_path;
+    }
+
+    /**
+     * @param Gets the cost of the full path.
+     * @return Path cost
+     */
+    inline float pathCost() const
+    {
+      return m_closedList.back()->gScore;
     }
 
   private:

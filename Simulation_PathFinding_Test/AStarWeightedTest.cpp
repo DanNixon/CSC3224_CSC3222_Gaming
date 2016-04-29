@@ -14,6 +14,12 @@
 
 #include <sstream>
 
+/**
+ * @def FP_ACC
+ * @brief Accuracy for floating point comparison.
+ */
+#define FP_ACC 0.001f
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Engine::Maths;
 
@@ -42,6 +48,9 @@ public:
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[3], nodes[3]));
 
+    // Assert path cost
+    Assert::AreEqual(0.0f, pathFinder.pathCost(), FP_ACC);
+
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
     Assert::AreEqual((size_t)1, path.size());
@@ -62,6 +71,9 @@ public:
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[3], nodes[5]));
+
+    // Assert path cost
+    Assert::AreEqual(2.82842f, pathFinder.pathCost(), FP_ACC);
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
@@ -85,6 +97,9 @@ public:
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[5], nodes[3]));
+
+    // Assert path cost
+    Assert::AreEqual(2.82842f, pathFinder.pathCost(), FP_ACC);
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
@@ -110,6 +125,9 @@ public:
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[6], nodes[1]));
+
+    // Assert path cost
+    Assert::AreEqual(3.82842f, pathFinder.pathCost(), FP_ACC);
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
@@ -137,6 +155,9 @@ public:
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[1], nodes[6]));
 
+    // Assert path cost
+    Assert::AreEqual(3.82842f, pathFinder.pathCost(), FP_ACC);
+
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
     Assert::AreEqual((size_t)4, path.size());
@@ -161,6 +182,9 @@ public:
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[8], nodes[0]));
+
+    // Assert path cost
+    Assert::AreEqual(3.41421f, pathFinder.pathCost(), FP_ACC);
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
@@ -187,6 +211,9 @@ public:
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[0], nodes[8]));
 
+    // Assert path cost
+    Assert::AreEqual(3.41421f, pathFinder.pathCost(), FP_ACC);
+
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
     Assert::AreEqual((size_t)4, path.size());
@@ -212,6 +239,9 @@ public:
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[7], nodes[4]));
 
+    // Assert path cost
+    Assert::AreEqual(1.2f, pathFinder.pathCost(), FP_ACC);
+
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
     Assert::AreEqual((size_t)4, path.size());
@@ -236,6 +266,9 @@ public:
     // Run path finding
     AStar pathFinder(nodes);
     Assert::IsTrue(pathFinder.findPath(nodes[4], nodes[7]));
+
+    // Assert path cost
+    Assert::AreEqual(1.2f, pathFinder.pathCost(), FP_ACC);
 
     // Assert path
     std::vector<Node *> &path = pathFinder.path();
