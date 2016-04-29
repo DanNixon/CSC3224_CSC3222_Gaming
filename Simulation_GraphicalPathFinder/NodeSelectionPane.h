@@ -14,6 +14,11 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
+  /**
+   * @class NodeSelectionPane
+   * @brief Used to select nodes in the graph.
+   * @author Dan Nixon
+   */
   class NodeSelectionPane : public SelectionPane
   {
   public:
@@ -21,6 +26,10 @@ namespace GraphicalPathFinder
                       PathFinder::NodeMap::iterator end);
     virtual ~NodeSelectionPane();
 
+    /**
+     * @brief Gets the selected node.
+     * @return Iterator to selected node
+     */
     inline PathFinder::NodeMap::iterator selectedNode()
     {
       return m_selectedNodeIt;
@@ -34,10 +43,10 @@ namespace GraphicalPathFinder
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
 
   private:
-    PathFinder::NodeMap::iterator m_nodesBegin;
-    PathFinder::NodeMap::iterator m_nodesEnd;
+    PathFinder::NodeMap::iterator m_nodesBegin; //!< Iterator to start of nodes
+    PathFinder::NodeMap::iterator m_nodesEnd;   //!< Iterator to end of nodes
 
-    PathFinder::NodeMap::iterator m_selectedNodeIt;
+    PathFinder::NodeMap::iterator m_selectedNodeIt; //!< Selected node
   };
 }
 }

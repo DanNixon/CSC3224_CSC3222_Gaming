@@ -40,13 +40,28 @@ namespace GraphicalPathFinder
   class PathFinder : public Engine::Common::Game
   {
   public:
+    /**
+     * @typedef NodeMap
+     * @brief Container for path finding Node and a graphical representation of
+     *        it.
+     */
     typedef std::map<Simulation::PathFinding::Node *, Engine::Graphics::RenderableObject *> NodeMap;
+
+    /**
+     * @typedef EdgeMap
+     * @brief Container for path finding Edge and a graphical representation of
+     *        it.
+     */
     typedef std::map<Simulation::PathFinding::Edge *, Engine::Graphics::RenderableObject *> EdgeMap;
 
   public:
     PathFinder();
     ~PathFinder();
 
+    /**
+     * @brief Gets the current view mode.
+     * @return View mode
+     */
     ViewMode_bitset viewMode() const
     {
       return m_viewMode;
@@ -54,12 +69,20 @@ namespace GraphicalPathFinder
 
     void setViewMode(ViewMode_bitset mode = ViewMode_bitset());
 
+    /**
+     * @brief Sets the start node.
+     * @param start Iterator to node
+     */
     inline void setStartNode(NodeMap::iterator start)
     {
       m_startNode = start;
       setViewMode(m_viewMode);
     }
 
+    /**
+     * @brief Sets the end node.
+     * @param end Iterator to node
+     */
     inline void setEndNode(NodeMap::iterator end)
     {
       m_endNode = end;
@@ -85,21 +108,21 @@ namespace GraphicalPathFinder
     Controls *m_controls;           //!< Control scheme
     OptionsMenu *m_menu;            //!< Option menu
 
-    NodeSelectionPane *m_nodeSelection;
-    EdgeSelectionPane *m_edgeSelection;
+    NodeSelectionPane *m_nodeSelection; //!< Node seelction widget
+    EdgeSelectionPane *m_edgeSelection; //!< Edge selection widget
 
-    Engine::Graphics::TextPane *m_rotationModeText;
+    Engine::Graphics::TextPane *m_rotationModeText; //!< Text indicating rotation mode
 
-    NodeMap m_nodes;
-    EdgeMap m_edges;
+    NodeMap m_nodes; //!< Path finding nodes and graphical representations
+    EdgeMap m_edges; //!< Path finding edges and graphical representations
 
-    NodeMap::iterator m_startNode;
-    NodeMap::iterator m_endNode;
+    NodeMap::iterator m_startNode; //!< Iterator to start node
+    NodeMap::iterator m_endNode;   //!< Iterator to end node
 
-    Simulation::PathFinding::AStar *m_finder;
+    Simulation::PathFinding::AStar *m_finder; //!< Path finder
 
-    ViewMode_bitset m_viewMode;
-    bool m_graphRotationFree;
+    ViewMode_bitset m_viewMode; //!< View mode
+    bool m_graphRotationFree;   //!< Graph rotation mode
   };
 }
 }

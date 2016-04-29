@@ -14,6 +14,11 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
+  /**
+   * @class EdgeSelectionPane
+   * @brief Used to select and adjust edges in the graph.
+   * @author Dan Nixon
+   */
   class EdgeSelectionPane : public SelectionPane
   {
   public:
@@ -24,6 +29,10 @@ namespace GraphicalPathFinder
                       PathFinder::EdgeMap::iterator end);
     virtual ~EdgeSelectionPane();
 
+    /**
+     * @brief Gets the selected edge.
+     * @return Iterator to selected edge
+     */
     inline PathFinder::EdgeMap::iterator selectedEdge()
     {
       return m_selectedEdgeIt;
@@ -37,15 +46,15 @@ namespace GraphicalPathFinder
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
 
   private:
-    Engine::UIMenu::MenuItem *m_traversableButton;
-    Engine::Graphics::TextPane *m_weightText;
-    Engine::Graphics::TextPane *m_connectionText;
-    Engine::Graphics::TextPane *m_costText;
+    Engine::UIMenu::MenuItem *m_traversableButton; //!< Traversable toggle button
+    Engine::Graphics::TextPane *m_weightText;      //!< Weight label
+    Engine::Graphics::TextPane *m_connectionText;  //!< Connection label
+    Engine::Graphics::TextPane *m_costText;        //!< COst label
 
-    PathFinder::EdgeMap::iterator m_edgesBegin;
-    PathFinder::EdgeMap::iterator m_edgesEnd;
+    PathFinder::EdgeMap::iterator m_edgesBegin; //!< Iterator to start of edges
+    PathFinder::EdgeMap::iterator m_edgesEnd;   //!< Iterator to end of edges
 
-    PathFinder::EdgeMap::iterator m_selectedEdgeIt;
+    PathFinder::EdgeMap::iterator m_selectedEdgeIt; //!< Selected edge
   };
 }
 }

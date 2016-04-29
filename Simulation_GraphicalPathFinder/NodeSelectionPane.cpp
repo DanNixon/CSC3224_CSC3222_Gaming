@@ -21,7 +21,9 @@ namespace Simulation
 namespace GraphicalPathFinder
 {
   /**
-   * @copydoc SelectionPane::SelectionPane
+   * @copydoc SoupMenu::SoupMenu
+   * @param begin Iterator to start of nodes
+   * @param end Iterator to end of nodes
    */
   NodeSelectionPane::NodeSelectionPane(Game *game, TTF_Font *font, float textSize, PathFinder::NodeMap::iterator begin,
                                        PathFinder::NodeMap::iterator end)
@@ -48,6 +50,10 @@ namespace GraphicalPathFinder
   {
   }
 
+  /**
+   * @brief Sets the selected node.
+   * @param it Iterator to node
+   */
   void NodeSelectionPane::selectNode(PathFinder::NodeMap::iterator it)
   {
     m_selectedNodeIt = it;
@@ -58,6 +64,9 @@ namespace GraphicalPathFinder
     m_pathFinder->setViewMode(m_pathFinder->viewMode());
   }
 
+  /**
+   * @brief Updates the graphical display.
+   */
   void NodeSelectionPane::updateDisplay()
   {
     // Update name
@@ -65,8 +74,8 @@ namespace GraphicalPathFinder
   }
 
   /**
-  * @copydoc IMenu::handleMenuOptionSelection
-  */
+   * @copydoc IMenu::handleMenuOptionSelection
+   */
   void NodeSelectionPane::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
   {
     if (item == m_previous)

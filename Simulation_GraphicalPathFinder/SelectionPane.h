@@ -19,24 +19,30 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
+  /**
+   * @class SelectionPane
+   * @brief Graphical pane used for selecting graph features.
+   * @author Dan Nixon
+   */
   class SelectionPane : public Engine::UIMenu::SoupMenu
   {
   public:
-    SelectionPane(Engine::Common::Game *game, TTF_Font *font, float textSize, const Engine::Maths::Vector2 &bgSize);
+    SelectionPane(Engine::Common::Game *game, TTF_Font *font, float textSize, const Engine::Maths::Vector2 &dimensions);
     virtual ~SelectionPane();
 
   protected:
     Engine::Graphics::TextPane *newTextPane(const std::string &name, Engine::Graphics::Alignment_bitset alignment);
 
   protected:
-    float m_margin;
-    Engine::Graphics::Colour m_backgroundColour;
+    float m_margin;                              //!< Margin offset
+    Engine::Graphics::Colour m_backgroundColour; //!< Pane background colour
 
-    Engine::UIMenu::MenuItem *m_previous;
-    Engine::UIMenu::MenuItem *m_next;
+    PathFinder *m_pathFinder; //!< Pointer to path finder app
 
-    PathFinder *m_pathFinder;
-    Engine::Graphics::TextPane *m_name;
+    Engine::UIMenu::MenuItem *m_previous; //!< Previous item button
+    Engine::UIMenu::MenuItem *m_next;     //!< Next item button
+
+    Engine::Graphics::TextPane *m_name; //!< Selected item name text
   };
 }
 }

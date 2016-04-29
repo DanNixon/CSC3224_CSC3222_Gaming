@@ -17,10 +17,15 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
+  /**
+   * @brief Amount to change weight by.
+   */
   const float EdgeSelectionPane::DELTA_WEIGHT = 0.1f;
 
   /**
-   * @copydoc SelectionPane::SelectionPane
+   * @copydoc SoupMenu::SoupMenu
+   * @param begin Iterator to start of edges
+   * @param end Iterator to end of edges
    */
   EdgeSelectionPane::EdgeSelectionPane(Game *game, TTF_Font *font, float textSize, PathFinder::EdgeMap::iterator begin,
                                        PathFinder::EdgeMap::iterator end)
@@ -69,6 +74,10 @@ namespace GraphicalPathFinder
   {
   }
 
+  /**
+   * @brief Sets the selected edge.
+   * @param it Iterator to edge
+   */
   void EdgeSelectionPane::selectEdge(PathFinder::EdgeMap::iterator it)
   {
     m_selectedEdgeIt = it;
@@ -79,6 +88,9 @@ namespace GraphicalPathFinder
     m_pathFinder->setViewMode(m_pathFinder->viewMode());
   }
 
+  /**
+   * @brief Updates the graphical display.
+   */
   void EdgeSelectionPane::updateDisplay()
   {
     Edge *edge = m_selectedEdgeIt->first;

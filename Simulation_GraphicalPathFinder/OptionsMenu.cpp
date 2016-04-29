@@ -51,6 +51,10 @@ namespace GraphicalPathFinder
   {
   }
 
+  /**
+   * @brief Updates the view options menu based on the current view mode.
+   * @param mode Current view mode
+   */
   void OptionsMenu::updateViewMenu(ViewMode_bitset mode)
   {
     m_viewWeights->setText(mode.test(ViewMode::WEIGHTS) ? "Weights (on)" : "Weights (off)");

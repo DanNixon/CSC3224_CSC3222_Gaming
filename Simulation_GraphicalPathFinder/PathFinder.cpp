@@ -38,6 +38,9 @@ namespace Simulation
 {
 namespace GraphicalPathFinder
 {
+  /**
+   * @brief Creates a new path finder.
+   */
   PathFinder::PathFinder()
       : Game("Graphical Path Finder", std::make_pair(1024, 768))
   {
@@ -47,6 +50,10 @@ namespace GraphicalPathFinder
   {
   }
 
+  /**
+   * @brief Sets the current view mode and updates colours of graph features.
+   * @param mode View mode
+   */
   void PathFinder::setViewMode(ViewMode_bitset mode)
   {
     m_viewMode = mode;
@@ -142,6 +149,9 @@ namespace GraphicalPathFinder
     m_menu->updateViewMenu(m_viewMode);
   }
 
+  /**
+   * @brief Run path finding and show path on graph.
+   */
   void PathFinder::runPathFinding()
   {
     m_finder->reset();
