@@ -5,7 +5,6 @@
     <ClCompile Include="EdgeTest.cpp" />
     <ClCompile Include="GraphLoaderTest.cpp" />
     <ClCompile Include="PriorityQueueTest.cpp" />
-    <ClCompile Include="AStarBuckyballTest.cpp" />
     <ClCompile Include="AStarTest.cpp" />
     <ClCompile Include="AStarWeightedTest.cpp" />
     <ClCompile Include="AStarNonTraversableTest.cpp" />

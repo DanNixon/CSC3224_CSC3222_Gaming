@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AStarBuckyballTest.cpp" />
     <ClCompile Include="AStarNonTraversableTest.cpp" />
     <ClCompile Include="AStarTest.cpp" />
     <ClCompile Include="AStarWeightedTest.cpp" />
