@@ -12,6 +12,8 @@
 
 #include <Engine_Common/Game.h>
 
+#include "ViewMode.h"
+
 namespace Simulation
 {
 namespace GraphicalPathFinder
@@ -29,6 +31,8 @@ namespace GraphicalPathFinder
     OptionsMenu(Engine::Common::Game *game, TTF_Font *font, float textSize);
     virtual ~OptionsMenu();
 
+    void updateViewMenu(ViewMode_bitset mode);
+
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
 
@@ -37,6 +41,13 @@ namespace GraphicalPathFinder
 
     Engine::UIMenu::MenuItem *m_viewMenu;
     Engine::UIMenu::MenuItem *m_pickMenu;
+
+    Engine::UIMenu::MenuItem *m_viewWeights;
+    Engine::UIMenu::MenuItem *m_viewStaticCosts;
+    Engine::UIMenu::MenuItem *m_viewCosts;
+    Engine::UIMenu::MenuItem *m_viewOpenList;
+    Engine::UIMenu::MenuItem *m_viewClosedList;
+    Engine::UIMenu::MenuItem *m_viewPath;
   };
 }
 }

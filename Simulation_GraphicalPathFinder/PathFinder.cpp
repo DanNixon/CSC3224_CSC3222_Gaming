@@ -136,6 +136,9 @@ namespace GraphicalPathFinder
 
       it->second->mesh()->setStaticColour(edgeColour);
     }
+
+    // Update the menu options
+    m_menu->updateViewMenu(m_viewMode);
   }
 
   void PathFinder::runPathFinding()

@@ -35,12 +35,12 @@ namespace GraphicalPathFinder
 
     // View menu
     addNewItem(m_viewMenu, "graph", "Simple Graph");
-    addNewItem(m_viewMenu, "weights", "Weights");
-    addNewItem(m_viewMenu, "static_costs", "Static Costs");
-    addNewItem(m_viewMenu, "costs", "Weighted Costs");
-    addNewItem(m_viewMenu, "open_list", "Open List");
-    addNewItem(m_viewMenu, "closed_list", "Closed List");
-    addNewItem(m_viewMenu, "path", "Path");
+    m_viewWeights = addNewItem(m_viewMenu, "weights", "Weights (off)");
+    m_viewStaticCosts = addNewItem(m_viewMenu, "static_costs", "Static Costs (off)");
+    m_viewCosts = addNewItem(m_viewMenu, "costs", "Weighted Costs (off)");
+    m_viewOpenList = addNewItem(m_viewMenu, "open_list", "Open List (off)");
+    m_viewClosedList = addNewItem(m_viewMenu, "closed_list", "Closed List (off)");
+    m_viewPath = addNewItem(m_viewMenu, "path", "Path (off)");
 
     // Pick menu
     addNewItem(m_pickMenu, "nodes", "Nodes");
@@ -49,6 +49,16 @@ namespace GraphicalPathFinder
 
   OptionsMenu::~OptionsMenu()
   {
+  }
+
+  void OptionsMenu::updateViewMenu(ViewMode_bitset mode)
+  {
+    m_viewWeights->setText(mode.test(ViewMode::WEIGHTS) ? "Weights (on)" : "Weights (off)");
+    m_viewStaticCosts->setText(mode.test(ViewMode::STATIC_COSTS) ? "Static Costs (on)" : "Static Costs (off)");
+    m_viewCosts->setText(mode.test(ViewMode::COSTS) ? "Costs (on)" : "Costs (off)");
+    m_viewOpenList->setText(mode.test(ViewMode::OPEN_LIST) ? "Open List (on)" : "Open List (off)");
+    m_viewClosedList->setText(mode.test(ViewMode::CLOSED_LIST) ? "Closed List (on)" : "Closed List (off)");
+    m_viewPath->setText(mode.test(ViewMode::PATH) ? "Path (on)" : "Path (off)");
   }
 
   /**
