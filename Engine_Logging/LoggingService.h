@@ -62,6 +62,8 @@ namespace Logging
     void addOutput(IOutputChannel *output);
     void removeOutput(IOutputChannel *output);
 
+    void setLevel(LogLevel level);
+
   protected:
     LoggingService();
     ~LoggingService();

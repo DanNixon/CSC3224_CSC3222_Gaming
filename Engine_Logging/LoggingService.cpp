@@ -67,6 +67,16 @@ namespace Logging
   }
 
   /**
+   * @brief Sets the verbosity level of all channels.
+   * @param level Log level
+   */
+  void LoggingService::setLevel(LogLevel level)
+  {
+    for (auto it = m_outputs.begin(); it != m_outputs.end(); ++it)
+      (*it)->setLevel(level);
+  }
+
+  /**
    * @brief Logs a message.
    * @param level Level at which the emssage is logged
    * @param loggerName Name of the logger logging the message

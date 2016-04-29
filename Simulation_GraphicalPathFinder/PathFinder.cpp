@@ -16,6 +16,7 @@
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_Graphics/SphericalMesh.h>
 #include <Engine_Logging/Logger.h>
+#include <Engine_Logging/LoggingService.h>
 #include <Engine_Maths/Quaternion.h>
 
 #include <Simulation_PathFInding/Utils.h>
@@ -27,11 +28,12 @@
 using namespace Engine::Common;
 using namespace Engine::Graphics;
 using namespace Engine::Maths;
+using namespace Engine::Logging;
 using namespace Simulation::PathFinding;
 
 namespace
 {
-Engine::Logging::Logger g_log(__FILE__);
+Logger g_log(__FILE__);
 }
 
 namespace Simulation
@@ -44,6 +46,9 @@ namespace GraphicalPathFinder
   PathFinder::PathFinder()
       : Game("Graphical Path Finder", std::make_pair(1024, 768))
   {
+#ifdef _DEBUG
+    LoggingService::Instance().setLevel(LogLevel::DEBUG);
+#endif
   }
 
   PathFinder::~PathFinder()
