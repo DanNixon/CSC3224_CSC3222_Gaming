@@ -12,13 +12,12 @@
 
 namespace GameDev
 {
-  namespace FlightSim
+namespace FlightSim
+{
+  class FrSkySPORTBridgeTelemetry : public ITelemetryProtocol
   {
-    class FrSkySPORTBridgeTelemetry : public ITelemetryProtocol
-    {
-
-    };
-  }
+  };
+}
 }
 
 #endif
