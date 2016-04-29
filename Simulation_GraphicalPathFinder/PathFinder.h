@@ -15,6 +15,7 @@
 
 #include <Engine_Common/Scene.h>
 #include <Engine_Graphics/RenderableObject.h>
+#include <Engine_Graphics/TextPane.h>
 
 #include <Simulation_PathFinding/AStar.h>
 #include <Simulation_PathFinding/Edge.h>
@@ -74,6 +75,7 @@ namespace GraphicalPathFinder
 
   private:
     friend class OptionsMenu;
+    friend class Controls;
 
     Uint8 m_graphicsLoop; //!< Graphics update loop ID
     Uint8 m_controlLoop;  //!< Control update loop ID
@@ -86,6 +88,8 @@ namespace GraphicalPathFinder
     NodeSelectionPane *m_nodeSelection;
     EdgeSelectionPane *m_edgeSelection;
 
+    Engine::Graphics::TextPane *m_rotationModeText;
+
     NodeMap m_nodes;
     EdgeMap m_edges;
 
@@ -95,6 +99,7 @@ namespace GraphicalPathFinder
     Simulation::PathFinding::AStar *m_finder;
 
     ViewMode_bitset m_viewMode;
+    bool m_graphRotationFree;
   };
 }
 }

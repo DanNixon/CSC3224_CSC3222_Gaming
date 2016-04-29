@@ -208,6 +208,14 @@ namespace GraphicalPathFinder
     m_menu->show();
     addEventHandler(m_menu);
 
+    // Rotation mode indicator
+    m_rotationModeText = new TextPane("rotation_mode", 0.08f, menuShader, m_fontMedium);
+    m_rotationModeText->setTextColour(Colour(1.0f, 1.0f, 1.0f));
+    m_rotationModeText->setAlignment(GetAlignment(Alignment::X_RIGHT, Alignment::Y_BOTTOM));
+    m_rotationModeText->setModelMatrix(Matrix4::Translation(Vector3(1.9f, -1.9f)));
+    m_rotationModeText->setText("Rotation: Fixed");
+    m_menu->root()->addChild(m_rotationModeText);
+
     // Load graph
     const std::string graphDataFile("../resources/buckminsterfullerene.dat");
 
@@ -293,8 +301,16 @@ namespace GraphicalPathFinder
     // Handle controls
     else if (id == m_controlLoop)
     {
+      // Check rotation mode
+      bool graphRotationMode = m_controls->state(S_MOVABLE_GRAPH);
+      if (graphRotationMode != m_graphRotationFree)
+      {
+        m_graphRotationFree = graphRotationMode;
+        m_rotationModeText->setText(m_graphRotationFree ? "Rotation: Free" : "Rotation: Fixed");
+      }
+
       // Update graph rotation
-      if (m_controls->state(S_MOVABLE_GRAPH))
+      if (m_graphRotationFree)
       {
         float yaw = m_controls->analog(A_MOUSE_X) * 180.0f;
         float pitch = m_controls->analog(A_MOUSE_Y) * 180.0f;
