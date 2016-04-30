@@ -3,9 +3,6 @@
  * @author Tom Archer, Rick Leinecker, Dan Nixon (120263697)
  *
  * For CSC3224 Project 2.
- *
- * Adapted from:
- * http://www.codeguru.com/cpp/i-n/network/serialcommunications/article.php/c2503/CSerial--A-C-Class-for-Serial-Communications.htm
  */
 
 #include "SerialPort.h"
@@ -27,17 +24,15 @@ namespace FlightSim
     close();
   }
 
-  bool SerialPort::open(int nPort, int nBaud)
+  bool SerialPort::open(const std::string &portName, int baud)
   {
     if (m_open)
       return true;
 
-    char szPort[15];
     char szComParams[50];
     DCB dcb;
 
-    wsprintf(szPort, "COM%d", nPort);
-    m_device = CreateFile(szPort, GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
+    m_device = CreateFile(portName.c_str(), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
                           FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, nullptr);
     if (m_device == nullptr)
       return false;
@@ -53,14 +48,14 @@ namespace FlightSim
     CommTimeOuts.WriteTotalTimeoutConstant = 5000;
     SetCommTimeouts(m_device, &CommTimeOuts);
 
-    wsprintf(szComParams, "COM%d:%d,n,8,1", nPort, nBaud);
+    wsprintf(szComParams, "COM%d:%d,n,8,1", nPort, baud);
 
     m_read.hEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
     m_write.hEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
 
     dcb.DCBlength = sizeof(DCB);
     GetCommState(m_device, &dcb);
-    dcb.BaudRate = nBaud;
+    dcb.BaudRate = baud;
     dcb.ByteSize = 8;
     unsigned char ucSet;
     ucSet = (unsigned char)((FC_RTSCTS & FC_DTRDSR) != 0);
@@ -87,7 +82,7 @@ namespace FlightSim
     return m_open;
   }
 
-  bool SerialPort::close(void)
+  bool SerialPort::close()
   {
     if (!m_open || m_device == nullptr)
       return true;
@@ -104,6 +99,69 @@ namespace FlightSim
     m_device = nullptr;
 
     return true;
+  }
+
+  int SerialPort::sendData(const char *buffer, int len)
+  {
+
+    if (!m_open || m_device == nullptr)
+      return 0;
+
+    DWORD dwBytesWritten = 0;
+    int i;
+    for (i = 0; i < len; i++)
+    {
+      writeCommByte(buffer[i]);
+      dwBytesWritten++;
+    }
+
+    return (int)dwBytesWritten;
+  }
+
+  int SerialPort::readDataWaiting()
+  {
+
+    if (!m_open || m_device == nullptr)
+      return 0;
+
+    DWORD dwErrorFlags;
+    COMSTAT ComStat;
+
+    ClearCommError(m_device, &dwErrorFlags, &ComStat);
+
+    return (int)ComStat.cbInQue;
+  }
+
+  int SerialPort::readData(void *buffer, int len)
+  {
+
+    if (!m_open || m_device == nullptr)
+      return 0;
+
+    BOOL bReadStatus;
+    DWORD dwBytesRead, dwErrorFlags;
+    COMSTAT ComStat;
+
+    ClearCommError(m_device, &dwErrorFlags, &ComStat);
+    if (!ComStat.cbInQue)
+      return 0;
+
+    dwBytesRead = (DWORD)ComStat.cbInQue;
+    if (len < (int)dwBytesRead)
+      dwBytesRead = (DWORD)len;
+
+    bReadStatus = ReadFile(m_device, buffer, dwBytesRead, &dwBytesRead, &m_read);
+    if (!bReadStatus)
+    {
+      if (GetLastError() == ERROR_IO_PENDING)
+      {
+        WaitForSingleObject(m_read.hEvent, 2000);
+        return ((int)dwBytesRead);
+      }
+      return 0;
+    }
+
+    return (int)dwBytesRead;
   }
 
   bool SerialPort::writeCommByte(unsigned char ucByte)
@@ -124,69 +182,6 @@ namespace FlightSim
     }
 
     return true;
-  }
-
-  int SerialPort::sendData(const char *buffer, int size)
-  {
-
-    if (!m_open || m_device == nullptr)
-      return 0;
-
-    DWORD dwBytesWritten = 0;
-    int i;
-    for (i = 0; i < size; i++)
-    {
-      writeCommByte(buffer[i]);
-      dwBytesWritten++;
-    }
-
-    return (int)dwBytesWritten;
-  }
-
-  int SerialPort::readDataWaiting(void)
-  {
-
-    if (!m_open || m_device == nullptr)
-      return 0;
-
-    DWORD dwErrorFlags;
-    COMSTAT ComStat;
-
-    ClearCommError(m_device, &dwErrorFlags, &ComStat);
-
-    return (int)ComStat.cbInQue;
-  }
-
-  int SerialPort::readData(void *buffer, int limit)
-  {
-
-    if (!m_open || m_device == nullptr)
-      return 0;
-
-    BOOL bReadStatus;
-    DWORD dwBytesRead, dwErrorFlags;
-    COMSTAT ComStat;
-
-    ClearCommError(m_device, &dwErrorFlags, &ComStat);
-    if (!ComStat.cbInQue)
-      return 0;
-
-    dwBytesRead = (DWORD)ComStat.cbInQue;
-    if (limit < (int)dwBytesRead)
-      dwBytesRead = (DWORD)limit;
-
-    bReadStatus = ReadFile(m_device, buffer, dwBytesRead, &dwBytesRead, &m_read);
-    if (!bReadStatus)
-    {
-      if (GetLastError() == ERROR_IO_PENDING)
-      {
-        WaitForSingleObject(m_read.hEvent, 2000);
-        return ((int)dwBytesRead);
-      }
-      return 0;
-    }
-
-    return (int)dwBytesRead;
   }
 }
 }

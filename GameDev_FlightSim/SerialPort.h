@@ -3,9 +3,6 @@
  * @author Tom Archer, Rick Leinecker, Dan Nixon (120263697)
  *
  * For CSC3224 Project 2.
- *
- * Adapted from:
- * http://www.codeguru.com/cpp/i-n/network/serialcommunications/article.php/c2503/CSerial--A-C-Class-for-Serial-Communications.htm
  */
 
 #ifndef _GAMEDEV_FLIGHTSIM_SERIALPORT_H_
@@ -27,31 +24,43 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @class SerialPort
+   * @brief Serial port driver.
+   * @author Tom Archer, Rick Leinecker, Dan Nixon (120263697)
+   *
+   * Adapted from:
+   * http://www.codeguru.com/cpp/i-n/network/serialcommunications/article.php/c2503/CSerial--A-C-Class-for-Serial-Communications.htm
+   */
   class SerialPort
   {
   public:
     SerialPort();
     ~SerialPort();
 
-    bool open(int nPort = 2, int nBaud = 9600);
+    bool open(const std::string &portName, int baud = 9600);
     bool close();
 
+    /**
+     * @brief Check if the port is open.
+     * @return True if port is open
+     */
     bool isOpen()
     {
       return m_open;
     }
 
-    int readData(void *, int);
-    int sendData(const char *, int);
+    int readData(void *buffer, int len);
+    int sendData(const char *buffer, int len);
     int readDataWaiting();
 
   protected:
-    bool writeCommByte(unsigned char);
+    bool writeCommByte(unsigned char ucByte);
 
-    HANDLE m_device;
-    OVERLAPPED m_read;
-    OVERLAPPED m_write;
-    bool m_open;
+    HANDLE m_device;    //!< Device handle
+    OVERLAPPED m_read;  //!< Read IO
+    OVERLAPPED m_write; //!< Write IO
+    bool m_open;        //!< Flag indicating the port is open
   };
 }
 }
