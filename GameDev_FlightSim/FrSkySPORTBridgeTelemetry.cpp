@@ -11,6 +11,6 @@ namespace GameDev
 {
 namespace FlightSim
 {
-  // TODO
+  //!< \todo
 }
 }

@@ -109,7 +109,7 @@ namespace FlightSim
       str << "tail";
       break;
     case AircraftSound::CRASH:
-      str << ""; // TODO
+      str << ""; //!< \todo
       break;
     }
 
@@ -217,7 +217,7 @@ namespace FlightSim
   {
     bool result = true;
 
-    // TODO: change 3 -> 4 when crash sound is added
+    //!< \todo change 3 -> 4 when crash sound is added
     for (size_t i = 0; i < 3; i++)
     {
       std::string filename = audioFilename(static_cast<AircraftSound>(i));

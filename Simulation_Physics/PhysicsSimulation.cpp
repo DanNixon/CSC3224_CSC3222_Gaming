@@ -126,7 +126,8 @@ namespace Physics
     // Remove interfaces that have been resolved and are no longer detected
     for (auto it = m_interfaces.begin(); it != m_interfaces.end();)
     {
-      // TODO: shouldn't need this check as all interfaces in this array should have already been resolved
+      // Shouldn't need this check as all interfaces in this array should have
+      // already been resolved
       if (it->resolved())
       {
         auto i = std::find(interfaces.begin(), interfaces.end(), *it);

@@ -118,7 +118,6 @@ namespace Demo
     fileLog->open();
     LoggingService::Instance().addOutput(fileLog);
 
-    // TODO: display dismissible on screen scontrols
     if (isFirstRun())
     {
       g_log.info("This is the first time the game has been launched.");
@@ -176,7 +175,6 @@ namespace Demo
     // UI: Battery voltage telemetry indicator
     m_batteryVoltsIndicator = new TelemetryValueIndicator("battery_volts", m_ui->root(), "VOLTS");
     m_batteryVoltsIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -2.5f, 0.9f)));
-    // TODO: take battery limits from aircraft data
     m_batteryVoltsIndicator->setAlarmLevels(10.5f, 9.9f);
 
     // UI: set default state

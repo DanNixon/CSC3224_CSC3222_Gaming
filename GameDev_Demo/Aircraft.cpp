@@ -112,7 +112,7 @@ namespace Demo
       str << "tail";
       break;
     case AircraftSound::CRASH:
-      str << ""; // TODO
+      str << "";
       break;
     }
 
@@ -216,7 +216,6 @@ namespace Demo
   {
     bool result = true;
 
-    // TODO: change 3 -> 4 when crash sound is added
     for (size_t i = 0; i < 3; i++)
     {
       std::string filename = audioFilename(static_cast<AircraftSound>(i));
@@ -336,9 +335,6 @@ namespace Demo
     // Reset controls
     setEngineSpeed(0.0f);
     setControls(0.0f, 0.0f, 0.0f, 0.0f);
-
-    // Set initial orientation and position
-    // TODO
   }
 
   /**

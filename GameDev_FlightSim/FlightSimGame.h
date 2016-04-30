@@ -35,7 +35,7 @@ namespace FlightSim
 {
   /**
    * @class FlightSimGame
-   * @brief TODO
+   * @brief Flight simulator game.
    * @author Dan Nixon
    */
   class FlightSimGame : public Engine::Common::ConfigurableGame
