@@ -18,7 +18,9 @@
 #define ASCII_XON 0x11
 #define ASCII_XOFF 0x13
 
-#include "Windows.h"
+#include <string>
+
+#include <Windows.h>
 
 namespace GameDev
 {
