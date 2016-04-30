@@ -18,12 +18,17 @@ FrSkySportSensorSp2uart sp2uart;
 FrSkySportSensorVario vario;
 FrSkySportTelemetry telemetry;
 
-uint32_t lastBadFrames;
-
 #define SBUS_HIGH 83
 #define SBUS_LOW -SBUS_HIGH
 
 #define STATUS_LED 13
+
+#define SERIAL_BUFFER_LEN 32
+#define SERIAL_COMMAND_END ';'
+
+uint32_t lastBadFrames;
+int serialBufferPos;
+char serialBuffer[SERIAL_BUFFER_LEN];
 
 enum Channel
 {
@@ -43,6 +48,10 @@ void setup()
   Serial.begin(9600);
 
   lastBadFrames = 0;
+  serialBufferPos = 0;
+  memset(serialBuffer, '\0', SERIAL_BUFFER_LEN);
+
+  Joystick.useManualSend(true);
 
   pinMode(STATUS_LED, OUTPUT);
   digitalWrite(STATUS_LED, HIGH);
@@ -75,6 +84,9 @@ void loop()
   Joystick.button(3, sbus.getNormalizedChannel(9) >= 60);
   Joystick.button(4, sbus.getNormalizedChannel(10) >= 60);
 
+  // Send joystick values
+  Joystick.send_now();
+
   // Detect bad frames
   uint32_t badFrames = sbus.getLostFrames();
   bool haveBadFrames = badFrames > lastBadFrames;
@@ -84,10 +96,36 @@ void loop()
   // Light LED on bad frames
   digitalWrite(STATUS_LED, haveBadFrames);
 
-  // Update telemetry values
-  fcs.setData(25.3, 12.6);    // Current, Voltage
-  sp2uart.setData(1.5, 3.3);  // A3, A4
-  vario.setData(250.5, -1.5); // Altitude (m), vertical speed (ms-1)
+  // Read serial port
+  while (Serial.available())
+  {
+    char c = Serial.read();
+
+    if (c == SERIAL_COMMAND_END)
+    {
+      float current, voltage, a3, a4, altitude, vSpeed;
+
+      // Parse serial data
+      sscanf(serialBuffer, "%f,%f,%f,%f,%f,%f", &a3, &a4, &current, &voltage, &altitude, &vSpeed);
+
+      // Empty buffer
+      memset(serialBuffer, '\0', SERIAL_BUFFER_LEN);
+      serialBufferPos = 0;
+
+      // Update telemetry values
+      fcs.setData(current, voltage);
+      sp2uart.setData(a3, a4);
+      vario.setData(altitude, vSpeed);
+    }
+    else if (serialBufferPos == SERIAL_BUFFER_LEN - 1)
+    {
+      // Empty buffer
+      memset(serialBuffer, '\0', SERIAL_BUFFER_LEN);
+      serialBufferPos = 0;
+    }
+    else
+      serialBuffer[serialBufferPos++] = c;
+  }
 
   // Send telemetry data to polled sensors
   telemetry.send();
