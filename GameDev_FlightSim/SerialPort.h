@@ -22,6 +22,8 @@
 
 #include <Windows.h>
 
+#include <Engine_ResourceManagment\IMemoryManaged.h>
+
 namespace GameDev
 {
 namespace FlightSim
@@ -34,7 +36,7 @@ namespace FlightSim
    * Adapted from:
    * http://www.codeguru.com/cpp/i-n/network/serialcommunications/article.php/c2503/CSerial--A-C-Class-for-Serial-Communications.htm
    */
-  class SerialPort
+  class SerialPort : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     SerialPort();

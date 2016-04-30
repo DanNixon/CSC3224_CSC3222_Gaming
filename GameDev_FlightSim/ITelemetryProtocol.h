@@ -10,6 +10,8 @@
 
 #include <map>
 
+#include <Engine_ResourceManagment\IMemoryManaged.h>
+
 namespace GameDev
 {
 namespace FlightSim
@@ -20,7 +22,9 @@ namespace FlightSim
    */
   enum class TelemetryValue : size_t
   {
+    TELEM_OK,
     RSSI,
+    CURRENT,
     VBAT,
     ALTITUDE,
     VERT_SPEED
@@ -31,7 +35,7 @@ namespace FlightSim
    * @brief Abstract class for a telemetry protocol.
    * @author Dan Nixon
    */
-  class ITelemetryProtocol
+  class ITelemetryProtocol : public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     ITelemetryProtocol()

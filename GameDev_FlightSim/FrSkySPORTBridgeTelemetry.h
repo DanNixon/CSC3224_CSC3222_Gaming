@@ -10,12 +10,19 @@
 
 #include "ITelemetryProtocol.h"
 
+#include "SerialPort.h"
+
 namespace GameDev
 {
 namespace FlightSim
 {
   class FrSkySPORTBridgeTelemetry : public ITelemetryProtocol
   {
+  public:
+    FrSkySPORTBridgeTelemetry();
+    virtual ~FrSkySPORTBridgeTelemetry();
+
+    bool send();
   };
 }
 }

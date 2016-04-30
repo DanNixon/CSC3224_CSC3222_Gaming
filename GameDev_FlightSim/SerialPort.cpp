@@ -48,7 +48,7 @@ namespace FlightSim
     CommTimeOuts.WriteTotalTimeoutConstant = 5000;
     SetCommTimeouts(m_device, &CommTimeOuts);
 
-    wsprintf(szComParams, "COM%d:%d,n,8,1", nPort, baud);
+    wsprintf(szComParams, "%s:%d,n,8,1", portName.c_str(), baud);
 
     m_read.hEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
     m_write.hEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
