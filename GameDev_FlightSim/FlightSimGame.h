@@ -25,9 +25,10 @@
 #include <Engine_Physics/PhysicalSystem.h>
 
 #include "Aircraft.h"
+#include "ITelemetryProtocol.h"
+#include "OnScreenTelemetry.h"
 #include "OptionsMenu.h"
 #include "StickIndicator.h"
-#include "TelemetryValueIndicator.h"
 
 namespace GameDev
 {
@@ -61,28 +62,30 @@ namespace FlightSim
     Uint8 m_physicsLoop;
     Uint8 m_audioLoop;
     Uint8 m_uiLoop;
+    Uint8 m_telemetryLoop;
     Uint8 m_profileLoop;
 
-    StickIndicator *m_leftStickIndicator;
-    StickIndicator *m_rightStickIndicator;
-    TelemetryValueIndicator *m_rssiIndicator;
-    TelemetryValueIndicator *m_batteryVoltsIndicator;
+    StickIndicator *m_leftStickIndicator;  //!< Indicator for position of left stick
+    StickIndicator *m_rightStickIndicator; //!< Indicator for position of right stick
 
-    Engine::Graphics::Camera *m_lineOfSightCamera;
-    Engine::Graphics::GraphicalScene *m_s; //!< Scene containing world (terrain and models)
-    Engine::Common::Scene *m_ui;           //!< Scene containing UI
+    Engine::Graphics::Camera *m_lineOfSightCamera; //!< Camera used for line of sight view
+    Engine::Graphics::GraphicalScene *m_s;         //!< Scene containing world (terrain and models)
+    Engine::Common::Scene *m_ui;                   //!< Scene containing UI
 
-    OptionsMenu *m_menu;
+    OptionsMenu *m_menu; //!< Top bar option menu
 
-    Engine::Audio::Context *m_audioContext;
-    Engine::Audio::Listener *m_audioListener;
+    Engine::Audio::Context *m_audioContext;   //!< Audio context
+    Engine::Audio::Listener *m_audioListener; //!< Audio listener
 
-    Engine::Input::IControlScheme *m_simControls;
+    Engine::Input::IControlScheme *m_simControls; //!< Active control scheme
 
-    Engine::Physics::PhysicalSystem *m_physicalSystem;
-    Engine::Physics::DebugDrawEngine *m_physicsDebugDraw;
+    OnScreenTelemetry *m_onScreenTelemetry;  //!< On screen telemetry
+    ITelemetryProtocol *m_physicalTelemetry; //!< Physical telemetry provider
 
-    Aircraft *m_aircraft;
+    Engine::Physics::PhysicalSystem *m_physicalSystem;    //!< Physics system
+    Engine::Physics::DebugDrawEngine *m_physicsDebugDraw; //!< Physics debug draw engine
+
+    Aircraft *m_aircraft; //!< Active aircraft
   };
 }
 }

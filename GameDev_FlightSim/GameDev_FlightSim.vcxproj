@@ -23,6 +23,7 @@
     <ClCompile Include="FlightSimGame.cpp" />
     <ClCompile Include="FrSkySPORTBridgeTelemetry.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OnScreenTelemetry.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="SerialPort.cpp" />
     <ClCompile Include="StickIndicator.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="ITelemetryProtocol.h" />
     <ClInclude Include="KJSSimulatorControls.h" />
     <ClInclude Include="KMSimulatorControls.h" />
+    <ClInclude Include="OnScreenTelemetry.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="SerialPort.h" />
     <ClInclude Include="SimulatorControls.h" />

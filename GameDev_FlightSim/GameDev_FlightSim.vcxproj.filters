@@ -19,6 +19,9 @@
     <ClCompile Include="FrSkySPORTBridgeTelemetry.cpp">
       <Filter>Telemetry</Filter>
     </ClCompile>
+    <ClCompile Include="OnScreenTelemetry.cpp">
+      <Filter>Telemetry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h" />
@@ -51,6 +54,9 @@
       <Filter>Telemetry</Filter>
     </ClInclude>
     <ClInclude Include="FrSkySPORTBridgeTelemetry.h">
+      <Filter>Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="OnScreenTelemetry.h">
       <Filter>Telemetry</Filter>
     </ClInclude>
   </ItemGroup>

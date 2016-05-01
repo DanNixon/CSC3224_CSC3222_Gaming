@@ -10,8 +10,6 @@
 
 #include <map>
 
-#include <Engine_ResourceManagment\IMemoryManaged.h>
-
 namespace GameDev
 {
 namespace FlightSim
@@ -35,7 +33,7 @@ namespace FlightSim
    * @brief Abstract class for a telemetry protocol.
    * @author Dan Nixon
    */
-  class ITelemetryProtocol : public Engine::ResourceManagment::IMemoryManaged
+  class ITelemetryProtocol
   {
   public:
     ITelemetryProtocol()

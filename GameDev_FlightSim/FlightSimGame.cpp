@@ -59,6 +59,7 @@ namespace FlightSim
    */
   FlightSimGame::FlightSimGame()
       : ConfigurableGame("Engine Demo", std::make_pair(1024, 768))
+      , m_physicalTelemetry(nullptr)
   {
   }
 
@@ -90,8 +91,7 @@ namespace FlightSim
    */
   void FlightSimGame::setTelemetryVisible(bool visible)
   {
-    m_rssiIndicator->setActive(visible);
-    m_batteryVoltsIndicator->setActive(visible);
+    m_onScreenTelemetry->setActive(visible);
     m_root.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
   }
 
@@ -167,17 +167,12 @@ namespace FlightSim
     m_rightStickIndicator = new StickIndicator("right_stick", m_ui->root());
     m_rightStickIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -8.5f, 0.9f)));
 
-    // UI: RSSI telemetry indicator
-    m_rssiIndicator = new TelemetryValueIndicator("rssi", m_ui->root(), "RSSI");
-    m_rssiIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, 0.0f, 0.9f)));
-    m_rssiIndicator->setAlarmLevels(std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_low"]),
-                                    std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_critical"]));
-
-    // UI: Battery voltage telemetry indicator
-    m_batteryVoltsIndicator = new TelemetryValueIndicator("battery_volts", m_ui->root(), "VOLTS");
-    m_batteryVoltsIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, -2.5f, 0.9f)));
-    //!< \todo Take battery limits from aircraft data
-    m_batteryVoltsIndicator->setAlarmLevels(10.5f, 9.9f);
+    // UI: On screen telemetry
+    m_onScreenTelemetry = new OnScreenTelemetry(m_ui->root());
+    m_onScreenTelemetry->setModelMatrix(Matrix4::Translation(Vector3(8.5f, 0.0f, 0.9f)));
+    m_onScreenTelemetry->m_rssi->setAlarmLevels(
+        std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_low"]),
+        std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_critical"]));
 
     // UI: set default state
     setTelemetryVisible(StringUtils::ToBool(m_root.children()["hud"].keys()["show_telemetry"]));
@@ -273,6 +268,7 @@ namespace FlightSim
     m_physicsLoop = addTimedLoop(8.33f, "physics");
     m_audioLoop = addTimedLoop(16.66f, "audio");
     m_uiLoop = addTimedLoop(100.0f, "ui_updates");
+    m_telemetryLoop = addTimedLoop(100.0f, "telemetry");
     m_profileLoop = addTimedLoop(1000.0f, "profile");
 
     // Profiling
@@ -330,10 +326,32 @@ namespace FlightSim
       // Stick indicators
       m_leftStickIndicator->setStickPosition(m_simControls->analog(A_YAW), m_simControls->analog(A_THROT));
       m_rightStickIndicator->setStickPosition(m_simControls->analog(A_ROLL), m_simControls->analog(A_PITCH));
+    }
+    else if (id == m_telemetryLoop)
+    {
+      float rssi = (float)m_aircraft->rssi();
+      float vbat = m_aircraft->batteryVoltage();
+      float current = 0.0f;
+      float altitude = 0.0f;
+      float vertSpeed = 0.0f;
 
-      // Telemetry indicators
-      m_rssiIndicator->setValue((float)m_aircraft->rssi());
-      m_batteryVoltsIndicator->setValue(m_aircraft->batteryVoltage(), 3);
+      // On screen telemetry
+      m_onScreenTelemetry->setValue(TelemetryValue::RSSI, rssi);
+      m_onScreenTelemetry->setValue(TelemetryValue::VBAT, vbat);
+      m_onScreenTelemetry->setValue(TelemetryValue::CURRENT, current);
+      m_onScreenTelemetry->setValue(TelemetryValue::ALTITUDE, altitude);
+      m_onScreenTelemetry->send();
+
+      if (m_physicalTelemetry != nullptr)
+      {
+        // Update physical telemetry
+        m_physicalTelemetry->setValue(TelemetryValue::RSSI, rssi);
+        m_physicalTelemetry->setValue(TelemetryValue::VBAT, vbat);
+        m_physicalTelemetry->setValue(TelemetryValue::CURRENT, current);
+        m_physicalTelemetry->setValue(TelemetryValue::ALTITUDE, altitude);
+        m_physicalTelemetry->setValue(TelemetryValue::VERT_SPEED, vertSpeed);
+        m_physicalTelemetry->send();
+      }
     }
     else if (id == m_profileLoop)
     {

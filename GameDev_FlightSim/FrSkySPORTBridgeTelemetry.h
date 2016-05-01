@@ -10,13 +10,15 @@
 
 #include "ITelemetryProtocol.h"
 
+#include <Engine_ResourceManagment\IMemoryManaged.h>
+
 #include "SerialPort.h"
 
 namespace GameDev
 {
 namespace FlightSim
 {
-  class FrSkySPORTBridgeTelemetry : public ITelemetryProtocol
+  class FrSkySPORTBridgeTelemetry : public ITelemetryProtocol, public Engine::ResourceManagment::IMemoryManaged
   {
   public:
     FrSkySPORTBridgeTelemetry();
