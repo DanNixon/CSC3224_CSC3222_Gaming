@@ -68,21 +68,38 @@ void setup()
  */
 void loop()
 {
-  // Joystick axes
-  Joystick.Y(map(sbus.getNormalizedChannel(CH_PITCH), SBUS_LOW, SBUS_HIGH, 0, 1023));
-  Joystick.X(map(sbus.getNormalizedChannel(CH_ROLL), SBUS_LOW, SBUS_HIGH, 0, 1023));
-  Joystick.Z(map(sbus.getNormalizedChannel(CH_THROT), SBUS_LOW, SBUS_HIGH, 0, 1023));
-  Joystick.Zrotate(map(sbus.getNormalizedChannel(CH_YAW), SBUS_LOW, SBUS_HIGH, 0, 1023));
+  // If RX failsafe is active
+  if (sbus.getFailsafeStatus() == SBUS_FAILSAFE_ACTIVE)
+  {
+    // Set failsafe
+    Joystick.Y(512);
+    Joystick.X(512);
+    Joystick.Z(512);
+    Joystick.Zrotate(512);
+    Joystick.sliderLeft(512);
+    Joystick.sliderRight(512);
 
-  // Sliders / aux channels
-  Joystick.sliderLeft(map(sbus.getNormalizedChannel(5), SBUS_LOW, SBUS_HIGH, 0, 1023));
-  Joystick.sliderRight(map(sbus.getNormalizedChannel(6), SBUS_LOW, SBUS_HIGH, 0, 1023));
+    for (int i = 0; i < 4; i++)
+      Joystick.button(i, false);
+  }
+  else
+  {
+    // Joystick axes
+    Joystick.Y(map(sbus.getNormalizedChannel(CH_PITCH), SBUS_LOW, SBUS_HIGH, 0, 1023));
+    Joystick.X(map(sbus.getNormalizedChannel(CH_ROLL), SBUS_LOW, SBUS_HIGH, 0, 1023));
+    Joystick.Z(map(sbus.getNormalizedChannel(CH_THROT), SBUS_LOW, SBUS_HIGH, 0, 1023));
+    Joystick.Zrotate(map(sbus.getNormalizedChannel(CH_YAW), SBUS_LOW, SBUS_HIGH, 0, 1023));
 
-  // Aux channel switches as buttons
-  Joystick.button(1, sbus.getNormalizedChannel(7) >= 60);
-  Joystick.button(2, sbus.getNormalizedChannel(8) >= 60);
-  Joystick.button(3, sbus.getNormalizedChannel(9) >= 60);
-  Joystick.button(4, sbus.getNormalizedChannel(10) >= 60);
+    // Sliders / aux channels
+    Joystick.sliderLeft(map(sbus.getNormalizedChannel(5), SBUS_LOW, SBUS_HIGH, 0, 1023));
+    Joystick.sliderRight(map(sbus.getNormalizedChannel(6), SBUS_LOW, SBUS_HIGH, 0, 1023));
+
+    // Aux channel switches as buttons
+    Joystick.button(1, sbus.getNormalizedChannel(7) >= 60);
+    Joystick.button(2, sbus.getNormalizedChannel(8) >= 60);
+    Joystick.button(3, sbus.getNormalizedChannel(9) >= 60);
+    Joystick.button(4, sbus.getNormalizedChannel(10) >= 60);
+  }
 
   // Send joystick values
   Joystick.send_now();
