@@ -30,8 +30,10 @@
 #include <Engine_ResourceManagment/MemoryManager.h>
 #include <Engine_Utility/StringUtils.h>
 
+#include "FrSkySPORTBridgeTelemetry.h"
 #include "KJSSimulatorControls.h"
 #include "KMSimulatorControls.h"
+#include "SerialPort.h"
 #include "control.h"
 
 using namespace Engine::Common;
@@ -58,7 +60,7 @@ namespace FlightSim
    * @brief Creates a new demonstration game instance.
    */
   FlightSimGame::FlightSimGame()
-      : ConfigurableGame("Engine Demo", std::make_pair(1024, 768))
+      : ConfigurableGame("Flight Sim", std::make_pair(1024, 768))
       , m_physicalTelemetry(nullptr)
   {
   }
@@ -114,7 +116,7 @@ namespace FlightSim
     int retVal = ConfigurableGame::gameStartup();
 
     // Open file logger
-    FileOutputChannel *fileLog = new FileOutputChannel(gameSaveDirectory() + "DemoGameLog.log");
+    FileOutputChannel *fileLog = new FileOutputChannel(gameSaveDirectory() + "FlightSimLog.log");
     fileLog->open();
     LoggingService::Instance().addOutput(fileLog);
 
@@ -263,6 +265,20 @@ namespace FlightSim
       }
     }
 
+    // Physical telemetry
+    KVNode &telem = m_root.children()["telemetry"];
+    if (StringUtils::ToBool(telem.keys()["enable"]) && telem.keys()["protocol"] == "frsky_sport_uart_bridge")
+    {
+      SerialPort *port = new SerialPort();
+      if (port->open(telem.keys()["port"], std::stoi(telem.keys()["baud"])))
+      {
+        m_physicalTelemetry = new FrSkySPORTBridgeTelemetry(port);
+        m_physicalTelemetry->send();
+      }
+      else
+        g_log.warn("COuld not open serial port, no physical telemetry");
+    }
+
     // Timed loops
     m_graphicsLoop = addTimedLoop(16.66f, "graphics");
     m_physicsLoop = addTimedLoop(8.33f, "physics");
@@ -329,9 +345,10 @@ namespace FlightSim
     }
     else if (id == m_telemetryLoop)
     {
+      //!< \todo: simulated values
       float rssi = (float)m_aircraft->rssi();
       float vbat = m_aircraft->batteryVoltage();
-      float current = 0.0f;
+      float current = 21.0f;
       float altitude = 0.0f;
       float vertSpeed = 0.0f;
 
@@ -408,7 +425,7 @@ namespace FlightSim
     telemetry.keys()["enable"] = "false";
     telemetry.keys()["protocol"] = "frsky_sport_uart_bridge";
     telemetry.keys()["port"] = "COM1";
-    telemetry.keys()["baud"] = "115200";
+    telemetry.keys()["baud"] = "9600";
     node.addChild(telemetry);
   }
 }

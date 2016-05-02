@@ -21,10 +21,13 @@ namespace FlightSim
   class FrSkySPORTBridgeTelemetry : public ITelemetryProtocol, public Engine::ResourceManagment::IMemoryManaged
   {
   public:
-    FrSkySPORTBridgeTelemetry();
+    FrSkySPORTBridgeTelemetry(SerialPort *port);
     virtual ~FrSkySPORTBridgeTelemetry();
 
     bool send();
+
+  private:
+    SerialPort *m_port;
   };
 }
 }

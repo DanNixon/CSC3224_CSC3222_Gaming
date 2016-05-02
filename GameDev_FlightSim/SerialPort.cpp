@@ -7,6 +7,13 @@
 
 #include "SerialPort.h"
 
+#include <Engine_Logging/Logger.h>
+
+namespace
+{
+Engine::Logging::Logger g_log(__FILE__);
+}
+
 namespace GameDev
 {
 namespace FlightSim
@@ -29,13 +36,18 @@ namespace FlightSim
     if (m_open)
       return true;
 
+    g_log.debug("Opening serial port " + portName);
+
     char szComParams[50];
     DCB dcb;
 
     m_device = CreateFile(portName.c_str(), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
                           FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, nullptr);
     if (m_device == nullptr)
+    {
+      g_log.warn("Failed to create serial port");
       return false;
+    }
 
     memset(&m_read, 0, sizeof(OVERLAPPED));
     memset(&m_write, 0, sizeof(OVERLAPPED));
@@ -75,6 +87,7 @@ namespace FlightSim
 
       CloseHandle(m_device);
 
+      g_log.warn("Failed to configure serial port IO");
       return false;
     }
 
@@ -86,6 +99,8 @@ namespace FlightSim
   {
     if (!m_open || m_device == nullptr)
       return true;
+
+    g_log.debug("Closing serial port");
 
     if (m_read.hEvent != nullptr)
       CloseHandle(m_read.hEvent);
@@ -101,11 +116,12 @@ namespace FlightSim
     return true;
   }
 
-  int SerialPort::sendData(const char *buffer, int len)
+  int SerialPort::sendData(const char *buffer, size_t len)
   {
-
     if (!m_open || m_device == nullptr)
       return 0;
+
+    g_log.debug("Sending serial data");
 
     DWORD dwBytesWritten = 0;
     int i;
@@ -115,12 +131,12 @@ namespace FlightSim
       dwBytesWritten++;
     }
 
+    g_log.debug("Sent bytes: " + std::to_string((int)dwBytesWritten));
     return (int)dwBytesWritten;
   }
 
   int SerialPort::readDataWaiting()
   {
-
     if (!m_open || m_device == nullptr)
       return 0;
 
@@ -132,11 +148,12 @@ namespace FlightSim
     return (int)ComStat.cbInQue;
   }
 
-  int SerialPort::readData(void *buffer, int len)
+  int SerialPort::readData(void *buffer, size_t len)
   {
-
     if (!m_open || m_device == nullptr)
       return 0;
+
+    g_log.debug("Reading serial data");
 
     BOOL bReadStatus;
     DWORD dwBytesRead, dwErrorFlags;
@@ -144,7 +161,10 @@ namespace FlightSim
 
     ClearCommError(m_device, &dwErrorFlags, &ComStat);
     if (!ComStat.cbInQue)
+    {
+      g_log.debug("No data to be read");
       return 0;
+    }
 
     dwBytesRead = (DWORD)ComStat.cbInQue;
     if (len < (int)dwBytesRead)
@@ -156,11 +176,15 @@ namespace FlightSim
       if (GetLastError() == ERROR_IO_PENDING)
       {
         WaitForSingleObject(m_read.hEvent, 2000);
+        g_log.debug("Read bytes: " + std::to_string((int)dwBytesRead));
         return ((int)dwBytesRead);
       }
+
+      g_log.debug("No data to be read");
       return 0;
     }
 
+    g_log.debug("Read bytes: " + std::to_string((int)dwBytesRead));
     return (int)dwBytesRead;
   }
 

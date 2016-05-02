@@ -54,8 +54,8 @@ namespace FlightSim
       return m_open;
     }
 
-    int readData(void *buffer, int len);
-    int sendData(const char *buffer, int len);
+    int readData(void *buffer, size_t len);
+    int sendData(const char *buffer, size_t len);
     int readDataWaiting();
 
   protected:
