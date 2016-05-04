@@ -17,6 +17,7 @@
 #include <Windows.h>
 
 #include "IEventHandler.h"
+#include "MessageQueue.h"
 
 namespace Engine
 {
@@ -109,6 +110,15 @@ namespace Common
     void addEventHandler(IEventHandler *handler);
     void removeEventHandler(IEventHandler *handler);
 
+    /**
+     * @brief Gets a reference to the message queue.
+     * @return Reference to message queue
+     */
+    inline MessageQueue &messageQueue()
+    {
+      return m_msgQueue;
+    }
+
   protected:
     virtual void gameLoadScreen();
 
@@ -146,11 +156,16 @@ namespace Common
     friend class Profiler;
 
     const std::string m_name;                        //!< Name of the game
+
     const int m_windowWidth;                         //!< Window width
     const int m_windowHeight;                        //!< Window height
+
     bool m_run;                                      //!< Flag indicating the same loop should be executed
+
     IEventHandler::HandlerList m_eventHandlers;      //!< List of event handlers
     GameLoopConfiguration *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
+
+    MessageQueue m_msgQueue;
   };
 }
 }

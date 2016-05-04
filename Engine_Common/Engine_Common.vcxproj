@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="ConfigurableGame.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="MessageQueue.cpp" />
     <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneObject.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="ConfigurableGame.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IEventHandler.h" />
+    <ClInclude Include="MessageQueue.h" />
     <ClInclude Include="Profiler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneObject.h" />

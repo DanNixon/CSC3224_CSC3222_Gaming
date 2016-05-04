@@ -19,15 +19,23 @@ namespace Common
   enum class Subsystem
   {
     NONE,
+    ALL,
 
     GRAPHICS,
     PHYSICS,
     AUDIO,
     INPUT,
     AI,
+    UI_HUD,
+    UI_MENU,
 
-    AUX1,
-    AUX2
+    GAME_LOGIC,
+
+    USER1,
+    USER2,
+    USER3,
+    USER4,
+    USER5
   };
 }
 }
