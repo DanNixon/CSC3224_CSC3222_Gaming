@@ -1,3 +1,4 @@
-*
-!.gitignore
-!*.md
+# HELI-X model files
+*.obj
+*.mtl
+*.xml
