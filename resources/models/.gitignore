@@ -1,4 +1,7 @@
 # HELI-X model files
+*.xml
 *.obj
 *.mtl
-*.xml
+*.png
+*.jpg
+*.wav
