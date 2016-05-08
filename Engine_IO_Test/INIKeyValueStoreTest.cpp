@@ -38,7 +38,7 @@ public:
     INIKeyValueStore store;
     Assert::IsTrue(store.load(stream));
 
-    KVNode & root = store.root();
+    KVNode & root = store.rootKVNode();
 
     // Test root node name and size
     Assert::AreEqual(std::string(), root.name());
@@ -72,7 +72,7 @@ public:
     // Build test structure
     INIKeyValueStore store;
 
-    KVNode & root = store.root();
+    KVNode & root = store.rootKVNode();
     root.keys()["hello"] = "1234567";
     root.keys()["test45"] = "99";
 

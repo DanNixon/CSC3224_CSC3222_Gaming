@@ -42,9 +42,9 @@ namespace IO
      * @brief Gets the root node of the data store.
      * @return Root node
      */
-    inline KVNode &root()
+    inline KVNode &rootKVNode()
     {
-      return m_root;
+      return m_rootKVNode;
     }
 
     /**
@@ -62,7 +62,7 @@ namespace IO
     virtual bool save(std::ostream &stream) = 0;
 
   protected:
-    KVNode m_root; //!< Root node
+    KVNode m_rootKVNode; //!< Root node
   };
 }
 }

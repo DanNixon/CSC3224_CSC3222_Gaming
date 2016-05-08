@@ -26,13 +26,13 @@ namespace IO
    */
   bool INIKeyValueStore::load(std::istream &stream)
   {
-    parseNode(stream, m_root, true);
+    parseNode(stream, m_rootKVNode, true);
 
     while (!stream.eof())
     {
       KVNode node;
       parseNode(stream, node);
-      m_root.addChild(node);
+      m_rootKVNode.addChild(node);
     }
 
     return true;
@@ -43,9 +43,9 @@ namespace IO
    */
   bool INIKeyValueStore::save(std::ostream &stream)
   {
-    outputNode(stream, m_root);
+    outputNode(stream, m_rootKVNode);
 
-    for (auto it = m_root.m_children.begin(); it != m_root.m_children.end(); ++it)
+    for (auto it = m_rootKVNode.m_children.begin(); it != m_rootKVNode.m_children.end(); ++it)
       outputNode(stream, it->second);
 
     return true;
