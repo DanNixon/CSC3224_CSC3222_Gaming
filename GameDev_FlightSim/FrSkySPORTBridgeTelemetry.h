@@ -18,6 +18,11 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @class FrSkySPORTBridgeTelemetry
+   * @brief Provides a driver to a FrSky S.PORT telemetry serial bridge.
+   * @author Dan Nixon
+   */
   class FrSkySPORTBridgeTelemetry : public ITelemetryProtocol, public Engine::ResourceManagment::IMemoryManaged
   {
   public:
@@ -27,7 +32,7 @@ namespace FlightSim
     bool send();
 
   private:
-    SerialPort *m_port;
+    SerialPort *m_port; //!< Serial port bridge is on
   };
 }
 }

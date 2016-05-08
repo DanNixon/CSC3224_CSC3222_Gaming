@@ -61,7 +61,7 @@ namespace PathFinding
     }
 
     /**
-     * @param Gets the cost of the full path.
+     * @brief Gets the cost of the full path.
      * @return Path cost
      */
     inline float pathCost() const

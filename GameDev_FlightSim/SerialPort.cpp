@@ -18,6 +18,9 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @brief Creates a new serial port driver.
+   */
   SerialPort::SerialPort()
       : m_device(nullptr)
       , m_open(false)
@@ -26,11 +29,20 @@ namespace FlightSim
     memset(&m_write, 0, sizeof(OVERLAPPED));
   }
 
+  /**
+   * @brief Closes the serial port.
+   */
   SerialPort::~SerialPort()
   {
     close();
   }
 
+  /**
+   * @brief Opens a serial port.
+   * @param portName Name of the port (e.g. "COM1")
+   * @param baud Baud rate
+   * @return True if the port is successfully opened
+   */
   bool SerialPort::open(const std::string &portName, int baud)
   {
     if (m_open)
@@ -95,6 +107,10 @@ namespace FlightSim
     return m_open;
   }
 
+  /**
+   * @brief Closes the serial port.
+   * @return True if the port is successfully closed
+   */
   bool SerialPort::close()
   {
     if (!m_open || m_device == nullptr)
@@ -116,6 +132,12 @@ namespace FlightSim
     return true;
   }
 
+  /**
+   * @brief Send data to the serial port.
+   * @param buffer Pointer to the data to send
+   * @param len Length of the data to send in bytes
+   * @return Number of bytes sent
+   */
   int SerialPort::sendData(const char *buffer, size_t len)
   {
     if (!m_open || m_device == nullptr)
@@ -148,6 +170,12 @@ namespace FlightSim
     return (int)ComStat.cbInQue;
   }
 
+  /**
+   * @brief Reads data from the serial port.
+   * @param buffer Pointer to receive buffer
+   * @param len Length of receive buffer
+   * @return Number of bytes read
+   */
   int SerialPort::readData(void *buffer, size_t len)
   {
     if (!m_open || m_device == nullptr)

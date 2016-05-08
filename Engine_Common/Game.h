@@ -165,7 +165,7 @@ namespace Common
     IEventHandler::HandlerList m_eventHandlers;      //!< List of event handlers
     GameLoopConfiguration *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
 
-    MessageQueue m_msgQueue;
+    MessageQueue m_msgQueue; //!< Message queue used within this game
   };
 }
 }

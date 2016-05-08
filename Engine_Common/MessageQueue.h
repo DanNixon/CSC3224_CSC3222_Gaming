@@ -24,12 +24,21 @@ namespace Common
   class MessageQueue
   {
   public:
+    /**
+     * @typedef MessageType
+     * @brief Represents a message as a pair of (destination subsystem,
+     *        string).
+     */
     typedef std::pair<Subsystem, std::string> MessageType;
 
   public:
     MessageQueue();
     virtual ~MessageQueue();
 
+    /**
+     * @brief Pushes a new message to the queue.
+     * @param msg New message
+     */
     inline void push(MessageType msg)
     {
       m_queue.push_back(msg);
@@ -39,7 +48,7 @@ namespace Common
     MessageType pop(Subsystem sys);
 
     size_t numMessages(Subsystem sys = Subsystem::ALL) const;
-    
+
   private:
     std::vector<MessageType> m_queue; //!< Queued messages
   };

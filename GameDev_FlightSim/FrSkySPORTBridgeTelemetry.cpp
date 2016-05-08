@@ -20,6 +20,10 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @brief Create a new telemetry driver.
+   * @param port Serial port bridge is on
+   */
   FrSkySPORTBridgeTelemetry::FrSkySPORTBridgeTelemetry(SerialPort *port)
       : ITelemetryProtocol()
       , m_port(port)
@@ -37,6 +41,9 @@ namespace FlightSim
   {
   }
 
+  /**
+   * @copydoc ITelemetryProtocol::send
+   */
   bool FrSkySPORTBridgeTelemetry::send()
   {
     if (m_port == nullptr || !m_port->isOpen())

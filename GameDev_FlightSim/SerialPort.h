@@ -8,6 +8,7 @@
 #ifndef _GAMEDEV_FLIGHTSIM_SERIALPORT_H_
 #define _GAMEDEV_FLIGHTSIM_SERIALPORT_H_
 
+#ifndef DOXYGEN_SKIP
 #define FC_DTRDSR 0x01
 #define FC_RTSCTS 0x02
 #define FC_XONXOFF 0x04
@@ -17,6 +18,7 @@
 #define ASCII_CR 0x0D
 #define ASCII_XON 0x11
 #define ASCII_XOFF 0x13
+#endif /* DOXYGEN_SKIP */
 
 #include <string>
 

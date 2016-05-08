@@ -15,6 +15,10 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @brief Creates a new on screen telemetry display.
+   * @param parent Parent object in scene tree
+   */
   OnScreenTelemetry::OnScreenTelemetry(SceneObject *parent)
       : ITelemetryProtocol()
       , SceneObject("on_screen_telemetry", parent)
@@ -50,6 +54,9 @@ namespace FlightSim
   {
   }
 
+  /**
+   * @copydoc ITelemetryProtocol::send
+   */
   bool OnScreenTelemetry::send()
   {
     // Don't spend time changing the text if it is invisible
