@@ -7,6 +7,8 @@
 
 #include "MessageQueue.h"
 
+#include <algorithm>
+
 namespace Engine
 {
 namespace Common
@@ -29,8 +31,13 @@ namespace Common
    */
   MessageQueue::MessageType MessageQueue::peek(Subsystem sys) const
   {
-    // TODO
-    return MessageQueue::MessageType();
+    auto it =
+        std::find_if(m_queue.begin(), m_queue.end(), [sys](MessageQueue::MessageType m) { return m.first == sys; });
+
+    if (it == m_queue.end())
+      return MessageQueue::MessageType();
+
+    return *it;
   }
 
   /**
@@ -41,8 +48,16 @@ namespace Common
    */
   MessageQueue::MessageType MessageQueue::pop(Subsystem sys)
   {
-    // TODO
-    return MessageQueue::MessageType();
+    auto it =
+        std::find_if(m_queue.begin(), m_queue.end(), [sys](MessageQueue::MessageType m) { return m.first == sys; });
+
+    if (it == m_queue.end())
+      return MessageQueue::MessageType();
+
+    MessageQueue::MessageType m = *it;
+    m_queue.erase(it);
+
+    return m;
   }
 
   /**
@@ -52,8 +67,16 @@ namespace Common
    */
   size_t MessageQueue::numMessages(Subsystem sys) const
   {
-    // TODO
-    return 0;
+    switch (sys)
+    {
+    case Subsystem::NONE:
+      return 0;
+    case Subsystem::ALL:
+      return m_queue.size();
+    default:
+      return std::count_if(m_queue.begin(), m_queue.end(),
+                           [sys](MessageQueue::MessageType m) { return m.first == sys; });
+    }
   }
 }
 }

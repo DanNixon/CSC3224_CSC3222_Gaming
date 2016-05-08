@@ -155,6 +155,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameDev_FlightSim", "GameDe
 		{56842BDD-E5B4-4286-BE60-9F5BDECA7D78} = {56842BDD-E5B4-4286-BE60-9F5BDECA7D78}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine_Common_Test", "Engine_Common_Test\Engine_Common_Test.vcxproj", "{96E61207-F99F-4E66-A9AF-DED547161478}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56842BDD-E5B4-4286-BE60-9F5BDECA7D78} = {56842BDD-E5B4-4286-BE60-9F5BDECA7D78}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -355,6 +360,14 @@ Global
 		{D7AD3802-5363-4FF1-8D51-03C5184EFB31}.Release|Win32.Build.0 = Release|Win32
 		{D7AD3802-5363-4FF1-8D51-03C5184EFB31}.Release|x64.ActiveCfg = Release|x64
 		{D7AD3802-5363-4FF1-8D51-03C5184EFB31}.Release|x64.Build.0 = Release|x64
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Debug|Win32.ActiveCfg = Debug|Win32
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Debug|Win32.Build.0 = Debug|Win32
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Debug|x64.ActiveCfg = Debug|x64
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Debug|x64.Build.0 = Debug|x64
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Release|Win32.ActiveCfg = Release|Win32
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Release|Win32.Build.0 = Release|Win32
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Release|x64.ActiveCfg = Release|x64
+		{96E61207-F99F-4E66-A9AF-DED547161478}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
