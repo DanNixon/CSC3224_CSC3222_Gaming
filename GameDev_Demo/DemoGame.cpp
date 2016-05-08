@@ -58,7 +58,7 @@ namespace Demo
    * @brief Creates a new demonstration game instance.
    */
   DemoGame::DemoGame()
-      : ConfigurableGame("Engine Demo", std::make_pair(1024, 768))
+      : Game("Engine Demo", std::make_pair(1024, 768))
   {
   }
 
@@ -111,8 +111,6 @@ namespace Demo
    */
   int DemoGame::gameStartup()
   {
-    int retVal = ConfigurableGame::gameStartup();
-
     // Open file logger
     FileOutputChannel *fileLog = new FileOutputChannel(gameSaveDirectory() + "DemoGameLog.log");
     fileLog->open();
@@ -276,7 +274,7 @@ namespace Demo
     // Profiling
     m_profiler = new Profiler(this);
 
-    return retVal;
+    return 0;
   }
 
   /**
@@ -345,13 +343,11 @@ namespace Demo
    */
   void DemoGame::gameShutdown()
   {
-    ConfigurableGame::gameShutdown();
-
     m_audioContext->close();
   }
 
   /**
-   * @copydoc ConfigurableGame::defaultConfigOptions
+   * @copydoc Game::defaultConfigOptions
    */
   void DemoGame::defaultConfigOptions(KVNode &node)
   {

@@ -8,7 +8,6 @@
 #ifndef _GAMEDEV_FLIGHTSIM_OPTIONSMENU_H_
 #define _GAMEDEV_FLIGHTSIM_OPTIONSMENU_H_
 
-#include <Engine_Common/Game.h>
 #include <Engine_UIMenu/TopBarMenu.h>
 
 namespace GameDev

@@ -11,6 +11,7 @@
 
 #include "Game.h"
 
+#include <fstream>
 #include <sstream>
 
 // clang-format off
@@ -19,16 +20,21 @@
 #include <gl/glu.h>
 #include <SDL_ttf.h>
 #include <alut.h>
+#include <Shlobj.h>
 // clang-formmat on
 
 #include <Engine_Logging/Logger.h>
 #include <Engine_Logging/LoggingService.h>
 #include <Engine_Logging/ConsoleOutputChannel.h>
 #include <Engine_ResourceManagment/MemoryManager.h>
+#include <Engine_Utility/StringUtils.h>
+#include <Engine_IO/DiskUtils.h>
 
 #include "Profiler.h"
 
 using namespace Engine::Logging;
+using namespace Engine::IO;
+using namespace Engine::Utility;
 
 namespace
 {
@@ -49,16 +55,44 @@ namespace Common
       , m_windowWidth(resolution.first)
       , m_windowHeight(resolution.second)
       , m_profiler(nullptr)
+      , m_firstRun(false)
+      , m_saveOnExit(true)
   {
     // Default logging configuration
     ConsoleOutputChannel * console = new ConsoleOutputChannel();
     console->setLevel(LogLevel::INFO);
     LoggingService::Instance().addOutput(console);
 
+    // Set initial loop config
     for (Uint8 i = 0; i < MAX_TIMED_LOOPS; i++)
       m_loops[i] = nullptr;
 
+    // Queue timer frequency
     QueryPerformanceFrequency(&m_freq);
+
+    // Set the config file name
+    WCHAR path[MAX_PATH];
+    char charPath[MAX_PATH];
+    char c = ' ';
+    if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, 0, path)) &&
+      SUCCEEDED(WideCharToMultiByte(CP_ACP, 0, path, -1, charPath, 260, &c, NULL)))
+    {
+      std::string sanitizedName = StringUtils::SanitizeFilename(m_name);
+      m_gameDirectory = std::string(charPath) + "\\." + sanitizedName + "\\";
+      m_configFilename = sanitizedName + ".ini";
+    }
+    else
+    {
+      g_log.error("Failed to get config file location");
+    }
+
+    // Create the game directory if it does not exist
+    if (!DiskUtils::Exists(m_gameDirectory))
+    {
+      m_firstRun = true;
+      if (!DiskUtils::MakeDirectories(m_gameDirectory))
+        g_log.error("Failed to create game save directory");
+    }
   }
 
   Game::~Game()
@@ -85,7 +119,29 @@ namespace Common
     if (status != 0)
       return status;
 
+    // Show game specific startup screen
     this->gameLoadScreen();
+
+    // Check for configuration file
+    if (!DiskUtils::Exists(configFilePath()))
+    {
+      // Create the configuration file (with default options) if it does not exist
+      m_firstRun = true;
+    }
+    else
+    {
+      // Load the existing configuration
+      m_firstRun = false;
+      loadConfig();
+    }
+
+    // Update configuration file
+    KVNode defaultRoot;
+    defaultConfigOptions(defaultRoot);
+    m_rootKVNode.updateFromOther(defaultRoot);
+    saveConfig();
+
+    // Run game specific startup routine
     status = this->gameStartup();
 
     if (status != 0)
@@ -165,7 +221,12 @@ namespace Common
       }
     }
 
+    // Run game specific shutdown routine
     this->gameShutdown();
+
+    // Save configuration
+    if (m_saveOnExit)
+      saveConfig();
 
     // Free ALL the memory
     Engine::ResourceManagment::MemoryManager::Instance().releaseAll();
@@ -210,6 +271,50 @@ namespace Common
     auto it = std::find(m_eventHandlers.begin(), m_eventHandlers.end(), handler);
     if (it != m_eventHandlers.end())
       m_eventHandlers.erase(it);
+  }
+
+  /**
+   * @brief Loads the game configuration from the config .ini file.
+   */
+  bool Game::loadConfig()
+  {
+    // Open file
+    std::ifstream file;
+    file.open(configFilePath());
+
+    // Check if the file is open
+    if ((file.rdstate() & std::ifstream::failbit) != 0)
+      return false;
+
+    // Load data
+    load(file);
+
+    // Close file
+    file.close();
+
+    return true;
+  }
+
+  /**
+   * @brief Saves the game configuration to the config .ini file.
+   */
+  bool Game::saveConfig()
+  {
+    // Open file
+    std::ofstream file;
+    file.open(configFilePath());
+
+    // Check if the file is open
+    if ((file.rdstate() & std::ofstream::failbit) != 0)
+      return false;
+
+    // Save data
+    save(file);
+
+    // Close file
+    file.close();
+
+    return true;
   }
 
   /**

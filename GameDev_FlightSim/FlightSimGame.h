@@ -8,7 +8,7 @@
 #ifndef _GAMEDEV_FLIGHTSIM_FLIGHTSIMGAME_H_
 #define _GAMEDEV_FLIGHTSIM_FLIGHTSIMGAME_H_
 
-#include <Engine_Common/ConfigurableGame.h>
+#include <Engine_Common/Game.h>
 
 #include <SDL_ttf.h>
 
@@ -39,7 +39,7 @@ namespace FlightSim
    * @brief Flight simulator game.
    * @author Dan Nixon
    */
-  class FlightSimGame : public Engine::Common::ConfigurableGame
+  class FlightSimGame : public Engine::Common::Game
   {
   public:
     FlightSimGame();

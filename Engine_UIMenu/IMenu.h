@@ -15,6 +15,7 @@
 
 #include <SDL_ttf.h>
 
+#include <Engine_Common/Game.h>
 #include <Engine_Graphics/Colour.h>
 #include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Input/MouseHandler.h>
@@ -23,11 +24,6 @@
 
 namespace Engine
 {
-namespace Common
-{
-  class Game;
-}
-
 namespace UIMenu
 {
   /**

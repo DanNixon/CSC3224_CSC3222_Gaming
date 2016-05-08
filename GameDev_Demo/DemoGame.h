@@ -8,7 +8,7 @@
 #ifndef _GAMEDEV_DEMO_DEMOGAME_H_
 #define _GAMEDEV_DEMO_DEMOGAME_H_
 
-#include <Engine_Common/ConfigurableGame.h>
+#include <Engine_Common/Game.h>
 
 #include <SDL_ttf.h>
 
@@ -38,7 +38,7 @@ namespace Demo
    * @brief Game demonstrating features of the game engine.
    * @author Dan Nixon
    */
-  class DemoGame : public Engine::Common::ConfigurableGame
+  class DemoGame : public Engine::Common::Game
   {
   public:
     DemoGame();

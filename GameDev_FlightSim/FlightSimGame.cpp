@@ -60,7 +60,7 @@ namespace FlightSim
    * @brief Creates a new demonstration game instance.
    */
   FlightSimGame::FlightSimGame()
-      : ConfigurableGame("Flight Sim", std::make_pair(1024, 768))
+      : Game("Flight Sim", std::make_pair(1024, 768))
       , m_physicalTelemetry(nullptr)
   {
   }
@@ -113,8 +113,6 @@ namespace FlightSim
    */
   int FlightSimGame::gameStartup()
   {
-    int retVal = ConfigurableGame::gameStartup();
-
     // Open file logger
     FileOutputChannel *fileLog = new FileOutputChannel(gameSaveDirectory() + "FlightSimLog.log");
     fileLog->open();
@@ -290,7 +288,7 @@ namespace FlightSim
     // Profiling
     m_profiler = new Profiler(this);
 
-    return retVal;
+    return 0;
   }
 
   /**
@@ -382,13 +380,11 @@ namespace FlightSim
    */
   void FlightSimGame::gameShutdown()
   {
-    ConfigurableGame::gameShutdown();
-
     m_audioContext->close();
   }
 
   /**
-   * @copydoc ConfigurableGame::defaultConfigOptions
+   * @copydoc Game::defaultConfigOptions
    */
   void FlightSimGame::defaultConfigOptions(KVNode &node)
   {

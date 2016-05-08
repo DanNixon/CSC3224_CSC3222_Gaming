@@ -7,7 +7,6 @@
     <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="Profiler.h" />
     <ClInclude Include="Subsystem.h" />
-    <ClInclude Include="ConfigurableGame.h" />
     <ClInclude Include="MessageQueue.h" />
   </ItemGroup>
   <ItemGroup>
@@ -15,7 +14,6 @@
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Profiler.cpp" />
-    <ClCompile Include="ConfigurableGame.cpp" />
     <ClCompile Include="MessageQueue.cpp" />
   </ItemGroup>
 </Project>

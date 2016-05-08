@@ -19,6 +19,8 @@
 #include "IEventHandler.h"
 #include "MessageQueue.h"
 
+#include <Engine_IO/INIKeyValueStore.h>
+
 namespace Engine
 {
 namespace Common
@@ -44,7 +46,7 @@ namespace Common
    * @brief Contains setup and shutdown logic for the game engine, should be the
    *        base class of any game using the engine.
    */
-  class Game
+  class Game : public Engine::IO::INIKeyValueStore
   {
   public:
     /**
@@ -119,6 +121,61 @@ namespace Common
       return m_msgQueue;
     }
 
+    /** @name Configuration functions
+     *  @{
+     */
+
+    bool loadConfig();
+    bool saveConfig();
+
+    /**
+     * @brief Checks f this was the first time the game was launched based on
+     *        the presence of the configuration file.
+     * @return True if the game is being launched for the first time
+     */
+    inline bool isFirstRun() const
+    {
+      return m_firstRun;
+    }
+
+    /**
+     * @brief Gets the game save directory.
+     * @return Save directory
+     */
+    inline std::string gameSaveDirectory() const
+    {
+      return m_gameDirectory;
+    }
+
+    /**
+     * @brief Sets configuration auto save on game termination.
+     * @param saveOnExit If the game will be saved on exit
+     */
+    inline void setConfigSaveOnExit(bool saveOnExit)
+    {
+      m_saveOnExit = saveOnExit;
+    }
+
+    /**
+     * @brief Checks if the configuration will be saved on game termination.
+     * @return True if the game will be saved on exit
+     */
+    inline bool configSaveOnExit() const
+    {
+      return m_saveOnExit;
+    }
+
+    /**
+     * @brief Gets the full path to the configuration file.
+     * @return Config file path
+     */
+    inline std::string configFilePath() const
+    {
+      return m_gameDirectory + m_configFilename;
+    }
+
+    /** @} */
+
   protected:
     virtual void gameLoadScreen();
 
@@ -140,7 +197,13 @@ namespace Common
      */
     virtual void gameShutdown() = 0;
 
-    Profiler *m_profiler; //!< Profiler instance
+    /**
+     * @brief Sets the default configuration options.
+     * @param node Node to add default options to
+     */
+    virtual void defaultConfigOptions(Engine::IO::KVNode &node)
+    {
+    }
 
   private:
     int init();
@@ -152,6 +215,11 @@ namespace Common
     LARGE_INTEGER m_freq;  //!< Performance counter frequency
     LARGE_INTEGER m_start; //!< Performance timer start time
 
+    std::string m_gameDirectory;  //!< Path to the game save directory
+    std::string m_configFilename; //!< Name of the configuration file
+    bool m_firstRun;              //!< Flag indicating first run based on missing config file
+    bool m_saveOnExit;            //!< Falg indicating if config should be saved on game exit
+
   protected:
     friend class Profiler;
 
@@ -161,6 +229,8 @@ namespace Common
     const int m_windowHeight; //!< Window height
 
     bool m_run; //!< Flag indicating the same loop should be executed
+
+    Profiler *m_profiler; //!< Profiler instance
 
     IEventHandler::HandlerList m_eventHandlers;      //!< List of event handlers
     GameLoopConfiguration *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops
