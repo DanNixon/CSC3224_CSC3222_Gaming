@@ -69,6 +69,22 @@ namespace FlightSim
   {
   }
 
+  void FlightSimGame::selectAircraft(const std::string &name)
+  {
+    // Record option
+    m_rootKVNode.children()["aircraft"].keys()["selected"] = name;
+
+    // TODO
+  }
+
+  void FlightSimGame::renewTerrain(const std::string &name)
+  {
+    // Record option
+    m_rootKVNode.children()["terrain"].keys()["default_type"] = name;
+
+    // TODO
+  }
+
   /**
    * @brief Sets the camera mode.
    * @param mode Mode string
@@ -209,6 +225,7 @@ namespace FlightSim
     aircraftPositionStr >> aircraftPosition;
 
     m_aircraft = new Aircraft("Gaui_X7");
+    m_aircraft->loadMetadata();
     m_aircraft->loadMeshes();
     m_aircraft->loadAudio(m_audioListener);
     m_aircraft->initPhysics(m_physicalSystem, aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
@@ -373,8 +390,34 @@ namespace FlightSim
     {
       if (m_msgQueue.hasMessage(Subsystem::GAME_LOGIC))
       {
-        // TODO
-        std::cout << m_msgQueue.pop(Subsystem::GAME_LOGIC).second << std::endl;
+        const std::string msgStr(m_msgQueue.pop(Subsystem::GAME_LOGIC).second);
+
+        if (msgStr.find("aircraft:reset") != std::string::npos)
+        {
+          m_aircraft->reset();
+        }
+        else if (msgStr.find("simulation:toggle") != std::string::npos)
+        {
+          bool running = m_physicalSystem->simulationRunning();
+          m_physicalSystem->setSimulationState(!running);
+          // TODO: update menu text
+        }
+        else if (msgStr.find("camera:mode:") != std::string::npos)
+        {
+          // TODO
+        }
+        else if (msgStr.find("telemetry:toggle") != std::string::npos)
+        {
+          bool visible = StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_telemetry"]);
+          setTelemetryVisible(!visible);
+          m_menu->updateOptionNames();
+        }
+        else if (msgStr.find("sticks:toggle") != std::string::npos)
+        {
+          bool visible = StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_sticks"]);
+          setSticksVisible(!visible);
+          m_menu->updateOptionNames();
+        }
       }
     }
     else if (id == m_profileLoop)
@@ -404,7 +447,7 @@ namespace FlightSim
     node.addChild(aircraft);
 
     KVNode terrain("terrain");
-    terrain.keys()["default_model"] = "Flat";
+    terrain.keys()["default_type"] = "Flat";
     node.addChild(terrain);
 
     KVNode camera("camera");

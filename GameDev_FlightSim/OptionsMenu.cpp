@@ -90,10 +90,8 @@ namespace FlightSim
     }
     else if (item->name() == "pause")
     {
-      /*auto system = m_simulatorGame->m_physicalSystem;
-      bool run = !system->simulationRunning();
-      system->setSimulationState(run);
-      item->setText(run ? "Pause" : "Resume", true);*/
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "simulation:toggle"));
+      // item->setText(run ? "Pause" : "Resume", true);
     }
     else if (item->name() == "reset")
     {
@@ -106,22 +104,18 @@ namespace FlightSim
     else if (item->name() == "telemetry")
     {
       m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "telemetry:toggle"));
-      updateOptionNames();
     }
     else if (item->name() == "sticks")
     {
       m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "sticks:toggle"));
-      updateOptionNames();
     }
     else if (item->parent()->name() == "aircraft")
     {
-      std::string selectedAircraftName = item->name();
-      m_game->rootKVNode().children()["aircraft"].keys()["selected"] = selectedAircraftName;
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "aircraft:select:" + item->name()));
     }
     else if (item->parent()->name() == "terrain")
     {
-      std::string selectedAircraftName = item->name();
-      m_game->rootKVNode().children()["terrain"].keys()["default_model"] = selectedAircraftName;
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "tarrain:renew:" + item->name()));
     }
   }
 

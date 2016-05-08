@@ -54,9 +54,11 @@ namespace FlightSim
     Aircraft(const std::string &name, const std::string &resourceRoot = "../resources/");
     virtual ~Aircraft();
 
+    std::string metadataFilename() const;
     std::string modelFilename(AircraftModel model) const;
     std::string audioFilename(AircraftSound sound) const;
 
+    void loadMetadata();
     void loadMeshes();
     void initPhysics(Engine::Physics::PhysicalSystem *system, const Engine::Maths::Vector3 &initialPosition,
                      const Engine::Maths::Quaternion &initialRotation);

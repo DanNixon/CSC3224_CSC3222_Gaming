@@ -45,6 +45,9 @@ namespace FlightSim
     FlightSimGame();
     virtual ~FlightSimGame();
 
+    void selectAircraft(const std::string &name);
+    void renewTerrain(const std::string &name);
+
     void setCameraMode(const std::string &mode);
     void setTelemetryVisible(bool visible);
     void setSticksVisible(bool visible);

@@ -59,6 +59,13 @@ namespace FlightSim
   {
   }
 
+  std::string Aircraft::metadataFilename() const
+  {
+    std::stringstream str;
+    str << m_resourceRoot << "models/" << m_name << "/" << m_name << ".ini";
+    return str.str();
+  }
+
   /**
    * @brief Gets the filename of a model.
    * @param model Model type
@@ -116,6 +123,11 @@ namespace FlightSim
     str << ".wav";
 
     return str.str();
+  }
+
+  void Aircraft::loadMetadata()
+  {
+    // TODO
   }
 
   /**
