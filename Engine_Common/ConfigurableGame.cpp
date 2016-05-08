@@ -127,7 +127,7 @@ namespace Common
     // Update the default configurations
     KVNode defaultRoot;
     defaultConfigOptions(defaultRoot);
-    m_root.updateFromOther(defaultRoot);
+    m_rootKVNode.updateFromOther(defaultRoot);
     saveConfig();
 
     return 0;

@@ -75,8 +75,8 @@ namespace FlightSim
    */
   void OptionsMenu::updateOptionNames()
   {
-    bool showTelem = StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_telemetry"]);
-    bool showSticks = StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_sticks"]);
+    bool showTelem = StringUtils::ToBool(m_simulatorGame->rootKVNode().children()["hud"].keys()["show_telemetry"]);
+    bool showSticks = StringUtils::ToBool(m_simulatorGame->rootKVNode().children()["hud"].keys()["show_sticks"]);
 
     m_telemetryOption->setText(showTelem ? "Hide Telemetry" : "Show Telemetry");
     m_sticksOption->setText(showSticks ? "Hide Sticks" : "Show Sticks");
@@ -108,25 +108,25 @@ namespace FlightSim
     }
     else if (item->name() == "telemetry")
     {
-      bool state = !StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_telemetry"]);
+      bool state = !StringUtils::ToBool(m_simulatorGame->rootKVNode().children()["hud"].keys()["show_telemetry"]);
       m_simulatorGame->setTelemetryVisible(state);
       updateOptionNames();
     }
     else if (item->name() == "sticks")
     {
-      bool state = !StringUtils::ToBool(m_simulatorGame->root().children()["hud"].keys()["show_sticks"]);
+      bool state = !StringUtils::ToBool(m_simulatorGame->rootKVNode().children()["hud"].keys()["show_sticks"]);
       m_simulatorGame->setSticksVisible(state);
       updateOptionNames();
     }
     else if (item->parent()->name() == "aircraft")
     {
       std::string selectedAircraftName = item->name();
-      m_simulatorGame->root().children()["aircraft"].keys()["selected"] = selectedAircraftName;
+      m_simulatorGame->rootKVNode().children()["aircraft"].keys()["selected"] = selectedAircraftName;
     }
     else if (item->parent()->name() == "terrain")
     {
       std::string selectedAircraftName = item->name();
-      m_simulatorGame->root().children()["terrain"].keys()["default_model"] = selectedAircraftName;
+      m_simulatorGame->rootKVNode().children()["terrain"].keys()["default_model"] = selectedAircraftName;
     }
   }
 

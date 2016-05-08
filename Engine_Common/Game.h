@@ -155,12 +155,12 @@ namespace Common
   protected:
     friend class Profiler;
 
-    const std::string m_name;                        //!< Name of the game
+    const std::string m_name; //!< Name of the game
 
-    const int m_windowWidth;                         //!< Window width
-    const int m_windowHeight;                        //!< Window height
+    const int m_windowWidth;  //!< Window width
+    const int m_windowHeight; //!< Window height
 
-    bool m_run;                                      //!< Flag indicating the same loop should be executed
+    bool m_run; //!< Flag indicating the same loop should be executed
 
     IEventHandler::HandlerList m_eventHandlers;      //!< List of event handlers
     GameLoopConfiguration *m_loops[MAX_TIMED_LOOPS]; //!< Configs for timed loops

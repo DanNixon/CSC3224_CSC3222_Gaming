@@ -84,7 +84,7 @@ namespace FlightSim
     m_lineOfSightCamera->setActive(!fpv);
 
     // Record setting
-    m_root.children()["camera"].keys()["mode"] = mode;
+    m_rootKVNode.children()["camera"].keys()["mode"] = mode;
   }
 
   /**
@@ -94,7 +94,7 @@ namespace FlightSim
   void FlightSimGame::setTelemetryVisible(bool visible)
   {
     m_onScreenTelemetry->setActive(visible);
-    m_root.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
+    m_rootKVNode.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
   }
 
   /**
@@ -105,7 +105,7 @@ namespace FlightSim
   {
     m_leftStickIndicator->setActive(visible);
     m_rightStickIndicator->setActive(visible);
-    m_root.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
+    m_rootKVNode.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
   }
 
   /**
@@ -173,12 +173,12 @@ namespace FlightSim
     m_onScreenTelemetry = new OnScreenTelemetry(m_ui->root());
     m_onScreenTelemetry->setModelMatrix(Matrix4::Translation(Vector3(8.5f, 0.0f, 0.9f)));
     m_onScreenTelemetry->m_rssi->setAlarmLevels(
-        std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_low"]),
-        std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_critical"]));
+        std::stof(m_rootKVNode.children()["on_screen_telemetry"].keys()["rssi_low"]),
+        std::stof(m_rootKVNode.children()["on_screen_telemetry"].keys()["rssi_critical"]));
 
     // UI: set default state
-    setTelemetryVisible(StringUtils::ToBool(m_root.children()["hud"].keys()["show_telemetry"]));
-    setSticksVisible(StringUtils::ToBool(m_root.children()["hud"].keys()["show_sticks"]));
+    setTelemetryVisible(StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_telemetry"]));
+    setSticksVisible(StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_sticks"]));
 
     // Scene
     m_s = new GraphicalScene(new SceneObject("root"));
@@ -205,9 +205,9 @@ namespace FlightSim
 #endif
 
     // Aircraft
-    float aircraftRotation = std::stof(m_root.children()["aircraft"].keys()["default_rotation"]);
+    float aircraftRotation = std::stof(m_rootKVNode.children()["aircraft"].keys()["default_rotation"]);
     Vector3 aircraftPosition;
-    std::stringstream aircraftPositionStr(m_root.children()["aircraft"].keys()["default_position"]);
+    std::stringstream aircraftPositionStr(m_rootKVNode.children()["aircraft"].keys()["default_position"]);
     aircraftPositionStr >> aircraftPosition;
 
     m_aircraft = new Aircraft("Gaui_X7");
@@ -227,7 +227,7 @@ namespace FlightSim
     m_s->root()->addChild(m_lineOfSightCamera);
 
     // Default camera mode
-    setCameraMode(m_root.children()["camera"].keys()["mode"]);
+    setCameraMode(m_rootKVNode.children()["camera"].keys()["mode"]);
 
     // Ground
     HeightmapMesh *hm = new HeightmapMesh(1000, 1000, 100000.0f, 100000.0f); // 1 km^2
@@ -266,7 +266,7 @@ namespace FlightSim
     }
 
     // Physical telemetry
-    KVNode &telem = m_root.children()["telemetry"];
+    KVNode &telem = m_rootKVNode.children()["telemetry"];
     if (StringUtils::ToBool(telem.keys()["enable"]) && telem.keys()["protocol"] == "frsky_sport_uart_bridge")
     {
       SerialPort *port = new SerialPort();

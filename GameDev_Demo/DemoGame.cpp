@@ -81,7 +81,7 @@ namespace Demo
     m_lineOfSightCamera->setActive(!fpv);
 
     // Record setting
-    m_root.children()["camera"].keys()["mode"] = mode;
+    m_rootKVNode.children()["camera"].keys()["mode"] = mode;
   }
 
   /**
@@ -92,7 +92,7 @@ namespace Demo
   {
     m_rssiIndicator->setActive(visible);
     m_batteryVoltsIndicator->setActive(visible);
-    m_root.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
+    m_rootKVNode.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
   }
 
   /**
@@ -103,7 +103,7 @@ namespace Demo
   {
     m_leftStickIndicator->setActive(visible);
     m_rightStickIndicator->setActive(visible);
-    m_root.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
+    m_rootKVNode.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
   }
 
   /**
@@ -169,8 +169,8 @@ namespace Demo
     // UI: RSSI telemetry indicator
     m_rssiIndicator = new TelemetryValueIndicator("rssi", m_ui->root(), "RSSI");
     m_rssiIndicator->setModelMatrix(Matrix4::Translation(Vector3(8.5f, 0.0f, 0.9f)));
-    m_rssiIndicator->setAlarmLevels(std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_low"]),
-                                    std::stof(m_root.children()["on_screen_telemetry"].keys()["rssi_critical"]));
+    m_rssiIndicator->setAlarmLevels(std::stof(m_rootKVNode.children()["on_screen_telemetry"].keys()["rssi_low"]),
+                                    std::stof(m_rootKVNode.children()["on_screen_telemetry"].keys()["rssi_critical"]));
 
     // UI: Battery voltage telemetry indicator
     m_batteryVoltsIndicator = new TelemetryValueIndicator("battery_volts", m_ui->root(), "VOLTS");
@@ -178,8 +178,8 @@ namespace Demo
     m_batteryVoltsIndicator->setAlarmLevels(10.5f, 9.9f);
 
     // UI: set default state
-    setTelemetryVisible(StringUtils::ToBool(m_root.children()["hud"].keys()["show_telemetry"]));
-    setSticksVisible(StringUtils::ToBool(m_root.children()["hud"].keys()["show_sticks"]));
+    setTelemetryVisible(StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_telemetry"]));
+    setSticksVisible(StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_sticks"]));
 
     // Scene
     m_s = new GraphicalScene(new SceneObject("root"));
@@ -206,9 +206,9 @@ namespace Demo
 #endif
 
     // Aircraft
-    float aircraftRotation = std::stof(m_root.children()["aircraft"].keys()["default_rotation"]);
+    float aircraftRotation = std::stof(m_rootKVNode.children()["aircraft"].keys()["default_rotation"]);
     Vector3 aircraftPosition;
-    std::stringstream aircraftPositionStr(m_root.children()["aircraft"].keys()["default_position"]);
+    std::stringstream aircraftPositionStr(m_rootKVNode.children()["aircraft"].keys()["default_position"]);
     aircraftPositionStr >> aircraftPosition;
 
     m_aircraft = new Aircraft("Gaui_X7");
@@ -228,7 +228,7 @@ namespace Demo
     m_s->root()->addChild(m_lineOfSightCamera);
 
     // Default camera mode
-    setCameraMode(m_root.children()["camera"].keys()["mode"]);
+    setCameraMode(m_rootKVNode.children()["camera"].keys()["mode"]);
 
     // Ground
     HeightmapMesh *hm = new HeightmapMesh(1000, 1000, 100000.0f, 100000.0f); // 1 km^2
