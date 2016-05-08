@@ -283,6 +283,7 @@ namespace FlightSim
     m_audioLoop = addTimedLoop(16.66f, "audio");
     m_uiLoop = addTimedLoop(100.0f, "ui_updates");
     m_telemetryLoop = addTimedLoop(100.0f, "telemetry");
+    m_queueLoop = addTimedLoop(100.0f, "queue_processing");
     m_profileLoop = addTimedLoop(1000.0f, "profile");
 
     // Profiling
@@ -366,6 +367,14 @@ namespace FlightSim
         m_physicalTelemetry->setValue(TelemetryValue::ALTITUDE, altitude);
         m_physicalTelemetry->setValue(TelemetryValue::VERT_SPEED, vertSpeed);
         m_physicalTelemetry->send();
+      }
+    }
+    else if (id == m_queueLoop)
+    {
+      if (m_msgQueue.hasMessage(Subsystem::GAME_LOGIC))
+      {
+        // TODO
+        std::cout << m_msgQueue.pop(Subsystem::GAME_LOGIC).second << std::endl;
       }
     }
     else if (id == m_profileLoop)

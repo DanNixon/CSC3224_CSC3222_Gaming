@@ -60,7 +60,11 @@ namespace Common
   {
     // Default logging configuration
     ConsoleOutputChannel * console = new ConsoleOutputChannel();
+#ifdef _DEBUG
+    console->setLevel(LogLevel::DEBUG);
+#else
     console->setLevel(LogLevel::INFO);
+#endif
     LoggingService::Instance().addOutput(console);
 
     // Set initial loop config

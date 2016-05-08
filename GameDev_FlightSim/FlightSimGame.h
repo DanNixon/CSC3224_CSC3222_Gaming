@@ -63,6 +63,7 @@ namespace FlightSim
     Uint8 m_audioLoop;
     Uint8 m_uiLoop;
     Uint8 m_telemetryLoop;
+    Uint8 m_queueLoop;
     Uint8 m_profileLoop;
 
     StickIndicator *m_leftStickIndicator;  //!< Indicator for position of left stick

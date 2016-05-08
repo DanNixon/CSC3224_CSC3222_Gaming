@@ -31,9 +31,9 @@ namespace Common
    */
   MessageQueue::MessageType MessageQueue::peek(Subsystem sys) const
   {
-    auto it =
-        std::find_if(m_queue.begin(), m_queue.end(), [sys](MessageQueue::MessageType m) { return m.first == sys; });
+    auto it = cfirst(sys);
 
+    // Return empty message if not found
     if (it == m_queue.end())
       return MessageQueue::MessageType();
 
@@ -48,16 +48,19 @@ namespace Common
    */
   MessageQueue::MessageType MessageQueue::pop(Subsystem sys)
   {
-    auto it =
-        std::find_if(m_queue.begin(), m_queue.end(), [sys](MessageQueue::MessageType m) { return m.first == sys; });
+    auto it = first(sys);
 
+    // Return empty message if not found
     if (it == m_queue.end())
       return MessageQueue::MessageType();
 
-    MessageQueue::MessageType m = *it;
+    // Record the messgae
+    MessageQueue::MessageType msg = *it;
+
+    // Remove message from queue
     m_queue.erase(it);
 
-    return m;
+    return msg;
   }
 
   /**
@@ -77,6 +80,38 @@ namespace Common
       return std::count_if(m_queue.begin(), m_queue.end(),
                            [sys](MessageQueue::MessageType m) { return m.first == sys; });
     }
+  }
+
+  /**
+   * @brief Checks if there messages in the queue for a given subsystem.
+   * @param sys Target subsystem
+   * @return True f there are messages
+   */
+  bool MessageQueue::hasMessage(Subsystem sys) const
+  {
+    return cfirst(sys) != m_queue.end();
+  }
+
+  MessageQueue::MessageList::iterator MessageQueue::first(Subsystem sys)
+  {
+    if (sys == Subsystem::NONE)
+      return m_queue.end();
+
+    if (sys == Subsystem::ALL)
+      return m_queue.begin();
+
+    return std::find_if(m_queue.begin(), m_queue.end(), [sys](MessageQueue::MessageType m) { return m.first == sys; });
+  }
+
+  MessageQueue::MessageList::const_iterator MessageQueue::cfirst(Subsystem sys) const
+  {
+    if (sys == Subsystem::NONE)
+      return m_queue.cend();
+
+    if (sys == Subsystem::ALL)
+      return m_queue.cbegin();
+
+    return std::find_if(m_queue.begin(), m_queue.end(), [sys](MessageQueue::MessageType m) { return m.first == sys; });
   }
 }
 }

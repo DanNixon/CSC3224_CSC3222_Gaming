@@ -14,8 +14,6 @@ namespace GameDev
 {
 namespace FlightSim
 {
-  class FlightSimGame;
-
   /**
    * @class OptionsMenu
    * @brief Menu used to display simulation options.
@@ -46,8 +44,6 @@ namespace FlightSim
     void populateMenu(Engine::UIMenu::MenuItem *parent, const NameValueList &items);
 
   private:
-    FlightSimGame *m_simulatorGame; //!< Game this menu is used in
-
     Engine::UIMenu::MenuItem *m_aircraftMenu; //!< Aircraft submenu node
     Engine::UIMenu::MenuItem *m_terrainMenu;  //!< Terrain submenu node
     Engine::UIMenu::MenuItem *m_telemetryOption;

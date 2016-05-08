@@ -9,8 +9,6 @@
 
 #include <Engine_Utility/StringUtils.h>
 
-#include "FlightSimGame.h"
-
 using namespace Engine::Common;
 using namespace Engine::Maths;
 using namespace Engine::UIMenu;
@@ -25,7 +23,6 @@ namespace FlightSim
    */
   OptionsMenu::OptionsMenu(Game *game, TTF_Font *font, float textSize)
       : TopBarMenu(game, font, textSize)
-      , m_simulatorGame(dynamic_cast<FlightSimGame *>(m_game))
   {
     setMargin(Vector2());
 
@@ -93,29 +90,27 @@ namespace FlightSim
     }
     else if (item->name() == "pause")
     {
-      auto system = m_simulatorGame->m_physicalSystem;
+      /*auto system = m_simulatorGame->m_physicalSystem;
       bool run = !system->simulationRunning();
       system->setSimulationState(run);
-      item->setText(run ? "Pause" : "Resume", true);
+      item->setText(run ? "Pause" : "Resume", true);*/
     }
     else if (item->name() == "reset")
     {
-      m_simulatorGame->m_aircraft->reset();
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "aircraft:reset"));
     }
     else if (item->parent()->name() == "camera")
     {
-      m_simulatorGame->setCameraMode(item->name());
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "camera:mode:" + item->name()));
     }
     else if (item->name() == "telemetry")
     {
-      bool state = !StringUtils::ToBool(m_game->rootKVNode().children()["hud"].keys()["show_telemetry"]);
-      m_simulatorGame->setTelemetryVisible(state);
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "telemetry:toggle"));
       updateOptionNames();
     }
     else if (item->name() == "sticks")
     {
-      bool state = !StringUtils::ToBool(m_simulatorGame->rootKVNode().children()["hud"].keys()["show_sticks"]);
-      m_simulatorGame->setSticksVisible(state);
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "sticks:toggle"));
       updateOptionNames();
     }
     else if (item->parent()->name() == "aircraft")

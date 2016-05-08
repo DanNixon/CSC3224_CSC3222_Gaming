@@ -31,6 +31,12 @@ namespace Common
      */
     typedef std::pair<Subsystem, std::string> MessageType;
 
+    /**
+     * @typedef MessageList
+     * @brief Underlying storage type for MessageQueue.
+     */
+    typedef std::vector<MessageType> MessageList;
+
   public:
     MessageQueue();
     virtual ~MessageQueue();
@@ -48,9 +54,14 @@ namespace Common
     MessageType pop(Subsystem sys);
 
     size_t numMessages(Subsystem sys = Subsystem::ALL) const;
+    bool hasMessage(Subsystem sys = Subsystem::ALL) const;
 
   private:
-    std::vector<MessageType> m_queue; //!< Queued messages
+    MessageList::iterator first(Subsystem sys);
+    MessageList::const_iterator cfirst(Subsystem sys) const;
+
+  private:
+    MessageList m_queue; //!< Queued messages
   };
 }
 }
