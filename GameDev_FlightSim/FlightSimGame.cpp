@@ -238,13 +238,15 @@ namespace FlightSim
     m_aircraft->loadMetadata();
     m_aircraft->loadMeshes();
     m_aircraft->loadAudio(m_audioListener);
-    m_aircraft->initPhysics(m_physicalSystem, aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
+    m_aircraft->initPhysics(aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
     m_aircraft->initCamera(this);
+    m_aircraft->addToSystem(m_physicalSystem);
     m_s->root()->addChild(m_aircraft);
 
     // Terrain
-    m_terrain = new Terrain("terrain", 10000.0f, 10000.0f);
-    m_terrain->initPhysics(m_physicalSystem);
+    m_terrain = new Terrain("terrain", 50000.0f, 50000.0f);
+    m_terrain->init();
+    m_terrain->addToSystem(m_physicalSystem);
     m_s->root()->addChild(m_terrain);
 
     // Camera

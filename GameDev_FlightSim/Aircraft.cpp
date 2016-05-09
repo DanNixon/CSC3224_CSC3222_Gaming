@@ -130,15 +130,15 @@ namespace FlightSim
     load(file);
 
     // Parse member data
-    m_mass = m_rootKVNode.children()["dynamics"].keyFloat("mass");
-    m_mainRotorThrust = m_rootKVNode.children()["dynamics"].keyFloat("main_rotor_thrust");
-    m_axisRates = m_rootKVNode.children()["dynamics"].keyVector3("axis_rates");
-    m_batteryVolts = m_rootKVNode.children()["avionics"].keyFloat("battery_full_v");
-    m_baselinePower = m_rootKVNode.children()["avionics"].keyFloat("avionics_power_w");
-    m_maxMotorPower = m_rootKVNode.children()["avionics"].keyFloat("motor_power_w");
-    m_rssiMinDist2 = std::pow(m_rootKVNode.children()["avionics"].keyFloat("rssi_min_range_m") * 10.0f, 2);
+    m_mass = m_rootKVNode.child("dynamics").keyFloat("mass");
+    m_mainRotorThrust = m_rootKVNode.child("dynamics").keyFloat("main_rotor_thrust");
+    m_axisRates = m_rootKVNode.child("dynamics").keyVector3("axis_rates");
+    m_batteryVolts = m_rootKVNode.child("avionics").keyFloat("battery_full_v");
+    m_baselinePower = m_rootKVNode.child("avionics").keyFloat("avionics_power_w");
+    m_maxMotorPower = m_rootKVNode.child("avionics").keyFloat("motor_power_w");
+    m_rssiMinDist2 = std::pow(m_rootKVNode.child("avionics").keyFloat("rssi_min_range_m") * 10.0f, 2);
     m_rssiInverseRange2 =
-        1.0f / (std::pow(m_rootKVNode.children()["avionics"].keyFloat("rssi_max_range_m") * 10.0f, 2) - m_rssiMinDist2);
+        1.0f / (std::pow(m_rootKVNode.child("avionics").keyFloat("rssi_max_range_m") * 10.0f, 2) - m_rssiMinDist2);
   }
 
   /**
@@ -186,11 +186,10 @@ namespace FlightSim
 
   /**
    * @brief Configures physics objects.
-   * @param system Physical system in use
    * @param initialPosition Initial position of the aircraft
    * @param initialRotation Initial orientation of the aircraft
    */
-  void Aircraft::initPhysics(PhysicalSystem *system, const Vector3 &initialPosition, const Quaternion &initialRotation)
+  void Aircraft::initPhysics(const Vector3 &initialPosition, const Quaternion &initialRotation)
   {
     // Record initial state
     m_initialRotation = initialRotation;
@@ -234,9 +233,6 @@ namespace FlightSim
     // Body
     m_physicalBody = new RigidBody(motion, m_mass, btVector3(0.0f, 0.0f, 0.0f), shape);
     m_physicalBody->body()->setActivationState(DISABLE_DEACTIVATION);
-
-    // Add to system
-    system->addBody(m_physicalBody);
   }
 
   /**

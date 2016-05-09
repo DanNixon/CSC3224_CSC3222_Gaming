@@ -62,10 +62,19 @@ namespace FlightSim
 
     void loadMetadata();
     void loadMeshes();
-    void initPhysics(Engine::Physics::PhysicalSystem *system, const Engine::Maths::Vector3 &initialPosition,
-                     const Engine::Maths::Quaternion &initialRotation);
+    void initPhysics(const Engine::Maths::Vector3 &initialPosition, const Engine::Maths::Quaternion &initialRotation);
     bool loadAudio(Engine::Audio::Listener *listener);
     void initCamera(Engine::Common::Game *game, float viewDepth = 1000.0f, float fieldOfVision = 45.0f);
+
+    inline void addToSystem(Engine::Physics::PhysicalSystem *system)
+    {
+      system->addBody(m_physicalBody);
+    }
+
+    inline void removeFromSystem(Engine::Physics::PhysicalSystem *system)
+    {
+      system->removeBody(m_physicalBody);
+    }
 
     /**
      * @brief Gets the source of a given type of sound.

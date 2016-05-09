@@ -34,7 +34,7 @@ namespace FlightSim
   {
   }
 
-  void Terrain::initPhysics(PhysicalSystem *system)
+  void Terrain::init()
   {
     // Heightmap ollision shape
     m_physicsHeightmap = new Heightmap();
@@ -46,9 +46,6 @@ namespace FlightSim
     // Body
     m_physicalBody = new RigidBody(motion, 0.0f, btVector3(0.0f, 0.0f, 0.0f), m_physicsHeightmap->shape());
     m_physicalBody->body()->setActivationState(DISABLE_DEACTIVATION);
-
-    // Add to system
-    system->addBody(m_physicalBody);
   }
 }
 }

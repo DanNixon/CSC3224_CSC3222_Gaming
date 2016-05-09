@@ -29,7 +29,17 @@ namespace FlightSim
             size_t depthResolution = 1000);
     virtual ~Terrain();
 
-    void initPhysics(Engine::Physics::PhysicalSystem *system);
+    void init();
+
+    inline void addToSystem(Engine::Physics::PhysicalSystem *system)
+    {
+      system->addBody(m_physicalBody);
+    }
+
+    inline void removeFromSystem(Engine::Physics::PhysicalSystem *system)
+    {
+      system->removeBody(m_physicalBody);
+    }
 
   protected:
     Engine::Physics::RigidBody *m_physicalBody;     //!< Physical body of the terrain
