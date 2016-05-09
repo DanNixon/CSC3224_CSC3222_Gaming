@@ -35,5 +35,44 @@ namespace IO
   {
     return CreateDirectory(path.c_str(), NULL) == TRUE;
   }
+
+  /**
+   * @brief Obtains a list of items in a directory.
+   * @param path Path to directory to list
+   * @param files If names of files should be returned
+   * @param directories If names of directories should be returned
+   * @param listAll If all (including hidden) items should be shown
+   * @return List of item names
+   *
+   * Adapted from:
+   * http://stackoverflow.com/questions/306533/how-do-i-get-a-list-of-files-in-a-directory-in-c/1932861#1932861
+   */
+  std::vector<std::string> DiskUtils::ListDirectory(const std::string &path, bool files, bool directories, bool listAll)
+  {
+    std::vector<std::string> retVal;
+
+    HANDLE dir;
+    WIN32_FIND_DATA fileData;
+
+    if ((dir = FindFirstFile((path + "/*").c_str(), &fileData)) != INVALID_HANDLE_VALUE)
+    {
+      do
+      {
+        const std::string filename = fileData.cFileName;
+        const bool isDirectory = (fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
+        const bool hiddenMod = filename[0] != '.' || listAll;
+
+        if (directories && isDirectory && hiddenMod)
+          retVal.push_back(filename);
+        else if (files && hiddenMod)
+          retVal.push_back(filename);
+
+      } while (FindNextFile(dir, &fileData));
+
+      FindClose(dir);
+    }
+
+    return retVal;
+  }
 }
 }

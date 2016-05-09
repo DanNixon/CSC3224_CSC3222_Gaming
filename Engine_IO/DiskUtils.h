@@ -9,6 +9,7 @@
 #define _ENGINE_IO_DISKUTILS_H_
 
 #include <string>
+#include <vector>
 
 namespace Engine
 {
@@ -23,8 +24,9 @@ namespace IO
   {
   public:
     static bool Exists(const std::string &path);
-
     static bool MakeDirectories(const std::string &path);
+    static std::vector<std::string> ListDirectory(const std::string &path, bool files = true, bool directories = true,
+                                                  bool listAll = false);
   };
 }
 }

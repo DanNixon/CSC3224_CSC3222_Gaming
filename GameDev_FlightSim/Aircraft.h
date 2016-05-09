@@ -53,7 +53,7 @@ namespace FlightSim
   class Aircraft : public Engine::Common::SceneObject, public Engine::IO::INIKeyValueStore
   {
   public:
-    Aircraft(const std::string &name, const std::string &resourceRoot = "../resources/");
+    Aircraft(const std::string &name, const std::string &resourceRoot);
     virtual ~Aircraft();
 
     std::string metadataFilename() const;

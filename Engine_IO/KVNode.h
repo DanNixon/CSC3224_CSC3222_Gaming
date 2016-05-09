@@ -152,6 +152,11 @@ namespace IO
       return m_children;
     }
 
+    KVNode &child(const std::string &name)
+    {
+      return m_children[name];
+    }
+
     void addChild(KVNode node)
     {
       m_children[node.name()] = node;

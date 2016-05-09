@@ -20,6 +20,7 @@
 #include <Engine_Graphics/RectangleMesh.h>
 #include <Engine_Graphics/Shaders.h>
 #include <Engine_Graphics/SphericalMesh.h>
+#include <Engine_IO/DiskUtils.h>
 #include <Engine_IO/KVNode.h>
 #include <Engine_Logging/FileOutputChannel.h>
 #include <Engine_Logging/Logger.h>
@@ -221,13 +222,19 @@ namespace FlightSim
     m_s->root()->addChild(m_physicsDebugDraw);
 #endif
 
+    // TODO
+    std::vector<std::string> a =
+        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
+    std::vector<std::string> t =
+        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
+
     // Aircraft
     float aircraftRotation = std::stof(m_rootKVNode.children()["aircraft"].keys()["default_rotation"]);
     Vector3 aircraftPosition;
     std::stringstream aircraftPositionStr(m_rootKVNode.children()["aircraft"].keys()["default_position"]);
     aircraftPositionStr >> aircraftPosition;
 
-    m_aircraft = new Aircraft("Gaui_X7");
+    m_aircraft = new Aircraft("Gaui_X7", m_rootKVNode.child("resources").keyString("models"));
     m_aircraft->loadMetadata();
     m_aircraft->loadMeshes();
     m_aircraft->loadAudio(m_audioListener);
@@ -432,6 +439,12 @@ namespace FlightSim
    */
   void FlightSimGame::defaultConfigOptions(KVNode &node)
   {
+    KVNode resources("resources");
+    resources.keys()["models"] = "../resources/models/";
+    resources.keys()["terrains"] = "../resources/terrain/";
+    resources.keys()["shaders"] = "../resources/shades/";
+    node.addChild(resources);
+
     KVNode aircraft("aircraft");
     aircraft.keys()["selected"] = "Gaui X5";
     aircraft.keys()["default_rotation"] = "135";

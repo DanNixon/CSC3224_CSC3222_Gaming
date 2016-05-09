@@ -60,7 +60,7 @@ namespace FlightSim
   std::string Aircraft::metadataFilename() const
   {
     std::stringstream str;
-    str << m_resourceRoot << "models/" << m_name << "/" << m_name << ".ini";
+    str << m_resourceRoot << m_name << "/" << m_name << ".ini";
     return str.str();
   }
 
@@ -72,7 +72,7 @@ namespace FlightSim
   std::string Aircraft::modelFilename(AircraftModel model) const
   {
     std::stringstream str;
-    str << m_resourceRoot << "models/" << m_name << "/";
+    str << m_resourceRoot << m_name << "/";
 
     switch (model)
     {
@@ -100,7 +100,7 @@ namespace FlightSim
   std::string Aircraft::audioFilename(AircraftSound sound) const
   {
     std::stringstream str;
-    str << m_resourceRoot << "models/" << m_name << "/";
+    str << m_resourceRoot << m_name << "/";
 
     switch (sound)
     {
