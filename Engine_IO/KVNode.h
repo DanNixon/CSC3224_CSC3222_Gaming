@@ -9,8 +9,12 @@
 #define _ENGINE_IO_KVNODE_H_
 
 #include <map>
+#include <sstream>
 #include <string>
 #include <vector>
+
+#include <Engine_Maths/Vector3.h>
+#include <Engine_Utility/StringUtils.h>
 
 namespace Engine
 {
@@ -75,9 +79,36 @@ namespace IO
       return (m_keys.find(key) != m_keys.end());
     }
 
+    /**
+     * @brief Returns the map of key values.
+     * @return Reference to key map
+     */
     std::map<std::string, std::string> &keys()
     {
       return m_keys;
+    }
+
+    std::string keyString(const std::string &name)
+    {
+      return m_keys[name];
+    }
+
+    float keyFloat(const std::string &name)
+    {
+      return std::stof(m_keys[name]);
+    }
+
+    bool keyBool(const std::string &name)
+    {
+      return Engine::Utility::StringUtils::ToBool(m_keys[name]);
+    }
+
+    Engine::Maths::Vector3 keyVector3(const std::string &name)
+    {
+      std::stringstream str(m_keys[name]);
+      Engine::Maths::Vector3 vec;
+      str >> vec;
+      return vec;
     }
 
     /**

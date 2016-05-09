@@ -42,13 +42,11 @@ namespace FlightSim
   Aircraft::Aircraft(const std::string &name, const std::string &resourceRoot)
       : SceneObject(name)
       , m_resourceRoot(resourceRoot)
-      , m_mass(0.6f)
-      , m_mainRotorThrust(1.0f)
-      , m_axisRates(1.0f, 1.0f, 1.0f)
+      , m_mass(0.0f)
+      , m_mainRotorThrust(0.0f)
+      , m_axisRates()
       , m_failsafe(false)
-      , m_rssi(0)
-      , m_altitudeFeet(0.0f)
-      , m_batteryVolts(12.6f)
+      , m_batteryVolts(0.0f)
       , m_physicalBody(nullptr)
   {
     for (size_t i = 0; i < 4; i++)
@@ -127,7 +125,17 @@ namespace FlightSim
 
   void Aircraft::loadMetadata()
   {
-    // TODO
+    // Load data
+    std::ifstream file(metadataFilename());
+    load(file);
+
+    // Parse member data
+    m_mass = m_rootKVNode.children()["dynamics"].keyFloat("mass");
+    m_mainRotorThrust = m_rootKVNode.children()["dynamics"].keyFloat("main_rotor_thrust");
+    m_axisRates = m_rootKVNode.children()["dynamics"].keyVector3("axis_rates");
+    m_batteryVolts = m_rootKVNode.children()["avionics"].keyFloat("battery_full_v");
+    m_baselinePower = m_rootKVNode.children()["avionics"].keyFloat("avionics_power_w");
+    m_maxMotorPower = m_rootKVNode.children()["avionics"].keyFloat("motor_power_w");
   }
 
   /**
@@ -189,12 +197,20 @@ namespace FlightSim
     btCompoundShape *shape = new btCompoundShape();
 
     // Main body bounding box
-    btBoxShape *bodyBox = new btBoxShape(btVector3(20.0f, 10.0f, 10.0f));
-    shape->addChildShape(btTransform(btQuaternion(0.0f, 0.0f, 0.0f), btVector3(5.0f, -5.0f, 0.0f)), bodyBox);
+    btBoxShape *bodyBox =
+        new btBoxShape(MathsConversions::ToBullet(m_rootKVNode.children()["physics"].keyVector3("body_aabb")));
+    shape->addChildShape(
+        btTransform(btQuaternion(0.0f, 0.0f, 0.0f),
+                    MathsConversions::ToBullet(m_rootKVNode.children()["physics"].keyVector3("body_aabb_pos"))),
+        bodyBox);
 
     // Tail/boom bounding box
-    btBoxShape *tailBox = new btBoxShape(btVector3(40.0f, 5.0f, 5.0f));
-    shape->addChildShape(btTransform(btQuaternion(0.0f, 0.0f, 0.0f), btVector3(-40.0f, 0.0f, 0.0f)), tailBox);
+    btBoxShape *tailBox =
+        new btBoxShape(MathsConversions::ToBullet(m_rootKVNode.children()["physics"].keyVector3("tail_aabb")));
+    shape->addChildShape(
+        btTransform(btQuaternion(0.0f, 0.0f, 0.0f),
+                    MathsConversions::ToBullet(m_rootKVNode.children()["physics"].keyVector3("tail_aabb_pos"))),
+        tailBox);
 
     // Main rotor cylinder
     BoundingCylinderShape *mainRotorCylinder = new BoundingCylinderShape();
@@ -322,6 +338,8 @@ namespace FlightSim
   {
     if (m_failsafe)
       return;
+
+    m_collective = throttle;
 
     // Adjust rotation by rates and engine (rotor) speed
     Vector3 axisVector(roll, yaw, pitch);

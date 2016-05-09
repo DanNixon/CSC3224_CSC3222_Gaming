@@ -14,6 +14,7 @@
 #include <Engine_Common/Game.h>
 #include <Engine_Graphics/Camera.h>
 #include <Engine_Graphics/RenderableObject.h>
+#include <Engine_IO/INIKeyValueStore.h>
 #include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
@@ -48,7 +49,7 @@ namespace FlightSim
    * @brief Class containing all information about an aircraft.
    * @author Dan Nixon
    */
-  class Aircraft : public Engine::Common::SceneObject
+  class Aircraft : public Engine::Common::SceneObject, public Engine::IO::INIKeyValueStore
   {
   public:
     Aircraft(const std::string &name, const std::string &resourceRoot = "../resources/");
@@ -110,17 +111,18 @@ namespace FlightSim
      */
     inline int rssi() const
     {
-      return m_rssi;
+      // TODO
+      return 0;
     }
 
     /**
-     * @brief Gets the altitude of the aircraft above the terrain origin in
-     *        feet.
-     * @return Altitude (ft)
+     * @brief Gets the altitude of the aircraft above the terrain origin.
+     * @return Altitude (m)
      */
     inline float altitude() const
     {
-      return m_altitudeFeet;
+      // TODO
+      return m_modelMatrix.positionVector()[1];
     }
 
     /**
@@ -130,6 +132,15 @@ namespace FlightSim
     inline float batteryVoltage() const
     {
       return m_batteryVolts;
+    }
+
+    /**
+     * @brief Calculates a very rough approximate current draw from the model battery.
+     * @return Current (A)
+     */
+    inline float batteryCurrent() const
+    {
+      return ((m_engineSpeed * ((m_collective * 0.8f) + 0.2f) * m_maxMotorPower) + m_baselinePower) / m_batteryVolts;
     }
 
     /**
@@ -153,11 +164,12 @@ namespace FlightSim
     float m_mass;                       //!< Mass in g
     float m_mainRotorThrust;            //!< Main rotor lifting force at maximum RPM and maximum throttle
     Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis (roll, yaw, pitch)
-    float m_engineSpeed;                //!< Engine/motor speed (factor of max RPM)
+    float m_baselinePower;
+    float m_maxMotorPower;
 
     bool m_failsafe;      //!< Flag indicating a failsafe condition
-    int m_rssi;           //!< RSSI in dB
-    float m_altitudeFeet; //!< Altitude in feet relative to Y=0
+    float m_engineSpeed;  //!< Engine/motor speed (factor of max RPM)
+    float m_collective;   //!< Collective pitch
     float m_batteryVolts; //!< Battery voltage
 
     Engine::Graphics::RenderableObject *m_subTreeAircraft;          //!< Scene sub tree containing main aircraft

@@ -212,7 +212,7 @@ namespace FlightSim
     // Physics
     m_physicalSystem = new PhysicalSystem(8.33f, 83.33f); // At best 120Hz, at worst 12Hz
 #ifdef PHYSICS_DEBUG_DRAW
-    m_physicsDebugDraw = new DebugDrawEngine(ShaderProgramLookup::Instance().get("aircraft_shader"));
+    m_physicsDebugDraw = new DebugDrawEngine(ShaderProgramLookup::Instance().get("ui_shader"));
     m_physicsDebugDraw->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
     m_physicalSystem->world()->setDebugDrawer(m_physicsDebugDraw);
     m_s->root()->addChild(m_physicsDebugDraw);
@@ -361,12 +361,11 @@ namespace FlightSim
     }
     else if (id == m_telemetryLoop)
     {
-      //!< \todo: simulated values
       float rssi = (float)m_aircraft->rssi();
       float vbat = m_aircraft->batteryVoltage();
-      float current = 21.0f;
-      float altitude = 0.0f;
-      float vertSpeed = 0.0f;
+      float current = m_aircraft->batteryCurrent();
+      float altitude = m_aircraft->altitude();
+      float vertSpeed = 0.0f; // TODO
 
       // On screen telemetry
       m_onScreenTelemetry->setValue(TelemetryValue::RSSI, rssi);
