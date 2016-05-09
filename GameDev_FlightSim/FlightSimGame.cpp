@@ -26,7 +26,7 @@
 #include <Engine_Maths/Quaternion.h>
 #include <Engine_Physics/BoundingBoxShape.h>
 #include <Engine_Physics/ConvexHullShape.h>
-#include <Engine_Physics/StaticPlaneRigidBody.h>
+#include <Engine_Physics/Heightmap.h>
 #include <Engine_ResourceManagment/MemoryManager.h>
 #include <Engine_Utility/StringUtils.h>
 
@@ -156,6 +156,9 @@ namespace FlightSim
     uiShader->link();
     ShaderProgramLookup::Instance().add("ui_shader", uiShader);
 
+    // TODO
+    ShaderProgramLookup::Instance().add("terrain_shader", uiShader);
+
     ShaderProgram *menuShader = new ShaderProgram();
     menuShader = new ShaderProgram();
     menuShader->addShader(new VertexShader("../resources/shader/vert_simple.glsl"));
@@ -231,8 +234,11 @@ namespace FlightSim
     m_aircraft->initPhysics(m_physicalSystem, aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
     m_aircraft->initCamera(this);
     m_s->root()->addChild(m_aircraft);
-    m_aircraft->setThrust(3000.0f);
-    m_aircraft->setAxisRates(Vector3(8.0f, 10.0f, 8.0f));
+
+    // Terrain
+    m_terrain = new Terrain("terrain", 10000.0f, 10000.0f);
+    m_terrain->initPhysics(m_physicalSystem);
+    m_s->root()->addChild(m_terrain);
 
     // Camera
     m_lineOfSightCamera =
@@ -243,17 +249,6 @@ namespace FlightSim
 
     // Default camera mode
     setCameraMode(m_rootKVNode.children()["camera"].keys()["mode"]);
-
-    // Ground
-    HeightmapMesh *hm = new HeightmapMesh(1000, 1000, 100000.0f, 100000.0f); // 1 km^2
-    hm->setHeight(50, 40, 10, true);
-    RenderableObject *ground = new RenderableObject("ground", hm, ShaderProgramLookup::Instance().get("ui_shader"));
-    SceneObjectMotionState *groundMotionState =
-        new SceneObjectMotionState(ground, Vector3(0.0f, 0.0f, 0.0f), Quaternion());
-    RigidBody *groundBody =
-        new StaticPlaneRigidBody(groundMotionState, 0, btVector3(0.0f, 0.0f, 0.0f), btVector3(0.0f, 1.0f, 0.0f));
-    m_physicalSystem->addBody(groundBody);
-    m_s->root()->addChild(ground);
 
     // GL setup
     glEnable(GL_DEPTH_TEST);
@@ -291,7 +286,7 @@ namespace FlightSim
         m_physicalTelemetry->send();
       }
       else
-        g_log.warn("COuld not open serial port, no physical telemetry");
+        g_log.warn("Could not open serial port, no physical telemetry");
     }
 
     // Timed loops

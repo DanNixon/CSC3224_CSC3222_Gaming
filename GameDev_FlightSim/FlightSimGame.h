@@ -29,6 +29,7 @@
 #include "OnScreenTelemetry.h"
 #include "OptionsMenu.h"
 #include "StickIndicator.h"
+#include "Terrain.h"
 
 namespace GameDev
 {
@@ -90,6 +91,7 @@ namespace FlightSim
     Engine::Physics::DebugDrawEngine *m_physicsDebugDraw; //!< Physics debug draw engine
 
     Aircraft *m_aircraft; //!< Active aircraft
+    Terrain *m_terrain;   //!< Active terrain
   };
 }
 }

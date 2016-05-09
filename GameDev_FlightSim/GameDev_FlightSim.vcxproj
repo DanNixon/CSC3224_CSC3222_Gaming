@@ -28,6 +28,7 @@
     <ClCompile Include="SerialPort.cpp" />
     <ClCompile Include="StickIndicator.cpp" />
     <ClCompile Include="TelemetryValueIndicator.cpp" />
+    <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h" />
@@ -43,6 +44,7 @@
     <ClInclude Include="SimulatorControls.h" />
     <ClInclude Include="StickIndicator.h" />
     <ClInclude Include="TelemetryValueIndicator.h" />
+    <ClInclude Include="Terrain.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D7AD3802-5363-4FF1-8D51-03C5184EFB31}</ProjectGuid>

@@ -78,26 +78,6 @@ namespace FlightSim
     }
 
     /**
-     * @brief Sets the maximum main rotor thrust.
-     * @param thrust Main rotor thrust
-     */
-    inline void setThrust(float thrust)
-    {
-      m_mainRotorThrust = thrust;
-    }
-
-    /**
-     * @brief Sets the axis rates.
-     * @param rates Axis rates
-     *
-     * Rates are in order [roll, yaw, pitch].
-     */
-    inline void setAxisRates(const Engine::Maths::Vector3 &rates)
-    {
-      m_axisRates = rates;
-    }
-
-    /**
      * @brief Gets the mass of the aircraft in g.
      * @return Aircraft mass
      */
@@ -144,7 +124,8 @@ namespace FlightSim
      */
     inline float batteryCurrent() const
     {
-      return ((m_engineSpeed * ((m_collective * 0.8f) + 0.2f) * m_maxMotorPower) + m_baselinePower) / m_batteryVolts;
+      return ((m_engineSpeed * (std::abs(m_collective * 0.8f) + 0.2f) * m_maxMotorPower) + m_baselinePower) /
+             m_batteryVolts;
     }
 
     /**
@@ -184,7 +165,7 @@ namespace FlightSim
     Engine::Graphics::RenderableObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
     Engine::Graphics::RenderableObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    Engine::Physics::RigidBody *m_physicalBody;  //!< Phsyical body of the aircraft
+    Engine::Physics::RigidBody *m_physicalBody;  //!< Physical body of the aircraft
     Engine::Maths::Quaternion m_initialRotation; //!< Initial orientation of the aircraft model
     Engine::Maths::Vector3 m_initialPosition;    //!< Initial world position of the aircraft model
 

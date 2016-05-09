@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Aircraft.cpp" />
     <ClCompile Include="FlightSimGame.cpp" />
     <ClCompile Include="SerialPort.cpp">
       <Filter>Telemetry</Filter>
@@ -22,9 +21,14 @@
     <ClCompile Include="OnScreenTelemetry.cpp">
       <Filter>Telemetry</Filter>
     </ClCompile>
+    <ClCompile Include="Aircraft.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Aircraft.h" />
     <ClInclude Include="FlightSimGame.h" />
     <ClInclude Include="SimulatorControls.h">
       <Filter>Controls</Filter>
@@ -59,6 +63,12 @@
     <ClInclude Include="OnScreenTelemetry.h">
       <Filter>Telemetry</Filter>
     </ClInclude>
+    <ClInclude Include="Aircraft.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Controls">
@@ -69,6 +79,9 @@
     </Filter>
     <Filter Include="Graphical">
       <UniqueIdentifier>{d5f900da-cb66-4f2f-8c07-2ca957aeab41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{0e581a47-d979-4551-8970-d5894100046c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
