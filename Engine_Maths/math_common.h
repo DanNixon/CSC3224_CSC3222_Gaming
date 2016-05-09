@@ -43,6 +43,22 @@ namespace Maths
   {
     return deg * PI / 180.0f;
   };
+
+  /**
+   * @brief Constrains a value to a range.
+   * @param x Value
+   * @param a Lower bound
+   * @param b Upper bound
+   * @return x if a < x < b, a if x < a, b if x > b
+   */
+  template <typename T> static inline T Constrain(const T &x, const T &a, const T &b)
+  {
+    if (x < a)
+      return a;
+    if (x > b)
+      return b;
+    return x;
+  }
 }
 }
 

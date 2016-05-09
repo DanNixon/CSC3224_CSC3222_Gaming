@@ -63,7 +63,7 @@ namespace FlightSim
     if (!m_active)
       return false;
 
-    m_rssi->setValue(m_values[TelemetryValue::RSSI]);
+    m_rssi->setValue(m_values[TelemetryValue::RSSI], 3);
     m_batteryVolts->setValue(m_values[TelemetryValue::VBAT], 3);
     m_batteryCurrent->setValue(m_values[TelemetryValue::CURRENT], 3);
     m_altitude->setValue(m_values[TelemetryValue::ALTITUDE], 3);

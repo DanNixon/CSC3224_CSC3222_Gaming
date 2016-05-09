@@ -136,6 +136,9 @@ namespace FlightSim
     m_batteryVolts = m_rootKVNode.children()["avionics"].keyFloat("battery_full_v");
     m_baselinePower = m_rootKVNode.children()["avionics"].keyFloat("avionics_power_w");
     m_maxMotorPower = m_rootKVNode.children()["avionics"].keyFloat("motor_power_w");
+    m_rssiMinDist2 = std::pow(m_rootKVNode.children()["avionics"].keyFloat("rssi_min_range_m") * 10.0f, 2);
+    m_rssiInverseRange2 =
+        1.0f / (std::pow(m_rootKVNode.children()["avionics"].keyFloat("rssi_max_range_m") * 10.0f, 2) - m_rssiMinDist2);
   }
 
   /**

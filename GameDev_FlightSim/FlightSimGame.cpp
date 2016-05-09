@@ -365,7 +365,6 @@ namespace FlightSim
       float vbat = m_aircraft->batteryVoltage();
       float current = m_aircraft->batteryCurrent();
       float altitude = m_aircraft->altitude();
-      float vertSpeed = 0.0f; // TODO
 
       // On screen telemetry
       m_onScreenTelemetry->setValue(TelemetryValue::RSSI, rssi);
@@ -381,7 +380,6 @@ namespace FlightSim
         m_physicalTelemetry->setValue(TelemetryValue::VBAT, vbat);
         m_physicalTelemetry->setValue(TelemetryValue::CURRENT, current);
         m_physicalTelemetry->setValue(TelemetryValue::ALTITUDE, altitude);
-        m_physicalTelemetry->setValue(TelemetryValue::VERT_SPEED, vertSpeed);
         m_physicalTelemetry->send();
       }
     }

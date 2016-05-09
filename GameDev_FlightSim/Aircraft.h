@@ -15,6 +15,7 @@
 #include <Engine_Graphics/Camera.h>
 #include <Engine_Graphics/RenderableObject.h>
 #include <Engine_IO/INIKeyValueStore.h>
+#include <Engine_Maths/VectorOperations.h>
 #include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
@@ -106,23 +107,26 @@ namespace FlightSim
     }
 
     /**
-     * @brief Gets the receiver signal strength indicator value in dB.
+     * @brief Calculates a very rough estimation of the  the receiver signal strength indicator value in dB.
      * @return RSSI
      */
     inline int rssi() const
     {
-      // TODO
-      return 0;
+      float rssi =
+          (Engine::Maths::VectorOperations::Distance2(m_worldTransform.positionVector(), Engine::Maths::Vector3()) -
+           m_rssiMinDist2) *
+          m_rssiInverseRange2;
+
+      return (int)((1.0f - Engine::Maths::Constrain(rssi, 0.0f, 1.0f)) * 110.0f);
     }
 
     /**
-     * @brief Gets the altitude of the aircraft above the terrain origin.
+     * @brief Calculates the altitude of the aircraft above the terrain origin.
      * @return Altitude (m)
      */
     inline float altitude() const
     {
-      // TODO
-      return m_modelMatrix.positionVector()[1];
+      return m_modelMatrix.positionVector()[1] * 0.01f;
     }
 
     /**
@@ -166,6 +170,8 @@ namespace FlightSim
     Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis (roll, yaw, pitch)
     float m_baselinePower;
     float m_maxMotorPower;
+    float m_rssiMinDist2;
+    float m_rssiInverseRange2;
 
     bool m_failsafe;      //!< Flag indicating a failsafe condition
     float m_engineSpeed;  //!< Engine/motor speed (factor of max RPM)
