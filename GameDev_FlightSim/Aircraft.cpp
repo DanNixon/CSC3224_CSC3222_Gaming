@@ -129,12 +129,18 @@ namespace FlightSim
     std::ifstream file(metadataFilename());
     load(file);
 
+    // Skip loading if this model is not enabled
+    if (!m_rootKVNode.child("general").keyBool("enabled"))
+      return;
+
     // Parse member data
     m_displayName = m_rootKVNode.child("general").keyString("name");
     m_mass = m_rootKVNode.child("dynamics").keyFloat("mass");
     m_mainRotorThrust = m_rootKVNode.child("dynamics").keyFloat("main_rotor_thrust");
     m_axisRates = m_rootKVNode.child("dynamics").keyVector3("axis_rates");
-    m_batteryVolts = m_rootKVNode.child("avionics").keyFloat("battery_full_v");
+    m_fullBatteryVolts = m_rootKVNode.child("avionics").keyFloat("battery_full_v");
+    m_emptyBatteryVolts = m_rootKVNode.child("avionics").keyFloat("battery_empty_v");
+    m_magicBatteryDischargeCoeff = m_rootKVNode.child("avionics").keyFloat("battery_discharge_coeff");
     m_baselinePower = m_rootKVNode.child("avionics").keyFloat("avionics_power_w");
     m_maxMotorPower = m_rootKVNode.child("avionics").keyFloat("motor_power_w");
     m_rssiMinDist2 = std::pow(m_rootKVNode.child("avionics").keyFloat("rssi_min_range_m") * 10.0f, 2);
@@ -380,6 +386,9 @@ namespace FlightSim
     // Reset failsafe flag
     m_failsafe = false;
 
+    // Reset battery
+    m_batteryVolts = m_fullBatteryVolts;
+
     // Reset controls
     setEngineSpeed(0.0f);
     setControls(0.0f, 0.0f, 0.0f, 0.0f);
@@ -399,6 +408,23 @@ namespace FlightSim
   {
     m_failsafe = true;
     setEngineSpeed(0.0f);
+  }
+
+  /**
+   * @copydoc SceneObject::update
+   */
+  void Aircraft::update(float msec, Subsystem sys)
+  {
+    SceneObject::update(msec, sys);
+
+    // Simulate decreasing battery voltage
+    if (sys == Subsystem::PHYSICS)
+    {
+      m_batteryVolts -= batteryCurrent() * m_magicBatteryDischargeCoeff;
+
+      if (m_batteryVolts <= m_emptyBatteryVolts)
+        activateFailsafe();
+    }
   }
 }
 }

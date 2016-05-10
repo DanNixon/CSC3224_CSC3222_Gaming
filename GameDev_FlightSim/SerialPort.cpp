@@ -143,7 +143,7 @@ namespace FlightSim
     if (!m_open || m_device == nullptr)
       return 0;
 
-    g_log.debug("Sending serial data");
+    g_log.trace("Sending serial data");
 
     DWORD dwBytesWritten = 0;
     int i;
@@ -153,7 +153,7 @@ namespace FlightSim
       dwBytesWritten++;
     }
 
-    g_log.debug("Sent bytes: " + std::to_string((int)dwBytesWritten));
+    g_log.trace("Sent bytes: " + std::to_string((int)dwBytesWritten));
     return (int)dwBytesWritten;
   }
 
@@ -181,7 +181,7 @@ namespace FlightSim
     if (!m_open || m_device == nullptr)
       return 0;
 
-    g_log.debug("Reading serial data");
+    g_log.trace("Reading serial data");
 
     BOOL bReadStatus;
     DWORD dwBytesRead, dwErrorFlags;
@@ -190,7 +190,7 @@ namespace FlightSim
     ClearCommError(m_device, &dwErrorFlags, &ComStat);
     if (!ComStat.cbInQue)
     {
-      g_log.debug("No data to be read");
+      g_log.trace("No data to be read");
       return 0;
     }
 
@@ -204,15 +204,15 @@ namespace FlightSim
       if (GetLastError() == ERROR_IO_PENDING)
       {
         WaitForSingleObject(m_read.hEvent, 2000);
-        g_log.debug("Read bytes: " + std::to_string((int)dwBytesRead));
+        g_log.trace("Read bytes: " + std::to_string((int)dwBytesRead));
         return ((int)dwBytesRead);
       }
 
-      g_log.debug("No data to be read");
+      g_log.trace("No data to be read");
       return 0;
     }
 
-    g_log.debug("Read bytes: " + std::to_string((int)dwBytesRead));
+    g_log.trace("Read bytes: " + std::to_string((int)dwBytesRead));
     return (int)dwBytesRead;
   }
 

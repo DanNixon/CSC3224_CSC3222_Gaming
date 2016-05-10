@@ -138,6 +138,9 @@ namespace FlightSim
      */
     inline float batteryCurrent() const
     {
+      if (m_batteryVolts < 0.1f)
+        return 0.0f;
+
       return ((m_engineSpeed * (std::abs(m_collective * 0.8f) + 0.2f) * m_maxMotorPower) + m_baselinePower) /
              m_batteryVolts;
     }
@@ -157,6 +160,8 @@ namespace FlightSim
     void reset();
     void activateFailsafe();
 
+    virtual void update(float msec, Engine::Common::Subsystem sys);
+
   protected:
     std::string m_resourceRoot; //!< Path to the root of the resources directory
 
@@ -168,6 +173,9 @@ namespace FlightSim
     float m_maxMotorPower;
     float m_rssiMinDist2;
     float m_rssiInverseRange2;
+    float m_fullBatteryVolts;
+    float m_emptyBatteryVolts;
+    float m_magicBatteryDischargeCoeff;
 
     bool m_failsafe;      //!< Flag indicating a failsafe condition
     float m_engineSpeed;  //!< Engine/motor speed (factor of max RPM)

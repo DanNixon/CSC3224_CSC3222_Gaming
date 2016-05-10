@@ -6,6 +6,7 @@
  */
 
 //#define PHYSICS_DEBUG_DRAW
+#define PROFILE
 
 #include "FlightSimGame.h"
 
@@ -245,7 +246,9 @@ namespace FlightSim
     m_uiLoop = addTimedLoop(100.0f, "ui_updates");
     m_telemetryLoop = addTimedLoop(100.0f, "telemetry");
     m_queueLoop = addTimedLoop(100.0f, "queue_processing");
+#ifdef PROFILE
     m_profileLoop = addTimedLoop(1000.0f, "profile");
+#endif
 
     // Profiling
     m_profiler = new Profiler(this);
@@ -284,6 +287,7 @@ namespace FlightSim
 
       // Physics update
       m_physicalSystem->update(dtMilliSec);
+      m_activeAircraft->update(dtMilliSec, Subsystem::PHYSICS);
     }
     else if (id == m_audioLoop)
     {
