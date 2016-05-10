@@ -130,6 +130,7 @@ namespace FlightSim
     load(file);
 
     // Parse member data
+    m_displayName = m_rootKVNode.child("general").keyString("name");
     m_mass = m_rootKVNode.child("dynamics").keyFloat("mass");
     m_mainRotorThrust = m_rootKVNode.child("dynamics").keyFloat("main_rotor_thrust");
     m_axisRates = m_rootKVNode.child("dynamics").keyVector3("axis_rates");
@@ -146,6 +147,10 @@ namespace FlightSim
    */
   void Aircraft::loadMeshes()
   {
+    // Do not load multiple times
+    if (m_subTreeAircraft != nullptr)
+      return;
+
     // Main model
     ModelLoader bodyLoader;
     m_subTreeAircraft =
@@ -191,6 +196,10 @@ namespace FlightSim
    */
   void Aircraft::initPhysics(const Vector3 &initialPosition, const Quaternion &initialRotation)
   {
+    // Do not init multiple times
+    if (m_physicalBody != nullptr)
+      return;
+
     // Record initial state
     m_initialRotation = initialRotation;
     m_initialPosition = initialPosition;
@@ -247,6 +256,10 @@ namespace FlightSim
     //!< \todo change 3 -> 4 when crash sound is added
     for (size_t i = 0; i < 3; i++)
     {
+      // Do not load multiple times
+      if (m_sounds[i] != nullptr)
+        continue;
+
       std::string filename = audioFilename(static_cast<AircraftSound>(i));
       std::string name = StringUtils::BasenameFromFilename(StringUtils::FilenameFromPath(filename));
 
@@ -275,6 +288,10 @@ namespace FlightSim
    */
   void Aircraft::initCamera(Game *game, float viewDepth, float fieldOfVision)
   {
+    // Do not init multiple times
+    if (m_fpvCamera != nullptr)
+      return;
+
     m_fpvCamera = new Camera("fpv_camera", Matrix4::Perspective(1.0f, viewDepth, game->windowAspect(), fieldOfVision));
     m_fpvCamera->setActive(false);
     m_fpvCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));

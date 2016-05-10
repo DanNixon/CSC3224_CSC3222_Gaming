@@ -86,6 +86,11 @@ namespace FlightSim
       return m_sounds[sound];
     }
 
+    inline std::string displayName() const
+    {
+      return m_displayName;
+    }
+
     /**
      * @brief Gets the mass of the aircraft in g.
      * @return Aircraft mass
@@ -155,6 +160,7 @@ namespace FlightSim
   protected:
     std::string m_resourceRoot; //!< Path to the root of the resources directory
 
+    std::string m_displayName;
     float m_mass;                       //!< Mass in g
     float m_mainRotorThrust;            //!< Main rotor lifting force at maximum RPM and maximum throttle
     Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis (roll, yaw, pitch)

@@ -46,13 +46,6 @@ namespace FlightSim
     FlightSimGame();
     virtual ~FlightSimGame();
 
-    void selectAircraft(const std::string &name);
-    void renewTerrain(const std::string &name);
-
-    void setCameraMode(const std::string &mode);
-    void setTelemetryVisible(bool visible);
-    void setSticksVisible(bool visible);
-
   protected:
     virtual int gameStartup();
     virtual void gameLoop(Uint8 id, float dtMilliSec);
@@ -60,8 +53,16 @@ namespace FlightSim
     virtual void defaultConfigOptions(Engine::IO::KVNode &node);
 
   private:
-    friend class OptionsMenu;
+    void loadAircraft();
 
+    void selectAircraft(const std::string &name, bool force = false);
+    void renewTerrain(const std::string &name);
+
+    void setCameraMode(const std::string &mode);
+    void setTelemetryVisible(bool visible);
+    void setSticksVisible(bool visible);
+
+  private:
     Uint8 m_graphicsLoop;
     Uint8 m_physicsLoop;
     Uint8 m_audioLoop;
@@ -90,8 +91,10 @@ namespace FlightSim
     Engine::Physics::PhysicalSystem *m_physicalSystem;    //!< Physics system
     Engine::Physics::DebugDrawEngine *m_physicsDebugDraw; //!< Physics debug draw engine
 
-    Aircraft *m_aircraft; //!< Active aircraft
-    Terrain *m_terrain;   //!< Active terrain
+    std::vector<Aircraft *> m_aircraft; //!< All aircraft
+    size_t m_activeAircraftIdx;         //!< Index of active aircraft
+
+    Terrain *m_terrain; //!< Active terrain
   };
 }
 }

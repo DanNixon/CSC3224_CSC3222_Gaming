@@ -70,61 +70,6 @@ namespace FlightSim
   {
   }
 
-  void FlightSimGame::selectAircraft(const std::string &name)
-  {
-    // Record option
-    m_rootKVNode.children()["aircraft"].keys()["selected"] = name;
-
-    // TODO
-  }
-
-  void FlightSimGame::renewTerrain(const std::string &name)
-  {
-    // Record option
-    m_rootKVNode.children()["terrain"].keys()["default_type"] = name;
-
-    // TODO
-  }
-
-  /**
-   * @brief Sets the camera mode.
-   * @param mode Mode string
-   *
-   * Expected mode strings are either "fpv" for first person view or "los" for
-   * line of sight.
-   */
-  void FlightSimGame::setCameraMode(const std::string &mode)
-  {
-    // Update active camera
-    bool fpv = mode == "fpv";
-    m_aircraft->fpvCamera()->setActive(fpv);
-    m_lineOfSightCamera->setActive(!fpv);
-
-    // Record setting
-    m_rootKVNode.children()["camera"].keys()["mode"] = mode;
-  }
-
-  /**
-   * @brief Sets the visibility of the telemetry indicators.
-   * @param visible Visibility
-   */
-  void FlightSimGame::setTelemetryVisible(bool visible)
-  {
-    m_onScreenTelemetry->setActive(visible);
-    m_rootKVNode.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
-  }
-
-  /**
-   * @brief Sets the visibility of the stick position indicators.
-   * @param visible Visibility
-   */
-  void FlightSimGame::setSticksVisible(bool visible)
-  {
-    m_leftStickIndicator->setActive(visible);
-    m_rightStickIndicator->setActive(visible);
-    m_rootKVNode.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
-  }
-
   /**
    * @copydoc Game::gameStartup
    */
@@ -223,25 +168,12 @@ namespace FlightSim
 #endif
 
     // TODO
-    std::vector<std::string> a =
-        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
     std::vector<std::string> t =
         DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
 
-    // Aircraft
-    float aircraftRotation = std::stof(m_rootKVNode.children()["aircraft"].keys()["default_rotation"]);
-    Vector3 aircraftPosition;
-    std::stringstream aircraftPositionStr(m_rootKVNode.children()["aircraft"].keys()["default_position"]);
-    aircraftPositionStr >> aircraftPosition;
-
-    m_aircraft = new Aircraft("Gaui_X7", m_rootKVNode.child("resources").keyString("models"));
-    m_aircraft->loadMetadata();
-    m_aircraft->loadMeshes();
-    m_aircraft->loadAudio(m_audioListener);
-    m_aircraft->initPhysics(aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
-    m_aircraft->initCamera(this);
-    m_aircraft->addToSystem(m_physicalSystem);
-    m_s->root()->addChild(m_aircraft);
+    // Load aircraft models
+    loadAircraft();
+    selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
     // Terrain
     m_terrain = new Terrain("terrain", 50000.0f, 50000.0f);
@@ -253,7 +185,7 @@ namespace FlightSim
     m_lineOfSightCamera =
         new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 50000.0f, windowAspect(), 30.0f));
     m_lineOfSightCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 250.0f, 0.0f)));
-    m_lineOfSightCamera->lookAt(m_aircraft);
+    m_lineOfSightCamera->lookAt(m_aircraft[m_activeAircraftIdx]);
     m_s->root()->addChild(m_lineOfSightCamera);
 
     // Default camera mode
@@ -339,8 +271,8 @@ namespace FlightSim
       float yaw = -m_simControls->analog(A_YAW);
       float throttle = m_simControls->analog(A_THROT);
 
-      m_aircraft->setEngineSpeed(engine);
-      m_aircraft->setControls(throttle, pitch, roll, yaw);
+      m_aircraft[m_activeAircraftIdx]->setEngineSpeed(engine);
+      m_aircraft[m_activeAircraftIdx]->setControls(throttle, pitch, roll, yaw);
 
       // Physics update
       m_physicalSystem->update(dtMilliSec);
@@ -365,10 +297,11 @@ namespace FlightSim
     }
     else if (id == m_telemetryLoop)
     {
-      float rssi = (float)m_aircraft->rssi();
-      float vbat = m_aircraft->batteryVoltage();
-      float current = m_aircraft->batteryCurrent();
-      float altitude = m_aircraft->altitude();
+      Aircraft *aircraft = m_aircraft[m_activeAircraftIdx];
+      float rssi = (float)aircraft->rssi();
+      float vbat = aircraft->batteryVoltage();
+      float current = aircraft->batteryCurrent();
+      float altitude = aircraft->altitude();
 
       // On screen telemetry
       m_onScreenTelemetry->setValue(TelemetryValue::RSSI, rssi);
@@ -395,7 +328,7 @@ namespace FlightSim
 
         if (msgStr.find("aircraft:reset") != std::string::npos)
         {
-          m_aircraft->reset();
+          m_aircraft[m_activeAircraftIdx]->reset();
         }
         else if (msgStr.find("simulation:toggle") != std::string::npos)
         {
@@ -482,6 +415,102 @@ namespace FlightSim
     telemetry.keys()["port"] = "COM1";
     telemetry.keys()["baud"] = "9600";
     node.addChild(telemetry);
+  }
+
+  void FlightSimGame::loadAircraft()
+  {
+    std::vector<std::string> aircraftNames =
+        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
+
+    for (auto it = aircraftNames.begin(); it != aircraftNames.end(); ++it)
+    {
+      Aircraft *aircraft = new Aircraft(*it, m_rootKVNode.child("resources").keyString("models"));
+      aircraft->loadMetadata();
+      m_aircraft.push_back(aircraft);
+    }
+  }
+
+  void FlightSimGame::selectAircraft(const std::string &name, bool force)
+  {
+    // No nothing if this is already the active aircraft
+    if (m_rootKVNode.child("aircraft").keyString("selected") == name && !force)
+      return;
+
+    // Record option
+    m_rootKVNode.children()["aircraft"].keys()["selected"] = name;
+
+    // Find new aircraft
+    auto it = std::find_if(m_aircraft.begin(), m_aircraft.end(), [name](Aircraft *a) { return a->name() == name; });
+    if (it == m_aircraft.end())
+    {
+      g_log.error("Aircraft " + name + " not found");
+      return;
+    }
+
+    m_activeAircraftIdx = it - m_aircraft.begin();
+
+    // Setup aircraft
+    float aircraftRotation = m_rootKVNode.child("aircraft").keyFloat("default_rotation");
+    Vector3 aircraftPosition = m_rootKVNode.child("aircraft").keyVector3("default_position");
+
+    (*it)->loadMeshes();
+    (*it)->loadAudio(m_audioListener);
+    (*it)->initPhysics(aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
+    (*it)->initCamera(this);
+
+    // Remove old aircraft
+    // TODO
+
+    // Add new aircraft
+    (*it)->addToSystem(m_physicalSystem);
+    m_s->root()->addChild(*it);
+  }
+
+  void FlightSimGame::renewTerrain(const std::string &name)
+  {
+    // Record option
+    m_rootKVNode.children()["terrain"].keys()["default_type"] = name;
+
+    // TODO
+  }
+
+  /**
+   * @brief Sets the camera mode.
+   * @param mode Mode string
+   *
+   * Expected mode strings are either "fpv" for first person view or "los" for
+   * line of sight.
+   */
+  void FlightSimGame::setCameraMode(const std::string &mode)
+  {
+    // Update active camera
+    bool fpv = mode == "fpv";
+    m_aircraft[m_activeAircraftIdx]->fpvCamera()->setActive(fpv);
+    m_lineOfSightCamera->setActive(!fpv);
+
+    // Record setting
+    m_rootKVNode.children()["camera"].keys()["mode"] = mode;
+  }
+
+  /**
+   * @brief Sets the visibility of the telemetry indicators.
+   * @param visible Visibility
+   */
+  void FlightSimGame::setTelemetryVisible(bool visible)
+  {
+    m_onScreenTelemetry->setActive(visible);
+    m_rootKVNode.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
+  }
+
+  /**
+   * @brief Sets the visibility of the stick position indicators.
+   * @param visible Visibility
+   */
+  void FlightSimGame::setSticksVisible(bool visible)
+  {
+    m_leftStickIndicator->setActive(visible);
+    m_rightStickIndicator->setActive(visible);
+    m_rootKVNode.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
   }
 }
 }
