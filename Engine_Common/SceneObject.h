@@ -83,6 +83,21 @@ namespace Common
     }
 
     /**
+     * @brief Removes a child SceneObject from this object.
+     * @param child Child SceneObject
+     */
+    void removeChild(SceneObject *child)
+    {
+      auto it = std::find(m_children.begin(), m_children.end(), child);
+      if (it != m_children.end())
+      {
+        m_children.erase(it);
+        child->m_parent = nullptr;
+        child->addToScene(nullptr);
+      }
+    }
+
+    /**
      * @brief Gets the list of children SceneObject of this object.
      * @return List of children
      * @see SceneObject::numChildren()

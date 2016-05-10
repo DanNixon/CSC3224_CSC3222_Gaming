@@ -29,6 +29,7 @@
 #include <Engine_Physics/ConvexHullShape.h>
 #include <Engine_Physics/Heightmap.h>
 #include <Engine_ResourceManagment/MemoryManager.h>
+#include <Engine_ResourceManagment/MemoryManager.h>
 #include <Engine_Utility/StringUtils.h>
 
 #include "FrSkySPORTBridgeTelemetry.h"
@@ -47,6 +48,7 @@ using namespace Engine::Physics;
 using namespace Engine::IO;
 using namespace Engine::Logging;
 using namespace Engine::Utility;
+using namespace Engine::ResourceManagment;
 
 namespace
 {
@@ -113,10 +115,17 @@ namespace FlightSim
     ShaderProgramLookup::Instance().add("menu_shader", menuShader);
     ShaderProgramLookup::Instance().add("aircraft_shader_tex", menuShader);
 
-    // Menu
+    // Create menu
     m_menu = new OptionsMenu(this, TTFFontLookup::Instance().get("main_font"), 0.05f);
     m_menu->setMargin(Vector2(0.005f, 0.005f));
-    m_menu->populateAircraftMenu({{"Gaui X5", "gaui_x5"}, {"Logo 600", "logo_600"}});
+
+    // Load aircraft
+    loadAircraft();
+
+    // Load terrain options
+    // TODO
+
+    // Init menu
     m_menu->populateTerrainMenu({{"Flat", "flat"}, {"Tall Peaks", "peaks"}, {"Forest", "forest"}});
     m_menu->layout();
     m_menu->hide();
@@ -171,8 +180,7 @@ namespace FlightSim
     std::vector<std::string> t =
         DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
 
-    // Load aircraft models
-    loadAircraft();
+    // Initial aircraft
     selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
     // Terrain
@@ -185,7 +193,7 @@ namespace FlightSim
     m_lineOfSightCamera =
         new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 50000.0f, windowAspect(), 30.0f));
     m_lineOfSightCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 250.0f, 0.0f)));
-    m_lineOfSightCamera->lookAt(m_aircraft[m_activeAircraftIdx]);
+    m_lineOfSightCamera->lookAt(m_activeAircraft);
     m_s->root()->addChild(m_lineOfSightCamera);
 
     // Default camera mode
@@ -271,8 +279,8 @@ namespace FlightSim
       float yaw = -m_simControls->analog(A_YAW);
       float throttle = m_simControls->analog(A_THROT);
 
-      m_aircraft[m_activeAircraftIdx]->setEngineSpeed(engine);
-      m_aircraft[m_activeAircraftIdx]->setControls(throttle, pitch, roll, yaw);
+      m_activeAircraft->setEngineSpeed(engine);
+      m_activeAircraft->setControls(throttle, pitch, roll, yaw);
 
       // Physics update
       m_physicalSystem->update(dtMilliSec);
@@ -297,11 +305,10 @@ namespace FlightSim
     }
     else if (id == m_telemetryLoop)
     {
-      Aircraft *aircraft = m_aircraft[m_activeAircraftIdx];
-      float rssi = (float)aircraft->rssi();
-      float vbat = aircraft->batteryVoltage();
-      float current = aircraft->batteryCurrent();
-      float altitude = aircraft->altitude();
+      float rssi = (float)m_activeAircraft->rssi();
+      float vbat = m_activeAircraft->batteryVoltage();
+      float current = m_activeAircraft->batteryCurrent();
+      float altitude = m_activeAircraft->altitude();
 
       // On screen telemetry
       m_onScreenTelemetry->setValue(TelemetryValue::RSSI, rssi);
@@ -328,7 +335,7 @@ namespace FlightSim
 
         if (msgStr.find("aircraft:reset") != std::string::npos)
         {
-          m_aircraft[m_activeAircraftIdx]->reset();
+          m_activeAircraft->reset();
         }
         else if (msgStr.find("simulation:toggle") != std::string::npos)
         {
@@ -338,7 +345,18 @@ namespace FlightSim
         }
         else if (msgStr.find("camera:mode:") != std::string::npos)
         {
-          // TODO
+          std::vector<std::string> options = StringUtils::Split(msgStr, ':');
+          setCameraMode(options[2]);
+        }
+        else if (msgStr.find("aircraft:select:") != std::string::npos)
+        {
+          std::vector<std::string> options = StringUtils::Split(msgStr, ':');
+          selectAircraft(options[2]);
+        }
+        else if (msgStr.find("terrain:renew:") != std::string::npos)
+        {
+          std::vector<std::string> options = StringUtils::Split(msgStr, ':');
+          renewTerrain(options[2]);
         }
         else if (msgStr.find("telemetry:toggle") != std::string::npos)
         {
@@ -422,12 +440,25 @@ namespace FlightSim
     std::vector<std::string> aircraftNames =
         DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
 
+    OptionsMenu::NameValueList menuItems;
+
     for (auto it = aircraftNames.begin(); it != aircraftNames.end(); ++it)
     {
       Aircraft *aircraft = new Aircraft(*it, m_rootKVNode.child("resources").keyString("models"));
       aircraft->loadMetadata();
-      m_aircraft.push_back(aircraft);
+
+      if (aircraft->rootKVNode().child("general").keyBool("enabled"))
+      {
+        m_aircraft.push_back(aircraft);
+        menuItems.push_back(std::make_pair(aircraft->displayName(), aircraft->name()));
+      }
+      else
+      {
+        MemoryManager::Instance().release(aircraft);
+      }
     }
+
+    m_menu->populateAircraftMenu(menuItems);
   }
 
   void FlightSimGame::selectAircraft(const std::string &name, bool force)
@@ -447,8 +478,6 @@ namespace FlightSim
       return;
     }
 
-    m_activeAircraftIdx = it - m_aircraft.begin();
-
     // Setup aircraft
     float aircraftRotation = m_rootKVNode.child("aircraft").keyFloat("default_rotation");
     Vector3 aircraftPosition = m_rootKVNode.child("aircraft").keyVector3("default_position");
@@ -459,11 +488,19 @@ namespace FlightSim
     (*it)->initCamera(this);
 
     // Remove old aircraft
-    // TODO
+    if (m_activeAircraft != nullptr)
+    {
+      (m_activeAircraft)->removeFromSystem(m_physicalSystem);
+      m_s->root()->removeChild(m_activeAircraft);
+    }
+
+    // Set active aircraft
+    m_activeAircraft = *it;
 
     // Add new aircraft
-    (*it)->addToSystem(m_physicalSystem);
-    m_s->root()->addChild(*it);
+    m_activeAircraft->addToSystem(m_physicalSystem);
+    m_s->root()->addChild(m_activeAircraft);
+    m_activeAircraft->reset();
   }
 
   void FlightSimGame::renewTerrain(const std::string &name)
@@ -485,7 +522,7 @@ namespace FlightSim
   {
     // Update active camera
     bool fpv = mode == "fpv";
-    m_aircraft[m_activeAircraftIdx]->fpvCamera()->setActive(fpv);
+    m_activeAircraft->fpvCamera()->setActive(fpv);
     m_lineOfSightCamera->setActive(!fpv);
 
     // Record setting

@@ -92,7 +92,7 @@ namespace FlightSim
     Engine::Physics::DebugDrawEngine *m_physicsDebugDraw; //!< Physics debug draw engine
 
     std::vector<Aircraft *> m_aircraft; //!< All aircraft
-    size_t m_activeAircraftIdx;         //!< Index of active aircraft
+    Aircraft *m_activeAircraft;         //!< Active aircraft
 
     Terrain *m_terrain; //!< Active terrain
   };
