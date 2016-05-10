@@ -300,8 +300,11 @@ namespace FlightSim
 
     m_fpvCamera = new Camera("fpv_camera", Matrix4::Perspective(1.0f, viewDepth, game->windowAspect(), fieldOfVision));
     m_fpvCamera->setActive(false);
-    m_fpvCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));
+    m_fpvCamera->setModelMatrix(Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("fpv_camera_pos")));
     addChild(m_fpvCamera);
+
+    // TODO: use angle
+    // m_rootKVNode.child("camera").keyFloat("fpv_camera_angle")
   }
 
   /**
@@ -417,9 +420,13 @@ namespace FlightSim
   {
     SceneObject::update(msec, sys);
 
-    // Simulate decreasing battery voltage
-    if (sys == Subsystem::PHYSICS)
+    if (sys == Subsystem::GRAPHICS)
     {
+      m_fpvCamera->look(m_worldTransform.facingVector());
+    }
+    else if (sys == Subsystem::PHYSICS)
+    {
+      // Simulate decreasing battery voltage
       m_batteryVolts -= batteryCurrent() * m_magicBatteryDischargeCoeff;
 
       if (m_batteryVolts <= m_emptyBatteryVolts)

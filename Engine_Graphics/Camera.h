@@ -9,6 +9,7 @@
 #define _ENGINE_GRAPHICS_CAMERA_H_
 
 #include <Engine_Common/SceneObject.h>
+#include <Engine_Graphics/RenderableObject.h>
 
 namespace Engine
 {
@@ -19,7 +20,7 @@ namespace Graphics
    * @brief Represents a camera in a scene.
    * @author Dan Nixon
    */
-  class Camera : public Engine::Common::SceneObject
+  class Camera : public Engine::Graphics::RenderableObject //Engine::Common::SceneObject
   {
   public:
     Camera(const std::string &name, const Engine::Maths::Matrix4 &projection = Engine::Maths::Matrix4(),

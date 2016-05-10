@@ -7,8 +7,13 @@
 
 #include "Camera.h"
 
+#include <Engine_Graphics/Shader.h>
+#include <Engine_Graphics/SphericalMesh.h>
+
 using namespace Engine::Common;
 using namespace Engine::Maths;
+
+using namespace Engine::Graphics;
 
 namespace Engine
 {
@@ -21,7 +26,7 @@ namespace Graphics
    * @param up Up vector (default Y axis)
    */
   Camera::Camera(const std::string &name, const Matrix4 &projection, const Vector3 &up)
-      : SceneObject(name)
+      : RenderableObject(name)//, new SphericalMesh(10.0f), ShaderProgramLookup::Instance().get("ui_shader"))
       , m_up(up)
       , m_projection(projection)
       , m_lookDirection(0.0f, 0.0, -10.0f)
@@ -43,7 +48,7 @@ namespace Graphics
       m_scene->setViewMatrix(viewMatrix());
     }
 
-    SceneObject::update(msec, sys);
+    RenderableObject::update(msec, sys);
   }
 
   /**
