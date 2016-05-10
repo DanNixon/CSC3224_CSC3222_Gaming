@@ -10,6 +10,9 @@
 
 #include <Engine_Physics/PhysicalSystem.h>
 
+#include "Aircraft.h"
+#include "Terrain.h"
+
 namespace GameDev
 {
 namespace FlightSim
@@ -22,10 +25,18 @@ namespace FlightSim
   class FSPhysicalSystem : public Engine::Physics::PhysicalSystem
   {
   public:
-    FSPhysicalSystem(float targetTimeStep, float maxPossibleTimeStep, float worldScale = 100.0f);
+    FSPhysicalSystem(float targetTimeStep, float maxPossibleTimeStep, float worldScale, Engine::Common::Game *game);
     virtual ~FSPhysicalSystem();
 
     virtual void internalTickCallback(btScalar timestep);
+
+    void setActiveAircraft(Aircraft *aircraft = nullptr);
+    void setActiveTerrain(Terrain *terrain = nullptr);
+
+  private:
+    Engine::Common::Game *m_game;
+    Aircraft *m_aircraft;
+    Terrain *m_terrain;
   };
 }
 }

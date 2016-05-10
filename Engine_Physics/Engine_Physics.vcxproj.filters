@@ -26,7 +26,6 @@
     <ClInclude Include="Heightmap.h">
       <Filter>Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionCallback.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneObjectMotionState.cpp" />

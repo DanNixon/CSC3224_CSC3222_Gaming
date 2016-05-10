@@ -41,6 +41,11 @@ namespace FlightSim
       system->removeBody(m_physicalBody);
     }
 
+    inline btCollisionObject *body()
+    {
+      return m_physicalBody->body();
+    }
+
   protected:
     Engine::Physics::RigidBody *m_physicalBody;     //!< Physical body of the terrain
     Engine::Physics::Heightmap *m_physicsHeightmap; //!< Terrain collision shape

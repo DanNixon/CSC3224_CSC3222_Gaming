@@ -16,7 +16,6 @@
 #include <Engine_Graphics/RenderableObject.h>
 #include <Engine_IO/INIKeyValueStore.h>
 #include <Engine_Maths/VectorOperations.h>
-#include <Engine_Physics/CollisionCallback.h>
 #include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
@@ -89,6 +88,21 @@ namespace FlightSim
     inline Engine::Audio::Source *audioSource(AircraftSound sound)
     {
       return m_sounds[sound];
+    }
+
+    inline btCollisionObject *mainBody() const
+    {
+      return m_physicalBody->body();
+    }
+
+    inline btCollisionObject *mainRotorBody() const
+    {
+      return m_mainRotorBody->body();
+    }
+
+    inline btCollisionObject *tailRotorBody() const
+    {
+      return m_tailRotorBody->body();
     }
 
     inline std::string displayName() const

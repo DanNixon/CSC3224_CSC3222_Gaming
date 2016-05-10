@@ -243,6 +243,7 @@ namespace FlightSim
     // Main rotor body
     m_mainRotorBody = new RigidBody(new btDefaultMotionState(), 0.0f, btVector3(0.0f, 0.0f, 0.0f), mainRotorCylinder);
     m_mainRotorBody->body()->setActivationState(DISABLE_DEACTIVATION);
+    m_mainRotorBody->body()->setCollisionFlags(btCollisionObject::CF_NO_CONTACT_RESPONSE);
 
     // Tail rotor cylinder
     BoundingCylinderShape *tailRotorCylinder = new BoundingCylinderShape();
@@ -251,6 +252,7 @@ namespace FlightSim
     // Tail rotor body
     m_tailRotorBody = new RigidBody(new btDefaultMotionState(), 0.0f, btVector3(0.0f, 0.0f, 0.0f), tailRotorCylinder);
     m_tailRotorBody->body()->setActivationState(DISABLE_DEACTIVATION);
+    m_tailRotorBody->body()->setCollisionFlags(btCollisionObject::CF_NO_CONTACT_RESPONSE);
   }
 
   /**
@@ -429,9 +431,22 @@ namespace FlightSim
     }
     else if (sys == Subsystem::PHYSICS)
     {
+      // Set main rotor collider position
+      btTransform mainRotor;
+      mainRotor.setFromOpenGLMatrix((const btScalar *)&(m_subTreeSpinningMainRotor->worldTransform()));
+      // m_mainRotorBody->motionState()->setWorldTransform(mainRotor);
+      m_mainRotorBody->body()->setWorldTransform(mainRotor);
+
+      // Set tail rotor collider position
+      btTransform tailRotor;
+      tailRotor.setFromOpenGLMatrix((const btScalar *)&(m_subTreeSpinningTailRotor->worldTransform()));
+      // m_tailRotorBody->motionState()->setWorldTransform(tailRotor);
+      m_tailRotorBody->body()->setWorldTransform(tailRotor);
+
       // Simulate decreasing battery voltage
       m_batteryVolts -= batteryCurrent() * m_magicBatteryDischargeCoeff;
 
+      // Trigger failsafe on dead battery
       if (m_batteryVolts <= m_emptyBatteryVolts)
         activateFailsafe();
     }

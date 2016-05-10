@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="BoundingBoxShape.h" />
     <ClInclude Include="BoundingCylinderShape.h" />
-    <ClInclude Include="CollisionCallback.h" />
     <ClInclude Include="ConvexHullShape.h" />
     <ClInclude Include="DebugDrawEngine.h" />
     <ClInclude Include="Heightmap.h" />

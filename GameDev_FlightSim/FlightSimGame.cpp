@@ -169,7 +169,7 @@ namespace FlightSim
     m_s->root()->addChild(m_audioListener);
 
     // Physics
-    m_physicalSystem = new FSPhysicalSystem(8.33f, 83.33f); // At best 120Hz, at worst 12Hz
+    m_physicalSystem = new FSPhysicalSystem(8.33f, 83.33f, 100.0f, this); // At best 120Hz, at worst 12Hz
 #ifdef PHYSICS_DEBUG_DRAW
     m_physicsDebugDraw = new DebugDrawEngine(ShaderProgramLookup::Instance().get("ui_shader"));
     m_physicsDebugDraw->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
@@ -177,18 +177,15 @@ namespace FlightSim
     m_s->root()->addChild(m_physicsDebugDraw);
 #endif
 
-    // TODO
-    std::vector<std::string> t =
+    // Populate terrain menu
+    std::vector<std::string> terrains =
         DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
 
     // Initial aircraft
     selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
     // Terrain
-    m_terrain = new Terrain("terrain", 50000.0f, 50000.0f);
-    m_terrain->init();
-    m_terrain->addToSystem(m_physicalSystem);
-    m_s->root()->addChild(m_terrain);
+    renewTerrain(m_rootKVNode.child("terrain").keyString("default_type"));
 
     // Camera
     m_lineOfSightCamera =
@@ -403,7 +400,7 @@ namespace FlightSim
     node.addChild(resources);
 
     KVNode aircraft("aircraft");
-    aircraft.keys()["selected"] = "Gaui X5";
+    aircraft.keys()["selected"] = "Gaui_X7";
     aircraft.keys()["default_rotation"] = "135";
     aircraft.keys()["default_position"] = "[0, 50, -250]";
     node.addChild(aircraft);
@@ -482,6 +479,10 @@ namespace FlightSim
       return;
     }
 
+    // Remove old aircraft
+    if (m_activeAircraft != nullptr)
+      m_s->root()->removeChild(m_activeAircraft);
+
     // Setup aircraft
     float aircraftRotation = m_rootKVNode.child("aircraft").keyFloat("default_rotation");
     Vector3 aircraftPosition = m_rootKVNode.child("aircraft").keyVector3("default_position");
@@ -491,19 +492,12 @@ namespace FlightSim
     (*it)->initPhysics(aircraftPosition, Quaternion(aircraftRotation, 0.0f, 0.0f));
     (*it)->initCamera(this);
 
-    // Remove old aircraft
-    if (m_activeAircraft != nullptr)
-    {
-      (m_activeAircraft)->removeFromSystem(m_physicalSystem);
-      m_s->root()->removeChild(m_activeAircraft);
-    }
-
     // Set active aircraft
     m_activeAircraft = *it;
 
     // Add new aircraft
-    m_activeAircraft->addToSystem(m_physicalSystem);
     m_s->root()->addChild(m_activeAircraft);
+    m_physicalSystem->setActiveAircraft(m_activeAircraft);
     m_activeAircraft->reset();
   }
 
@@ -512,7 +506,23 @@ namespace FlightSim
     // Record option
     m_rootKVNode.children()["terrain"].keys()["default_type"] = name;
 
+    Terrain *oldTerrain = m_terrain;
+
+    // Generate new terrain
+    m_terrain = new Terrain("terrain", 50000.0f, 50000.0f);
+    m_terrain->init();
     // TODO
+
+    // Add new terrain
+    m_s->root()->addChild(m_terrain);
+    m_physicalSystem->setActiveTerrain(m_terrain);
+
+    // Remove old terrain
+    if (oldTerrain != nullptr)
+    {
+      m_s->root()->removeChild(oldTerrain);
+      MemoryManager::Instance().release(oldTerrain);
+    }
   }
 
   /**
