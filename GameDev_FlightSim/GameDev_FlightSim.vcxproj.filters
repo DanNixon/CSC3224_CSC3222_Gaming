@@ -27,6 +27,7 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="FSPhysicalSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FlightSimGame.h" />
@@ -69,6 +70,7 @@
     <ClInclude Include="Terrain.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="FSPhysicalSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Controls">

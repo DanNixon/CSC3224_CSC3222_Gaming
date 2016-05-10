@@ -169,7 +169,7 @@ namespace FlightSim
     m_s->root()->addChild(m_audioListener);
 
     // Physics
-    m_physicalSystem = new PhysicalSystem(8.33f, 83.33f); // At best 120Hz, at worst 12Hz
+    m_physicalSystem = new FSPhysicalSystem(8.33f, 83.33f); // At best 120Hz, at worst 12Hz
 #ifdef PHYSICS_DEBUG_DRAW
     m_physicsDebugDraw = new DebugDrawEngine(ShaderProgramLookup::Instance().get("ui_shader"));
     m_physicsDebugDraw->setDebugMode(btIDebugDraw::DBG_DrawWireframe);

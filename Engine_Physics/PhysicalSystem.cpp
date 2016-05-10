@@ -11,6 +11,12 @@ namespace Engine
 {
 namespace Physics
 {
+  static void _internalTickCallback(btDynamicsWorld *world, btScalar timeStep)
+  {
+    PhysicalSystem *system = static_cast<PhysicalSystem *>(world->getWorldUserInfo());
+    system->internalTickCallback(timeStep);
+  }
+
   /**
    * @brief Create a new simulated physical system.
    * @param targetTimeStep Target time in milliseconds between physics updates
@@ -33,6 +39,9 @@ namespace Physics
 
     // Real world gravity
     m_world->setGravity(btVector3(0.0f, -9.81f * m_worldScale, 0.0f));
+
+    // Tick callback
+    m_world->setInternalTickCallback(_internalTickCallback, this);
   }
 
   PhysicalSystem::~PhysicalSystem()

@@ -229,25 +229,28 @@ namespace FlightSim
                     MathsConversions::ToBullet(m_rootKVNode.children()["physics"].keyVector3("tail_aabb_pos"))),
         tailBox);
 
+    // Motion
+    SceneObjectMotionState *motion = new SceneObjectMotionState(this, initialPosition, initialRotation);
+
+    // Aircraft body
+    m_physicalBody = new RigidBody(motion, m_mass, btVector3(0.0f, 0.0f, 0.0f), shape);
+    m_physicalBody->body()->setActivationState(DISABLE_DEACTIVATION);
+
     // Main rotor cylinder
     BoundingCylinderShape *mainRotorCylinder = new BoundingCylinderShape();
     mainRotorCylinder->updateDimensionFromSceneTree(m_subTreeSpinningMainRotor);
-    shape->addChildShape(
-        btTransform(btQuaternion(0.0f, 0.0f, 0.0f), MathsConversions::ToBullet(mainRotorCylinder->origin())),
-        mainRotorCylinder);
+
+    // Main rotor body
+    m_mainRotorBody = new RigidBody(new btDefaultMotionState(), 0.0f, btVector3(0.0f, 0.0f, 0.0f), mainRotorCylinder);
+    m_mainRotorBody->body()->setActivationState(DISABLE_DEACTIVATION);
 
     // Tail rotor cylinder
     BoundingCylinderShape *tailRotorCylinder = new BoundingCylinderShape();
     tailRotorCylinder->updateDimensionFromSceneTree(m_subTreeSpinningTailRotor);
-    shape->addChildShape(MathsConversions::ToBullet(Quaternion(0.0f, 90.0f, 0.0f), Vector3(-74.0f, 0.0f, 1.5f)),
-                         tailRotorCylinder);
 
-    // Motion
-    SceneObjectMotionState *motion = new SceneObjectMotionState(this, initialPosition, initialRotation);
-
-    // Body
-    m_physicalBody = new RigidBody(motion, m_mass, btVector3(0.0f, 0.0f, 0.0f), shape);
-    m_physicalBody->body()->setActivationState(DISABLE_DEACTIVATION);
+    // Tail rotor body
+    m_tailRotorBody = new RigidBody(new btDefaultMotionState(), 0.0f, btVector3(0.0f, 0.0f, 0.0f), tailRotorCylinder);
+    m_tailRotorBody->body()->setActivationState(DISABLE_DEACTIVATION);
   }
 
   /**

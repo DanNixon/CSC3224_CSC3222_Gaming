@@ -26,7 +26,7 @@ namespace Graphics
    * @param up Up vector (default Y axis)
    */
   Camera::Camera(const std::string &name, const Matrix4 &projection, const Vector3 &up)
-      : RenderableObject(name)//, new SphericalMesh(10.0f), ShaderProgramLookup::Instance().get("ui_shader"))
+      : RenderableObject(name) //, new SphericalMesh(10.0f), ShaderProgramLookup::Instance().get("ui_shader"))
       , m_up(up)
       , m_projection(projection)
       , m_lookDirection(0.0f, 0.0, -10.0f)

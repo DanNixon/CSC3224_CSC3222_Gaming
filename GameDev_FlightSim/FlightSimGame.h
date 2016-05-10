@@ -22,9 +22,9 @@
 #include <Engine_Graphics/ShaderProgram.h>
 #include <Engine_Input/IControlScheme.h>
 #include <Engine_Physics/DebugDrawEngine.h>
-#include <Engine_Physics/PhysicalSystem.h>
 
 #include "Aircraft.h"
+#include "FSPhysicalSystem.h"
 #include "ITelemetryProtocol.h"
 #include "OnScreenTelemetry.h"
 #include "OptionsMenu.h"
@@ -88,7 +88,7 @@ namespace FlightSim
     OnScreenTelemetry *m_onScreenTelemetry;  //!< On screen telemetry
     ITelemetryProtocol *m_physicalTelemetry; //!< Physical telemetry provider
 
-    Engine::Physics::PhysicalSystem *m_physicalSystem;    //!< Physics system
+    FSPhysicalSystem *m_physicalSystem;                   //!< Physics system
     Engine::Physics::DebugDrawEngine *m_physicsDebugDraw; //!< Physics debug draw engine
 
     std::vector<Aircraft *> m_aircraft; //!< All aircraft

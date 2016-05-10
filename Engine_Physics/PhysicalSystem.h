@@ -89,7 +89,11 @@ namespace Physics
       return m_worldScale;
     }
 
-  private:
+    virtual void internalTickCallback(btScalar timestep)
+    {
+    }
+
+  protected:
     bool m_runSimulation;   //!< Flag indicating if the simulation should be running
     float m_targetTimeStep; //!< Target time between simulation updates (ms)
     int m_maxSubSteps;      //!< Maximum sub steps for simulation update

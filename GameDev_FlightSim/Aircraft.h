@@ -16,6 +16,7 @@
 #include <Engine_Graphics/RenderableObject.h>
 #include <Engine_IO/INIKeyValueStore.h>
 #include <Engine_Maths/VectorOperations.h>
+#include <Engine_Physics/CollisionCallback.h>
 #include <Engine_Physics/PhysicalSystem.h>
 
 namespace GameDev
@@ -69,11 +70,15 @@ namespace FlightSim
     inline void addToSystem(Engine::Physics::PhysicalSystem *system)
     {
       system->addBody(m_physicalBody);
+      system->addBody(m_mainRotorBody);
+      system->addBody(m_tailRotorBody);
     }
 
     inline void removeFromSystem(Engine::Physics::PhysicalSystem *system)
     {
       system->removeBody(m_physicalBody);
+      system->removeBody(m_mainRotorBody);
+      system->removeBody(m_tailRotorBody);
     }
 
     /**
@@ -188,7 +193,9 @@ namespace FlightSim
     Engine::Graphics::RenderableObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
     Engine::Graphics::RenderableObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    Engine::Physics::RigidBody *m_physicalBody;  //!< Physical body of the aircraft
+    Engine::Physics::RigidBody *m_physicalBody; //!< Physical body of the aircraft
+    Engine::Physics::RigidBody *m_mainRotorBody;
+    Engine::Physics::RigidBody *m_tailRotorBody;
     Engine::Maths::Quaternion m_initialRotation; //!< Initial orientation of the aircraft model
     Engine::Maths::Vector3 m_initialPosition;    //!< Initial world position of the aircraft model
 
