@@ -123,7 +123,10 @@ namespace FlightSim
     // Load aircraft
     loadAircraft();
 
-    // Load terrain options
+    // Populate terrain menu
+    std::vector<std::string> terrains =
+        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
+
     // TODO
 
     // Init menu
@@ -177,10 +180,6 @@ namespace FlightSim
     m_s->root()->addChild(m_physicsDebugDraw);
 #endif
 
-    // Populate terrain menu
-    std::vector<std::string> terrains =
-        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
-
     // Initial aircraft
     selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
@@ -189,7 +188,7 @@ namespace FlightSim
 
     // Camera
     m_lineOfSightCamera =
-        new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 50000.0f, windowAspect(), 30.0f));
+        new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 500000.0f, windowAspect(), 30.0f));
     m_lineOfSightCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 250.0f, 0.0f)));
     m_lineOfSightCamera->lookAt(m_activeAircraft);
     m_s->root()->addChild(m_lineOfSightCamera);
@@ -310,6 +309,10 @@ namespace FlightSim
       float vbat = m_activeAircraft->batteryVoltage();
       float current = m_activeAircraft->batteryCurrent();
       float altitude = m_activeAircraft->altitude();
+
+      // Kill on low RSSI
+      if (rssi < 25)
+        m_activeAircraft->activateFailsafe();
 
       // On screen telemetry
       m_onScreenTelemetry->setValue(TelemetryValue::RSSI, rssi);
@@ -510,12 +513,9 @@ namespace FlightSim
 
     // Generate new terrain
     m_terrain = new Terrain("terrain");
-    float data[] = {10.0f, 10.0f, 10.0f, 10.0f, 10.0f,
-                    10.0f, 5.0f, 5.0f, 5.0f, 10.0f,
-                    10.0f, 5.0f, 0.0f, 5.0f, 10.0f,
-                    10.0f, 5.0f, 5.0f, 5.0f, 10.0f,
-                    10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
-    m_terrain->init(500.0f, 500.0f, 5, 5, data);
+    float data[] = {10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 5.0f,  5.0f,  5.0f,  10.0f, 10.0f, 5.0f, 0.0f,
+                    5.0f,  10.0f, 10.0f, 5.0f,  5.0f,  5.0f,  10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
+    m_terrain->init(5000.0f, 5000.0f, 5, 5, data);
     // TODO
 
     // Add new terrain

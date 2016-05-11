@@ -235,6 +235,7 @@ namespace FlightSim
     // Aircraft body
     m_physicalBody = new RigidBody(motion, m_mass, btVector3(0.0f, 0.0f, 0.0f), shape);
     m_physicalBody->body()->setActivationState(DISABLE_DEACTIVATION);
+    m_physicalBody->body()->setRollingFriction(1000.0f);
 
     // Main rotor cylinder
     BoundingCylinderShape *mainRotorCylinder = new BoundingCylinderShape();
