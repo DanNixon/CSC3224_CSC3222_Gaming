@@ -23,8 +23,8 @@ namespace GameDev
 namespace FlightSim
 {
   TerrainBuilder::TerrainBuilder(const std::string &name, const std::string &resourceRoot)
-    : m_name(name)
-    , m_resourceRoot(resourceRoot)
+      : m_name(name)
+      , m_resourceRoot(resourceRoot)
   {
   }
 
@@ -57,18 +57,18 @@ namespace FlightSim
 
     m_resolutionX = m_rootKVNode.child("dimensions").keyUnsignedLong("resolution_x");
     m_resolutionY = m_rootKVNode.child("dimensions").keyUnsignedLong("resolution_y");
-    
+
     m_baselineAltitude = m_rootKVNode.child("basic").keyFloat("baseline_altitude");
 
     // Parse peaks
     size_t numPeaks = m_rootKVNode.child("basic").keyUnsignedLong("peaks_count");
     m_peaks.reserve(numPeaks);
-    
+
     for (size_t i = 0; i < numPeaks; i++)
       m_peaks.push_back(TerrainPeak(m_rootKVNode.child("peak_" + std::to_string(i))));
   }
 
-  void TerrainBuilder::generate(Terrain * terrain)
+  void TerrainBuilder::generate(Terrain *terrain)
   {
     // Create height data array
     size_t dataSize = m_resolutionX * m_resolutionY;

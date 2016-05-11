@@ -123,7 +123,8 @@ namespace FlightSim
 
     if (sys == Subsystem::GRAPHICS && m_game->messageQueue().hasMessage(Subsystem::UI_MENU))
     {
-      std::vector<std::string> messageOptions = StringUtils::Split(m_game->messageQueue().pop(Subsystem::UI_MENU).second, ':');
+      std::vector<std::string> messageOptions =
+          StringUtils::Split(m_game->messageQueue().pop(Subsystem::UI_MENU).second, ':');
 
       // Update the name of a menu item
       if (messageOptions.size() == 3 && messageOptions[0] == "menu")
@@ -137,7 +138,7 @@ namespace FlightSim
         {
           m_sticksOption->setText(messageOptions[2]);
           layout();
-        }  
+        }
         else if (messageOptions[1] == "pause")
         {
           m_pauseOption->setText(messageOptions[2]);

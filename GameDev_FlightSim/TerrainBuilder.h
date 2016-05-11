@@ -11,8 +11,8 @@
 #include <Engine_IO/INIKeyValueStore.h>
 #include <Engine_ResourceManagment/IMemoryManaged.h>
 
-#include "TerrainPeak.h"
 #include "Terrain.h"
+#include "TerrainPeak.h"
 
 namespace GameDev
 {
@@ -52,7 +52,7 @@ namespace FlightSim
       return m_depth;
     }
 
-    void generate(Terrain * terrain);
+    void generate(Terrain *terrain);
 
   private:
     std::string m_resourceRoot; //!< Path to the root of the resources directory

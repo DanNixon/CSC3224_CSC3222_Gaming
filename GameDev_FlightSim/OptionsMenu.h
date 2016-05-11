@@ -44,11 +44,11 @@ namespace FlightSim
     void populateMenu(Engine::UIMenu::MenuItem *parent, const NameValueList &items);
 
   private:
-    Engine::UIMenu::MenuItem *m_aircraftMenu; //!< Aircraft submenu node
-    Engine::UIMenu::MenuItem *m_terrainMenu;  //!< Terrain submenu node
-    Engine::UIMenu::MenuItem *m_pauseOption; //!< Pause/resume option
+    Engine::UIMenu::MenuItem *m_aircraftMenu;    //!< Aircraft submenu node
+    Engine::UIMenu::MenuItem *m_terrainMenu;     //!< Terrain submenu node
+    Engine::UIMenu::MenuItem *m_pauseOption;     //!< Pause/resume option
     Engine::UIMenu::MenuItem *m_telemetryOption; //!< Telemetry visible option
-    Engine::UIMenu::MenuItem *m_sticksOption; //!< Sticks visible option
+    Engine::UIMenu::MenuItem *m_sticksOption;    //!< Sticks visible option
   };
 }
 }

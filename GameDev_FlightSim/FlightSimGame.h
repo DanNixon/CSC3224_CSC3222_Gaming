@@ -97,7 +97,7 @@ namespace FlightSim
     Aircraft *m_activeAircraft;         //!< Active aircraft
 
     std::vector<TerrainBuilder *> m_terrainBuilders; //!< Terrain builders
-    Terrain *m_terrain; //!< Active terrain
+    Terrain *m_terrain;                              //!< Active terrain
   };
 }
 }

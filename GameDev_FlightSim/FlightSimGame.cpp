@@ -447,7 +447,7 @@ namespace FlightSim
   void FlightSimGame::loadTerrainPresets()
   {
     std::vector<std::string> terrainNames =
-      DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
+        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
 
     OptionsMenu::NameValueList menuItems;
 
@@ -541,7 +541,8 @@ namespace FlightSim
     m_rootKVNode.children()["terrain"].keys()["default_type"] = name;
 
     // Find new terrain generator
-    auto it = std::find_if(m_terrainBuilders.begin(), m_terrainBuilders.end(), [name](TerrainBuilder *a) { return a->name() == name; });
+    auto it = std::find_if(m_terrainBuilders.begin(), m_terrainBuilders.end(),
+                           [name](TerrainBuilder *a) { return a->name() == name; });
     if (it == m_terrainBuilders.end())
     {
       g_log.error("Terrain builder " + name + " not found");
