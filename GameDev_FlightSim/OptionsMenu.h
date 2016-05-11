@@ -35,7 +35,7 @@ namespace FlightSim
     void populateAircraftMenu(const NameValueList &items);
     void populateTerrainMenu(const NameValueList &items);
 
-    void updateOptionNames();
+    virtual void update(float msec, Engine::Common::Subsystem sys);
 
   protected:
     virtual void handleMenuOptionSelection(Engine::UIMenu::MenuItem *item);
@@ -46,8 +46,9 @@ namespace FlightSim
   private:
     Engine::UIMenu::MenuItem *m_aircraftMenu; //!< Aircraft submenu node
     Engine::UIMenu::MenuItem *m_terrainMenu;  //!< Terrain submenu node
-    Engine::UIMenu::MenuItem *m_telemetryOption;
-    Engine::UIMenu::MenuItem *m_sticksOption;
+    Engine::UIMenu::MenuItem *m_pauseOption; //!< Pause/resume option
+    Engine::UIMenu::MenuItem *m_telemetryOption; //!< Telemetry visible option
+    Engine::UIMenu::MenuItem *m_sticksOption; //!< Sticks visible option
   };
 }
 }

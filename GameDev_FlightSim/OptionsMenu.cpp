@@ -27,7 +27,7 @@ namespace FlightSim
     setMargin(Vector2());
 
     addNewItem(nullptr, "exit", "Exit");
-    addNewItem(nullptr, "pause", "Pause");
+    m_pauseOption = addNewItem(nullptr, "pause", "Pause");
     addNewItem(nullptr, "reset", "Reset");
 
     MenuItem *cameraMenu = addNewItem(nullptr, "camera", "Camera");
@@ -40,9 +40,6 @@ namespace FlightSim
 
     m_aircraftMenu = addNewItem(nullptr, "aircraft", "Aircraft");
     m_terrainMenu = addNewItem(nullptr, "terrain", "Terrain");
-
-    // Update initial names
-    updateOptionNames();
   }
 
   OptionsMenu::~OptionsMenu()
@@ -68,18 +65,6 @@ namespace FlightSim
   }
 
   /**
-   * @brief Sets the names of certain menu options based on the state of the game.
-   */
-  void OptionsMenu::updateOptionNames()
-  {
-    bool showTelem = StringUtils::ToBool(m_game->rootKVNode().children()["hud"].keys()["show_telemetry"]);
-    bool showSticks = StringUtils::ToBool(m_game->rootKVNode().children()["hud"].keys()["show_sticks"]);
-
-    m_telemetryOption->setText(showTelem ? "Hide Telemetry" : "Show Telemetry");
-    m_sticksOption->setText(showSticks ? "Hide Sticks" : "Show Sticks");
-  }
-
-  /**
    * @copydoc IMenu::handleMenuOptionSelection
    */
   void OptionsMenu::handleMenuOptionSelection(Engine::UIMenu::MenuItem *item)
@@ -91,7 +76,6 @@ namespace FlightSim
     else if (item->name() == "pause")
     {
       m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "simulation:toggle"));
-      // item->setText(run ? "Pause" : "Resume", true);
     }
     else if (item->name() == "reset")
     {
@@ -115,7 +99,7 @@ namespace FlightSim
     }
     else if (item->parent()->name() == "terrain")
     {
-      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "tarrain:renew:" + item->name()));
+      m_game->messageQueue().push(std::make_pair(Subsystem::GAME_LOGIC, "terrain:renew:" + item->name()));
     }
   }
 
@@ -128,6 +112,39 @@ namespace FlightSim
   {
     for (auto it = items.begin(); it != items.end(); ++it)
       addNewItem(parent, it->second, it->first);
+  }
+
+  /**
+   * @copydoc GraphicalScene::update
+   */
+  void OptionsMenu::update(float msec, Subsystem sys)
+  {
+    GraphicalScene::update(msec, sys);
+
+    if (sys == Subsystem::GRAPHICS && m_game->messageQueue().hasMessage(Subsystem::UI_MENU))
+    {
+      std::vector<std::string> messageOptions = StringUtils::Split(m_game->messageQueue().pop(Subsystem::UI_MENU).second, ':');
+
+      // Update the name of a menu item
+      if (messageOptions.size() == 3 && messageOptions[0] == "menu")
+      {
+        if (messageOptions[1] == "telemetry_option")
+        {
+          m_telemetryOption->setText(messageOptions[2]);
+          layout();
+        }
+        else if (messageOptions[1] == "sticks_option")
+        {
+          m_sticksOption->setText(messageOptions[2]);
+          layout();
+        }  
+        else if (messageOptions[1] == "pause")
+        {
+          m_pauseOption->setText(messageOptions[2]);
+          layout();
+        }
+      }
+    }
   }
 }
 }

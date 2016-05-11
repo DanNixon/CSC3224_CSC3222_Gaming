@@ -20,13 +20,41 @@ namespace FlightSim
   class TerrainPeak
   {
   public:
-    TerrainPeak()
+    TerrainPeak(Engine::IO::KVNode &node)
     {
-      // TODO
+      m_centreX = node.keyUnsignedLong("centre_x");
+      m_centreY = node.keyUnsignedLong("centre_y");
+      m_function = node.keyString("function");
+      m_factor = node.keyFloat("factor");
     }
 
     virtual ~TerrainPeak()
     {
+    }
+
+    size_t centreX() const
+    {
+      return m_centreX;
+    }
+
+    size_t centreY() const
+    {
+      return m_centreY;
+    }
+
+    std::string function() const
+    {
+      return m_function;
+    }
+
+    float factor() const
+    {
+      return m_factor;
+    }
+
+    void calculate(float *out) const
+    {
+      // TODO
     }
 
   private:

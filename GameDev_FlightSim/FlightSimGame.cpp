@@ -345,9 +345,14 @@ namespace FlightSim
         }
         else if (msgStr.find("simulation:toggle") != std::string::npos)
         {
-          bool running = m_physicalSystem->simulationRunning();
-          m_physicalSystem->setSimulationState(!running);
-          // TODO: update menu text
+          bool running = !m_physicalSystem->simulationRunning();
+          m_physicalSystem->setSimulationState(running);
+
+          // Update menu text
+          std::string msg = "menu:pause:Resume";
+          if (running)
+            msg = "menu:pause:Pause";
+          m_msgQueue.push(MessageQueue::MessageType(Subsystem::UI_MENU, msg));
         }
         else if (msgStr.find("camera:mode:") != std::string::npos)
         {
@@ -368,13 +373,11 @@ namespace FlightSim
         {
           bool visible = StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_telemetry"]);
           setTelemetryVisible(!visible);
-          m_menu->updateOptionNames();
         }
         else if (msgStr.find("sticks:toggle") != std::string::npos)
         {
           bool visible = StringUtils::ToBool(m_rootKVNode.children()["hud"].keys()["show_sticks"]);
           setSticksVisible(!visible);
-          m_menu->updateOptionNames();
         }
       }
     }
@@ -586,8 +589,17 @@ namespace FlightSim
    */
   void FlightSimGame::setTelemetryVisible(bool visible)
   {
+    // Set visibility
     m_onScreenTelemetry->setActive(visible);
+
+    // Store option
     m_rootKVNode.children()["hud"].keys()["show_telemetry"] = visible ? "true" : "false";
+
+    // Update menu option text
+    std::string msg = "menu:telemetry_option:Show Telemetry";
+    if (visible)
+      msg = "menu:telemetry_option:Hide Telemetry";
+    m_msgQueue.push(MessageQueue::MessageType(Subsystem::UI_MENU, msg));
   }
 
   /**
@@ -596,9 +608,18 @@ namespace FlightSim
    */
   void FlightSimGame::setSticksVisible(bool visible)
   {
+    // Set visibility
     m_leftStickIndicator->setActive(visible);
     m_rightStickIndicator->setActive(visible);
+
+    // Store option
     m_rootKVNode.children()["hud"].keys()["show_sticks"] = visible ? "true" : "false";
+
+    // Update menu option text
+    std::string msg = "menu:sticks_option:Show Sticks";
+    if (visible)
+      msg = "menu:sticks_option:Hide Sticks";
+    m_msgQueue.push(MessageQueue::MessageType(Subsystem::UI_MENU, msg));
   }
 }
 }

@@ -60,9 +60,7 @@ namespace FlightSim
     m_peaks.reserve(numPeaks);
     
     for (size_t i = 0; i < numPeaks; i++)
-    {
-      // TODO
-    }
+      m_peaks.push_back(TerrainPeak(m_rootKVNode.child("peak_" + std::to_string(i))));
   }
 }
 }
