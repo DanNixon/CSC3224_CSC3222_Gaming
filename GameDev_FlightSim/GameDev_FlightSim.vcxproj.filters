@@ -28,7 +28,9 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="FSPhysicalSystem.cpp" />
-    <ClCompile Include="TerrainBuilder.cpp" />
+    <ClCompile Include="TerrainBuilder.cpp">
+      <Filter>TerrainGeneration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FlightSimGame.h" />
@@ -72,7 +74,12 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="FSPhysicalSystem.h" />
-    <ClInclude Include="TerrainBuilder.h" />
+    <ClInclude Include="TerrainBuilder.h">
+      <Filter>TerrainGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainPeak.h">
+      <Filter>TerrainGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Controls">
@@ -86,6 +93,9 @@
     </Filter>
     <Filter Include="Objects">
       <UniqueIdentifier>{0e581a47-d979-4551-8970-d5894100046c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TerrainGeneration">
+      <UniqueIdentifier>{a6b565e2-a68b-4ae6-acf1-463d80542db9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

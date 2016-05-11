@@ -126,14 +126,10 @@ namespace FlightSim
     // Load aircraft
     loadAircraft();
 
-    // Populate terrain menu
-    std::vector<std::string> terrains =
-        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
-
-    // TODO
+    // Load terrain presets
+    loadTerrainPresets();
 
     // Init menu
-    m_menu->populateTerrainMenu({{"Flat", "flat"}, {"Tall Peaks", "peaks"}, {"Forest", "forest"}});
     m_menu->layout();
     m_menu->hide();
     addEventHandler(m_menu);
@@ -443,6 +439,32 @@ namespace FlightSim
     telemetry.keys()["port"] = "COM1";
     telemetry.keys()["baud"] = "9600";
     node.addChild(telemetry);
+  }
+
+  void FlightSimGame::loadTerrainPresets()
+  {
+    std::vector<std::string> terrainNames =
+      DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("terrains"), true, false);
+
+    OptionsMenu::NameValueList menuItems;
+
+    for (auto it = terrainNames.begin(); it != terrainNames.end(); ++it)
+    {
+      TerrainBuilder *terrain = new TerrainBuilder(*it, m_rootKVNode.child("resources").keyString("terrains"));
+      terrain->loadMetadata();
+
+      if (terrain->rootKVNode().child("general").keyBool("enabled"))
+      {
+        m_terrainBuilders.push_back(terrain);
+        menuItems.push_back(std::make_pair(terrain->displayName(), terrain->name()));
+      }
+      else
+      {
+        MemoryManager::Instance().release(terrain);
+      }
+    }
+
+    m_menu->populateTerrainMenu(menuItems);
   }
 
   void FlightSimGame::loadAircraft()

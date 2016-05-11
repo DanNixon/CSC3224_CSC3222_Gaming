@@ -49,6 +49,7 @@
     <ClInclude Include="TelemetryValueIndicator.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainBuilder.h" />
+    <ClInclude Include="TerrainPeak.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D7AD3802-5363-4FF1-8D51-03C5184EFB31}</ProjectGuid>

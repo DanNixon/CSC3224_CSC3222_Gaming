@@ -7,6 +7,8 @@
 
 #include "TerrainBuilder.h"
 
+#include <fstream>
+
 #include <Engine_Logging/Logger.h>
 
 using namespace Engine::Maths;
@@ -20,12 +22,47 @@ namespace GameDev
 {
 namespace FlightSim
 {
-  TerrainBuilder::TerrainBuilder()
+  TerrainBuilder::TerrainBuilder(const std::string &name, const std::string &resourceRoot)
+    : m_name(name)
+    , m_resourceRoot(resourceRoot)
   {
   }
 
   TerrainBuilder::~TerrainBuilder()
   {
+  }
+
+  std::string TerrainBuilder::metadataFilename() const
+  {
+    std::stringstream str;
+    str << m_resourceRoot << m_name;
+    return str.str();
+  }
+
+  void TerrainBuilder::loadMetadata()
+  {
+    // Load data
+    std::ifstream file(metadataFilename());
+    load(file);
+
+    // Skip loading if this terrain is not enabled
+    if (!m_rootKVNode.child("general").keyBool("enabled"))
+      return;
+
+    // Parse member data
+    m_displayName = m_rootKVNode.child("general").keyString("name");
+    m_resolutionX = m_rootKVNode.child("dimensions").keyUnsignedLong("resolution_x");
+    m_resolutionX = m_rootKVNode.child("dimensions").keyUnsignedLong("resolution_y");
+    m_baselineAltitude = m_rootKVNode.child("basic").keyFloat("baseline_altitude");
+
+    // Parse peaks
+    size_t numPeaks = m_rootKVNode.child("basic").keyUnsignedLong("peaks_count");
+    m_peaks.reserve(numPeaks);
+    
+    for (size_t i = 0; i < numPeaks; i++)
+    {
+      // TODO
+    }
   }
 }
 }

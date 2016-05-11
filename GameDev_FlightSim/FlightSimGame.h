@@ -30,6 +30,7 @@
 #include "OptionsMenu.h"
 #include "StickIndicator.h"
 #include "Terrain.h"
+#include "TerrainBuilder.h"
 
 namespace GameDev
 {
@@ -54,6 +55,7 @@ namespace FlightSim
 
   private:
     void loadAircraft();
+    void loadTerrainPresets();
 
     void selectAircraft(const std::string &name, bool force = false);
     void renewTerrain(const std::string &name);
@@ -94,6 +96,7 @@ namespace FlightSim
     std::vector<Aircraft *> m_aircraft; //!< All aircraft
     Aircraft *m_activeAircraft;         //!< Active aircraft
 
+    std::vector<TerrainBuilder *> m_terrainBuilders; //!< Terrain builders
     Terrain *m_terrain; //!< Active terrain
   };
 }

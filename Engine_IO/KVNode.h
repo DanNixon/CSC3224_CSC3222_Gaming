@@ -98,6 +98,11 @@ namespace IO
       return std::stof(m_keys[name]);
     }
 
+    unsigned long keyUnsignedLong(const std::string &name)
+    {
+      return std::stoul(m_keys[name]);
+    }
+
     bool keyBool(const std::string &name)
     {
       return Engine::Utility::StringUtils::ToBool(m_keys[name]);
