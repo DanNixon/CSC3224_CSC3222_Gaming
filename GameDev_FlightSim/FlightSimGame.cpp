@@ -105,8 +105,11 @@ namespace FlightSim
     uiShader->link();
     ShaderProgramLookup::Instance().add("ui_shader", uiShader);
 
-    // TODO
-    ShaderProgramLookup::Instance().add("terrain_shader", uiShader);
+    ShaderProgram *terrainShader = new ShaderProgram();
+    terrainShader->addShader(new VertexShader("../resources/shader/vert_terrain.glsl"));
+    terrainShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
+    terrainShader->link();
+    ShaderProgramLookup::Instance().add("terrain_shader", terrainShader);
 
     ShaderProgram *menuShader = new ShaderProgram();
     menuShader = new ShaderProgram();
@@ -201,6 +204,9 @@ namespace FlightSim
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
+
+    // TODO
+    glUniform1f(glGetUniformLocation(terrainShader->program(), "maxHeight"), 1.0f / 10.0f);
 
     // Input
     if (JoystickHandler::NumJoysticks() == 0)
@@ -513,8 +519,12 @@ namespace FlightSim
 
     // Generate new terrain
     m_terrain = new Terrain("terrain");
-    float data[] = {10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 5.0f,  5.0f,  5.0f,  10.0f, 10.0f, 5.0f, 0.0f,
-                    5.0f,  10.0f, 10.0f, 5.0f,  5.0f,  5.0f,  10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
+    float data[] = {
+      10.0f, 10.0f, -2.0f, 10.0f, 10.0f,
+      10.0f, -3.0f,  -5.0f,  -3.0f,  10.0f,
+      10.0f, 5.0f,  0.0f,  5.0f,  10.0f,
+      10.0f, 0.0f,  5.0f,  5.0f,  10.0f,
+      10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
     m_terrain->init(5000.0f, 5000.0f, 5, 5, data);
     // TODO
 

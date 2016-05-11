@@ -402,8 +402,12 @@ namespace FlightSim
     setEngineSpeed(0.0f);
     setControls(0.0f, 0.0f, 0.0f, 0.0f);
 
-    // Set initial orientation and position
+    // Stop current motion
     m_physicalBody->body()->clearForces();
+    m_physicalBody->body()->setLinearVelocity(btVector3(0.0f, 0.0f, 0.0f));
+    m_physicalBody->body()->setAngularVelocity(btVector3(0.0f, 0.0f, 0.0f));
+
+    // Set initial orientation and position
     m_physicalBody->body()->setCenterOfMassTransform(MathsConversions::ToBullet(m_initialRotation, m_initialPosition));
   }
 
