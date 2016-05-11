@@ -10,12 +10,11 @@
 #include <Engine_Common/MessageQueue.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-using namespace Engine::Common;
 
 // clang-format off
 namespace Engine
 {
-namespace IO
+namespace Common
 {
 namespace Test
 {
