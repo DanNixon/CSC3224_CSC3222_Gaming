@@ -51,11 +51,13 @@ namespace FlightSim
   {
     // Calculate X distribution
     float *distributionX = new float[dimX];
+    std::fill(distributionX, distributionX + dimX, 0.0f);
     Random xRand(m_xFunction);
     DoIterations(xRand, distributionX, dimX, m_xSamples);
 
     // Calculate Y distribution
     float *distributionY = new float[dimY];
+    std::fill(distributionY, distributionY + dimY, 0.0f);
     Random yRand(m_yFunction);
     DoIterations(yRand, distributionY, dimY, m_ySamples);
 
