@@ -12,6 +12,7 @@
 #include <Engine_ResourceManagment/IMemoryManaged.h>
 
 #include "TerrainPeak.h"
+#include "Terrain.h"
 
 namespace GameDev
 {
@@ -41,11 +42,26 @@ namespace FlightSim
       return m_displayName;
     }
 
+    inline float width() const
+    {
+      return m_width;
+    }
+
+    inline float depth() const
+    {
+      return m_depth;
+    }
+
+    void generate(Terrain * terrain);
+
   private:
     std::string m_resourceRoot; //!< Path to the root of the resources directory
 
     std::string m_name;
     std::string m_displayName;
+
+    float m_width;
+    float m_depth;
 
     size_t m_resolutionX;
     size_t m_resolutionY;

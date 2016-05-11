@@ -182,7 +182,7 @@ namespace FlightSim
     // Initial aircraft
     selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
-    // Terrain
+    // Initial terrain
     renewTerrain(m_rootKVNode.child("terrain").keyString("default_type"));
 
     // Camera
@@ -540,18 +540,19 @@ namespace FlightSim
     // Record option
     m_rootKVNode.children()["terrain"].keys()["default_type"] = name;
 
+    // Find new terrain generator
+    auto it = std::find_if(m_terrainBuilders.begin(), m_terrainBuilders.end(), [name](TerrainBuilder *a) { return a->name() == name; });
+    if (it == m_terrainBuilders.end())
+    {
+      g_log.error("Terrain builder " + name + " not found");
+      return;
+    }
+
     Terrain *oldTerrain = m_terrain;
 
     // Generate new terrain
     m_terrain = new Terrain("terrain");
-    float data[] = {
-      10.0f, 10.0f, -2.0f, 10.0f, 10.0f,
-      10.0f, -3.0f,  -5.0f,  -3.0f,  10.0f,
-      10.0f, 5.0f,  0.0f,  5.0f,  10.0f,
-      10.0f, 0.0f,  5.0f,  5.0f,  10.0f,
-      10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
-    m_terrain->init(5000.0f, 5000.0f, 5, 5, data);
-    // TODO
+    (*it)->generate(m_terrain);
 
     // Add new terrain
     m_s->root()->addChild(m_terrain);
