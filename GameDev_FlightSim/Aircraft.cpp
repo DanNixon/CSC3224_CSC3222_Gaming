@@ -433,14 +433,12 @@ namespace FlightSim
     {
       // Set main rotor collider position
       btTransform mainRotor;
-      mainRotor.setFromOpenGLMatrix((const btScalar *)&(m_subTreeSpinningMainRotor->worldTransform()));
-      // m_mainRotorBody->motionState()->setWorldTransform(mainRotor);
+      mainRotor.setFromOpenGLMatrix((const btScalar *)&(m_subTreeMainRotor->worldTransform()));
       m_mainRotorBody->body()->setWorldTransform(mainRotor);
 
       // Set tail rotor collider position
       btTransform tailRotor;
       tailRotor.setFromOpenGLMatrix((const btScalar *)&(m_subTreeSpinningTailRotor->worldTransform()));
-      // m_tailRotorBody->motionState()->setWorldTransform(tailRotor);
       m_tailRotorBody->body()->setWorldTransform(tailRotor);
 
       // Simulate decreasing battery voltage

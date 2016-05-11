@@ -283,8 +283,8 @@ namespace FlightSim
       m_activeAircraft->setControls(throttle, pitch, roll, yaw);
 
       // Physics update
-      m_physicalSystem->update(dtMilliSec);
       m_activeAircraft->update(dtMilliSec, Subsystem::PHYSICS);
+      m_physicalSystem->update(dtMilliSec);
     }
     else if (id == m_audioLoop)
     {
@@ -509,8 +509,13 @@ namespace FlightSim
     Terrain *oldTerrain = m_terrain;
 
     // Generate new terrain
-    m_terrain = new Terrain("terrain", 50000.0f, 50000.0f);
-    m_terrain->init();
+    m_terrain = new Terrain("terrain");
+    float data[] = {10.0f, 10.0f, 10.0f, 10.0f, 10.0f,
+                    10.0f, 5.0f, 5.0f, 5.0f, 10.0f,
+                    10.0f, 5.0f, 0.0f, 5.0f, 10.0f,
+                    10.0f, 5.0f, 5.0f, 5.0f, 10.0f,
+                    10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
+    m_terrain->init(500.0f, 500.0f, 5, 5, data);
     // TODO
 
     // Add new terrain

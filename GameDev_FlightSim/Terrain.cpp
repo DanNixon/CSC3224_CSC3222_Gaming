@@ -24,9 +24,8 @@ namespace GameDev
 {
 namespace FlightSim
 {
-  Terrain::Terrain(const std::string &name, float width, float depth, size_t widthResolution, size_t depthResolution)
-      : RenderableObject(name, new HeightmapMesh(widthResolution, depthResolution, width, depth),
-                         ShaderProgramLookup::Instance().get("terrain_shader"))
+  Terrain::Terrain(const std::string &name)
+      : RenderableObject(name, nullptr, ShaderProgramLookup::Instance().get("terrain_shader"))
   {
   }
 
@@ -34,9 +33,13 @@ namespace FlightSim
   {
   }
 
-  void Terrain::init()
+  void Terrain::init(float width, float depth, size_t widthResolution, size_t depthResolution, float *heightData)
   {
-    // Heightmap ollision shape
+    // Mesh
+    m_mesh = new HeightmapMesh(widthResolution, depthResolution, width, depth);
+    static_cast<HeightmapMesh *>(m_mesh)->setHeight(heightData);
+
+    // Heightmap collision shape
     m_physicsHeightmap = new Heightmap();
     m_physicsHeightmap->populate(static_cast<HeightmapMesh *>(m_mesh));
 

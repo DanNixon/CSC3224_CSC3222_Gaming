@@ -25,11 +25,10 @@ namespace FlightSim
   class Terrain : public Engine::Graphics::RenderableObject
   {
   public:
-    Terrain(const std::string &name, float width, float depth, size_t widthResolution = 1000,
-            size_t depthResolution = 1000);
+    Terrain(const std::string &name);
     virtual ~Terrain();
 
-    void init();
+    void init(float width, float depth, size_t widthResolution, size_t depthResolution, float *heightData);
 
     inline void addToSystem(Engine::Physics::PhysicalSystem *system)
     {
