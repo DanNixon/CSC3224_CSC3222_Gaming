@@ -8,6 +8,9 @@
 #ifndef _GAMEDEV_FLIGHTSIM_TERRAINPEAK_H_
 #define _GAMEDEV_FLIGHTSIM_TERRAINPEAK_H_
 
+#include <Engine_IO/KVNode.h>
+#include <Engine_Utility/Random.h>
+
 namespace GameDev
 {
 namespace FlightSim
@@ -19,48 +22,20 @@ namespace FlightSim
    */
   class TerrainPeak
   {
+  private:
+    static void DoIterations(Engine::Utility::Random &rand, float *bins, size_t nBins, size_t nIters);
+
   public:
-    TerrainPeak(Engine::IO::KVNode &node)
-    {
-      m_centreX = node.keyUnsignedLong("centre_x");
-      m_centreY = node.keyUnsignedLong("centre_y");
-      m_function = node.keyString("function");
-      m_factor = node.keyFloat("factor");
-    }
+    TerrainPeak(Engine::IO::KVNode &node);
+    virtual ~TerrainPeak();
 
-    virtual ~TerrainPeak()
-    {
-    }
-
-    size_t centreX() const
-    {
-      return m_centreX;
-    }
-
-    size_t centreY() const
-    {
-      return m_centreY;
-    }
-
-    std::string function() const
-    {
-      return m_function;
-    }
-
-    float factor() const
-    {
-      return m_factor;
-    }
-
-    void calculate(float *out) const
-    {
-      // TODO
-    }
+    void calculate(float *out, size_t dimX, size_t dimY) const;
 
   private:
-    size_t m_centreX;
-    size_t m_centreY;
-    std::string m_function;
+    std::string m_xFunction;
+    std::string m_yFunction;
+    size_t m_xSamples;
+    size_t m_ySamples;
     float m_factor;
   };
 }

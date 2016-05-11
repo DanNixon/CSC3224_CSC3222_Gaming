@@ -31,6 +31,9 @@
     <ClCompile Include="TerrainBuilder.cpp">
       <Filter>TerrainGeneration</Filter>
     </ClCompile>
+    <ClCompile Include="TerrainPeak.cpp">
+      <Filter>TerrainGeneration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FlightSimGame.h" />

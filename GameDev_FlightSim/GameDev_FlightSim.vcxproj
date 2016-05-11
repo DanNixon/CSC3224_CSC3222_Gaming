@@ -31,6 +31,7 @@
     <ClCompile Include="TelemetryValueIndicator.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainBuilder.cpp" />
+    <ClCompile Include="TerrainPeak.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h" />

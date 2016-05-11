@@ -79,9 +79,7 @@ namespace FlightSim
 
     // Add peaks
     for (auto it = m_peaks.begin(); it != m_peaks.end(); ++it)
-    {
-      // TODO
-    }
+      it->calculate(heightData, m_resolutionX, m_resolutionY);
 
     // Init terrain
     terrain->init(m_width, m_depth, m_resolutionX, m_resolutionY, heightData);
