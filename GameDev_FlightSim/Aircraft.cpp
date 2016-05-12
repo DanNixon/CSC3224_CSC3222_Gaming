@@ -320,7 +320,7 @@ namespace FlightSim
 
     m_fpvCamera = new Camera("fpv_camera", Matrix4::Perspective(1.0f, viewDepth, game->windowAspect(), fieldOfVision));
     m_fpvCamera->setActive(false);
-    m_fpvCamera->setModelMatrix(Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("fpv_camera_pos")));
+    m_fpvCamera->setModelMatrix(Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("fpv_camera_pos")) * Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
     addChild(m_fpvCamera);
 
     // TODO: use angle
@@ -444,11 +444,7 @@ namespace FlightSim
   {
     SceneObject::update(msec, sys);
 
-    if (sys == Subsystem::GRAPHICS)
-    {
-      m_fpvCamera->look(m_worldTransform.facingVector());
-    }
-    else if (sys == Subsystem::PHYSICS)
+    if (sys == Subsystem::PHYSICS)
     {
       // Set main rotor collider position
       btTransform mainRotor;

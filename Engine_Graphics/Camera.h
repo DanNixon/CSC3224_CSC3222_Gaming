@@ -39,18 +39,6 @@ namespace Graphics
     }
 
     /**
-     * @brief Point the camera in a given sirection.
-     * @param direction DIrection to look in
-     *
-     * Only takes affect when lookAt() is either not claled or was last called
-     * with nullptr as the parameter.
-     */
-    inline void look(Engine::Maths::Vector3 direction)
-    {
-      m_lookDirection = direction;
-    }
-
-    /**
      * @brief Sets the projection matrix.
      * @param projection Projection matrix
      */
@@ -73,7 +61,6 @@ namespace Graphics
   protected:
     Engine::Maths::Vector3 m_up;            //!< Up vector
     Engine::Maths::Matrix4 m_projection;    //!< Projection matrix
-    Engine::Maths::Vector3 m_lookDirection; //!< Direction to look in
     Engine::Common::SceneObject *m_lookAt;  //!< Object to look at
   };
 }

@@ -29,7 +29,6 @@ namespace Graphics
       : RenderableObject(name) //, new SphericalMesh(10.0f), ShaderProgramLookup::Instance().get("ui_shader"))
       , m_up(up)
       , m_projection(projection)
-      , m_lookDirection(0.0f, 0.0, -10.0f)
   {
   }
 
@@ -42,13 +41,13 @@ namespace Graphics
    */
   void Camera::update(float msec, Subsystem sys)
   {
+    RenderableObject::update(msec, sys);
+
     if (sys == Subsystem::GRAPHICS && m_active)
     {
       m_scene->setProjectionMatrix(m_projection);
       m_scene->setViewMatrix(viewMatrix());
     }
-
-    RenderableObject::update(msec, sys);
   }
 
   /**
@@ -59,8 +58,10 @@ namespace Graphics
     Vector3 position = worldTransform().positionVector();
     Vector3 facing;
 
+    Vector3 f2 = m_worldTransform.facingVector();
+
     if (m_lookAt == nullptr)
-      facing = position + m_lookDirection;
+      facing = position + f2;
     else
       facing = m_lookAt->worldTransform().positionVector();
 
