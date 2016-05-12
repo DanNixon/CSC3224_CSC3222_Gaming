@@ -5,6 +5,10 @@ For CSC3224 project 2.
 
 Uses several helicopter models from HELI-X.
 
+Terrains are generated using a series of peaks defined by Gaussian
+probability distributions which are described in the terrain builder
+files (in `resources/terrains`).
+
 Controls are for a 3D helicopter where the collective controls the pitch of
 the main rotor blades and the cyclic controls the rate of rotation on the
 pitch and roll axis.
