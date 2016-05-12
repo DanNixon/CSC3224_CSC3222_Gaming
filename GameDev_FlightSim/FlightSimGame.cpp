@@ -182,9 +182,6 @@ namespace FlightSim
     // Initial aircraft
     selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
-    // Initial terrain
-    renewTerrain(m_rootKVNode.child("terrain").keyString("default_type"));
-
     // Line of fight camera
     m_lineOfSightCamera =
         new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 500000.0f, windowAspect(), 30.0f));
@@ -202,6 +199,9 @@ namespace FlightSim
 
     // Default camera mode
     setCameraMode(m_rootKVNode.children()["camera"].keys()["mode"]);
+
+    // Initial terrain
+    renewTerrain(m_rootKVNode.child("terrain").keyString("default_type"));
 
     // GL setup
     glEnable(GL_DEPTH_TEST);
