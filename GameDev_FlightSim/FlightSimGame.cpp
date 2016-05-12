@@ -169,6 +169,14 @@ namespace FlightSim
     m_s->root()->addChild(sun);
     m_s->lights().push_back(sun);
 
+    // Sky
+    Texture * skyTexture = new Texture();
+    skyTexture->load("../resources/sky.png");
+    RenderableObject* skyObject = new RenderableObject("sky", new RectangleMesh(Vector2(500000.0f, 500000.0f)), menuShader, skyTexture);
+    float skyAltitude = m_rootKVNode.child("graphics").keyFloat("sky_altitude_m") * 100.0f;
+    skyObject->setModelMatrix(Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) * Matrix4::Translation(Vector3(0.0f, 0.0f, -skyAltitude)));
+    m_s->root()->addChild(skyObject);
+
     // Audio
     m_audioContext = new Context();
     m_audioContext->open();
@@ -188,15 +196,17 @@ namespace FlightSim
     selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
     // Line of fight camera
+    float losViewDist = m_rootKVNode.child("camera").keyFloat("los_view_dist");
     m_lineOfSightCamera =
-        new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 500000.0f, windowAspect(), 30.0f));
+        new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, losViewDist, windowAspect(), 30.0f));
     m_lineOfSightCamera->setModelMatrix(
         Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("los_camera_position")));
     m_lineOfSightCamera->lookAt(m_activeAircraft);
     m_s->root()->addChild(m_lineOfSightCamera);
 
     // Aerial camera
-    m_aerialCamera = new Camera("aerial_camera", Matrix4::Perspective(1.0f, 500000.0f, windowAspect(), 30.0f));
+    float aerialViewDist = m_rootKVNode.child("camera").keyFloat("aerial_view_dist");
+    m_aerialCamera = new Camera("aerial_camera", Matrix4::Perspective(1.0f, aerialViewDist, windowAspect(), 30.0f));
     m_aerialCamera->setModelMatrix(
         Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("aerial_camera_position")));
     m_aerialCamera->lookAt(m_activeAircraft);
@@ -422,6 +432,10 @@ namespace FlightSim
     resources.keys()["shaders"] = "../resources/shades/";
     node.addChild(resources);
 
+    KVNode graphics("graphics");
+    graphics.keys()["sky_altitude_m"] = "1000";
+    node.addChild(graphics);
+
     KVNode aircraft("aircraft");
     aircraft.keys()["selected"] = "Gaui_X7";
     aircraft.keys()["default_rotation"] = "135";
@@ -436,6 +450,8 @@ namespace FlightSim
     camera.keys()["mode"] = "los";
     camera.keys()["los_camera_position"] = "[0,250,0]";
     camera.keys()["aerial_camera_position"] = "[0,5000,5000]";
+    camera.keys()["los_view_dist"] = "5000000";
+    camera.keys()["aerial_view_dist"] = "5000000";
     node.addChild(camera);
 
     KVNode hud("hud");
