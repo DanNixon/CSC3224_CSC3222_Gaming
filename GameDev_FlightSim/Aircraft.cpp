@@ -17,6 +17,7 @@
 #include <Engine_Physics/MathsConversions.h>
 #include <Engine_Physics/SceneObjectMotionState.h>
 #include <Engine_Utility/StringUtils.h>
+#include <Engine_IO/DiskUtils.h>
 
 using namespace Engine::Common;
 using namespace Engine::Audio;
@@ -24,6 +25,7 @@ using namespace Engine::Graphics;
 using namespace Engine::Utility;
 using namespace Engine::Maths;
 using namespace Engine::Physics;
+using namespace Engine::IO;
 
 namespace
 {
@@ -125,8 +127,18 @@ namespace FlightSim
 
   void Aircraft::loadMetadata()
   {
+    std::string filename = metadataFilename();
+
+    // Set to disabled if the metadata file could not be opened
+    if (!DiskUtils::Exists(filename))
+    {
+      m_rootKVNode.addChild(KVNode("general"));
+      m_rootKVNode.child("general").keys()["enabled"] = "false";
+      return;
+    }
+
     // Load data
-    std::ifstream file(metadataFilename());
+    std::ifstream file(filename);
     load(file);
 
     // Skip loading if this model is not enabled

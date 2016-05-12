@@ -215,12 +215,6 @@ namespace FlightSim
     // Input
     if (JoystickHandler::NumJoysticks() > 0 && m_rootKVNode.child("joystick").keyBool("enable"))
     {
-      g_log.info("Using mouse and keyboard");
-      m_simControls = new KMSimulatorControls(this);
-      m_simControls->setAnalogDeadbands(0.05f);
-    }
-    else
-    {
       g_log.info("Using joystick and keyboard");
       m_simControls = new KJSSimulatorControls(this, m_rootKVNode.child("joystick"));
       m_simControls->setAnalogDeadbands(0.05f);
@@ -229,6 +223,12 @@ namespace FlightSim
         g_log.error("Could not open joystick");
         return 50;
       }
+    }
+    else
+    {
+      g_log.info("Using mouse and keyboard");
+      m_simControls = new KMSimulatorControls(this);
+      m_simControls->setAnalogDeadbands(0.05f);
     }
 
     // Physical telemetry
