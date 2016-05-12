@@ -543,8 +543,15 @@ namespace FlightSim
     m_menu->populateAircraftMenu(menuItems);
   }
 
+  /**
+   * @brief Handles selection of the active aircraft.
+   * @param name Name of the aircraft to switch to
+   * @param force If the aircraft should be changed even if it matches the current one
+   */
   void FlightSimGame::selectAircraft(const std::string &name, bool force)
   {
+    g_log.info("Selected aircraft: " + name);
+
     // No nothing if this is already the active aircraft
     if (m_rootKVNode.child("aircraft").keyString("selected") == name && !force)
       return;
@@ -584,6 +591,8 @@ namespace FlightSim
 
   void FlightSimGame::renewTerrain(const std::string &name)
   {
+    g_log.info("Selected terrain: " + name);
+
     // Record option
     m_rootKVNode.children()["terrain"].keys()["default_type"] = name;
 
@@ -618,11 +627,13 @@ namespace FlightSim
    * @brief Sets the camera mode.
    * @param mode Mode string
    *
-   * Expected mode strings are either "fpv" for first person view or "los" for
-   * line of sight.
+   * Expected mode strings are either "fpv" for first person view, "los" for
+   * line of sight or "aerial" for high altitude camera.
    */
   void FlightSimGame::setCameraMode(const std::string &mode)
   {
+    g_log.info("Selected camera mode: " + mode);
+
     m_activeAircraft->fpvCamera()->setActive(true);
     m_lineOfSightCamera->setActive(false);
     m_aerialCamera->setActive(false);

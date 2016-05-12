@@ -200,7 +200,7 @@ namespace FlightSim
     m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN),
                                                       ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
     m_subTreeSpinningMainRotor->setModelMatrix(
-      Matrix4::Translation(m_rootKVNode.child("graphics").keyVector3("main_rotor_offset")) *
+        Matrix4::Translation(m_rootKVNode.child("graphics").keyVector3("main_rotor_offset")) *
         Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("main_rotor_scale")));
     m_subTreeSpinningMainRotor->setActive(false);
     m_subTreeSpinningMainRotor->setTransparent(true, std::numeric_limits<size_t>::max());
