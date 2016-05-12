@@ -14,6 +14,7 @@
 
 #include <Engine_Input/JoystickController.h>
 #include <Engine_Input/KeyboardController.h>
+#include <Engine_IO/KVNode.h>
 
 #include "controls.h"
 
@@ -32,16 +33,15 @@ namespace FlightSim
     /**
      * @copydoc IControlScheme:IControlScheme
      */
-    KJSSimulatorControls(Engine::Common::Game *game)
+    KJSSimulatorControls(Engine::Common::Game *game, Engine::IO::KVNode & config)
         : SimulatorControls(game)
         , m_joystick(new Engine::Input::JoystickController(this))
     {
-      m_joystick->setAxisMapping(1, A_PITCH);
-      m_joystick->setAxisMapping(0, A_ROLL);
-      m_joystick->setAxisMapping(2, A_THROT);
-      m_joystick->setAxisMapping(3, A_YAW);
-      m_joystick->setAxisMapping(4, A_ENGINE);
-      m_joystick->setButtonMapping(0, S_FPV);
+      m_joystick->setAxisMapping((Uint8)config.keyUnsignedLong("axis_pitch"), A_PITCH);
+      m_joystick->setAxisMapping((Uint8)config.keyUnsignedLong("axis_roll"), A_ROLL);
+      m_joystick->setAxisMapping((Uint8)config.keyUnsignedLong("axis_collective"), A_THROT);
+      m_joystick->setAxisMapping((Uint8)config.keyUnsignedLong("axis_yaw"), A_YAW);
+      m_joystick->setAxisMapping((Uint8)config.keyUnsignedLong("axis_throttle"), A_ENGINE);
 
       addController(m_joystick);
       game->addEventHandler(m_joystick);

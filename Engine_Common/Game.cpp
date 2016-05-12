@@ -84,6 +84,9 @@ namespace Common
       std::string sanitizedName = StringUtils::SanitizeFilename(m_name);
       m_gameDirectory = std::string(charPath) + "\\." + sanitizedName + "\\";
       m_configFilename = sanitizedName + ".ini";
+
+      g_log.info("Save directory: " + m_gameDirectory);
+      g_log.info("Main configuration file: " + m_configFilename);
     }
     else
     {

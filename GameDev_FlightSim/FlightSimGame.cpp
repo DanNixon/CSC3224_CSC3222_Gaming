@@ -213,7 +213,7 @@ namespace FlightSim
     glUniform1f(glGetUniformLocation(terrainShader->program(), "maxHeight"), 1.0f / 10.0f);
 
     // Input
-    if (JoystickHandler::NumJoysticks() == 0)
+    if (JoystickHandler::NumJoysticks() > 0 && m_rootKVNode.child("joystick").keyBool("enable"))
     {
       g_log.info("Using mouse and keyboard");
       m_simControls = new KMSimulatorControls(this);
@@ -222,9 +222,9 @@ namespace FlightSim
     else
     {
       g_log.info("Using joystick and keyboard");
-      m_simControls = new KJSSimulatorControls(this);
+      m_simControls = new KJSSimulatorControls(this, m_rootKVNode.child("joystick"));
       m_simControls->setAnalogDeadbands(0.05f);
-      if (!static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(0))
+      if (!static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(m_rootKVNode.child("joystick").keyUnsignedLong("number")))
       {
         g_log.error("Could not open joystick");
         return 50;
@@ -435,6 +435,16 @@ namespace FlightSim
     hud.keys()["show_telemetry"] = "false";
     hud.keys()["show_sticks"] = "false";
     node.addChild(hud);
+
+    KVNode joystick("joystick");
+    joystick.keys()["enable"] = "true";
+    joystick.keys()["number"] = "0";
+    joystick.keys()["axis_collective"] = "2";
+    joystick.keys()["axis_yaw"] = "3";
+    joystick.keys()["axis_pitch"] = "1";
+    joystick.keys()["axis_roll"] = "0";
+    joystick.keys()["axis_throttle"] = "4";
+    node.addChild(joystick);
 
     KVNode onScreenTelemetry("on_screen_telemetry");
     onScreenTelemetry.keys()["rssi_low"] = "55";
