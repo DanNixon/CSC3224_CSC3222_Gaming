@@ -223,7 +223,9 @@ namespace FlightSim
       g_log.info("Using joystick and keyboard");
       m_simControls = new KJSSimulatorControls(this, m_rootKVNode.child("joystick"));
       m_simControls->setAnalogDeadbands(0.05f);
-      if (!static_cast<KJSSimulatorControls *>(m_simControls)->joystick()->open(m_rootKVNode.child("joystick").keyUnsignedLong("number")))
+      if (!static_cast<KJSSimulatorControls *>(m_simControls)
+               ->joystick()
+               ->open(m_rootKVNode.child("joystick").keyUnsignedLong("number")))
       {
         g_log.error("Could not open joystick");
         return 50;

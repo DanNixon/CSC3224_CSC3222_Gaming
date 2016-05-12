@@ -59,9 +59,9 @@ namespace Graphics
     Engine::Maths::Matrix4 viewMatrix() const;
 
   protected:
-    Engine::Maths::Vector3 m_up;            //!< Up vector
-    Engine::Maths::Matrix4 m_projection;    //!< Projection matrix
-    Engine::Common::SceneObject *m_lookAt;  //!< Object to look at
+    Engine::Maths::Vector3 m_up;           //!< Up vector
+    Engine::Maths::Matrix4 m_projection;   //!< Projection matrix
+    Engine::Common::SceneObject *m_lookAt; //!< Object to look at
   };
 }
 }

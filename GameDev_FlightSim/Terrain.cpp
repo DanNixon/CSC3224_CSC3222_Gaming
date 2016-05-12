@@ -26,7 +26,8 @@ namespace GameDev
 namespace FlightSim
 {
   Terrain::Terrain(const std::string &name)
-      : RenderableObject(name, nullptr, ShaderProgramLookup::Instance().get("terrain_shader"), TextureLookup::Instance().get("terrain_texture"))
+      : RenderableObject(name, nullptr, ShaderProgramLookup::Instance().get("terrain_shader"),
+                         TextureLookup::Instance().get("terrain_texture"))
   {
   }
 

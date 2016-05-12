@@ -12,9 +12,9 @@
 
 #include <Engine_Common/Game.h>
 
+#include <Engine_IO/KVNode.h>
 #include <Engine_Input/JoystickController.h>
 #include <Engine_Input/KeyboardController.h>
-#include <Engine_IO/KVNode.h>
 
 #include "controls.h"
 
@@ -33,7 +33,7 @@ namespace FlightSim
     /**
      * @copydoc IControlScheme:IControlScheme
      */
-    KJSSimulatorControls(Engine::Common::Game *game, Engine::IO::KVNode & config)
+    KJSSimulatorControls(Engine::Common::Game *game, Engine::IO::KVNode &config)
         : SimulatorControls(game)
         , m_joystick(new Engine::Input::JoystickController(this))
     {

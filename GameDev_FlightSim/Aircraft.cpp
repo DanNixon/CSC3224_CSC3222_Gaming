@@ -12,12 +12,12 @@
 #include <Engine_Audio/WAVSource.h>
 #include <Engine_Graphics/ModelLoader.h>
 #include <Engine_Graphics/ShaderProgram.h>
+#include <Engine_IO/DiskUtils.h>
 #include <Engine_Logging/Logger.h>
 #include <Engine_Physics/BoundingCylinderShape.h>
 #include <Engine_Physics/MathsConversions.h>
 #include <Engine_Physics/SceneObjectMotionState.h>
 #include <Engine_Utility/StringUtils.h>
-#include <Engine_IO/DiskUtils.h>
 
 using namespace Engine::Common;
 using namespace Engine::Audio;
@@ -192,7 +192,8 @@ namespace FlightSim
     ModelLoader mainRotorLoader;
     m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN),
                                                       ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
-    m_subTreeSpinningMainRotor->setModelMatrix(Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("main_rotor_scale")));
+    m_subTreeSpinningMainRotor->setModelMatrix(
+        Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("main_rotor_scale")));
     m_subTreeSpinningMainRotor->setActive(false);
     m_subTreeSpinningMainRotor->setTransparent(true, std::numeric_limits<size_t>::max());
     addChild(m_subTreeSpinningMainRotor);
@@ -201,9 +202,9 @@ namespace FlightSim
     ModelLoader tailRotorLoader;
     m_subTreeSpinningTailRotor = tailRotorLoader.load(modelFilename(AircraftModel::TAIL_ROTOR_SPIN),
                                                       ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
-    m_subTreeSpinningTailRotor->setModelMatrix(Matrix4::Translation(Vector3(-74.0f, 0.0f, 1.5f)) *
-                                               Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
-                                               Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("tail_rotor_scale")));
+    m_subTreeSpinningTailRotor->setModelMatrix(
+        Matrix4::Translation(Vector3(-74.0f, 0.0f, 1.5f)) * Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
+        Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("tail_rotor_scale")));
     m_subTreeSpinningTailRotor->setActive(false);
     m_subTreeSpinningTailRotor->setTransparent(true, std::numeric_limits<size_t>::max());
     addChild(m_subTreeSpinningTailRotor);
@@ -320,7 +321,8 @@ namespace FlightSim
 
     m_fpvCamera = new Camera("fpv_camera", Matrix4::Perspective(1.0f, viewDepth, game->windowAspect(), fieldOfVision));
     m_fpvCamera->setActive(false);
-    m_fpvCamera->setModelMatrix(Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("fpv_camera_pos")) * Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
+    m_fpvCamera->setModelMatrix(Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("fpv_camera_pos")) *
+                                Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
     addChild(m_fpvCamera);
 
     // TODO: use angle
