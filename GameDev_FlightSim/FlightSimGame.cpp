@@ -491,6 +491,38 @@ namespace FlightSim
     node.addChild(telemetry);
   }
 
+  /**
+   * @brief Loads aircraft metadata.
+   */
+  void FlightSimGame::loadAircraft()
+  {
+	  std::vector<std::string> aircraftNames =
+		  DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
+
+	  OptionsMenu::NameValueList menuItems;
+
+	  for (auto it = aircraftNames.begin(); it != aircraftNames.end(); ++it)
+	  {
+		  Aircraft *aircraft = new Aircraft(*it, m_rootKVNode.child("resources").keyString("models"));
+		  aircraft->loadMetadata();
+
+		  if (aircraft->rootKVNode().child("general").keyBool("enabled"))
+		  {
+			  m_aircraft.push_back(aircraft);
+			  menuItems.push_back(std::make_pair(aircraft->displayName(), aircraft->name()));
+		  }
+		  else
+		  {
+			  MemoryManager::Instance().release(aircraft);
+		  }
+	  }
+
+	  m_menu->populateAircraftMenu(menuItems);
+  }
+
+  /**
+   * @brief Loads the terrain builder presets and their settings.
+   */
   void FlightSimGame::loadTerrainPresets()
   {
     std::vector<std::string> terrainNames =
@@ -515,32 +547,6 @@ namespace FlightSim
     }
 
     m_menu->populateTerrainMenu(menuItems);
-  }
-
-  void FlightSimGame::loadAircraft()
-  {
-    std::vector<std::string> aircraftNames =
-        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
-
-    OptionsMenu::NameValueList menuItems;
-
-    for (auto it = aircraftNames.begin(); it != aircraftNames.end(); ++it)
-    {
-      Aircraft *aircraft = new Aircraft(*it, m_rootKVNode.child("resources").keyString("models"));
-      aircraft->loadMetadata();
-
-      if (aircraft->rootKVNode().child("general").keyBool("enabled"))
-      {
-        m_aircraft.push_back(aircraft);
-        menuItems.push_back(std::make_pair(aircraft->displayName(), aircraft->name()));
-      }
-      else
-      {
-        MemoryManager::Instance().release(aircraft);
-      }
-    }
-
-    m_menu->populateAircraftMenu(menuItems);
   }
 
   /**
@@ -589,6 +595,10 @@ namespace FlightSim
     m_activeAircraft->reset();
   }
 
+  /**
+   * @brief Generates a new terrain and replaces the current one.
+   * @param name Name of the terrain builder preset to use
+   */
   void FlightSimGame::renewTerrain(const std::string &name)
   {
     g_log.info("Selected terrain: " + name);
