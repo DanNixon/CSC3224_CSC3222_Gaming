@@ -170,11 +170,13 @@ namespace FlightSim
     m_s->lights().push_back(sun);
 
     // Sky
-    Texture * skyTexture = new Texture();
+    Texture *skyTexture = new Texture();
     skyTexture->load("../resources/sky.png");
-    RenderableObject* skyObject = new RenderableObject("sky", new RectangleMesh(Vector2(500000.0f, 500000.0f)), menuShader, skyTexture);
+    RenderableObject *skyObject =
+        new RenderableObject("sky", new RectangleMesh(Vector2(500000.0f, 500000.0f)), menuShader, skyTexture);
     float skyAltitude = m_rootKVNode.child("graphics").keyFloat("sky_altitude_m") * 100.0f;
-    skyObject->setModelMatrix(Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) * Matrix4::Translation(Vector3(0.0f, 0.0f, -skyAltitude)));
+    skyObject->setModelMatrix(Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
+                              Matrix4::Translation(Vector3(0.0f, 0.0f, -skyAltitude)));
     m_s->root()->addChild(skyObject);
 
     // Audio
