@@ -61,12 +61,14 @@ namespace FlightSim
     Random yRand(m_yFunction);
     DoIterations(yRand, distributionY, dimY, m_ySamples);
 
+    float factor = m_factor / (m_xSamples + m_ySamples);
+
     // Iterate over grid
     for (size_t i = 0; i < dimX; i++)
     {
       for (size_t j = 0; j < dimY; j++)
       {
-        out[i * dimY + j] += distributionX[i] * distributionY[j];
+        out[i * dimY + j] += factor * distributionX[i] * distributionY[j];
       }
     }
 
