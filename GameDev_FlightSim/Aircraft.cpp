@@ -161,7 +161,7 @@ namespace FlightSim
     ModelLoader bodyLoader;
     m_subTreeAircraft =
         bodyLoader.load(modelFilename(AircraftModel::BODY), ShaderProgramLookup::Instance().get("aircraft_shader_lit"));
-    m_subTreeAircraft->setModelMatrix(Matrix4::Scale(2.0f));
+    m_subTreeAircraft->setModelMatrix(Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("body_scale")));
     addChild(m_subTreeAircraft);
 
     // Static main rotor
@@ -180,7 +180,7 @@ namespace FlightSim
     ModelLoader mainRotorLoader;
     m_subTreeSpinningMainRotor = mainRotorLoader.load(modelFilename(AircraftModel::MAIN_ROTOR_SPIN),
                                                       ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
-    m_subTreeSpinningMainRotor->setModelMatrix(Matrix4::Scale(2.0f));
+    m_subTreeSpinningMainRotor->setModelMatrix(Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("main_rotor_scale")));
     m_subTreeSpinningMainRotor->setActive(false);
     m_subTreeSpinningMainRotor->setTransparent(true, std::numeric_limits<size_t>::max());
     addChild(m_subTreeSpinningMainRotor);
@@ -191,7 +191,7 @@ namespace FlightSim
                                                       ShaderProgramLookup::Instance().get("aircraft_shader_tex"));
     m_subTreeSpinningTailRotor->setModelMatrix(Matrix4::Translation(Vector3(-74.0f, 0.0f, 1.5f)) *
                                                Matrix4::Rotation(90.0f, Vector3(1.0f, 0.0f, 0.0f)) *
-                                               Matrix4::Scale(0.4f));
+                                               Matrix4::Scale(m_rootKVNode.child("graphics").keyFloat("tail_rotor_scale")));
     m_subTreeSpinningTailRotor->setActive(false);
     m_subTreeSpinningTailRotor->setTransparent(true, std::numeric_limits<size_t>::max());
     addChild(m_subTreeSpinningTailRotor);
