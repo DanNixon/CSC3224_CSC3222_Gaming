@@ -107,7 +107,7 @@ namespace FlightSim
 
     ShaderProgram *terrainShader = new ShaderProgram();
     terrainShader->addShader(new VertexShader("../resources/shader/vert_terrain.glsl"));
-    terrainShader->addShader(new FragmentShader("../resources/shader/frag_col.glsl"));
+    terrainShader->addShader(new FragmentShader("../resources/shader/frag_tex.glsl"));
     terrainShader->link();
     ShaderProgramLookup::Instance().add("terrain_shader", terrainShader);
 
@@ -118,6 +118,11 @@ namespace FlightSim
     menuShader->link();
     ShaderProgramLookup::Instance().add("menu_shader", menuShader);
     ShaderProgramLookup::Instance().add("aircraft_shader_tex", menuShader);
+
+    // Load textures
+    Texture *terrainTex = new Texture();
+    terrainTex->load("../resources/terrain_height.png");
+    TextureLookup::Instance().add("terrain_texture", terrainTex);
 
     // Create menu
     m_menu = new OptionsMenu(this, TTFFontLookup::Instance().get("main_font"), 0.05f);
@@ -209,8 +214,8 @@ namespace FlightSim
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.0f, 0.3f, 0.5f, 1.0f);
 
-    // TODO
-    glUniform1f(glGetUniformLocation(terrainShader->program(), "maxHeight"), 1.0f / 10.0f);
+    // Max terrain height
+    glUniform1f(glGetUniformLocation(terrainShader->program(), "maxHeight"), 1.0f / 100000.0f);
 
     // Input
     if (JoystickHandler::NumJoysticks() > 0 && m_rootKVNode.child("joystick").keyBool("enable"))

@@ -84,6 +84,12 @@ namespace Graphics
 
     Engine::Maths::Vector2 m_size; //!< Dimensions of texture
   };
+
+  /**
+   * @typedef TextureLookup
+   * @brief Texture resource lookup.
+   */
+  typedef Engine::ResourceManagment::ResourceLookup<Texture *> TextureLookup;
 }
 }
 

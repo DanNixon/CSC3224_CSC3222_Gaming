@@ -8,6 +8,7 @@
 #include "Terrain.h"
 
 #include <Engine_Graphics/HeightmapMesh.h>
+#include <Engine_Graphics/Texture.h>
 #include <Engine_Logging/Logger.h>
 
 using namespace Engine::Common;
@@ -25,7 +26,7 @@ namespace GameDev
 namespace FlightSim
 {
   Terrain::Terrain(const std::string &name)
-      : RenderableObject(name, nullptr, ShaderProgramLookup::Instance().get("terrain_shader"))
+      : RenderableObject(name, nullptr, ShaderProgramLookup::Instance().get("terrain_shader"), TextureLookup::Instance().get("terrain_texture"))
   {
   }
 

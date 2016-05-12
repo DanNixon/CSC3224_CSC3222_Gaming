@@ -20,15 +20,16 @@ void main(void)
 {
   gl_Position = (projMatrix * viewMatrix * modelMatrix) * vec4(position, 1.0);
 	
-  OUT.texCoord = vec2(position.y, 0);
+	float inverseHeightFactor = 1.0 / 10.0;
+	float factor = position.y * inverseHeightFactor;
 	
-	float maxHeight = 0.1;
+  OUT.texCoord = vec2(0.5 + (0.5 * factor), 0);
 	
 	vec4 hmCol = vec4(0, 0, 0, 1);
 	if(position.y < 0.0)
-		hmCol.r = position.y * maxHeight;
+		hmCol.r = factor;
 	else
-		hmCol.g = position.y * maxHeight;
+		hmCol.g = factor;
 	
   OUT.colour = hmCol;
 }
