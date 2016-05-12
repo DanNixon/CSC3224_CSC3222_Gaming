@@ -94,6 +94,8 @@ namespace FlightSim
     FSPhysicalSystem *m_physicalSystem;                   //!< Physics system
     Engine::Physics::DebugDrawEngine *m_physicsDebugDraw; //!< Physics debug draw engine
 
+    float m_lastAircraftReset; //!< Last time the aircraft model was reset
+
     std::vector<Aircraft *> m_aircraft; //!< All aircraft
     Aircraft *m_activeAircraft;         //!< Active aircraft
 

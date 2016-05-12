@@ -368,7 +368,14 @@ namespace FlightSim
 
         if (msgStr.find("aircraft:reset") != std::string::npos)
         {
-          m_activeAircraft->reset();
+          // Debounce the aircraft reset messages
+          // (stops odd cases where multiple resets are triggered)
+          float time = this->time();
+          if (time > m_lastAircraftReset + 500.0f)
+          {
+            m_activeAircraft->reset();
+            m_lastAircraftReset = time;
+          }
         }
         else if (msgStr.find("simulation:toggle") != std::string::npos)
         {
