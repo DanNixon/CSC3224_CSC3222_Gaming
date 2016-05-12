@@ -98,15 +98,15 @@ namespace Physics
     }
 
   protected:
-    bool m_runSimulation;   //!< Flag indicating if the simulation should be running
-    float m_targetTimeStep; //!< Target time between simulation updates (ms)
-    int m_maxSubSteps;      //!< Maximum sub steps for simulation update
-    float m_worldScale;     //!< World scaling factor
-    btBroadphaseInterface *m_broadphase; //!< Broadphase
+    bool m_runSimulation;                               //!< Flag indicating if the simulation should be running
+    float m_targetTimeStep;                             //!< Target time between simulation updates (ms)
+    int m_maxSubSteps;                                  //!< Maximum sub steps for simulation update
+    float m_worldScale;                                 //!< World scaling factor
+    btBroadphaseInterface *m_broadphase;                //!< Broadphase
     btDefaultCollisionConfiguration *m_collisionConfig; //!< Collision configuration
-    btCollisionDispatcher *m_collisionDispatcher; //!< Collision dispatch
-    btSequentialImpulseConstraintSolver *m_solver; //!< Solver
-    btDiscreteDynamicsWorld *m_world; //!< Physical world
+    btCollisionDispatcher *m_collisionDispatcher;       //!< Collision dispatch
+    btSequentialImpulseConstraintSolver *m_solver;      //!< Solver
+    btDiscreteDynamicsWorld *m_world;                   //!< Physical world
   };
 }
 }

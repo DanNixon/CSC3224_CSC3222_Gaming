@@ -208,16 +208,16 @@ namespace FlightSim
   protected:
     std::string m_resourceRoot; //!< Path to the root of the resources directory
 
-    std::string m_displayName; //!< Displayed name of the aircraft
+    std::string m_displayName;          //!< Displayed name of the aircraft
     float m_mass;                       //!< Mass in g
     float m_mainRotorThrust;            //!< Main rotor lifting force at maximum RPM and maximum throttle
     Engine::Maths::Vector3 m_axisRates; //!< Rate coefficients for rotation in each axis (roll, yaw, pitch)
-    float m_baselinePower; //!< Power used when idle (W)
-    float m_maxMotorPower; //!< Power used by motor at full load (W)
-    float m_rssiMinDist2; //!< Minimum distance over 1 for RSSI calculation
-    float m_rssiInverseRange2; //!< Inverse range used for RSSI calculation
-    float m_fullBatteryVolts; //!< Battery voltage when full
-    float m_emptyBatteryVolts; //!< Battery voltage when empty
+    float m_baselinePower;              //!< Power used when idle (W)
+    float m_maxMotorPower;              //!< Power used by motor at full load (W)
+    float m_rssiMinDist2;               //!< Minimum distance over 1 for RSSI calculation
+    float m_rssiInverseRange2;          //!< Inverse range used for RSSI calculation
+    float m_fullBatteryVolts;           //!< Battery voltage when full
+    float m_emptyBatteryVolts;          //!< Battery voltage when empty
     float m_magicBatteryDischargeCoeff; //!< Magic number used to set battery discharge rate
 
     bool m_failsafe;      //!< Flag indicating a failsafe condition
@@ -231,7 +231,7 @@ namespace FlightSim
     Engine::Graphics::RenderableObject *m_subTreeSpinningMainRotor; //!< Scene sub tree containing spinning main rotor
     Engine::Graphics::RenderableObject *m_subTreeSpinningTailRotor; //!< Scene sub tree containing spinning tail rotor
 
-    Engine::Physics::RigidBody *m_physicalBody; //!< Physical body of the aircraft
+    Engine::Physics::RigidBody *m_physicalBody;  //!< Physical body of the aircraft
     Engine::Physics::RigidBody *m_mainRotorBody; //!< Main rotor physical body
     Engine::Physics::RigidBody *m_tailRotorBody; //!< Tail rotor physical body
     Engine::Maths::Quaternion m_initialRotation; //!< Initial orientation of the aircraft model
