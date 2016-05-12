@@ -25,6 +25,10 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @brief Creates a new terrain.
+   * @param name Name of the terrain
+   */
   Terrain::Terrain(const std::string &name)
       : RenderableObject(name, nullptr, ShaderProgramLookup::Instance().get("terrain_shader"),
                          TextureLookup::Instance().get("terrain_texture"))
@@ -35,6 +39,14 @@ namespace FlightSim
   {
   }
 
+  /**
+   * @brief Initialise the terrain.
+   * @param width Width in m
+   * @param depth Depth in m
+   * @param widthResolution Number of steps in width
+   * @param depthResolution Number of steps in depth
+   * @param heightData Pointer to array of height data
+   */
   void Terrain::init(float width, float depth, size_t widthResolution, size_t depthResolution, float *heightData)
   {
     // Mesh

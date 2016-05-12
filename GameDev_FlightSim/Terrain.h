@@ -30,16 +30,28 @@ namespace FlightSim
 
     void init(float width, float depth, size_t widthResolution, size_t depthResolution, float *heightData);
 
+    /**
+     * @brief Adds the terrain to a physical system.
+     * @param system System to add to
+     */
     inline void addToSystem(Engine::Physics::PhysicalSystem *system)
     {
       system->addBody(m_physicalBody);
     }
 
+    /**
+     * @brief Adds the terrain to a physical system.
+     * @param system System to remove from
+     */
     inline void removeFromSystem(Engine::Physics::PhysicalSystem *system)
     {
       system->removeBody(m_physicalBody);
     }
 
+    /**
+     * @brief Gets the terrain physical body.
+     * @return Physical body
+     */
     inline btCollisionObject *body()
     {
       return m_physicalBody->body();

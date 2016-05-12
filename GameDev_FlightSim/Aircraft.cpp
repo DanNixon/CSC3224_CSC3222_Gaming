@@ -59,6 +59,10 @@ namespace FlightSim
   {
   }
 
+  /**
+   * @brief Gets the filename of the metadata file.
+   * @return Metadata filename
+   */
   std::string Aircraft::metadataFilename() const
   {
     std::stringstream str;
@@ -125,6 +129,9 @@ namespace FlightSim
     return str.str();
   }
 
+  /**
+   * @brief Loads aircraft metedata from file.
+   */
   void Aircraft::loadMetadata()
   {
     std::string filename = metadataFilename();

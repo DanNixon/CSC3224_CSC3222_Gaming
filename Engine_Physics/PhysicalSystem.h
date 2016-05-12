@@ -102,11 +102,11 @@ namespace Physics
     float m_targetTimeStep; //!< Target time between simulation updates (ms)
     int m_maxSubSteps;      //!< Maximum sub steps for simulation update
     float m_worldScale;     //!< World scaling factor
-    btBroadphaseInterface *m_broadphase;
-    btDefaultCollisionConfiguration *m_collisionConfig;
-    btCollisionDispatcher *m_collisionDispatcher;
-    btSequentialImpulseConstraintSolver *m_solver;
-    btDiscreteDynamicsWorld *m_world;
+    btBroadphaseInterface *m_broadphase; //!< Broadphase
+    btDefaultCollisionConfiguration *m_collisionConfig; //!< Collision configuration
+    btCollisionDispatcher *m_collisionDispatcher; //!< Collision dispatch
+    btSequentialImpulseConstraintSolver *m_solver; //!< Solver
+    btDiscreteDynamicsWorld *m_world; //!< Physical world
   };
 }
 }

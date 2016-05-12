@@ -68,7 +68,7 @@ namespace FlightSim
 
   /**
    * @brief Sets the active aircraft.
-   * @param Active aircraft
+   * @param aircraft Active aircraft
    */
   void FSPhysicalSystem::setActiveAircraft(Aircraft *aircraft)
   {
