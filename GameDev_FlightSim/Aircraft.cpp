@@ -180,13 +180,13 @@ namespace FlightSim
     m_subTreeMainRotor = dynamic_cast<RenderableObject *>(
         m_subTreeAircraft->find(m_rootKVNode.child("graphics").keyString("main_rotor_mesh")));
     if (m_subTreeMainRotor == nullptr)
-      g_log.error("Could not find main rotor mesh");
+      g_log.critical("Could not find main rotor mesh");
 
     // Static tail rotor
     m_subTreeTailRotor = dynamic_cast<RenderableObject *>(
         m_subTreeAircraft->find(m_rootKVNode.child("graphics").keyString("tail_rotor_mesh")));
     if (m_subTreeTailRotor == nullptr)
-      g_log.error("Could not find tail rotor mesh");
+      g_log.critical("Could not find tail rotor mesh");
 
     // Spinning main rotor
     ModelLoader mainRotorLoader;
