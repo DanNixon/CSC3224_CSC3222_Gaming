@@ -19,7 +19,7 @@ namespace FlightSim
 {
   /**
    * @class FSPhysicalSystem
-   * @brief Flight simulator game.
+   * @brief Physical system specific to running the flight simulator game physics.
    * @author Dan Nixon
    */
   class FSPhysicalSystem : public Engine::Physics::PhysicalSystem
@@ -34,9 +34,10 @@ namespace FlightSim
     void setActiveTerrain(Terrain *terrain = nullptr);
 
   private:
-    Engine::Common::Game *m_game;
-    Aircraft *m_aircraft;
-    Terrain *m_terrain;
+    Engine::Common::Game *m_game; //!< Game in use
+
+    Aircraft *m_aircraft; //!< Active aircraft
+    Terrain *m_terrain;   //!< Active terrain
   };
 }
 }

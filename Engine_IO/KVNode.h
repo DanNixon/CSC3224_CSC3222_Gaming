@@ -88,26 +88,51 @@ namespace IO
       return m_keys;
     }
 
+    /**
+     * @brief Gets the value of a key as a string.
+     * @param name Name of the key
+     * @return Value as string
+     */
     std::string keyString(const std::string &name)
     {
       return m_keys[name];
     }
 
+    /**
+     * @brief Gets the value of a key as a float.
+     * @param name Name of the key
+     * @return Value as float
+     */
     float keyFloat(const std::string &name)
     {
       return std::stof(m_keys[name]);
     }
 
+    /**
+     * @brief Gets the value of a key as an unsigned long.
+     * @param name Name of the key
+     * @return Value as an unsigned long
+     */
     unsigned long keyUnsignedLong(const std::string &name)
     {
       return std::stoul(m_keys[name]);
     }
 
+    /**
+     * @brief Gets the value of a key as a boolean.
+     * @param name Name of the key
+     * @return Value as boolean
+     */
     bool keyBool(const std::string &name)
     {
       return Engine::Utility::StringUtils::ToBool(m_keys[name]);
     }
 
+    /**
+     * @brief Gets the value of a key as a vector.
+     * @param name Name of the key
+     * @return Value as vector
+     */
     Engine::Maths::Vector3 keyVector3(const std::string &name)
     {
       std::stringstream str(m_keys[name]);
@@ -152,16 +177,29 @@ namespace IO
       return (m_children.find(name) != m_children.end());
     }
 
+    /**
+     * @brief Returns a reference to the children of this node.
+     * @return Children
+     */
     std::map<std::string, KVNode> &children()
     {
       return m_children;
     }
 
+    /**
+     * @brief Gets a child node.
+     * @param name Name of child node
+     * @return Reference to child node
+     */
     KVNode &child(const std::string &name)
     {
       return m_children[name];
     }
 
+    /**
+     * @brief Adds a child node.
+     * @param node Node to add
+     */
     void addChild(KVNode node)
     {
       m_children[node.name()] = node;

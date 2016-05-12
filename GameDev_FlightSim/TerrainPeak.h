@@ -23,7 +23,7 @@ namespace FlightSim
   class TerrainPeak
   {
   private:
-    static void DoIterations(Engine::Utility::Random &rand, float *bins, size_t nBins, size_t nIters);
+    static void CreateDistribution(Engine::Utility::Random &rand, float *bins, size_t nBins, size_t nIters);
 
   public:
     TerrainPeak(Engine::IO::KVNode &node);
@@ -32,11 +32,11 @@ namespace FlightSim
     void calculate(float *out, size_t dimX, size_t dimY) const;
 
   private:
-    std::string m_xFunction;
-    std::string m_yFunction;
-    size_t m_xSamples;
-    size_t m_ySamples;
-    float m_factor;
+    std::string m_xFunction; //!< Random function describing X distribution
+    std::string m_yFunction; //!< Random function describing Y distribution
+    size_t m_xSamples;       //!< Number of samples in X distribution
+    size_t m_ySamples;       //!< Number of samples in Y distribution
+    float m_factor;          //!< Scale factor
   };
 }
 }

@@ -89,6 +89,10 @@ namespace Physics
       return m_worldScale;
     }
 
+    /**
+     * @brief Hander function for the internal tick during simulation stepping.
+     * @param timestep Current timestep
+     */
     virtual void internalTickCallback(btScalar timestep)
     {
     }

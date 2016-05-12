@@ -22,6 +22,11 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @brief Creates a new terrain builder profile.
+   * @param name Name of the profile
+   * @param resourceRoot Path to the root of the resource directory
+   */
   TerrainBuilder::TerrainBuilder(const std::string &name, const std::string &resourceRoot)
       : m_name(name)
       , m_resourceRoot(resourceRoot)
@@ -32,6 +37,10 @@ namespace FlightSim
   {
   }
 
+  /**
+   * @brief Gets the path to the metadata file for this profile.
+   * @return Metedata filename
+   */
   std::string TerrainBuilder::metadataFilename() const
   {
     std::stringstream str;
@@ -39,6 +48,9 @@ namespace FlightSim
     return str.str();
   }
 
+  /**
+   * @brief Loads the metadata for this profile.
+   */
   void TerrainBuilder::loadMetadata()
   {
     // Load data
@@ -68,6 +80,10 @@ namespace FlightSim
       m_peaks.push_back(TerrainPeak(m_rootKVNode.child("peak_" + std::to_string(i))));
   }
 
+  /**
+   * @brief Generates a new terrain using this profile.
+   * @param terrain Pointer to new terrain which will be generated
+   */
   void TerrainBuilder::generate(Terrain *terrain)
   {
     // Create height data array

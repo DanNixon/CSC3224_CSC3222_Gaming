@@ -17,6 +17,10 @@ namespace GameDev
 {
 namespace FlightSim
 {
+  /**
+   * @copdoc PhysicalSystem::PhysicalSystem
+   * @param game Pointer to the game instance in use
+   */
   FSPhysicalSystem::FSPhysicalSystem(float targetTimeStep, float maxPossibleTimeStep, float worldScale, Game *game)
       : PhysicalSystem(targetTimeStep, maxPossibleTimeStep, worldScale)
       , m_game(game)
@@ -27,6 +31,9 @@ namespace FlightSim
   {
   }
 
+  /**
+   * @copydoc PhysicalSystem::internalTickCallback
+   */
   void FSPhysicalSystem::internalTickCallback(btScalar timestep)
   {
     int numManifolds = m_world->getDispatcher()->getNumManifolds();
@@ -59,6 +66,10 @@ namespace FlightSim
     }
   }
 
+  /**
+   * @brief Sets the active aircraft.
+   * @param Active aircraft
+   */
   void FSPhysicalSystem::setActiveAircraft(Aircraft *aircraft)
   {
     if (m_aircraft != nullptr)
@@ -68,6 +79,10 @@ namespace FlightSim
     m_aircraft->addToSystem(this);
   }
 
+  /**
+   * @brief Sets the active terrain.
+   * @param terrain Active terrain
+   */
   void FSPhysicalSystem::setActiveTerrain(Terrain *terrain)
   {
     if (m_terrain != nullptr)
