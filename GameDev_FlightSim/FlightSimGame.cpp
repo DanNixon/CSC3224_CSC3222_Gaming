@@ -644,7 +644,7 @@ namespace FlightSim
   {
     g_log.info("Selected camera mode: " + mode);
 
-    m_activeAircraft->fpvCamera()->setActive(true);
+    m_activeAircraft->fpvCamera()->setActive(false);
     m_lineOfSightCamera->setActive(false);
     m_aerialCamera->setActive(false);
 

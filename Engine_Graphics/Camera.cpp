@@ -55,13 +55,11 @@ namespace Graphics
    */
   Engine::Maths::Matrix4 Camera::viewMatrix() const
   {
-    Vector3 position = worldTransform().positionVector();
+    Vector3 position = m_worldTransform.positionVector();
     Vector3 facing;
 
-    Vector3 f2 = m_worldTransform.facingVector();
-
     if (m_lookAt == nullptr)
-      facing = position + f2;
+      facing = position + m_worldTransform.facingVector();
     else
       facing = m_lookAt->worldTransform().positionVector();
 

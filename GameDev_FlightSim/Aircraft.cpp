@@ -333,9 +333,6 @@ namespace FlightSim
     m_fpvCamera->setModelMatrix(Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("fpv_camera_pos")) *
                                 Matrix4::Rotation(90.0f, Vector3(0.0f, 1.0f, 0.0f)));
     addChild(m_fpvCamera);
-
-    // TODO: use angle
-    // m_rootKVNode.child("camera").keyFloat("fpv_camera_angle")
   }
 
   /**

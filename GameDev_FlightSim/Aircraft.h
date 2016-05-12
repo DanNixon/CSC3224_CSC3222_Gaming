@@ -64,7 +64,7 @@ namespace FlightSim
     void loadMeshes();
     void initPhysics(const Engine::Maths::Vector3 &initialPosition, const Engine::Maths::Quaternion &initialRotation);
     bool loadAudio(Engine::Audio::Listener *listener);
-    void initCamera(Engine::Common::Game *game, float viewDepth = 1000.0f, float fieldOfVision = 45.0f);
+    void initCamera(Engine::Common::Game *game, float viewDepth = 10000.0f, float fieldOfVision = 45.0f);
 
     /**
      * @brief Adds the aircraft to a physical system.
