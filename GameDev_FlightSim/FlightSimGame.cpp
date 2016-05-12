@@ -185,12 +185,20 @@ namespace FlightSim
     // Initial terrain
     renewTerrain(m_rootKVNode.child("terrain").keyString("default_type"));
 
-    // Camera
+    // Line of fight camera
     m_lineOfSightCamera =
         new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, 500000.0f, windowAspect(), 30.0f));
-    m_lineOfSightCamera->setModelMatrix(Matrix4::Translation(Vector3(0.0f, 250.0f, 0.0f)));
+    m_lineOfSightCamera->setModelMatrix(
+        Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("los_camera_position")));
     m_lineOfSightCamera->lookAt(m_activeAircraft);
     m_s->root()->addChild(m_lineOfSightCamera);
+
+    // Aerial camera
+    m_aerialCamera = new Camera("aerial_camera", Matrix4::Perspective(1.0f, 500000.0f, windowAspect(), 30.0f));
+    m_aerialCamera->setModelMatrix(
+        Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("aerial_camera_position")));
+    m_aerialCamera->lookAt(m_activeAircraft);
+    m_s->root()->addChild(m_aerialCamera);
 
     // Default camera mode
     setCameraMode(m_rootKVNode.children()["camera"].keys()["mode"]);
@@ -414,17 +422,14 @@ namespace FlightSim
     node.addChild(aircraft);
 
     KVNode terrain("terrain");
-    terrain.keys()["default_type"] = "Flat";
+    terrain.keys()["default_type"] = "flat.ini";
     node.addChild(terrain);
 
     KVNode camera("camera");
     camera.keys()["mode"] = "los";
+    camera.keys()["los_camera_position"] = "[0,250,0]";
+    camera.keys()["aerial_camera_position"] = "[0,5000,5000]";
     node.addChild(camera);
-
-    KVNode lineOfSight("line_of_sight");
-    lineOfSight.keys()["camera_height"] = "250";
-    lineOfSight.keys()["pilot_collision_radius"] = "100";
-    node.addChild(lineOfSight);
 
     KVNode hud("hud");
     hud.keys()["show_telemetry"] = "false";
@@ -576,10 +581,17 @@ namespace FlightSim
    */
   void FlightSimGame::setCameraMode(const std::string &mode)
   {
+    m_activeAircraft->fpvCamera()->setActive(true);
+    m_lineOfSightCamera->setActive(false);
+    m_aerialCamera->setActive(false);
+
     // Update active camera
-    bool fpv = mode == "fpv";
-    m_activeAircraft->fpvCamera()->setActive(fpv);
-    m_lineOfSightCamera->setActive(!fpv);
+    if (mode == "fpv")
+      m_activeAircraft->fpvCamera()->setActive(true);
+    else if (mode == "aerial")
+      m_aerialCamera->setActive(true);
+    else
+      m_lineOfSightCamera->setActive(true);
 
     // Record setting
     m_rootKVNode.children()["camera"].keys()["mode"] = mode;

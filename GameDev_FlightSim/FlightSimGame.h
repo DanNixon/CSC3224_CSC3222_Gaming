@@ -77,6 +77,7 @@ namespace FlightSim
     StickIndicator *m_rightStickIndicator; //!< Indicator for position of right stick
 
     Engine::Graphics::Camera *m_lineOfSightCamera; //!< Camera used for line of sight view
+    Engine::Graphics::Camera *m_aerialCamera;      //!< Camera used for aerial view
     Engine::Graphics::GraphicalScene *m_s;         //!< Scene containing world (terrain and models)
     Engine::Common::Scene *m_ui;                   //!< Scene containing UI
 

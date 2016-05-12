@@ -33,6 +33,7 @@ namespace FlightSim
     MenuItem *cameraMenu = addNewItem(nullptr, "camera", "Camera");
     addNewItem(cameraMenu, "los", "Line of Sight");
     addNewItem(cameraMenu, "fpv", "First Person View");
+    addNewItem(cameraMenu, "aerial", "Aerial View");
 
     MenuItem *uiMenu = addNewItem(nullptr, "ui", "HUD");
     m_telemetryOption = addNewItem(uiMenu, "telemetry", "Telemetry");
