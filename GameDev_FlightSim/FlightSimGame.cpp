@@ -194,16 +194,12 @@ namespace FlightSim
     m_s->root()->addChild(m_physicsDebugDraw);
 #endif
 
-    // Initial aircraft
-    selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
-
     // Line of fight camera
     float losViewDist = m_rootKVNode.child("camera").keyFloat("los_view_dist");
     m_lineOfSightCamera =
         new Camera("line_of_sight_camera", Matrix4::Perspective(1.0f, losViewDist, windowAspect(), 30.0f));
     m_lineOfSightCamera->setModelMatrix(
         Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("los_camera_position")));
-    m_lineOfSightCamera->lookAt(m_activeAircraft);
     m_s->root()->addChild(m_lineOfSightCamera);
 
     // Aerial camera
@@ -211,14 +207,17 @@ namespace FlightSim
     m_aerialCamera = new Camera("aerial_camera", Matrix4::Perspective(1.0f, aerialViewDist, windowAspect(), 30.0f));
     m_aerialCamera->setModelMatrix(
         Matrix4::Translation(m_rootKVNode.child("camera").keyVector3("aerial_camera_position")));
-    m_aerialCamera->lookAt(m_activeAircraft);
+
     m_s->root()->addChild(m_aerialCamera);
 
-    // Default camera mode
-    setCameraMode(m_rootKVNode.children()["camera"].keys()["mode"]);
+    // Initial aircraft
+    selectAircraft(m_rootKVNode.child("aircraft").keyString("selected"), true);
 
     // Initial terrain
     renewTerrain(m_rootKVNode.child("terrain").keyString("default_type"));
+
+    // Default camera mode
+    setCameraMode(m_rootKVNode.children()["camera"].keys()["mode"]);
 
     // GL setup
     glEnable(GL_DEPTH_TEST);
@@ -496,28 +495,28 @@ namespace FlightSim
    */
   void FlightSimGame::loadAircraft()
   {
-	  std::vector<std::string> aircraftNames =
-		  DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
+    std::vector<std::string> aircraftNames =
+        DiskUtils::ListDirectory(m_rootKVNode.child("resources").keyString("models"), false, true);
 
-	  OptionsMenu::NameValueList menuItems;
+    OptionsMenu::NameValueList menuItems;
 
-	  for (auto it = aircraftNames.begin(); it != aircraftNames.end(); ++it)
-	  {
-		  Aircraft *aircraft = new Aircraft(*it, m_rootKVNode.child("resources").keyString("models"));
-		  aircraft->loadMetadata();
+    for (auto it = aircraftNames.begin(); it != aircraftNames.end(); ++it)
+    {
+      Aircraft *aircraft = new Aircraft(*it, m_rootKVNode.child("resources").keyString("models"));
+      aircraft->loadMetadata();
 
-		  if (aircraft->rootKVNode().child("general").keyBool("enabled"))
-		  {
-			  m_aircraft.push_back(aircraft);
-			  menuItems.push_back(std::make_pair(aircraft->displayName(), aircraft->name()));
-		  }
-		  else
-		  {
-			  MemoryManager::Instance().release(aircraft);
-		  }
-	  }
+      if (aircraft->rootKVNode().child("general").keyBool("enabled"))
+      {
+        m_aircraft.push_back(aircraft);
+        menuItems.push_back(std::make_pair(aircraft->displayName(), aircraft->name()));
+      }
+      else
+      {
+        MemoryManager::Instance().release(aircraft);
+      }
+    }
 
-	  m_menu->populateAircraftMenu(menuItems);
+    m_menu->populateAircraftMenu(menuItems);
   }
 
   /**
@@ -593,6 +592,10 @@ namespace FlightSim
     m_s->root()->addChild(m_activeAircraft);
     m_physicalSystem->setActiveAircraft(m_activeAircraft);
     m_activeAircraft->reset();
+
+    // Have fixed position cameras look at new aircraft
+    m_lineOfSightCamera->lookAt(m_activeAircraft);
+    m_aerialCamera->lookAt(m_activeAircraft);
   }
 
   /**
