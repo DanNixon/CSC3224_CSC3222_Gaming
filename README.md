@@ -1,7 +1,7 @@
 Games Simulations and Development
 =================================
 
-[![Build status](https://ci.appveyor.com/api/projects/status/tvgs84skgq5ffeql?svg=true)](https://ci.appveyor.com/project/DanNixon/csc3224-csc3222-gaming)
+[![Build status](https://ci.appveyor.com/api/projects/status/18hex29avp0jksx4?svg=true)](https://ci.appveyor.com/project/DanNixon/csc3224-csc3222-gaming)
 
 Coursework for the
 [CSC3224](http://www.ncl.ac.uk/module-catalogue/module.php?code=CSC3224)
